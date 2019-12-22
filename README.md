@@ -5,4 +5,4 @@ Este é um portal que reúne experimentações com tecnologias e ferramentas ref
 # Componentes
 
 - FHIR
-  - JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath))
+  - JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath))
