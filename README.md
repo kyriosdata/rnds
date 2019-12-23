@@ -26,8 +26,9 @@ fhirpath -f resposta.json -e 'FHIRPath expression'
 
 Convém destacar que documentos JSON em geral podem ser consultados por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)). Observe que JsonPath também pode ser empregado para consultar documentos JSON retornados via FHIR, contudo, FHIRPath contém recursos específicos. 
 
-# Outros
+# Especificação FHIR empregada pelo Brasil
   - https://simplifier.net/
+  - Especificação FHIR para RNDS [aqui](https://simplifier.net/RNDS/~introduction)
   
 # Siglas
   
