@@ -11,7 +11,7 @@ Este é um portal que reúne experimentações que fazem uso de tecnologias e fe
 
 - FHIR
   - STU é a abreviação para _Standard for Trial Use_ no contexto FHIR. 
-  - Implementação [Java](https://hapifhir.io/hapi-fhir/) e servidor para [testes](http://hapi.fhir.org/)).
+  - Implementação [Java](https://hapifhir.io/hapi-fhir/) e servidor para [testes](http://hapi.fhir.org/).
   - [Primeiros passos](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320)
   - FHIRPath ([specification](http://hl7.org/fhirpath/), [github](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)) é usado _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
   - FHIRPath [javascript](https://github.com/HL7/fhirpath.js)
