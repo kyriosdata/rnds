@@ -1,10 +1,11 @@
-# Rede Nacional de Dados em Saúde (RNDS)
+# Experimentações tecnológicas
 
-Este é um portal que reúne experimentações com tecnologias e ferramentas referenciadas pela RNDS com foco em desenvolvedores de software. 
+Este é um portal que reúne experimentações que fazem uso de tecnologias e ferramentas referenciadas pela RNDS com foco em desenvolvedores de software. 
 
-> - _Este não é um portal oficial do DATASUS/MS_. 
-> - _Tecnologias sugeridas podem não ser usadas pela RNDS.
-> - _Uso ilustrado das tecnologias pode ser equivocado, de baixa qualidade (faça sua avaliação).
+> - _Este **NÃO** é um portal oficial do DATASUS/MS_. 
+> - _Este **NÃO** é um portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br_.
+> - _Tecnologias sugeridas podem não ser usadas pela RNDS_.
+> - _Uso ilustrado das tecnologias pode ser equivocado, de baixa qualidade (faça sua avaliação)_.
 
 # Componentes
 
