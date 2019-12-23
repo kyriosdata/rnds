@@ -19,6 +19,11 @@ Hapi FHIR é uma implementação de FHIR em Java disponível em https://hapifhir
 ## JSON 
 Respostas para requisições via FHIR são formatadas usando JSON. Para consultar tais documentos, por exemplo, extrair uma informação dentre os dados retornados, pode-se usar FHIRPath ([github](https://github.com/HL7/fhirpath)). A [especificação](http://hl7.org/fhirpath/) encontra-se amplamente disponível, assim como a versão [detalhada](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)). Há uma implementação de FHIRPath em [javascript](https://github.com/HL7/fhirpath.js), dentre outras opções.
 
+```shell
+npm install --global fhirpath
+fhirpath -f resposta.json -e 'FHIRPath expression'
+```
+
 Convém destacar que documentos JSON em geral podem ser consultados por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)). Observe que JsonPath também pode ser empregado para consultar documentos JSON retornados via FHIR, contudo, FHIRPath contém recursos específicos. 
 
 # Outros
