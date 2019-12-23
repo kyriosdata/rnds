@@ -14,5 +14,5 @@ Este é um portal que reúne experimentações com tecnologias e ferramentas ref
   - https://simplifier.net/
   - Server para testes (http://hapi.fhir.org/).
   
-  # Elementos removidos
+# Elementos removidos
   
