@@ -1,6 +1,10 @@
 # Rede Nacional de Dados em Saúde (RNDS)
 
-Este é um portal que reúne experimentações com tecnologias e ferramentas referenciadas pela RNDS com foco em desenvolvedores de software. *Este não é um portal oficial do DATASUS/MS*. 
+Este é um portal que reúne experimentações com tecnologias e ferramentas referenciadas pela RNDS com foco em desenvolvedores de software. 
+
+> - _Este não é um portal oficial do DATASUS/MS_. 
+> - _Tecnologias sugeridas podem não ser usadas pela RNDS.
+> - _Uso ilustrado das tecnologias pode ser equivocado, de baixa qualidade (faça sua avaliação).
 
 # Componentes
 
