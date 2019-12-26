@@ -1,11 +1,12 @@
 # Experimentações tecnológicas
 
-Este é um portal que reúne experimentações que fazem uso de tecnologias e ferramentas referenciadas pela RNDS com foco em desenvolvedores de software. 
+Observe que
 
-> - _Este **NÃO** é um portal oficial do DATASUS/MS_. 
-> - _Este **NÃO** é um portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br_.
-> - _Tecnologias sugeridas podem não ser usadas pela RNDS_.
-> - _Uso ilustrado das tecnologias pode ser equivocado, de baixa qualidade (faça sua avaliação)_.
+- _Este **NÃO** é um portal oficial do DATASUS/MS_. 
+- _Este **NÃO** é o portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br_.
+- _Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde_.
+
+Considerando o que foi dito acima, este portal reúne experimentações e _links_ relevantes, dentre outros, pertinentes  às tecnologias que supostamente serão empregadas pela RNDS/DATASUS.
 
 # Componentes
 
