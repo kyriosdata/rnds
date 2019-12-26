@@ -17,7 +17,11 @@ Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.helioss
 <img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">
 Hapi FHIR é uma implementação de FHIR em Java disponível em https://hapifhir.io/hapi-fhir/. Há um servidor para testes disponível em http://hapi.fhir.org/.
 
-## JSON 
+# JSON e XML
+
+O portal oficial define JSON (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_. 
+
+## FHIRPath 
 Respostas para requisições via FHIR são formatadas usando JSON. Para consultar tais documentos, por exemplo, extrair uma informação dentre os dados retornados, pode-se usar FHIRPath ([github](https://github.com/HL7/fhirpath)). A [especificação](http://hl7.org/fhirpath/) encontra-se amplamente disponível, assim como a versão [detalhada](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)). Há uma implementação de FHIRPath em [javascript](https://github.com/HL7/fhirpath.js), dentre outras opções.
 
 ```shell
