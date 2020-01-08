@@ -15,9 +15,9 @@ Considerando o que foi dito acima, este portal reúne experimentações e _links
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
-Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme o próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. Em tempo, um recurso representa algum tipo de entidade do cuidado em saúde.
+Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme o próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. Em tempo, um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html).
 
-No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html).
+No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Ou seja, qualquer que seja o dado em saúde que se deseja trocar usando o FHIR, um ou mais destes recursos serão empregados.
 
 Quando se usa o FHIR para troca de dados, os dados são acomodados nestes blocos básicos (recursos) e empacotados em XML, JSON ou RDF antes de serem transferidos.
 
