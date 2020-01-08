@@ -13,6 +13,8 @@ Considerando o que foi dito acima, este portal reúne experimentações e _links
 
 ## FHIR
 
+[<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png">](https://www.hl7.org/fhir/)
+
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">](https://hapifhir.io)
