@@ -21,7 +21,7 @@ Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, 
 
 Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
 
-# Formatos JSON, XML e RDF
+## Formatos JSON, XML e RDF
 
 O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
 
@@ -29,7 +29,7 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 [RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
 
-## Servidores disponíveis para experimentação
+## Servidores (implementações do FHIR)
 
 Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Eles funcionam como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma,sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
 
