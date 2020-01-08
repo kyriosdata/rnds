@@ -15,7 +15,8 @@ Considerando o que foi dito acima, este portal reúne experimentações e _links
 
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
-<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">
+[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">](https://hapifhir.io)
+
 Hapi FHIR é uma implementação de FHIR em Java disponível em https://hapifhir.io/hapi-fhir/. Há um servidor para testes disponível em http://hapi.fhir.org/.
 
 # JSON e XML
