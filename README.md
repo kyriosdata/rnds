@@ -21,7 +21,7 @@ Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, 
 
 Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
 
-## Formatos JSON, XML e RDF
+### Formatos JSON, XML e RDF
 
 O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
 
@@ -31,10 +31,10 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 ## Implementações do FHIR
 
-FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [\_open source](https://wiki.hl7.org/Open_Source_FHIR_implementations).
+FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
 
-De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io) é _open source_.
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="80">](https://hapifhir.io)
+De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
+[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
 ## Experimentação do FHIR
 
