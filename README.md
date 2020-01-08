@@ -31,17 +31,18 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 ## Servidores (implementações do FHIR)
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Eles funcionam como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma,sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Eles funcionam como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
 
-A implementação de referência do FHIR é a Hapi FHIR. Hapi FHIR está disponível em https://hapifhir.io/hapi-fhir/ (_open source_). Há um servidor para testes disponível em http://hapi.fhir.org/.
+A implementação de referência do FHIR é a Hapi FHIR.
+[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="80">](https://hapifhir.io)
+
+Hapi FHIR está disponível em https://hapifhir.io/hapi-fhir/ (_open source_). Há um servidor para testes disponível em http://hapi.fhir.org/.
 
 ## Requisições (como submeter)
 
 A ferramenta [Postman](https://www.getpostman.com/downloads/) é amplamente empregada para submeter requisições HTTP.
 
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
-
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">](https://hapifhir.io)
 
 ## FHIRPath
 
