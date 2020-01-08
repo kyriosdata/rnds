@@ -15,17 +15,25 @@ Considerando o que foi dito acima, este portal reúne experimentações e _links
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
-Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme o próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. Em tempo, um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html).
+Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
 
-No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Ou seja, qualquer que seja o dado em saúde que se deseja trocar usando o FHIR, um ou mais destes recursos serão empregados.
+Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
 
-Quando se usa o FHIR para troca de dados, os dados são acomodados nestes blocos básicos (recursos) e empacotados em XML, JSON ou RDF antes de serem transferidos.
+Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
 
-> Os exemplos neste portal fazem uso de JSON.
+# Formatos JSON, XML e RDF
+
+O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
+
+[XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet).
+
+[RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
 
 ## Servidores disponíveis para experimentação
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing)servidores que podem ser empregados livremente para experimentar o FHIR, noutras palavras, enviar requisições e consultar os resultados com bases criadas especificamente para testes.
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing)servidores disponíveis para experimentação com o FHIR. Eles funcionam como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma,sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
+
+A implementação de referência do FHIR é a Hapi FHIR. Hapi FHIR está disponível em https://hapifhir.io/hapi-fhir/ (_open source_). Há um servidor para testes disponível em http://hapi.fhir.org/.
 
 ## Requisições (como submeter)
 
@@ -34,14 +42,6 @@ A ferramenta [Postman](https://www.getpostman.com/downloads/) é amplamente empr
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="100">](https://hapifhir.io)
-
-Hapi FHIR é uma implementação de FHIR em Java disponível em https://hapifhir.io/hapi-fhir/. Há um servidor para testes disponível em http://hapi.fhir.org/.
-
-# JSON e XML
-
-O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
-
-[XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet).
 
 ## FHIRPath
 
