@@ -9,15 +9,27 @@ Observe que
 
 Considerando o que foi dito acima, este portal reúne experimentações e _links_ relevantes, dentre outros, pertinentes às tecnologias que supostamente serão empregadas pela RNDS/DATASUS.
 
-# Componentes
+# Tecnologias
 
 ## FHIR
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
-Conforme o portal oficional, https://hl7.org/fhir/, _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. De acordo com o portal, um recurso representa algum tipo de entidade do cuidado em saúde.
+Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme o próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. Em tempo, um recurso representa algum tipo de entidade do cuidado em saúde.
 
-Um recurso, ou uma instância de um recurso pode ser representada em XML, JSON ou RDF. No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html).
+No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html).
+
+Quando se usa o FHIR para troca de dados, os dados são acomodados nestes blocos básicos (recursos) e empacotados em XML, JSON ou RDF antes de serem transferidos.
+
+> Os exemplos neste portal fazem uso de JSON.
+
+## Servidores disponíveis para experimentação
+
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing)servidores que podem ser empregados livremente para experimentar o FHIR, noutras palavras, enviar requisições e consultar os resultados com bases criadas especificamente para testes.
+
+## Requisições (como submeter)
+
+A ferramenta [Postman](https://www.getpostman.com/downloads/) é amplamente empregada para submeter requisições HTTP.
 
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
