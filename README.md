@@ -15,10 +15,9 @@ Considerando o que foi dito acima, este portal reúne experimentações e _links
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
-Conforme o portal oficional, https://hl7.org/fhir/, _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. De acordo com o portal, um recurso representa algum tipo de entidade do cuidado em saúde. 
+Conforme o portal oficional, https://hl7.org/fhir/, _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Conforme no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados. De acordo com o portal, um recurso representa algum tipo de entidade do cuidado em saúde.
 
-Um recurso, ou uma instância de um recurso pode ser representada em XML, JSON ou RDF.
-No momento em que esta página é escrita estão definidos 145 tipos distintos de recursos. 
+Um recurso, ou uma instância de um recurso pode ser representada em XML, JSON ou RDF. No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html).
 
 Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
