@@ -37,10 +37,13 @@ De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhi
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
 ## FHIR (perfis)
+
+[<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
+
 O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de um perfil, por exemplo, indicando que as opções de sexo são "masculina", "feminino" e assim por diante, em vez de "male",  "female", ...
 
-A definição de perfis é facilitada por serviços como Simplifier.NET.
-<br>[<img src="https://simplifier.net/images/simplifier-logo.png" width="75">](https://simplifier.net)
+A definição de perfis é facilitada por serviços como ]Simplifier.NET](https://simplifier.net).
+
 
 ## Experimentação do FHIR
 
