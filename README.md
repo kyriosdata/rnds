@@ -36,6 +36,12 @@ FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de 
 De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
+## FHIR (perfis)
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de um perfil, por exemplo, indicando que as opções de sexo são "masculina", "feminino" e assim por diante, em vez de "male",  "female", ...
+
+A definição de perfis é facilitada por serviços como Simplifier.NET.
+![](https://simplifier.net/images/simplifier-logo.png)
+
 ## Experimentação do FHIR
 
 Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações).
