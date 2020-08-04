@@ -35,5 +35,5 @@ pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.ne
 
 ### Campos do tipo de amostra biológica
 
-Estes campos classificam o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsade/brtipoamostragal) utilizada em exames de acordo com a terminologia Gerenciador de Ambiente Laboratorial (GAL).
+Estes campos classificam o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsade/brtipoamostragal) utilizada em exames de acordo com a terminologia Gerenciador de Ambiente Laboratorial (GAL). Existem vários códigos para o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsade/brtipoamostragal), dentre eles, **SECONF**, empregado para identificar "Secreção Orofaríngea e Nasofaríngea".
 
