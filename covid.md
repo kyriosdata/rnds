@@ -1,5 +1,7 @@
 ## Detalhando resultado de exame de COVID-19
 
+O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner para uma coleção de recursos FHIR. De fato, um [Bundle](https://www.hl7.org/fhir/bundle.html) reúne o recurso [Composition](https://www.hl7.org/fhir/composition.html) que, por sua vez, referencia um [Observation](https://www.hl7.org/fhir/observation.html) que, por sua vez, referencia um tercerio recurso FHIR, [Specimen](https://www.hl7.org/fhir/specimen.html).
+
 O resultado de exame de COVID é representado pelo recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) personalizado
 pela RNDS no perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3).
 Este resultado compreende uma única seção definida pelo [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico).
