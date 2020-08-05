@@ -23,8 +23,7 @@ de COVID-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado 
 ### Campos do Bundle
 
 O Bundle é um contêiner para recursos FHIR, ou seja, serve como "pacote" no qual outros recursos FHIR são fornecidos.
-Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de COVID-19: (a) resourceType; (b) meta;
-(c) identifier; (d) type; (e) timestamp e (f) entry.
+Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de COVID-19:
 
 1. **resourceType**: indica o tipo do recurso FHIR em questão, ou seja, `Bundle`.
 1. **meta**: objeto cujo único atributo fornecido é **lastUpdated**, indicando a data da última alteração do recurso.
@@ -47,29 +46,28 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
 ### Campos do resultado de exame laboratorial
 
 Um resultado de exame laboratorial de COVID-19 é definido pelo recurso
-[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3). Sete campos são utilizados, conforme detalhados
-abaixo:
+[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3). Sete campos são utilizados, conforme detalhados abaixo:
 
-- **status**: definido com o valor fixo "final".
-- **type** é um objeto JSON com um único campo, **coding**, que por sua vez, é definido por um objeto JSON com dois campos:
-  - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento". Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
-  - **code**: valor fixo "REL"
-- **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. Este é definido por um objeto JSON com o campo **identifier** que, por sua
-  vez, é um objeto JSON formado por dois campos:
-  - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
-  - **value**: CNS ou CPF do sujeito da composição.
-- **date** - Data e hora em que o documento foi criado (ocorreu a autoria), por exemplo "2020-03-23T10:30:12.947-02:00".
+1. **status**: definido com o valor fixo "final".
+1. **type** é um objeto JSON com um único campo, **coding**, que por sua vez, é definido por um objeto JSON com dois campos:
+   - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento". Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
+   - **code**: valor fixo `REL`
+1. **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. Este é definido por um objeto JSON com o campo **identifier** que, por sua
+   vez, é um objeto JSON formado por dois campos:
+   - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
+   - **value**: CNS ou CPF do sujeito da composição.
+1. **date** - Data e hora em que o documento foi criado (ocorreu a autoria), por exemplo `2020-03-23T10:30:12.947-02:00`.
 
-- **author**: responsável pelo laudo.
-  - **identifier**
-    - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0". Pesso jurídica e profissional liberal é definido em perfil [próprio](https://simplifier.net/redenacionaldedadosemsade/brpessoajuridicaprofissionalliberal)
-    - **value**: CNPJ ou CPF do responsável pelo laudo.
-- **title**: valor fixo "Resultado de Exame Laboratorial"
-- **section**
+1. **author**: responsável pelo laudo.
+   - **identifier**
+     - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0". Pesso jurídica e profissional liberal é definido em perfil [próprio](https://simplifier.net/redenacionaldedadosemsade/brpessoajuridicaprofissionalliberal)
+     - **value**: CNPJ ou CPF do responsável pelo laudo.
+1. **title**: valor fixo `Resultado de Exame Laboratorial`
+1. **section**
 
-  - **entry**
+   - **entry**
 
-    - **reference**: valor fixo "urn:uuid:transient-1"
+     - **reference**: valor fixo `urn:uuid:transient-1`
 
 ### Campos do diagnóstio em laboratório clínico
 
