@@ -25,8 +25,12 @@ O Bundle é um contêiner para recursos FHIR, ou seja, serve como "pacote" no qu
 Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de COVID-19: (a) resourceType; (b) meta;
 (c) identifier; (d) type; (e) timestamp e (f) entry. 
 
-- **resourceType**. Indica o tipo do recurso FHIR em questão, ou seja, "Bundle".
-- **meta**: 
+- **resourceType**: indica o tipo do recurso FHIR em questão, ou seja, "Bundle".
+- **meta**: objeto cujo único atributo fornecido é **lastUpdated**, indicando a data da última alteração do recurso. 
+- **identifier**: identificar único do recurso (_Bundle_), e persistente (fixo), que não se altera, mesmo quando o _Bundle_ é 
+transferido de um servidor para outro. Este objeto possui vários campos, dois deles são utilizados:
+  - **system** é definido pela sequencia no seguinte formato: "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<id-laboratorio>" e
+  - **value**. 
 
 ### Campos do resultado de exame laboratorial
 
