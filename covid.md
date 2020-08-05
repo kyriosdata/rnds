@@ -8,9 +8,9 @@ Neste documento, a intenção é
 
 > fornecer detalhes dos itens de informação do Bundle empregado para registrar o resultado de exame de COVID-19, conforme definido pela RNDS.
 
-O resultado de exame de COVID é representado pelo recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) personalizado
-pela RNDS no perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3).
-Este resultado compreende uma única seção definida pelo [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico).
+O FHIR define um conjunto significativo de recursos a serem empregados em vários contextos. A adequação de um recurso a um contexto específico
+é realizada por meio de um perfil. A RNDS, para contemplar o cenário nacional, já definiu dezenas de perfis. Dois deles são empregados no Bundle
+utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3) que personaliza o recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) e (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico), que personaliza o recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html).
 
 ### Campos do resultado de exame laboratorial
 
