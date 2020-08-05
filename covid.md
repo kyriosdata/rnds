@@ -17,6 +17,17 @@ utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de E
 
 O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme definido, sem adaptação.
 
+Nas quatro seções seguintes são detalhados os campos empregados por cada um dos recursos utilizados para a submissão do resultado de um exame 
+de COVID-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (c) Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e [Specimen](https://www.hl7.org/fhir/specimen.html).
+
+### Campos do Bundle
+O Bundle é um contêiner para recursos FHIR, ou seja, serve como "pacote" no qual outros recursos FHIR são fornecidos. 
+Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de COVID-19: (a) resourceType; (b) meta;
+(c) identifier; (d) type; (e) timestamp e (f) entry. 
+
+- **resourceType**. Indica o tipo do recurso FHIR em questão, ou seja, "Bundle".
+- **meta**: 
+
 ### Campos do resultado de exame laboratorial
 
 Um resultado de exame laboratorial de COVID-19 é detalhado pelos campos: (a) status; (b) type; (c) subject; (d) date; (e) autor; (f) title e (g) section. 
