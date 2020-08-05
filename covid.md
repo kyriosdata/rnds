@@ -40,8 +40,8 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
    um _Bundle_ existe para reunir outros recursos. No caso do resultado de exame de COVID-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html). Ou seja, a lista fornecida
    no campo **entry** contém três objetos, um para cada um destes recursos. Cada objeto é detalhado pelos seguintes campos:
 
-   - **fullUrl**: referência absoluta para o recurso ou, como o caso do resultado de exame de COVID-19, o identificador do recurso empacotado pelo _Bundle_ e possivelmente empregado em outra parte do documento.
-   - **resource**: objeto que detalha o recurso que faz parte do "pacote" (_Bundle_). No caso em questão, é aqui que será fornecido o conteúdo propriamente dito de cada um dos três recuros que fazem parte do _Bundle_ que registra o resultado de exame de COVID-19.
+   - **fullUrl**: referência absoluta para o recurso ou, como o caso do resultado de exame de COVID-19, o identificador do recurso empacotado pelo _Bundle_. Neste exemplo os três valores empregados são `urn:uuid:transient-0`, `urn:uuid:transient-1` e `urn:uuid:transient-2`.
+   - **resource**: objeto que detalha o recurso que faz parte do "pacote" (_Bundle_). No caso em questão, é aqui que será fornecido o conteúdo propriamente dito de cada um dos três recuros que fazem parte do _Bundle_ que registra o resultado de exame de COVID-19. Estes três recursos são detalhados nas três seções seguintes.
 
 ### Campos do resultado de exame laboratorial
 
