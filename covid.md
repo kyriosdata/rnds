@@ -18,7 +18,7 @@ utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de E
 O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme definido, sem adaptação.
 
 Nas quatro seções seguintes são detalhados os campos empregados por cada um dos recursos utilizados para a submissão do resultado de um exame 
-de COVID-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (c) Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e [Specimen](https://www.hl7.org/fhir/specimen.html).
+de COVID-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (c) Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (d) [Specimen](https://www.hl7.org/fhir/specimen.html).
 
 ### Campos do Bundle
 O Bundle é um contêiner para recursos FHIR, ou seja, serve como "pacote" no qual outros recursos FHIR são fornecidos. 
@@ -32,6 +32,10 @@ transferido de um servidor para outro. Este objeto possui vários campos, dois d
   - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<laboratorioID>`, onde `laboratorioID` é o identificador do laboratório em questão fornecido pela RNDS no momento do cadastro. 
   - **value**: identificador único do _Bundle_ no contexto do laboratório. Ou seja, este é um identificador único válido para o laboratório 
   unicamente identificar o recurso em questão.
+- **type**: cujo valor é `document` neste caso. Convém observar que existem vários outros tipos para este recurso, empregados em outros cenários.
+- **timestamp**: o instante em que o recurso (_Bundle_) foi montado, ou seja, algo como `2020-03-23T14:23:56.567-02:00`, por exemplo.  
+- **entry**: objeto que é um _array_, ou seja, uma lista de objetos. Cada objeto desta lista é um recurso que faz parte do "pacote". De fato,
+o recurso _Bundle_ existe para reunir estes outros recursos. No caso do resultado de exame de COVID-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html).
 
 ### Campos do resultado de exame laboratorial
 
