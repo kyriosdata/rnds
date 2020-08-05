@@ -12,16 +12,18 @@ O FHIR define um conjunto significativo de recursos a serem empregados em vário
 é realizada por meio de um perfil. A RNDS, para contemplar o cenário nacional, já definiu dezenas de perfis. Dois deles são empregados no Bundle
 utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3) que personaliza o recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) e (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico), que personaliza o recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html).
 
+O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme
+definido, sem adaptação.
+
 ### Campos do resultado de exame laboratorial
 
 Um resultado de exame laboratorial de COVID-19 é detalhado pelos campos: (a) status; (b) type; (c) subject; (d) date; (e) autor; (f) title e (g) section. 
 Cada um deles detalhado abaixo.
 
-- **status**: valor fixo "final". 
-- **type**
-  - **coding**
-    - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento". Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
-    - **code**: valor fixo "REL"
+- **status**: definido com o valor fixo "final". 
+- **type** é um objeto com um único campo, **coding** que, por sua vez, é definido por dois campos:
+  - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento". Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
+  - **code**: valor fixo "REL"
 - **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. 
   - **identifier**
     - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
