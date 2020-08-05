@@ -79,7 +79,17 @@ adaptado pela RNDS por meio do perfil
 ### Campos do diagnóstio em laboratório clínico
 
 O diagnóstio em laboratório clínico é representado pelo recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html) personalizado
-pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico).
+pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). À semelhança do recurso detalhado na seção anterior, novamente temos uma sequência de campos que descrevem o presente recurso e o perfil correspondente definido pela RNDS:
+
+1. **resourceType**: valor `Observation`.
+1. **meta**: objeto cujo único campo empregado é **profile**, um _array_ cuja
+   única entrada é `http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0`, ou seja, o identificador único do perfil
+   em questão.
+1. **status**: valor `final`.
+1. **category**: lista (_array_) com um único objeto (elemento), cujo único campo
+   é **coding**, uma lista (_array_). Esta lista também possui um único elemento (objeto), formado por dois campos:
+   - **system** cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS`. Este valor identifica unicamente um sistema de códigos criado pela RNDS. Este sistema, [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), conforme a descrição fornecida, "é o segundo nível da hierarquia da Tabela SUS e seus códigos ajudam a classificar e localizar procedimentos."
+   - **code**: valor `0214`. Este valor, conforme o [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), refere-se a `Diagnóstico por teste rápido`.
 
 ### Campos do tipo de amostra biológica
 
