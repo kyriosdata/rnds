@@ -29,8 +29,9 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
 - **meta**: objeto cujo único atributo fornecido é **lastUpdated**, indicando a data da última alteração do recurso. 
 - **identifier**: identificar único do recurso (_Bundle_), e persistente (fixo), que não se altera, mesmo quando o _Bundle_ é 
 transferido de um servidor para outro. Este objeto possui vários campos, dois deles são utilizados:
-  - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<id-laboratorio>` e
-  - **value**. 
+  - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<laboratorioID>`, onde `laboratorioID` é o identificador do laboratório em questão fornecido pela RNDS no momento do cadastro. 
+  - **value**: identificador único do _Bundle_ no contexto do laboratório. Ou seja, este é um identificador único válido para o laboratório 
+  unicamente identificar o recurso em questão.
 
 ### Campos do resultado de exame laboratorial
 
