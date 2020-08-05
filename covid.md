@@ -46,12 +46,18 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
 ### Campos do resultado de exame laboratorial
 
 Um resultado de exame laboratorial de COVID-19 é definido pelo recurso
-[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3). Sete campos são utilizados, conforme detalhados abaixo:
+[Composition](https://www.hl7.org/fhir/composition.html), em particular,
+adaptado pela RNDS por meio do perfil
+[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3). Os campos empregados são detalhados abaixo:
 
+1. **resourceType**: definido com o valor `Composition`.
+1. **meta**: objeto cujo único campo empregado é **profile**, um _array_ cuja
+   única entrada é `http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.0`, ou seja, o identificador único do perfil
+   em questão.
 1. **status**: definido com o valor fixo `final`.
 1. **type** é um objeto JSON com um único campo, **coding**, que por sua vez, é definido por um objeto JSON com dois campos:
    - **system**: valor fixo `http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento`. Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
-   - **code**: valor fixo `REL`
+   - **code**: valor fixo `REL`.
 1. **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. Este é definido por um objeto JSON com o campo **identifier** que, por sua
    vez, é um objeto JSON formado por dois campos:
    - **system**: valor fixo `http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0`. Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
@@ -62,14 +68,12 @@ Um resultado de exame laboratorial de COVID-19 é definido pelo recurso
    - **identifier**
      - **system**: valor fixo `http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0`. Pesso jurídica e profissional liberal é definido em perfil [próprio](https://simplifier.net/redenacionaldedadosemsade/brpessoajuridicaprofissionalliberal)
      - **value**: CNPJ ou CPF do responsável pelo laudo.
-1. **title**: valor fixo `Resultado de Exame Laboratorial`
+1. **title**: valor fixo `Resultado de Exame Laboratorial`.
 1. **section**: é uma lista (_array_) que, no caso de exame laboratorial, deve possuir um único objeto (elemento). O perfil definido pela RNDS estabelece que um único campo deve ser utilizado por este objeto único, o campo **entry**. O campo **entry** também
    é uma lista (_array_) e a expectativa é que um único objeto (elemento) seja fornecido. Este objeto único deve fazer uso de um único campo **reference**. Este campo deve
    possuir como valor o identificador único, neste "pacote", do recurso que registra o
    o diagnóstico do resultado, ou seja, o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Convém ressaltar que este recurso identificado é um dos três recursos utilizados no _Bundle_. Em consequência, o valor do campo **reference** deve coincidir com o valor do campo **fullUrl** correspondente ao recurso referenciado.
-
    - **entry**
-
      - **reference**: valor fixo `urn:uuid:transient-1`
 
 ### Campos do diagnóstio em laboratório clínico
