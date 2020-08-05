@@ -21,13 +21,13 @@ Um resultado de exame laboratorial de COVID-19 é detalhado pelos campos: (a) st
 Cada um deles detalhado abaixo.
 
 - **status**: definido com o valor fixo "final". 
-- **type** é um objeto com um único campo, **coding** que, por sua vez, é definido por dois campos:
+- **type** é um objeto JSON com um único campo, **coding**, que por sua vez, é definido por um objeto JSON com dois campos:
   - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento". Identifica um conjunto de códigos (_code system_) para [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsade/brtipodocumento).
   - **code**: valor fixo "REL"
-- **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. 
-  - **identifier**
-    - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
-    - **value**: CNS ou CPF do sujeito da composição. 
+- **subject**: o sujeito da composição, ou seja, a quem se refere o resultado do exame. Este é definido por um objeto JSON com o campo **identifier** que, por sua
+vez, é um objeto JSON formado por dois campos:
+  - **system**: valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". Observe que existe uma definição para [Indivíduo](https://simplifier.net/RedeNacionaldeDadosemSade/BRIndividuo).
+  - **value**: CNS ou CPF do sujeito da composição. 
 - **date** - Data e hora em que o documento foi criado (ocorreu a autoria), por exemplo "2020-03-23T10:30:12.947-02:00".
 
 - **author**: responsável pelo laudo. 
