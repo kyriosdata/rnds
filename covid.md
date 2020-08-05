@@ -2,7 +2,7 @@ O objetivo deste documento é
 
 > fornecer detalhes dos itens de informação do Bundle empregado para registrar o resultado de exame de COVID-19, conforme definido pela RNDS.
 
-## Detalhando resultado de exame de COVID-19
+### Detalhando resultado de exame de COVID-19
 
 O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner para uma coleção de recursos FHIR. No caso específico do exame de COVID-19, por exemplo, 
 conforme definido pela RNDS, o [Bundle](https://www.hl7.org/fhir/bundle.html) empregado para registrar o resultado deste exame deve ser formado pelo recurso [Composition](https://www.hl7.org/fhir/composition.html). Este recurso referencia um [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, 
