@@ -90,6 +90,9 @@ pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.ne
    é **coding**, uma lista (_array_). Esta lista também possui um único elemento (objeto), formado por dois campos:
    - **system** cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS`. Este valor identifica unicamente um sistema de códigos criado pela RNDS. Este sistema, [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), conforme a descrição fornecida, "é o segundo nível da hierarquia da Tabela SUS e seus códigos ajudam a classificar e localizar procedimentos."
    - **code**: valor `0214`. Este valor, conforme o [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), refere-se a `Diagnóstico por teste rápido`.
+1. **code** é um objeto que tem como propósito identificar unicamente o [exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0). Este objeto possui um único campo definido: **coding** que, por sua vez, é uma lista (_array_) com um único elemento (objeto). Este único elemento (objeto) possui dois campos:
+   - **system**: cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC`. Este valor é o identificador único de um sistema de códigos, criado pela RNDS, para [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19LOINC).
+   - **code**: aqui deve ser fornecido o valor, conforme os [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19LOINC), conforme o valor fornecido para **system**, campo anterior. Um valor possível é `94547-7`, que correspondente a `SARS Coronavírus 2, [presença de] anticorpos IgG e IgM em soro ou plasma por imunoensaio`.
 
 ### Campos do tipo de amostra biológica
 
