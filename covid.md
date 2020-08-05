@@ -35,7 +35,7 @@ transferido de um servidor para outro. Este objeto possui vários campos, dois d
 - **type**: cujo valor é `document` neste caso. Convém observar que existem vários outros tipos para este recurso, empregados em outros cenários.
 - **timestamp**: o instante em que o recurso (_Bundle_) foi montado, ou seja, algo como `2020-03-23T14:23:56.567-02:00`, por exemplo.  
 - **entry**: objeto que é um _array_, ou seja, uma lista de objetos. Cada objeto desta lista é um recurso que faz parte do "pacote". De fato,
-o recurso _Bundle_ existe para reunir estes outros recursos. No caso do resultado de exame de COVID-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html).
+o recurso _Bundle_ existe para reunir estes outros recursos. No caso do resultado de exame de COVID-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html). Estes três recursos são detalhados nas seções subsequentes.
 
 ### Campos do resultado de exame laboratorial
 
