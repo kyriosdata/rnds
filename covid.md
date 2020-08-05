@@ -8,12 +8,14 @@ O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner p
 conforme definido pela RNDS, o [Bundle](https://www.hl7.org/fhir/bundle.html) empregado para registrar o resultado deste exame deve ser formado pelo recurso [Composition](https://www.hl7.org/fhir/composition.html). Este recurso referencia um [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, 
 faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html). 
 
-O FHIR define um conjunto significativo de recursos a serem empregados em vários contextos. A adequação de um recurso a um contexto específico
-é realizada por meio de um perfil. A RNDS, para contemplar o cenário nacional, já definiu dezenas de perfis. Dois deles são empregados no Bundle
+O FHIR define um conjunto significativo de mais de uma centena recursos a serem empregados em vários contextos. Acima citamos apenas quatro deles. 
+A adequação de um recurso a um contexto específico
+é realizada por meio de um perfil. 
+
+A RNDS, para contemplar o cenário nacional, já definiu vários perfis. Dois deles são empregados no Bundle
 utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3) que personaliza o recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) e (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico), que personaliza o recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html).
 
-O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme
-definido, sem adaptação.
+O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme definido, sem adaptação.
 
 ### Campos do resultado de exame laboratorial
 
