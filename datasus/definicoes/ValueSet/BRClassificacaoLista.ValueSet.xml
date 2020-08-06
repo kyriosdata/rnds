@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="caaa2d92-3b06-407f-b5a0-cb2808723d2f" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-11T19:15:18.88+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRClassificacaoLista-1.0" />
+  <version value="1.0" />
+  <name value="Classificação das Listas" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T19:15:39.3549501+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="ValueSet utilizado para classificar os tipos de listas utilizados na Rede Nacional de Dados em Saúde." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRClassificacaoLista" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

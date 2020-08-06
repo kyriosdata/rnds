@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="0a10269f-4d8d-4cbc-b06f-762fb595e248" />
+  <meta>
+    <versionId value="3" />
+    <lastUpdated value="2020-03-11T02:14:22.604+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRValorMonetario-1.0" />
+  <version value="1.0" />
+  <name value="BRValorMonetario" />
+  <title value="Valor Monetário" />
+  <status value="active" />
+  <date value="2020-03-11T02:14:21.1503424Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Um valor monetário em Reais brasileiros / BRL / R$ para qualquer finalidade." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="MedicationDispense" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRValorMonetario-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="Money" />
+      </type>
+    </element>
+    <element id="Extension.value[x].value">
+      <path value="Extension.value[x].value" />
+      <short value="Valor" />
+      <definition value="Valor decimal monetário." />
+      <min value="1" />
+    </element>
+    <element id="Extension.value[x].currency">
+      <path value="Extension.value[x].currency" />
+      <short value="Moeda" />
+      <definition value="Código da moeda utilizando o padrão da ISO 4217." />
+      <min value="1" />
+    </element>
+  </differential>
+</StructureDefinition>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="f047067e-cbf2-47ba-9906-6c493a2f3b88" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T13:09:43.952+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoObservacao-1.0" />
+  <version value="1.0" />
+  <name value="Estado da Observação." />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:09:42.3921631+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Tipos de estados de uma observação." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://hl7.org/fhir/observation-status" />
+      <version value="*" />
+      <concept>
+        <code value="final" />
+        <display value="Concluída" />
+      </concept>
+      <concept>
+        <code value="entered-in-error" />
+        <display value="Cancelada por informação errada" />
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="5cee5980-4c03-4b86-8a2a-85006a28bc38" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T13:24:57.092+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRProcedimentosNacionais-1.0" />
+  <version value="1.0" />
+  <name value="Procedimento realizado" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:24:56.3559248+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Value Set das classificações brasileiras para procedimentos adotadas em contexto nacional." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBHPMTUSS" />
+      <version value="*" />
+    </include>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTabelaSUS" />
+      <version value="*" />
+      <!-- <filter>
+        <property value="level" />
+        <op value="=" />
+        <value value="procedimento" />
+      </filter> -->
+    </include>
+  </compose>
+</ValueSet>

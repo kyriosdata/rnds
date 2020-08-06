@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ca3ea0bd-5b7a-4620-b8d2-4a402889f6b3" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T13:22:38.185+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BROrgaoExpedidor-1.0" />
+  <version value="1.0" />
+  <name value="Órgão Expedidor" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:22:37.450287+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Lista de órgãos responsáveis por expedir documentos no Brasil." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BROrgaoExpedidor" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

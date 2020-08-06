@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="43f6c72c-13f8-4c9e-bd10-b39c22f34d4e" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:11:16.366+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRDose" />
+  <version value="201701A" />
+  <name value="Dose de Vacina" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:11:36.3705+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Define a dose da administração de uma substância." />
+  <content value="complete" />
+  <concept>
+    <code value="1" />
+    <display value="1ª Dose" />
+  </concept>
+  <concept>
+    <code value="2" />
+    <display value="2ª Dose" />
+  </concept>
+  <concept>
+    <code value="3" />
+    <display value="3ª Dose" />
+  </concept>
+  <concept>
+    <code value="4" />
+    <display value="4ª Dose" />
+  </concept>
+  <concept>
+    <code value="5" />
+    <display value="5ª Dose" />
+  </concept>
+  <concept>
+    <code value="6" />
+    <display value="1º Reforço" />
+  </concept>
+  <concept>
+    <code value="7" />
+    <display value="2º Reforço" />
+  </concept>
+  <concept>
+    <code value="8" />
+    <display value="Dose" />
+  </concept>
+  <concept>
+    <code value="9" />
+    <display value="Única" />
+  </concept>
+  <concept>
+    <code value="10" />
+    <display value="Revacinação" />
+  </concept>
+  <concept>
+    <code value="11" />
+    <display value="Tratamento com uma dose" />
+  </concept>
+  <concept>
+    <code value="12" />
+    <display value="Tratamento com duas doses" />
+  </concept>
+  <concept>
+    <code value="13" />
+    <display value="Tratamento com três doses" />
+  </concept>
+  <concept>
+    <code value="14" />
+    <display value="Tratamento com quatro doses" />
+  </concept>
+  <concept>
+    <code value="15" />
+    <display value="Tratamento com cinco doses" />
+  </concept>
+  <concept>
+    <code value="16" />
+    <display value="Tratamento com seis doses" />
+  </concept>
+  <concept>
+    <code value="17" />
+    <display value="Tratamento com sete doses" />
+  </concept>
+  <concept>
+    <code value="18" />
+    <display value="Tratamento com oito doses" />
+  </concept>
+  <concept>
+    <code value="19" />
+    <display value="Tratamento com nove doses" />
+  </concept>
+  <concept>
+    <code value="20" />
+    <display value="Tratamento com dez doses" />
+  </concept>
+  <concept>
+    <code value="21" />
+    <display value="Tratamento com onze doses" />
+  </concept>
+  <concept>
+    <code value="22" />
+    <display value="Tratamento com doze doses" />
+  </concept>
+  <concept>
+    <code value="23" />
+    <display value="Tratamento com treze doses" />
+  </concept>
+  <concept>
+    <code value="24" />
+    <display value="Tratamento com quartorze doses" />
+  </concept>
+  <concept>
+    <code value="25" />
+    <display value="Tratamento com quinze doses" />
+  </concept>
+  <concept>
+    <code value="26" />
+    <display value="Tratamento com dezesseis doses" />
+  </concept>
+  <concept>
+    <code value="27" />
+    <display value="Tratamento com dezessete doses" />
+  </concept>
+  <concept>
+    <code value="28" />
+    <display value="Tratamento com dezoito doses" />
+  </concept>
+  <concept>
+    <code value="29" />
+    <display value="Tratamento com dezenove doses" />
+  </concept>
+  <concept>
+    <code value="30" />
+    <display value="Tratamento com vinte doses" />
+  </concept>
+  <concept>
+    <code value="31" />
+    <display value="Tratamento com vinte e quatro doses" />
+  </concept>
+  <concept>
+    <code value="32" />
+    <display value="1ª Dose Revacinação" />
+  </concept>
+  <concept>
+    <code value="33" />
+    <display value="2ª Dose Revacinação" />
+  </concept>
+  <concept>
+    <code value="34" />
+    <display value="3ª Dose Revacinação" />
+  </concept>
+  <concept>
+    <code value="35" />
+    <display value="4ª Dose Revacinação" />
+  </concept>
+  <concept>
+    <code value="36" />
+    <display value="Dose Inicial" />
+  </concept>
+  <concept>
+    <code value="37" />
+    <display value="Dose Adicional" />
+  </concept>
+  <concept>
+    <code value="38" />
+    <display value="Reforço" />
+  </concept>
+</CodeSystem>

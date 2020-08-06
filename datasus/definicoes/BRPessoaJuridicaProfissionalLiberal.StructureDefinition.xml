@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="e8de703a-44d9-4ad4-bbd8-bc6edb93a8ee" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T02:17:02.388+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0" />
+  <version value="1.0" />
+  <name value="BRPessoaJuridicaProfissionalLiberal" />
+  <title value="Pessoa Jurídica e Profissional Liberal" />
+  <status value="active" />
+  <date value="2020-03-11T02:17:01.8709644Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Pessoa jurídica identificada no âmbito da Receita Federal do Brasil pelo Cadastro Nacional da Pessoa Jurídica (CNPJ) ou profissional liberal identificado pelo Cadastro de Pessoas Físicas (CPF)." />
+  <purpose value="No Brasil, em especial no sistema de saúde, os serviços podem ser de propriedade de uma Pessoa Jurídica (administração pública, entidades empresariais, entidades sem fins lucrativos ou organizações internacionais e outras instituições extraterritoriais) ou de uma Pesoa Física (profissional liberal). Este perfil tem a finalidade de permitir essa identificação." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Organization" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Organization" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Organization">
+      <path value="Organization" />
+      <short value="Pessoa Jurídica e Profissional Liberal" />
+      <definition value="Pessoa jurídica identificada no âmbito da Receita Federal do Brasil pelo Cadastro Nacional da Pessoa Jurídica (CNPJ) ou profissional liberal identificado pelo Cadastro de Pessoas Físicas (CPF)." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Organization.identifier">
+      <path value="Organization.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Organization.active">
+      <path value="Organization.active" />
+      <short value="Pessoa Jurídica Ativa" />
+      <definition value="Se a Pessoa Jurídia ainda está ativa." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Organization.type">
+      <path value="Organization.type" />
+      <short value="Natureza Jurídica" />
+      <definition value="Identifica a constituição jurídico-institucional das entidades públicas e privadas nos cadastros da administração pública do Brasil." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Natureza Jurídica" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRNaturezaJuridica-1.0" />
+      </binding>
+    </element>
+    <element id="Organization.type.coding">
+      <path value="Organization.type.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Organization.type.coding.system">
+      <path value="Organization.type.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Organization.type.coding.code">
+      <path value="Organization.type.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Organization.type.coding.display">
+      <path value="Organization.type.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Organization.type.coding.userSelected">
+      <path value="Organization.type.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Organization.type.text">
+      <path value="Organization.type.text" />
+      <max value="0" />
+    </element>
+    <element id="Organization.name">
+      <path value="Organization.name" />
+      <short value="Nome" />
+      <definition value="Nome empresarial da Pessoa Jurídica." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Organization.alias">
+      <path value="Organization.alias" />
+      <short value="Nome Fantasia" />
+      <definition value="Nome fantasia da Pessoa Jurídica." />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Organization.telecom">
+      <path value="Organization.telecom" />
+      <max value="0" />
+    </element>
+    <element id="Organization.address">
+      <path value="Organization.address" />
+      <max value="0" />
+    </element>
+    <element id="Organization.partOf">
+      <path value="Organization.partOf" />
+      <max value="0" />
+    </element>
+    <element id="Organization.contact">
+      <path value="Organization.contact" />
+      <max value="0" />
+    </element>
+    <element id="Organization.endpoint">
+      <path value="Organization.endpoint" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

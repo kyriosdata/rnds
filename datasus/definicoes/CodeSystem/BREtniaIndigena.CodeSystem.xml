@@ -1,0 +1,1614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="5067204c-879c-4bae-bc39-46a3f156feb6" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:12:14.533+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BREtniaIndigena" />
+  <version value="201701A" />
+  <name value="Etnia Indígena" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:12:34.5209426+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Códigos para representação de etnias indígenas no Brasil." />
+  <content value="complete" />
+  <concept>
+    <code value="0001" />
+    <display value="ACONA (WAKONAS, NACONAS, JAKONA, ACORA­NES)" />
+  </concept>
+  <concept>
+    <code value="0002" />
+    <display value="AIKANA (AIKANA, MAS SAKA,TUBARAO)" />
+  </concept>
+  <concept>
+    <code value="0003" />
+    <display value="AJURU" />
+  </concept>
+  <concept>
+    <code value="0004" />
+    <display value="AKUNSU (AKUNT'SU)" />
+  </concept>
+  <concept>
+    <code value="0005" />
+    <display value="AMANAYE" />
+  </concept>
+  <concept>
+    <code value="0006" />
+    <display value="AMONDAWA" />
+  </concept>
+  <concept>
+    <code value="0007" />
+    <display value="ANAMBE" />
+  </concept>
+  <concept>
+    <code value="0008" />
+    <display value="APARAI (APALAI)" />
+  </concept>
+  <concept>
+    <code value="0009" />
+    <display value="APIAKA (APIACA)" />
+  </concept>
+  <concept>
+    <code value="0010" />
+    <display value="APINAYE (APINAJE/APINAIE/APINAGE)" />
+  </concept>
+  <concept>
+    <code value="0011" />
+    <display value="APURINA (APORINA, IPURINA, IPURINA, IPURI­NAN)" />
+  </concept>
+  <concept>
+    <code value="0012" />
+    <display value="ARANA (ARACUAI DO VALE DO JEQUITINHONHA)" />
+  </concept>
+  <concept>
+    <code value="0013" />
+    <display value="ARAPASO (ARAPACO)" />
+  </concept>
+  <concept>
+    <code value="0014" />
+    <display value="ARARA DE RONDONIA (KARO, URUCU, URUKU)" />
+  </concept>
+  <concept>
+    <code value="0015" />
+    <display value="ARARA DO ACRE (SHAWANAUA, AMAWAKA)" />
+  </concept>
+  <concept>
+    <code value="0016" />
+    <display value="ARARA DO ARIPUANA (ARARA DO BEIRADAO/ARI­PUANA)" />
+  </concept>
+  <concept>
+    <code value="0017" />
+    <display value="ARARA DO PARA (UKARAGMA, UKARAMMA)" />
+  </concept>
+  <concept>
+    <code value="0018" />
+    <display value="ARAWETE (ARAUETE)" />
+  </concept>
+  <concept>
+    <code value="0019" />
+    <display value="ARIKAPU (ARICAPU, ARIKAPO, MASUBI, MAXUBI)" />
+  </concept>
+  <concept>
+    <code value="0020" />
+    <display value="ARIKEM (ARIQUEN, ARIQUEME, ARIKEME)" />
+  </concept>
+  <concept>
+    <code value="0021" />
+    <display value="ARIKOSE (ARICOBE)" />
+  </concept>
+  <concept>
+    <code value="0022" />
+    <display value="ARUA" />
+  </concept>
+  <concept>
+    <code value="0023" />
+    <display value="ARUAK (ARAWAK)" />
+  </concept>
+  <concept>
+    <code value="0024" />
+    <display value="ASHANINKA (KAMPA)" />
+  </concept>
+  <concept>
+    <code value="0025" />
+    <display value="ASURINI DO TOCANTINS (AKUAWA/AKWAWA)" />
+  </concept>
+  <concept>
+    <code value="0026" />
+    <display value="ASURINI DO XINGU (AWAETE)" />
+  </concept>
+  <concept>
+    <code value="0027" />
+    <display value="ATIKUM (ATICUM)" />
+  </concept>
+  <concept>
+    <code value="0028" />
+    <display value="AVA - CANOEIRO" />
+  </concept>
+  <concept>
+    <code value="0029" />
+    <display value="AWETI (AUETI/AUETO)" />
+  </concept>
+  <concept>
+    <code value="0030" />
+    <display value="BAKAIRI (KURA, BACAIRI)" />
+  </concept>
+  <concept>
+    <code value="0031" />
+    <display value="BANAWA YAFI (BANAWA, BANAWA-JAFI)" />
+  </concept>
+  <concept>
+    <code value="0032" />
+    <display value="BANIWA (BANIUA, BANIVA, WALIMANAI, WAKUE­NAI)" />
+  </concept>
+  <concept>
+    <code value="0033" />
+    <display value="BARA (WAIPINOMAKA)" />
+  </concept>
+  <concept>
+    <code value="0034" />
+    <display value="BARASANA (HANERA)" />
+  </concept>
+  <concept>
+    <code value="0035" />
+    <display value="BARE" />
+  </concept>
+  <concept>
+    <code value="0036" />
+    <display value="BORORO (BOE)" />
+  </concept>
+  <concept>
+    <code value="0037" />
+    <display value="BOTOCUDO (GEREN)" />
+  </concept>
+  <concept>
+    <code value="0038" />
+    <display value="CANOE" />
+  </concept>
+  <concept>
+    <code value="0039" />
+    <display value="CASSUPA" />
+  </concept>
+  <concept>
+    <code value="0040" />
+    <display value="CHAMACOCO" />
+  </concept>
+  <concept>
+    <code value="0041" />
+    <display value="CHIQUITANO (XIQUITANO)" />
+  </concept>
+  <concept>
+    <code value="0042" />
+    <display value="CIKIYANA (SIKIANA)" />
+  </concept>
+  <concept>
+    <code value="0043" />
+    <display value="CINTA LARGA (MATETAMAE)" />
+  </concept>
+  <concept>
+    <code value="0044" />
+    <display value="COLUMBIARA (CORUMBIARA)" />
+  </concept>
+  <concept>
+    <code value="0045" />
+    <display value="DENI" />
+  </concept>
+  <concept>
+    <code value="0046" />
+    <display value="DESANA (DESANA, DESANO, DESSANO, WIRA, UMUKOMASA)" />
+  </concept>
+  <concept>
+    <code value="0047" />
+    <display value="DIAHUI (JAHOI, JAHUI, DIARROI)" />
+  </concept>
+  <concept>
+    <code value="0048" />
+    <display value="ENAWENE-NAWE (SALUMA)" />
+  </concept>
+  <concept>
+    <code value="0049" />
+    <display value="FULNI-O" />
+  </concept>
+  <concept>
+    <code value="0050" />
+    <display value="GALIBI (GALIBI DO OIAPOQUE, KARINHA)" />
+  </concept>
+  <concept>
+    <code value="0051" />
+    <display value="GALIBI MARWORNO (GALIBI DO UACA, ARUA)" />
+  </concept>
+  <concept>
+    <code value="0052" />
+    <display value="GAVIAO DE RONDONIA (DIGUT)" />
+  </concept>
+  <concept>
+    <code value="0053" />
+    <display value="GAVIAO KRIKATEJE" />
+  </concept>
+  <concept>
+    <code value="0054" />
+    <display value="GAVIAO PARKATEJE (PARKATEJE)" />
+  </concept>
+  <concept>
+    <code value="0055" />
+    <display value="GAVIAO PUKOBIE (PUKOBIE, PYKOPJE, GAVIAO DO MARANHAO)" />
+  </concept>
+  <concept>
+    <code value="0056" />
+    <display value="GUAJA (AWA, AVA)" />
+  </concept>
+  <concept>
+    <code value="0057" />
+    <display value="GUAJAJARA (TENETEHARA)" />
+  </concept>
+  <concept>
+    <code value="0058" />
+    <display value="GUARANI KAIOWA (PAI TAVYTERA)" />
+  </concept>
+  <concept>
+    <code value="0059" />
+    <display value="GUARANI M'BYA" />
+  </concept>
+  <concept>
+    <code value="0060" />
+    <display value="GUARANI NANDEVA (AVAKATUETE, CHIRIPA, NHANDEWA, AVA GUARANI)" />
+  </concept>
+  <concept>
+    <code value="0061" />
+    <display value="GUATO" />
+  </concept>
+  <concept>
+    <code value="0062" />
+    <display value="HIMARIMA (HIMERIMA)" />
+  </concept>
+  <concept>
+    <code value="0063" />
+    <display value="INGARIKO (INGARICO, AKAWAIO, KAPON)" />
+  </concept>
+  <concept>
+    <code value="0064" />
+    <display value="IRANXE (IRANTXE)" />
+  </concept>
+  <concept>
+    <code value="0065" />
+    <display value="ISSE" />
+  </concept>
+  <concept>
+    <code value="0066" />
+    <display value="JABOTI (JABUTI, KIPIU, YABYTI)" />
+  </concept>
+  <concept>
+    <code value="0067" />
+    <display value="JAMAMADI (YAMAMADI, DJEOROMITXI)" />
+  </concept>
+  <concept>
+    <code value="0068" />
+    <display value="JARAWARA" />
+  </concept>
+  <concept>
+    <code value="0069" />
+    <display value="JIRIPANCO (JERIPANCO, GERIPANCO)" />
+  </concept>
+  <concept>
+    <code value="0070" />
+    <display value="JUMA (YUMA)" />
+  </concept>
+  <concept>
+    <code value="0071" />
+    <display value="JURUNA" />
+  </concept>
+  <concept>
+    <code value="0072" />
+    <display value="JURUTI (YURITI)" />
+  </concept>
+  <concept>
+    <code value="0073" />
+    <display value="KAAPOR (URUBU-KAAPOR, KA'APOR, KAAPORTE)" />
+  </concept>
+  <concept>
+    <code value="0074" />
+    <display value="KADIWEU (CADUVEO, CADIUEU)" />
+  </concept>
+  <concept>
+    <code value="0075" />
+    <display value="KAIABI (CAIABI, KAYABI)" />
+  </concept>
+  <concept>
+    <code value="0076" />
+    <display value="KAIMBE (CAIMBE)" />
+  </concept>
+  <concept>
+    <code value="0077" />
+    <display value="KAINGANG (CAINGANGUE)" />
+  </concept>
+  <concept>
+    <code value="0078" />
+    <display value="KAIXANA (CAIXANA)" />
+  </concept>
+  <concept>
+    <code value="0079" />
+    <display value="KALABASSA (CALABASSA, CALABACAS)" />
+  </concept>
+  <concept>
+    <code value="0080" />
+    <display value="KALANCO" />
+  </concept>
+  <concept>
+    <code value="0081" />
+    <display value="KALAPALO (CALAPALO)" />
+  </concept>
+  <concept>
+    <code value="0082" />
+    <display value="KAMAYURA (CAMAIURA, KAMAIURA)" />
+  </concept>
+  <concept>
+    <code value="0083" />
+    <display value="KAMBA (CAMBA)" />
+  </concept>
+  <concept>
+    <code value="0084" />
+    <display value="KAMBEBA (CAMBEBA, OMAGUA)" />
+  </concept>
+  <concept>
+    <code value="0085" />
+    <display value="KAMBIWA (CAMBIUA)" />
+  </concept>
+  <concept>
+    <code value="0086" />
+    <display value="KAMBIWA PIPIPA (PIPIPA)" />
+  </concept>
+  <concept>
+    <code value="0087" />
+    <display value="KAMPE" />
+  </concept>
+  <concept>
+    <code value="0088" />
+    <display value="KANAMANTI (KANAMATI, CANAMANTI)" />
+  </concept>
+  <concept>
+    <code value="0089" />
+    <display value="KANAMARI (CANAMARI, KANAMARY, TUKUNA)" />
+  </concept>
+  <concept>
+    <code value="0090" />
+    <display value="KANELA APANIEKRA (CANELA)" />
+  </concept>
+  <concept>
+    <code value="0091" />
+    <display value="KANELA RANKOKAMEKRA (CANELA)" />
+  </concept>
+  <concept>
+    <code value="0092" />
+    <display value="KANINDE" />
+  </concept>
+  <concept>
+    <code value="0093" />
+    <display value="KANOE (CANOE)" />
+  </concept>
+  <concept>
+    <code value="0094" />
+    <display value="KANTARURE (CANTARURE)" />
+  </concept>
+  <concept>
+    <code value="0095" />
+    <display value="KAPINAWA (CAPINAUA)" />
+  </concept>
+  <concept>
+    <code value="0096" />
+    <display value="KARAJA (CARAJA)" />
+  </concept>
+  <concept>
+    <code value="0097" />
+    <display value="KARAJA/JAVAE (JAVAE)" />
+  </concept>
+  <concept>
+    <code value="0098" />
+    <display value="KARAJA/XAMBIOA (KARAJA DO NORTE)" />
+  </concept>
+  <concept>
+    <code value="0099" />
+    <display value="KARAPANA (CARAPANA, MUTEAMASA, UKOPINO­PONA)" />
+  </concept>
+  <concept>
+    <code value="0100" />
+    <display value="KARAPOTO (CARAPOTO)" />
+  </concept>
+  <concept>
+    <code value="0101" />
+    <display value="KARIPUNA (CARIPUNA)" />
+  </concept>
+  <concept>
+    <code value="0102" />
+    <display value="KARIPUNA DO AMAPA (CARIPUNA)" />
+  </concept>
+  <concept>
+    <code value="0103" />
+    <display value="KARIRI (CARIRI)" />
+  </concept>
+  <concept>
+    <code value="0104" />
+    <display value="KARIRI-XOCO (CARIRI-CHOCO)" />
+  </concept>
+  <concept>
+    <code value="0105" />
+    <display value="KARITIANA (CARITIANA)" />
+  </concept>
+  <concept>
+    <code value="0106" />
+    <display value="KATAWIXI (KATAUIXI, KATAWIN, KATAWISI, CATAUICHI)" />
+  </concept>
+  <concept>
+    <code value="0107" />
+    <display value="KATUENA (CATUENA, KATWENA)" />
+  </concept>
+  <concept>
+    <code value="0108" />
+    <display value="KATUKINA (PEDA DJAPA)" />
+  </concept>
+  <concept>
+    <code value="0109" />
+    <display value="KATUKINA DO ACRE" />
+  </concept>
+  <concept>
+    <code value="0110" />
+    <display value="KAXARARI (CAXARARI)" />
+  </concept>
+  <concept>
+    <code value="0111" />
+    <display value="KAXINAWA (HUNI-KUIN, CASHINAUA, CAXINAUA)" />
+  </concept>
+  <concept>
+    <code value="0112" />
+    <display value="KAXIXO" />
+  </concept>
+  <concept>
+    <code value="0113" />
+    <display value="KAXUYANA (CAXUIANA)" />
+  </concept>
+  <concept>
+    <code value="0114" />
+    <display value="KAYAPO (CAIAPO)" />
+  </concept>
+  <concept>
+    <code value="0115" />
+    <display value="KAYAPO KARARAO (KARARAO)" />
+  </concept>
+  <concept>
+    <code value="0116" />
+    <display value="KAYAPO TXUKAHAMAE (TXUKAHAMAE)" />
+  </concept>
+  <concept>
+    <code value="0117" />
+    <display value="KAYAPO XICRIM (XIKRIN)" />
+  </concept>
+  <concept>
+    <code value="0118" />
+    <display value="KAYUISANA (CAIXANA, CAUIXANA, KAIXANA)" />
+  </concept>
+  <concept>
+    <code value="0119" />
+    <display value="KINIKINAWA (GUAN, KOINUKOEN, KINIKINAO)" />
+  </concept>
+  <concept>
+    <code value="0120" />
+    <display value="KIRIRI" />
+  </concept>
+  <concept>
+    <code value="0121" />
+    <display value="KOCAMA (COCAMA, KOKAMA)" />
+  </concept>
+  <concept>
+    <code value="0122" />
+    <display value="KOKUIREGATEJE" />
+  </concept>
+  <concept>
+    <code value="0123" />
+    <display value="KORUBO" />
+  </concept>
+  <concept>
+    <code value="0124" />
+    <display value="KRAHO (CRAO, KRAO)" />
+  </concept>
+  <concept>
+    <code value="0125" />
+    <display value="KREJE (KRENYE)" />
+  </concept>
+  <concept>
+    <code value="0126" />
+    <display value="KRENAK (BORUN, CRENAQUE)" />
+  </concept>
+  <concept>
+    <code value="0127" />
+    <display value="KRIKATI (KRINKATI)" />
+  </concept>
+  <concept>
+    <code value="0128" />
+    <display value="KUBEO (CUBEO, COBEWA, KUBEWA, PAMIWA, CU­BEU)" />
+  </concept>
+  <concept>
+    <code value="0129" />
+    <display value="KUIKURO (KUIKURU, CUICURO)" />
+  </concept>
+  <concept>
+    <code value="0130" />
+    <display value="KUJUBIM (KUYUBI, CUJUBIM)" />
+  </concept>
+  <concept>
+    <code value="0131" />
+    <display value="KULINA PANO (CULINA)" />
+  </concept>
+  <concept>
+    <code value="0132" />
+    <display value="KULINA/MADIHA (CULINA, MADIJA, MADIHA)" />
+  </concept>
+  <concept>
+    <code value="0133" />
+    <display value="KURIPAKO (CURIPACO, CURRIPACO, CORIPACO, WAKUENAI)" />
+  </concept>
+  <concept>
+    <code value="0134" />
+    <display value="KURUAIA (CURUAIA)" />
+  </concept>
+  <concept>
+    <code value="0135" />
+    <display value="KWAZA (COAIA, KOAIA)" />
+  </concept>
+  <concept>
+    <code value="0136" />
+    <display value="MACHINERI (MANCHINERI, MANXINERI)" />
+  </concept>
+  <concept>
+    <code value="0137" />
+    <display value="MACURAP (MAKURAP)" />
+  </concept>
+  <concept>
+    <code value="0138" />
+    <display value="MAKU DOW (DOW)" />
+  </concept>
+  <concept>
+    <code value="0139" />
+    <display value="MAKU HUPDA (HUPDA)" />
+  </concept>
+  <concept>
+    <code value="0140" />
+    <display value="MAKU NADEB (NADEB)" />
+  </concept>
+  <concept>
+    <code value="0141" />
+    <display value="MAKU YUHUPDE (YUHUPDE)" />
+  </concept>
+  <concept>
+    <code value="0142" />
+    <display value="MAKUNA (MACUNA, YEBA-MASA)" />
+  </concept>
+  <concept>
+    <code value="0143" />
+    <display value="MAKUXI (MACUXI, MACHUSI, PEMON)" />
+  </concept>
+  <concept>
+    <code value="0144" />
+    <display value="MARIMAM (MARIMA)" />
+  </concept>
+  <concept>
+    <code value="0145" />
+    <display value="MARUBO" />
+  </concept>
+  <concept>
+    <code value="0146" />
+    <display value="MATIPU" />
+  </concept>
+  <concept>
+    <code value="0147" />
+    <display value="MATIS" />
+  </concept>
+  <concept>
+    <code value="0148" />
+    <display value="MATSE (MAYORUNA)" />
+  </concept>
+  <concept>
+    <code value="0149" />
+    <display value="MAXAKALI (MAXACALI)" />
+  </concept>
+  <concept>
+    <code value="0150" />
+    <display value="MAYA (MAYA)" />
+  </concept>
+  <concept>
+    <code value="0151" />
+    <display value="MAYTAPU" />
+  </concept>
+  <concept>
+    <code value="0152" />
+    <display value="MEHINAKO (MEINAKU, MEINACU)" />
+  </concept>
+  <concept>
+    <code value="0153" />
+    <display value="MEKEN (MEQUEM, MEKHEM, MICHENS)" />
+  </concept>
+  <concept>
+    <code value="0154" />
+    <display value="MENKY (MYKY, MUNKU, MENKI, MYNKY)" />
+  </concept>
+  <concept>
+    <code value="0155" />
+    <display value="MIRANHA (MIRANHA, MIRANA)" />
+  </concept>
+  <concept>
+    <code value="0156" />
+    <display value="MIRITI TAPUIA (MIRITI-TAPUYA, BUIA-TAPUYA)" />
+  </concept>
+  <concept>
+    <code value="0157" />
+    <display value="MUNDURUKU (MUNDURUCU)" />
+  </concept>
+  <concept>
+    <code value="0158" />
+    <display value="MURA" />
+  </concept>
+  <concept>
+    <code value="0159" />
+    <display value="NAHUKWA (NAFUQUA)" />
+  </concept>
+  <concept>
+    <code value="0160" />
+    <display value="NAMBIKWARA DO CAMPO (HALOTESU, KITHAULU, WAKALITESU, SAWENTES, MANDUKA)" />
+  </concept>
+  <concept>
+    <code value="0161" />
+    <display value="NAMBIKWARA DO NORTE (NEGAROTE ,MAMAIN­DE, LATUNDE, SABANE E MANDUKA, TAWANDE)" />
+  </concept>
+  <concept>
+    <code value="0162" />
+    <display value="NAMBIKWARA DO SUL (WASUSU ,HAHAINTESU, ALANTESU, WAIKISU, ALAKETESU, WASUSU, SA­RARE)" />
+  </concept>
+  <concept>
+    <code value="0163" />
+    <display value="NARAVUTE (NARUVOTO)" />
+  </concept>
+  <concept>
+    <code value="0164" />
+    <display value="NAWA (NAUA)" />
+  </concept>
+  <concept>
+    <code value="0165" />
+    <display value="NUKINI (NUQUINI, NUKUINI)" />
+  </concept>
+  <concept>
+    <code value="0166" />
+    <display value="OFAIE (OFAYE-XAVANTE)" />
+  </concept>
+  <concept>
+    <code value="0167" />
+    <display value="ORO WIN" />
+  </concept>
+  <concept>
+    <code value="0168" />
+    <display value="PAIAKU (JENIPAPO-KANINDE)" />
+  </concept>
+  <concept>
+    <code value="0169" />
+    <display value="PAKAA NOVA (WARI, PACAAS NOVOS)" />
+  </concept>
+  <concept>
+    <code value="0170" />
+    <display value="PALIKUR (AUKWAYENE, AUKUYENE, PALIKU'ENE)" />
+  </concept>
+  <concept>
+    <code value="0171" />
+    <display value="PANARA (KRENHAKARORE , KRENAKORE, KRENA­KARORE)" />
+  </concept>
+  <concept>
+    <code value="0172" />
+    <display value="PANKARARE (PANCARARE)" />
+  </concept>
+  <concept>
+    <code value="0173" />
+    <display value="PANKARARU (PANCARARU)" />
+  </concept>
+  <concept>
+    <code value="0174" />
+    <display value="PANKARARU KALANKO (KALANKO)" />
+  </concept>
+  <concept>
+    <code value="0175" />
+    <display value="PANKARARU KARUAZU (KARUAZU)" />
+  </concept>
+  <concept>
+    <code value="0176" />
+    <display value="PANKARU (PANCARU)" />
+  </concept>
+  <concept>
+    <code value="0177" />
+    <display value="PARAKANA (PARACANA, APITEREWA, AWAETE)" />
+  </concept>
+  <concept>
+    <code value="0178" />
+    <display value="PARECI (PARESI, HALITI)" />
+  </concept>
+  <concept>
+    <code value="0179" />
+    <display value="PARINTINTIN" />
+  </concept>
+  <concept>
+    <code value="0180" />
+    <display value="PATAMONA (KAPON)" />
+  </concept>
+  <concept>
+    <code value="0181" />
+    <display value="PATAXO" />
+  </concept>
+  <concept>
+    <code value="0182" />
+    <display value="PATAXO HA-HA-HAE" />
+  </concept>
+  <concept>
+    <code value="0183" />
+    <display value="PAUMARI (PALMARI)" />
+  </concept>
+  <concept>
+    <code value="0184" />
+    <display value="PAUMELENHO" />
+  </concept>
+  <concept>
+    <code value="0185" />
+    <display value="PIRAHA (MURA PIRAHA)" />
+  </concept>
+  <concept>
+    <code value="0186" />
+    <display value="PIRATUAPUIA (PIRATAPUYA, PIRATAPUYO, PIRA­TAPUYA, WAIKANA)" />
+  </concept>
+  <concept>
+    <code value="0187" />
+    <display value="PITAGUARI" />
+  </concept>
+  <concept>
+    <code value="0188" />
+    <display value="POTIGUARA" />
+  </concept>
+  <concept>
+    <code value="0189" />
+    <display value="POYANAWA (POIANAUA)" />
+  </concept>
+  <concept>
+    <code value="0190" />
+    <display value="RIKBAKTSA (CANOEIROS, ERIGPAKTSA)" />
+  </concept>
+  <concept>
+    <code value="0191" />
+    <display value="SAKURABIAT (MEKENS, SAKIRABIAP, SAKIRABIAR)" />
+  </concept>
+  <concept>
+    <code value="0192" />
+    <display value="SATERE-MAWE (SATERE-MAUE)" />
+  </concept>
+  <concept>
+    <code value="0193" />
+    <display value="SHANENAWA (KATUKINA)" />
+  </concept>
+  <concept>
+    <code value="0194" />
+    <display value="SIRIANO (SIRIA-MASA)" />
+  </concept>
+  <concept>
+    <code value="0195" />
+    <display value="SURIANA" />
+  </concept>
+  <concept>
+    <code value="0196" />
+    <display value="SURUI DE RONDONIA (PAITER)" />
+  </concept>
+  <concept>
+    <code value="0197" />
+    <display value="SURUI DO PARA (AIKEWARA)" />
+  </concept>
+  <concept>
+    <code value="0198" />
+    <display value="SUYA (SUIA/KISEDJE)" />
+  </concept>
+  <concept>
+    <code value="0199" />
+    <display value="TAPAYUNA (BEICO-DE-PAU)" />
+  </concept>
+  <concept>
+    <code value="0200" />
+    <display value="TAPEBA" />
+  </concept>
+  <concept>
+    <code value="0201" />
+    <display value="TAPIRAPE (TAPI'IRAPE)" />
+  </concept>
+  <concept>
+    <code value="0202" />
+    <display value="TAPUIA (TAPUIA-XAVANTE, TAPUIO)" />
+  </concept>
+  <concept>
+    <code value="0203" />
+    <display value="TARIANO (TARIANA, TALIASERI)" />
+  </concept>
+  <concept>
+    <code value="0204" />
+    <display value="TAUREPANG (TAULIPANG, PEMON, AREKUNA, PA­GEYN)" />
+  </concept>
+  <concept>
+    <code value="0205" />
+    <display value="TEMBE" />
+  </concept>
+  <concept>
+    <code value="0206" />
+    <display value="TENHARIM" />
+  </concept>
+  <concept>
+    <code value="0207" />
+    <display value="TERENA" />
+  </concept>
+  <concept>
+    <code value="0208" />
+    <display value="TICUNA (TIKUNA, TUKUNA, MAGUTA)" />
+  </concept>
+  <concept>
+    <code value="0209" />
+    <display value="TINGUI BOTO" />
+  </concept>
+  <concept>
+    <code value="0210" />
+    <display value="TIRIYO EWARHUYANA (TIRIYO, TRIO, TARONA, YAWI, PIANOKOTO)" />
+  </concept>
+  <concept>
+    <code value="0211" />
+    <display value="TIRIYO KAH'YANA (TIRIYO, TRIO, TARONA, YAWI, PIANOKOTO)" />
+  </concept>
+  <concept>
+    <code value="0212" />
+    <display value="TIRIYO TSIKUYANA (TIRIYO, TRIO, TARONA, YAWI, PIANOKOTO)" />
+  </concept>
+  <concept>
+    <code value="0213" />
+    <display value="TORA" />
+  </concept>
+  <concept>
+    <code value="0214" />
+    <display value="TREMEMBE" />
+  </concept>
+  <concept>
+    <code value="0215" />
+    <display value="TRUKA" />
+  </concept>
+  <concept>
+    <code value="0216" />
+    <display value="TRUMAI" />
+  </concept>
+  <concept>
+    <code value="0217" />
+    <display value="TSOHOM DJAPA (TSUNHUM-DJAPA)" />
+  </concept>
+  <concept>
+    <code value="0218" />
+    <display value="TUKANO (TUCANO, YE'PA-MASA, DASEA)" />
+  </concept>
+  <concept>
+    <code value="0219" />
+    <display value="TUMBALALA" />
+  </concept>
+  <concept>
+    <code value="0220" />
+    <display value="TUNAYANA" />
+  </concept>
+  <concept>
+    <code value="0221" />
+    <display value="TUPARI" />
+  </concept>
+  <concept>
+    <code value="0222" />
+    <display value="TUPINAMBA" />
+  </concept>
+  <concept>
+    <code value="0223" />
+    <display value="TUPINIQUIM" />
+  </concept>
+  <concept>
+    <code value="0224" />
+    <display value="TURIWARA" />
+  </concept>
+  <concept>
+    <code value="0225" />
+    <display value="TUXA" />
+  </concept>
+  <concept>
+    <code value="0226" />
+    <display value="TUYUKA (TUIUCA, DOKAPUARA, UTAPINOMAKA­PHONA)" />
+  </concept>
+  <concept>
+    <code value="0227" />
+    <display value="TXIKAO (TXICAO, IKPENG)" />
+  </concept>
+  <concept>
+    <code value="0228" />
+    <display value="UMUTINA (OMOTINA, BARBADOS)" />
+  </concept>
+  <concept>
+    <code value="0229" />
+    <display value="URU-EU-WAU-WAU (URUEU-UAU-UAU, URUPAIN, URUPA)" />
+  </concept>
+  <concept>
+    <code value="0230" />
+    <display value="WAI WAI HIXKARYANA (HIXKARYANA)" />
+  </concept>
+  <concept>
+    <code value="0231" />
+    <display value="WAI WAI KARAFAWYANA (KARAFAWYANA, KARA­PAWYANA)" />
+  </concept>
+  <concept>
+    <code value="0232" />
+    <display value="WAI WAI XEREU (XEREU)" />
+  </concept>
+  <concept>
+    <code value="0233" />
+    <display value="WAI WAI KATUENA (KATUENA)" />
+  </concept>
+  <concept>
+    <code value="0234" />
+    <display value="WAI WAI MAWAYANA (MAWAYANA)" />
+  </concept>
+  <concept>
+    <code value="0235" />
+    <display value="WAIAPI (WAYAMPI, OYAMPI, WAYAPY, )" />
+  </concept>
+  <concept>
+    <code value="0236" />
+    <display value="WAIMIRI ATROARI (KINA)" />
+  </concept>
+  <concept>
+    <code value="0237" />
+    <display value="WANANO (UANANO, WANANA)" />
+  </concept>
+  <concept>
+    <code value="0238" />
+    <display value="WAPIXANA (UAPIXANA, VAPIDIANA, WAPISIANA, WAPISHANA)" />
+  </concept>
+  <concept>
+    <code value="0239" />
+    <display value="WAREKENA (UAREQUENA, WEREKENA)" />
+  </concept>
+  <concept>
+    <code value="0240" />
+    <display value="WASSU" />
+  </concept>
+  <concept>
+    <code value="0241" />
+    <display value="WAURA (UAURA, WAUJA)" />
+  </concept>
+  <concept>
+    <code value="0242" />
+    <display value="WAYANA (WAIANA, UAIANA)" />
+  </concept>
+  <concept>
+    <code value="0243" />
+    <display value="WITOTO (UITOTO, HUITOTO)" />
+  </concept>
+  <concept>
+    <code value="0244" />
+    <display value="XAKRIABA (XACRIABA)" />
+  </concept>
+  <concept>
+    <code value="0245" />
+    <display value="XAVANTE (A'UWE, AKWE, AWEN, AKWEN)" />
+  </concept>
+  <concept>
+    <code value="0246" />
+    <display value="XERENTE (AKWE, AWEN, AKWEN)" />
+  </concept>
+  <concept>
+    <code value="0247" />
+    <display value="XETA" />
+  </concept>
+  <concept>
+    <code value="0248" />
+    <display value="XIPAIA (SHIPAYA, XIPAYA)" />
+  </concept>
+  <concept>
+    <code value="0249" />
+    <display value="XOKLENG (SHOKLENG, XOCLENG)" />
+  </concept>
+  <concept>
+    <code value="0250" />
+    <display value="XOKO (XOCO, CHOCO)" />
+  </concept>
+  <concept>
+    <code value="0251" />
+    <display value="XUKURU (XUCURU)" />
+  </concept>
+  <concept>
+    <code value="0252" />
+    <display value="XUKURU KARIRI (XUCURU-KARIRI)" />
+  </concept>
+  <concept>
+    <code value="0253" />
+    <display value="YAIPIYANA" />
+  </concept>
+  <concept>
+    <code value="0254" />
+    <display value="YAMINAWA (JAMINAWA, IAMINAWA)" />
+  </concept>
+  <concept>
+    <code value="0255" />
+    <display value="YANOMAMI NINAM (IANOMAMI, IANOAMA, XIRIA­NA)" />
+  </concept>
+  <concept>
+    <code value="0256" />
+    <display value="YANOMAMI SANUMA (IANOMAMI, IANOAMA, XI­RIANA)" />
+  </concept>
+  <concept>
+    <code value="0257" />
+    <display value="YANOMAMI YANOMAM (IANOMAMI, IANOAMA, XI­RIANA)" />
+  </concept>
+  <concept>
+    <code value="0258" />
+    <display value="YAWALAPITI (IAUALAPITI)" />
+  </concept>
+  <concept>
+    <code value="0259" />
+    <display value="YAWANAWA (IAUANAUA)" />
+  </concept>
+  <concept>
+    <code value="0260" />
+    <display value="YEKUANA (MAIONGON, YE'KUANA, YEKWANA, MAYONGONG)" />
+  </concept>
+  <concept>
+    <code value="0261" />
+    <display value="YUDJA (JURUNA, YURUNA)" />
+  </concept>
+  <concept>
+    <code value="0262" />
+    <display value="ZO'E (POTURU)" />
+  </concept>
+  <concept>
+    <code value="0263" />
+    <display value="ZORO (PAGEYN)" />
+  </concept>
+  <concept>
+    <code value="0264" />
+    <display value="ZURUAHA (SOROWAHA, SURUWAHA)" />
+  </concept>
+  <concept>
+    <code value="X265" />
+    <display value="AHANENAWA" />
+  </concept>
+  <concept>
+    <code value="X266" />
+    <display value="AICABA" />
+  </concept>
+  <concept>
+    <code value="X267" />
+    <display value="AIKANÃ-KWASÁ" />
+  </concept>
+  <concept>
+    <code value="X269" />
+    <display value="ALANTESU" />
+  </concept>
+  <concept>
+    <code value="X271" />
+    <display value="AMAWÁKA" />
+  </concept>
+  <concept>
+    <code value="X272" />
+    <display value="ANACÉ" />
+  </concept>
+  <concept>
+    <code value="X276" />
+    <display value="ARARA APOLIMA" />
+  </concept>
+  <concept>
+    <code value="X278" />
+    <display value="ARIPUANÁ" />
+  </concept>
+  <concept>
+    <code value="X279" />
+    <display value="ASSURINI" />
+  </concept>
+  <concept>
+    <code value="X280" />
+    <display value="AWUARÁ" />
+  </concept>
+  <concept>
+    <code value="X281" />
+    <display value="BORBA" />
+  </concept>
+  <concept>
+    <code value="X282" />
+    <display value="CABIXI" />
+  </concept>
+  <concept>
+    <code value="X283" />
+    <display value="CAMARARÉ" />
+  </concept>
+  <concept>
+    <code value="X284" />
+    <display value="CAMASURI" />
+  </concept>
+  <concept>
+    <code value="X285" />
+    <display value="CARA PRETA" />
+  </concept>
+  <concept>
+    <code value="X286" />
+    <display value="CHARRUA" />
+  </concept>
+  <concept>
+    <code value="X287" />
+    <display value="CUJUBIM" />
+  </concept>
+  <concept>
+    <code value="X288" />
+    <display value="DAW" />
+  </concept>
+  <concept>
+    <code value="X289" />
+    <display value="GAVIÃO" />
+  </concept>
+  <concept>
+    <code value="X290" />
+    <display value="GUARANI" />
+  </concept>
+  <concept>
+    <code value="X291" />
+    <display value="HALANTESU" />
+  </concept>
+  <concept>
+    <code value="X292" />
+    <display value="HALOTESU" />
+  </concept>
+  <concept>
+    <code value="X293" />
+    <display value="HENGATÚ" />
+  </concept>
+  <concept>
+    <code value="X294" />
+    <display value="HIXKARYANA" />
+  </concept>
+  <concept>
+    <code value="X295" />
+    <display value="HUPDE" />
+  </concept>
+  <concept>
+    <code value="X296" />
+    <display value="HUPDES" />
+  </concept>
+  <concept>
+    <code value="X297" />
+    <display value="IAUANAUA" />
+  </concept>
+  <concept>
+    <code value="X298" />
+    <display value="IAUARETE AÇU" />
+  </concept>
+  <concept>
+    <code value="X299" />
+    <display value="IKPENG" />
+  </concept>
+  <concept>
+    <code value="X300" />
+    <display value="INAMBU" />
+  </concept>
+  <concept>
+    <code value="X301" />
+    <display value="INHABARANA" />
+  </concept>
+  <concept>
+    <code value="X302" />
+    <display value="JAVAE" />
+  </concept>
+  <concept>
+    <code value="X303" />
+    <display value="JENIPAPO" />
+  </concept>
+  <concept>
+    <code value="X304" />
+    <display value="JENIPAPO-KANINDE" />
+  </concept>
+  <concept>
+    <code value="X305" />
+    <display value="JIAHOI" />
+  </concept>
+  <concept>
+    <code value="X306" />
+    <display value="KAIOWA" />
+  </concept>
+  <concept>
+    <code value="X307" />
+    <display value="KAMPA" />
+  </concept>
+  <concept>
+    <code value="X308" />
+    <display value="KANELA" />
+  </concept>
+  <concept>
+    <code value="X309" />
+    <display value="KARAFAWYANA" />
+  </concept>
+  <concept>
+    <code value="X310" />
+    <display value="KARARAO" />
+  </concept>
+  <concept>
+    <code value="X311" />
+    <display value="KARUBO" />
+  </concept>
+  <concept>
+    <code value="X312" />
+    <display value="KASSUPÁ" />
+  </concept>
+  <concept>
+    <code value="X313" />
+    <display value="KATITHÃULU" />
+  </concept>
+  <concept>
+    <code value="X314" />
+    <display value="KATOKIN" />
+  </concept>
+  <concept>
+    <code value="X315" />
+    <display value="KATUKINA PANO" />
+  </concept>
+  <concept>
+    <code value="X316" />
+    <display value="KATUKINA PEDA DJAPA" />
+  </concept>
+  <concept>
+    <code value="X317" />
+    <display value="KATUKINA SHANENAUWA" />
+  </concept>
+  <concept>
+    <code value="X318" />
+    <display value="KAXAGO" />
+  </concept>
+  <concept>
+    <code value="X319" />
+    <display value="KAYABI" />
+  </concept>
+  <concept>
+    <code value="X320" />
+    <display value="KINÃ (WAIMIRI-ATROARI)" />
+  </concept>
+  <concept>
+    <code value="X321" />
+    <display value="KIRIRI-BARRA" />
+  </concept>
+  <concept>
+    <code value="X322" />
+    <display value="KITHÃULU" />
+  </concept>
+  <concept>
+    <code value="X323" />
+    <display value="KOIAIÁ" />
+  </concept>
+  <concept>
+    <code value="X324" />
+    <display value="KOIUPANKÁ" />
+  </concept>
+  <concept>
+    <code value="X325" />
+    <display value="KONTANAWA" />
+  </concept>
+  <concept>
+    <code value="X326" />
+    <display value="KRAHÔ KANELA" />
+  </concept>
+  <concept>
+    <code value="X327" />
+    <display value="KULINA" />
+  </concept>
+  <concept>
+    <code value="X328" />
+    <display value="LATUNDÊ" />
+  </concept>
+  <concept>
+    <code value="X329" />
+    <display value="MAKU" />
+  </concept>
+  <concept>
+    <code value="X330" />
+    <display value="MAKUNAMBÉ" />
+  </concept>
+  <concept>
+    <code value="X331" />
+    <display value="MAMAINDÊ" />
+  </concept>
+  <concept>
+    <code value="X332" />
+    <display value="MAMURI" />
+  </concept>
+  <concept>
+    <code value="X333" />
+    <display value="MANACAPURU" />
+  </concept>
+  <concept>
+    <code value="X334" />
+    <display value="MANAIRISSU" />
+  </concept>
+  <concept>
+    <code value="X335" />
+    <display value="MANCHINERI" />
+  </concept>
+  <concept>
+    <code value="X336" />
+    <display value="MANDUCA" />
+  </concept>
+  <concept>
+    <code value="X337" />
+    <display value="MARIBONDO" />
+  </concept>
+  <concept>
+    <code value="X338" />
+    <display value="MASSAKA" />
+  </concept>
+  <concept>
+    <code value="X339" />
+    <display value="MAWAYANA" />
+  </concept>
+  <concept>
+    <code value="X340" />
+    <display value="MAWÉ" />
+  </concept>
+  <concept>
+    <code value="X341" />
+    <display value="MAYORUNA" />
+  </concept>
+  <concept>
+    <code value="X342" />
+    <display value="MIQUELENO" />
+  </concept>
+  <concept>
+    <code value="X343" />
+    <display value="MOKURIÑ" />
+  </concept>
+  <concept>
+    <code value="X344" />
+    <display value="MON ORO WARAM" />
+  </concept>
+  <concept>
+    <code value="X345" />
+    <display value="MUTUM" />
+  </concept>
+  <concept>
+    <code value="X346" />
+    <display value="MYKY" />
+  </concept>
+  <concept>
+    <code value="X347" />
+    <display value="NADEB" />
+  </concept>
+  <concept>
+    <code value="X348" />
+    <display value="NAMBIKWARA" />
+  </concept>
+  <concept>
+    <code value="X349" />
+    <display value="NEGAROTÊ" />
+  </concept>
+  <concept>
+    <code value="X350" />
+    <display value="NHENGATU" />
+  </concept>
+  <concept>
+    <code value="X351" />
+    <display value="OFAIE XAVANTE" />
+  </concept>
+  <concept>
+    <code value="X352" />
+    <display value="ONÇA" />
+  </concept>
+  <concept>
+    <code value="X353" />
+    <display value="ORO AT" />
+  </concept>
+  <concept>
+    <code value="X354" />
+    <display value="ORO EO" />
+  </concept>
+  <concept>
+    <code value="X355" />
+    <display value="ORO JOWIN" />
+  </concept>
+  <concept>
+    <code value="X356" />
+    <display value="ORO MIYLIN" />
+  </concept>
+  <concept>
+    <code value="X357" />
+    <display value="ORO MON" />
+  </concept>
+  <concept>
+    <code value="X358" />
+    <display value="ORO NÁO" />
+  </concept>
+  <concept>
+    <code value="X359" />
+    <display value="ORO WAM" />
+  </concept>
+  <concept>
+    <code value="X360" />
+    <display value="ORO WARAM" />
+  </concept>
+  <concept>
+    <code value="X361" />
+    <display value="ORO WARAM XIJEIN" />
+  </concept>
+  <concept>
+    <code value="X362" />
+    <display value="PACA" />
+  </concept>
+  <concept>
+    <code value="X363" />
+    <display value="PANKARÁ" />
+  </concept>
+  <concept>
+    <code value="X364" />
+    <display value="PAPAGAIO" />
+  </concept>
+  <concept>
+    <code value="X365" />
+    <display value="PAYAYÁ" />
+  </concept>
+  <concept>
+    <code value="X366" />
+    <display value="PIPIPAN" />
+  </concept>
+  <concept>
+    <code value="X367" />
+    <display value="PIRATA" />
+  </concept>
+  <concept>
+    <code value="X368" />
+    <display value="PUROBORÁ" />
+  </concept>
+  <concept>
+    <code value="X369" />
+    <display value="SABANÊ" />
+  </concept>
+  <concept>
+    <code value="X370" />
+    <display value="SANUMA" />
+  </concept>
+  <concept>
+    <code value="X371" />
+    <display value="SAWENTESÚ" />
+  </concept>
+  <concept>
+    <code value="X372" />
+    <display value="SILCY-TAPUYA" />
+  </concept>
+  <concept>
+    <code value="X373" />
+    <display value="SIUCI" />
+  </concept>
+  <concept>
+    <code value="X374" />
+    <display value="TABAJARA" />
+  </concept>
+  <concept>
+    <code value="X375" />
+    <display value="TAKUARA" />
+  </concept>
+  <concept>
+    <code value="X376" />
+    <display value="TATU" />
+  </concept>
+  <concept>
+    <code value="X377" />
+    <display value="TAWANDÊ" />
+  </concept>
+  <concept>
+    <code value="X378" />
+    <display value="TEFÉ" />
+  </concept>
+  <concept>
+    <code value="X379" />
+    <display value="TIMBIRA" />
+  </concept>
+  <concept>
+    <code value="X380" />
+    <display value="TORÁ DO BAIXO GRANDE" />
+  </concept>
+  <concept>
+    <code value="X381" />
+    <display value="TSUNHUM-DJAPÁ" />
+  </concept>
+  <concept>
+    <code value="X382" />
+    <display value="TUBARÃO" />
+  </concept>
+  <concept>
+    <code value="X383" />
+    <display value="TUPAIU" />
+  </concept>
+  <concept>
+    <code value="X384" />
+    <display value="TUPI" />
+  </concept>
+  <concept>
+    <code value="X385" />
+    <display value="TUPINAMBÁ DE BELMONTE" />
+  </concept>
+  <concept>
+    <code value="X386" />
+    <display value="URUBU" />
+  </concept>
+  <concept>
+    <code value="X387" />
+    <display value="URUBU KAAPOR" />
+  </concept>
+  <concept>
+    <code value="X388" />
+    <display value="URUPÁ" />
+  </concept>
+  <concept>
+    <code value="X389" />
+    <display value="WAI WAI" />
+  </concept>
+  <concept>
+    <code value="X390" />
+    <display value="WAIKISU" />
+  </concept>
+  <concept>
+    <code value="X391" />
+    <display value="WAKALITESÚ" />
+  </concept>
+  <concept>
+    <code value="X392" />
+    <display value="WASSUSU" />
+  </concept>
+  <concept>
+    <code value="X393" />
+    <display value="XEREU" />
+  </concept>
+  <concept>
+    <code value="X394" />
+    <display value="XI EIN" />
+  </concept>
+  <concept>
+    <code value="X395" />
+    <display value="XICRIN" />
+  </concept>
+  <concept>
+    <code value="X396" />
+    <display value="XIPAYA" />
+  </concept>
+  <concept>
+    <code value="X397" />
+    <display value="XIRIANA" />
+  </concept>
+  <concept>
+    <code value="X398" />
+    <display value="XIRUAI" />
+  </concept>
+  <concept>
+    <code value="X399" />
+    <display value="YEPAMASSÃ" />
+  </concept>
+  <concept>
+    <code value="X400" />
+    <display value="TIRIYÓ" />
+  </concept>
+  <concept>
+    <code value="X401" />
+    <display value="YANOMAMI" />
+  </concept>
+  <concept>
+    <code value="X402" />
+    <display value="ARARA" />
+  </concept>
+  <concept>
+    <code value="X403" />
+    <display value="SAKIRIABAR" />
+  </concept>
+  <concept>
+    <code value="X404" />
+    <display value="TATZ" />
+  </concept>
+  <concept>
+    <code value="X405" />
+    <display value="SEM INFORMACAO" />
+  </concept>
+</CodeSystem>

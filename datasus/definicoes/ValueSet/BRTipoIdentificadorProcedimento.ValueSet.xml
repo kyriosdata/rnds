@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ded765df-ff24-46f3-9c62-4d58d8cf8b87" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T14:50:37.318+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoIdentificadorProcedimento-1.0" />
+  <version value="1.0" />
+  <name value="Tipo de Identificador do Procedimento" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T14:50:35.0809802+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica o tipo de identificador que está sendo utilizado para o procedimento." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoIdentificador" />
+      <version value="*" />
+      <concept>
+        <code value="AUTH" />
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="14a58b08-366c-4fd4-ab5d-da004a11feb9" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-11T19:12:55.889+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRDivisaoGeograficaBrasil" />
+  <version value="201701A" />
+  <name value="Divisão Geográfica do Brasil" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T19:13:16.339365+00:00" />
+  <publisher value="Instituto Brasileiro de Geografia e Estatística" />
+  <description value="As regiões geográficas, estados, distrito federal e municípios do Brasil." />
+  <content value="complete" />
+  <property>
+    <code value="type" />
+    <description value="tipo" />
+    <type value="code" />
+  </property>
+  <property>
+    <code value="ethnical" />
+    <description value="Gentílico" />
+    <type value="string" />
+  </property>
+  <property>
+    <code value="initials" />
+    <description value="Sigla" />
+    <type value="code" />
+  </property>
+  <concept>
+    <code value="1" />
+    <display value="Norte" />
+    <property>
+      <code value="type" />
+      <valueCode value="region" />
+    </property>
+    <property>
+      <code value="initials" />
+      <valueCode value="N" />
+    </property>
+    <concept>
+      <code value="11" />
+      <display value="Rondônia" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="RO" />
+      </property>
+    </concept>
+    <concept>
+      <code value="12" />
+      <display value="Acre" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="AC" />
+      </property>
+    </concept>
+    <concept>
+      <code value="13" />
+      <display value="Amazonas" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="AM" />
+      </property>
+    </concept>
+    <concept>
+      <code value="14" />
+      <display value="Roraima" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="RR" />
+      </property>
+    </concept>
+    <concept>
+      <code value="15" />
+      <display value="Pará" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="PA" />
+      </property>
+    </concept>
+    <concept>
+      <code value="16" />
+      <display value="Amapá" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="AP" />
+      </property>
+    </concept>
+    <concept>
+      <code value="17" />
+      <display value="Tocantins" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="TO" />
+      </property>
+    </concept>
+  </concept>
+  <concept>
+    <code value="2" />
+    <display value="Nordeste" />
+    <property>
+      <code value="type" />
+      <valueCode value="region" />
+    </property>
+    <property>
+      <code value="initials" />
+      <valueCode value="NE" />
+    </property>
+    <concept>
+      <code value="21" />
+      <display value="Maranhão" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="MA" />
+      </property>
+    </concept>
+    <concept>
+      <code value="22" />
+      <display value="Piauí" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="PI" />
+      </property>
+    </concept>
+    <concept>
+      <code value="23" />
+      <display value="Ceará" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="CE" />
+      </property>
+    </concept>
+    <concept>
+      <code value="24" />
+      <display value="Rio Grande do Norte" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="RN" />
+      </property>
+    </concept>
+    <concept>
+      <code value="25" />
+      <display value="Paraíba" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="PB" />
+      </property>
+    </concept>
+    <concept>
+      <code value="26" />
+      <display value="Pernambuco" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="PE" />
+      </property>
+    </concept>
+    <concept>
+      <code value="27" />
+      <display value="Alagoas" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="AL" />
+      </property>
+    </concept>
+    <concept>
+      <code value="28" />
+      <display value="Sergipe" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="SE" />
+      </property>
+    </concept>
+    <concept>
+      <code value="29" />
+      <display value="Bahia" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="BA" />
+      </property>
+    </concept>
+  </concept>
+  <concept>
+    <code value="3" />
+    <display value="Sudeste" />
+    <property>
+      <code value="type" />
+      <valueCode value="region" />
+    </property>
+    <property>
+      <code value="initials" />
+      <valueCode value="SE" />
+    </property>
+    <concept>
+      <code value="31" />
+      <display value="Minas Gerais" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="MG" />
+      </property>
+      <property>
+        <code value="ethnical" />
+        <valueString value="mineiro" />
+      </property>
+      <concept>
+        <code value="315780" />
+        <display value="Santa Luzia" />
+        <property>
+          <code value="type" />
+          <valueCode value="city" />
+        </property>
+        <property>
+          <code value="ethnical" />
+          <valueString value="luziense" />
+        </property>
+      </concept>
+    </concept>
+    <concept>
+      <code value="32" />
+      <display value="Espírito Santo" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="ES" />
+      </property>
+    </concept>
+    <concept>
+      <code value="33" />
+      <display value="Rio de Janeiro" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="RJ" />
+      </property>
+    </concept>
+    <concept>
+      <code value="34" />
+      <display value="São Paulo" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="SP" />
+      </property>
+    </concept>
+  </concept>
+  <concept>
+    <code value="4" />
+    <display value="Sul" />
+    <property>
+      <code value="type" />
+      <valueCode value="region" />
+    </property>
+    <property>
+      <code value="initials" />
+      <valueCode value="S" />
+    </property>
+    <concept>
+      <code value="41" />
+      <display value="Paraná" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="PR" />
+      </property>
+    </concept>
+    <concept>
+      <code value="42" />
+      <display value="Santa Catarina" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="SC" />
+      </property>
+    </concept>
+    <concept>
+      <code value="43" />
+      <display value="Rio Grande do Sul" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="RS" />
+      </property>
+    </concept>
+  </concept>
+  <concept>
+    <code value="5" />
+    <display value="Centro-Oeste" />
+    <property>
+      <code value="type" />
+      <valueCode value="region" />
+    </property>
+    <property>
+      <code value="initials" />
+      <valueCode value="CO" />
+    </property>
+    <concept>
+      <code value="50" />
+      <display value="Mato Grosso do Sul" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="MS" />
+      </property>
+    </concept>
+    <concept>
+      <code value="51" />
+      <display value="Mato Grosso" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="MT" />
+      </property>
+    </concept>
+    <concept>
+      <code value="52" />
+      <display value="Goiás" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="GO" />
+      </property>
+    </concept>
+    <concept>
+      <code value="53" />
+      <display value="Distrito Federal" />
+      <property>
+        <code value="type" />
+        <valueCode value="state" />
+      </property>
+      <property>
+        <code value="initials" />
+        <valueCode value="DF" />
+      </property>
+    </concept>
+  </concept>
+</CodeSystem>

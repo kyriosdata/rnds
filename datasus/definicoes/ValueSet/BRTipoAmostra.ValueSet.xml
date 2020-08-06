@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="49458d7d-2bf6-40fc-a0f3-e03f5ff11a36" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-26T13:33:59.905+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoAmostra-1.0" />
+  <version value="1.0" />
+  <name value="Tipo de Amostra de Exame" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-26T13:33:58.1106981+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Tipo da amostra de um exame ou teste." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://terminology.hl7.org/CodeSystem/v2-0487" />
+      <version value="*" />
+      <concept>
+        <code value="FRS" />
+        <display value="Fluido Respiratório" />
+      </concept>
+      <concept>
+        <code value="LAVG" />
+        <display value="Lavagem Brônquica" />
+      </concept>
+      <concept>
+        <code value="NSECR" />
+        <display value="Secreção Nasal" />
+      </concept>
+      <concept>
+        <code value="PLAS" />
+        <display value="Plasma" />
+      </concept>
+      <concept>
+        <code value="SPT" />
+        <display value="Escarro" />
+      </concept>
+      <concept>
+        <code value="TASP" />
+        <display value="Aspirado Traqueal" />
+      </concept>
+      <concept>
+        <code value="WB" />
+        <display value="Sangue Total" />
+      </concept>
+      <concept>
+        <code value="SER" />
+        <display value="Soro" />
+      </concept>
+    </include>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

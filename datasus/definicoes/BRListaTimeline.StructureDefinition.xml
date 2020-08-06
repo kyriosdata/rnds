@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="270156fd-40f7-44b0-979d-1165022df8da" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-12T20:16:33.525+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRListaTimeline-1.0" />
+  <version value="1.0" />
+  <name value="BRListaTimeline" />
+  <title value="Lista da Timeline" />
+  <status value="active" />
+  <date value="2020-03-12T20:16:54.7221525Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Lista de de itens agregados na timeline um paciente." />
+  <purpose value="No contexto da Rede Nacional de Dados em Saúde do Brasil, é utilizada para agregar todos os medicamentos de um paciente e simplificar sua indexação e pesquisa na rede Blockchain." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="List" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/List" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="List">
+      <path value="List" />
+      <short value="Lista" />
+      <definition value="Uma lista de recursos gerenciados." />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.identifier">
+      <path value="List.identifier" />
+      <max value="0" />
+    </element>
+    <element id="List.status">
+      <path value="List.status" />
+      <short value="Estado da Lista" />
+      <definition value="current: Ativa ou principal&#xD;&#xA;retired: Obsoleta&#xD;&#xA;entered-in-error: Cancelada por informação errada" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.mode">
+      <path value="List.mode" />
+      <fixedCode value="working" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.title">
+      <path value="List.title" />
+      <max value="0" />
+    </element>
+    <element id="List.code">
+      <path value="List.code" />
+      <short value="Tipo da Lista" />
+      <definition value="Classifica o tipo da lista" />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Tipo da Lista" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRClassificacaoLista-1.0" />
+      </binding>
+    </element>
+    <element id="List.code.coding">
+      <path value="List.code.coding" />
+      <min value="1" />
+      <max value="1" />
+      <binding>
+        <strength value="required" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRClassificacaoLista-1.0" />
+      </binding>
+    </element>
+    <element id="List.code.coding.system">
+      <path value="List.code.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="List.code.coding.code">
+      <path value="List.code.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="List.code.coding.display">
+      <path value="List.code.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="List.code.coding.userSelected">
+      <path value="List.code.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="List.code.text">
+      <path value="List.code.text" />
+      <max value="0" />
+    </element>
+    <element id="List.subject">
+      <path value="List.subject" />
+      <short value="Assunto da lista" />
+      <definition value="Indivíduo a quem a lista se refere." />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="List.subject.reference">
+      <path value="List.subject.reference" />
+      <min value="1" />
+    </element>
+    <element id="List.subject.type">
+      <path value="List.subject.type" />
+      <max value="0" />
+    </element>
+    <element id="List.subject.identifier">
+      <path value="List.subject.identifier" />
+      <max value="0" />
+    </element>
+    <element id="List.subject.display">
+      <path value="List.subject.display" />
+      <max value="0" />
+    </element>
+    <element id="List.encounter">
+      <path value="List.encounter" />
+      <max value="0" />
+    </element>
+    <element id="List.date">
+      <path value="List.date" />
+      <short value="Data/hora da Última Atualização" />
+      <definition value="Data e hora da geração ou da última atualização da lista." />
+      <min value="1" />
+    </element>
+    <element id="List.source">
+      <path value="List.source" />
+      <max value="0" />
+    </element>
+    <element id="List.orderedBy">
+      <path value="List.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="List.note">
+      <path value="List.note" />
+      <max value="0" />
+    </element>
+    <element id="List.entry">
+      <path value="List.entry" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="item.display" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <short value="Itens da lista" />
+      <definition value="Recursos referenciados nesta lista." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:medication">
+      <path value="List.entry" />
+      <sliceName value="medication" />
+      <short value="Itens da Lista de Medicamentos" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:medication.flag">
+      <path value="List.entry.flag" />
+      <short value="Estado do Medicamento" />
+      <definition value="dispensed: Medicamento dispensado" />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Classificação do Medicamento" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoMedicamentoLista-1.0" />
+      </binding>
+    </element>
+    <element id="List.entry:medication.flag.coding">
+      <path value="List.entry.flag.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="List.entry:medication.flag.coding.system">
+      <path value="List.entry.flag.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:medication.flag.coding.code">
+      <path value="List.entry.flag.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:medication.flag.coding.display">
+      <path value="List.entry.flag.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.flag.coding.userSelected">
+      <path value="List.entry.flag.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.flag.text">
+      <path value="List.entry.flag.text" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.deleted">
+      <path value="List.entry.deleted" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.date">
+      <path value="List.entry.date" />
+      <short value="Data/Hora do Medicamento" />
+      <definition value="Data ou data e hora que o medicamento foi prescrito, administrado ou dispensado." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:medication.item">
+      <path value="List.entry.item" />
+      <short value="Medicamento" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRMedicamento-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:medication.item.reference">
+      <path value="List.entry.item.reference" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:medication.item.type">
+      <path value="List.entry.item.type" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.item.identifier">
+      <path value="List.entry.item.identifier" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:medication.item.display">
+      <path value="List.entry.item.display" />
+      <short value="Descrição do Medicamento" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:immunization">
+      <path value="List.entry" />
+      <sliceName value="immunization" />
+      <short value="Itens da Lista de Imunobiológicos" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:immunization.flag">
+      <path value="List.entry.flag" />
+      <short value="Dose do Imunobiológico" />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Dose do Imunobiológico" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRImunobiologicoDose-1.0" />
+      </binding>
+    </element>
+    <element id="List.entry:immunization.flag.coding">
+      <path value="List.entry.flag.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="List.entry:immunization.flag.coding.system">
+      <path value="List.entry.flag.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:immunization.flag.coding.code">
+      <path value="List.entry.flag.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:immunization.flag.coding.display">
+      <path value="List.entry.flag.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.flag.coding.userSelected">
+      <path value="List.entry.flag.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.flag.text">
+      <path value="List.entry.flag.text" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.deleted">
+      <path value="List.entry.deleted" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.date">
+      <path value="List.entry.date" />
+      <short value="Data/Hora da Administração do Imunobiológico" />
+      <definition value="Data ou data e hora que o imunobiológico foi administrado." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:immunization.item">
+      <path value="List.entry.item" />
+      <short value="Imunobiológico Administrado" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRImunobiologicoAdministrado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="List.entry:immunization.item.reference">
+      <path value="List.entry.item.reference" />
+      <min value="1" />
+    </element>
+    <element id="List.entry:immunization.item.type">
+      <path value="List.entry.item.type" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.item.identifier">
+      <path value="List.entry.item.identifier" />
+      <max value="0" />
+    </element>
+    <element id="List.entry:immunization.item.display">
+      <path value="List.entry.item.display" />
+      <short value="Descrição do Imunobiológico" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="List.emptyReason">
+      <path value="List.emptyReason" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

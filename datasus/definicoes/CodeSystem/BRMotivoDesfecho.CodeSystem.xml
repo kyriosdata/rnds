@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="27fb166d-e605-428b-b72e-9bb007d1f573" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:16:07.812+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRMotivoDesfecho" />
+  <version value="201701A" />
+  <name value="Motivo do Desfecho" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:16:28.3110021+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Caracteriza o motivo de conclusão total ou parcial do contato assistencial." />
+  <content value="complete" />
+  <concept>
+    <code value="01" />
+    <display value="Alta clínica" />
+  </concept>
+  <concept>
+    <code value="02" />
+    <display value="Alta Voluntária" />
+  </concept>
+  <concept>
+    <code value="03" />
+    <display value="Encaminhamento" />
+  </concept>
+  <concept>
+    <code value="04" />
+    <display value="Evasão" />
+  </concept>
+  <concept>
+    <code value="05" />
+    <display value="Ordem Judicial" />
+  </concept>
+  <concept>
+    <code value="06" />
+    <display value="Óbito" />
+  </concept>
+  <concept>
+    <code value="07" />
+    <display value="Permanência" />
+  </concept>
+  <concept>
+    <code value="08" />
+    <display value="Retorno" />
+  </concept>
+  <concept>
+    <code value="09" />
+    <display value="Transferência" />
+  </concept>
+</CodeSystem>

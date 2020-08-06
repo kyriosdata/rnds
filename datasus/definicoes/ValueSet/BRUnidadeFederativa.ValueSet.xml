@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ea7f4c5c-1534-4c06-b9ce-597b28beab3e" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T14:51:21.585+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRUnidadeFederativa-1.0" />
+  <version value="1.0" />
+  <name value="Unidade Federativa" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T14:51:21.2223533+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Os estados e o Distrito Federal, entes subnacionais brasileiros." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRDivisaoGeograficaBrasil" />
+      <version value="*" />
+      <filter>
+        <property value="type" />
+        <op value="=" />
+        <value value="state" />
+      </filter>
+    </include>
+  </compose>
+</ValueSet>
