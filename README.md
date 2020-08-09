@@ -60,6 +60,8 @@ Embora existam outras formas de trafegar recursos (FHIR) entre dois computadores
 
 A interação permite: ler o estado corrente de um recurso; ler o estado de um recurso em uma dada versão; atualizar um recurso existente por meio do seu identificador único; remover um recurso e até recuperar o histórico de mudanças de um recurso. Estas não são as únicas possibilidades. Também é possível procurar por um recurso utilizando algum critério de busca, dentre outras possibilidades.
 
+### cURL
+
 Entendi, mas como exatamente posso construir uma requisição em uma RESTful API? E mais específico ainda, exatamente a RESTful API definida pelo FHIR? Os detalhes estão amplamente disponíveis [aqui](http://hl7.org/fhir/http.html).
 
 Você pode executar o comando abaixo em um _prompt_:
@@ -68,7 +70,13 @@ Você pode executar o comando abaixo em um _prompt_:
 curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/0c89be2f-121a-4b31-b9c8-d7528179fb
 ```
 
-Ou usar a interface gráfica oferecida pelo mesmo servidor empregado acima, ou seja, http://test.fhir.org/r4, ou ainda fazer uso de um software desenvolvido especificamente para a finalidade pretendida, seja ele para ser executado em um smartphone, computador usando um navegador ou um software que já é do conhecimento do usuário em questão e que agora está passando por uma manutenção na qual ele poderá recuperar dados em saúde além de um paciente, por exemplo, sem que o usuário sequer saiba que existe algo como FHIR.
+### Outras opções
+
+Você também pode usar a interface gráfica oferecida pelo mesmo servidor empregado acima, ou seja, http://test.fhir.org/r4, ou ainda fazer uso de um software desenvolvido especificamente para a finalidade pretendida, seja ele para ser executado em um smartphone, computador usando um navegador ou um software que já é do conhecimento do usuário em questão e que agora está passando por uma manutenção na qual ele poderá recuperar dados em saúde além de um paciente, por exemplo, sem que o usuário sequer saiba que existe algo como FHIR.
+
+- [.Net](http://ewoutkramer.github.io/fhir-net-api/client-setup.html)
+- [JavaScript](https://github.com/smart-on-fhir/client-js)
+- [Java](https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton)
 
 ## Requisições (como submeter)
 
