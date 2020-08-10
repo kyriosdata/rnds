@@ -12,7 +12,7 @@ Ou seja,
 ### Acerca dos dados necessários
 
 Esta é a parte "mais simples", afinal, estes dados são produzidos por profissionais da saúde.
-Para cada exame realizado, o profissional de saúde responsável irá definir os valores correspondentes. O profissional de TI terá que obter estes valores, provavelmente, de um sistema de software empregado pelo laboratório e compor o documento JSON exigido pela RNDS. Os dados necessários para compor o documento JSON estão identificados em uma [tabela](resultado-exame-form.md).
+Para cada exame realizado, o profissional de saúde responsável irá definir os valores correspondentes. O profissional de TI terá que obter estes valores, provavelmente, de um sistema de software empregado pelo laboratório e compor o documento JSON exigido pela RNDS (e [enviar](enviar-exame-covid.md) para a RNDS, naturalmente). Os dados necessários para compor o documento JSON estão identificados em uma [tabela](resultado-exame-form.md).
 
 Convém esclarecer que o laboratório que produz um laudo pode gerar outros dados, além daqueles estabelecidos pela tabela acima.
 
