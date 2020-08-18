@@ -23,25 +23,31 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class TokenApplication {
-    private static final String KEY_STORE_PATH = "certificado.jks";
     private static final String KEY_STORE_PASSWORD = "secret";
+    private static final String KEY_STORE_PATH = "certificado.jks";
 
     private static final boolean DEBUG_SSL = false;
     private static final String EHR_AUTH =
             "https://ehr-auth.saude.gov.br/api/token";
 
+    /**
+     * Obtém path completo do nome do arquivo fornecido que se encontra
+     * no diretório resources.
+     *
+     * @param arquivo Nome do arquivo contido no diretório "resources".
+     *
+     * @return O caminho completo para o arquivo cujo nome é fornecido.
+     */
     private static String fromResource(final String arquivo) {
-        final URL url =
-                TokenApplication.class.getClassLoader().getResource(arquivo);
-        return url.getPath();
+        Class<TokenApplication> appClass = TokenApplication.class;
+        return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 
     public static void main(String[] args) throws Exception {
         if (DEBUG_SSL) {
             System.setProperty("javax.net.debug", "all");
         }
-
-        // o alias do certificado (key pair) no arquivo JKS deve ser "client"
+        
         String file = fromResource(KEY_STORE_PATH);
         char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
 
