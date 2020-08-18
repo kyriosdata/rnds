@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 
 public class TokenApplication {
     private static final String KEY_STORE_PATH = "certificado.jks";
@@ -54,10 +55,8 @@ public class TokenApplication {
                 .setSSLSocketFactory(sslSocketFactory)
                 .build();
 
-        String endpoint;
-
-        // producao
-        endpoint = EHR_AUTH;
+        // TODO definir em tempo de execução
+        final String endpoint = EHR_AUTH;
 
         HttpGet get = new HttpGet(endpoint);
 
@@ -72,10 +71,16 @@ public class TokenApplication {
 
         System.out.println();
 
-        if (response.getAllHeaders() != null) {
-            for (Header item : response.getAllHeaders()) {
-                System.out.println(item.getName() + ": " + item.getValue());
-            }
+        final Header[] allHeaders = response.getAllHeaders();
+        if (allHeaders == null) {
+            return;
         }
+
+        Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
+    }
+
+    private static void showHeader(Header item) {
+        String h = String.join(" : ", item.getName(), item.getValue());
+        System.out.println(h);
     }
 }
