@@ -1,6 +1,7 @@
 package com.github.kyriosdata.rnds;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -12,11 +13,11 @@ import org.apache.http.util.EntityUtils;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.nio.file.Files;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -47,7 +48,7 @@ public class TokenApplication {
         if (DEBUG_SSL) {
             System.setProperty("javax.net.debug", "all");
         }
-        
+
         String file = fromResource(KEY_STORE_PATH);
         char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
 
@@ -76,7 +77,10 @@ public class TokenApplication {
         System.out.println();
 
         System.out.println(response.getStatusLine());
-        System.out.println(EntityUtils.toString(response.getEntity()));
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        response.getEntity().getContent().transferTo(baos);
+        System.out.println(baos.toString());
 
         System.out.println();
 
