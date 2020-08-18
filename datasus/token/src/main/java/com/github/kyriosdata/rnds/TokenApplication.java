@@ -7,27 +7,33 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class TokenApplication {
     private static final String KEY_STORE_PATH = "certificado.jks";
     private static final String KEY_STORE_PASSWORD = "secret";
-    private static final String PRIVATE_KEY_PASSWORD = "secret";
 
     private static final boolean DEBUG_SSL = false;
     private static final String EHR_AUTH =
             "https://ehr-auth.saude.gov.br/api/token";
 
-    private static File fromResource(final String arquivo) {
+    private static String fromResource(final String arquivo) {
         final URL url =
                 TokenApplication.class.getClassLoader().getResource(arquivo);
-        return new File(url.getPath());
+        return url.getPath();
     }
 
     public static void main(String[] args) throws Exception {
@@ -36,14 +42,10 @@ public class TokenApplication {
         }
 
         // o alias do certificado (key pair) no arquivo JKS deve ser "client"
-        File file = fromResource(KEY_STORE_PATH);
+        String file = fromResource(KEY_STORE_PATH);
         char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
-        char[] privateKeyPassword = PRIVATE_KEY_PASSWORD.toCharArray();
 
-        SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(file, keyStorePassord, privateKeyPassword)
-                .loadTrustMaterial(file, keyStorePassord)
-                .build();
+        SSLContext sslcontext = sslContext(file, keyStorePassord);
 
         SSLConnectionSocketFactory sslSocketFactory =
                 new SSLConnectionSocketFactory(
@@ -83,5 +85,30 @@ public class TokenApplication {
     private static void showHeader(Header item) {
         String h = String.join(" : ", item.getName(), item.getValue());
         System.out.println(h);
+    }
+
+    private static SSLContext sslContext(String keystoreFile, char[] password)
+            throws GeneralSecurityException, IOException {
+        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+        try (InputStream in = new FileInputStream(keystoreFile)) {
+            keystore.load(in, password);
+        }
+
+        String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
+        KeyManagerFactory keyManagerFactory =
+                KeyManagerFactory.getInstance(defaultAlgorithm);
+        keyManagerFactory.init(keystore, password);
+
+        TrustManagerFactory trustManagerFactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustManagerFactory.init(keystore);
+
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(
+                keyManagerFactory.getKeyManagers(),
+                trustManagerFactory.getTrustManagers(),
+                new SecureRandom());
+
+        return sslContext;
     }
 }
