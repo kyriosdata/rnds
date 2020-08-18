@@ -37,11 +37,12 @@ public class TokenApplication {
 
         // o alias do certificado (key pair) no arquivo JKS deve ser "client"
         File file = fromResource(KEY_STORE_PATH);
+        char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
+        char[] privateKeyPassword = PRIVATE_KEY_PASSWORD.toCharArray();
+
         SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(
-                        file, KEY_STORE_PASSWORD.toCharArray(),
-                        PRIVATE_KEY_PASSWORD.toCharArray())
-                .loadTrustMaterial(file, KEY_STORE_PASSWORD.toCharArray())
+                .loadKeyMaterial(file, keyStorePassord, privateKeyPassword)
+                .loadTrustMaterial(file, keyStorePassord)
                 .build();
 
         SSLConnectionSocketFactory sslSocketFactory =
