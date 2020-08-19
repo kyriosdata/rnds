@@ -34,7 +34,6 @@ public class TokenApplication {
      * no diretório resources.
      *
      * @param arquivo Nome do arquivo contido no diretório "resources".
-     *
      * @return O caminho completo para o arquivo cujo nome é fornecido.
      */
     private static String fromResource(final String arquivo) {
@@ -51,31 +50,16 @@ public class TokenApplication {
         char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
 
         SSLContext sslcontext = sslContext(file, keyStorePassord);
+        CloseableHttpClient httpClient = getClient(sslcontext);
 
-        SSLConnectionSocketFactory sslSocketFactory =
-                new SSLConnectionSocketFactory(
-                        sslcontext,
-                        new String[]{"TLSv1.2"},
-                        null,
-                        new NoopHostnameVerifier());
-
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLSocketFactory(sslSocketFactory)
-                .build();
-
-        // TODO definir em tempo de execução
-        final String endpoint = EHR_AUTH;
-
-        HttpGet get = new HttpGet(endpoint);
-
+        HttpGet get = new HttpGet(EHR_AUTH);
         get.addHeader("accept", "application/json");
-
         CloseableHttpResponse response = httpClient.execute(get);
 
         StatusLine statusLine = response.getStatusLine();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        response.getEntity().getContent().transferTo(baos);
+        response.getEntity().writeTo(baos);
         String payload = baos.toString();
 
         final Header[] allHeaders = response.getAllHeaders();
@@ -88,8 +72,24 @@ public class TokenApplication {
         System.out.println(statusLine);
         System.out.println(payload);
         System.out.println();
-        
+
         Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
+    }
+
+    private static CloseableHttpClient getClient(SSLContext sslcontext) {
+
+        SSLConnectionSocketFactory sslSocketFactory =
+                new SSLConnectionSocketFactory(
+                        sslcontext,
+                        new String[]{"TLSv1.2"},
+                        null,
+                        new NoopHostnameVerifier());
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLSocketFactory(sslSocketFactory)
+                .build();
+        
+        return httpClient;
     }
 
     private static void showHeader(Header item) {
@@ -109,8 +109,9 @@ public class TokenApplication {
                 KeyManagerFactory.getInstance(defaultAlgorithm);
         keyManagerFactory.init(keystore, password);
 
+        String algorithmTrust = TrustManagerFactory.getDefaultAlgorithm();
         TrustManagerFactory trustManagerFactory =
-                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+                TrustManagerFactory.getInstance(algorithmTrust);
         trustManagerFactory.init(keystore);
 
         SSLContext sslContext = SSLContext.getInstance("TLS");
