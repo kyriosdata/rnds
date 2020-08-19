@@ -1,6 +1,7 @@
 package com.github.kyriosdata.rnds;
 
 import org.apache.http.Header;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -71,21 +72,22 @@ public class TokenApplication {
 
         CloseableHttpResponse response = httpClient.execute(get);
 
-        System.out.println();
-
-        System.out.println(response.getStatusLine());
+        StatusLine statusLine = response.getStatusLine();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         response.getEntity().getContent().transferTo(baos);
-        System.out.println(baos.toString());
-
-        System.out.println();
+        String payload = baos.toString();
 
         final Header[] allHeaders = response.getAllHeaders();
         if (allHeaders == null) {
             return;
         }
 
+        System.out.println();
+        System.out.println(statusLine);
+        System.out.println(payload);
+        System.out.println();
+        
         Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
     }
 
