@@ -84,6 +84,7 @@ public class TokenApplication {
         }
 
         System.out.println();
+        System.out.println(KeyStore.getDefaultType());
         System.out.println(statusLine);
         System.out.println(payload);
         System.out.println();
