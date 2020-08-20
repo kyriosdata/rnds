@@ -11,6 +11,13 @@
 }
 ```
 
+O valor da propriedade **access_token** será empregado em todas as demais requisições. As requisições foram uso deste valor por 
+meio do header **X-Authorization-Server**. Em particular, o valor deste _header_ deve ser fornecido no seguinte formato:
+
+```
+X-Authorization-Server: Bearer <valor-de-access-token-aqui>
+```
+
 ### Erros
 
 #### Requisições dependem de valores de entrada
