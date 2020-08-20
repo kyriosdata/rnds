@@ -1,6 +1,24 @@
 ### Erros
 
-### Token empregado para a requisição expirou
+#### Requisições dependem de valores de entrada
+A consulta a um estabelecimento de saúde via seu CNES exige que o código correspondente seja fornecido na URL, por exemplo,
+`https://ehr-services.hmg.saude.gov.br/api;fhir/r4/Organization/2337991`. Se o código, neste exemplo, `2337991` ou outro não 
+é fornecido, então você receberá como resposta o conteúdo abaixo:
+
+```json
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "processing",
+            "diagnostics": "Invalid request: The FHIR endpoint on this server does not know how to handle GET operation[Organization/] with parameters [[]]"
+        }
+    ]
+}
+```
+
+#### Token empregado para a requisição expirou
 Lembre-se de que o _token_, quando obtido, tem uma validade de 30 minutos. Após estes 30 minutos
 qualquer requisição que o utilize irá retornar algo similar ao conteúdo abaixo:
 
