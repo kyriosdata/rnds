@@ -1,6 +1,6 @@
 ### Erros
 
-```
+```js
 {
     "resourceType": "OperationOutcome",
     "issue": [
