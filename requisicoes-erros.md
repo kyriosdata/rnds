@@ -1,3 +1,16 @@
+### Requisições
+
+#### Obter token
+
+```json
+{
+    "access_token": "longa sequencia aqui.",
+    "scope": "read write",
+    "token_type": "jwt",
+    "expires_in": 1800000
+}
+```
+
 ### Erros
 
 #### Requisições dependem de valores de entrada
