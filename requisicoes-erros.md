@@ -31,6 +31,24 @@ A consulta a um estabelecimento de saúde via seu CNES exige que o código corre
 }
 ```
 
+
+#### Requisição com consistência verificada
+A consulta por CNES retorna a resposta abaixo se o profissional de saúde em nome do qual a 
+requisição é feita (valor omitido na resposta abaixo) não possui vínculo com a credencial também omitida.
+
+```json
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "security",
+            "diagnostics": "(EHR-ERR906) Profissional CNS <numero aqui> não autorizado, pois não possui vínculo CBO autorizado em nenhum dos estabelecimentos autorizados para a credencial <numero aqui>."
+        }
+    ]
+}
+```
+
 #### Token empregado para a requisição expirou
 Lembre-se de que o _token_, quando obtido, tem uma validade de 30 minutos. Após estes 30 minutos
 qualquer requisição que o utilize irá retornar algo similar ao conteúdo abaixo:
