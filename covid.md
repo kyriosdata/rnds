@@ -44,7 +44,11 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
 1. **identifier**: identificar único do recurso. Este identificador deve ser persistente (fixo), e não deve se alterar, mesmo quando o recurso é
    transferido de um servidor para outro. Este objeto possui vários campos, dois deles são utilizados:
 
-   - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<laboratorioID>`, onde `laboratorioID` é o identificador do laboratório em questão fornecido pela RNDS no momento do cadastro.
+   - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<laboratorioID>`, onde `laboratorioID` é o identificador do laboratório em questão fornecido pela RNDS no momento do cadastro. Este valor é aquele informado pelo Portal de Serviços, conforme ilustrado na figura abaixo. Observe que os números foram cobertos para anonimizar o cenário em questão.
+   
+   ![image](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
+
+   
    - **value**: identificador único do _Bundle_ no contexto do laboratório. Ou seja, este é um identificador único válido para o laboratório
      unicamente identificar o recurso em questão.
 
