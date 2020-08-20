@@ -4,7 +4,7 @@
 
 ```json
 {
-    "access_token": "longa sequencia aqui.",
+    "access_token": "longa sequencia aqui. Este token será necessário, o valor deste campo, em todas as demais requisições. Ele será fornecido por meio do header X-Authorization-Server, conforme detalhado abaixo.",
     "scope": "read write",
     "token_type": "jwt",
     "expires_in": 1800000
