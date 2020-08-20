@@ -34,6 +34,37 @@ Na consulta por profissional via CNS, se o código CNS é inválido, por exemplo
 }
 ```
 
+#### Submeter bundle com identificador inválido do solicitante
+
+O identificador do solicitante, após devidamente cadastrado, pode ser recuperado conforme ilustrado abaixo, pelo Portal de Serviços:
+
+![image](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
+
+O identificador que acima segue ocultado, deve ser fornecido no lugar do texto "qualquer", no trecho da requisição (bundle),
+conforme ilustrado abaixo: 
+
+```json
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-qualquer",
+        "value": "valor-unico-do-bundle-para-o-lab"
+    },
+```
+
+Se o valor "qualquer" não é substituído pelo identificador do solicitante, a resposta será aquela abaixo:
+
+```json
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "security",
+            "diagnostics": "(EHR-ERR881) Você não possui autorização para utilizar esse sistema de origem: http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-qualquer"
+        }
+    ]
+}
+```
+
 #### Submeter recurso com número que não é único para o laboratório
 
 Este identificador é aquele fornecido por meio da propriedade **identifier.value** do _bundle_.
