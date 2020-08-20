@@ -34,6 +34,23 @@ Na consulta por profissional via CNS, se o código CNS é inválido, por exemplo
 }
 ```
 
+#### Submeter recurso com número que não é único para o laboratório
+
+Este identificador é aquele fornecido por meio da propriedade **identifier.value** do _bundle_.
+
+```json
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "processing",
+            "diagnostics": "(EHR-ERR866) O identifier informado já foi utilizado para cadastrar outro documento e não pode ser repetido."
+        }
+    ]
+}
+```
+
 ### Erros
 
 #### Requisições dependem de valores de entrada
