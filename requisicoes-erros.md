@@ -18,6 +18,22 @@ meio do header **X-Authorization-Server**. Em particular, o valor deste _header_
 X-Authorization-Server: Bearer <valor-de-access-token-aqui>
 ```
 
+#### Código inválido CNS
+Na consulta por profissional via CNS, se o código CNS é inválido, por exemplo, então tem-se o resultado abaixo:
+
+```json
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "processing",
+            "diagnostics": "Resource Practitioner/<codivo-invalido> is not known"
+        }
+    ]
+}
+```
+
 ### Erros
 
 #### Requisições dependem de valores de entrada
