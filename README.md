@@ -43,7 +43,7 @@ De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhi
 O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de um perfil, por exemplo, indicando que as opções de sexo são "masculina", "feminino" e assim por diante, em vez de "male",  "female", ...
 
 A definição de perfis é facilitada por serviços como [Simplifier.NET](https://simplifier.net), que é empregado pela
-RNDS. Consulte a "personalização" do FHIR realizada pela RNDS [aqui](https://simplifier.net/rnds).
+RNDS. Consulte a "personalização" do FHIR realizada pela RNDS [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 
 ## Experimentação do FHIR
