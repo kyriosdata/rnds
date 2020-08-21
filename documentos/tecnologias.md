@@ -1,4 +1,4 @@
-## FHIR
+## FHIR (Fast Healthcare Interoperability Resources)
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
@@ -8,7 +8,7 @@ Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, 
 
 Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
 
-### Formatos JSON, XML e RDF
+## JSON, XML e RDF
 
 O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
 
@@ -16,21 +16,22 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 [RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
 
-## Implementações do FHIR
+## Hapi FHIR
 
 FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
 
-De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
+A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
-## FHIR (perfis)
+## Simplifier.NET
 
 [<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de um perfil, por exemplo, indicando que as opções de sexo são "masculina", "feminino" e assim por diante, em vez de "male", "female", ...
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de perfis (_profiles_). Simplifier.NET é um serviço que permite
+publicar perfis.
 
-A definição de perfis é facilitada por serviços como [Simplifier.NET](https://simplifier.net), que é empregado pela
-RNDS. Consulte a "personalização" do FHIR realizada pela RNDS [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
+Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste
+serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ## Experimentação do FHIR
 
