@@ -16,3 +16,5 @@ dados para a RNDS, assim como realizar consultas por meio dos serviços
 oferecidos pelo DATASUS, então este portal é para você!
 
 ## Mapa de orientação
+
+- [Tecnologias](documentos/tecnologias.md)
