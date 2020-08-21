@@ -23,11 +23,18 @@ FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de 
 A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 [<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
+## Forge (editor de perfis)
+
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de perfis (_profiles_).
+
+A criação é melhor realizada com o apoio de software específico.
+[Forge](https://simplifier.net/forge) é uma aplicação Windows.
+
 ## Simplifier.NET
 
 [<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de perfis (_profiles_). Simplifier.NET é um serviço que permite
+Simplifier.NET é um serviço que permite
 publicar perfis.
 
 Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste
