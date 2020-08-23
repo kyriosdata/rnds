@@ -18,3 +18,14 @@ oferecidos pelo DATASUS, então este portal é para você!
 ## Mapa de orientação
 
 - [Tecnologias](documentos/tecnologias.md)
+- Fluxo: 
+  - Administrador
+    - Certificado
+    - Cadastro no Portal de Serviços
+  - Ambiente de desenvolvimento
+    - Postman
+    - Java
+  - Aplicações
+    - Obter token
+    - Consultar ...
+  
