@@ -27,6 +27,6 @@ Este é o endereço único para obtenção do _token_ de segurança. Esta é a �
 de serviço. O _token_ tem uma validade de 30 minutos e, neste período,
 é esperado que seja reutilizado.
 
-- Requisição de serviços (formato do endereco): **https://%lt;uf&gt;-ehr-services.saude.gov.br/api**. Ao contrário do ambiente de homologação, que oferece um único ponto de acesso para requisição dos serviços, há um
+- Requisição de serviços (formato do endereco): **https://&lt;uf&gt;-ehr-services.saude.gov.br/api**. Ao contrário do ambiente de homologação, que oferece um único ponto de acesso para requisição dos serviços, há um
 endereço (ponto de acesso) para requisição de serviços para cada
 estado da federação. O formato é **https://uf-ehr-services.saude.gov.br/api**.
