@@ -35,8 +35,7 @@ FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de 
 
 A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 
-A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos ambientes de
-homologação e produção.
+A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos [ambientes](./ambientes.md) de homologação e produção.
 
 ## Simplifier.NET
 
