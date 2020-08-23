@@ -12,6 +12,7 @@ O ambiente de homologação é oferecido para testes e experimentações.
 implementação do FHIR oferecida pela RNDS. Uma requisição endereçada 
 a este ponto de acesso deve vir acompanhado do _token_ obtido por meio
 do outro ponto de acesso. 
+
 - Requisição do _token_ de acesso: **https<span>:</span>//ehr-auth-hmg.saude.gov.br**. Este ponto de acesso por meio do qual o _token_ para acesso
 à implementação do FHIR é obtido. O _token_ obtido por este ponto
 de acesso pode ser reutilizado em várias requisições. Enquanto estiver
@@ -19,4 +20,8 @@ válido, o que é definido por um período de tempo (30 minutos), não é necess
 
 ### Ambiente de produção
 O ambiente de produção disponibiliza o catálogo de serviços da RNDS
-para envio e consulta a dados em saúde.
+para envio e consulta a informações em saúde dos usuários do SUS.
+À semelhança do ambiente de homologação são oferecidos dois 
+pontos de acesso. Por outro lado, um dos pontos de acesso depende
+da localização do software cliente (há um ponto de acesso para
+cada estado).
