@@ -41,7 +41,7 @@ agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/port
 
 Simplifier.NET é um serviço que permite
 publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
-pela RNDS no arquivo [zip]((http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
+pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
 também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
 perfis criados.
 
