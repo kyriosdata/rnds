@@ -1,28 +1,10 @@
-## FHIR (Fast Healthcare Interoperability Resources)
+### FHIR (Fast Healthcare Interoperability Resources)
 
 [<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
 
 Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
 
 Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
-
-Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
-
-## JSON, XML e RDF
-
-O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
-
-[XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet).
-
-[RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
-
-## Hapi FHIR
-
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
-
-FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
-
-A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 
 ## Forge (editor de perfis)
 
@@ -35,6 +17,27 @@ Embora a personalização seja possível usando um simples editor de texto,
 A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
 agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
 
+OBSERVAÇÃO: a edição de perfis não é uma tarefa típica de desenvolvedores de software, mas de quem é responsável pela modelagem de informação em saúde. 
+
+## JSON (há ainda XML e RDF)
+
+Quando se usa o FHIR para troca de dados, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, conforme explorado neste portal. Contudo, há ainda XML e RDF.
+
+O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
+
+[XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet). Por outro lado, [RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
+
+## Hapi FHIR (implementação de referência)
+
+[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
+
+FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
+
+A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
+
+A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos ambientes de
+homologação e produção.
+
 ## Simplifier.NET
 
 [<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
@@ -45,8 +48,7 @@ pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/
 também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
 perfis criados.
 
-Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste
-serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
+Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ## Experimentação do FHIR
 
@@ -98,11 +100,6 @@ fhirpath -f resposta.json -e 'FHIRPath expression'
 ```
 
 Convém destacar que documentos JSON em geral podem ser consultados por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)). Observe que JsonPath também pode ser empregado para consultar documentos JSON retornados via FHIR, contudo, FHIRPath contém recursos específicos.
-
-# Especificação FHIR empregada pelo Brasil
-
-- https://simplifier.net/
-- Especificação FHIR para RNDS [aqui](https://simplifier.net/RNDS/~introduction)
 
 # Siglas
 
