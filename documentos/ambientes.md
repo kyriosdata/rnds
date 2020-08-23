@@ -22,11 +22,14 @@ enviam e recuperam informações em saúde por meio da RNDS.
 À semelhança do ambiente de homologação, há um endereço
 para obter o _token_ e outro, distinto para cada estado, conforme detalhado abaixo, para o acesso aos serviços FHIR.
 
-- Requisição do _token_ de acesso: **https://ehr-auth.saude.gov.br**. 
+- Requisição do _token_ de acesso: **https<span>:</span>//ehr-auth.saude.gov.br**. 
 Este é o endereço único para obtenção do _token_ de segurança. Esta é a única finalidade deste ponto de acesso. Convém destacar que não é necessário obter um _token_ antes de cada requisição
 de serviço. O _token_ tem uma validade de 30 minutos e, neste período,
 é esperado que seja reutilizado.
 
 - Requisição de serviços (formato do endereco): **https://&lt;uf&gt;-ehr-services.saude.gov.br/api**. Ao contrário do ambiente de homologação, que oferece um único ponto de acesso para requisição dos serviços, há um
-endereço (ponto de acesso) para requisição de serviços para cada
-estado da federação. O formato é **https://uf-ehr-services.saude.gov.br/api**.
+endereço (ponto de acesso) para requisição por estado. O estado é definido
+pelo CNES da instituição em questão que requisita o acesso. Por exemplo,
+se o CNES de quem requisita o serviço é do Distributo Federal, então o 
+endereço a ser empregado deve ser **https://df-ehr-services.saude.gov.br/api**. Por outro lado, se for do estado de Goiás, então será 
+**https://go-ehr-services.saude.gov.br/api**. E assim por diante.
