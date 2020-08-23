@@ -18,24 +18,32 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 ## Hapi FHIR
 
+[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
+
 FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
 
 A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
 
 ## Forge (editor de perfis)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de perfis (_profiles_).
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
 
-A criação é melhor realizada com o apoio de software específico.
-[Forge](https://simplifier.net/forge) é uma aplicação Windows.
+Embora a personalização seja possível usando um simples editor de texto,
+é melhor realizada com apoio de um editor específico como o
+[Forge](https://simplifier.net/forge), disponível para Windows.
+
+A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
+agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
 
 ## Simplifier.NET
 
 [<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
 
 Simplifier.NET é um serviço que permite
-publicar perfis.
+publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
+pela RNDS no arquivo [zip]((http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
+também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
+perfis criados.
 
 Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste
 serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
