@@ -1,6 +1,9 @@
 ## Ambientes
 
-A RNDS oferece dois ambientes, um de homologação e outro de produção. 
+A RNDS oferece dois ambientes, um de homologação e outro de produção,
+por meio dos quais uma implementação de FHIR é oferecida para um software
+que deseja enviar e receber informações em saúde de usuários.
+
 O ambiente de homologação é oferecido para testes e experimentações. 
 O ambiente de produção disponibiliza o catálogo de serviços da RNDS
 para envio e consulta a dados em saúde.
