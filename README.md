@@ -1,3 +1,5 @@
+<img src="./media/guia.png" width="100px">
+
 # Interagindo com a RNDS: Visão do Desenvolvedor
 
 Avisos:
@@ -18,7 +20,7 @@ oferecidos pelo DATASUS, então este portal é para você!
 ## Mapa de orientação
 
 - [Tecnologias](documentos/tecnologias.md)
-- Fluxo: 
+- Fluxo:
   - Administrador
     - Certificado
     - Cadastro no Portal de Serviços
@@ -28,4 +30,3 @@ oferecidos pelo DATASUS, então este portal é para você!
   - Aplicações
     - Obter token
     - Consultar ...
-  
