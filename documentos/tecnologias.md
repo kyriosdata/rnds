@@ -100,11 +100,10 @@ faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
 ### Postman
 
-[<img src="../media/postman.png" width="100px">](https://www.getpostman.com/downloads/)
+[<img src="../media/postman.png" width="60px">](https://www.getpostman.com/downloads/)
 
 A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
-para as requisições via linha de comandos usando cURL. É possível,
-inclusive, configurar testes, dentre outras funções oferecidas por meio desta ferramenta.
+gráfica para montar requisições, executá-las, e configurar testes, dentre outras funções.
 
 ### Desenvolvedores via código
 
