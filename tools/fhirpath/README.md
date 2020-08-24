@@ -20,5 +20,5 @@ $ npm install
 Contando quantas entradas possuem no documento **exemplo.json**.
 
 ```shell
-$ npm run fhirpath -- -f exemplo-original.json -e "entry.count()"
+$ npm run fhirpath -- -f exemplo.json -e "entry.count()"
 ```
