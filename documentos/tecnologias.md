@@ -32,10 +32,10 @@ navegação e visualização das definições. Os perfis definidos pela RNDS est
 [<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
 
 Simplifier.NET é um serviço que permite
-publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
-pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
-também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
-perfis criados.
+publicar e consultar perfis. Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir.
+
+As facilidades oferecidas pelo Simplifier.NET incluem a navegação entre recursos e definições pertinentes, o que é desejável para 
+documentação.
 
 ## JSON (há ainda XML e RDF)
 
