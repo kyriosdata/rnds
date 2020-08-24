@@ -9,7 +9,7 @@ Avisos:
 
 Objetivo:
 
-> Criar código para usufruir dos serviços da RNDS.
+> Usufruir dos serviços da RNDS.
 
 Se você é desenvolvedor e, por algum motivo, precisa escrever código para enviar
 dados para a RNDS, assim como realizar consultas por meio dos serviços
