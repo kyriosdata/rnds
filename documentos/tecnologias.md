@@ -103,7 +103,7 @@ faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 [<img src="../media/postman.png" width="50px">](https://www.getpostman.com/downloads/)
 
 A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
-gráfica para montar requisições, executá-las, e configurar testes, dentre outras funções.
+gráfica para montar requisições, executá-las, e configurar testes, dentre outras funções, o que a torna uma espécie de referência no desenvolvimento de APIs.
 
 ### Desenvolvedores via código
 
@@ -116,9 +116,11 @@ Desenvolvedores escrevem código. O acesso à RESTful API FHIR via código
 
 ## FHIRPath
 
-Respostas para requisições via FHIR são formatadas usando JSON. Para consultar tais documentos, por exemplo, extrair uma informação dentre os dados retornados, pode-se usar FHIRPath ([github](https://github.com/HL7/fhirpath)). A [especificação](http://hl7.org/fhirpath/) encontra-se amplamente disponível, assim como a versão [detalhada](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
+A RESTful API FHIR apresenta resultados em JSON. Para consultar tais resultados, por exemplo, extrair uma informação, pode-se usar FHIRPath ([github](https://github.com/HL7/fhirpath)).
 
-Consultas baseadas em FHIRPath podem ser executadas por meio do portal [clinfhir](http://clinfhir.com). Adicionalmente, pode-se usar a implementação em [javascript](https://github.com/HL7/fhirpath.js), dentre outras opções.
+A [especificação](http://hl7.org/fhirpath/) encontra-se amplamente disponível, assim como a versão [detalhada](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
+
+Consultas baseadas em FHIRPath podem ser executadas por meio do portal [clinfhir](http://clinfhir.com). Adicionalmente, pode-se usar a implementação [fhirpath](https://github.com/HL7/fhirpath.js) em Javascript, dentre outras opções.
 
 ```shell
 npm install --global fhirpath
