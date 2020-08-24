@@ -55,11 +55,13 @@ A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é
 
 A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos [ambientes](./ambientes.md) de homologação e produção.
 
-## Experimentação do FHIR
+## Experimentar acesso ao FHIR (sem ser via RNDS)
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações).
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações). 
 
 Cada um destes servidores funciona como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
+Desenvolvedores podem empregar estes servidores para se ambientar com a RESTful API padronizada pelo FHIR. De fato, o acesso ao [ambiente](./ambientes.md) de homologação pode ser precedido pelo contato
+com um destes servidores.
 
 Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, também possui um servidor para testes disponível em http://hapi.fhir.org/.
 
