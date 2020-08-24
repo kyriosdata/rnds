@@ -8,20 +8,20 @@ Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, 
 
 ### Forge (editor de perfis)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. 
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta.
 Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
 A definição de perfis é um esforço de modelagem de informação em saúde, e não é uma tarefa típica de desenvolvedores de software. Contudo,
-desenvolvedores terão que ter acesso aos perfis estabelecidos para os recursos a serem trocados. Afinal, toda a troca de 
+desenvolvedores terão que ter acesso aos perfis estabelecidos para os recursos a serem trocados. Afinal, toda a troca de
 dados deverá estar em conformidade com os perfis definidos.
 
 Um perfil pode ser criado com um simples editor de texto, contudo,
 a criação é melhor realizada com apoio de um editor específico como o
 [Forge](https://simplifier.net/forge), disponível para Windows.
 
-
 ### Perfis RNDS (definições)
+
 A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
-agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). 
+agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
 
 Além deste arquivo, as definições
 podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de
@@ -34,7 +34,7 @@ navegação e visualização das definições. Os perfis definidos pela RNDS est
 Simplifier.NET é um serviço que permite
 publicar e consultar perfis. Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir.
 
-As facilidades oferecidas pelo Simplifier.NET incluem a navegação entre recursos e definições pertinentes, o que é desejável para 
+As facilidades oferecidas pelo Simplifier.NET incluem a navegação entre recursos e definições pertinentes, o que é desejável para
 documentação.
 
 ## JSON (há ainda XML e RDF)
@@ -57,7 +57,7 @@ A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outr
 
 ## Experimentar acesso ao FHIR (sem ser via RNDS)
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações). 
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações).
 
 Cada um destes servidores funciona como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
 Desenvolvedores podem empregar estes servidores para se ambientar com a RESTful API padronizada pelo FHIR. De fato, o acesso ao [ambiente](./ambientes.md) de homologação pode ser precedido pelo contato
@@ -65,15 +65,22 @@ com um destes servidores.
 
 Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, também possui um servidor para testes disponível em http://hapi.fhir.org/.
 
-## Mas como interagir com um destes servidores? (RESTful API?)
+### Como interagir com estes servidores FHIR?
 
-Embora existam outras formas de trafegar recursos (FHIR) entre dois computadores, o foco aqui está na RESTful API. O FHIR pode ser descrito como uma RESTful API. De forma simplificada, tal RESTful API descreve como interagir com uma implementação FHIR (por exemplo, qualquer uma daquelas em execução nos servidores citados na seção anterior).
+#### RESTful API FHIR
 
-A interação permite: ler o estado corrente de um recurso; ler o estado de um recurso em uma dada versão; atualizar um recurso existente por meio do seu identificador único; remover um recurso e até recuperar o histórico de mudanças de um recurso. Estas não são as únicas possibilidades. Também é possível procurar por um recurso utilizando algum critério de busca, dentre outras possibilidades.
+Um dos aspectos que distingue o FHIR de outras estratégias de interoperabilidade é o foco na implementação. Em particular, inclui detalhes da interface de acesso,
+ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html).
 
-### cURL
+#### Interface gráfica
 
-Entendi, mas como exatamente posso construir uma requisição em uma RESTful API? E mais específico ainda, exatamente a RESTful API definida pelo FHIR? Os detalhes estão amplamente disponíveis [aqui](http://hl7.org/fhir/http.html).
+Alguns deles oferecem uma interface gráfica onde é possível "montar" uma
+requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/).
+É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
+
+#### cURL
+
+Entendi, mas como exatamente posso construir uma requisição em uma RESTful API? E mais específico ainda, exatamente a RESTful API definida pelo FHIR? Os detalhes estão amplamente disponíveis .
 
 Você pode executar o comando abaixo em um _prompt_:
 

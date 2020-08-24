@@ -2,8 +2,6 @@
 
 ## Guia do Desenvolvedor RNDS
 
-### Tudo o que você precisa saber (em detalhes)
-
 Avisos:
 
 - Este **NÃO** é um portal do DATASUS/MS.
@@ -16,8 +14,7 @@ Objetivo:
 > Usufruir dos serviços da RNDS.
 
 Se você é desenvolvedor e, por algum motivo, precisa escrever código para enviar
-dados para a RNDS, assim como realizar consultas por meio dos serviços
-oferecidos pelo DATASUS, então este portal é para você!
+dados ou consultar informações fornecidas pela RNDS, então este portal é para você!
 
 ## Mapa de orientação
 
