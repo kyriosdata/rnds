@@ -84,9 +84,9 @@ RESTful API consulte .
 Alguns deles oferecem uma interface gráfica onde é possível "montar" uma
 requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/) é um exemplo. É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
 
-#### cURL
+### cURL
 
-Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores. Você pode executar o comando abaixo
+Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores. Afinal, é necessário indicar explicitamente todos os _headers_ necessários, assim como o _payload_ esperado, para montar corretamente uma requisição. Você pode executar o comando abaixo
 
 ```
 curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/id-invalido
@@ -96,6 +96,14 @@ e obter como resposta o código 404 (não encontrado), para indicar que o pacien
 cujo identificador é "id-invalido" não foi encontrado. Observe que esta requisição
 faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
+### Postman
+
+A ferramenta [Postman](https://www.getpostman.com/downloads/) é umas das
+principais ferramentas disponíveis para acesso a RESTful APIs. É possível,
+inclusive, configurar testes por meio desta ferramenta.
+
+Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
+
 ### Outras opções
 
 Você também pode usar a interface gráfica oferecida pelo mesmo servidor empregado acima, ou seja, http://test.fhir.org/r4, ou ainda fazer uso de um software desenvolvido especificamente para a finalidade pretendida, seja ele para ser executado em um smartphone, computador usando um navegador ou um software que já é do conhecimento do usuário em questão e que agora está passando por uma manutenção na qual ele poderá recuperar dados em saúde além de um paciente, por exemplo, sem que o usuário sequer saiba que existe algo como FHIR.
@@ -103,12 +111,6 @@ Você também pode usar a interface gráfica oferecida pelo mesmo servidor empre
 - [.Net](http://ewoutkramer.github.io/fhir-net-api/client-setup.html)
 - [JavaScript](https://github.com/smart-on-fhir/client-js)
 - [Java](https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton)
-
-## Requisições (como submeter)
-
-A ferramenta [Postman](https://www.getpostman.com/downloads/) é amplamente empregada para submeter requisições HTTP.
-
-Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
 ## FHIRPath
 
