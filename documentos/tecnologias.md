@@ -98,6 +98,7 @@ e obter como resposta o código 404 (não encontrado), para indicar que o pacien
 cujo identificador é "id-invalido" não foi encontrado. Observe que esta requisição
 faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
+<hr>
 ### Postman
 
 [<img src="../media/postman.png" width="50px">](https://www.getpostman.com/downloads/)
