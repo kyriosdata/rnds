@@ -6,6 +6,8 @@ Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dad
 
 Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
 
+Está além do escopo apresentar em abrangência o FHIR. Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
+
 ### Forge (editor de perfis)
 
 O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta.
@@ -98,11 +100,9 @@ faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
 ### Postman
 
-A ferramenta [Postman](https://www.getpostman.com/downloads/) é umas das
-principais ferramentas disponíveis para acesso a RESTful APIs. É possível,
-inclusive, configurar testes por meio desta ferramenta.
-
-Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
+A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
+para as requisições via linha de comandos usando cURL. É possível,
+inclusive, configurar testes, dentre outras funções oferecidas por meio desta ferramenta.
 
 ### Outras opções
 
