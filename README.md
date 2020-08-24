@@ -2,7 +2,7 @@
 
 ## Guia do Desenvolvedor RNDS
 
-### Tudo o que você precisa saber
+### Tudo o que você precisa saber (em detalhes)
 
 Avisos:
 
