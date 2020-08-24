@@ -15,7 +15,8 @@ Embora a personalização seja possível usando um simples editor de texto,
 [Forge](https://simplifier.net/forge), disponível para Windows.
 
 A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
-agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
+agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). Além deste arquivo, as definições
+podem ser consultadas por meio de portal que oferece serviço específico, conforme comentado abaixo. 
 
 OBSERVAÇÃO: a edição de perfis não é uma tarefa típica de desenvolvedores de software, mas de quem é responsável pela modelagem de informação em saúde. 
 
