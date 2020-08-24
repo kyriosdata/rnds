@@ -19,11 +19,13 @@ a criação é melhor realizada com apoio de um editor específico como o
 [Forge](https://simplifier.net/forge), disponível para Windows.
 
 
-### Perfis (definições)
+### Perfis RNDS (definições)
 A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
-agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). Além deste arquivo, as definições
+agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). 
+
+Além deste arquivo, as definições
 podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de
-navegação e visualização das definições. 
+navegação e visualização das definições. Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ### Simplifier.NET
 
@@ -34,8 +36,6 @@ publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
 pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
 também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
 perfis criados.
-
-Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ## JSON (há ainda XML e RDF)
 
