@@ -11,20 +11,22 @@ Ou seja,
 
 ### Contexto
 
-Exames são realizados e os laudos correspondentes são produzidos por profissionais de saúde. Possivelmente, os laudos são registrados em um sistema de software
+Exames são realizados e os laudos correspondentes são produzidos por profissionais de saúde. Os laudos são possivelmente registrados em um sistema de software
 empregado pelo laboratório em questão.
 
-O profissional de TI terá que obter estes valores do sistema de software empregado pelo laboratório. A obtenção destes dados do sistema de software existente é um esforço a ser realizado pela equipe de TI do laboratório. Os dados necessários estão identificados em uma [tabela](resultado-exame-form.md).
+Cabe ao profissional de TI do laboratório disponibilizar um software que executa as seguintes atividades para cada laudo produzido pelo laboratório:
 
-Os dados obtidos pelo profissional de TI, para cada laudo, dará origem a
-um documento JSON. Cabe ao profissional de TI compor o documento JSON
-correspondente a um laudo de forma correta, conforme os perfis FHIR estabelecidos
-pela RNDS.
+- Extrair os dados necessários do laudo em questão.
+- Compor o documento JSON correspondente conforme perfis FHIR definidos pela RNDS.
+- Enviar o documento JSON criado no passo anterior para a RNDS.
 
-O profissional de TI terá que escrever c
-(e [enviar](enviar-exame-covid.md) para a RNDS, naturalmente).
+O profissional de TI do laboratório terá que obter valores do sistema de software empregado pelo laboratório para compor um documento JSON correspondente. Os valores necessários estão identificados em uma [tabela](resultado-exame-form.md).
 
-Convém esclarecer que o laboratório que produz um laudo pode gerar outros dados, além daqueles estabelecidos pela tabela acima.
+Cada laboratório tem autonomia e usa um sistema específico para registro dos
+laudos que produz. Em consequência, também cabe ao laboratório a extração dos
+dados necessários a serem enviados para a RNDS. A composição do documento JSON,
+por outro lado, deve seguir
+a cada laudo e [envio](enviar-exame-covid.md) cada um deles para a RNDS.
 
 ### Detalhando resultado de exame de COVID-19
 
