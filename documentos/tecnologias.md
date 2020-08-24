@@ -68,28 +68,30 @@ Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, tam
 ## Como interagir com um servidor FHIR?
 
 Há uma API (_Application Programming Interface_) bem-definida para o acesso
-a um servidor FHIR. Esta API é uma RESTful API. Para saber o que é uma RESTful API, consulte [What is REST](https://restfulapi.net/), e portais [pertinentes](https://github.com/Kikobeats/awesome-api). Este estilo de integração é amplamente empregado atualmente e você encontrará com facilidade os mais variados serviços acessíveis
+a um servidor FHIR, uma RESTful API, e há várias formas de usar esta API.
+
+Consulte [What is REST](https://restfulapi.net/) para saber o que é uma RESTful API, e portais [pertinentes](https://github.com/Kikobeats/awesome-api). Este estilo de integração é amplamente empregado e você encontrará com facilidade os mais variados serviços acessíveis
 por meio de uma RESTful API (veja uma lista deles [aqui](https://medium.com/better-programming/a-curated-list-of-100-cool-and-fun-public-apis-to-inspire-your-next-project-7600ce3e9b3)).
 
-#### RESTful API FHIR
+### RESTful API FHIR
 
 Um dos aspectos que distingue o FHIR de outras estratégias de interoperabilidade é o foco na implementação. Em particular, inclui detalhes da interface de acesso,
 ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html). Para definição de
 RESTful API consulte .
 
-#### Interface gráfica
+### Interface gráfica
 
 Alguns deles oferecem uma interface gráfica onde é possível "montar" uma
 requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/) é um exemplo. É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
 
 #### cURL
 
-Entendi, mas como exatamente posso construir uma requisição em uma RESTful API? E mais específico ainda, exatamente a RESTful API definida pelo FHIR? Os detalhes estão amplamente disponíveis .
+Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores.
 
-Você pode executar o comando abaixo em um _prompt_:
+Você pode executar o comando abaixo
 
 ```
-curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/0c89be2f-121a-4b31-b9c8-d7528179fb
+curl -H "Accept: application/json" http<span>:</span>//test.fhir.org/r4/Patient/id-invalido
 ```
 
 ### Outras opções
