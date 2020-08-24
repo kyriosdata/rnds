@@ -86,13 +86,15 @@ requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.or
 
 #### cURL
 
-Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores.
-
-Você pode executar o comando abaixo
+Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores. Você pode executar o comando abaixo
 
 ```
-curl -H "Accept: application/json" http<span>:</span>//test.fhir.org/r4/Patient/id-invalido
+curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/id-invalido
 ```
+
+e obter como resposta o código 404 (não encontrado), para indicar que o paciente
+cujo identificador é "id-invalido" não foi encontrado. Observe que esta requisição
+faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
 ### Outras opções
 
