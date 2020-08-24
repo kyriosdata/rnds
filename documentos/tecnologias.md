@@ -99,6 +99,7 @@ cujo identificador é "id-invalido" não foi encontrado. Observe que esta requis
 faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
 <hr>
+
 ### Postman
 
 [<img src="../media/postman.png" width="50px">](https://www.getpostman.com/downloads/)
