@@ -65,18 +65,22 @@ com um destes servidores.
 
 Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, também possui um servidor para testes disponível em http://hapi.fhir.org/.
 
-### Como interagir com estes servidores FHIR?
+## Como interagir com um servidor FHIR?
+
+Há uma API (_Application Programming Interface_) bem-definida para o acesso
+a um servidor FHIR. Esta API é uma RESTful API. Para saber o que é uma RESTful API, consulte [What is REST](https://restfulapi.net/), e portais [pertinentes](https://github.com/Kikobeats/awesome-api). Este estilo de integração é amplamente empregado atualmente e você encontrará com facilidade os mais variados serviços acessíveis
+por meio de uma RESTful API (veja uma lista deles [aqui](https://medium.com/better-programming/a-curated-list-of-100-cool-and-fun-public-apis-to-inspire-your-next-project-7600ce3e9b3)).
 
 #### RESTful API FHIR
 
 Um dos aspectos que distingue o FHIR de outras estratégias de interoperabilidade é o foco na implementação. Em particular, inclui detalhes da interface de acesso,
-ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html).
+ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html). Para definição de
+RESTful API consulte .
 
 #### Interface gráfica
 
 Alguns deles oferecem uma interface gráfica onde é possível "montar" uma
-requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/).
-É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
+requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/) é um exemplo. É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
 
 #### cURL
 
