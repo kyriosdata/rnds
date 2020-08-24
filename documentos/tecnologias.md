@@ -6,19 +6,36 @@ Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dad
 
 Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
 
-## Forge (editor de perfis)
+### Forge (editor de perfis)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. 
+Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
+A definição de perfis é um esforço de modelagem de informação em saúde, e não é uma tarefa típica de desenvolvedores de software. Contudo,
+desenvolvedores terão que ter acesso aos perfis estabelecidos para os recursos a serem trocados. Afinal, toda a troca de 
+dados deverá estar em conformidade com os perfis definidos.
 
-Embora a personalização seja possível usando um simples editor de texto,
-é melhor realizada com apoio de um editor específico como o
+Um perfil pode ser criado com um simples editor de texto, contudo,
+a criação é melhor realizada com apoio de um editor específico como o
 [Forge](https://simplifier.net/forge), disponível para Windows.
 
-A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
-agrupadas e disponíveis neste arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). Além deste arquivo, as definições
-podem ser consultadas por meio de portal que oferece serviço específico, conforme comentado abaixo. 
 
-OBSERVAÇÃO: a edição de perfis não é uma tarefa típica de desenvolvedores de software, mas de quem é responsável pela modelagem de informação em saúde. 
+### Perfis (definições)
+A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
+agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip). Além deste arquivo, as definições
+podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de
+navegação e visualização das definições. 
+
+### Simplifier.NET
+
+[<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
+
+Simplifier.NET é um serviço que permite
+publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
+pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
+também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
+perfis criados.
+
+Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ## JSON (há ainda XML e RDF)
 
@@ -37,18 +54,6 @@ FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de 
 A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
 
 A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos [ambientes](./ambientes.md) de homologação e produção.
-
-## Simplifier.NET
-
-[<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
-
-Simplifier.NET é um serviço que permite
-publicar perfis. Ou seja, você pode consultar as "personalizações" realizadas
-pela RNDS no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip),
-também mencionado no item anterior. Contudo, o Simplifier.NET oferece uma alternativa de acesso via navegador com funções que facilitam a compreensão dos
-perfis criados.
-
-Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ## Experimentação do FHIR
 
