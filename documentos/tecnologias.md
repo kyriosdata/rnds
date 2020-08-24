@@ -106,9 +106,10 @@ A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
 para as requisições via linha de comandos usando cURL. É possível,
 inclusive, configurar testes, dentre outras funções oferecidas por meio desta ferramenta.
 
-### Outras opções
+### Desenvolvedores via código
 
-Você também pode usar a interface gráfica oferecida pelo mesmo servidor empregado acima, ou seja, http://test.fhir.org/r4, ou ainda fazer uso de um software desenvolvido especificamente para a finalidade pretendida, seja ele para ser executado em um smartphone, computador usando um navegador ou um software que já é do conhecimento do usuário em questão e que agora está passando por uma manutenção na qual ele poderá recuperar dados em saúde além de um paciente, por exemplo, sem que o usuário sequer saiba que existe algo como FHIR.
+Desenvolvedores escrevem código. O acesso à RESTful API FHIR via código
+é apoiada por várias bibliotecas. Abaixo seguem algumas delas:
 
 - [.Net](http://ewoutkramer.github.io/fhir-net-api/client-setup.html)
 - [JavaScript](https://github.com/smart-on-fhir/client-js)
