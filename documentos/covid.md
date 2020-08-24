@@ -9,10 +9,20 @@ Ou seja,
 - Você saberá como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
 - Você será capaz de montar um documento JSON para refletir o resultado de um dado exame.
 
-### Acerca dos dados necessários
+### Contexto
 
-Esta é a parte "mais simples", afinal, estes dados são produzidos por profissionais da saúde.
-Para cada exame realizado, o profissional de saúde responsável irá definir os valores correspondentes. O profissional de TI terá que obter estes valores, provavelmente, de um sistema de software empregado pelo laboratório e compor o documento JSON exigido pela RNDS (e [enviar](enviar-exame-covid.md) para a RNDS, naturalmente). Os dados necessários para compor o documento JSON estão identificados em uma [tabela](resultado-exame-form.md).
+Exames são realizados e os laudos correspondentes são produzidos por profissionais de saúde. Possivelmente, os laudos são registrados em um sistema de software
+empregado pelo laboratório em questão.
+
+O profissional de TI terá que obter estes valores do sistema de software empregado pelo laboratório. A obtenção destes dados do sistema de software existente é um esforço a ser realizado pela equipe de TI do laboratório. Os dados necessários estão identificados em uma [tabela](resultado-exame-form.md).
+
+Os dados obtidos pelo profissional de TI, para cada laudo, dará origem a
+um documento JSON. Cabe ao profissional de TI compor o documento JSON
+correspondente a um laudo de forma correta, conforme os perfis FHIR estabelecidos
+pela RNDS.
+
+O profissional de TI terá que escrever c
+(e [enviar](enviar-exame-covid.md) para a RNDS, naturalmente).
 
 Convém esclarecer que o laboratório que produz um laudo pode gerar outros dados, além daqueles estabelecidos pela tabela acima.
 
@@ -45,10 +55,9 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
    transferido de um servidor para outro. Este objeto possui vários campos, dois deles são utilizados:
 
    - **system** é definido pela sequencia no seguinte formato: `http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<laboratorioID>`, onde `laboratorioID` é o identificador do laboratório em questão fornecido pela RNDS no momento do cadastro. Este valor é aquele informado pelo Portal de Serviços, conforme ilustrado na figura abaixo. Observe que os números foram cobertos para anonimizar o cenário em questão.
-   
+
    ![image](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
 
-   
    - **value**: identificador único do _Bundle_ no contexto do laboratório. Ou seja, este é um identificador único válido para o laboratório
      unicamente identificar o recurso em questão.
 
