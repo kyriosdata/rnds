@@ -1,7 +1,6 @@
 package com.github.kyriosdata.rnds;
 
 import org.apache.http.Header;
-import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -19,15 +18,18 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class TokenApplication {
     private static final String KEY_STORE_PASSWORD = "secret";
     private static final String KEY_STORE_PATH = "certificado.jks";
 
     private static final boolean DEBUG_SSL = false;
-    private static final String EHR_AUTH =
-            "https://ehr-auth.saude.gov.br/api/token";
+
+    /**
+     * Endereço do qual o token será obtido.
+     */
+    private static final String SERVER =
+            "https://ehr-auth-hmg.saude.gov.br/api/token";
 
     /**
      * Obtém path completo do nome do arquivo fornecido que se encontra
@@ -46,34 +48,72 @@ public class TokenApplication {
             System.setProperty("javax.net.debug", "all");
         }
 
-        String file = fromResource(KEY_STORE_PATH);
-        char[] keyStorePassord = KEY_STORE_PASSWORD.toCharArray();
+        final String token = getTokenFromRnds(SERVER,
+                fromResource(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray());
+        System.out.println(token);
 
-        SSLContext sslcontext = sslContext(file, keyStorePassord);
-        CloseableHttpClient httpClient = getClient(sslcontext);
+//        final Header[] allHeaders = response.getAllHeaders();
+//        if (allHeaders == null) {
+//            return;
+//        }
+//
+//        System.out.println();
+//        System.out.println(KeyStore.getDefaultType());
+//        System.out.println(statusLine);
+//        System.out.println(payload);
+//        System.out.println();
+//
+//        Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
+    }
 
-        HttpGet get = new HttpGet(EHR_AUTH);
-        get.addHeader("accept", "application/json");
-        CloseableHttpResponse response = httpClient.execute(get);
+    /**
+     * Obtém <i>token</i> para acesso ao portal de serviços da RNDS.
+     *
+     * @param server          Endereço do serviço que verifica o certificado
+     *                        e, se devidamente autorizado, oferece o
+     *                        <i>token</i> correspondente.
+     * @param file            O arquivo (path completo) contendo o certificado.
+     * @param keyStorePassord A senha de acesso ao certificado.
+     * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
+     */
+    private static String getTokenFromRnds(String server, String file,
+                                           char[] keyStorePassord) {
+        try {
+            SSLContext sslcontext = sslContext(file, keyStorePassord);
+            try (CloseableHttpClient httpClient = getClient(sslcontext)) {
+                HttpGet get = new HttpGet(server);
+                get.addHeader("accept", "application/json");
+                try (CloseableHttpResponse response = httpClient.execute(get)) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    response.getEntity().writeTo(baos);
 
-        StatusLine statusLine = response.getStatusLine();
+                    // Resposta do servidor
+                    String payload = baos.toString();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        response.getEntity().writeTo(baos);
-        String payload = baos.toString();
-
-        final Header[] allHeaders = response.getAllHeaders();
-        if (allHeaders == null) {
-            return;
+                    return extrairToken(payload);
+                }
+            }
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
         }
 
-        System.out.println();
-        System.out.println(KeyStore.getDefaultType());
-        System.out.println(statusLine);
-        System.out.println(payload);
-        System.out.println();
+        return null;
+    }
 
-        Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
+    /**
+     * Extrai do JSON fornecido o valor do par cujo nome é "access_token".
+     * Assume que a entrada contém JSON válido e que o par de nome
+     * "access_token" está presente.
+     *
+     * @param payload O JSON do qual o valor será extraído.
+     * @return O valor do par cujo nome é "access_token" no JSON fornecido.
+     */
+    private static String extrairToken(String payload) {
+        final int indice = payload.indexOf("access_token");
+        final int separador = payload.indexOf(":", indice);
+        final int inicioToken = payload.indexOf("\"", separador) + 1;
+        final int fimToken = payload.indexOf("\"", inicioToken);
+        return payload.substring(inicioToken, fimToken);
     }
 
     private static CloseableHttpClient getClient(SSLContext sslcontext) {
@@ -88,7 +128,7 @@ public class TokenApplication {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslSocketFactory)
                 .build();
-        
+
         return httpClient;
     }
 
