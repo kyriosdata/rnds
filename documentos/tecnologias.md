@@ -21,7 +21,7 @@ OBSERVAÇÃO: a edição de perfis não é uma tarefa típica de desenvolvedores
 
 ## JSON (há ainda XML e RDF)
 
-Quando se usa o FHIR para troca de dados, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, conforme explorado neste portal. Contudo, há ainda XML e RDF.
+Quando se usa o FHIR para troca de dados, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, conforme explorado neste portal. Contudo, há ainda as opções XML e RDF.
 
 O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
 
