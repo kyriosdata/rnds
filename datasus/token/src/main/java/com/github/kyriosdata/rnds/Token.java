@@ -1,12 +1,13 @@
 package com.github.kyriosdata.rnds;
 
-import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -19,7 +20,9 @@ import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 
-public class TokenApplication {
+public class Token {
+    private static final Logger logger =
+            LoggerFactory.getLogger(Token.class);
     private static final String KEY_STORE_PASSWORD = "secret";
     private static final String KEY_STORE_PATH = "certificado.jks";
 
@@ -39,31 +42,19 @@ public class TokenApplication {
      * @return O caminho completo para o arquivo cujo nome é fornecido.
      */
     private static String fromResource(final String arquivo) {
-        Class<TokenApplication> appClass = TokenApplication.class;
+        Class<Token> appClass = Token.class;
         return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         if (DEBUG_SSL) {
             System.setProperty("javax.net.debug", "all");
         }
 
-        final String token = getTokenFromRnds(SERVER,
-                fromResource(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray());
+        final String token = getToken(SERVER,
+                fromResource(KEY_STORE_PATH),
+                KEY_STORE_PASSWORD.toCharArray());
         System.out.println(token);
-
-//        final Header[] allHeaders = response.getAllHeaders();
-//        if (allHeaders == null) {
-//            return;
-//        }
-//
-//        System.out.println();
-//        System.out.println(KeyStore.getDefaultType());
-//        System.out.println(statusLine);
-//        System.out.println(payload);
-//        System.out.println();
-//
-//        Arrays.stream(allHeaders).forEach(TokenApplication::showHeader);
     }
 
     /**
@@ -76,14 +67,16 @@ public class TokenApplication {
      * @param keyStorePassord A senha de acesso ao certificado.
      * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
      */
-    private static String getTokenFromRnds(String server, String file,
-                                           char[] keyStorePassord) {
+    private static String getToken(
+            final String server,
+            final String file,
+            final char[] keyStorePassord) {
         try {
-            SSLContext sslcontext = sslContext(file, keyStorePassord);
-            try (CloseableHttpClient httpClient = getClient(sslcontext)) {
+            SSLContext context = sslContext(file, keyStorePassord);
+            try (CloseableHttpClient cliente = getClient(context)) {
                 HttpGet get = new HttpGet(server);
                 get.addHeader("accept", "application/json");
-                try (CloseableHttpResponse response = httpClient.execute(get)) {
+                try (CloseableHttpResponse response = cliente.execute(get)) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     response.getEntity().writeTo(baos);
 
@@ -117,7 +110,6 @@ public class TokenApplication {
     }
 
     private static CloseableHttpClient getClient(SSLContext sslcontext) {
-
         SSLConnectionSocketFactory sslSocketFactory =
                 new SSLConnectionSocketFactory(
                         sslcontext,
@@ -125,16 +117,9 @@ public class TokenApplication {
                         null,
                         new NoopHostnameVerifier());
 
-        CloseableHttpClient httpClient = HttpClients.custom()
+        return HttpClients.custom()
                 .setSSLSocketFactory(sslSocketFactory)
                 .build();
-
-        return httpClient;
-    }
-
-    private static void showHeader(Header item) {
-        String h = String.join(" : ", item.getName(), item.getValue());
-        System.out.println(h);
     }
 
     private static SSLContext sslContext(String keystoreFile, char[] password)
