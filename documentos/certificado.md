@@ -2,7 +2,9 @@
 
 Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. 
 A confiança é estabelecida por meio de um arquivo, o _keystore_. Em particular, este arquivo deve conter os certificados
-das autoridades certificadoras nas quais deve confiar. 
+das autoridades certificadoras cujos certificados por ela assinados são considerados confiáveis. Dito de outro forma,
+a aplicação em Java estabelece uma relação de confiança apenas com certificados assinados por autoridades certificadoras
+cujos certificados estão contidos no _keystore_. 
 
 ## Certificado digital
 
