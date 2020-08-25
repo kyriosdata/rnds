@@ -66,6 +66,7 @@ public class Token {
      * @param file            O arquivo (path completo) contendo o certificado.
      * @param keyStorePassord A senha de acesso ao certificado.
      * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
+     * O valor {@code null} é retornado em caso de falha.
      */
     private static String getToken(
             final String server,
