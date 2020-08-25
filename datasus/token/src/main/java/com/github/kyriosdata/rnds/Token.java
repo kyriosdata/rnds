@@ -23,7 +23,7 @@ import java.security.SecureRandom;
 public class Token {
     private static final Logger logger =
             LoggerFactory.getLogger(Token.class);
-    private static final String KEY_STORE_PASSWORD = "secret";
+    private static final String SENHA = "secret";
     private static final String KEY_STORE_PATH = "certificado.jks";
 
     private static final boolean DEBUG_SSL = false;
@@ -51,9 +51,9 @@ public class Token {
             System.setProperty("javax.net.debug", "all");
         }
 
-        final String token = getToken(SERVER,
-                fromResource(KEY_STORE_PATH),
-                KEY_STORE_PASSWORD.toCharArray());
+        String certificado = fromResource(KEY_STORE_PATH);
+
+        final String token = getToken(SERVER, certificado, SENHA.toCharArray());
         System.out.println(token);
     }
 
@@ -87,7 +87,7 @@ public class Token {
                 }
             }
         } catch (IOException | GeneralSecurityException e) {
-            e.printStackTrace();
+            logger.warn(e.toString());
         }
 
         return null;
