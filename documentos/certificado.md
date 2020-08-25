@@ -6,8 +6,18 @@ das autoridades certificadoras cujos certificados por ela assinados são conside
 a aplicação em Java estabelece uma relação de confiança apenas com certificados assinados por autoridades certificadoras
 cujos certificados estão contidos no _keystore_. 
 
+Se no _keystore_ empregado pela aplicação não está o certificado da autoridade certificadora que assina o certificado do
+serviço com o qual está tentando interagir, a confiança não é estabelecida e a exceção abaixo é gerada:
+
+```
+javax.net.ssl.SSLHandshakeException: PKIX path building failed: 
+sun.security.provider.certpath.SunCertPathBuilderException: 
+unable to find valid certification path to requested target
+```
+
 Abaixo é ilustrado como acrescentar ao _keystore_ contendo o certificado digital de um laboratório, o certificado da autoridade
-certificadora que assina os certificados empregados pelos serviços da RNDS.
+certificadora que assina os certificados empregados pelos serviços da RNDS e, dessa forma, estabelecer a confiança necessária
+para comounicação via SSL por uma aplicação em Java.
 
 ## Preparando o _keystore_
 
