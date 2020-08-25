@@ -14,8 +14,9 @@ certificadora que assina os certificados empregados pelos serviços da RNDS.
 O arquivo **certificado.jks** é parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). Este arquivo
 contém o certificado da autoridade certificadora que assina os certificados dos serviços da RNDS.
 
-Abaixo é ilustrada uma sequência de passos, e os comandos correspondentes, cuja execução extrai os certificados necessários deste arquivo (**certificado.jks**) e os importa no arquivo do certificado digital empregado pelo laboratório para acesso à RNDS. Para efeito destes passos é assumido que o certificado digital do laboratório está
-contido no arquivo **cert.pfx**. De fato, a sugestão é realizar uma cópia do certificado original para a realização dos passos abaixo. Em resumo, em um mesmo diretório estão os arquivos **certificado.pks** (oferecido pela RNDS) e uma cópia do certificado digital do laboratório (**cert.pfx**).
+Abaixo é ilustrada uma sequência de passos, e os comandos correspondentes, cuja execução extrai o certificado necessário do arquivo (**certificado.jks**) e o importa no arquivo do certificado digital empregado pelo laboratório para acesso à RNDS, ou o _keystore_ do laboratório. 
+Para efeito destes passos é assumido que o certificado digital do laboratório está
+contido no arquivo **laboratorio.pfx**. De fato, a sugestão é realizar uma cópia do certificado original para a realização dos passos abaixo. Em resumo, em um mesmo diretório estão os arquivos **certificado.pks** (oferecido pela RNDS) e uma cópia do certificado digital do laboratório (**laboratorio.pfx**).
 
 ### Listar o conteúdo destes arquivos (opcional)
 
