@@ -34,7 +34,8 @@ public class RNDS {
     static final Logger logger =
             LoggerFactory.getLogger(RNDS.class);
 
-    static SSLContext sslContext(String keystoreFile, char[] password)
+    static SSLContext sslContext(final String keystoreFile,
+                                 final char[] password)
             throws GeneralSecurityException, IOException {
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
         try (InputStream in = new FileInputStream(keystoreFile)) {
@@ -68,7 +69,7 @@ public class RNDS {
      * @param payload O JSON do qual o valor será extraído.
      * @return O valor do par cujo nome é "access_token" no JSON fornecido.
      */
-    static String extrairToken(String payload) {
+    static String extrairToken(final String payload) {
         final int indice = payload.indexOf("access_token");
         final int separador = payload.indexOf(":", indice);
         final int inicioToken = payload.indexOf("\"", separador) + 1;
@@ -76,7 +77,7 @@ public class RNDS {
         return payload.substring(inicioToken, fimToken);
     }
 
-    static CloseableHttpClient getClient(SSLContext sslcontext) {
+    static CloseableHttpClient getClient(final SSLContext sslcontext) {
         SSLConnectionSocketFactory sslSocketFactory =
                 new SSLConnectionSocketFactory(
                         sslcontext,
@@ -92,20 +93,20 @@ public class RNDS {
     /**
      * Obtém <i>token</i> para acesso ao portal de serviços da RNDS.
      *
-     * @param server          Endereço do serviço que verifica o certificado
-     *                        e, se devidamente autorizado, oferece o
-     *                        <i>token</i> correspondente.
-     * @param file            O arquivo (path completo) contendo o certificado.
-     * @param keyStorePassord A senha de acesso ao certificado.
+     * @param server           Endereço do serviço que verifica o certificado
+     *                         e, se devidamente autorizado, oferece o
+     *                         <i>token</i> correspondente.
+     * @param file             O arquivo (path completo) contendo o certificado.
+     * @param keyStorePassword A senha de acesso ao certificado.
      * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
      * O valor {@code null} é retornado em caso de falha.
      */
     public static String getToken(
             final String server,
             final String file,
-            final char[] keyStorePassord) {
+            final char[] keyStorePassword) {
         try {
-            SSLContext context = sslContext(file, keyStorePassord);
+            SSLContext context = sslContext(file, keyStorePassword);
             try (CloseableHttpClient cliente = getClient(context)) {
                 HttpGet get = new HttpGet(server);
                 get.addHeader("accept", "application/json");

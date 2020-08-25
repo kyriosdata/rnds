@@ -6,6 +6,9 @@
 
 package com.github.kyriosdata.rnds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 public class Token {
@@ -17,33 +20,32 @@ public class Token {
             "https://ehr-auth-hmg.saude.gov.br/api/token";
 
     /**
-     * Obtém path completo do nome do arquivo fornecido que se encontra
-     * no diretório resources.
-     *
-     * @param arquivo Nome do arquivo contido no diretório "resources".
-     * @return O caminho completo para o arquivo cujo nome é fornecido.
-     */
-    private static String fromResource(final String arquivo) {
-        Class<Token> appClass = Token.class;
-        return appClass.getClassLoader().getResource(arquivo).getPath();
-    }
-
-    /**
      * Aplicação que recupera <i>token</i> de acesso aos serviços da RNDS.
      * @param args Nenhum argumento é esperado via linha de comandos.
      */
     public static void main(String[] args) {
+        final Logger logger =
+                LoggerFactory.getLogger(Token.class);
+
         final String arquivo = System.getenv("RNDS_CERT_FILE");
-        Objects.requireNonNull(arquivo, "RNDS_CERT_FILE não definida");
+        logger.info("RNDS_CERT_FILE: {}", arquivo);
 
         final String server = System.getenv("RNDS_AUTH_SERVER");
-        Objects.requireNonNull(server, "RNDS_AUTH_SERVER não definida");
+        logger.info("RNDS_AUTH_SERVER: {}", server);
 
         String senha = System.getenv("RNDS_CERT_SENHA");
-        Objects.requireNonNull(senha, "RNDS_CERT_SENHA não definida");
+        logger.info("RNDS_CERT_SENHA: ******");
         final char[] password = senha.toCharArray();
 
-        final String token = RNDS.getToken(SERVER, arquivo, password);
-        System.out.println(token);
+        if (arquivo == null || server == null || senha == null) {
+            return;
+        }
+
+        final String token = RNDS.getToken(server, arquivo, password);
+        if (token == null) {
+            logger.warn("FALHA AO OBTER TOKEN");
+        } else {
+            logger.info("TOKEN: {}...", token.substring(0, 19));
+        }
     }
 }
