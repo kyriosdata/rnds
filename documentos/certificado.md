@@ -21,7 +21,7 @@ contido no arquivo **laboratorio.pfx**. De fato, a sugestão é realizar uma có
 ### Listar o conteúdo destes arquivos (opcional)
 
 - `keytool -list -keystore certificado.jks`
-- `keytool -list -keystore cert.pfx`
+- `keytool -list -keystore laboratorio.pfx`
 
 ### Exportar certificado da autoridade certificadora em certificado.jks
 
@@ -29,4 +29,4 @@ contido no arquivo **laboratorio.pfx**. De fato, a sugestão é realizar uma có
 
 ### Importar certificado da autoridade certificado obtido no passo anterior
 
-- `keytool -import -trustcacerts -alias "saude.gov.br" -file ca.crt -keystore cert.pfx`
+- `keytool -import -trustcacerts -alias "saude.gov.br" -file ca.crt -keystore laboratorio.pfx`
