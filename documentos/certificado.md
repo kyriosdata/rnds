@@ -28,6 +28,10 @@ Abaixo é ilustrada uma sequência de passos, e os comandos correspondentes, cuj
 Para efeito destes passos é assumido que o certificado digital do laboratório está
 contido no arquivo **laboratorio.pfx**. De fato, a sugestão é realizar uma cópia do certificado original para a realização dos passos abaixo. Em resumo, em um mesmo diretório estão os arquivos **certificado.pks** (oferecido pela RNDS) e uma cópia do certificado digital do laboratório (**laboratorio.pfx**).
 
+A execução dos comandos abaixo exige a senha de acesso aos certificados. No caso do _keystore_ **certificado.jks**, a senha é **secret**. 
+O certificado do cliente contido neste _keystore_ tem apenas a finalidade de teste. Por outro lado, a senha do _keystore_ do 
+laboratório, definitivamente não é pública, e terá que ser conhecida por quem executar o comando. 
+
 ### Listar o conteúdo destes arquivos (opcional)
 
 - `keytool -list -keystore certificado.jks`
