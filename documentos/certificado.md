@@ -19,12 +19,10 @@ contido no arquivo **cert.pfx**. De fato, a sugestão é realizar uma cópia do 
 - `keytool -list -keystore certificado.jks`
 - `keytool -list -keystore cert.pfx`
 
-### Exportar certificados de certificado.jks
+### Exportar certificado da autoridade certificadora em certificado.jks
 
-- `keytool -export -alias "server" -file server.crt -keystore certificado.jks`
-- `keytool -export -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore certificado.jks`
+- `keytool -export -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file ca.crt -keystore certificado.jks`
 
-### Importar certificados obtidos no passo anterior
+### Importar certificado da autoridade certificado obtido no passo anterior
 
-- `keytool -import -trustcacerts -alias server -file server.crt -keystore cert.pfx`
-- `keytool -import -trustcacerts -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore cert.pfx`
+- `keytool -import -trustcacerts -alias "saude.gov.br" -file ca.crt -keystore cert.pfx`
