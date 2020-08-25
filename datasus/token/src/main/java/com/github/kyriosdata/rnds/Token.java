@@ -16,6 +16,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -50,6 +52,9 @@ public class Token {
     public static void main(String[] args) {
         final String arquivo = System.getenv("RNDS_CERT_FILE");
         Objects.requireNonNull(arquivo, "RNDS_CERT_FILE não definida");
+        if (!Files.exists(Path.of(arquivo))) {
+            System.out.println("não existe");
+        }
 
         final String server = System.getenv("RNDS_AUTH_SERVER");
         Objects.requireNonNull(server, "RNDS_AUTH_SERVER não definida");

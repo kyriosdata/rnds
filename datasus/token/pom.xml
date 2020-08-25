@@ -87,6 +87,18 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.28</version>
+        </dependency>
+
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
@@ -299,6 +311,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.versao}</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
             </plugin>
 
             <!-- PMD                  -->
