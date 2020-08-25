@@ -19,14 +19,11 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.util.Objects;
 
 public class Token {
     private static final Logger logger =
             LoggerFactory.getLogger(Token.class);
-    private static final String SENHA = "secret";
-    private static final String KEY_STORE_PATH = "certificado.jks";
-
-    private static final boolean DEBUG_SSL = false;
 
     /**
      * Endereço do qual o token será obtido.
@@ -46,14 +43,22 @@ public class Token {
         return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 
+    /**
+     * Aplicação que recupera <i>token</i> de acesso aos serviços da RNDS.
+     * @param args Nenhum argumento é esperado via linha de comandos.
+     */
     public static void main(String[] args) {
-        if (DEBUG_SSL) {
-            System.setProperty("javax.net.debug", "all");
-        }
+        final String arquivo = System.getenv("RNDS_CERT_FILE");
+        Objects.requireNonNull(arquivo, "RNDS_CERT_FILE não definida");
 
-        String certificado = fromResource(KEY_STORE_PATH);
+        final String server = System.getenv("RNDS_AUTH_SERVER");
+        Objects.requireNonNull(server, "RNDS_AUTH_SERVER não definida");
 
-        final String token = getToken(SERVER, certificado, SENHA.toCharArray());
+        String senha = System.getenv("RNDS_CERT_SENHA");
+        Objects.requireNonNull(senha, "RNDS_CERT_SENHA não definida");
+        final char[] password = senha.toCharArray();
+
+        final String token = getToken(SERVER, arquivo, password);
         System.out.println(token);
     }
 
