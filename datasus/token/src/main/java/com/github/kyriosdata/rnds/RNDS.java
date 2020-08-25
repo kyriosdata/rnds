@@ -26,10 +26,13 @@ import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 
+/**
+ * Classe que implementa funções utilitárias para acesso aos serviços da RNDS.
+ */
 public class RNDS {
 
     static final Logger logger =
-            LoggerFactory.getLogger(Token.class);
+            LoggerFactory.getLogger(RNDS.class);
 
     static SSLContext sslContext(String keystoreFile, char[] password)
             throws GeneralSecurityException, IOException {
