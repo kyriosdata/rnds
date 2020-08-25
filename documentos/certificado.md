@@ -9,7 +9,7 @@ cujos certificados estão contidos no _keystore_.
 Abaixo é ilustrado como acrescentar ao _keystore_ contendo o certificado digital de um laboratório, o certificado da autoridade
 certificadora que assina os certificados empregados pelos serviços da RNDS.
 
-## Certificado digital
+## Preparando o _keystore_
 
 O arquivo **certificado.jks** e parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). Este arquivo
 contém os certificados necessários para ilustrar a obtenção do _token_ de segurança. 
