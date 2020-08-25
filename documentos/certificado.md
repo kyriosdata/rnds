@@ -1,3 +1,9 @@
+## Interação via SSL em Java
+
+Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. 
+A confiança é estabelecida por meio de um arquivo, o _keystore_. Em particular, este arquivo deve conter os certificados
+das autoridades certificadoras nas quais deve confiar. 
+
 ## Certificado digital
 
 O arquivo **certificado.jks** e parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). Este arquivo
