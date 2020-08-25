@@ -8,15 +8,15 @@ contido no arquivo **cert.pfx**. De fato, a sugestão é realizar uma cópia do 
 
 ### Listar o conteúdo destes arquivos (opcional)
 
-`keytool -list -keystore certificado.jks`
-`keytool -list -keystore cert.pfx`
+- `keytool -list -keystore certificado.jks`
+- `keytool -list -keystore cert.pfx`
 
 ### Exportar certificados de certificado.jks
 
-`keytool -export -alias "server" -file server.crt -keystore certificado.jks`
-`keytool -export -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore certificado.jks`
+- `keytool -export -alias "server" -file server.crt -keystore certificado.jks`
+- `keytool -export -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore certificado.jks`
 
 ### Importar certificados obtidos no passo anterior
 
-`keytool -import -trustcacerts -alias server -file server.crt -keystore cert.pfx`
-`keytool -import -trustcacerts -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore cert.pfx`
+- `keytool -import -trustcacerts -alias server -file server.crt -keystore cert.pfx`
+- `keytool -import -trustcacerts -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file dominio.crt -keystore cert.pfx`
