@@ -37,7 +37,7 @@ public class RNDS {
             LoggerFactory.getLogger(RNDS.class);
 
     private static SSLContext sslContext(final String keystoreFile,
-                                 final char[] password)
+                                         final char[] password)
             throws GeneralSecurityException, IOException {
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
         try (InputStream in = new FileInputStream(keystoreFile)) {
@@ -133,31 +133,38 @@ public class RNDS {
     /**
      * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
      *
-     * @param srv O serviço que fornecerá a resposta.
+     * @param srv   O serviço que fornecerá a resposta.
      * @param token O <i>token</i> de acesso ao serviço.
-     * @param cnes O código CNES do estabelecimento.
-     * @param cpf O CPF do responsável pela requisição. Deve estar associado
-     *            ao <i>token</i>.
+     * @param cnes  O código CNES do estabelecimento.
+     * @param cpf   O CPF do responsável pela requisição. Deve estar associado
+     *              ao <i>token</i>.
      * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
      * de exceção.
      */
     public static String cnes(String srv, String token, String cnes,
-                               String cpf) {
+                              String cpf) {
         try {
-            final String CNES_REQUEST = "Organization/" + cnes;
+            final String CNES_REQUEST = "fhir/r4/Organization/" + cnes;
             logger.info("SERVICO: {}", CNES_REQUEST);
 
             final URL url = new URL(srv + CNES_REQUEST);
-            HttpsURLConnection servico = (HttpsURLConnection) url.openConnection();
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
             servico.setRequestMethod("GET");
             servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server", "Bearer " + token);
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
             servico.setRequestProperty("Authorization", cpf);
 
             final int codigo = servico.getResponseCode();
-            logger.info("RESPONSE CODE: {}", codigo);
-            final String payload = fromInputStream(servico.getInputStream());
-            return payload;
+            logger.warn("RESPONSE CODE: {}", codigo);
+
+            if (codigo != 200) {
+                logger.warn(fromInputStream(servico.getErrorStream()));
+                return null;
+            }
+
+            return fromInputStream(servico.getInputStream());
         } catch (IOException exception) {
             logger.warn("EXCECAO: {}", exception);
             return null;
@@ -165,16 +172,18 @@ public class RNDS {
     }
 
     public static String profissional(String srv, String token, String cns,
-                              String cpf) {
+                                      String cpf) {
         try {
             final String PROFISSIONAL = "Practitioner/" + cns;
             logger.info("SERVICO: {}", PROFISSIONAL);
 
             final URL url = new URL(srv + PROFISSIONAL);
-            HttpsURLConnection servico = (HttpsURLConnection) url.openConnection();
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
             servico.setRequestMethod("GET");
             servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server", "Bearer " + token);
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
             servico.setRequestProperty("Authorization", cpf);
 
             final int codigo = servico.getResponseCode();

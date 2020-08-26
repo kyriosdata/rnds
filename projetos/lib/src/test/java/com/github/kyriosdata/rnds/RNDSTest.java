@@ -67,17 +67,10 @@ public class RNDSTest {
     }
 
     @Test
-    void recuperarTokenViaVariaveisDeAmbiente() {
+    public void recuperarTokenViaVariaveisDeAmbiente(){
         String token = RNDS.getToken(
                 RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
-        assertTrue(token.length() > 2048);
-    }
-
-    @Test
-    public void testDecodeJWT(){
-        String jwtToken = RNDS.getToken(
-                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
-        String[] split_string = jwtToken.split("\\.");
+        String[] split_string = token.split("\\.");
         String base64EncodedHeader = split_string[0];
         String base64EncodedBody = split_string[1];
 
@@ -91,6 +84,23 @@ public class RNDSTest {
         String body = new String(base64Url.decode(base64EncodedBody));
         assertTrue(body.contains("RNDS-HMG"));
         assertTrue(body.contains("ICP-Brasil"));
+    }
+
+    @Test
+    void cnesConhecido() {
+        String token = RNDS.getToken(
+                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+
+        String cnes = RNDS.cnes(servicos, token, "2337991", "980016287385192");
+        assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
+    }
+
+    @Test
+    void cnesInvalidoNaoPodeSerEncontrado() {
+        String token = RNDS.getToken(
+                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+
+        assertNull(RNDS.cnes(servicos, token, "233799", "980016287385192"));
     }
 }
 
