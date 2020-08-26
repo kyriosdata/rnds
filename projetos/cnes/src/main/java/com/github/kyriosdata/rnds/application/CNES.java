@@ -78,7 +78,7 @@ public class CNES {
             return;
         }
 
-        final String payload = RNDS.cnes(srv, token, args[0], args[1]);
+        final String payload = RNDS.profissional(srv, token, args[0], args[1]);
 
         logger.info("PAYLOAD: {}", payload);
     }
