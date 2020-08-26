@@ -29,8 +29,9 @@
             </name>
             <comments>A atribuição deve conter, explicitamente, a seguinte
                 linha:
-                Copyright (c) 2016. Fábrica de Software - Instituto de
-                Informática (UFG)
+                Copyright (c) 2020
+                Fábio Nogueira de Lucena
+                Instituto de Informática (UFG)
             </comments>
             <url>https://creativecommons.org/licenses/by/4.0/</url>
         </license>
@@ -60,7 +61,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
-            com.github.kyriosdata.rnds.Token
+            com.github.kyriosdata.rnds.application.Token
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
@@ -98,12 +99,6 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.versao}</version>
@@ -111,21 +106,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.11</version>
+            <groupId>com.github.kyriosdata</groupId>
+            <artifactId>rnds-lib</artifactId>
+            <version>0.0.1</version>
         </dependency>
 
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>RNDS</name>
-            <url>https://maven.pkg.github.com/kyriosdata/rnds</url>
-        </repository>
-    </distributionManagement>
-
+    
     <build>
 
         <pluginManagement>

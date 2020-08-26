@@ -4,8 +4,9 @@
  * Creative Commons Attribution 4.0 International License.
  */
 
-package com.github.kyriosdata.rnds;
+package com.github.kyriosdata.rnds.application;
 
+import com.github.kyriosdata.rnds.RNDS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
