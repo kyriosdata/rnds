@@ -112,7 +112,7 @@
         </dependency>
 
     </dependencies>
-    
+
     <build>
 
         <pluginManagement>
@@ -840,7 +840,7 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>exemplo-unico</finalName>
+                                    <finalName>token</finalName>
                                     <archive>
                                         <manifest>
                                             <mainClass>${project.mainClass}
