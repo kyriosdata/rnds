@@ -1,9 +1,13 @@
-﻿# token
+﻿# Biblioteca
 
-Projeto que ilustra a obtenção de 
-_token_ para acesso aos serviços da 
-RNDS via código em Java.
+Projeto que implementa biblioteca para facilitar acesso aos serviços da RNDS.
 
-## Informações para desenvolvedores
+### Maven
 
-- Consulte [dev](dev.md)
+```js
+<dependency>
+  <groupId>com.github.kyriosdata</groupId>
+  <artifactId>rnds-lib</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
