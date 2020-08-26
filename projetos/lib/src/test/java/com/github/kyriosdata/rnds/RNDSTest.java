@@ -8,9 +8,9 @@ package com.github.kyriosdata.rnds;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.apache.commons.codec.binary.Base64;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RNDSTest {
 
@@ -23,7 +23,7 @@ public class RNDSTest {
     private static final String RNDS_SERVICOS =
             "https://ehr-services-hmg.saude.gov.br/api/";
 
-    private static String certificadoSenha;
+    private static char[] certificadoSenha;
     private static String certificadoArquivo;
     private static String autenticador;
     private static String servicos;
@@ -33,7 +33,8 @@ public class RNDSTest {
         autenticador = System.getenv("RNDS_AUTENTICADOR");
         servicos = System.getenv("RNDS_SERVICOS");
         certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
-        certificadoSenha = System.getenv("RNDS_CERTIFICADO_SENHA");
+        String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
+        certificadoSenha = senha != null ? senha.toCharArray() : null;
     }
 
     /**
@@ -57,11 +58,39 @@ public class RNDSTest {
     }
 
     @Test
-    void recuperarToken() {
+    void recuperarTokenExemploRnds() {
         String arquivo = fromResource(RNDS_CERTIFICADO_ARQUIVO);
         char[] keyStorePassword = RNDS_CERTIFICADO_SENHA.toCharArray();
-        String token = RNDS.getToken(RNDS_AUTENTICADOR, arquivo, keyStorePassword);
+        String token = RNDS.getToken(RNDS_AUTENTICADOR, arquivo,
+                keyStorePassword);
         assertEquals(2334, token.length());
+    }
+
+    @Test
+    void recuperarTokenViaVariaveisDeAmbiente() {
+        String token = RNDS.getToken(
+                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+        assertTrue(token.length() > 2048);
+    }
+
+    @Test
+    public void testDecodeJWT(){
+        String jwtToken = RNDS.getToken(
+                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+        String[] split_string = jwtToken.split("\\.");
+        String base64EncodedHeader = split_string[0];
+        String base64EncodedBody = split_string[1];
+
+        Base64 base64Url = new Base64(true);
+        String header = new String(base64Url.decode(base64EncodedHeader));
+        assertTrue(header.contains("kid"));
+        assertTrue(header.contains("rnds auth"));
+        assertTrue(header.contains("RS256"));
+
+
+        String body = new String(base64Url.decode(base64EncodedBody));
+        assertTrue(body.contains("RNDS-HMG"));
+        assertTrue(body.contains("ICP-Brasil"));
     }
 }
 
