@@ -46,9 +46,11 @@ public class CNES {
             "https://ehr-auth.saude.gov.br/api/token";
 
     /**
-     * Aplicação que recupera <i>token</i> de acesso aos serviços da RNDS.
+     * Aplicação que obtém informações sobre o estabelecimento de saúde
+     * para o CNES fornecido.
      *
-     * @param args Nenhum argumento é esperado via linha de comandos.
+     * @param args O primeiro argumento é o CNES do estabelecimento e o
+     *             segundo deve ser o CPF do responsável pela requisição.
      */
     public static void main(String[] args) throws IOException {
 
@@ -76,10 +78,7 @@ public class CNES {
             return;
         }
 
-        final String cnes = args[0];
-        final String cpf = args[1];
-
-        final String payload = RNDS.cnes(srv, token, cnes, cpf);
+        final String payload = RNDS.cnes(srv, token, args[0], args[1]);
 
         logger.info("PAYLOAD: {}", payload);
     }
