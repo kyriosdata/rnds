@@ -196,6 +196,38 @@ public class RNDS {
         }
     }
 
+    public static String cpf(String srv, String token, String cpf,
+                             String authorization) {
+        try {
+            final String query = "?identifier=http://rnds.saude.gov" +
+                    ".br/fhir/r4/NamingSystem/cpf|" + cpf;
+            final String CPF = "fhir/r4/Practitioner" + query;
+            logger.info("SERVICO: {}", CPF);
+
+            final URL url = new URL(srv + CPF);
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
+            servico.setRequestProperty("Authorization", authorization);
+
+            final int codigo = servico.getResponseCode();
+            logger.warn("RESPONSE CODE: {}", codigo);
+
+            if (codigo != 200) {
+                logger.warn(fromInputStream(servico.getErrorStream()));
+                return null;
+            }
+
+            return fromInputStream(servico.getInputStream());
+        } catch (IOException exception) {
+            logger.warn("EXCECAO: {}", exception);
+            return null;
+        }
+    }
+
     /**
      * Método de conveniência para obter uma sequência de caracteres,
      * no formato UTF-8, a partir da entrada fornecida.

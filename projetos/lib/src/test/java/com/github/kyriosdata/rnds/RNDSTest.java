@@ -108,6 +108,13 @@ public class RNDSTest {
                 "980016287385192");
         assertTrue(cns.contains("SANTOS"));
     }
+
+    @Test
+    void profissionalPeloCpf() {
+        String cns = RNDS.cpf(servicos, token, "01758263156",
+                "980016287385192");
+        assertTrue(cns.contains("SANTOS"));
+    }
 }
 
 
