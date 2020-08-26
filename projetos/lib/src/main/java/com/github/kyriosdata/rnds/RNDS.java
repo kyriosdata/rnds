@@ -174,7 +174,7 @@ public class RNDS {
     public static String profissional(String srv, String token, String cns,
                                       String cpf) {
         try {
-            final String PROFISSIONAL = "Practitioner/" + cns;
+            final String PROFISSIONAL = "fhir/r4/Practitioner/" + cns;
             logger.info("SERVICO: {}", PROFISSIONAL);
 
             final URL url = new URL(srv + PROFISSIONAL);

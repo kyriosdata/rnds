@@ -28,6 +28,9 @@ public class RNDSTest {
     private static String autenticador;
     private static String servicos;
 
+    private static String token;
+
+
     @BeforeAll
     static void setup() {
         autenticador = System.getenv("RNDS_AUTENTICADOR");
@@ -35,6 +38,9 @@ public class RNDSTest {
         certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
         String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
         certificadoSenha = senha != null ? senha.toCharArray() : null;
+        token = RNDS.getToken(
+                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+
     }
 
     /**
@@ -55,6 +61,7 @@ public class RNDSTest {
         assertNotNull(servicos, "url servicos desconhecida");
         assertNotNull(certificadoArquivo, "arquivo cert nao definido");
         assertNotNull(certificadoSenha, "senha certificado unknown");
+        assertNotNull(token, "token não recuperado");
     }
 
     @Test
@@ -68,8 +75,6 @@ public class RNDSTest {
 
     @Test
     public void recuperarTokenViaVariaveisDeAmbiente(){
-        String token = RNDS.getToken(
-                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
         String[] split_string = token.split("\\.");
         String base64EncodedHeader = split_string[0];
         String base64EncodedBody = split_string[1];
@@ -88,19 +93,20 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-        String token = RNDS.getToken(
-                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
-
         String cnes = RNDS.cnes(servicos, token, "2337991", "980016287385192");
         assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
     }
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        String token = RNDS.getToken(
-                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
-
         assertNull(RNDS.cnes(servicos, token, "233799", "980016287385192"));
+    }
+
+    @Test
+    void profissionalPeloCns() {
+        String cns = RNDS.profissional(servicos, token, "980016287385192",
+                "980016287385192");
+        assertTrue(cns.contains("SANTOS"));
     }
 }
 
