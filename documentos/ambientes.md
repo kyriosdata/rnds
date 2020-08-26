@@ -33,5 +33,5 @@ para obter o _token_ e outro, distinto para cada estado, conforme detalhado abai
   endereço (ponto de acesso) para requisição por estado. O estado é definido
   pelo CNES da instituição em questão que requisita o acesso. Por exemplo,
   se o CNES de quem requisita o serviço é do Distributo Federal, então o
-  endereço a ser empregado deve ser **https://df-ehr-services.saude.gov.br/api**. Por outro lado, se for do estado de Goiás, então deve ser
-  **https://go-ehr-services.saude.gov.br/api**, e assim por diante.
+  endereço a ser empregado deve ser **https<span>:</span>//df-ehr-services.saude.gov.br/api**. Por outro lado, se for do estado de Goiás, então deve ser
+  **https<span>:</span>//go-ehr-services.saude.gov.br/api**, e assim por diante.
