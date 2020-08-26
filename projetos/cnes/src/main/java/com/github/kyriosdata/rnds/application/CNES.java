@@ -10,13 +10,7 @@ import com.github.kyriosdata.rnds.RNDS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Aplicação que ilustra uso da biblioteca RNDS-LIB
@@ -85,7 +79,7 @@ public class CNES {
         final String cnes = args[0];
         final String cpf = args[1];
 
-        final String payload = cnes(srv, token, cnes, cpf);
+        final String payload = RNDS.cnes(srv, token, cnes, cpf);
 
         logger.info("PAYLOAD: {}", payload);
     }
