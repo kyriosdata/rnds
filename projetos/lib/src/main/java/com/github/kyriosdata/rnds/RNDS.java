@@ -15,6 +15,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
@@ -22,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -125,5 +127,66 @@ public class RNDS {
         }
 
         return null;
+    }
+
+
+    /**
+     * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
+     *
+     * @param srv O serviço que fornecerá a resposta.
+     * @param token O <i>token</i> de acesso ao serviço.
+     * @param cnes O código CNES do estabelecimento.
+     * @param cpf O CPF do responsável pela requisição. Deve estar associado
+     *            ao <i>token</i>.
+     * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
+     * de exceção.
+     */
+    public static String cnes(String srv, String token, String cnes,
+                               String cpf) {
+        try {
+            final String CNES_REQUEST = "Organization/" + cnes;
+            logger.info("SERVICO: {}", CNES_REQUEST);
+
+            final URL url = new URL(srv + CNES_REQUEST);
+            HttpsURLConnection servico = (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server", "Bearer " + token);
+            servico.setRequestProperty("Authorization", cpf);
+
+            final int codigo = servico.getResponseCode();
+            logger.info("RESPONSE CODE: {}", codigo);
+            final String payload = fromInputStream(servico.getInputStream());
+            return payload;
+        } catch (IOException exception) {
+            logger.warn("EXCECAO: {}", exception);
+            return null;
+        }
+    }
+
+    /**
+     * Método de conveniência para obter uma sequência de caracteres,
+     * no formato UTF-8, a partir da entrada fornecida.
+     *
+     * @param is Entrada da qual o conteúdo será obtido.
+     * @return Sequência de caracteres disponível na entrada ou valor
+     * {@code null}, em caso de erro.
+     */
+    private static String fromInputStream(final InputStream is) {
+        try {
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                byte[] buffer = new byte[1024];
+                int length;
+
+                while ((length = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                return baos.toString("UTF-8");
+            }
+        } catch (IOException exception) {
+            logger.warn("EXCECAO: {}", exception);
+            return null;
+        }
     }
 }
