@@ -52,7 +52,7 @@ public class CNES {
      * @param args O primeiro argumento é o CNES do estabelecimento e o
      *             segundo deve ser o CPF do responsável pela requisição.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         final String arquivo = System.getenv("RNDS_CERT_FILE");
         logger.info("RNDS_CERT_FILE: {}", arquivo);
