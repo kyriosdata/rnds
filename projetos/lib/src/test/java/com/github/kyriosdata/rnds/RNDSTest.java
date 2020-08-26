@@ -6,7 +6,7 @@
 
 package com.github.kyriosdata.rnds;
 
-public class TokenTest {
+public class RNDSTest {
 
     /**
      * Obtém path completo do nome do arquivo fornecido que se encontra
@@ -16,7 +16,7 @@ public class TokenTest {
      * @return O caminho completo para o arquivo cujo nome é fornecido.
      */
     static String fromResource(final String arquivo) {
-        Class<Token> appClass = Token.class;
+        Class<RNDS> appClass = RNDS.class;
         return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 }
