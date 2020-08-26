@@ -6,7 +6,15 @@
 
 package com.github.kyriosdata.rnds;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class RNDSTest {
+
+    public static final String AUTH = "https://ehr-auth-hmg.saude.gov" +
+            ".br/api/token";
 
     /**
      * Obtém path completo do nome do arquivo fornecido que se encontra
@@ -18,6 +26,14 @@ public class RNDSTest {
     static String fromResource(final String arquivo) {
         Class<RNDS> appClass = RNDS.class;
         return appClass.getClassLoader().getResource(arquivo).getPath();
+    }
+
+    @Test
+    void obtemArquivo() {
+        String arquivo = fromResource("certificado.jks");
+        char[] keyStorePassword = "secret".toCharArray();
+        String token = RNDS.getToken(AUTH, arquivo, keyStorePassword);
+        assertEquals(2334, token.length());
     }
 }
 
