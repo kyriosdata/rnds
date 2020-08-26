@@ -36,7 +36,7 @@ public class RNDS {
     static final Logger logger =
             LoggerFactory.getLogger(RNDS.class);
 
-    static SSLContext sslContext(final String keystoreFile,
+    private static SSLContext sslContext(final String keystoreFile,
                                  final char[] password)
             throws GeneralSecurityException, IOException {
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -148,6 +148,29 @@ public class RNDS {
             logger.info("SERVICO: {}", CNES_REQUEST);
 
             final URL url = new URL(srv + CNES_REQUEST);
+            HttpsURLConnection servico = (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server", "Bearer " + token);
+            servico.setRequestProperty("Authorization", cpf);
+
+            final int codigo = servico.getResponseCode();
+            logger.info("RESPONSE CODE: {}", codigo);
+            final String payload = fromInputStream(servico.getInputStream());
+            return payload;
+        } catch (IOException exception) {
+            logger.warn("EXCECAO: {}", exception);
+            return null;
+        }
+    }
+
+    public static String profissional(String srv, String token, String cns,
+                              String cpf) {
+        try {
+            final String PROFISSIONAL = "Practitioner/" + cns;
+            logger.info("SERVICO: {}", PROFISSIONAL);
+
+            final URL url = new URL(srv + PROFISSIONAL);
             HttpsURLConnection servico = (HttpsURLConnection) url.openConnection();
             servico.setRequestMethod("GET");
             servico.setRequestProperty("Content-Type", "application/json");
