@@ -65,7 +65,7 @@ Se o valor "qualquer" não é substituído pelo identificador do solicitante, a 
 }
 ```
 
-#### Submeter recurso com número que não é único para o laboratório
+#### (422) Submeter recurso com número que não é único para o laboratório
 
 Este identificador é aquele fornecido por meio da propriedade **identifier.value** do _bundle_.
 
