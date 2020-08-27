@@ -1,7 +1,11 @@
-O objetivo deste documento é
+Objetivo:
 
-> fornecer detalhes dos dados necessários para registrar o resultado de exame de COVID-19, conforme definido pela RNDS. Tais dados são registrados em um documento JSON, cujos campos
-> são definidos pelo recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html).
+> Detalhar itens de dado necessários para registrar o resultado de exame de COVID-19, conforme definido pela RNDS.
+
+Um resultado de exame é enviado para a RNDS por meio do recurso FHIR
+[Bundle](https://www.hl7.org/fhir/bundle.html). Ou seja, para cada resultado
+será construído um _Bundle_ correspondente. Abaixo é detalhado cada elemento
+deste _Bundle_.
 
 Ou seja,
 
@@ -14,13 +18,17 @@ Ou seja,
 Exames são realizados e os laudos correspondentes são produzidos por profissionais de saúde. Os laudos são possivelmente registrados em um sistema de software
 empregado pelo laboratório em questão.
 
-Cabe ao profissional de TI do laboratório disponibilizar um software que executa as seguintes atividades para cada laudo produzido pelo laboratório:
+O profissional de TI do laboratório, ou desenvolvedor, foco deste documento, tem
+outras atribuições. Cabe ao desenvolvedor disponibilizar um software que executa as seguintes atividades para cada laudo produzido pelo laboratório:
 
-- Extrair os dados necessários do laudo em questão.
-- Compor o documento JSON correspondente conforme perfis FHIR definidos pela RNDS.
-- Enviar o documento JSON criado no passo anterior para a RNDS.
+1. Recuperar os dados necessários do laudo em questão.
+1. Compor o documento JSON correspondente conforme perfis FHIR definidos pela RNDS.
+1. Enviar o documento JSON criado no passo anterior para a RNDS.
 
-O profissional de TI do laboratório terá que obter valores do sistema de software empregado pelo laboratório para compor um documento JSON correspondente. Os valores necessários estão identificados em uma [tabela](resultado-exame-form.md).
+Supondo que o laboratório em questão faz uso de um sistema de software,
+o desenvolvedor terá que obter os dados deste sistema para compor um documento JSON correspondente. Naturalmente esta atividade está além do escopo da RNDS.
+
+Cada um dos itens de dados necessários está compilado em uma [tabela](resultado-exame-form.md) e comentado abaixo.
 
 Cada laboratório tem autonomia e usa um sistema específico para registro dos
 laudos que produz. Em consequência, também cabe ao laboratório a extração dos
@@ -126,3 +134,16 @@ pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.ne
 ### Campos do tipo de amostra biológica
 
 Estes campos classificam o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsade/brtipoamostragal) utilizada em exames de acordo com a terminologia GAL (Gerenciador de Ambiente Laboratorial). Existem vários códigos para o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsade/brtipoamostragal), dentre eles, **SECONF**, empregado para identificar "Secreção Orofaríngea e Nasofaríngea".
+
+#### Para correção
+
+```json
+"relatesTo": [
+{
+   "code": "replaces",
+   "targetReference": {
+      "reference": "Composition/del1"
+   }
+}
+]
+```
