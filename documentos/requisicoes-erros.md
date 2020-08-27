@@ -136,3 +136,24 @@ qualquer requisição que o utilize irá retornar algo similar ao conteúdo abai
     ]
 }
 ```
+
+#### (422) Valor de "status" diferente de "final"
+
+Se tentar submeter um laudo, cujo **status** é diferente de **final**, conforme ilustrado abaixo
+
+![image](https://user-images.githubusercontent.com/1735792/91478272-f5bf6400-e875-11ea-98ab-ac7961384967.png)
+
+e compatível com o perfil [Estados do documento](https://simplifier.net/RedeNacionaldeDadosemSade/BREstadoDocumento-1.0), terá como resposta
+
+```js
+{
+    "resourceType": "OperationOutcome",
+    "issue": [
+        {
+            "severity": "error",
+            "code": "processing",
+            "diagnostics": "(EHR-ERR924) Ao enviar um documento é obrigatório utilizar o status: final"
+        }
+    ]
+}
+```
