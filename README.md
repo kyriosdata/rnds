@@ -18,6 +18,10 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 ## Mapa de orientação
 
+#### Atividades clássicas de um laboratório
+
+Laudos produzidos permanecem restritos ao laboratório. 
+
 ![image](./media/laboratorio.png)
 
 - [Tecnologias](documentos/tecnologias.md)
