@@ -20,11 +20,16 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 #### Atividades clássicas de um laboratório
 
-Laudos produzidos permanecem restritos ao laboratório. 
+Em um cenário convencional, laudos produzidos por um laboratório permanecem restritos ao laboratório e acessíveis aos usuários do software em questão.
 
 ![image](./media/laboratorio.png)
 
 - [Tecnologias](documentos/tecnologias.md)
+
+#### Atividades de TI (desenvolvimento)
+
+![image](./media/desenvolvedor.png)
+
 - Fluxo:
   - Administrador
     - Certificado
