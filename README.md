@@ -38,7 +38,7 @@ A integração com a RNDS exige ações realizadas por dois atores: (a) o respon
 É atribuição do responsável pelo laboratório:
 
 - adquirir e disponibilizar o certificado digital a ser utilizado para identificar o laboratório junto à RNDS;
-- credenciamento junto à RNDS e
+- solicitar acesso junto à RNDS e
 - esclarecer mapeamentos e transformações eventualmente necessários entre os dados fornecidos para um laudo e aqueles esperados pela RNDS.
 
 O responsável pela produção do código (_software_) que realiza a integração com a RNDS deverá assegurar a execução correta de quatro características do código a ser produzido:
