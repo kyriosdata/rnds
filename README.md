@@ -28,9 +28,27 @@ A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
 em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil.
 
-A Portaria X é o gatilho da mudança. De acordo com ela, os laboratórios continuam realizando suas atividades fins, como antes.
-Contudo, induz a realização de um Projeto de Integração com a RNDS
-cujo entregável é código (_software_). Este código deve oferecer quatro características principais, conforme ilustrado na figura abaixo.
+A Portaria X é o gatilho da mudança e para atendê-la segue uma sequência de atividades. De acordo com esta portaria, os laboratórios continuam realizando suas atividades fins, como antes.
+Contudo, induz a realização de um esforço de Integração com a RNDS.
+
+## Integração com a RNDS
+
+A integração com a RNDS exige ações realizadas por dois atores: (a) o responsável pelo laboratório e (b) o responsável pela produção de código (_software_).
+
+É atribuição do responsável pelo laboratório:
+
+- adquirir e disponibilizar o certificado digital a ser utilizado para identificar o laboratório junto à RNDS;
+- credenciamento junto à RNDS e
+- esclarecer mapeamentos e transformações eventualmente necessários entre os dados fornecidos para um laudo e aqueles esperados pela RNDS.
+
+O responsável pela produção do código (_software_) que realiza a integração com a RNDS deverá assegurar a execução correta de quatro características do código a ser produzido:
+
+- extrair dados do sistema de software empregado pelo laboratório;
+- mapear código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
+- empacotar os dados na representação a ser utilizada para envio (JSON) e
+- enviar os dados para a RNDS.
+
+A figura ilustra as atribuições destes dois atores.
 
 <img src="./media/desenvolvedor.png" width="600xp">
 
