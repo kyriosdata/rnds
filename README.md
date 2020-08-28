@@ -18,20 +18,16 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 ## Mapa de orientação
 
-#### Atividades clássicas de um laboratório
+Em um cenário convencional, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
 
-Em um cenário convencional, laudos produzidos por um laboratório permanecem restritos ao laboratório e acessíveis aos usuários do software em questão.
+<img src="./media/laboratorio.png" width="500px">
 
-![image](./media/laboratorio.png)
-
-<img src="./media/laboratorio.png" width="300px">
-
-- [Tecnologias](documentos/tecnologias.md)
 
 #### Atividades de TI (desenvolvimento)
 
-![image](./media/desenvolvedor.png)
+<img src="./media/desenvolvedor.png" width="500xp">
 
+- [Tecnologias](documentos/tecnologias.md)
 - Fluxo:
   - Administrador
     - Certificado
