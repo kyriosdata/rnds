@@ -18,14 +18,14 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 ## Mapa de orientação
 
-Em um cenário convencional, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
+Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão, conforme ilustrado abaixo.
 
-<img src="./media/laboratorio.png" width="500px">
+<img src="./media/laboratorio.png" width="600px">
 
+A RNDS, contudo, demanda mudança na forma de trabalho dos laboratórios. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
+dos laboratórios em que foram produzidos.
 
-#### Atividades de TI (desenvolvimento)
-
-<img src="./media/desenvolvedor.png" width="500xp">
+<img src="./media/desenvolvedor.png" width="600xp">
 
 - [Tecnologias](documentos/tecnologias.md)
 - Fluxo:
