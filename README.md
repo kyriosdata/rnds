@@ -24,6 +24,8 @@ Em um cenário convencional, laudos produzidos por um laboratório permanecem re
 
 ![image](./media/laboratorio.png)
 
+<img src="./media/laboratorio.png" width="300px">
+
 - [Tecnologias](documentos/tecnologias.md)
 
 #### Atividades de TI (desenvolvimento)
