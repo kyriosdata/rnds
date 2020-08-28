@@ -28,16 +28,15 @@ A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
 em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil.
 
-Os laboratórios continuam realizando suas atividades fins, como antes.
-Neste momento, contudo, é preciso que o responsável pelo laboratório
-realize um Projeto de Integração com a RNDS. Este projeto demanda
-a produção de código (_software_) que possui quatro características
-principais, conforme ilustrado na figura abaixo.
+A Portaria X é o gatilho da mudança. De acordo com ela, os laboratórios continuam realizando suas atividades fins, como antes.
+Contudo, induz a realização de um Projeto de Integração com a RNDS
+cujo entregável é código (_software_). Este código deve oferecer quatro características principais, conforme ilustrado na figura abaixo.
 
 <img src="./media/desenvolvedor.png" width="600xp">
 
-- [Tecnologias](documentos/tecnologias.md)
+## Outros
 
+- [Tecnologias](documentos/tecnologias.md)
 - Fluxo:
   - Administrador
     - Certificado
