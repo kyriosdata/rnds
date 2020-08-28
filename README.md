@@ -18,16 +18,26 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 ## Mapa de orientação
 
-Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão, conforme ilustrado abaixo.
+Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão.
+Conforme ilustrado abaixo, em algum momento seriam enviados para uma ilha
+privada, segura, inacessível até aos pacientes.
 
 <img src="./media/laboratorio.png" width="600px">
 
-A RNDS, contudo, demanda mudança na forma de trabalho dos laboratórios. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
-dos laboratórios em que foram produzidos.
+A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
+dos laboratórios em que foram produzidos. A intenção é "fazer a informação
+em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil.
+
+Os laboratórios continuam realizando suas atividades fins, como antes.
+Neste momento, contudo, é preciso que o responsável pelo laboratório
+realize um Projeto de Integração com a RNDS. Este projeto demanda
+a produção de código (_software_) que possui quatro características
+principais, conforme ilustrado na figura abaixo.
 
 <img src="./media/desenvolvedor.png" width="600xp">
 
 - [Tecnologias](documentos/tecnologias.md)
+
 - Fluxo:
   - Administrador
     - Certificado
