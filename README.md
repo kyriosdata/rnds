@@ -18,6 +18,8 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 
 ## Mapa de orientação
 
+![image](./media/laboratorio.png)
+
 - [Tecnologias](documentos/tecnologias.md)
 - Fluxo:
   - Administrador
