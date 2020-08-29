@@ -1,0 +1,27 @@
+{
+  "name": "path",
+  "version": "1.0.0",
+  "description": "Consultado recurso FHIR via FHIRPath",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fhirpath": "fhirpath"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyriosdata/rnds.git"
+  },
+  "keywords": [
+    "fhirpath",
+    "rnds"
+  ],
+  "author": "Fábio Nogueira de Lucena",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kyriosdata/rnds/issues"
+  },
+  "homepage": "https://github.com/kyriosdata/rnds#readme",
+  "devDependencies": {
+    "fhirpath": "^2.4.0"
+  }
+}

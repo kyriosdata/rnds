@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="e93a2b50-3f50-4670-8242-8b9af26a3584" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-13T20:01:09.639+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRJurisdicaoOrgaoEmissor-1.0" />
+  <version value="1.0" />
+  <name value="BRJurisdicaoOrgaoExpedidor" />
+  <title value="Jurisdição do Órgão Expedidor" />
+  <status value="active" />
+  <date value="2020-03-13T20:01:33.7451754Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Jurisdição de Órgãos Expedidores" />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="Patient.identifier" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Jurisdição do Órgão Expedidor" />
+      <definition value="Unidade Federativa ou o número da região do Órgão Expedidor de um documento." />
+      <max value="1" />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRJurisdicaoOrgaoEmissor-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <type>
+        <code value="positiveInt" />
+      </type>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <binding>
+        <strength value="required" />
+        <description value="Unidade Federativa" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRUnidadeFederativa-1.0" />
+      </binding>
+    </element>
+  </differential>
+</StructureDefinition>

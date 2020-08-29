@@ -1,0 +1,157 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2020-03-23T14:23:56.567-02:00"
+  },
+  "identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-<preencha-aqui-id-solicitacao>",
+    "value": "765345678987654345678"
+  },
+  "type": "document",
+  "timestamp": "2020-03-23T14:23:56.567-02:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.0"
+          ]
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento",
+              "code": "REL"
+            }
+          ]
+        },
+        "subject": {
+          "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+            "value": "700500572752652"
+          }
+        },
+        "date": "2020-03-23T10:30:12.947-02:00",
+        "author": [
+          {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+              "value": "00394544000185"
+            }
+          }
+        ],
+        "title": "Resultado de Exame Laboratorial",
+        "section": [
+          {
+            "entry": [
+              {
+                "reference": "urn:uuid:transient-1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS",
+                "code": "0214"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL",
+              "code": "coronavirusnCoV"
+            }
+          ]
+        },
+        "subject": {
+          "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+            "value": "700500572752652"
+          }
+        },
+        "issued": "2020-03-23T10:30:12.947-02:00",
+        "performer": [
+          {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+              "value": "00394544000185"
+            }
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+              "code": "3"
+            }
+          ]
+        },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+                "code": "2"
+              }
+            ]
+          }
+        ],
+        "note": [
+          {
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris velit, maximus a vulputate nec, interdum ut mauris. Aenean a."
+          }
+        ],
+        "method": {
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        "specimen": {
+          "reference": "urn:uuid:transient-2"
+        },
+        "referenceRange": [
+          {
+            "text": "Vestibulum mauris velit, maximus a vulputate nec, interdum ut mauris."
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:transient-2",
+      "resource": {
+        "resourceType": "Specimen",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0"
+          ]
+        },
+        "type": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+              "code": "SECONF"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="9e02be1a-ccd7-41d3-a10e-2c031a4979b4" />
+  <meta>
+    <versionId value="4" />
+    <lastUpdated value="2020-03-13T20:37:13.273+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRContatoAssistencial-1.0" />
+  <version value="1.0" />
+  <name value="BRContatoAssistencial" />
+  <title value="Contato Assistencial" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-13T20:37:36.8572361Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Resumo ou sumário referente a um atendimento ininterrupto dispensado a um indivíduo em uma mesma modalidade assistencial e em um mesmo estabelecimento de saúde, gerado após a conclusão deste atendimento.&#xD;&#xA;Referência: &lt;a href=&quot;https://wiki.saude.gov.br/cmd/index.php/Página_principal#Contato_Assistencial&quot;&gt;https://wiki.saude.gov.br/cmd/index.php/Página_principal#Contato_Assistencial&lt;/a&gt;" />
+  <purpose value="Reportar para o Sistema Único de Saúde dados mínimos referentes a um atendimento concluído, de forma a possibilitar seu compartilhamento entre profissionais de saúde, o próprio indivíduo que recebeu o atendimento, assim como possibilitar o uso secundário das informações para atividades faturamento, auditoria, formulação e monitoramento de políticas públicas, por exemplo, nas esferas municipal, estadual e federal." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Encounter" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Encounter" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Encounter">
+      <path value="Encounter" />
+      <short value="Contato Assistencial" />
+      <definition value="Atenção à saúde dispensada a um indivíduo em uma modalidade assistencial, de forma ininterrupta e em um mesmo estabelecimento de saúde." />
+      <alias value="Atendimento" />
+      <alias value="Visita" />
+      <alias value="Internação" />
+      <alias value="Consulta" />
+      <alias value="Atendimento Ambulatorial" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.identifier">
+      <path value="Encounter.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.status">
+      <path value="Encounter.status" />
+      <short value="finished | entered-in-error" />
+      <definition value="Indica o estado que o contato assistencial se encontra quando é informado para a RNDS." />
+      <comment value="Na RNDS os contatos assistenciais somente são informados após terem sido finalizados, portanto somente a opção finished pode ser utilizada, ou entered-in-error, quando o contato assistencial foi enviado com erro." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Estado do Contato Assistencial" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoContatoAssistencial-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.statusHistory">
+      <path value="Encounter.statusHistory" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.class">
+      <path value="Encounter.class" />
+      <label value="Modalidade Assistencial" />
+      <short value="Modalidade Assistencial" />
+      <definition value="Classifica os contatos assistenciais de acordo com as especificidades do modo, local e duração do atendimento.&#xD;&#xA;Referência: https://rts.saude.gov.br/#/modalidade-assistencial" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Modalidade Assistencial" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRModalidadeAssistencial-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.class.system">
+      <path value="Encounter.class.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.class.code">
+      <path value="Encounter.class.code" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.class.display">
+      <path value="Encounter.class.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.class.userSelected">
+      <path value="Encounter.class.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.classHistory">
+      <path value="Encounter.classHistory" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.type">
+      <path value="Encounter.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceType">
+      <path value="Encounter.serviceType" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.priority">
+      <path value="Encounter.priority" />
+      <label value="Caráter do Atendimento" />
+      <short value="Caráter do Atendimento" />
+      <definition value="Identifica o contato assistencial de acordo com a prioridade de sua realização.&#xD;&#xA;Referência: https://rts.saude.gov.br/#/carater-atendimento" />
+      <alias value="Caráter de Atendimento" />
+      <alias value="Caráter da Internação" />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Identifica o contato assistencial de acordo com a prioridade de sua realização." />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRCaraterAtendimento-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.priority.coding">
+      <path value="Encounter.priority.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Encounter.priority.coding.system">
+      <path value="Encounter.priority.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.priority.coding.code">
+      <path value="Encounter.priority.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.priority.coding.display">
+      <path value="Encounter.priority.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.priority.coding.userSelected">
+      <path value="Encounter.priority.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.priority.text">
+      <path value="Encounter.priority.text" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.subject">
+      <path value="Encounter.subject" />
+      <comment value="Na primeira versão não será suportado a identificação de grupos." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.subject.extension">
+      <path value="Encounter.subject.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Encounter.subject.extension:unidentifiedPatient">
+      <path value="Encounter.subject.extension" />
+      <sliceName value="unidentifiedPatient" />
+      <short value="Dados do Indivíduo Não Identificado" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuoNaoIdentificado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.subject.extension:unidentifiedPatient.extension:gender">
+      <path value="Encounter.subject.extension.extension" />
+      <sliceName value="gender" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.subject.extension:unidentifiedPatient.extension:birthYear">
+      <path value="Encounter.subject.extension.extension" />
+      <sliceName value="birthYear" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.subject.extension:unidentifiedPatient.extension:reason">
+      <path value="Encounter.subject.extension.extension" />
+      <sliceName value="reason" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.subject.type">
+      <path value="Encounter.subject.type" />
+      <fixedUri value="Patient" />
+    </element>
+    <element id="Encounter.subject.identifier.use">
+      <path value="Encounter.subject.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.subject.identifier.type">
+      <path value="Encounter.subject.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.subject.identifier.system">
+      <path value="Encounter.subject.identifier.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.subject.identifier.value">
+      <path value="Encounter.subject.identifier.value" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.subject.identifier.period">
+      <path value="Encounter.subject.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.subject.identifier.assigner">
+      <path value="Encounter.subject.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.subject.display">
+      <path value="Encounter.subject.display" />
+      <short value="Nome ou descrição do sujeito" />
+      <definition value="Nome do indivíduo ou descrição do sujeito do Contato Assistencial quando não for um indivíduo." />
+      <max value="0" />
+    </element>
+    <element id="Encounter.episodeOfCare">
+      <path value="Encounter.episodeOfCare" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.basedOn">
+      <path value="Encounter.basedOn" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant">
+      <path value="Encounter.participant" />
+      <short value="Participante(s) do Contato Assistencial" />
+      <definition value="Identifica o(s) profissional(is) ou indivíduo(s) que teve(tiveram) algum tipo de participação no Contato Assistencial." />
+      <alias value="Profissionais do Atendimento" />
+      <alias value="Profissional Responsável pela Alta" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.participant.extension">
+      <path value="Encounter.participant.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Encounter.participant.extension:function">
+      <path value="Encounter.participant.extension" />
+      <sliceName value="function" />
+      <definition value="Ocupação do profissional ou indivíduo que participou do contato assistencial." />
+      <min value="1" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BROcupacao-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.participant.extension:team">
+      <path value="Encounter.participant.extension" />
+      <sliceName value="team" />
+      <short value="Equipe" />
+      <definition value="Identifica a equipe de saúde responsável pelo Contato Assistencial utilizando o Identificador Nacional de Equipes." />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIdentificacaoEquipe-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.participant.type">
+      <path value="Encounter.participant.type" />
+      <short value="Tipo de Participação" />
+      <definition value="Responsabilidade que o profissional ou indivíduo teve durante o Contato Assistencial." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Responsabilidade no Contato Assistencial" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRResponsabilidadeParticipante-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.participant.type.coding.system">
+      <path value="Encounter.participant.type.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.participant.type.coding.code">
+      <path value="Encounter.participant.type.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.participant.type.coding.display">
+      <path value="Encounter.participant.type.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.type.coding.userSelected">
+      <path value="Encounter.participant.type.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.type.text">
+      <path value="Encounter.participant.type.text" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.period">
+      <path value="Encounter.participant.period" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.individual">
+      <path value="Encounter.participant.individual" />
+      <short value="Participante" />
+      <definition value="Identifica o profissional ou indivíduo teve alguma participação no Contato Assistencial." />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://saude.gov.br/fhir/r4/StructureDefinition/BRLotacaoProfissional-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.participant.individual.reference">
+      <path value="Encounter.participant.individual.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.participant.individual.type">
+      <path value="Encounter.participant.individual.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.individual.identifier">
+      <path value="Encounter.participant.individual.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.participant.individual.display">
+      <path value="Encounter.participant.individual.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.appointment">
+      <path value="Encounter.appointment" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.period">
+      <path value="Encounter.period" />
+      <short value="Início e Término do Contato Assistencial" />
+      <definition value="Data ou data/hora de adminissão e desfecho do Contato Assistencial." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.period.start">
+      <path value="Encounter.period.start" />
+      <short value="Momento da Admissão" />
+      <definition value="Competência (mês/ano), data ou data e hora do início do Contato Assistencial." />
+      <alias value="Data da Admissão" />
+      <alias value="Data e Hora do Atendimento" />
+      <alias value="Data e Hora da Admissão" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.period.end">
+      <path value="Encounter.period.end" />
+      <short value="Momento do Desfecho" />
+      <definition value="Competência (mês/ano), data ou data e hora do término do Contato Assistencial." />
+      <alias value="Data do Desfecho" />
+      <alias value="Data e Hora da Saída da Internação" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.length">
+      <path value="Encounter.length" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonCode">
+      <path value="Encounter.reasonCode" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference">
+      <path value="Encounter.reasonReference" />
+      <slicing>
+        <discriminator>
+          <type value="profile" />
+          <path value="resolve()" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <short value="Motivo do Atendimento" />
+      <definition value="Motivação para o Contato Assistencial acontecer." />
+      <alias value="Motivo do Contato Assistencial" />
+      <alias value="Diangóstico Principal" />
+      <alias value="Motivo da Admissão" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis">
+      <path value="Encounter.reasonReference" />
+      <sliceName value="primaryDiagnosis" />
+      <short value="Diagnóstico Principal" />
+      <definition value="Condição estabelecida após estudo de forma a esclarecer qual o mais importante ou principal motivo responsável pela demanda do contato assistencial. O diagnóstico principal reflete achados clínicos descobertos durante a permanência do indivíduo no estabelecimento de saúde, podendo portanto ser diferente do diagnóstico de admissão. (Port. nº 1.324/SAS/MS/2014)." />
+      <max value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRCID10Avaliado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.extension">
+      <path value="Encounter.reasonReference.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.extension:admissionStatus">
+      <path value="Encounter.reasonReference.extension" />
+      <sliceName value="admissionStatus" />
+      <definition value="Identifica se o problema/diagnóstico era previamente conhecido na admissão do indivíduo para o contato assistencial.&#xD;&#xA;Utilize true para Sim, false para Não e null para Desconhecido." />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndicadorPresencaAdmissao-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.reference">
+      <path value="Encounter.reasonReference.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.type">
+      <path value="Encounter.reasonReference.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.identifier">
+      <path value="Encounter.reasonReference.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:primaryDiagnosis.display">
+      <path value="Encounter.reasonReference.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonCoded">
+      <path value="Encounter.reasonReference" />
+      <sliceName value="reasonCoded" />
+      <short value="Motivo do Atendimento Estruturado" />
+      <definition value="Motivo do Contato Assistencial ter acontecido." />
+      <alias value="Motivo do Atendimento" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRCIAP2Avaliado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.reasonReference:reasonCoded.reference">
+      <path value="Encounter.reasonReference.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.reasonReference:reasonCoded.type">
+      <path value="Encounter.reasonReference.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonCoded.identifier">
+      <path value="Encounter.reasonReference.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonCoded.display">
+      <path value="Encounter.reasonReference.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonText">
+      <path value="Encounter.reasonReference" />
+      <sliceName value="reasonText" />
+      <short value="Declaração Subjetiva do Motivo do Atendimento" />
+      <definition value="Declaração subjetiva do indivíduo para indicar a razão do Contato Assistencial." />
+      <alias value="Declaração Subjetiva do Indivíudo para o Atendimento" />
+      <max value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRMotivoDescritivoContatoAssistencial-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.reasonReference:reasonText.reference">
+      <path value="Encounter.reasonReference.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.reasonReference:reasonText.type">
+      <path value="Encounter.reasonReference.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonText.identifier">
+      <path value="Encounter.reasonReference.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference:reasonText.display">
+      <path value="Encounter.reasonReference.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis">
+      <path value="Encounter.diagnosis" />
+      <slicing>
+        <discriminator>
+          <type value="profile" />
+          <path value="condition.resolve()" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <short value="Diagnóstico(s)/Problema(s) Avaliado(s) e Procedimento(s) Realizado(s)" />
+      <definition value="Este elemento faz referência tento aos Diagnóstico(s)/Problema(s) Avaliado(s) quanto aos Procedimento(s) Realizado(s) no Contato Assistencial, de acordo com o slice específico." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis">
+      <path value="Encounter.diagnosis" />
+      <sliceName value="diagnosis" />
+      <short value="Diagnóstico(s)/Problema(s) Avaliado(s)" />
+      <definition value="Informações sobre a condição de saúde, lesão, deficiência ou qualquer outra questão que afete o bem-estar físico, mental ou social de um indivíduo identificadas em um contato assistencial. (adaptado do conceito de Problema/Diagnóstico do Clinical Knowledge Manager/OpenEHR)" />
+      <alias value="Lista de Problemas" />
+      <alias value="Diagnóstico Secundário" />
+      <alias value="Patologia Associada" />
+      <alias value="Comorbidade" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.extension">
+      <path value="Encounter.diagnosis.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.extension:admissionStatus">
+      <path value="Encounter.diagnosis.extension" />
+      <sliceName value="admissionStatus" />
+      <definition value="Identifica se o problema/diagnóstico era previamente conhecido na admissão do indivíduo para o contato assistencial.&#xD;&#xA;Utilize true para Sim, false para Não e null para Desconhecido." />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndicadorPresencaAdmissao-1.0" />
+      </type>
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.condition">
+      <path value="Encounter.diagnosis.condition" />
+      <short value="Diagnóstico Avaliado" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRCID10Avaliado-1.0" />
+        <!-- <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRCIAP2Avaliado-1.0" /> -->
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.condition.reference">
+      <path value="Encounter.diagnosis.condition.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.condition.type">
+      <path value="Encounter.diagnosis.condition.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.condition.identifier">
+      <path value="Encounter.diagnosis.condition.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.condition.display">
+      <path value="Encounter.diagnosis.condition.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.use">
+      <path value="Encounter.diagnosis.use" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:diagnosis.rank">
+      <path value="Encounter.diagnosis.rank" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:procedures">
+      <path value="Encounter.diagnosis" />
+      <sliceName value="procedures" />
+      <short value="Procedimento(s) Realizado(s)" />
+      <definition value="Ações e serviços de saúde realizados." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.extension">
+      <path value="Encounter.diagnosis.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Encounter.diagnosis:procedures.extension:financier">
+      <path value="Encounter.diagnosis.extension" />
+      <sliceName value="financier" />
+      <definition value="Agente, instituição ou entidade responsável por custear as ações e serviços de saúde." />
+      <min value="1" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRFinanciamento-1.0" />
+      </type>
+    </element>
+    <element id="Encounter.diagnosis:procedures.condition">
+      <path value="Encounter.diagnosis.condition" />
+      <short value="Procedimento Realizado" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRProcedimentoRealizado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.condition.reference">
+      <path value="Encounter.diagnosis.condition.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.condition.type">
+      <path value="Encounter.diagnosis.condition.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.condition.identifier">
+      <path value="Encounter.diagnosis.condition.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.condition.display">
+      <path value="Encounter.diagnosis.condition.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.use">
+      <path value="Encounter.diagnosis.use" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis:procedures.rank">
+      <path value="Encounter.diagnosis.rank" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.account">
+      <path value="Encounter.account" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization">
+      <path value="Encounter.hospitalization" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.hospitalization.preAdmissionIdentifier">
+      <path value="Encounter.hospitalization.preAdmissionIdentifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.origin">
+      <path value="Encounter.hospitalization.origin" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource">
+      <path value="Encounter.hospitalization.admitSource" />
+      <short value="Procedência" />
+      <definition value="Identifica o serviço que encaminhou o indivíduo ou a sua iniciativa/de seu responsável na busca pelo acesso ao serviço de saúde." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Procedência" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRProcedencia-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.hospitalization.admitSource.coding">
+      <path value="Encounter.hospitalization.admitSource.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource.coding.system">
+      <path value="Encounter.hospitalization.admitSource.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource.coding.code">
+      <path value="Encounter.hospitalization.admitSource.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource.coding.display">
+      <path value="Encounter.hospitalization.admitSource.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource.coding.userSelected">
+      <path value="Encounter.hospitalization.admitSource.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.admitSource.text">
+      <path value="Encounter.hospitalization.admitSource.text" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.reAdmission">
+      <path value="Encounter.hospitalization.reAdmission" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.dietPreference">
+      <path value="Encounter.hospitalization.dietPreference" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.specialCourtesy">
+      <path value="Encounter.hospitalization.specialCourtesy" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.specialArrangement">
+      <path value="Encounter.hospitalization.specialArrangement" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.destination">
+      <path value="Encounter.hospitalization.destination" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition">
+      <path value="Encounter.hospitalization.dischargeDisposition" />
+      <short value="Motivo de Desfecho" />
+      <definition value="Caracteriza o motivo de conclusão total ou parcial do Contato Assistencial." />
+      <alias value="Desfecho da Internação" />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Motivo do Desfecho" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRMotivoDesfecho-1.0" />
+      </binding>
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.coding">
+      <path value="Encounter.hospitalization.dischargeDisposition.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.coding.system">
+      <path value="Encounter.hospitalization.dischargeDisposition.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.coding.code">
+      <path value="Encounter.hospitalization.dischargeDisposition.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.coding.display">
+      <path value="Encounter.hospitalization.dischargeDisposition.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.coding.userSelected">
+      <path value="Encounter.hospitalization.dischargeDisposition.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization.dischargeDisposition.text">
+      <path value="Encounter.hospitalization.dischargeDisposition.text" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location">
+      <path value="Encounter.location" />
+      <short value="Local de atendimento" />
+      <definition value="Local onde o atendimento aconteceu.&#xD;&#xA;Location/1: No próprio Estabelecimento de Saúde [utilizar como padrão)]&#xD;&#xA;Location/2: Unidade Móvel&#xD;&#xA;Location/2: Domicílio&#xD;&#xA;Location/3: Rua&#xD;&#xA;Location/4: Domicíio&#xD;&#xA;Location/5: Escola/Creche&#xD;&#xA;Location/5: Outros&#xD;&#xA;Location/7: Pólo (Academia da Saúde)&#xD;&#xA;Location/8: Instituição/Abrigo&#xD;&#xA;Location/9: Unidade Prisional ou congênere&#xD;&#xA;Location/10: Unidade Socioeducativa" />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.location.location">
+      <path value="Encounter.location.location" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRLocalAtendimento-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.location.location.reference">
+      <path value="Encounter.location.location.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.location.location.type">
+      <path value="Encounter.location.location.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location.location.identifier">
+      <path value="Encounter.location.location.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location.location.display">
+      <path value="Encounter.location.location.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location.status">
+      <path value="Encounter.location.status" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location.physicalType">
+      <path value="Encounter.location.physicalType" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location.period">
+      <path value="Encounter.location.period" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceProvider">
+      <path value="Encounter.serviceProvider" />
+      <short value="Estabelecimento de Saúde do Contato Assistencial" />
+      <definition value="Identifica pelo número de inscrição no Cadastro Nacional de Estabelecimentos de Saúde o Estabelecimento de Saúde que realizou o Contato Assistencial." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.serviceProvider.reference">
+      <path value="Encounter.serviceProvider.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.serviceProvider.type">
+      <path value="Encounter.serviceProvider.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceProvider.identifier">
+      <path value="Encounter.serviceProvider.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceProvider.display">
+      <path value="Encounter.serviceProvider.display" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.partOf">
+      <path value="Encounter.partOf" />
+      <short value="Contato Assistencial anterior" />
+      <definition value="Permite referenciar outro Contato Assistencial que tenha dado sequência a este, como por exemplo, um indivíduo realiza, em um mesmo Estabelecimento de Saúde, um Contato Assistencial que seja de Modalidade Assistencial Atenção à Urgência/Emergência, e necessite ser internado, dando continuidade em um Contato Assistencial de Atenção Hospitalar. Neste exemplo, este elemento seria utilizado no Contato Assistencial de Atenção Hospitalar, que faria referência ao Contato Assistencial de Atenção à Urgência/Emergência." />
+      <type>
+        <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-hierarchy">
+          <valueBoolean value="true" />
+        </extension>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRContatoAssistencial-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Encounter.partOf.reference">
+      <path value="Encounter.partOf.reference" />
+      <min value="1" />
+    </element>
+    <element id="Encounter.partOf.type">
+      <path value="Encounter.partOf.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.partOf.identifier">
+      <path value="Encounter.partOf.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.partOf.display">
+      <path value="Encounter.partOf.display" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

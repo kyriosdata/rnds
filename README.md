@@ -1,99 +1,78 @@
-# Experimentações tecnológicas
+<img src="./media/guia.png" width="100px">
 
-Observe que
+## Guia do Desenvolvedor RNDS
 
-- _Este **NÃO** é um portal do DATASUS/MS_.
-- _Este **NÃO** é o portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br_.
-- _Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde_.
-- _Este portal **NÃO** contém nenhuma informação privilegiada ou algo similar, ao contrário, tudo o que aqui está registrado pode ser encontrado na internet, sem restrição de acesso._
+Objetivo:
 
-Considerando o que foi dito acima, este portal reúne experimentações e _links_ relevantes, dentre outros, pertinentes às tecnologias que supostamente serão empregadas pela RNDS/DATASUS.
+> Usufruir dos serviços da RNDS.
 
-# Tecnologias
+Avisos:
 
-## FHIR
+- Este **NÃO** é um portal do DATASUS/MS.
+- Este **NÃO** é o portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br.
+- Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde.
+- Este portal **NÃO** contém nenhuma informação privilegiada ou algo similar, ao contrário, tudo o que aqui está registrado pode ser encontrado na internet, sem restrição de acesso.
 
-[<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
+Se você é desenvolvedor e, por algum motivo, precisa escrever código para enviar
+dados ou consultar informações fornecidas pela RNDS, então este portal é para você!
 
-Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
+## Mapa de orientação
 
-Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
+Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão.
+Conforme ilustrado abaixo, em algum momento seriam enviados para uma base de dados, ou ilha
+privada, segura, inacessível até aos pacientes.
 
-Quando se usa o FHIR para troca de dados entre dois estabelecimentos, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, XML ou RDF.
+<img src="./media/laboratorio.png" width="600px">
 
-### Formatos JSON, XML e RDF
+A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser estendido para que laudos cruzem as fronteiras
+dos laboratórios em que foram produzidos. A intenção é "fazer a informação
+em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
+que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. Na prática, isso significa que laboratórios terão que produzir _software_ para integração com a RNDS, conforme ilustrado abaixo.
 
-O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
+<img src="./media/portaria.png" width="500px">
 
-[XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet).
+O presente documento tem como compromisso identificar todos
+os passos necessários, desde administrativos até técnicos (produção de _software_), para realizar tal notificação. Dito de outra forma, para realizar a _integração com a RNDS_.
 
-[RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
+## Integração com a RNDS
 
-## Implementações do FHIR
+A integração com a RNDS exige ações realizadas por dois atores: (a) o responsável pelo laboratório e (b) o responsável pela TI (Tecnologia
+da Informação) do laboratório.
 
-FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
+### Atribuições do responsável pelo laboratório
 
-De fato, a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
+1. Adquirir o certificado digital a ser utilizado para identificar o laboratório junto à RNDS. Este certificado é empregado no item seguinte (_solicitar acesso_) e também pelo _software_ de integração com a RNDS. O _software_ de integração é atribuição do responsável pela TI do laboratório (seção seguinte).
+1. Solicitar acesso junto à RNDS. Esta solicitação é necessária para credenciamento do laboratório junto à RNDS. Este credenciamento dá origem
+   ao **identificador do solicitante**, que será empregado pelo _software_ de integração. Esta solicitação é realizada com o apoio do responsável pela TI do laboratório, dado que depende de informações como faixa de IPs dos
+   servidores empregados pelo laboratório e serviços a serem requisitados, dentre outros.
+1. Esclarecer mapeamentos eventualmente necessários entre os dados produzidos por um laudo e aqueles esperados pela RNDS. O laboratório pode empregar uma terminologia ou códigos próprios para identificar os exames que realiza, enquanto a RNDS espera um código baseado no LOINC, por exemplo. Neste caso, cabe ao responsável pelo laboratório realizar o mapeamento entre os códigos que o laboratório faz uso e aqueles esperados pela RNDS.
 
-## FHIR (perfis)
+### Atribuições do responsável pela TI do laboratório
 
-[<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
+1. Propor e desenvolver _software_ de integração. A proposta depende do contexto em questão, contudo, invariavelmente, terá que realizar funções bem-definidas.
+1. Homologar. O _software_ deverá ser experimentado no ambiente de homologação. Esta experimentação deverá gerar evidências de que se integra satisfatoriamente à RNDS.
+1. Colocar em produção. Algumas configurações são alteradas, como os
+   endereços dos serviços do ambiente de produção.
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Em consequência, pode ser necessária a criação de um perfil, por exemplo, indicando que as opções de sexo são "masculina", "feminino" e assim por diante, em vez de "male",  "female", ...
+- extrair dados do sistema de software empregado pelo laboratório;
+- mapear código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
+- empacotar os dados na representação a ser utilizada para envio (JSON) e
+- enviar os dados para a RNDS.
 
-A definição de perfis é facilitada por serviços como [Simplifier.NET](https://simplifier.net), que é empregado pela
-RNDS. Consulte a "personalização" do FHIR realizada pela RNDS [aqui](https://simplifier.net/rnds).
+A figura ilustra as atribuições destes dois atores.
 
+<img src="./media/desenvolvedor.png" width="600xp">
 
-## Experimentação do FHIR
+## Outros
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações).
-
-Cada um destes servidores funciona como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
-
-Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, também possui um servidor para testes disponível em http://hapi.fhir.org/.
-
-## Mas como interagir com um destes servidores? (RESTful API?)
-
-Embora existam outras formas de trafegar recursos (FHIR) entre dois computadores, o foco aqui está na RESTful API. O FHIR pode ser descrito como uma RESTful API. De forma simplificada, tal RESTful API descreve como interagir com uma implementação FHIR (por exemplo, qualquer uma daquelas em execução nos servidores citados na seção anterior).
-
-A interação permite: ler o estado corrente de um recurso; ler o estado de um recurso em uma dada versão; atualizar um recurso existente por meio do seu identificador único; remover um recurso e até recuperar o histórico de mudanças de um recurso. Estas não são as únicas possibilidades. Também é possível procurar por um recurso utilizando algum critério de busca, dentre outras possibilidades.
-
-Entendi, mas como exatamente posso construir uma requisição em uma RESTful API? E mais específico ainda, exatamente a RESTful API definida pelo FHIR? Os detalhes estão amplamente disponíveis [aqui](http://hl7.org/fhir/http.html).
-
-Você pode executar o comando abaixo em um _prompt_:
-
-```
-curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/0c89be2f-121a-4b31-b9c8-d7528179fb
-```
-
-Ou usar a interface gráfica oferecida pelo mesmo servidor empregado acima, ou seja, http://test.fhir.org/r4, ou ainda fazer uso de um software desenvolvido especificamente para a finalidade pretendida, seja ele para ser executado em um smartphone, computador usando um navegador ou um software que já é do conhecimento do usuário em questão e que agora está passando por uma manutenção na qual ele poderá recuperar dados em saúde além de um paciente, por exemplo, sem que o usuário sequer saiba que existe algo como FHIR.
-
-## Requisições (como submeter)
-
-A ferramenta [Postman](https://www.getpostman.com/downloads/) é amplamente empregada para submeter requisições HTTP.
-
-Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
-
-## FHIRPath
-
-Respostas para requisições via FHIR são formatadas usando JSON. Para consultar tais documentos, por exemplo, extrair uma informação dentre os dados retornados, pode-se usar FHIRPath ([github](https://github.com/HL7/fhirpath)). A [especificação](http://hl7.org/fhirpath/) encontra-se amplamente disponível, assim como a versão [detalhada](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
-
-Consultas baseadas em FHIRPath podem ser executadas por meio do portal [clinfhir](http://clinfhir.com). Adicionalmente, pode-se usar a implementação em [javascript](https://github.com/HL7/fhirpath.js), dentre outras opções.
-
-```shell
-npm install --global fhirpath
-fhirpath -f resposta.json -e 'FHIRPath expression'
-```
-
-Convém destacar que documentos JSON em geral podem ser consultados por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)). Observe que JsonPath também pode ser empregado para consultar documentos JSON retornados via FHIR, contudo, FHIRPath contém recursos específicos.
-
-# Especificação FHIR empregada pelo Brasil
-
-- https://simplifier.net/
-- Especificação FHIR para RNDS [aqui](https://simplifier.net/RNDS/~introduction)
-
-# Siglas
-
-- STU é a abreviação para _Standard for Trial Use_ no contexto FHIR.
+- [Tecnologias](documentos/tecnologias.md)
+- Fluxo:
+  - Administrador
+    - Certificado
+    - Cadastro no Portal de Serviços
+  - Ambiente de desenvolvimento
+    - Postman
+    - Java
+  - Aplicações
+    - Obter token
+    - Consultar ...
