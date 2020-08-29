@@ -4,7 +4,7 @@
 
 Objetivo:
 
-> Detalhar os passos necessários e orientações, inclusive técnicas, para integração com a RNDS.
+> Detalhar a integração com a RNDS.
 
 Avisos:
 
