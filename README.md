@@ -4,7 +4,7 @@
 
 Objetivo:
 
-> Usufruir dos serviços da RNDS.
+> Detalhar os passos necessários e orientações, inclusive técnicas, para integração com a RNDS.
 
 Avisos:
 
