@@ -27,7 +27,7 @@ privada, segura, inacessível até aos pacientes.
 A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser estendido para que laudos cruzem as fronteiras
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
 em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo.
+que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. Na prática, isso significa que laboratórios terão que produzir _software_ para integração com a RNDS, conforme ilustrado abaixo.
 
 <img src="./media/portaria.png" width="500px">
 
