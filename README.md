@@ -24,10 +24,14 @@ privada, segura, inacessível até aos pacientes.
 
 <img src="./media/laboratorio.png" width="600px">
 
-A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
+A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser estendido para que laudos cruzem as fronteiras
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
 em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. O presente documento tem como compromisso identificar todos
+que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo.
+
+<img src="./media/portaria.png" width="500px">
+
+O presente documento tem como compromisso identificar todos
 os passos necessários, desde administrativos até técnicos, para realizar tal notificação. Dito de outra forma, _integração com a RNDS_.
 
 ## Integração com a RNDS
@@ -46,8 +50,9 @@ da Informação) do laboratório.
 ### Atribuições do responsável pela TI do laboratório
 
 1. Propor e desenvolver _software_ de integração. A proposta depende do contexto em questão, contudo, invariavelmente, terá que realizar funções bem-definidas.
-1. Submter para homologação.
-1. Colocar em produção.
+1. Homologar. O _software_ deverá ser experimentado no ambiente de homologação. Esta experimentação deverá gerar evidências de que se integra satisfatoriamente à RNDS.
+1. Colocar em produção. Algumas configurações são alteradas, como os
+   endereços dos serviços do ambiente de produção.
 
 - extrair dados do sistema de software empregado pelo laboratório;
 - mapear código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
