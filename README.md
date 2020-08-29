@@ -32,7 +32,7 @@ que estabelece a obrigatoriedade de notificação de resultados de testes de SAR
 <img src="./media/portaria.png" width="500px">
 
 O presente documento tem como compromisso identificar todos
-os passos necessários, desde administrativos até técnicos, para realizar tal notificação. Dito de outra forma, _integração com a RNDS_.
+os passos necessários, desde administrativos até técnicos (produção de _software_), para realizar tal notificação. Dito de outra forma, para realizar a _integração com a RNDS_.
 
 ## Integração com a RNDS
 
