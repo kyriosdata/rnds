@@ -13,21 +13,23 @@ Avisos:
 - Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde.
 - Este portal **NÃO** contém nenhuma informação privilegiada ou algo similar, ao contrário, tudo o que aqui está registrado pode ser encontrado na internet, sem restrição de acesso.
 
-Se você é desenvolvedor e, por algum motivo, precisa escrever código para enviar
-dados ou consultar informações fornecidas pela RNDS, então este portal é para você!
-
-## Mapa de orientação
+## Contexto
 
 Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão.
-Conforme ilustrado abaixo, em algum momento seriam enviados para uma base de dados, ou ilha
-privada, segura, inacessível até aos pacientes.
+Conforme ilustrado abaixo, em algum momento seriam enviados para uma base de dados segura, e inacessível até aos pacientes.
 
 <img src="./media/laboratorio.png" width="600px">
 
-A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser estendido para que laudos cruzem as fronteiras
-dos laboratórios em que foram produzidos. A intenção é "fazer a informação
-em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. Na prática, isso significa que laboratórios terão que produzir _software_ para integração com a RNDS, conforme ilustrado abaixo.
+A saúde, contudo, demanda mudança na qual laudos cruzem as fronteiras
+dos laboratórios que os produziram. A intenção é "fazer a informação
+em saúde chegar onde ela é necessária".
+
+A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
+que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo.
+
+<img src="./media/portaria.png" width="500px">
+
+Na prática, isso significa que laboratórios terão que produzir _software_ para integração com a RNDS, conforme ilustrado abaixo.
 
 <img src="./media/portaria.png" width="500px">
 
