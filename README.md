@@ -19,17 +19,16 @@ dados ou consultar informações fornecidas pela RNDS, então este portal é par
 ## Mapa de orientação
 
 Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão.
-Conforme ilustrado abaixo, em algum momento seriam enviados para uma ilha
+Conforme ilustrado abaixo, em algum momento seriam enviados para uma base de dados, ou ilha
 privada, segura, inacessível até aos pacientes.
 
 <img src="./media/laboratorio.png" width="600px">
 
 A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
-em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil.
-
-A Portaria X é o gatilho da mudança e para atendê-la segue uma sequência de atividades. De acordo com esta portaria, os laboratórios continuam realizando suas atividades fins, como antes.
-Contudo, induz a realização de um esforço de Integração com a RNDS.
+em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde, 
+que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. O presente documento tem como compromisso identificar todos
+os passos necessários, desde administrativos até técnicos, para realizar tal notificação. Dito de outra forma, _integração com a RNDS_.
 
 ## Integração com a RNDS
 
