@@ -23,12 +23,12 @@ A informação em saúde, contudo, "precisa chegar onde é necessária". A Porta
 
 <img src="./media/laboratorio.png" width="600px">
 
-Na prática isso significa que cada laboratório terá que produzir _software_ para a sua integração com a RNDS. Noutras palavras, _software_ que notifica o Ministério da Saúde de cada resultado de exame que o laboratório produz, conforme ilustrado abaixo.
+Na prática isso significa que cada laboratório terá que produzir _software_ para a sua integração com a RNDS. Noutras palavras, _software_ que notifica o Ministério da Saúde de cada resultado de exame que produz, conforme ilustrado abaixo.
 
 <img src="./media/pratica.png" width="500px">
 
-O presente documento tem como compromisso identificar todos
-os passos necessários, desde administrativos até técnicos, para realizar tal notificação, ou a _integração com a RNDS_.
+> O presente documento tem como compromisso identificar todos
+> os passos necessários, administrativos e técnicos, para a _integração com a RNDS_.
 
 ## Integração na perspectiva dos atores
 
