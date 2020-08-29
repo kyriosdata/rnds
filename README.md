@@ -26,21 +26,28 @@ privada, segura, inacessível até aos pacientes.
 
 A saúde, contudo, demanda mudança. O processo anterior, figura acima, deve ser ajustado para que laudos cruzem as fronteiras
 dos laboratórios em que foram produzidos. A intenção é "fazer a informação
-em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde, 
+em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
 que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2. O presente documento tem como compromisso identificar todos
 os passos necessários, desde administrativos até técnicos, para realizar tal notificação. Dito de outra forma, _integração com a RNDS_.
 
 ## Integração com a RNDS
 
-A integração com a RNDS exige ações realizadas por dois atores: (a) o responsável pelo laboratório e (b) o responsável pela produção de código (_software_).
+A integração com a RNDS exige ações realizadas por dois atores: (a) o responsável pelo laboratório e (b) o responsável pela TI (Tecnologia
+da Informação) do laboratório.
 
-É atribuição do responsável pelo laboratório:
+### Atribuições do responsável pelo laboratório
 
-- adquirir e disponibilizar o certificado digital a ser utilizado para identificar o laboratório junto à RNDS;
-- solicitar acesso junto à RNDS e
-- esclarecer mapeamentos e transformações eventualmente necessários entre os dados fornecidos para um laudo e aqueles esperados pela RNDS.
+1. Adquirir o certificado digital a ser utilizado para identificar o laboratório junto à RNDS. Este certificado é empregado no item seguinte (_solicitar acesso_) e também pelo _software_ de integração com a RNDS. O _software_ de integração é atribuição do responsável pela TI do laboratório (seção seguinte).
+1. Solicitar acesso junto à RNDS. Esta solicitação é necessária para credenciamento do laboratório junto à RNDS. Este credenciamento dá origem
+   ao **identificador do solicitante**, que será empregado pelo _software_ de integração. Esta solicitação é realizada com o apoio do responsável pela TI do laboratório, dado que depende de informações como faixa de IPs dos
+   servidores empregados pelo laboratório e serviços a serem requisitados, dentre outros.
+1. Esclarecer mapeamentos eventualmente necessários entre os dados produzidos por um laudo e aqueles esperados pela RNDS. O laboratório pode empregar uma terminologia ou códigos próprios para identificar os exames que realiza, enquanto a RNDS espera um código baseado no LOINC, por exemplo. Neste caso, cabe ao responsável pelo laboratório realizar o mapeamento entre os códigos que o laboratório faz uso e aqueles esperados pela RNDS.
 
-O responsável pela produção do código (_software_) que realiza a integração com a RNDS deverá assegurar a execução correta de quatro características do código a ser produzido:
+### Atribuições do responsável pela TI do laboratório
+
+1. Propor e desenvolver _software_ de integração. A proposta depende do contexto em questão, contudo, invariavelmente, terá que realizar funções bem-definidas.
+1. Submter para homologação.
+1. Colocar em produção.
 
 - extrair dados do sistema de software empregado pelo laboratório;
 - mapear código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
