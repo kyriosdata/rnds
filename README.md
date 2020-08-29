@@ -2,9 +2,9 @@
 
 ## Guia do Desenvolvedor RNDS
 
-Objetivo:
+Interesse:
 
-> Detalhar a integração com a RNDS.
+> Integração com a RNDS.
 
 Avisos:
 
@@ -15,28 +15,28 @@ Avisos:
 
 ## Contexto
 
-Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permaneceriam restritos ao sistema de software do laboratório em questão.
-Em algum momento seriam enviados para uma base de dados segura, e inacessível até aos pacientes.
+Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
+Em algum momento são enviados para uma base de dados segura, e inacessível até aos pacientes.
 
-A saúde, contudo, demanda mudança na qual laudos cruzem as fronteiras
-dos laboratórios que os produzem. A intenção é "fazer a informação
-em saúde chegar onde ela é necessária". A RNDS é o meio adotado pelo Brasil, 
-conforme a Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-que estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo.
+A informação em saúde, contudo, "precisa chegar onde é necessária". A Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
+é um marco histórico, neste sentido. Ela estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo, produzidos em todo o território nacional.
 
-<img src="./media/laboratorio.png" width="500px">
+<img src="./media/laboratorio.png" width="600px">
 
 Na prática, isso significa que laboratórios terão que produzir _software_ para integração com a RNDS, conforme ilustrado abaixo.
 
-<img src="./media/portaria.png" width="500px">
+<img src="./media/pratica.png" width="500px">
 
 O presente documento tem como compromisso identificar todos
-os passos necessários, desde administrativos até técnicos (produção de _software_), para realizar tal notificação. Dito de outra forma, para realizar a _integração com a RNDS_.
+os passos necessários, desde administrativos até técnicos, para realizar tal notificação, ou a _integração com a RNDS_, ou ainda, produzir um
+_software_ que encaminha resultados de exames para a RNDS.
 
-## Integração com a RNDS
+## Integração na perspectiva dos atores
 
 A integração com a RNDS exige ações realizadas por dois atores: (a) o responsável pelo laboratório e (b) o responsável pela TI (Tecnologia
-da Informação) do laboratório.
+da Informação) do laboratório. O responsável pela TI pode ser um colaborador
+do próprio laboratório ou serviço oferecido por empresa especializada,
+dentre outros cenários.
 
 ### Atribuições do responsável pelo laboratório
 
