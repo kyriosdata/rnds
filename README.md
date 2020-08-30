@@ -49,7 +49,7 @@ dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 
 ### Atribuições do responsável pela TI do laboratório
 
-1. **Desenvolver _software_**. A proposta depende do contexto em questão, contudo, invariavelmente, terá que realizar funções bem-definidas.
+1. **Desenvolver**. A proposta e desenvolvimento do _software_ de integração depende do contexto em questão, contudo, invariavelmente, terá que realizar funções bem-definidas. Tais funções incluem o padrão estabelecido pela RNDS para integração (FHIR).
 1. **Homologar**. O _software_ deverá ser experimentado no ambiente de homologação. Esta experimentação deverá gerar evidências de que se integra satisfatoriamente à RNDS.
 1. **Colocar em produção**. Algumas configurações são alteradas, como os
    endereços dos serviços do ambiente de produção.
