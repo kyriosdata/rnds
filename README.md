@@ -61,21 +61,20 @@ As funções e o fluxo de dados entre elas são exibidos abaixo.
 
 <img src="./media/rnds-dfd.png" width="500px">
 
-Naturalmente, o _design_ deste _software_ varia de laboratório
-para laboratório, conforme o contexto de TI em questão. As funções podem
-ser agrupadas naquelas que têm como objetivo "compor notificação" e
-"entregar notificação":
+As funções podem ser classificadas, e definidas conforme abaixo:
 
 - PREPARAÇÃO
-  1.  **Filtrar** dados do sistema de software empregado pelo laboratório.
-  1.  **Mapear** código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
+  1.  **Filtrar**. Dentre os dados produzidos para um laudo, aqueles necessários são selecionados.
+  1.  **Mapear**. código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
   1.  **Empacotar** os dados na representação a ser utilizada para envio (JSON).
+  1.  **Verificar** o documento JSON correspondente ao laudo a ser enviado.
 - ENTREGA
   1.  **Autenticar**. Obter a chave de acesso aos serviços.
   1.  **Enviar**. Atividade que notifica o resultado de um exame, conforme
       padrões estabelecidos pela RNDS, ao Ministério da Saúde.
 
-A figura ilustra as atribuições destes dois atores.
+A relação temporal entre estas funções, e os artefatos por elas produzidos
+são ilustrados na figura abaixo.
 
 <img src="./media/desenvolvedor.png" width="600xp">
 
