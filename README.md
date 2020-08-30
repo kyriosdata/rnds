@@ -54,10 +54,22 @@ dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 1. **Colocar em produção**. Algumas configurações são alteradas, como os
    endereços dos serviços do ambiente de produção.
 
-- extrair dados do sistema de software empregado pelo laboratório;
-- mapear código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
-- empacotar os dados na representação a ser utilizada para envio (JSON) e
-- enviar os dados para a RNDS.
+## Software de integração (funções)
+
+O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
+Naturalmente, o _design_ deste _software_ deve variar de laboratório
+para laboratório, conforme o contexto de TI em questão. As funções podem
+ser agrupadas em funções de _preparação_ e aquelas de _entrega_:
+
+- PREPARAÇÃO
+  1.  **Extrair** dados do sistema de software empregado pelo laboratório.
+  1.  **Mapear** código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
+  1.  **Empacotar** os dados na representação a ser utilizada para envio (JSON).
+- ENTREGA
+  1.  **Autenticar**. Obter a chave de acesso aos serviços.
+  1.  **Enviar**. Transferir os dados de um resultado de exame, conforme
+      padrões estabelecidos pela RNDS, para o Ministério da Saúde e, dessa forma,
+      cumprir a obrigação de notificação.
 
 A figura ilustra as atribuições destes dois atores.
 
