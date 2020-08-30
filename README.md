@@ -19,7 +19,7 @@ Em um cenário convencional, sem a introdução da RNDS, laudos produzidos perma
 Em algum momento são enviados para uma base de dados segura, e inacessível até aos pacientes.
 
 A informação em saúde, contudo, "precisa chegar onde é necessária". A Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-é um marco histórico, neste sentido. Ela estabelece a obrigatoriedade de notificação de resultados de testes de SARS-CoV-2, conforme ilustrado abaixo, produzidos em todo o território nacional.
+é um marco histórico, neste sentido. Ela estabelece a obrigatoriedade de notificar o Ministério da Saúde os resultados de testes de SARS-CoV-2, conforme ilustrado abaixo, produzidos em todo o território nacional.
 
 <img src="./media/laboratorio.png" width="600px">
 
@@ -59,21 +59,21 @@ dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
 As funções e o fluxo de dados entre elas são exibidos abaixo.
 
-<img src="./media/rnds-dfd.png" width="400px">
+<img src="./media/rnds-dfd.png" width="500px">
 
 Naturalmente, o _design_ deste _software_ varia de laboratório
 para laboratório, conforme o contexto de TI em questão. As funções podem
-ser agrupadas em funções de _preparação_ e aquelas de _entrega_:
+ser agrupadas naquelas que têm como objetivo "compor notificação" e
+"entregar notificação":
 
 - PREPARAÇÃO
-  1.  **Extrair** dados do sistema de software empregado pelo laboratório.
+  1.  **Filtrar** dados do sistema de software empregado pelo laboratório.
   1.  **Mapear** código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
   1.  **Empacotar** os dados na representação a ser utilizada para envio (JSON).
 - ENTREGA
   1.  **Autenticar**. Obter a chave de acesso aos serviços.
-  1.  **Enviar**. Transferir os dados de um resultado de exame, conforme
-      padrões estabelecidos pela RNDS, para o Ministério da Saúde e, dessa forma,
-      cumprir a obrigação de notificação.
+  1.  **Enviar**. Atividade que notifica o resultado de um exame, conforme
+      padrões estabelecidos pela RNDS, ao Ministério da Saúde.
 
 A figura ilustra as atribuições destes dois atores.
 
