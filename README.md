@@ -57,7 +57,11 @@ dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 ## Software de integração (funções)
 
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
-Naturalmente, o _design_ deste _software_ deve variar de laboratório
+As funções e o fluxo de dados entre elas são exibidos abaixo.
+
+<img src="./media/rnds-dfd.png" width="400px">
+
+Naturalmente, o _design_ deste _software_ varia de laboratório
 para laboratório, conforme o contexto de TI em questão. As funções podem
 ser agrupadas em funções de _preparação_ e aquelas de _entrega_:
 
