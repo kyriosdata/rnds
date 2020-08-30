@@ -67,8 +67,7 @@ As funções, os fluxos entre elas e os dados necessários são exibidas abaixo.
 
 <img src="./media/rnds-dfd.png" width="650px">
 
-As funções são definidas e classificadas quanto à fase em que é executada (preparação ou entrega). Observe que a função
-_Entragar notificação_, no diagrama acima, e refinada na fase de entrega
+Cada função é definida e classificada quanto à fase em que é executada (preparação ou entrega).
 
 - PREPARAÇÃO
   1.  **Filtrar**. Dentre os dados produzidos para um laudo, aqueles necessários são selecionados.
@@ -80,8 +79,10 @@ _Entragar notificação_, no diagrama acima, e refinada na fase de entrega
   1.  **Enviar**. Atividade que notifica o resultado de um exame, conforme
       padrões estabelecidos pela RNDS, ao Ministério da Saúde.
 
-A relação temporal entre estas funções, e os artefatos por elas produzidos
-são ilustrados na figura abaixo.
+A figura abaixo ilustra a classificação das funções, a ordem de execução destas funções e os dois ambientes (de homologação e produção).
+A fase de preparação reúne funções "locais" ao laboratório, não demandam interação com um dos ambientes da RNDS. Por outro lado, as funções da
+fase de entrega, _Autenticar_ e _Enviar_, depende do acesso a um dos
+ambientes da RNDS.
 
 <img src="./media/desenvolvedor.png" width="600xp">
 
