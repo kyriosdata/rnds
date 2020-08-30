@@ -93,7 +93,7 @@ public class RNDS {
     }
 
     /**
-     * Obtém <i>token</i> para acesso ao portal de serviços da RNDS.
+     * Obtém <i>token</i> para acesso aos serviços de integração da RNDS.
      *
      * @param server           Endereço do serviço que verifica o certificado
      *                         e, se devidamente autorizado, oferece o
