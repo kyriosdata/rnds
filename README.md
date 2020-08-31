@@ -19,7 +19,7 @@ Em um cenário convencional, sem a introdução da RNDS, laudos produzidos perma
 Em algum momento são enviados para uma base de dados segura, e inacessível até aos pacientes.
 
 A informação em saúde, contudo, "precisa chegar onde é necessária". A Portaria 1.792, de 17 de julho de 2020, do Ministério da Saúde,
-é um marco histórico, neste sentido. Ela estabelece a obrigatoriedade de notificar o Ministério da Saúde os resultados de testes de SARS-CoV-2, conforme ilustrado abaixo, produzidos em todo o território nacional.
+é um marco histórico, neste sentido. Ela estabelece a obrigatoriedade de notificar o Ministério da Saúde acerca dos resultados de testes de SARS-CoV-2, conforme ilustrado abaixo, produzidos em todo o território nacional.
 
 <img src="./media/laboratorio.png" width="600px">
 
