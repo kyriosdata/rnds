@@ -15,4 +15,5 @@ produzidos pelo laboratório em questão, para um exame de COVID-19.
 | Responsável                    | CPF ou CNPJ do responsável pelo laudo.                                                                                                |
 | Subgrupo da tabela SUS         | Código que auxilia na classificação e localização de procedimentos. Por exemplo, 0214 refere-se a "Diagnóstico por teste rápido".     |
 | Código LOINC do exame          | Código LOINC, por exemplo, "94547-7" para "SARS Coronavírus 2, [presença de] anticorpos IgG e IgM em soro ou plasma por imunoensaio". |
-|                                |                                                                                                                                       |
+| Resultado Qualitativo do Exame | Veja tabela [aqui](https://simplifier.net/redenacionaldedadosemsade/brresultadoqualitativoexame)                                      |         | Método                         | Descrição do método, por exemplo, "Imunocromatográfico".                                                                              |
+| Valores de referência          | Valores de referência para apoiar na interpretação do resultado, exemplo, "(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos"                            |
