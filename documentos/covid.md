@@ -13,29 +13,6 @@ Ou seja,
 - Você saberá como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
 - Você será capaz de montar um documento JSON para refletir o resultado de um dado exame.
 
-### Contexto
-
-Exames são realizados e os laudos correspondentes são produzidos por profissionais de saúde. Os laudos são possivelmente registrados em um sistema de software
-empregado pelo laboratório em questão.
-
-O profissional de TI do laboratório, ou desenvolvedor, foco deste documento, tem
-outras atribuições. Cabe ao desenvolvedor disponibilizar um software que executa as seguintes atividades para cada laudo produzido pelo laboratório:
-
-1. Recuperar os dados necessários do laudo em questão.
-1. Compor o documento JSON correspondente conforme perfis FHIR definidos pela RNDS.
-1. Enviar o documento JSON criado no passo anterior para a RNDS.
-
-Supondo que o laboratório em questão faz uso de um sistema de software,
-o desenvolvedor terá que obter os dados deste sistema para compor um documento JSON correspondente. Naturalmente esta atividade está além do escopo da RNDS.
-
-Cada um dos itens de dados necessários está compilado em uma [tabela](resultado-exame-form.md) e comentado abaixo.
-
-Cada laboratório tem autonomia e usa um sistema específico para registro dos
-laudos que produz. Em consequência, também cabe ao laboratório a extração dos
-dados necessários a serem enviados para a RNDS. A composição do documento JSON,
-por outro lado, deve seguir
-a cada laudo e [envio](enviar-exame-covid.md) cada um deles para a RNDS.
-
 ### Detalhando resultado de exame de COVID-19
 
 O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner para uma coleção de recursos FHIR. No caso específico do exame de COVID-19, por exemplo,
