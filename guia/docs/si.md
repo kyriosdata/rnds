@@ -4,10 +4,17 @@ title: Software de Integração
 sidebar_label: Software de Integração
 ---
 
-O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente. As duas seções seguintes
-apresentam, respectivamente, tal _software_ na perspectiva dos principais atores e as funções que deve implementar.
+O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI.
 
-## Funções do software de integração
+As funcionalidades esperadas são fornecidas na seção seguinte. O _design_ de um _software_ correspondente e a implementação, por outro lado, dependem de um número significativo de variáveis, por exemplo, a linguagem de programação, o sistema de software utilizado pelo laboratório e
+a política a ser utilizada para envio dos resultados, dentre outros.
+Em consequência, só podem ser realizados caso a caso por cada laboratório.
+
+As especificidades de cada laboratório, contudo, não impedem a produção de um _design_ para orientar e, inclusive, a implementação correspondente pronta para ser reutilizada por desenvolvedores (profissionais de TI), onde for o caso.
+
+Este documento apresenta as funcionalidas, o _design_ para um cenário "clássico", a implementação correspondente e ferramentas para desenvolvedores.
+
+## Funcionalidades (características)
 
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
 As funções, os fluxos entre elas e os dados necessários são exibidas abaixo.
