@@ -15,9 +15,10 @@ outro para os serviços propriamente ditos para troca de informações em saúde
 
 ### Ambiente de homologação
 
-|               |                                                          |
-| Autenticação  | https<span>:</span>//ehr-auth-hmg.saude.gov.br/api/token |
-| Serviços FHIR | https<span>:</span>//ehr-services.hmg.saude.gov.br/api   |
+| Função       | Endereço                                                                         |
+|--------------|----------------------------------------------------------------------------------|
+| Autenticação | https<span>:</span>//ehr-auth-hmg.saude.gov.br                                   |
+| Serviços     | https<span>:</span>//ehr-services.hmg.saude.gov.br/api |
 
 O ambiente de homologação existe para testes e experimentações.
 O ambiente de homologação é oferecido por meio de dois pontos de acesso:
