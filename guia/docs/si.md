@@ -14,10 +14,18 @@ As especificidades de cada laboratório, contudo, não impedem a produção de u
 
 Este documento apresenta as funcionalidas, o _design_ para um cenário "clássico", a implementação correspondente e ferramentas para desenvolvedores.
 
-## Funcionalidades (características)
+## Funcionalidades
 
-O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
-As funções, os fluxos entre elas e os dados necessários são exibidas abaixo.
+O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, fará uso de vários serviços oferecidos. Dois deles são
+representativos e estão explicitamente indicados na figura abaixo.
+
+![img](../static/img/rnds-uc.png)
+
+A documentação enfatiza _Obter token de acesso_ e _Enviar resultado de exame_. Não apenas por serem os principais, mas porque cobrem tudo o
+que é necessário também pelos demais serviços.
+
+O caso de uso _Obter token de acesso_ implementa segurança e seu processo é essencialmente técnico. Por meio deste caso de uso, empregando o certificado digital do laboratório, obtém-se o _token_ necessário para usufruir dos demais serviços. No diagrama fornecido abaixo, este caso de uso é realizado por meio da função "Autenticar". Todas as demais funções,
+por outro lado, são necessárias para implementar o caso de uso _Enviar resultado de exame_.
 
 ![img](../static/img/rnds-dfd.png)
 
@@ -39,3 +47,5 @@ fase de entrega, _Autenticar_ e _Enviar_, depende do acesso a um dos
 ambientes da RNDS.
 
 ![img](../static/img/desenvolvedor.png)
+
+## Design
