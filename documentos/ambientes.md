@@ -34,7 +34,9 @@ enviam e recuperam informações em saúde "reais".
 | Autenticação | https<span>:</span>//ehr-auth.saude.gov.br/api/token                         |
 | Serviços (endereço por estado) | https<span>:</span>//&lt;UF&gt;-ehr-services.saude.gov.br/api |
 
-Observe que no ambiente de produção há um endereço para cada estado da federação. 
-Neste caso, cada laboratório, conforme o CNES em questão, fará uso do estado correspondente. 
+O endereço para obtenção do _token_ de acesso é único para todo o Brasil.
+Por outro lado, há um endereço para cada estado da federação para requisição 
+dos serviços FHIR. Neste caso, cada laboratório, conforme o CNES em questão, fará uso do estado correspondente. 
 Por exemplo, o laboratório Rômulo Rocha, CNES 2337991, localizado no Estado de Goiás, fará uso do
-endereço **https<span>:</span>//go-ehr-services.saude.gov.br/api**. 
+endereço **https<span>:</span>//go-ehr-services.saude.gov.br/api**. Se o laboratório está em Minas Gerais, então
+o endereço é **https<span>:</span>//mg-ehr-services.saude.gov.br/api**, e assim por diante.
