@@ -32,7 +32,7 @@ enviam e recuperam informações em saúde "reais".
 | Função       | Endereço                                                                         |
 |--------------|----------------------------------------------------------------------------------|
 | Autenticação | https<span>:</span>//ehr-auth.saude.gov.br/api/token                         |
-| Serviços (endereço por unidade da federação)     | https<span>:</span>//&lt;UF&gt;ehr-services.saude.gov.br/api |
+| Serviços (endereço por estado) | https<span>:</span>//&lt;UF&gt;-ehr-services.saude.gov.br/api |
 
 Observe que no ambiente de produção há um endereço para cada estado da federação. 
 Neste caso, cada laboratório, conforme o CNES em questão, fará uso do estado correspondente. 
