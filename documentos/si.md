@@ -1,8 +1,7 @@
 ## Software de Integração
 
 O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente. As duas seções seguintes
-apresentam este _software_ na perspectiva dos principais atores e das
-funções que deve implementar.
+apresentam, respectivamente, tal _software_ na perspectiva dos principais atores e as funções que deve implementar.
 
 ### Software de integração (atores)
 
