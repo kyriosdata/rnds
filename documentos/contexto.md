@@ -1,9 +1,5 @@
 ## Contexto
 
-Interesse:
-
-> Integração com a RNDS.
-
 Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
 Em algum momento são enviados para uma base de dados segura, e inacessível até aos pacientes.
 
@@ -16,5 +12,5 @@ Na prática isso significa que cada laboratório terá que produzir _software_ p
 
 <img src="../media/pratica.png" width="500px">
 
-> O presente documento tem como compromisso identificar todos
-> os passos necessários, administrativos e técnicos, para a _integração com a RNDS_.
+O **Guia do Desenvolvedor RNDS** tem como compromisso identificar todos
+os passos necessários, orientações e outros, administrativos e técnicos, para a _integração com a RNDS_. A intenção é clara: _facilitar a integração com a RNDS_.
