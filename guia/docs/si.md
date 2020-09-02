@@ -49,3 +49,21 @@ ambientes da RNDS.
 ![img](../static/img/desenvolvedor.png)
 
 ## Design
+
+Na perspectiva de implantação (_deployment_), a figura abaixo
+ilustra uma possível organização do ecossistema de software
+utilizado por um laboratório, e sua interação com a RNDS.
+
+![img](../static/img/rnds-deployment.png)
+
+Na figura, _Software de integração_ é
+um componente isolado, distinto de um "Sistema Usado pelo Laboratório".
+Em um dado laboratório, contudo, pode não existir um "Sistema Usado pelo Laboratório", ou até existir, mas a TI do laboratório propor um _design_ distinto no qual as funções aqui atribuídas ao _Software de Integração_
+seriam incorporadas pelo "Sistema Usado pelo Laboratório".
+
+Adicionalmente, se esta figura, por acaso, reflete parte do _design_ adotado por algum laboratório, ainda existem vários detalhes omitidos e relevantes para
+o _design_ da integração. Por exemplo, a forma de obtenção dos dados
+pertinentes aos resultados de exames e atualmente mantidos pelo "Software Usado pelo Laboratório", conforme nota pertinente na figura acima.
+
+> IMPORTANTE: a figura acima, embora possa inspirar o _design_ da
+> integração de um laboratório com a RNDS, apenas registra uma possibilidade cujo objetivo é orientar desenvolvedores de software acerca de questões pertinentes à tal integração.
