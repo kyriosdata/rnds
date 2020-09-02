@@ -41,7 +41,7 @@ Cada função é definida e classificada quanto à fase em que é executada (pre
   1.  **Enviar**. Atividade que notifica o resultado de um exame, conforme
       padrões estabelecidos pela RNDS, ao Ministério da Saúde.
 
-A figura abaixo ilustra a classificação das funções, a ordem de execução destas funções e os dois ambientes (de homologação e produção).
+A figura abaixo ilustra a classificação das funções, a ordem em que devem ser executadas e os dois ambientes (de homologação e produção).
 A fase de preparação reúne funções "locais" ao laboratório, não demandam interação com um dos ambientes da RNDS. Por outro lado, as funções da
 fase de entrega, _Autenticar_ e _Enviar_, depende do acesso a um dos
 ambientes da RNDS.
@@ -50,9 +50,13 @@ ambientes da RNDS.
 
 ## Design
 
+Dentre as funções atribuídas ao _Software de Integração_, ao todo seis, conforme seção anterior, duas delas não são contempladas aqui: (a) filtrar e (b) mapear. Estas funções são bem específicas e dependentes do ecossistema disponível no laboratório.
+
+### Implantação
+
 Na perspectiva de implantação (_deployment_), a figura abaixo
 ilustra uma possível organização do ecossistema de software
-utilizado por um laboratório, e sua interação com a RNDS.
+utilizado por um laboratório, e sua integração com a RNDS.
 
 ![img](../static/img/rnds-deployment.png)
 
