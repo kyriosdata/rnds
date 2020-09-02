@@ -15,6 +15,7 @@ outro para os serviços propriamente ditos para troca de informações em saúde
 
 ### Ambiente de homologação
 
+|||
 | Autenticação  | https<span>:</span>//ehr-auth-hmg.saude.gov.br/api/token                                         |
 | Serviços FHIR | https<span>:</span>//ehr-services.hmg.saude.gov.br/api |
 
