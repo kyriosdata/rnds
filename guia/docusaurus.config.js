@@ -1,6 +1,6 @@
 module.exports = {
   title: "RNDS",
-  tagline: "Guia do Desenvolvedor RNDS",
+  tagline: "Guia de Integração",
   url: "https://kyriosdata.github.io",
   baseUrl: "/rnds/",
   onBrokenLinks: "throw",

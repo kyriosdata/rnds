@@ -74,7 +74,7 @@ function Home() {
               )}
               to={useBaseUrl("docs/")}
             >
-              Guia
+              Consulte
             </Link>
           </div>
         </div>
