@@ -14,7 +14,7 @@ Adicionalmente, a RNDS oferece dois ambientes, um de homologação e outro de pr
 Cada um deles inclui um endereço para obtenção do _token_ de acesso e
 outro para os serviços propriamente ditos para troca de informações em saúde.
 
-<img src="../media/ambientes.png" width="500px">
+<img src="../media/ambientes.png" width="300px">
 
 ### Ambiente de homologação (endereços)
 
