@@ -1,10 +1,8 @@
 ---
 id: contexto
-title: Guia RNDS
+title: Contexto
 sidebar_label: Contexto
 ---
-
-## Contexto
 
 Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
 Em algum momento são enviados para uma base de dados segura, e inacessível até aos pacientes.
