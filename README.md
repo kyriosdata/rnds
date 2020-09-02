@@ -26,6 +26,8 @@ Avisos:
 - [Erros](./documentos/erros.md)
 - [Dados necessários para exame COVID](./documentos/tabela-covid.md)
 - [Tecnologias](./documentos/tecnologias.md)
+- [Biblioteca](./documentos/biblioteca.md)
+- [Aplicações](./documentos/aplicacoes.md)
 
 ## Outros
 
