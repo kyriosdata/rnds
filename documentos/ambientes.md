@@ -20,20 +20,20 @@ outro para os serviços (_EHR_) propriamente ditos para troca de informações e
 
 O ambiente de homologação existe para testes e experimentações.
 
-| Função       | Endereço                                                 |
-| ------------ | -------------------------------------------------------- |
-| Autenticação | https<span>:</span>//ehr-auth-hmg.saude.gov.br/api/token |
-| Serviços     | https<span>:</span>//ehr-services.hmg.saude.gov.br/api   |
+| Função | Endereço                                                 |
+| ------ | -------------------------------------------------------- |
+| Auth   | https<span>:</span>//ehr-auth-hmg.saude.gov.br/api/token |
+| EHR    | https<span>:</span>//ehr-services.hmg.saude.gov.br/api   |
 
 ### Ambiente de produção (endereços)
 
 O ambiente de produção coloca à disposição os serviços que, de fato,
 enviam e recuperam informações em saúde "reais".
 
-| Função                         | Endereço                                                      |
-| ------------------------------ | ------------------------------------------------------------- |
-| Autenticação                   | https<span>:</span>//ehr-auth.saude.gov.br/api/token          |
-| Serviços (endereço por estado) | https<span>:</span>//&lt;UF&gt;-ehr-services.saude.gov.br/api |
+| Função           | Endereço                                                      |
+| ---------------- | ------------------------------------------------------------- |
+| Auth             | https<span>:</span>//ehr-auth.saude.gov.br/api/token          |
+| EHR (por estado) | https<span>:</span>//&lt;UF&gt;-ehr-services.saude.gov.br/api |
 
 O endereço para obtenção do _token_ de acesso é único para todo o Brasil.
 Por outro lado, há um endereço para cada estado da federação para requisição
