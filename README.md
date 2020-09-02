@@ -17,6 +17,15 @@ Avisos:
 
 - [Contexto](./documentos/contexto.md)
 - [Software de integração](./documentos/si.md)
+- [Ambientes](./documentos/ambientes.md)
+- [Autenticação](./documentos/autenticacao.md)
+- [Certificado digital](./documentos/certificado.md)
+- [Resultado de exame COVID](./documentos/covid.md)
+- [Serviços (EHR)](./documentos/servicos.md)
+- [Postman](./documentos/postman.md)
+- [Erros](./documentos/erros.md)
+- [Dados necessários para exame COVID](./documentos/tabela-covid.md)
+- [Tecnologias](./documentos/tecnologias.md)
 
 ## Outros
 
