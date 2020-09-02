@@ -13,6 +13,10 @@ Avisos:
 - Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde.
 - Este portal **NÃO** contém nenhuma informação privilegiada ou algo similar, ao contrário, tudo o que aqui está registrado pode ser encontrado na internet, sem restrição de acesso.
 
+## Organização
+
+- [Contexto](./documentos/contexto.md)
+
 ## Contexto
 
 Em um cenário convencional, sem a introdução da RNDS, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
