@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="f4fc274b-0d77-4d3f-a9ea-4f5b901d77f1" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:20:19.554+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRRacaCor" />
+  <version value="201701A" />
+  <name value="Raça/Cor" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:20:40.0457007+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Códigos para representação de raça/cor." />
+  <content value="complete" />
+  <concept>
+    <code value="01" />
+    <display value="Branca" />
+  </concept>
+  <concept>
+    <code value="02" />
+    <display value="Preta" />
+  </concept>
+  <concept>
+    <code value="03" />
+    <display value="Parda" />
+  </concept>
+  <concept>
+    <code value="04" />
+    <display value="Amarela" />
+  </concept>
+  <concept>
+    <code value="05" />
+    <display value="Indígena" />
+  </concept>
+</CodeSystem>

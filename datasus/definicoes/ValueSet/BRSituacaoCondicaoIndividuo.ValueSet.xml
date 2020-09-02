@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="a430839c-60a4-4681-82a4-a30b0e6a27e9" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T13:26:38.479+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRSituacaoCondicaoIndividuo-1.0" />
+  <version value="1.0" />
+  <name value="Situação/Condição do Indivíduo na Administração de Imunobiológico" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:26:37.7466865+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica a situação/condição de um indivíudo em um contexto." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRSituacaoCondicaoIndividuo" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

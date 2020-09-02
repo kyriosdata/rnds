@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="48e1c9b8-61e5-43a8-9905-2a514f651fa5" />
+  <meta>
+    <versionId value="2" />
+    <lastUpdated value="2020-03-26T13:19:48.127+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento" />
+  <version value="201701A" />
+  <name value="Tipo de Documento" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-26T13:19:46.9743559+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classificação dos tipos de documentos compartilhados no Brasil." />
+  <content value="complete" />
+  <concept>
+    <code value="CMD" />
+    <display value="Conjunto Mínimo de Dados" />
+    <definition value="Documento público que coleta os dados mínimos dos atendimentos em saúde realizados em qualquer estabelecimento de saúde do país, público ou privado, em cada contato assistencial." />
+  </concept>
+  <concept>
+    <code value="SA" />
+    <display value="Sumário de Alta" />
+    <definition value="Relato clínico objetivo sobre as intervenções realizadas, as instruções para continuidade do cuidado pós-alta e o estado de saúde do indivíduo ao final de sua permanência na internação em estabelecimentos de saúde como: hospital, clínica, hospital-dia, internação domiciliar e urgência." />
+  </concept>
+  <concept>
+    <code value="RAC" />
+    <display value="Registro de Atendimento Clínico" />
+    <definition value="Registro de dados essenciais de uma consulta realizada a um indivíduo no âmbito da atenção básica, especializada ou domiciliar (atendimento diário)." />
+  </concept>
+  <concept>
+    <code value="RIA" />
+    <display value="Registro de Imunobiológico Administrado" />
+  </concept>
+  <concept>
+    <code value="RDM" />
+    <display value="Registro de Dispensação de Medicamento" />
+  </concept>
+  <concept>
+    <code value="REL" />
+    <display value="Resultado de Exame(s) Laboratoriais(s)" />
+  </concept>
+</CodeSystem>

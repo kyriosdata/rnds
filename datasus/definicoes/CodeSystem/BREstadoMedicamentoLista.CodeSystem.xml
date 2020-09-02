@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="18c1da3d-315d-40e3-b713-64102496c451" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:11:32.215+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BREstadoMedicamentoLista" />
+  <version value="201701A" />
+  <name value="Estado do Medicamento na Lista" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:11:52.7140537+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classificação do estado de um medicamento na lista de medicamentos da Rede Nacional de Dados em Saúde." />
+  <content value="complete" />
+  <concept>
+    <code value="dispensed" />
+    <display value="Medicamento dispensado" />
+  </concept>
+</CodeSystem>

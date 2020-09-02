@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="17e2d3ae-3c74-4b22-8e95-560ab209d7df" />
+  <meta>
+    <versionId value="6" />
+    <lastUpdated value="2020-03-13T20:30:07.307+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRMedicamentoDispensado-1.0" />
+  <version value="1.0" />
+  <name value="BRMedicamentoDispensado" />
+  <title value="Medicamento Dispensado" />
+  <status value="draft" />
+  <date value="2020-03-13T20:30:31.4080018Z" />
+  <publisher value="Ministerio da Saúde do Brasil" />
+  <description value="Detalha os atos de dispensação de medicamentos." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="MedicationDispense" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/MedicationDispense" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="MedicationDispense">
+      <path value="MedicationDispense" />
+      <short value="Medicamento Dispensado" />
+      <definition value="Detalha os atos de dispensação de medicamentos." />
+      <alias value="Droga dispensada" />
+      <alias value="Fármaco dispensado" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.extension">
+      <path value="MedicationDispense.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="MedicationDispense.extension:component">
+      <path value="MedicationDispense.extension" />
+      <sliceName value="component" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRComponenteAssistenciaFarmaceutica-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.extension:healthProgram">
+      <path value="MedicationDispense.extension" />
+      <sliceName value="healthProgram" />
+      <definition value="Programa de saúde ao qual o medicamento dispensado está associado." />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRProgramaSaude-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.extension:amount">
+      <path value="MedicationDispense.extension" />
+      <sliceName value="amount" />
+      <short value="Valor do Medicamento" />
+      <definition value="Valor monetário do medicamento." />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRValorMonetario-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.extension:amount.value[x].value">
+      <path value="MedicationDispense.extension.value[x].value" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.extension:amount.value[x].currency">
+      <path value="MedicationDispense.extension.value[x].currency" />
+      <fixedCode value="BRL" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.status">
+      <path value="MedicationDispense.status" />
+      <short value="Estado da Dispensação" />
+      <definition value="completed: finalizada&#xD;&#xA;entered-in-error: cancelada por informação incorreta." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.category">
+      <path value="MedicationDispense.category" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.medication[x]">
+      <path value="MedicationDispense.medication[x]" />
+      <short value="Medicamento" />
+      <definition value="Identifica o medicamento que foi dispensado." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRMedicamento-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.medication[x].reference">
+      <path value="MedicationDispense.medication[x].reference" />
+      <min value="1" />
+    </element>
+    <element id="MedicationDispense.medication[x].type">
+      <path value="MedicationDispense.medication[x].type" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.medication[x].identifier">
+      <path value="MedicationDispense.medication[x].identifier" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.medication[x].display">
+      <path value="MedicationDispense.medication[x].display" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject">
+      <path value="MedicationDispense.subject" />
+      <short value="Indivíduo da Dispensação" />
+      <definition value="Indivíduo para quem o medicamento foi dispensado." />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.subject.type">
+      <path value="MedicationDispense.subject.type" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject.identifier.use">
+      <path value="MedicationDispense.subject.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject.identifier.type">
+      <path value="MedicationDispense.subject.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject.identifier.period">
+      <path value="MedicationDispense.subject.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject.identifier.assigner">
+      <path value="MedicationDispense.subject.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.subject.display">
+      <path value="MedicationDispense.subject.display" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.performer">
+      <path value="MedicationDispense.performer" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.performer.function">
+      <path value="MedicationDispense.performer.function" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.performer.actor">
+      <path value="MedicationDispense.performer.actor" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/BRProfissional-1.0" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/BRLotacaoProfissional-1.0" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/BRPessoaJuridicaProfissionalLiberal-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.performer.actor.reference">
+      <path value="MedicationDispense.performer.actor.reference" />
+      <min value="1" />
+    </element>
+    <element id="MedicationDispense.performer.actor.type">
+      <path value="MedicationDispense.performer.actor.type" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.performer.actor.identifier">
+      <path value="MedicationDispense.performer.actor.identifier" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.performer.actor.display">
+      <path value="MedicationDispense.performer.actor.display" />
+      <max value="0" />
+    </element>
+    <element id="MedicationDispense.quantity">
+      <path value="MedicationDispense.quantity" />
+      <short value="Quantidade Dispensada" />
+      <definition value="Quantidade do medicamento que foi dispensado." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.quantity.value">
+      <path value="MedicationDispense.quantity.value" />
+      <short value="Valor" />
+      <definition value="Valor numérico que representa a quantidade." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.quantity.unit">
+      <path value="MedicationDispense.quantity.unit" />
+      <short value="Unidade Farmacêutica" />
+      <definition value="Unidade de medida para a quantidade que foi dispensada." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Unidade Farmacêutica" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRUnidadeFarmaceutica-1.0" />
+      </binding>
+    </element>
+    <element id="MedicationDispense.whenHandedOver">
+      <path value="MedicationDispense.whenHandedOver" />
+      <short value="Data/hora da Dispensação" />
+      <definition value="A data ou data e hora que o medicamento foi dispensado para o indivíduo ou seu representante legal." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction">
+      <path value="MedicationDispense.dosageInstruction" />
+      <short value="Instruções de Uso" />
+      <definition value="Indica como o medicamento deverá ser utilizado pelo indivíduo." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing">
+      <path value="MedicationDispense.dosageInstruction.timing" />
+      <short value="Temporalidade do Uso" />
+      <definition value="Quando o medicamento deverá ser utilizado pelo indivíduo." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat" />
+      <short value="Agendamento do Uso" />
+      <definition value="Regras que descrevem o agendamento do uso do medicamento." />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat.duration">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat.duration" />
+      <short value="Duração do Uso" />
+      <definition value="Por quanto tempo o medicamento deverá ser utilizado." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat.durationUnit">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat.durationUnit" />
+      <short value="Unidade da Duração" />
+      <definition value="Intervalo de tempo que a duração representa.&#xD;&#xA;s: segundo&#xD;&#xA;min: minuto&#xD;&#xA;h: hora&#xD;&#xA;d: dia&#xD;&#xA;wk: semana&#xD;&#xA;mo:mês&#xD;&#xA;a: ano" />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat.frequency">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat.frequency" />
+      <short value="Frequência" />
+      <definition value="Número de vezes que o uso da medicação deverá ser repetida no período especificado." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat.period">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat.period" />
+      <short value="Período" />
+      <definition value="Período em que a frequência deverá ser repetida. Ex.: 3 vezes por dia, 3 é a frequência, dia é o período." />
+      <mustSupport value="true" />
+    </element>
+    <element id="MedicationDispense.dosageInstruction.timing.repeat.periodUnit">
+      <path value="MedicationDispense.dosageInstruction.timing.repeat.periodUnit" />
+      <short value="Unidade do Período" />
+      <definition value="Intervalo de tempo que o período representa.&#xD;&#xA;s: segundo&#xD;&#xA;min: minuto&#xD;&#xA;h: hora&#xD;&#xA;d: dia&#xD;&#xA;wk: semana&#xD;&#xA;mo:mês&#xD;&#xA;a: ano" />
+      <mustSupport value="true" />
+    </element>
+  </differential>
+</StructureDefinition>

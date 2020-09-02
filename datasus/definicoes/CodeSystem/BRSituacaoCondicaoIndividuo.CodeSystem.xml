@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="f5312a63-6e2b-4d69-bcb1-b2c0d6b2981e" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:20:37.65+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRSituacaoCondicaoIndividuo" />
+  <version value="201701A" />
+  <name value="Situação/Condição do Indivíduo" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:20:58.1470379+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica a situação/condição de um indivíudo em um contexto." />
+  <content value="complete" />
+  <concept>
+    <code value="1" />
+    <display value="Indígenas" />
+  </concept>
+  <concept>
+    <code value="2" />
+    <display value="Assentados" />
+  </concept>
+  <concept>
+    <code value="3" />
+    <display value="Acampados" />
+  </concept>
+  <concept>
+    <code value="4" />
+    <display value="Militares" />
+  </concept>
+  <concept>
+    <code value="5" />
+    <display value="Quilombola" />
+  </concept>
+  <concept>
+    <code value="6" />
+    <display value="População privada de liberdade" />
+  </concept>
+  <concept>
+    <code value="7" />
+    <display value="População geral" />
+  </concept>
+  <concept>
+    <code value="8" />
+    <display value="Crianças" />
+  </concept>
+  <concept>
+    <code value="9" />
+    <display value="Gestantes" />
+  </concept>
+  <concept>
+    <code value="10" />
+    <display value="Trabalhadores de saúde" />
+  </concept>
+  <concept>
+    <code value="11" />
+    <display value="Puérperas" />
+  </concept>
+  <concept>
+    <code value="12" />
+    <display value="Idosos" />
+  </concept>
+  <concept>
+    <code value="13" />
+    <display value="Funcionários do sistema prisional" />
+  </concept>
+  <concept>
+    <code value="14" />
+    <display value="Comorbidade" />
+  </concept>
+  <concept>
+    <code value="15" />
+    <display value="Outros grupos sem comorbidades" />
+  </concept>
+  <concept>
+    <code value="16" />
+    <display value="Doença respiratória crônica" />
+  </concept>
+  <concept>
+    <code value="17" />
+    <display value="Doença cardíaca crônica" />
+  </concept>
+  <concept>
+    <code value="18" />
+    <display value="Doença renal crônica" />
+  </concept>
+  <concept>
+    <code value="19" />
+    <display value="Doença hepática crônica" />
+  </concept>
+  <concept>
+    <code value="20" />
+    <display value="Doença neurológica crônica" />
+  </concept>
+  <concept>
+    <code value="21" />
+    <display value="Diabetes" />
+  </concept>
+  <concept>
+    <code value="22" />
+    <display value="Obesos" />
+  </concept>
+  <concept>
+    <code value="23" />
+    <display value="Imunossupressão" />
+  </concept>
+  <concept>
+    <code value="24" />
+    <display value="Transplantados" />
+  </concept>
+  <concept>
+    <code value="25" />
+    <display value="Trissomias" />
+  </concept>
+  <concept>
+    <code value="26" />
+    <display value="Professores-Ensino Básico e Superior" />
+  </concept>
+  <concept>
+    <code value="27" />
+    <display value="Policiais Civis, Militares, Bombeiros e membros ativos das Forças Armadas" />
+  </concept>
+</CodeSystem>

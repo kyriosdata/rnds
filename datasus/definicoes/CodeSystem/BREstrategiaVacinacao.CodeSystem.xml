@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="c99a1d68-1b3e-4d25-9eab-bd5c9610dcfe" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-11T18:11:59.755+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BREstrategiaVacinacao" />
+  <version value="201701A" />
+  <name value="Estratégia de Vacinação" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:12:20.2627546+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica a estratégia de vacinação adotada." />
+  <content value="complete" />
+  <concept>
+    <code value="1" />
+    <display value="Rotina" />
+  </concept>
+  <concept>
+    <code value="2" />
+    <display value="Especial" />
+  </concept>
+  <concept>
+    <code value="3" />
+    <display value="Bloqueio" />
+  </concept>
+  <concept>
+    <code value="4" />
+    <display value="Intensificação" />
+  </concept>
+  <concept>
+    <code value="5" />
+    <display value="Campanha indiscriminada" />
+  </concept>
+  <concept>
+    <code value="6" />
+    <display value="Campanha seletiva" />
+  </concept>
+  <concept>
+    <code value="7" />
+    <display value="Soroterapia" />
+  </concept>
+  <concept>
+    <code value="8" />
+    <display value="Serviço Privado" />
+  </concept>
+  <concept>
+    <code value="9" />
+    <display value="Monitoramento rápido de cobertura vacinal" />
+  </concept>
+</CodeSystem>

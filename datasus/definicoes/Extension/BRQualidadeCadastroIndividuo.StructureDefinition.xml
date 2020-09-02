@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="e0c912f5-2298-4901-8405-8baff145a131" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-13T19:28:20.288+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRQualidadeCadastroIndividuo-1.0" />
+  <version value="1.0" />
+  <name value="BRQualidadeCadastroIndividuo" />
+  <title value="Qualidade do Cadastro do Indivíduo" />
+  <status value="active" />
+  <date value="2020-03-13T19:28:41.6812754Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Grau de qualidade de um registro de um indivíduo, vai de 0 até 100." />
+  <purpose value="Necessário para qualificar o grau de completude de um registro." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="Patient" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Qualidade do Cadastro do Indivíduo" />
+      <definition value="Grau de qualidade do registro do indivíduo." />
+      <max value="1" />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRQualidadeCadastroIndividuo-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="positiveInt" />
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="33f94efe-eda9-4cdf-b3a1-4b2e0d5dfba9" />
+  <meta>
+    <versionId value="6" />
+    <lastUpdated value="2020-03-13T20:04:37.319+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRProcedimentoRealizado-1.0" />
+  <version value="1.0" />
+  <name value="BRProcedimentoRealizado" />
+  <title value="Procedimento Realizado" />
+  <status value="active" />
+  <date value="2020-03-13T20:05:00.7373693Z" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Procedimento realizado em um indivíduo." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Procedure" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Procedure" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Procedure">
+      <path value="Procedure" />
+      <short value="Procedimento Realizado" />
+      <definition value="Ação de saúde realizada no indivíduo." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.extension">
+      <path value="Procedure.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Procedure.extension:quantity">
+      <path value="Procedure.extension" />
+      <sliceName value="quantity" />
+      <definition value="Quantidade realizada do procedimento." />
+      <min value="1" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRQuantidade-1.0" />
+      </type>
+    </element>
+    <!-- <element id="Procedure.extension:quantity.value[x]">
+      <path value="Procedure.extension.value[x]" />
+      <type>
+        <code value="positiveInt" />
+      </type>
+    </element> -->
+    <element id="Procedure.identifier">
+      <path value="Procedure.identifier" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.identifier.use">
+      <path value="Procedure.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.type">
+      <path value="Procedure.identifier.type" />
+      <short value="Tipo de Identificador" />
+      <min value="1" />
+      <fixedCodeableConcept>
+        <coding>
+          <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoIdentificador" />
+          <code value="AUTH" />
+        </coding>
+      </fixedCodeableConcept>
+      <binding>
+        <strength value="required" />
+        <description value="Tipo de Identificador" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoIdentificadorProcedimento-1.0" />
+      </binding>
+    </element>
+    <element id="Procedure.identifier.type.coding">
+      <path value="Procedure.identifier.type.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Procedure.identifier.type.coding.system">
+      <path value="Procedure.identifier.type.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.identifier.type.coding.code">
+      <path value="Procedure.identifier.type.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.identifier.type.coding.display">
+      <path value="Procedure.identifier.type.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.type.coding.userSelected">
+      <path value="Procedure.identifier.type.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.type.text">
+      <path value="Procedure.identifier.type.text" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.system">
+      <path value="Procedure.identifier.system" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.value">
+      <path value="Procedure.identifier.value" />
+      <short value="Código de Autorização" />
+      <definition value="Código do identificador da permissão para a realização do procedimento." />
+      <min value="1" />
+    </element>
+    <element id="Procedure.identifier.period">
+      <path value="Procedure.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.identifier.assigner">
+      <path value="Procedure.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.instantiatesCanonical">
+      <path value="Procedure.instantiatesCanonical" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.instantiatesUri">
+      <path value="Procedure.instantiatesUri" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.basedOn">
+      <path value="Procedure.basedOn" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.partOf">
+      <path value="Procedure.partOf" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.status">
+      <path value="Procedure.status" />
+      <short value="Estado do Procedimento" />
+      <definition value="Estado da realização do procedimento." />
+      <comment value="Na primeira fase da RNDS somente serão informados procedimentos realizados ou cancelados (com erro), portanto, somente o valor completed será aceito." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Estado do Evento" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoEvento-1.0" />
+      </binding>
+    </element>
+    <element id="Procedure.statusReason">
+      <path value="Procedure.statusReason" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.category">
+      <path value="Procedure.category" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.code">
+      <path value="Procedure.code" />
+      <short value="Procedimento Realizado" />
+      <definition value="Identificação do procedimento que foi realizado." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Classificações Nacionais de Procedimentos" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRProcedimentosNacionais-1.0" />
+      </binding>
+    </element>
+    <element id="Procedure.code.coding">
+      <path value="Procedure.code.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Procedure.code.coding.system">
+      <path value="Procedure.code.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.code.coding.code">
+      <path value="Procedure.code.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.code.coding.display">
+      <path value="Procedure.code.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.code.coding.userSelected">
+      <path value="Procedure.code.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.code.text">
+      <path value="Procedure.code.text" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.subject">
+      <path value="Procedure.subject" />
+      <short value="Indivíduo" />
+      <definition value="Indivíduo em que o procedimento foi realizado." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.subject.extension">
+      <path value="Procedure.subject.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Procedure.subject.extension:unidentifiedPatient">
+      <path value="Procedure.subject.extension" />
+      <sliceName value="unidentifiedPatient" />
+      <short value="Dados do Indivíduo Não Identificado" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuoNaoIdentificado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.subject.extension:unidentifiedPatient.extension:gender">
+      <path value="Procedure.subject.extension.extension" />
+      <sliceName value="gender" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.subject.extension:unidentifiedPatient.extension:birthYear">
+      <path value="Procedure.subject.extension.extension" />
+      <sliceName value="birthYear" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.subject.extension:unidentifiedPatient.extension:reason">
+      <path value="Procedure.subject.extension.extension" />
+      <sliceName value="reason" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.subject.type">
+      <path value="Procedure.subject.type" />
+      <short value="Recurso do sujeito" />
+      <definition value="Indica o recurso FHIR que será utilizado na RNDS para identificar de forma direta o sujeito que do procedimento." />
+    </element>
+    <element id="Procedure.subject.identifier.use">
+      <path value="Procedure.subject.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.subject.identifier.type">
+      <path value="Procedure.subject.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.subject.identifier.system">
+      <path value="Procedure.subject.identifier.system" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.subject.identifier.value">
+      <path value="Procedure.subject.identifier.value" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.subject.identifier.period">
+      <path value="Procedure.subject.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.subject.identifier.assigner">
+      <path value="Procedure.subject.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.subject.display">
+      <path value="Procedure.subject.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.encounter">
+      <path value="Procedure.encounter" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performed[x]">
+      <path value="Procedure.performed[x]" />
+      <short value="Momento da Realização do Procedimento" />
+      <definition value="Competência (mês e ano), data ou data e hora que o procedimento foi realizado." />
+      <min value="1" />
+      <type>
+        <code value="dateTime" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.recorder">
+      <path value="Procedure.recorder" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.asserter">
+      <path value="Procedure.asserter" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer">
+      <path value="Procedure.performer" />
+      <short value="Executante" />
+      <definition value="Informações sobre o profissional, Estabelecimento de Saúde e equipe que realizou o procedimento." />
+      <comment value="Obrigatório quando o financiamento do procedimento for SUS." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.performer.extension">
+      <path value="Procedure.performer.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Procedure.performer.extension:team">
+      <path value="Procedure.performer.extension" />
+      <sliceName value="team" />
+      <short value="Identificação da Equipe" />
+      <definition value="Identifica a equipe de saúde que realizou o procedimento utilizando o Identificador Nacional de Equipes." />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIdentificacaoEquipe-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.performer.function">
+      <path value="Procedure.performer.function" />
+      <short value="Ocupação do Profissional" />
+      <definition value="Atividade desempenhada pelo profissional que realizou o procedimento." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Ocupação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BROcupacao-1.0" />
+      </binding>
+    </element>
+    <element id="Procedure.performer.function.coding">
+      <path value="Procedure.performer.function.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Procedure.performer.function.coding.system">
+      <path value="Procedure.performer.function.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.performer.function.coding.code">
+      <path value="Procedure.performer.function.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.performer.function.coding.display">
+      <path value="Procedure.performer.function.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.function.coding.userSelected">
+      <path value="Procedure.performer.function.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.function.text">
+      <path value="Procedure.performer.function.text" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor">
+      <path value="Procedure.performer.actor" />
+      <!-- <slicing>
+        <discriminator>
+          <type value="type" />
+          <path value="reference" />
+        </discriminator>
+        <rules value="open" />
+      </slicing> -->
+      <short value="Profissional e/ou Estabelecimento de Saúde Executante" />
+      <definition value="Referência ao profissional e/ou Estabelecimento de Saúde que realizou o procedimento." />
+      <mustSupport value="true" />
+    </element>
+<!--     <element id="Procedure.performer.actor:organization">
+      <path value="Procedure.performer.actor" />
+      <sliceName value="organization" />
+      <short value="Estabelecimento de Saúde Executante" />
+      <definition value="Estabelecimento de Saúde onde o procedimento foi realizado." />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.performer.actor:organization.reference">
+      <path value="Procedure.performer.actor.reference" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.performer.actor:organization.type">
+      <path value="Procedure.performer.actor.type" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor:organization.identifier">
+      <path value="Procedure.performer.actor.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor:organization.display">
+      <path value="Procedure.performer.actor.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor:practitioner">
+      <path value="Procedure.performer.actor" />
+      <sliceName value="practitioner" />
+      <short value="Profissional" />
+      <definition value="Profissional que realizou o procedimento." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRLotacaoProfissional-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.performer.actor:practitioner.reference">
+      <path value="Procedure.performer.actor.reference" />
+      <min value="1" />
+    </element>
+    <element id="Procedure.performer.actor:practitioner.type">
+      <path value="Procedure.performer.actor.type" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor:practitioner.identifier">
+      <path value="Procedure.performer.actor.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.actor:practitioner.display">
+      <path value="Procedure.performer.actor.display" />
+      <max value="0" />
+    </element>
+ -->
+     <element id="Procedure.performer.onBehalfOf">
+      <path value="Procedure.performer.onBehalfOf" />
+      <short value="Estabelecimento de Saúde Terceiro" />
+      <definition value="Estabelecimento de Saúde que realizou o procedimento como serviço terceiro do Estabelecimento de Saúde do Contato Assistencial." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.performer.onBehalfOf.reference">
+      <path value="Procedure.performer.onBehalfOf.reference" />
+      <short value="Referência direta ao Estabelecimento de Saúde terceiro" />
+      <definition value="Número de CNES do Estabelecimento de Saúde terceiro." />
+      <min value="1" />
+    </element>
+    <element id="Procedure.performer.onBehalfOf.type">
+      <path value="Procedure.performer.onBehalfOf.type" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.onBehalfOf.identifier">
+      <path value="Procedure.performer.onBehalfOf.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.performer.onBehalfOf.display">
+      <path value="Procedure.performer.onBehalfOf.display" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.location">
+      <path value="Procedure.location" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.reasonCode">
+      <path value="Procedure.reasonCode" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.reasonReference">
+      <path value="Procedure.reasonReference" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.bodySite">
+      <path value="Procedure.bodySite" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.outcome">
+      <path value="Procedure.outcome" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.report">
+      <path value="Procedure.report" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.complication">
+      <path value="Procedure.complication" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.complicationDetail">
+      <path value="Procedure.complicationDetail" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.followUp">
+      <path value="Procedure.followUp" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.note">
+      <path value="Procedure.note" />
+      <short value="Resultado ou observações do procedimento" />
+      <definition value="Possibilita realizar anotações acerca do desfecho e observações do procedimento." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.note.author[x]">
+      <path value="Procedure.note.author[x]" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.note.time">
+      <path value="Procedure.note.time" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.note.text">
+      <path value="Procedure.note.text" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.focalDevice">
+      <path value="Procedure.focalDevice" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.usedReference">
+      <path value="Procedure.usedReference" />
+      <max value="0" />
+    </element>
+    <element id="Procedure.usedCode">
+      <path value="Procedure.usedCode" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

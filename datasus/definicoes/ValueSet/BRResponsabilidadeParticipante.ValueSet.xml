@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="4fe0e952-c6aa-45fd-8598-0d1522c9fc01" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2020-03-12T13:25:53.984+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRResponsabilidadeParticipante-1.0" />
+  <version value="1.0" />
+  <name value="Reponsabilidade no Contato Assistencial" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:25:53.2469711+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica o tipo de responsabilidade de indivíduos ou profissionais no Contato Assistencial." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRResponsabilidadeParticipante" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>
