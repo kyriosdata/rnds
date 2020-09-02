@@ -11,8 +11,8 @@ do Certificado Digital do laboratório em questão, ou seja, um certificado
 ICP-Brasil (e-CPF ou e-CNPJ).
 
 Adicionalmente, a RNDS oferece dois ambientes, um de homologação e outro de produção.
-Cada um deles inclui um endereço para obtenção do _token_ de acesso e
-outro para os serviços propriamente ditos para troca de informações em saúde.
+Cada um deles inclui um endereço para obtenção do _token_ de acesso (_Auth_) e
+outro para os serviços (_EHR_) propriamente ditos para troca de informações em saúde, conforme ilustrado abaixo.
 
 <img src="../media/ambientes.png" width="300px">
 
