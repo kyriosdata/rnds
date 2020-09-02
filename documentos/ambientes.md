@@ -1,10 +1,24 @@
 ## Ambientes
 
+O padrão FHIR, adotado pela RNDS, possui uma RESTFul API bem-definida. 
+O Software de Integração a ser criado por um laboratório, portanto, fará 
+uso desta API, disponibilizada em um endereço, para se integrar à RNDS.
+O uso da API, contudo, depende de um _token_ de acesso, obtido em um outro
+endereço. Ou seja, temos dois endereços a serem empregados por um software
+de integração com a RNDS, um deles fornece o _token_ de acesso e o outro
+os serviços propriamente ditos. 
+
 A RNDS oferece dois ambientes, um de homologação e outro de produção.
-Estes ambientes implementam o FHIR e oferecem a um software cliente
-o meio para enviar e receber informações em saúde de usuários do SUS, de forma segura.
+Cada um deles inclui um endereço para obtenção do _token_ de acesso e
+outro para os serviços propriamente ditos para troca de informações em saúde.
+
 
 ### Ambiente de homologação
+
+| Ambiente      | Homologação                                                                      |
+|---------------|----------------------------------------------------------------------------------|
+| Autenticação  | **https<span>:</span>//ehr-auth-hmg.saude.gov.br**                                         |
+| Serviços FHIR | **https<span>:</span>//ehr-services.hmg.saude.gov.br/api** |
 
 O ambiente de homologação existe para testes e experimentações.
 O ambiente de homologação é oferecido por meio de dois pontos de acesso:
