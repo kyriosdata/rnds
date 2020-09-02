@@ -11,7 +11,7 @@ da Informação) do laboratório. O responsável pela TI pode ser um colaborador
 do próprio laboratório ou serviço oferecido por empresa especializada,
 dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 
-<img src="./media/papeis.png" width="500px">
+<img src="../media/papeis.png" width="500px">
 
 #### Atribuições do responsável pelo laboratório
 
@@ -33,7 +33,7 @@ dentre outros cenários. A figura abaixo compila as atribuições de ambos.
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, deve desempenhar um conjunto de funções bem-definidas.
 As funções, os fluxos entre elas e os dados necessários são exibidas abaixo.
 
-<img src="./media/rnds-dfd.png" width="650px">
+<img src="../media/rnds-dfd.png" width="650px">
 
 Cada função é definida e classificada quanto à fase em que é executada (preparação ou entrega).
 
@@ -52,18 +52,4 @@ A fase de preparação reúne funções "locais" ao laboratório, não demandam 
 fase de entrega, _Autenticar_ e _Enviar_, depende do acesso a um dos
 ambientes da RNDS.
 
-<img src="./media/desenvolvedor.png" width="600xp">
-
-## Outros
-
-- [Tecnologias](documentos/tecnologias.md)
-- Fluxo:
-  - Administrador
-    - Certificado
-    - Cadastro no Portal de Serviços
-  - Ambiente de desenvolvimento
-    - Postman
-    - Java
-  - Aplicações
-    - Obter token
-    - Consultar ...
+<img src="../media/desenvolvedor.png" width="600xp">
