@@ -2,7 +2,7 @@ module.exports = {
   title: "RNDS guia",
   tagline: "Guia do Desenvolvedor RNDS",
   url: "https://kyriosdata.github.io",
-  baseUrl: "/rnds",
+  baseUrl: "/rnds/",
   onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
