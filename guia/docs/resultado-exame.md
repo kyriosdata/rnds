@@ -1,3 +1,9 @@
+---
+id: resultado
+title: Resultado de Exame Laboratorial
+sidebar_label: Resultado de exame
+---
+
 Objetivo:
 
 > Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial.
@@ -17,12 +23,25 @@ Reunir estes três recursos correspondentes a um resultado de exame laboratorial
 são depositados recursos FHIR, é uma "sacola" de recursos FHIR. De fato,
 para enviar resultado de exame será feito uso de um _Bundle_.
 
-Todo recurso FHIR é representado em JSON com estrutura similar àquela abaixo,
-na qual a propriedade _resourceType_ identifica o tipo de recurso. Neste caso, um _Bundle_:
+Todo recurso FHIR pode ser representado em JSON e a propriedade _resourceType_
+é obrigatória. Esta propriedade identifica o tipo de recurso. Para um recurso
+do tipo _Bundle_ o valor desta propriedade é "Bundle", conforme ilustrado
+no "esqueleto" de um JSON abaixo. Adicionalmente, é por meio da propriedade
+_entry_ que vários outros recursos FHIR podem ser fornecidos. No caso de um
+Resultado de Exame Laboratorial, conforme citado acima, espera-se um recurso
+_Composition_, _Observation_ e, por fim, um _Specimen_.
 
 ```json
 {
-    "resourceType" : "Bundle",
-    -- outros pares (chave/valor) omitidos---
+   "resourceType":"Bundle",
+   "meta": { ... omitido ... },
+   "identifier":{ ... omitido ... },
+   "type":"document",
+   "timestamp":"2020-03-23T14:23:56.567-02:00",
+   "entry":[
+      { ... Composition ... },
+      { ... Observation ... },
+      { ... Specimen ... }
+    ]
 }
 ```
