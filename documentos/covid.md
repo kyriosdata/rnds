@@ -1,13 +1,14 @@
 Um resultado de exame é enviado para a RNDS por meio do recurso FHIR
 [Bundle](https://www.hl7.org/fhir/bundle.html). Ou seja, para cada resultado
-será construído um _Bundle_ correspondente. Abaixo é detalhado cada elemento
-deste _Bundle_.
+será construído um _Bundle_ correspondente.
+
+```json
+{
+  "resourceType": "ok"
+}
+```
 
 ### Detalhando resultado de exame de COVID-19
-
-O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner para uma coleção de recursos FHIR. No caso específico do exame de COVID-19, por exemplo,
-conforme definido pela RNDS, o [Bundle](https://www.hl7.org/fhir/bundle.html) empregado para registrar o resultado deste exame deve ser formado pelo recurso [Composition](https://www.hl7.org/fhir/composition.html). Este recurso referencia um [Observation](https://www.hl7.org/fhir/observation.html) que, por fim,
-faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html).
 
 O FHIR define um conjunto significativo de mais de uma centena recursos a serem empregados em vários contextos. Acima citamos apenas quatro deles.
 A adequação de um recurso a um contexto específico
