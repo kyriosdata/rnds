@@ -21,7 +21,7 @@ de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresult
 
 Adicionalmente, um quarto recurso é necessário para reunir os três descritos acima. O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner no qual
 são depositados recursos FHIR, é uma "sacola" de recursos FHIR. Em consequência,
-um resultado de exame laboratorial pode ser ilutrado conforme abaixo.
+um resultado de exame laboratorial pode ser ilutrado usando a UML conforme abaixo.
 
 ![img](../static/img/resultado-exame.png)
 
