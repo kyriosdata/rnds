@@ -1,17 +1,7 @@
-Objetivo:
-
-> Detalhar itens de dado necessários para registrar o resultado de exame de COVID-19, conforme definido pela RNDS.
-
 Um resultado de exame é enviado para a RNDS por meio do recurso FHIR
 [Bundle](https://www.hl7.org/fhir/bundle.html). Ou seja, para cada resultado
 será construído um _Bundle_ correspondente. Abaixo é detalhado cada elemento
 deste _Bundle_.
-
-Ou seja,
-
-- Você saberá quais são os dados necessários para montar um resultado de exame de COVID-19.
-- Você saberá como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
-- Você será capaz de montar um documento JSON para refletir o resultado de um dado exame.
 
 ### Detalhando resultado de exame de COVID-19
 
