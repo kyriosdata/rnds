@@ -15,9 +15,9 @@ Avisos:
 
 ## Organização
 
-- [Contexto](./documentos/contexto.md)
-- [Software de integração](./documentos/si.md)
-- [Ambientes](./documentos/ambientes.md)
+- Contexto
+- Software de integração
+- Ambientes
 - [Autenticação](./documentos/autenticacao.md)
 - [Certificado digital](./documentos/certificado.md)
 - [Resultado de exame COVID](./documentos/covid.md)
