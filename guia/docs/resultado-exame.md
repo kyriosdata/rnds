@@ -207,15 +207,31 @@ _subject_. O indivíduo ao qual está associado o resultado de exame. A identifi
 
 _date_. Data e hora em que o documento foi gerado, por exemplo, "2020-03-20T00:00:00-03:00".
 
-_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima.
+_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. À semelhança de cenários anteriores, o trecho
+JSON abaixo substitui o valor de um CNES pela sequência "{{lab-cnes}}".
 
 ```json
 "author":[
    {
       "identifier":{
          "system":"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
-         "value":"2337991"
+         "value":"{{lab-cnes}}"
       }
    }
 ],
 ```
+
+_title_. O título do documento é o valor fixo "Resultado de Exame Laboratorial".
+
+_relatesTo_. Esta propriedade, conforme a documentação do perfil, deve ser utilizado exclusivamente
+para indicar que este documento substitui (_replaces_) outro documento. Seu uso, portanto, está
+definido para indicar que o presente documento substitui um anterior. Conforme a documentação,
+o documento substituído continuará disponível na RNDS e poderá ser recuperado integralmente
+por meio do identificador a ele atribuído pela RNDS, contudo, não estará diretamente disponível
+na linha do tempo do cidadão. Esta propriedade será detalhada na definição do serviço
+_Substituir resultado de exame_.
+
+_section_. Define as seções do documento (resultado). Neste caso há uma única seção na qual
+é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, no caso um _Observation_ e,
+para ser ainda mais preciso, o perfil definido pela RNDS para registrar o diagnóstico de um
+laboratório clínico.
