@@ -144,7 +144,8 @@ Em geral, em um conjunto de recursos FHIR há referências entre os recursos, fo
 
 Convém reiterar por meio de mais um exemplo. A amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada pelo diagnóstico (_Observation_) que a utiliza.
 
-O trecho de JSON abaixo, ressaltando apenas a propriedade _entry_, é fornecido para ilustrar a localização e compreensão do emprego de referências entre recursos FHIR em um _Bundle_.
+O trecho de JSON abaixo, ressaltando apenas a propriedade _entry_ de um _Bundle_, é fornecido para a localização e compreensão do emprego de referências entre recursos FHIR. Cada entrada do _array_ possui o seu endereço ou identificador único na propriedade _fullUrl_ e, naturalmente, o recurso em questão (_resource_). Cada recurso possui o seu próprio _resourceType_ e, portanto, sabe-se que os três recursos são um _Composition_, um _Observation_ e, por fim, um _Specimen_. Ainda observe como é estabelecida a referência entre recursos.
+Na segunda entrada do _array_, _Observation_, há uma referência (_reference_) para a terceira entrada cujo identificador é "urn:uuid:transient-2". De forma análoga, na primeira entrada há uma referência (_reference_) cujo valor é "urn:uuid:transient-1", indicando o recurso referenciado, o _Observation_.
 
 ```json
 "entry": [
