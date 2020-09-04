@@ -176,4 +176,46 @@ Tendo em vista que os recursos que definem um resultado de exame laboratorial fo
 
 ### Resultado de Exame Laboratorial
 
-A representação de um resultado de exame, no Brasil, é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html).
+Um resultado de exame no Brasil é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html). Conforme o perfil, um resultado é caracterizado por várias propriedades, cada uma delas comentada abaixo.
+
+_status_. Para efeito de um resultado o valor a ser utilizado é "final".
+
+_type_. Identifica o tipo do documento por meio da propriedade _coding_, que é um _array_, neste caso, de uma entrada apenas e obrigatória. O objeto correspondente a tal entrada possui duas propriedades, _system_ e _code_.
+A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Documento](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoDocumento). A segunda, um dos valores possíveis. Dentre eles há "REL", que representa "Resultado de Exame(s) Laboratorial(is)". Em consequência, esta propriedade é definida conforme abaixo:
+
+```json
+"type": {
+   "coding": [
+      {
+        "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento",
+        "code": "REL"
+      }
+   ]
+},
+```
+
+_subject_. O indivíduo ao qual está associado o resultado de exame. A identificação é fornecida pelo objeto _identifier_, que possui duas propriedades, _system_ e _value_. O primeiro possui um valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". O segundo, _value_, é o CNS (Cartão Nacional de Saúde) do indivíduo. Abaixo segue a representação desta propriedade na qual, em vez do CNS de um indivíduo, é fornecida a sequência "{{individuo-cns}}".
+
+```json
+"subject": {
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+        "value": "{{individuo-cns}}"
+    }
+},
+```
+
+_date_. Data e hora em que o documento foi gerado, por exemplo, "2020-03-20T00:00:00-03:00".
+
+_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima.
+
+```json
+"author":[
+   {
+      "identifier":{
+         "system":"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+         "value":"2337991"
+      }
+   }
+],
+```
