@@ -83,4 +83,40 @@ o pedido de credenciamento do laboratório em questão é aprovado. A figura aba
 O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados
 produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim por diante, caso o
-identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (\_Universally Unique IDentifier) geralmente conhecido por [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Não é difícil o acesso a um gerador de UUID. Para ilustrar, seguem dois, um em [Java](https://www.baeldung.com/java-uuid) e outro em [JavaScript](https://www.npmjs.com/package/uuid).
+identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+
+De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_, a ser enviado para a RNDS, é
+
+```json
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
+        "value": "04/09/2020-cdYQj"
+    }
+```
+
+### Elementos do resultado
+
+Um _Bundle_ é empregado para reunir recursos FHIR. A propriedade _entry_ é o local onde os recursos devem ser fornecidos (observe que é um _array_). No caso em questão, tal _array_, propriedade _entry_, deverá possuir três entradas:
+
+```json
+   "entry":[
+      { ... Resultado de Exame Laboratorial ... },
+      { ... Diagnóstico em Laboratório Clínico ... },
+      { ... Amostra Biológica ... }
+    ]
+```
+
+Estas três entradas, respectivamente, referem-se aos seguintes perfis, personalizações definidas pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
+
+Observe que estes recursos são fornecidos em entradas próprias da propriedade _entry_ e, consequentemente, é necessário que a amostra biológica empregada seja referenciada pelo diagnóstico que, por sua vez, deve ser referenciada pelo resultado de exame laboratorial. Estas referências são comuns e amplamente empregadas quando se uso o padrão FHIR.
+
+### Referências entre recursos
+
+O FHIR faz uso extensivo do conceito de [referência](https://www.hl7.org/fhir/references.html). Ou seja, muitos dos elementos que compõem um recurso são referências para outros recursos. Dito de outra forma,
+em vez do diagnóstico em laboratório clínico (_Observation_) ser fornecido "embutido" em um resultado de exame laboratorial (_Composition_), este último recurso referencia (aponta para) o recurso que é o diagnóstico (_Observation_). Em geral, em um conjunto de recursos FHIR há referências entre os recursos, formando uma rede de informação em saúde.
+
+Em um segundo exemplo, a amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada na amostra biológica (_Observation_). Por fim, em um resultado de exame laboratorial temos duas referências, uma do resultado de exame laboratorial para o diagnóstico correspondente, e do diagnóstico para a amostra biológica correspondente.
+
+Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher as entradas correspondentes.
