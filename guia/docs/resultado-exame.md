@@ -42,12 +42,12 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 ```json
 {
    "resourceType":"Bundle",
+   "type":"document",
    "timestamp":"2020-03-20T00:00:00-03:00",
    "meta": {
       "lastUpdated": "2020-03-20T00:00:00-03:00"
    },
    "identifier":{ ... omitido ... },
-   "type":"document",
    "entry":[
       { ... Resultado de Exame Laboratorial ... },
       { ... Diagnóstico em Laboratório Clínico ... },
@@ -56,6 +56,11 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 }
 ```
 
+A propriedade _type_ indica o propósito do _Bundle_, no caso, trata-se de um documento (_document_). A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
+provavelmente o mesmo instante da última atualização, fornecida na propriedade _lastUpdate_
+de _meta_.
+
 O "esqueleto" acima ilustra como um resultado de exame laboratorial deve ser empacotado
 antes de ser enviado para a RNDS. Ou seja, é preciso produzir
-um JSON completo, válido, "inflado" com os valores omitidos.
+um JSON completo, válido, "inflado" com os valores omitidos, para as propriedades
+_identifier_ e _entry_.
