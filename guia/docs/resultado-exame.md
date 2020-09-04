@@ -42,10 +42,12 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 ```json
 {
    "resourceType":"Bundle",
-   "meta": { ... omitido ... },
+   "timestamp":"2020-03-20T00:00:00-03:00",
+   "meta": {
+      "lastUpdated": "2020-03-20T00:00:00-03:00"
+   },
    "identifier":{ ... omitido ... },
    "type":"document",
-   "timestamp":"... instante do empacotamento ...",
    "entry":[
       { ... Resultado de Exame Laboratorial ... },
       { ... Diagnóstico em Laboratório Clínico ... },
