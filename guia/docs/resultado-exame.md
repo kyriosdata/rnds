@@ -6,7 +6,7 @@ sidebar_label: Resultado de exame
 
 Objetivo:
 
-> Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial.
+> Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial. A representação JSON de um resultado completo pode ser obtido AQUI.
 
 Resultados esperados:
 
@@ -94,6 +94,28 @@ De posse tanto do identificador do solicitante, por exemplo, "99", quanto do ide
     }
 ```
 
+Em consequência, o "esqueleto" JSON pode ser reescrito, considerando o detalhamento do _identifier_, conforme abaixo:
+
+```json
+{
+   "resourceType":"Bundle",
+   "type":"document",
+   "timestamp":"2020-03-20T00:00:00-03:00",
+   "meta": {
+      "lastUpdated": "2020-03-20T00:00:00-03:00"
+   },
+   "identifier": {
+      "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
+      "value": "04/09/2020-cdYQj"
+   },
+   "entry":[
+      { ... Resultado de Exame Laboratorial ... },
+      { ... Diagnóstico em Laboratório Clínico ... },
+      { ... Amostra Biológica ... }
+    ]
+}
+```
+
 ### Elementos do resultado
 
 Um _Bundle_ é empregado para reunir recursos FHIR. A propriedade _entry_ é o local onde os recursos devem ser fornecidos (observe que é um _array_). No caso em questão, tal _array_, propriedade _entry_, deverá possuir três entradas:
@@ -114,9 +136,39 @@ Observe que estes recursos são fornecidos em entradas próprias da propriedade 
 ### Referências entre recursos
 
 O FHIR faz uso extensivo do conceito de [referência](https://www.hl7.org/fhir/references.html). Ou seja, muitos dos elementos que compõem um recurso são referências para outros recursos. Dito de outra forma,
-em vez do diagnóstico em laboratório clínico (_Observation_) ser fornecido "embutido" em um resultado de exame laboratorial (_Composition_), este último recurso referencia (aponta para) o recurso que é o diagnóstico (_Observation_). Em geral, em um conjunto de recursos FHIR há referências entre os recursos, formando uma rede de informação em saúde.
+em vez do diagnóstico em laboratório clínico (_Observation_) ser fornecido "embutido" em um resultado de exame laboratorial (_Composition_), este último recurso referencia (aponta para) o recurso que é o diagnóstico (_Observation_).
 
-Em um segundo exemplo, a amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada na amostra biológica (_Observation_). Por fim, em um resultado de exame laboratorial temos duas referências, uma do resultado de exame laboratorial para o diagnóstico correspondente, e do diagnóstico para a amostra biológica correspondente.
+Em geral, em um conjunto de recursos FHIR há referências entre os recursos, formando uma rede de informação em saúde. Conforme ilustrado abaixo, a rede para um resultado de exame laboratórial é formada por três recursos, entre os quais há duas referências. O recurso Resultado possui uma referência para Diagnóstico que, por sua vez, referencia o recurso Amostra.
+
+![img](../static/img/referencias.png)
+
+Convém reiterar por meio de mais um exemplo. A amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada pelo diagnóstico (_Observation_) que a utiliza.
+
+O trecho de JSON abaixo, ressaltando apenas a propriedade _entry_, é fornecido para ilustrar a localização e compreensão do emprego de referências entre recursos FHIR em um _Bundle_.
+
+```json
+"entry": [
+   {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        ... "reference": "urn:uuid:transient-1" ...
+   },
+   {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Observation",
+         ... "reference": "urn:uuid:transient-2" ...
+      }
+   },
+   {
+      "fullUrl": "urn:uuid:transient-2",
+      "resource": {
+        "resourceType": "Specimen"
+      }
+   }
+]
+```
 
 Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher as entradas correspondentes.
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos.
