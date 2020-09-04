@@ -207,7 +207,7 @@ _subject_. O indivíduo ao qual está associado o resultado de exame. A identifi
 
 _date_. Data e hora em que o documento foi gerado, por exemplo, "2020-03-20T00:00:00-03:00".
 
-_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. À semelhança de cenários anteriores, o trecho
+_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo ou autoria do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. À semelhança de cenários anteriores, o trecho
 JSON abaixo substitui o valor de um CNES pela sequência "{{lab-cnes}}".
 
 ```json
@@ -231,7 +231,139 @@ por meio do identificador a ele atribuído pela RNDS, contudo, não estará dire
 na linha do tempo do cidadão. Esta propriedade será detalhada na definição do serviço
 _Substituir resultado de exame_.
 
-_section_. Define as seções do documento (resultado). Neste caso há uma única seção na qual
-é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, no caso um _Observation_ e,
+_section_. Define as seções empregadas pelo resultado (documento). Neste caso há uma única seção na qual
+é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, um _Observation_ e,
 para ser ainda mais preciso, o perfil definido pela RNDS para registrar o diagnóstico de um
-laboratório clínico.
+laboratório clínico. Em consequência, o valor desta propriedade é fixo e fornecido abaixo:
+
+```json
+"section": [
+    {
+        "entry": [
+            {
+                "reference": "urn:uuid:transient-1"
+            }
+        ]
+    }
+]
+```
+
+### Diagnóstio em Laboratório Clínico
+
+O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
+diagnóstica ou investigativa. Este perfil é uma personalização do recurso [Observation](https://www.hl7.org/fhir/observation.html). As propriedades são definidas abaixo.
+
+_status_. Valor fixo "final".
+
+_category_. Conforme a documentação do perfil, classifica o exame ou teste utilizando os subgrupos do grupo 02 - Procedimentos com finalidade diagnóstica da Tabela SUS. Ou seja, é um dos valores do [Subgrupo da Tabela SUS](https://simplifier.net/RedeNacionaldeDadosemSade/BRSubgrupoTabelaSUS). No trecho abaixo usa-se o código "0214",
+que designa "Diagnóstico por teste rápido".
+
+```json
+"category": [
+    {
+      "coding": [
+       {
+         "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS",
+         "code": "0214"
+       }
+      ]
+    }
+],
+```
+
+_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19LOINC) e códigos da tabela [Exames do GAL](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19GAL). O trecho abaixo ilustra um
+exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que designa "SARS Coronavírus 2, [dosagem de] anticorpo IgG em soro ou plasma por imunoensaio".
+
+```json
+"code": {
+    "coding": [
+        {
+            "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC",
+            "code": "94507-1"
+        }
+    ]
+},
+```
+
+_subject_. Identifica o indivíduo associado ao exame ou teste. O valor só faz sentido se for
+o mesmo daquele fornecido anteriormente, para o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Em consequência, o trecho JSON correspondente, também com o mesmo propósito de não citar explictamente um indivíduo, o código CNS do indivíduo é substituído
+por "{{individuo-cns}}".
+
+```json
+"subject": {
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+        "value": "{{individuo-cns}}"
+    }
+},
+```
+
+_issued_. Data/hora em que o resultado foi liberado. Este instante pode ser diferente daquele em
+que o resultado é produzido e também diferente do instante em que o empacotamento, _Bundle_ é produzido.
+
+_performer_. Identifica o responsável pelo resultado do exame. Observe que este responsável pode ser diferente do autor.
+
+```json
+"performer": [
+    {
+        "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+            "value": "{{lab-cnes}}"
+        }
+    }
+],
+```
+
+_valueQuantity_. O valor do resultado quando este é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Se for qualitativo, então a propriedade
+a ser utilizada deve ser _valueCodeableConcept_. Neste caso, a propriedade _valueQuantity_ não seria fornecida.
+
+_valueCodeableConcept_. O valor do resultado quando este é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)). Se o valor do resultado é quantitativo,
+então a propriedade a ser utilizada deve ser _valueQuantity_. Neste caso, a propriedade _valueCodeableConcept_ não seria fornecida. No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
+[Resultado qualitativo do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRResultadoQualitativoExame).
+
+```json
+"valueCodeableConcept": {
+    "coding": [
+        {
+            "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+            "code": "3"
+        }
+    ]
+},
+```
+
+_interpretation_. Interpretação qualitativa de um resultado quantitativo. Propriedade opcional e
+particularmente útil quando se deseja esclarecer o resultado quantitativo do exame.
+
+_note_. Comentários sobre os resultados dos exames. Propriedade também opcional.
+
+_method_. O método empregado na realização do exame. Este objeto possui uma única propriedade, _text_. Abaixo
+segue um trecho JSON correspondente:
+
+```json
+"method": {
+    "text": "Imunocromatográfico"
+}
+```
+
+_referenceRange_. De forma análoga à _method_ (acima), para o perfil em questão, esta propriedade (_array_) é definida por um único objeto de uma única propriedade, _text_, conforme ilustra o trecho abaixo.
+
+```json
+"referenceRange":
+   [
+       {
+           "text": "(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos"
+       }
+   ]
+```
+
+_specimen_. Estabelece referência para o recurso [Specimen](https://www.hl7.org/fhir/specimen.html). Este recurso identifica a amostra empregada na realização do exame. Neste caso específico é uma referência para o perfil
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica). Noutras palavras,
+esta propriedade é a última do segundo recurso fornecido no _Bundle_ e que, em particular, referencia
+o terceiro recurso, conforme ilustrado abaixo.
+
+```json
+"specimen": {
+    "reference": "urn:uuid:transient-2"
+}
+```
