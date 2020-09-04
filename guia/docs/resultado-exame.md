@@ -57,10 +57,30 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 ```
 
 A propriedade _type_ indica o propósito do _Bundle_, no caso, trata-se de um documento (_document_). A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
-provavelmente o mesmo instante da última atualização, fornecida na propriedade _lastUpdate_
-de _meta_.
+provavelmente o mesmo instante da última atualização, fornecida na propriedade _meta.lastUpdate_.
 
 O "esqueleto" acima ilustra como um resultado de exame laboratorial deve ser empacotado
-antes de ser enviado para a RNDS. Ou seja, é preciso produzir
-um JSON completo, válido, "inflado" com os valores omitidos, para as propriedades
-_identifier_ e _entry_.
+antes de ser enviado para a RNDS. Ou seja, falta completar este "esqueleto", produzir
+um JSON válido, "inflado" com os valores omitidos para as propriedades
+_identifier_ (identificador do _Bundle_) e _entry_ (elementos do resultado).
+
+### Identificador (_identifier_)
+
+A montagem de um identificador (_identifier_) é realizada a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{labID}} e {{resultadoID}}:
+
+```json
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{labID}}",
+        "value": "{{resultadoID}}"
+    }
+```
+
+O identificador do solicitante, representado acima por {{labID}}, é fornecido pela RNDS quando
+o pedido de credenciamento do laboratório em questão é aprovado. A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados por uma questão de segurança.
+
+![img](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
+
+O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados
+produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
+O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim por diante, caso o
+identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (\_Universally Unique IDentifier) geralmente conhecido por [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Não é difícil o acesso a um gerador de UUID. Para ilustrar, seguem dois, um em [Java](https://www.baeldung.com/java-uuid) e outro em [JavaScript](https://www.npmjs.com/package/uuid).
