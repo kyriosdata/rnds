@@ -367,3 +367,22 @@ o terceiro recurso, conforme ilustrado abaixo.
     "reference": "urn:uuid:transient-2"
 }
 ```
+
+### Amostra Biológica
+
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica) é um perfil de
+[Specimen](https://www.hl7.org/fhir/specimen.html). Este perfil identifica a amostra de origem humana ou animal
+usada em investigações biológicas/laboratoriais para fins diagnósticos. Neste caso, a única propriedade é _type_,
+que identifica o [Tipo de Amostra de Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostra-1.0). Este tipo pode vir de duas tabelas (_code systems_) distintas. Uma delas é o [Tipo de Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostraGAL) que, dentre os seus códigos se encontra
+"SGHEM" para designar "sangue", empregado no trecho abaixo.
+
+```json
+"type": {
+    "coding": [
+        {
+            "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+            "code": "SGHEM"
+        }
+    ]
+}
+```
