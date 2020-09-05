@@ -49,7 +49,7 @@ A execução satisfatória desta atribuição resulta em:
 - Identificação dos itens de dados dos quais aqueles exigidos pela RNDS serão obtidos.
 - Identificação do mapeamento, se for o caso, entre o item de dado de origem do laboratório e o item de dado exigido pela RNDS.
 
-## Responsável pela TI do laboratório
+## Responsável pela TI
 
 ### Desenvolver
 
