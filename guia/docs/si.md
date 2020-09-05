@@ -21,25 +21,26 @@ representativos e estão explicitamente indicados na figura abaixo.
 
 ![img](../static/img/rnds-uc.png)
 
-A documentação enfatiza _Obter token de acesso_ e _Enviar resultado de exame_. Não apenas por serem os principais, mas porque cobrem tudo o
-que é necessário também pelos demais serviços.
+O diagrama acima contempla _Obter token de acesso_ e _Enviar resultado de exame_, não apenas por serem os principais, mas porque cobrem tudo o
+que é necessário nos demais serviços.
 
-O caso de uso _Obter token de acesso_ implementa segurança e seu processo é essencialmente técnico. Por meio deste caso de uso, empregando o certificado digital do laboratório, obtém-se o _token_ necessário para usufruir dos demais serviços. No diagrama fornecido abaixo, este caso de uso é realizado por meio da função "Autenticar". Todas as demais funções,
-por outro lado, são necessárias para implementar o caso de uso _Enviar resultado de exame_.
+Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
 
 ![img](../static/img/rnds-dfd.png)
 
 Cada função é definida e classificada quanto à fase em que é executada (preparação ou entrega).
 
 - PREPARAÇÃO
-  1.  **Filtrar**. Dentre os dados produzidos para um laudo, aqueles necessários são selecionados.
-  1.  **Mapear**. código empregados pelo laboratório e/ou transformações de dados necessários para se adequar às exigências da RNDS;
-  1.  **Empacotar** os dados na representação a ser utilizada para envio (JSON).
-  1.  **Verificar** o documento JSON correspondente ao laudo a ser enviado.
+
+  1.  **Filtrar**. Seleciona os dados de um resultado de exame a partir dos quais aqueles exigidos pela RNDS serão produzidos.
+  1.  **Mapear**. Realiza a conversão e/ou mapeamento necessário entre os dados selecionados (filtrados) e aqueles no formato exigido pela RNDS.
+  1.  **Empacotar**. Cria a representação JSON dos dados correspondentes a um
+      resultado.
+
 - ENTREGA
-  1.  **Autenticar**. Obter a chave de acesso aos serviços.
-  1.  **Enviar**. Atividade que notifica o resultado de um exame, conforme
-      padrões estabelecidos pela RNDS, ao Ministério da Saúde.
+  1.  **Verificar**. Confere se o empacotamento do resultado a ser enviado está consistente com especificação da RNDS.
+  1.  **Autenticar**. Obtém a chave de acesso aos serviços.
+  1.  **Enviar**. Notifica o resultado de um exame.
 
 A figura abaixo ilustra a classificação das funções, a ordem em que devem ser executadas e os dois ambientes (de homologação e produção).
 A fase de preparação reúne funções "locais" ao laboratório, não demandam interação com um dos ambientes da RNDS. Por outro lado, as funções da
