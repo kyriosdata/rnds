@@ -32,7 +32,7 @@ const features = [
   },
   {
     title: "Conteúdo",
-    imageUrl: "img/undraw_docusaurus_react.svg",
+    imageUrl: "img/conteudo-guia.png",
     description: (
       <>
         Contexto, sequência de passos, orientações, explanações, código,
