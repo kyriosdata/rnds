@@ -8,8 +8,8 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: "Easy to Use",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    title: "RNDS",
+    imageUrl: "img/rnds-logo.png",
     description: (
       <>
         Docusaurus was designed from the ground up to be easily installed and
