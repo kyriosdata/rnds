@@ -2,9 +2,11 @@ module.exports = {
   someSidebar: {
     Tópicos: [
       "contexto",
+      "roteiro",
       "atores",
-      "si",
       "ambientes",
+      "tecnologias",
+      "si",
       "resultado",
       "doc1",
       "doc2",

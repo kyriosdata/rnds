@@ -1,6 +1,13 @@
+---
+id: tecnologias
+title: Tecnologias
+sidebar_label: tecnologias
+---
+
 ### FHIR (Fast Healthcare Interoperability Resources)
 
-[<img src="https://www.hl7.org/fhir/assets/images/fhir-logo-www.png" width="100">](https://www.hl7.org/fhir/)
+![img](../static/img/fhir-logo-www.png)
+https://www.hl7.org/fhir/
 
 Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
 
@@ -25,13 +32,11 @@ a criação é melhor realizada com apoio de um editor específico como o
 A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
 agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
 
-Além deste arquivo, as definições
-podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de
-navegação e visualização das definições. Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
+Além deste arquivo, as definições podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de navegação e visualização das definições. Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
 
 ### Simplifier.NET
 
-[<img src="https://simplifier.net/images/simplifier-logo.png" width="150">](https://simplifier.net)
+<img src="https://simplifier.net/images/simplifier-logo.png" width="150"> https://simplifier.net
 
 Simplifier.NET é um serviço que permite
 publicar e consultar perfis. Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir.
@@ -49,11 +54,11 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 ## Hapi FHIR (implementação de referência)
 
-[<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50">](https://hapifhir.io)
+<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50"> https://hapifhir.io
 
 FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
 
-A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br>
+A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br/>
 
 A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos [ambientes](./ambientes.md) de homologação e produção.
 
@@ -102,7 +107,8 @@ faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
 ### Postman
 
-[<img src="../media/postman.png" width="50px">](https://www.getpostman.com/downloads/)
+![img](../static/img/postman.png)
+https://www.getpostman.com/downloads/
 
 A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
 gráfica para montar requisições, executá-las, e configurar testes, dentre outras funções, o que a torna uma espécie de referência no desenvolvimento de APIs.
@@ -125,4 +131,4 @@ Consulte [FHIRPath](../tools/fhirpath) para detalhes, inclusive exemplos de uso.
 
 # Siglas
 
-- STU é a abreviação para _Standard for Trial Use_ no contexto FHIR.
+STU é a abreviação para _Standard for Trial Use_ no contexto FHIR.
