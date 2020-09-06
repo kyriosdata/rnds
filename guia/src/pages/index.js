@@ -12,8 +12,10 @@ const features = [
     imageUrl: "img/rnds-logo.png",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        A Rede Nacional de Dados em Saúde (
+        <a href="https://rnds.saude.gov.br/">RNDS</a>) é uma "plataforma
+        nacional de integração de dados em saúde" visando a transformação
+        digital da saúde no Brasil.
       </>
     ),
   },
