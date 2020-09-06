@@ -20,22 +20,24 @@ const features = [
     ),
   },
   {
-    title: "Focus on What Matters",
-    imageUrl: "img/undraw_docusaurus_react.svg",
+    title: "Foco no desenvolvedor",
+    imageUrl: "img/desenvolvedor-guia.png",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        O <i>Guia</i> é produzido com foco no desenvolvedor. A integração é
+        vista como um projeto cujo principal artefato é o _software_ que
+        requisita serviços oferecidos pela RNDS.
       </>
     ),
   },
   {
-    title: "Powered by React",
+    title: "Conteúdo",
     imageUrl: "img/undraw_docusaurus_react.svg",
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Contexto, sequência de passos, orientações, explanações, código,
+        <i>scripts</i>, enfim, tudo o que é necessário para compreender e fazer
+        funcionar a integração com a RNDS.
       </>
     ),
   },
