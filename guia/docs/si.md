@@ -39,13 +39,10 @@ Cada função é definida e classificada quanto à fase em que é executada (pre
 
 - ENTREGA
   1.  **Verificar**. Confere se o empacotamento do resultado a ser enviado está consistente com especificação da RNDS.
-  1.  **Autenticar**. Obtém a chave de acesso aos serviços.
-  1.  **Enviar**. Notifica o resultado de um exame.
+  1.  **Autenticar**. Obtém chave para acesso aos serviços da RNDS.
+  1.  **Enviar**. Notifica o resultado de um exame à RNDS.
 
-A figura abaixo ilustra a classificação das funções, a ordem em que devem ser executadas e os dois ambientes (de homologação e produção).
-A fase de preparação reúne funções "locais" ao laboratório, não demandam interação com um dos ambientes da RNDS. Por outro lado, as funções da
-fase de entrega, _Autenticar_ e _Enviar_, depende do acesso a um dos
-ambientes da RNDS.
+A figura abaixo ilustra os processos e a classificação deles, além de indicar que dois processos, via internet, interagem com as portas Auth e EHR, oferecidas pela RNDS. Detalhes são fornecidos em [Ambientes](./ambientes).
 
 ![img](../static/img/desenvolvedor.png)
 
