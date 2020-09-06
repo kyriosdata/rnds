@@ -9,10 +9,10 @@ module.exports = {
   projectName: "rnds", // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: "My Site",
+      title: "Guia",
       logo: {
-        alt: "My Site Logo",
-        src: "img/logo.svg",
+        alt: "Guia de Integração RNDS",
+        src: "img/guia.png",
       },
       items: [
         {
