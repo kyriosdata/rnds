@@ -12,7 +12,7 @@ module.exports = {
       title: "Guia",
       logo: {
         alt: "Guia de Integração RNDS",
-        src: "img/guia.png",
+        src: "img/guia-logo.png",
       },
       items: [
         {
