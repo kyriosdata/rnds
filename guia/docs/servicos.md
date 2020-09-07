@@ -8,14 +8,13 @@ Há um serviço (_web service_) de _segurança_ e os demais são de _saúde_.
 
 O serviço de segurança obtém o _token_ de acesso exigido para execução dos demais serviços. Este _token_ substitui o emprego de autenticação baseada em usuário e uma senha secreta por certificado digital. O certificado digital, portanto, é empregado para autenticar a origem ou em nome de quem as requisições serão submetidas. 
 
-Os serviços (_web services_) de saúde implementam a troca de informação em saúde. Estes serviços são o meio para se atingir a deseja interoperabilidade. 
+Os serviços (_web services_) de saúde implementam a troca de informação em saúde. Estes serviços são o meio para se atingir a desejada interoperabilidade. 
 
 ### Segurança (_web service_)
 
-| Método | Path                      | Entrada | Saida | Descrição |
-|--------|---------------------------|---------|-------|-----------|
-| GET    | /token          |         |       |           |
-
+| Método | Path        | Entrada | Saida | Descrição |
+|--------|-------------|---------|-------|-----------|
+| GET    | /api/token  |         |       |           |
 
 ### Saúde (_web services_) 
 
