@@ -47,74 +47,36 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações do padrão FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations), como a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io).
 
-A integração com a RNDS significa que há uma implementação do FHIR oferecida pela RNDS, observando os perfis definidas pela RNDS, por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde. A implementação do FHIR oferecida pela RNDS está disponível em dois [ambientes](./ambientes.md), um de homologação e outro de produção.
+A integração com a RNDS significa que há uma implementação do FHIR oferecida pela RNDS, observando os perfis definidas pela RNDS, por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde.
 
-## Experimentar acesso ao FHIR (sem ser via RNDS)
+> Quem disponibiliza uma implementação do FHIR é a RNDS. Laboratórios são clientes desta implementação. Laboratórios não precisam disponibilizar uma implementação do FHIR.
 
-Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso (lembre-se que são empregados apenas para testes, experimentações).
+A implementação do FHIR oferecida pela RNDS está disponível em dois [ambientes](./ambientes.md), um de homologação e outro de produção.
 
-Cada um destes servidores funciona como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON.
-Desenvolvedores podem empregar estes servidores para se ambientar com a RESTful API padronizada pelo FHIR. De fato, o acesso ao [ambiente](./ambientes.md) de homologação pode ser precedido pelo contato
-com um destes servidores.
+## Implementações para testes com o FHIR
 
-Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada acima, também possui um servidor para testes disponível em http://hapi.fhir.org/.
+Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso. Estes servidores são empregados apenas para testes, o que
+é suficiente para desenvolvedores que queiram conhecer mais sobre o padrão.
 
-## Como interagir com um servidor FHIR?
+Cada um destes servidores funciona como um estabelecimento apto a interagir com outros por meio do FHIR. Desta forma, sem exigências que são necessárias em um cenário real, até porque os dados disponibilizados não são dados reais, você pode submeter requisições e observar os recursos retornados no formato da sua escolha, em geral XML ou JSON, conforme visto anteriormente.
+
+Desenvolvedores podem empregar estes servidores para se ambientar com o padrão FHIR. De fato, o acesso ao [ambiente](./ambientes.md) de homologação da RNDS pode ser precedido pelo contato com um destes servidores.
+
+Antes que o responsável pelo laboratório obtenha um certificado digital, peça o credenciamento e aguarde pela homologação, desenvolvedores podem empregar um destes servidores para experimentação. Convém observar, contudo, que nestes casos tais servidores não estarão aderentes aos perfis estabelecidos pela RNDS.
+Ou seja, seguem o padrão FHIR, mas sem "obdecer" as especificidades impostas pelos perfis nacionais.
+
+Em tempo, a implementação de referência do FHIR, Hapi FHIR, citada anteriormente, também possui um servidor para testes disponível em http://hapi.fhir.org/.
+
+## RESTful API FHIR
 
 Há uma API (_Application Programming Interface_) bem-definida para o acesso
-a um servidor FHIR, uma RESTful API, e há várias formas de usar esta API.
+a um servidor FHIR. Trata-se de uma RESTFul API, a [RESTful API FHIR](http://hl7.org/fhir/http.html).
 
-Consulte [What is REST](https://restfulapi.net/) para saber o que é uma RESTful API, e portais [pertinentes](https://github.com/Kikobeats/awesome-api). Este estilo de integração é amplamente empregado e você encontrará com facilidade os mais variados serviços acessíveis
+Consulte [What is REST](https://restfulapi.net/) para saber o que é uma RESTful API, e portais [pertinentes](https://github.com/Kikobeats/awesome-api). RESTful API é um estilo amplamente empregado para integração entre sistemas, e não é específico para a saúde. Há um conjunto significativo de servições disponíveis
 por meio de uma RESTful API (veja uma lista deles [aqui](https://medium.com/better-programming/a-curated-list-of-100-cool-and-fun-public-apis-to-inspire-your-next-project-7600ce3e9b3)).
-
-### RESTful API FHIR
-
-Um dos aspectos que distingue o FHIR de outras estratégias de interoperabilidade é o foco na implementação. Em particular, inclui detalhes da interface de acesso,
-ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html). Para definição de
-RESTful API consulte.
-
-### Interface gráfica
-
-Alguns deles oferecem uma interface gráfica onde é possível "montar" uma
-requisição e submetê-la. O servidor de testes [Hapi FHIR](http://hapi.fhir.org/) é um exemplo. É útil para experimentação e para obter detalhes de como criar corretamente uma requisição.
-
-### cURL
-
-Via linha de comandos (_shell_) você pode disparar requisições compatíveis com a RESTful API FHIR. Naturalmente, este é um recurso empregado mais por desenvolvedores. Afinal, é necessário indicar explicitamente todos os _headers_ necessários, assim como o _payload_ esperado, para montar corretamente uma requisição. Você pode executar o comando abaixo
-
-```
-curl -H "Accept: application/json" http://test.fhir.org/r4/Patient/id-invalido
-```
-
-e obter como resposta o código 404 (não encontrado), para indicar que o paciente
-cujo identificador é "id-invalido" não foi encontrado. Observe que esta requisição
-faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
-
-<hr/>
-
-### Postman
-
-![img](../static/img/postman.png)
-https://www.getpostman.com/downloads/
-
-A ferramenta [Postman](https://www.getpostman.com/downloads/) é uma alternativa
-gráfica para montar requisições, executá-las, e configurar testes, dentre outras funções, o que a torna uma espécie de referência no desenvolvimento de APIs.
-
-### Desenvolvedores via código
-
-Desenvolvedores escrevem código. O acesso à RESTful API FHIR via código
-é apoiada por várias bibliotecas. Abaixo seguem algumas delas:
-
-- [.Net](http://ewoutkramer.github.io/fhir-net-api/client-setup.html)
-- [JavaScript](https://github.com/smart-on-fhir/client-js)
-- [Java](https://github.com/FirelyTeam/fhirstarters/tree/master/java/hapi-fhirstarters-client-skeleton)
 
 ## FHIRPath
 
 FHIRPath é um mecanismo para manusear documentos JSON contendo recursos FHIR.
 Trata-se de proposta similar à JsonPath e XML Path, por exemplo. Contudo,
 possui funções específicas para documentos contendo recursos FHIR.
-
-## Siglas
-
-STU é a abreviação para _Standard for Trial Use_ no contexto FHIR.

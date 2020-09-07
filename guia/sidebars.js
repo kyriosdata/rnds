@@ -6,6 +6,7 @@ module.exports = {
       "atores",
       "ambientes",
       "tecnologias",
+      "requisicoes",
       "servicos",
       "perfis",
       "si",
