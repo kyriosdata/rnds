@@ -117,7 +117,6 @@ Desenvolvedores escrevem código. O acesso à RESTful API FHIR via código
 FHIRPath é um mecanismo para manusear documentos JSON contendo recursos FHIR.
 Trata-se de proposta similar à JsonPath e XML Path, por exemplo. Contudo,
 possui funções específicas para documentos contendo recursos FHIR.
-Consulte [FHIRPath](../tools/fhirpath) para detalhes, inclusive exemplos de uso.
 
 ## Siglas
 
