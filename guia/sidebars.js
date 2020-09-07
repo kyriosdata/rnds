@@ -6,6 +6,7 @@ module.exports = {
       "atores",
       "ambientes",
       "tecnologias",
+      "perfis",
       "si",
       "resultado",
       "doc1",

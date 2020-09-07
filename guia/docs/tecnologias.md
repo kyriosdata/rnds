@@ -4,12 +4,9 @@ title: Tecnologias
 sidebar_label: tecnologias
 ---
 
-### FHIR (Fast Healthcare Interoperability Resources)
+### FHIR
 
-![img](../static/img/fhir-logo-www.png)
-https://www.hl7.org/fhir/
-
-Conforme o portal https://hl7.org/fhir/, FHIR _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
+[FHIR](https://hl7.org/fhir/) _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
 
 Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
 
@@ -27,16 +24,9 @@ Um perfil pode ser criado com um simples editor de texto, contudo,
 a criação é melhor realizada com apoio de um editor específico como o
 [Forge](https://simplifier.net/forge), disponível para Windows.
 
-### Perfis RNDS (definições)
-
-A RNDS já realizou "adequações" em alguns dos recursos (_resources_) FHIR para atender o contexto nacional. As definições pertinentes estão
-agrupadas e disponíveis no arquivo [zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/9c3445f12823fd4c4f66e107617fc131_inp88qqqi.zip).
-
-Além deste arquivo, as definições podem ser publicadas e consultadas por meio do portal Simplifier.NET (comentado abaixo), cujas funções incluem recursos de navegação e visualização das definições. Os perfis definidos pela RNDS estão disponíveis para consulta, por meio deste serviço, [aqui](https://simplifier.net/RedeNacionaldeDadosemSade).
-
 ### Simplifier.NET
 
-<img src="https://simplifier.net/images/simplifier-logo.png" width="150"> https://simplifier.net
+<img src="https://simplifier.net/images/simplifier-logo.png" width="150" /> https://simplifier.net
 
 Simplifier.NET é um serviço que permite
 publicar e consultar perfis. Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir.
@@ -54,7 +44,7 @@ O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Ob
 
 ## Hapi FHIR (implementação de referência)
 
-<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50"> https://hapifhir.io
+<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50"/> https://hapifhir.io
 
 FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
 
@@ -84,7 +74,7 @@ por meio de uma RESTful API (veja uma lista deles [aqui](https://medium.com/bett
 
 Um dos aspectos que distingue o FHIR de outras estratégias de interoperabilidade é o foco na implementação. Em particular, inclui detalhes da interface de acesso,
 ou seja, da [RESTful API FHIR](http://hl7.org/fhir/http.html). Para definição de
-RESTful API consulte .
+RESTful API consulte.
 
 ### Interface gráfica
 
@@ -103,7 +93,7 @@ e obter como resposta o código 404 (não encontrado), para indicar que o pacien
 cujo identificador é "id-invalido" não foi encontrado. Observe que esta requisição
 faz uso do servidor FHIR **http<span>:</span>//test.fhir.org**.
 
-<hr>
+<hr/>
 
 ### Postman
 
@@ -129,6 +119,6 @@ Trata-se de proposta similar à JsonPath e XML Path, por exemplo. Contudo,
 possui funções específicas para documentos contendo recursos FHIR.
 Consulte [FHIRPath](../tools/fhirpath) para detalhes, inclusive exemplos de uso.
 
-# Siglas
+## Siglas
 
 STU é a abreviação para _Standard for Trial Use_ no contexto FHIR.

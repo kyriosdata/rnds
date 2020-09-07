@@ -15,3 +15,4 @@ Abaixo segue um roteiro projetado para contemplar o desenvolvedor que não tem c
 - Compreenda a organização e o código de um _Software de Integração_, que desempenha funções de integração disponibilizadas em uma biblioteca pública.
 - Verificação de recursos.
 - Adquira uma noção dos fundamentos.
+- Ambiente-se com as [personalizações](./perfis) do FHIR pela RNDS.
