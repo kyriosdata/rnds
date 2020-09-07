@@ -15,6 +15,7 @@ module.exports = {
       "doc2",
       "doc3",
     ],
+    Ferramentas: ["tools/fhirpath", "tools/postman"],
     Features: ["mdx"],
   },
 };
