@@ -1,28 +1,27 @@
 ---
 id: tecnologias
 title: Tecnologias
-sidebar_label: tecnologias
+sidebar_label: Tecnologias
 ---
 
 ### FHIR
 
-[FHIR](https://hl7.org/fhir/) _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_ ou recurso é o elemento básico empregado para a troca de dados usando FHIR.
+[FHIR](https://hl7.org/fhir/) _é um padrão para a troca de dados em saúde_, o acrônimo vem de _Fast Healthcare Interoperability Resources_. Destacado no próprio nome, _resource_, ou recurso, é o elemento básico empregado para a interoperabilidade de sistemas de informação em saúde usando FHIR.
 
-Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo ou animal assistido. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
+Um recurso representa algum tipo de entidade do cuidado em saúde. Por exemplo, o recurso [_Patient_](https://www.hl7.org/fhir/patient.html) é empregado para dados demográficos ou outra informação administrativa acerca do indivíduo. Por outro lado, se o que se deseja trocar são medidas como pressão ou temperatura, por exemplo, então fará uso do recurso [_Observation_](https://www.hl7.org/fhir/observation.html). No momento em que esta página é escrita estão definidos 145 tipos distintos de [recursos](https://www.hl7.org/fhir/resourcelist.html). Todos eles devidamente documentados.
 
-Está além do escopo apresentar em abrangência o FHIR. Os primeiros passos em FHIR podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
+Está além do escopo apresentar o FHIR em abrangência e profundidade. Os primeiros passos podem ser orientados por [aqui](https://blog.heliossoftware.com/fhir-training-the-early-steps-of-mastering-hl7-fhir-997d8dfa1320).
 
 ### Forge (editor de perfis)
 
-O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta.
-Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
-A definição de perfis é um esforço de modelagem de informação em saúde, e não é uma tarefa típica de desenvolvedores de software. Contudo,
-desenvolvedores terão que ter acesso aos perfis estabelecidos para os recursos a serem trocados. Afinal, toda a troca de
+O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível abarcar os usos específicos de todo o planeta. Felizmente, o FHIR permite "personalizações" por meio de perfis (_profiles_).
+
+A definição de perfis é um esforço de modelagem de informação em saúde.
+Desenvolvedores terão que ter acesso aos perfis que personalizam os recursos a serem trocados. Afinal, toda a troca de
 dados deverá estar em conformidade com os perfis definidos.
 
-Um perfil pode ser criado com um simples editor de texto, contudo,
-a criação é melhor realizada com apoio de um editor específico como o
-[Forge](https://simplifier.net/forge), disponível para Windows.
+A edição de um perfil é melhor realizada com o apoio de um editor
+específico para esta finalidade. [Forge](https://simplifier.net/forge), disponível para Windows, é uma opção.
 
 ### Simplifier.NET
 
