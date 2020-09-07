@@ -18,38 +18,36 @@ O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível
 
 A definição de perfis é um esforço de modelagem de informação em saúde.
 Desenvolvedores terão que ter acesso aos perfis que personalizam os recursos a serem trocados. Afinal, toda a troca de
-dados deverá estar em conformidade com os perfis definidos.
+dados deverá estar em conformidade com os perfis definidos. Veja [Perfis](./perfis) para acesso aos perfis definidos pela RNDS.
 
 A edição de um perfil é melhor realizada com o apoio de um editor
 específico para esta finalidade. [Forge](https://simplifier.net/forge), disponível para Windows, é uma opção.
 
+Convém ressaltar que para a integração com a RNDS não será necessário definir perfis (_profiles_). Esta é uma atribuição da RNDS e os [perfis](./perfis) já estão definidos. O acesso a eles, contudo, é necessário para verificar se as personalizações definidas são atendidas.
+
 ### Simplifier.NET
 
-<img src="https://simplifier.net/images/simplifier-logo.png" width="150" /> https://simplifier.net
-
-Simplifier.NET é um serviço que permite
-publicar e consultar perfis. Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir.
+[Simplifier.NET](https://simplifier.net) é um serviço que permite
+publicar e consultar perfis (_profiles_). Convém ressaltar que perfis precisam ser conhecidos entre as partes que irão interagir e que ferramenta a Forge, por exemplo, apresentada na seção anterior, permite apenas criá-los.
 
 As facilidades oferecidas pelo Simplifier.NET incluem a navegação entre recursos e definições pertinentes, o que é desejável para
-documentação.
+quem deseja consultar perfis.
+
+Os [perfis](./perfis) definidos pela RNDS podem ser consultados via este serviço.
 
 ## JSON (há ainda XML e RDF)
 
-Quando se usa o FHIR para troca de dados, o que ocorre é a troca de recursos. Em particular, tais recursos trafegam representados em JSON, conforme explorado neste portal. Contudo, há ainda as opções XML e RDF.
+Quando se usa o FHIR para troca de dados, o que ocorre é a troca de recursos. Tais recursos podem trafegar representados em vários formatos, dentre eles, JSON. Este guia de integração faz uso de JSON.
 
 O portal oficial define [JSON](https://www.json.org/json-en.html) (JavaScript Object Notation) como _um formato leve para troca de dados_. Ainda acrescenta que este formato é _fácil para seres humanos escreverem e lerem_.
 
 [XML](https://en.wikipedia.org/wiki/XML), à semelhança de JSON, é comumente empregado em _web services_ (serviços oferecidos por meio da internet). Por outro lado, [RDF](https://www.hl7.org/fhir/rdf.html) está associado, em geral, a questões semânticas, por exemplo, quando se deseja realizar inferência sobre os dados.
 
-## Hapi FHIR (implementação de referência)
+## Implementação do FHIR
 
-<img src="https://hapifhir.io/hapi-fhir/images/logos/raccoon-forwards.png" width="50"/> https://hapifhir.io
+FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações do padrão FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations), como a implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io).
 
-FHIR é uma especificação, um padrão. Computador, por outro lado, precisa de um software que implementa este padrão para ser executado. Há várias implementações de FHIR e algumas são [_open source_](https://wiki.hl7.org/Open_Source_FHIR_implementations).
-
-A implementação de referência do FHIR, a [Hapi FHIR](https://hapifhir.io), é _open source_.<br/>
-
-A RNDS oferece uma implementação do FHIR por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde sobre usuários. Esta implementação é oferecida por meio dos [ambientes](./ambientes.md) de homologação e produção.
+A integração com a RNDS significa que há uma implementação do FHIR oferecida pela RNDS, observando os perfis definidas pela RNDS, por meio da qual laboratórios e outros estabelecimentos de súde consultam e enviam informações de saúde. A implementação do FHIR oferecida pela RNDS está disponível em dois [ambientes](./ambientes.md), um de homologação e outro de produção.
 
 ## Experimentar acesso ao FHIR (sem ser via RNDS)
 
