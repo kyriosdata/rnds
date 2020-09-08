@@ -1,0 +1,79 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T04:06:22.238+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRMeioContato-1.0" />
+  <version value="1.0" />
+  <name value="BRMeioContato" />
+  <title value="Meio de Contato" />
+  <status value="active" />
+  <date value="2020-03-11T04:06:21.7150652+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Padronização de meios de contato no Brasil." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <type value="ContactPoint" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/ContactPoint" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="ContactPoint">
+      <path value="ContactPoint" />
+      <short value="Meio de Contato" />
+      <definition value="Informações do(s) meio(s) de contato com o indivíduo." />
+      <alias value="Contato" />
+      <alias value="Informação de Contato" />
+      <alias value="Telefone" />
+      <alias value="E-Mail" />
+      <alias value="Correio Eletrônico" />
+      <alias value="Celular" />
+      <alias value="Recado" />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.system">
+      <path value="ContactPoint.system" />
+      <short value="Tipo de Meio de Contato" />
+      <definition value="sms: número de telefone celular.&#xD;&#xA;phone: número de telefone fixo.&#xD;&#xA;fax: número de fax.&#xD;&#xA;email: endereço de correio eletrônico (e-mail).&#xD;&#xA;pager: número de pager/bip.&#xD;&#xA;url: endereço do sítio eletrônico na internet, inclusive redes sociais.&#xD;&#xA;other: outros meios de contato, inserir no value uma descrição, seguida do caractere : e espaço, seguido do contato propriamente dito (ex.: Jabber: fulano@organizacao)." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.value">
+      <path value="ContactPoint.value" />
+      <short value="Contato" />
+      <definition value="O número do telefone (preferencialmente em formato internacional +CC DDD XXXXX-XXXX, onde CC é o código do país, DDD código da cidade/localidade e XXXXX-XXXX é o número do telefone propriamente dito), endereço de correio eletrônico (ex.: fulano@provedor.br), URL ou outro valor que identifique o contato. Quando utilizar &quot;other&quot; no system, inserir uma descrição do meio de contato, seguida do caractere : e espaço, seguido do contato propriamente dito (ex.: Jabber: fulano@organizacao)." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.use">
+      <path value="ContactPoint.use" />
+      <short value="Uso do Meio de Contato" />
+      <definition value="home: residencial.&#xD;&#xA;work: comercial.&#xD;&#xA;temp: temporário ou de recado.&#xD;&#xA;mobile: dispositivo móvel, como um telefone celular." />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.rank">
+      <path value="ContactPoint.rank" />
+      <short value="Ordem de Preferência" />
+      <definition value="Especifica uma ordem preferencial entre vários contatos do mesmo tipo, sendo o de valor 1 o preferido." />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.period">
+      <path value="ContactPoint.period" />
+      <short value="Período do Meio de Contato" />
+      <definition value="Período em que o meio de contato foi utilizado pelo indivíduo." />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.period.start">
+      <path value="ContactPoint.period.start" />
+      <short value="Data de Início do Meio de Contato" />
+      <definition value="Data em que o meio de contato foi cadastrado ou começou a ser utilizado pelo indivíduo." />
+      <mustSupport value="true" />
+    </element>
+    <element id="ContactPoint.period.end">
+      <path value="ContactPoint.period.end" />
+      <short value="Data da Término do Meio de Contato" />
+      <definition value="Data em que o meio de contato foi desativado ou parou de ser utilizado pelo indivíduo." />
+      <mustSupport value="true" />
+    </element>
+  </differential>
+</StructureDefinition>

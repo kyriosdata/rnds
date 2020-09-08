@@ -1,0 +1,22 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ce40ac9a-0564-45d7-888d-091b7be01842" />
+  <meta>
+    <lastUpdated value="2020-04-07T20:51:20.256+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRJustificativaIndividuoNaoIdentificado-1.0" />
+  <version value="1.0" />
+  <name value="Justificativa da Impossibilidade de Identificação do Indivíduo" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-04-07T20:51:17.5349531+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica as razões pelo qual não foi possível obter os dados de identificação do indivíduo em um contato assistencial. (Port. nº 84/SAS/MS/1997 e Port. nº02/SAS/SGEP/MS/2012)" />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRJustificativaIndividuoNaoIdentificado" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

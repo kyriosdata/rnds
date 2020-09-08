@@ -1,0 +1,102 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-06-09T14:35:21.710+00:00" />
+  </meta>
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAdministracaoImunobiologico-1.1" />
+  <version value="1.1" />
+  <name value="BRAdministracaoImunobiologico" />
+  <title value="Registro de Administração de Imunobiológicos" />
+  <status value="active" />
+  <date value="2020-06-09T14:35:47.3387078+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Documento que representa o Registro de Administração de Imunobiológicos." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Composition" />
+  <baseDefinition value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRConjuntoMinimoDados-1.1" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Composition">
+      <path value="Composition" />
+      <short value="Registro Administração de Imunobiológico" />
+      <definition value="Documento que representa o Registro de Administração de Imunobiológico." />
+      <alias value="Administração de Imunobiológico" />
+      <alias value="Vacinação" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
+        <valueString value="Section" />
+      </extension>
+      <path value="Composition.section" />
+      <sliceName value="imunobiologicosAdministrados" />
+      <short value="Imunobiológico(s) Administrado(s)" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.title">
+      <path value="Composition.section.title" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.text">
+      <path value="Composition.section.text" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.entry">
+      <path value="Composition.section.entry" />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRImunobiologicoAdministrado-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.entry.reference">
+      <path value="Composition.section.entry.reference" />
+      <min value="1" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.entry.type">
+      <path value="Composition.section.entry.type" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.entry.identifier">
+      <path value="Composition.section.entry.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.entry.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Composition.section.entry.display" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:imunobiologicosAdministrados.section">
+      <path value="Composition.section.section" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

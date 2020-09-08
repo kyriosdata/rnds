@@ -1,0 +1,114 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ucum-vitals-common" />
+  <meta>
+    <lastUpdated value="2020-06-09T19:22:59.441+00:00" />
+    <profile value="http://hl7.org/fhir/StructureDefinition/shareablevalueset" />
+  </meta>
+  <language value="pt-BR" />
+  <text>
+    <status value="generated" />
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <h2>Unidades para Sinais Vitais</h2>
+      <div>
+        <p>Unidades comuns da UCUM para Sinais Vitais</p>
+      </div>
+      <p>
+        <b>Aviso de direitos autorais:</b>
+      </p>
+      <div>
+        <p>UCUM possui direitos autorais © 1999-2013 Regenstrief Institute, Inc. e The UCUM Organization, Indianapolis, IN. Todos os direitos reservados. Mais informações em: http://unitsofmeasure.org/trac//wiki/TermsOfUse</p>
+      </div>
+      <div>
+        <p>Traduzido pelo Ministério da Saúde do Brasil.</p>
+      </div>
+      <p>Este conjunto de valores inclui códigos do seguinte sistema de codificação:</p>
+      <ul>
+        <li>Inclui os seguintes códigos definidos pela
+          <a href="http://unitsofmeasure.org"><code>http://unitsofmeasure.org</code></a><table class="none"><tr><td style="white-space:nowrap"><b>Código</b></td><td><b>Descrição</b></td></tr><tr><td>%</td><td>por cento</td><td /></tr><tr><td>cm</td><td>centímetro</td><td /></tr><tr><td>[in_i]</td><td>polegada (internacional)</td><td /></tr><tr><td>kg</td><td>quilograma</td><td /></tr><tr><td>g</td><td>grama</td><td /></tr><tr><td>[lb_av]</td><td>libra (estadunidense e inglesa)</td><td /></tr><tr><td>Cel</td><td>grau Celsius</td><td /></tr><tr><td>[degF]</td><td>grau Fahrenheit</td><td /></tr><tr><td>mm[Hg]</td><td>milímetro de mercúrio</td><td /></tr><tr><td>/min</td><td>por minuto</td><td /></tr><tr><td>kg/m2</td><td>quilograma por metro quadrado</td><td /></tr><tr><td>m2</td><td>metro quadrado</td><td /></tr></table></li>
+      </ul>
+    </div>
+  </text>
+  <extension url="http://hl7.org/fhir/StructureDefinition/valueset-extensible">
+    <valueBoolean value="true" />
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-wg">
+    <valueCode value="oo" />
+  </extension>
+  <url value="http://hl7.org/fhir/ValueSet/ucum-vitals-common" />
+  <identifier>
+    <system value="urn:ietf:rfc:3986" />
+    <value value="urn:oid:2.16.840.1.113883.4.642.3.955" />
+  </identifier>
+  <version value="4.0.0" />
+  <name value="Unidades UCUM para Sinais Vitais" />
+  <title value="Unidades UCUM para Sinais Vitais" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-06-09T19:23:24.5226039+00:00" />
+  <publisher value="FHIR Project" />
+  <contact>
+    <telecom>
+      <system value="url" />
+      <value value="http://hl7.org/fhir" />
+    </telecom>
+    <telecom>
+      <system value="email" />
+      <value value="fhir@lists.hl7.org" />
+    </telecom>
+  </contact>
+  <description value="Unidades UCUM para Sinais Vitais" />
+  <copyright value="UCUM possui direitos autorais © 1999-2013 Regenstrief Institute, Inc. e The UCUM Organization, Indianapolis, IN. Todos os direitos reservados. Mais informações em: http://unitsofmeasure.org/trac//wiki/TermsOfUse" />
+  <compose>
+    <include>
+      <system value="http://unitsofmeasure.org" />
+      <concept>
+        <code value="%" />
+        <display value="por cento" />
+      </concept>
+      <concept>
+        <code value="cm" />
+        <display value="centímetro" />
+      </concept>
+      <concept>
+        <code value="[in_i]" />
+        <display value="polegada (international)" />
+      </concept>
+      <concept>
+        <code value="kg" />
+        <display value="quilograma" />
+      </concept>
+      <concept>
+        <code value="g" />
+        <display value="grama" />
+      </concept>
+      <concept>
+        <code value="[lb_av]" />
+        <display value="libra (EUA e Inglesa)" />
+      </concept>
+      <concept>
+        <code value="Cel" />
+        <display value="grau Celsius" />
+      </concept>
+      <concept>
+        <code value="[degF]" />
+        <display value="grau Fahrenheit" />
+      </concept>
+      <concept>
+        <code value="mm[Hg]" />
+        <display value="milímetro de mercúrio" />
+      </concept>
+      <concept>
+        <code value="/min" />
+        <display value="por minuto" />
+      </concept>
+      <concept>
+        <code value="kg/m2" />
+        <display value="quilograma por metro quadrado" />
+      </concept>
+      <concept>
+        <code value="m2" />
+        <display value="metro quadrado" />
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

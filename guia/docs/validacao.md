@@ -21,5 +21,8 @@ deve ser verificada.
 Uma alternativa para validação é usar o [validador](https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar), devidamente [documentado](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) e que permite seu uso via linha de comandos. Alguns deles são ilustrados abaixo:
 
 ```shell
-java -jar validador_cli.jar <recurso para validar> -ig <diretorio de definicoes> -recurse -output resultado.xml
+java -jar validador_cli.jar <recurso para validar> -ig <diretorio de definicoes> -recurse -output resultado.json
 ```
+
+No arquivo indicado acima, **resultado.json**, será fornecida a
+representação JSON de _OperationOutcome_.

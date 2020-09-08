@@ -1,0 +1,71 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="a495e791-173d-4175-bced-da4b42fa0ce1" />
+  <meta>
+    <lastUpdated value="2020-03-13T20:29:03.976+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRProgramaSaude-1.0" />
+  <version value="1.0" />
+  <name value="BRProgramaSaude" />
+  <title value="Programa de Saúde" />
+  <status value="active" />
+  <date value="2020-03-13T20:29:28.0958213+00:00" />
+  <description value="Extensão para identificar o programa de saúde." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="MedicationDispense" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Programa de Saúde" />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRProgramaSaude-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <binding>
+        <strength value="required" />
+        <description value="Programa de Saúde" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRProgramaSaude-1.0" />
+      </binding>
+    </element>
+    <element id="Extension.value[x].coding">
+      <path value="Extension.value[x].coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Extension.value[x].coding.system">
+      <path value="Extension.value[x].coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Extension.value[x].coding.code">
+      <path value="Extension.value[x].coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Extension.value[x].coding.display">
+      <path value="Extension.value[x].coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Extension.value[x].coding.userSelected">
+      <path value="Extension.value[x].coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Extension.value[x].text">
+      <path value="Extension.value[x].text" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

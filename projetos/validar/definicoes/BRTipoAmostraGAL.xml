@@ -1,0 +1,192 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="1fe028ce-d3f8-43c9-be1c-00b49a2bc4df" />
+  <meta>
+    <lastUpdated value="2020-06-09T14:39:12.730+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL" />
+  <version value="201701A" />
+  <name value="Tipo de Amostra Biológica" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-06-09T14:39:37.7113823+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica o tipo de amostra biológica utilizada em exames de acordo com a terminologia Gerenciador de Ambiente Laboratorial (GAL)." />
+  <content value="complete" />
+  <concept>
+    <code value="SECONF" />
+    <display value="Secreção Orofaríngea e Nasofaríngea" />
+  </concept>
+  <concept>
+    <code value="SNOF" />
+    <display value="Swab Naso-Orofaríngeo" />
+  </concept>
+  <concept>
+    <code value="SWNAFA" />
+    <display value="Swab Nasofaríngeo" />
+  </concept>
+  <concept>
+    <code value="SWAB" />
+    <display value="Swab" />
+  </concept>
+  <concept>
+    <code value="SECNAS" />
+    <display value="Secreção Nasofaríngea" />
+  </concept>
+  <concept>
+    <code value="ASNAFA" />
+    <display value="Aspirado Nasofaríngeo" />
+  </concept>
+  <concept>
+    <code value="SWORO" />
+    <display value="Swab Orofaríngeo" />
+  </concept>
+  <concept>
+    <code value="SWNAS" />
+    <display value="Swab Nasal" />
+  </concept>
+  <concept>
+    <code value="SECORF" />
+    <display value="Secreção Orofaríngea" />
+  </concept>
+  <concept>
+    <code value="LAVBRA" />
+    <display value="Lavado Brônquico Alveolar" />
+  </concept>
+  <concept>
+    <code value="LAVBRO" />
+    <display value="Lavado Brônquico" />
+  </concept>
+  <concept>
+    <code value="CORIZA" />
+    <display value="Coriza" />
+  </concept>
+  <concept>
+    <code value="EXSNAS" />
+    <display value="Exsudato de Nasofaringe" />
+  </concept>
+  <concept>
+    <code value="ASPBRO" />
+    <display value="Aspirado Brônquico" />
+  </concept>
+  <concept>
+    <code value="LAVTBR" />
+    <display value="Lavado Traqueo-Brônquico" />
+  </concept>
+  <concept>
+    <code value="SECTRA" />
+    <display value="Secreção Traqueal" />
+  </concept>
+  <concept>
+    <code value="EXSORO" />
+    <display value="Exsudato de Orofaringe" />
+  </concept>
+  <concept>
+    <code value="FGMP" />
+    <display value="Fragmentos do pulmão" />
+  </concept>
+  <concept>
+    <code value="FGMT" />
+    <display value="Fragmento" />
+  </concept>
+  <concept>
+    <code value="FLUORA" />
+    <display value="Fluido oral" />
+  </concept>
+  <concept>
+    <code value="FRAAMI" />
+    <display value="Fragmentos de ampigdalas" />
+  </concept>
+  <concept>
+    <code value="FRABAC" />
+    <display value="Fragmentos de baço" />
+  </concept>
+  <concept>
+    <code value="FRACOR" />
+    <display value="Fragmentos de coração" />
+  </concept>
+  <concept>
+    <code value="FRAFIG" />
+    <display value="Fragmentos de fígado" />
+  </concept>
+  <concept>
+    <code value="FRAGT" />
+    <display value="Fragmento de tecido" />
+  </concept>
+  <concept>
+    <code value="FRAMOR" />
+    <display value="Fragmentos de múltiplos órgãos" />
+  </concept>
+  <concept>
+    <code value="FRAPAN" />
+    <display value="Fragmentos de pâncreas" />
+  </concept>
+  <concept>
+    <code value="FRARIM" />
+    <display value="Fragmentos de rim" />
+  </concept>
+  <concept>
+    <code value="FRATRA" />
+    <display value="Fragmentos de traquéia" />
+  </concept>
+  <concept>
+    <code value="FRBRON" />
+    <display value="Fragmentos de brônquio" />
+  </concept>
+  <concept>
+    <code value="INFP" />
+    <display value="Infiltrado pulmonar" />
+  </concept>
+  <concept>
+    <code value="INODER" />
+    <display value="Inoculação intradérmica" />
+  </concept>
+  <concept>
+    <code value="LAVORO" />
+    <display value="Lavado de orofaringe" />
+  </concept>
+  <concept>
+    <code value="MTBIO" />
+    <display value="Material Não Biológico" />
+  </concept>
+  <concept>
+    <code value="SECBRO" />
+    <display value="Secreção brônquica" />
+  </concept>
+  <concept>
+    <code value="SECOC" />
+    <display value="Secreção ocular" />
+  </concept>
+  <concept>
+    <code value="SECPEN" />
+    <display value="Secreção peniana" />
+  </concept>
+  <concept>
+    <code value="SGEDT" />
+    <display value="Sangue com EDTA" />
+  </concept>
+  <concept>
+    <code value="SGHEM" />
+    <display value="Sangue" />
+  </concept>
+  <concept>
+    <code value="SNCCEB" />
+    <display value="Fragmento do tecido do SNC - cérebro" />
+  </concept>
+  <concept>
+    <code value="SWBAN" />
+    <display value="Swab Anal" />
+  </concept>
+  <concept>
+    <code value="SWOCU" />
+    <display value="Swab Ocular" />
+  </concept>
+  <concept>
+    <code value="SWRET" />
+    <display value="Swab retal" />
+  </concept>
+  <concept>
+    <code value="TECPM" />
+    <display value="Tecido pós-mortem" />
+  </concept>
+</CodeSystem>

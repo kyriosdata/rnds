@@ -1,0 +1,447 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="31468be2-a66e-427d-b07e-c217627c069d" />
+  <meta>
+    <lastUpdated value="2020-03-13T20:49:07.302+00:00" />
+  </meta>
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRImunobiologicoAdministrado-1.0" />
+  <version value="1.0" />
+  <name value="BRImunobiologicoAdministrado" />
+  <title value="Imunobiológico Administrado" />
+  <status value="active" />
+  <date value="2020-03-13T20:49:30.516547+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Representa um imunobiológico administrado." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Immunization" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Immunization" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Immunization">
+      <path value="Immunization" />
+      <short value="Imunobiológico Administrado" />
+      <definition value="Representa um imunobiológico administrado." />
+      <alias value="Vacinação" />
+      <alias value="Vacina Administrada" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.extension">
+      <path value="Immunization.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Immunization.extension:patientSituation">
+      <path value="Immunization.extension" />
+      <sliceName value="patientSituation" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRSituacaoCondicaoIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.identifier">
+      <path value="Immunization.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.status">
+      <path value="Immunization.status" />
+      <short value="Estado da Administração do Imunobiológico" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Estado do Evento" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoEvento-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.statusReason">
+      <path value="Immunization.statusReason" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.vaccineCode">
+      <path value="Immunization.vaccineCode" />
+      <short value="Imunobiológico Administrado" />
+      <definition value="Imunobiolótio que foi administrado." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Imunobiológico" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRImunobiologico-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.vaccineCode.coding">
+      <path value="Immunization.vaccineCode.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Immunization.vaccineCode.coding.system">
+      <path value="Immunization.vaccineCode.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.vaccineCode.coding.code">
+      <path value="Immunization.vaccineCode.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.vaccineCode.coding.display">
+      <path value="Immunization.vaccineCode.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.vaccineCode.coding.userSelected">
+      <path value="Immunization.vaccineCode.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.vaccineCode.text">
+      <path value="Immunization.vaccineCode.text" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.patient">
+      <path value="Immunization.patient" />
+      <short value="Indivíduo" />
+      <definition value="Indivíduo que recebeu o imunobiológico." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.patient.identifier.use">
+      <path value="Immunization.patient.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.patient.identifier.type">
+      <path value="Immunization.patient.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.patient.identifier.system">
+      <path value="Immunization.patient.identifier.system" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.patient.identifier.value">
+      <path value="Immunization.patient.identifier.value" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.patient.identifier.period">
+      <path value="Immunization.patient.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.patient.identifier.assigner">
+      <path value="Immunization.patient.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.patient.display">
+      <path value="Immunization.patient.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.encounter">
+      <path value="Immunization.encounter" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.occurrence[x]">
+      <path value="Immunization.occurrence[x]" />
+      <short value="Data da Administração do Imunobiológico" />
+      <definition value="Data ou data e hora que o imunobiológico foi administrado." />
+      <type>
+        <code value="dateTime" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.recorded">
+      <path value="Immunization.recorded" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.primarySource">
+      <path value="Immunization.primarySource" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reportOrigin">
+      <path value="Immunization.reportOrigin" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.location">
+      <path value="Immunization.location" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.manufacturer">
+      <path value="Immunization.manufacturer" />
+      <short value="Fabricante" />
+      <definition value="Fabricante do imunobiológico." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.manufacturer.reference">
+      <path value="Immunization.manufacturer.reference" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.manufacturer.type">
+      <path value="Immunization.manufacturer.type" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.manufacturer.identifier">
+      <path value="Immunization.manufacturer.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.manufacturer.display">
+      <path value="Immunization.manufacturer.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.lotNumber">
+      <path value="Immunization.lotNumber" />
+      <short value="Lote" />
+      <definition value="Código do lote do imunobiológico." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.expirationDate">
+      <path value="Immunization.expirationDate" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.site">
+      <path value="Immunization.site" />
+      <short value="Local de Aplicação" />
+      <definition value="Local do corpo humano onde o imunobiológico foi administrado." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Local de Aplicação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRLocalAplicacao-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.site.coding">
+      <path value="Immunization.site.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Immunization.site.coding.system">
+      <path value="Immunization.site.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.site.coding.code">
+      <path value="Immunization.site.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.site.coding.display">
+      <path value="Immunization.site.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.site.coding.userSelected">
+      <path value="Immunization.site.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.site.text">
+      <path value="Immunization.site.text" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.route">
+      <path value="Immunization.route" />
+      <short value="Via de Administração" />
+      <definition value="Via que o imunobiológico foi administrado." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Via de Administração" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRViaAdministracao-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.route.coding">
+      <path value="Immunization.route.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Immunization.route.coding.system">
+      <path value="Immunization.route.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.route.coding.code">
+      <path value="Immunization.route.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.route.coding.display">
+      <path value="Immunization.route.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.route.coding.userSelected">
+      <path value="Immunization.route.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.route.text">
+      <path value="Immunization.route.text" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.doseQuantity">
+      <path value="Immunization.doseQuantity" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer">
+      <path value="Immunization.performer" />
+      <short value="Profissional Executante" />
+      <definition value="Informações sobre o profissional que administrou o imunobiológico." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.performer.function">
+      <path value="Immunization.performer.function" />
+      <short value="Ocupação do Profissional" />
+      <definition value="Atividade desempenhada pelo profissional que administrou o imunobiológico." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Ocupação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BROcupacao-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.performer.function.coding">
+      <path value="Immunization.performer.function.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Immunization.performer.function.coding.system">
+      <path value="Immunization.performer.function.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.performer.function.coding.code">
+      <path value="Immunization.performer.function.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.performer.function.coding.display">
+      <path value="Immunization.performer.function.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer.function.coding.userSelected">
+      <path value="Immunization.performer.function.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer.function.text">
+      <path value="Immunization.performer.function.text" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer.actor">
+      <path value="Immunization.performer.actor" />
+      <short value="Profissional" />
+      <definition value="Profissional que administrou o imunobiológico." />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRLotacaoProfissional-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.performer.actor.reference">
+      <path value="Immunization.performer.actor.reference" />
+      <min value="1" />
+    </element>
+    <element id="Immunization.performer.actor.type">
+      <path value="Immunization.performer.actor.type" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer.actor.identifier">
+      <path value="Immunization.performer.actor.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer.actor.display">
+      <path value="Immunization.performer.actor.display" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.note">
+      <path value="Immunization.note" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reasonCode">
+      <path value="Immunization.reasonCode" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reasonReference">
+      <path value="Immunization.reasonReference" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.isSubpotent">
+      <path value="Immunization.isSubpotent" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.subpotentReason">
+      <path value="Immunization.subpotentReason" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.education">
+      <path value="Immunization.education" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.programEligibility">
+      <path value="Immunization.programEligibility" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.fundingSource">
+      <path value="Immunization.fundingSource" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reaction">
+      <path value="Immunization.reaction" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.protocolApplied">
+      <path value="Immunization.protocolApplied" />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.protocolApplied.extension">
+      <path value="Immunization.protocolApplied.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Immunization.protocolApplied.extension:strategy">
+      <path value="Immunization.protocolApplied.extension" />
+      <sliceName value="strategy" />
+      <definition value="Identifica a estratégia de vacinação em que esta administração aconteceu." />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstrategiaVacinacao-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Immunization.protocolApplied.series">
+      <path value="Immunization.protocolApplied.series" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.protocolApplied.authority">
+      <path value="Immunization.protocolApplied.authority" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.protocolApplied.targetDisease">
+      <path value="Immunization.protocolApplied.targetDisease" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.protocolApplied.doseNumber[x]">
+      <path value="Immunization.protocolApplied.doseNumber[x]" />
+      <short value="Dose" />
+      <definition value="Dose do imunobiológico administrado." />
+      <type>
+        <code value="string" />
+      </type>
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Dose do Imunobiológico" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRDose-1.0" />
+      </binding>
+    </element>
+    <element id="Immunization.protocolApplied.seriesDoses[x]">
+      <path value="Immunization.protocolApplied.seriesDoses[x]" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

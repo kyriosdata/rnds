@@ -1,0 +1,21 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-12T13:17:22.715+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRModalidadeAssistencial-1.0" />
+  <version value="1.0" />
+  <name value="Modalidade Assistencial" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:17:18.5012669+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classificação dos documentos e contatos assistenciais de acordo com as especificidades do modo, local e duração do atendimento." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRModalidadeAssistencial" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

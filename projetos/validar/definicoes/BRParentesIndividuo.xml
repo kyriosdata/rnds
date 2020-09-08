@@ -1,0 +1,115 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T04:16:22.006+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-wg">
+    <valueCode value="pc" />
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm">
+    <valueInteger value="1" />
+  </extension>
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRParentesIndividuo-1.0" />
+  <version value="1.0" />
+  <name value="BRParentesIndividuo" />
+  <title value="Parentes do Indivíduo" />
+  <status value="active" />
+  <date value="2020-03-11T04:16:19.3374511+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Resource para representar parentescos de indivíduo." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="Patient" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Parentes do Indivíduo" />
+      <definition value="Parentes de um indivíduo e seu grau de parentesco." />
+      <isModifier value="false" />
+    </element>
+    <element id="Extension.extension">
+      <path value="Extension.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Extension.extension:relationship">
+      <path value="Extension.extension" />
+      <sliceName value="relationship" />
+      <short value="Parentesco" />
+      <definition value="Distingue entre diferentes tipos de relações parentais com granularidade variável para apoiar a captura da relação &quot;no grau conhecido&quot;." />
+      <min value="1" />
+      <max value="1" />
+      <isModifier value="false" />
+      <binding>
+        <strength value="required" />
+        <description value="Parentesco" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRParentesco-1.0" />
+      </binding>
+    </element>
+    <element id="Extension.extension:relationship.url">
+      <path value="Extension.extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="relationship" />
+    </element>
+    <element id="Extension.extension:relationship.value[x]">
+      <path value="Extension.extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="code" />
+      </type>
+    </element>
+    <element id="Extension.extension:parent">
+      <path value="Extension.extension" />
+      <sliceName value="parent" />
+      <short value="Parente do Indivíduo" />
+      <definition value="Nome completo ou referência a outro indivíduo que tem parentesco com o indivíduo atual." />
+      <min value="1" />
+      <max value="1" />
+      <isModifier value="false" />
+    </element>
+    <element id="Extension.extension:parent.url">
+      <path value="Extension.extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="parent" />
+    </element>
+    <element id="Extension.extension:parent.value[x]">
+      <path value="Extension.extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="HumanName" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRNomeIndividuo-1.0" />
+      </type>
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0" />
+      </type>
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRParentesIndividuo-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

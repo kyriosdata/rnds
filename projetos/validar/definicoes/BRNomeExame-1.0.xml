@@ -1,0 +1,25 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-26T13:20:24.501+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRNomeExame-1.0" />
+  <version value="1.0" />
+  <name value="Nome do Exame" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-26T13:20:23.3537413+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica o exame laboratorial realizado." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC" />
+      <version value="*" />
+    </include>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

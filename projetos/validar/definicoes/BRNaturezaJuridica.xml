@@ -1,0 +1,38 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="a422e7b3-47eb-424b-97d8-520400a1b9f6" />
+  <meta>
+    <lastUpdated value="2020-03-30T18:15:21.477+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRNaturezaJuridica" />
+  <version value="2018" />
+  <name value="Natureza Jurídica" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-30T18:15:18.1570669+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Identifica a constituição jurídico-institucional das entidades públicas e privadas nos cadastros da administração pública do Brasil." />
+  <content value="complete" />
+  <property>
+    <code value="type" />
+    <description value="tipo" />
+    <type value="code" />
+  </property>
+  <concept>
+    <code value="1" />
+    <display value="Administração Pública" />
+    <property>
+      <code value="type" />
+      <valueCode value="grupo" />
+    </property>
+    <concept>
+      <code value="101-5" />
+      <display value="Órgão Público do Poder Executivo Federal" />
+      <definition value="Esta Natureza Jurídica compreende:&#xD;&#xA;- os órgãos públicos do Poder Executivo Federal&#xD;&#xA;Esta Natureza Jurídica compreende também:&#xD;&#xA;- as embaixadas, os consulados, os escritórios de representações e demais unidades diplomáticas e consulares do Governo brasileiro em outros países ou em organizações internacionais&#xD;&#xA;- o Conselho Nacional dos Direitos da Criança e do Adolescente (Conanda)&#xD;&#xA;- a Advocacia-Geral da União&#xD;&#xA;Esta Natureza Jurídica não compreende:&#xD;&#xA;- as autarquias (110-4)&#xD;&#xA;-as fundações públicas (113-9)&#xD;&#xA;- os órgãos do Ministério Público da União (116-3)&#xD;&#xA;- os fundos especiais de natureza contábil e/ou financeira, não dotados de personalidade jurídica, previstos nos artigos 71 a 74 da Lei n. º 4.320, de 17/03/1964, criados no âmbito do Poder Executivo da União (131-7)&#xD;&#xA;- os fundos de avais públicos: União (131-7), Estadual ou do Distrito Federal (132-5) e Municipal (133-3)&#xD;&#xA;- a União (134-1)&#xD;&#xA;- as empresas públicas (201-1)&#xD;&#xA;- as sociedades de economia mista federais (203-8)&#xD;&#xA;- as embaixadas, os consulados, os escritórios de representações e as demais unidades diplomáticas do Governo brasileiro em outros países ou em organizações internacionais (502-9)" />
+      <property>
+        <code value="type" />
+        <valueCode value="categoria" />
+      </property>
+    </concept>
+  </concept>
+</CodeSystem>

@@ -1,0 +1,158 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="0d945af8-3a09-4663-8ce2-0e4175d5cb09" />
+  <meta>
+    <lastUpdated value="2020-03-13T19:47:18.613+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRRacaCorEtnia-1.0" />
+  <version value="1.0" />
+  <name value="BRRacaCorEtnia" />
+  <title value="Raça/Cor e Etnina" />
+  <status value="active" />
+  <date value="2020-03-13T19:47:42.7344057+00:00" />
+  <publisher value="Datasus" />
+  <description value="Extensão para para representar dados relacionados à raça/cor e etnia de um indivíduo." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="Patient" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Raça/Cor e Etnia" />
+      <definition value="Dados relacionados à raça/cor e etnia de um indivíduo." />
+      <alias value="raça" />
+      <alias value="etnia" />
+      <alias value="cor" />
+      <alias value="cútis" />
+      <max value="1" />
+    </element>
+    <element id="Extension.extension">
+      <path value="Extension.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Extension.extension:race">
+      <path value="Extension.extension" />
+      <sliceName value="race" />
+      <short value="Raça/Cor" />
+      <definition value="Raça ou cor autorreferenciada por um indivíduo." />
+      <min value="1" />
+      <max value="1" />
+      <binding>
+        <strength value="required" />
+        <description value="Raça/Cor" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRRacaCor-1.0" />
+      </binding>
+    </element>
+    <element id="Extension.extension:race.url">
+      <path value="Extension.extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="race" />
+    </element>
+    <element id="Extension.extension:race.value[x]">
+      <path value="Extension.extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+    </element>
+    <element id="Extension.extension:race.value[x].coding">
+      <path value="Extension.extension.value[x].coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Extension.extension:race.value[x].coding.system">
+      <path value="Extension.extension.value[x].coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Extension.extension:race.value[x].coding.code">
+      <path value="Extension.extension.value[x].coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Extension.extension:race.value[x].coding.display">
+      <path value="Extension.extension.value[x].coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Extension.extension:race.value[x].coding.userSelected">
+      <path value="Extension.extension.value[x].coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Extension.extension:race.value[x].text">
+      <path value="Extension.extension.value[x].text" />
+      <max value="0" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity">
+      <path value="Extension.extension" />
+      <sliceName value="indigenousEthnicity" />
+      <short value="Etnia Indígena" />
+      <definition value="Etnia indígena atribuída a um indivíduo" />
+      <max value="1" />
+      <binding>
+        <strength value="required" />
+        <description value="Etnia Indígena" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREtniaIndigena-1.0" />
+      </binding>
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.url">
+      <path value="Extension.extension.url" />
+      <fixedUri value="indigenousEthnicity" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x]">
+      <path value="Extension.extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].coding">
+      <path value="Extension.extension.value[x].coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].coding.system">
+      <path value="Extension.extension.value[x].coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].coding.code">
+      <path value="Extension.extension.value[x].coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].coding.display">
+      <path value="Extension.extension.value[x].coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].coding.userSelected">
+      <path value="Extension.extension.value[x].coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Extension.extension:indigenousEthnicity.value[x].text">
+      <path value="Extension.extension.value[x].text" />
+      <max value="0" />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <type>
+        <code value="uri" />
+      </type>
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRRacaCorEtnia-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

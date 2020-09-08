@@ -1,0 +1,161 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T04:06:40.866+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BREndereco-1.0" />
+  <version value="1.0" />
+  <name value="BREndereco" />
+  <title value="Endereço" />
+  <status value="active" />
+  <date value="2020-03-11T04:06:40.3767721+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Padronização de endereços no Brasil." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <type value="Address" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Address" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Address">
+      <path value="Address" />
+      <short value="Dados de Endereçamento" />
+      <definition value="Dados do(s) endereço(s) onde o sujeito do endereço pode ser localizado." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.use">
+      <path value="Address.use" />
+      <short value="Uso do Endereço" />
+      <definition value="home: endereço residencial atual.&#xD;&#xA;work: endereço comercial ou de trabalho atual.&#xD;&#xA;temp: endereço temporário, como um hotel, a casa de amigos ou familiares, uma instalação/edificação provisória, etc.&#xD;&#xA;old: endereço anterior." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.type">
+      <path value="Address.type" />
+      <short value="Tipo de Endereço" />
+      <definition value="physical: um endereço físico de um edificação ou espaço geográfico real, como de uma casa, prédio, loja, galpão, lote, etc.&#xD;&#xA;postal: um endereço virtual, como de uma Caixa Postal ou serviço de logística de mercadorias, p.ex." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.text">
+      <path value="Address.text" />
+      <max value="0" />
+    </element>
+    <element id="Address.line">
+      <path value="Address.line" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="line" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <short value="Endereço" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.line:streetType">
+      <path value="Address.line" />
+      <sliceName value="streetType" />
+      <short value="Tipo de Logradouro" />
+      <definition value="Tipo de logradouro do endereço." />
+      <max value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Tipo de Logradouro" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoLogradouro-1.0" />
+      </binding>
+    </element>
+    <element id="Address.line:street">
+      <path value="Address.line" />
+      <sliceName value="street" />
+      <short value="Logradouro" />
+      <definition value="Logradouro do endereço (ex.: Visconde do Rio Branco, das Laranjeiras, QRSW 8 Bloco A-1) . Quando não for possível utilizar o elemento streetType, incluir textualmente no início do nome do logradouro o tipo de logradouro abreviado (ex.: R. Visconde do Rio Branco, Av. das Laranjeiras, Quadra QRSW 8 Bloco A-1)." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.line:number">
+      <path value="Address.line" />
+      <sliceName value="number" />
+      <short value="Número" />
+      <definition value="Número do endereço." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.line:complement">
+      <path value="Address.line" />
+      <sliceName value="complement" />
+      <short value="Complemento" />
+      <definition value="Complemento do endereço, como o nome do edifício, bloco, número do apartamento, número da sala etc." />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.line:neighborhood">
+      <path value="Address.line" />
+      <sliceName value="neighborhood" />
+      <short value="Bairro" />
+      <definition value="Bairro do endereço." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.city">
+      <path value="Address.city" />
+      <short value="Município" />
+      <definition value="Município do endereço." />
+      <min value="1" />
+      <binding>
+        <strength value="required" />
+        <description value="Município" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRMunicipio-1.0" />
+      </binding>
+    </element>
+    <element id="Address.district">
+      <path value="Address.district" />
+      <max value="0" />
+    </element>
+    <element id="Address.state">
+      <path value="Address.state" />
+      <short value="UF" />
+      <definition value="Unidade Federativa (estados ou Distrito Federal) do endereço." />
+      <min value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Unidade Federativa" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRUnidadeFederativa-1.0" />
+      </binding>
+    </element>
+    <element id="Address.postalCode">
+      <path value="Address.postalCode" />
+      <short value="CEP" />
+      <definition value="Código de Endereçamento Postal. Utilizar a máscara XXXXX-XXXX." />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.country">
+      <path value="Address.country" />
+      <max value="0" />
+    </element>
+    <element id="Address.period">
+      <path value="Address.period" />
+      <short value="Período do Endereço" />
+      <definition value="Período em que o endereço foi utilizado." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.period.start">
+      <path value="Address.period.start" />
+      <short value="Data de Inicio do Endereço" />
+      <definition value="Data em que o endereço foi cadastrado ou começou a ser utilizado." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Address.period.end">
+      <path value="Address.period.end" />
+      <short value="Data de Término do Endereço" />
+      <definition value="Data em que o endereço foi desativado ou parou de ser utilizado." />
+      <mustSupport value="true" />
+    </element>
+  </differential>
+</StructureDefinition>

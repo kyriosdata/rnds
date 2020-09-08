@@ -1,0 +1,22 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="6dfb0714-7ff9-4a9f-9201-33943db7498c" />
+  <meta>
+    <lastUpdated value="2020-03-11T19:14:51.806+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRCID10-1.0" />
+  <version value="1.0" />
+  <name value="Classificação Internacional de Doenças - Décima Revisão - CID-10" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T19:15:12.2909517+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classificação Internacional de Doenças - Décima Revisão - CID-10" />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRCID10" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

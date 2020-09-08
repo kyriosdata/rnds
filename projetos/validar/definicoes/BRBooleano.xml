@@ -1,0 +1,43 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="bd2268df-7a8f-4e9b-8674-547f3b20a52b" />
+  <meta>
+    <lastUpdated value="2020-03-13T19:54:48.455+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuoProtegido-1.0" />
+  <version value="1.0" />
+  <name value="BRIndividuoProtegido" />
+  <title value="Indivíduo Protegido?" />
+  <status value="active" />
+  <date value="2020-03-13T19:55:12.5908295+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Extensão utilizada para identificar indivíduos que possuem  maior restrição à disponibilização de seus dados, por possuirem grande exposição pública (ex.: político, esportista, artista famoso etc.), estarem em programa de proteção à testemunha, o objeto de seu trabalho colocá-los em risco (investigadores da inteligência, p.ex.), dentre outros." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="element" />
+    <expression value="Patient" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Indivíduo Protegido?" />
+      <definition value="Identifica indivíduos que possuem maior restrição à disponibilização de seus dados, por possuirem grande exposição pública (ex.: político, esportista, artista famoso etc.), estarem em programa de proteção à testemunha, o objeto de seu trabalho colocá-los em risco (investigadores da inteligência, p.ex.), dentre outros." />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuoProtegido-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="boolean" />
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>

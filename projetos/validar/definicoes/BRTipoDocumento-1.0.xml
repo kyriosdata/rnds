@@ -1,0 +1,21 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-12T13:26:59.318+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoDocumento-1.0" />
+  <version value="1.0" />
+  <name value="Tipo de Documento" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:26:58.6069366+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica o tipo de documento que está sendo trafegado." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>

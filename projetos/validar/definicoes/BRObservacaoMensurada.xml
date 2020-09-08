@@ -1,0 +1,479 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="dc435b4b-c499-4169-9716-d24cf6ad2eef" />
+  <meta>
+    <lastUpdated value="2020-06-09T21:02:37.353+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRObservacaoMensurada-1.0" />
+  <version value="1.0" />
+  <name value="BRObservacaoMensurada" />
+  <title value="Observação Mensurada" />
+  <status value="active" />
+  <date value="2020-06-09T21:03:01.4143611+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Observações quantitativas sobre um paciente." />
+  <fhirVersion value="4.0.0" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Observation" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Observation" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Observation">
+      <path value="Observation" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.extension">
+      <path value="Observation.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Observation.extension:PosicaoIndividuo">
+      <path value="Observation.extension" />
+      <sliceName value="PosicaoIndividuo" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPosicaoIndividuo-1.0" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.extension:PosicaoIndividuo.value[x]">
+      <path value="Observation.extension.value[x]" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.identifier">
+      <path value="Observation.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.use">
+      <path value="Observation.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.type">
+      <path value="Observation.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.system">
+      <path value="Observation.identifier.system" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.value">
+      <path value="Observation.identifier.value" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.period">
+      <path value="Observation.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.period.start">
+      <path value="Observation.identifier.period.start" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.period.end">
+      <path value="Observation.identifier.period.end" />
+      <max value="0" />
+    </element>
+    <element id="Observation.identifier.assigner">
+      <path value="Observation.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Observation.basedOn">
+      <path value="Observation.basedOn" />
+      <max value="0" />
+    </element>
+    <element id="Observation.partOf">
+      <path value="Observation.partOf" />
+      <max value="0" />
+    </element>
+    <element id="Observation.partOf.identifier">
+      <path value="Observation.partOf.identifier" />
+      <max value="0" />
+    </element>
+    <element id="Observation.partOf.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.partOf.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.status">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint">
+        <valueString value="default: final" />
+      </extension>
+      <path value="Observation.status" />
+      <short value="Estado da Observação" />
+      <definition value="Indica o estado que o contato assistencial se encontra quando é informado para a RNDS." />
+      <mustSupport value="true" />
+      <binding>
+        <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
+          <valueString value="ObservationStatus" />
+        </extension>
+        <strength value="required" />
+        <description value="Estado da Observação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoObservacao-1.0" />
+      </binding>
+    </element>
+    <element id="Observation.category">
+      <path value="Observation.category" />
+      <short value="Categoria da Observação" />
+      <definition value="Categoriza a observação que está sendo representada." />
+      <min value="1" />
+      <max value="1" />
+      <mustSupport value="true" />
+      <binding>
+        <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
+          <valueString value="ObservationCategory" />
+        </extension>
+        <strength value="required" />
+        <description value="Categoria da Observação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRCategoriaObservacao-1.0" />
+      </binding>
+    </element>
+    <element id="Observation.category.coding">
+      <path value="Observation.category.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Observation.category.coding.system">
+      <path value="Observation.category.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.category.coding.code">
+      <path value="Observation.category.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Observation.category.coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.category.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.category.coding.userSelected">
+      <path value="Observation.category.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Observation.category.text">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.category.text" />
+      <max value="0" />
+    </element>
+    <element id="Observation.code">
+      <path value="Observation.code" />
+      <short value="Tipo da Observação" />
+      <definition value="Classifica o tipo de observação que está sendo representada." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Tipo de Observação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoObservacao-1.0" />
+      </binding>
+    </element>
+    <element id="Observation.code.coding">
+      <path value="Observation.code.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Observation.code.coding.system">
+      <path value="Observation.code.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.code.coding.code">
+      <path value="Observation.code.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Observation.code.coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.code.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.code.coding.userSelected">
+      <path value="Observation.code.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Observation.code.text">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.code.text" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject">
+      <path value="Observation.subject" />
+      <max value="0" />
+      <mustSupport value="false" />
+    </element>
+    <element id="Observation.subject.reference">
+      <path value="Observation.subject.reference" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.type">
+      <path value="Observation.subject.type" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.identifier.use">
+      <path value="Observation.subject.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.identifier.type">
+      <path value="Observation.subject.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.identifier.system">
+      <path value="Observation.subject.identifier.system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.subject.identifier.value">
+      <path value="Observation.subject.identifier.value" />
+      <min value="1" />
+    </element>
+    <element id="Observation.subject.identifier.period">
+      <path value="Observation.subject.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.identifier.assigner">
+      <path value="Observation.subject.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Observation.subject.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.subject.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.focus">
+      <path value="Observation.focus" />
+      <max value="0" />
+    </element>
+    <element id="Observation.encounter">
+      <path value="Observation.encounter" />
+      <max value="0" />
+    </element>
+    <element id="Observation.effective[x]">
+      <path value="Observation.effective[x]" />
+      <max value="0" />
+    </element>
+    <element id="Observation.issued">
+      <path value="Observation.issued" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.performer">
+      <path value="Observation.performer" />
+      <max value="0" />
+    </element>
+    <element id="Observation.value[x]">
+      <path value="Observation.value[x]" />
+      <short value="Resultado da Observação" />
+      <definition value="Observação realizada expressa por uma quantidade." />
+      <type>
+        <code value="Quantity" />
+      </type>
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Unidades UCUM para Sinais Vitais" />
+        <valueSet value="http://hl7.org/fhir/ValueSet/ucum-vitals-common" />
+      </binding>
+    </element>
+    <element id="Observation.value[x].value">
+      <path value="Observation.value[x].value" />
+      <min value="1" />
+    </element>
+    <element id="Observation.value[x].comparator">
+      <path value="Observation.value[x].comparator" />
+      <max value="0" />
+    </element>
+    <element id="Observation.value[x].unit">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.value[x].unit" />
+      <max value="0" />
+    </element>
+    <element id="Observation.value[x].system">
+      <path value="Observation.value[x].system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.value[x].code">
+      <path value="Observation.value[x].code" />
+      <min value="1" />
+    </element>
+    <element id="Observation.dataAbsentReason">
+      <path value="Observation.dataAbsentReason" />
+      <max value="0" />
+    </element>
+    <element id="Observation.interpretation">
+      <path value="Observation.interpretation" />
+      <max value="0" />
+    </element>
+    <element id="Observation.note">
+      <path value="Observation.note" />
+      <max value="0" />
+    </element>
+    <element id="Observation.bodySite">
+      <path value="Observation.bodySite" />
+      <short value="Parte do corpo observada" />
+      <definition value="Indica o local no corpo do sujeito onde a observação foi feita (ou seja, o local de destino da ação)." />
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Código que descreve a loalização anatômica na aferição." />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRLocalAfericao-1.0" />
+      </binding>
+    </element>
+    <element id="Observation.bodySite.coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.bodySite.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.bodySite.coding.userSelected">
+      <path value="Observation.bodySite.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Observation.bodySite.text">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.bodySite.text" />
+      <max value="0" />
+    </element>
+    <element id="Observation.method">
+      <path value="Observation.method" />
+      <max value="0" />
+    </element>
+    <element id="Observation.specimen">
+      <path value="Observation.specimen" />
+      <max value="0" />
+    </element>
+    <element id="Observation.device">
+      <path value="Observation.device" />
+      <max value="0" />
+    </element>
+    <element id="Observation.referenceRange">
+      <path value="Observation.referenceRange" />
+      <max value="0" />
+    </element>
+    <element id="Observation.hasMember">
+      <path value="Observation.hasMember" />
+      <max value="0" />
+    </element>
+    <element id="Observation.derivedFrom">
+      <path value="Observation.derivedFrom" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component">
+      <path value="Observation.component" />
+      <short value="Resultados Compostos" />
+      <definition value="Algumas observações têm resultados compostos expressos como códigos distintos, mas compartilhando dos mesmos atributos, como os valores referentes à Pressão Arterial Sistólica e à Pressão Arterial Diastólica numa mensuração de Pressão Arterial." />
+      <requirements value="Para representar observações compostas, como uma Pressão Arterial, por exemplo, que possui um valor referente à Pressão Arterial Sistólica e a Pressão Arterial Diastólica, ambos os valores, os respectivos códigos indicando se é uma medida Sistólica ou Diastólica e as respectivas unidades de medida devem ser representadas neste elemento, neste caso, informando-se dois elementos component na mesma mensagem." />
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.component.code">
+      <path value="Observation.component.code" />
+      <short value="Tipo da Observação" />
+      <definition value="Classifica o tipo de observação que está sendo representada." />
+      <mustSupport value="true" />
+      <binding>
+        <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
+          <valueString value="ObservationCode" />
+        </extension>
+        <strength value="required" />
+        <description value="Tipo de Observação" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRTipoObservacao-1.0" />
+      </binding>
+    </element>
+    <element id="Observation.component.code.coding">
+      <path value="Observation.component.code.coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Observation.component.code.coding.system">
+      <path value="Observation.component.code.coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.component.code.coding.code">
+      <path value="Observation.component.code.coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Observation.component.code.coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.component.code.coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.code.coding.userSelected">
+      <path value="Observation.component.code.coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.code.text">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.component.code.text" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.value[x]">
+      <path value="Observation.component.value[x]" />
+      <short value="Resultado Composto da Observação" />
+      <definition value="Um dos resultados compostos da observação realizada, expressa por uma quantidade." />
+      <min value="1" />
+      <type>
+        <code value="Quantity" />
+      </type>
+      <mustSupport value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Unidades UCUM para Sinais Vitais" />
+        <valueSet value="http://hl7.org/fhir/ValueSet/ucum-vitals-common" />
+      </binding>
+    </element>
+    <element id="Observation.component.value[x].value">
+      <path value="Observation.component.value[x].value" />
+      <min value="1" />
+    </element>
+    <element id="Observation.component.value[x].comparator">
+      <path value="Observation.component.value[x].comparator" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.value[x].unit">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Observation.component.value[x].unit" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.value[x].system">
+      <path value="Observation.component.value[x].system" />
+      <min value="1" />
+    </element>
+    <element id="Observation.component.value[x].code">
+      <path value="Observation.component.value[x].code" />
+      <min value="1" />
+    </element>
+    <element id="Observation.component.dataAbsentReason">
+      <path value="Observation.component.dataAbsentReason" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.interpretation">
+      <path value="Observation.component.interpretation" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component.referenceRange">
+      <path value="Observation.component.referenceRange" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

@@ -1,0 +1,35 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T18:19:54.794+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRPosicaoIndividuo" />
+  <version value="1.0" />
+  <name value="Posição do Indivíduo" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:20:15.3085069+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Identifica a posição de um indivíduo em um determinado contexto." />
+  <content value="complete" />
+  <concept>
+    <code value="1" />
+    <display value="Em pé" />
+  </concept>
+  <concept>
+    <code value="2" />
+    <display value="Sentado" />
+  </concept>
+  <concept>
+    <code value="3" />
+    <display value="Reclinado" />
+  </concept>
+  <concept>
+    <code value="4" />
+    <display value="Deitado" />
+  </concept>
+  <concept>
+    <code value="5" />
+    <display value="Deitado com inclinação para esquerda" />
+  </concept>
+</CodeSystem>

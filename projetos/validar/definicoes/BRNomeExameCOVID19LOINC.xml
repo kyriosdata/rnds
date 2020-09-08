@@ -1,0 +1,344 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="56d007e3-e37f-452a-af44-566381bd1deb" />
+  <meta>
+    <lastUpdated value="2020-09-03T19:49:39.291+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC" />
+  <version value="20200901" />
+  <name value="Exames LOINC" />
+  <status value="active" />
+  <experimental value="true" />
+  <date value="2020-09-03T19:49:39.577868+00:00" />
+  <publisher value="LOINC" />
+  <description value="Classifica o exame laboratorial realizado em amostra biológica para diagnóstico laboratorial, de acordo com a terminologia LOINC." />
+  <content value="fragment" />
+  <concept>
+    <code value="94306-8" />
+    <display value="SARS Coronavírus 2, teste de RNA - amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94307-6" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra não especificada por amplificação de ácido nucleico usando sonda primer set N1" />
+  </concept>
+  <concept>
+    <code value="94308-4" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra não especificada por amplificação de ácido nucleico usando sonda primer set N2" />
+  </concept>
+  <concept>
+    <code value="94309-2" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94310-0" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94311-8" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene N em amostra não especificada por amplificação de ácido nucleico usando sonda primer set N1" />
+  </concept>
+  <concept>
+    <code value="94312-6" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene N em amostra não especificada por amplificação de ácido nucleico usando sonda primer set N2" />
+  </concept>
+  <concept>
+    <code value="94313-4" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene N em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94314-2" />
+    <display value="SARS Coronavírus 2, [presença de] gene RdRp em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94315-9" />
+    <display value="SARS Coronavírus 2, [presença de] gene E em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94316-7" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94500-6" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94502-2" />
+    <display value="SARS Coronavírus relacionado, [presença de] RNA em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94503-0" />
+    <display value="SARS Coronavírus 2, teste de anticorpo em soro, plasma ou sangue por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94504-8" />
+    <display value="SARS Coronavírus 2, teste de anticorpo, soro ou plasma por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94505-5" />
+    <display value="SARS Coronavírus 2, [dosagem de] anticorpo IgG em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94506-3" />
+    <display value="SARS Coronavírus 2, [dosagem de] anticorpo IgM em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94507-1" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgG em  soro, plasma ou sangue por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94508-9" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgM em soro, plasma ou sangue por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94509-7" />
+    <display value="SARS Coronavírus relacionado [limiar de ciclo de] gene E em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94510-5" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene N em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94511-3" />
+    <display value="SARS Coronavírus 2,  [limiar de ciclo da] região ORF1ab em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94531-1" />
+    <display value="SARS Coronavírus 2 teste de RNA em amostra respiratória por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94532-9" />
+    <display value="SARS Coronavírus relacionado + MERS Coronavirus [presença de] RNA em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94533-7" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94534-5" />
+    <display value="SARS Coronavírus 2, [presença de] gene RdRp em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94547-7" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgG e IgM em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94558-4" />
+    <display value="SARS Coronavírus 2, [presença de] antígeno em amostra respiratória por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94559-2" />
+    <display value="SARS Coronavírus 2, [presença de] gene da região ORF1ab em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94562-6" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgA em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94563-4" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgG em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94564-2" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgM em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94565-9" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em rinofaringe por amplificação de ácido nucléico com detecção sem sonda" />
+  </concept>
+  <concept>
+    <code value="94639-2" />
+    <display value="SARS Coronavírus 2,  [presença de] região ORF1ab em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94640-0" />
+    <display value="SARS Coronavírus 2, [presença de] gene S em amostra respiratória por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94641-8" />
+    <display value="SARS Coronavírus 2, [presença de] gene S em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94642-6" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene S em amostra respiratória, por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94643-4" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene S em amostra não especificada, por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94644-2" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] região ORF1ab em amostra respiratória por amplificação do ácido nucleico" />
+  </concept>
+  <concept>
+    <code value="94645-9" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene RdRp em amostra não especificada por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94646-7" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] gene RdRp em amostra respiratória por amplificação do ácido nucleico" />
+  </concept>
+  <concept>
+    <code value="94647-5" />
+    <display value="SARS Coronavírus relacionado, [presença de] RNA em amosta não especificada, por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94660-8" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em soro ou plasma por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94661-6" />
+    <display value="SARS Coronavírus 2, [interpretação de] anticorpo em soro ou plasma" />
+  </concept>
+  <concept>
+    <code value="94720-0" />
+    <display value="SARS Coronavírus 2, [dosagem de] anticorpos IgA em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94745-7" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] RNA em amostra respiratória por amplificação do ácido nucleico" />
+  </concept>
+  <concept>
+    <code value="94746-5" />
+    <display value="SARS Coronavírus 2, [limiar de ciclo de] RNA em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94756-4" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra respiratória por amplificação do ácido nucleido usando sonda primer set N1" />
+  </concept>
+  <concept>
+    <code value="94757-2" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em amostra respiratória por amplificação do ácido nucleico usando sonda primer set N2" />
+  </concept>
+  <concept>
+    <code value="94758-0" />
+    <display value="SARS Coronavírus relacionado, [presença de] gene E em amostra respiratória por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94759-8" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em nasofaringe por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94760-6" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em nasofaringe por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94761-4" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgG  em teste em amostra de sangue seco por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94762-2" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94763-0" />
+    <display value="SARS Coronavírus 2, [presença de] em amostra não específica por cultura em organismo específico" />
+  </concept>
+  <concept>
+    <code value="94764-8" />
+    <display value="SARS Coronavírus 2, [sequência de bases] genôma inteiro em isolado por sequenciamento" />
+  </concept>
+  <concept>
+    <code value="94765-5" />
+    <display value="SARS Coronavírus 2, [presença de] gene E em soro ou plasma, por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94766-3" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em soro ou plasma por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94767-1" />
+    <display value="SARS Coronavírus 2, [presença de] gene S em soro ou plasma, por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94768-9" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgA em soro, plasma, ou sangue por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="94769-7" />
+    <display value="SARS Coronavírus 2, [dosagem de] anticorpo em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="94819-0" />
+    <display value="SARS Coronavírus 2, [dosagem de] (carga viral) RNA em amostra não especificada por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="94822-4" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em saliva (fluido oral) por sequenciamento" />
+  </concept>
+  <concept>
+    <code value="94845-5" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em saliva (fluido oral) por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95125-1" />
+    <display value="SARS Coronavírus 2,  [presença de] IgA+IgM em soro ou plasma por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="95209-3" />
+    <display value="SARS Coronavírus + SARS Coronavírus 2 [presença de] antígeno em amostra respiratória por imunoensaio rápido" />
+  </concept>
+  <concept>
+    <code value="95380-2" />
+    <display value="Teste de detecção de RNA do vírus da Influenza A e B, SARS Coronavírus 2 e SARS Coronavírus relacionado por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95406-5" />
+    <display value="SARS Coronavírus 2, [presença de] RNA no nariz por amplificação de ácido nucléico com detecção sem sonda" />
+  </concept>
+  <concept>
+    <code value="95409-9" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em nariz por  amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95410-7" />
+    <display value="SARS Coronavírus 2, [concentração de] anticorpos neutralizantes em soro por teste de neutralização de pseudovírus" />
+  </concept>
+  <concept>
+    <code value="95411-5" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpos neutralizantes em soro por teste de neutralização de pseudovírus" />
+  </concept>
+  <concept>
+    <code value="95416-4" />
+    <display value="SARS Coronavírus 2, [presença de] anticorpo IgM teste em amostra de sangue seco por imunoensaio" />
+  </concept>
+  <concept>
+    <code value="95422-2" />
+    <display value="Teste de detecção de RNA de vírus da influenza A e B e de gene N de SARS Coronavírus 2 em amostra respiratória por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95423-0" />
+    <display value="Identificação de vírus da Influenza A e B e SARS Coronavírus  em amostra respiratória, por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95424-8" />
+    <display value="SARS Coronavírus 2, [presença de] RNA em amostra respiratória por sequenciamento" />
+  </concept>
+  <concept>
+    <code value="95425-5" />
+    <display value="SARS Coronavírus 2, [presença de] gene N em saliva (fluido oral) por amplificação de ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95427-1" />
+    <display value="SARS Coronavírus 2, [concentração de] anticorpo IgA em soro ou plasma por imunofluorescência" />
+  </concept>
+  <concept>
+    <code value="95428-9" />
+    <display value="SARS Coronavírus 2, [concentração de] anticorpo IgM em soro ou plasma por imunofluorescência" />
+  </concept>
+  <concept>
+    <code value="95429-7" />
+    <display value="SARS Coronavírus 2, [concentração de] anticorpo IgG em soro ou plasma por imunofluorescência" />
+  </concept>
+  <concept>
+    <code value="95521-1" />
+    <display value="SARS Coronavírus 2,  [#/volume] (carga viral) gene N em amostra respiratória  por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95522-9" />
+    <display value="SARS Coronavírus 2, [dosagem de] (carga viral ) gene N em amostra respiratória  por amplificação do ácido nucleico com detecção por sonda" />
+  </concept>
+  <concept>
+    <code value="95542-7" />
+    <display value="SARS Coronavirus 2, anticorpos IgG+IgM [presença de] em soro, plasma ou sangue por imunoensaio rápido" />
+  </concept>
+</CodeSystem>

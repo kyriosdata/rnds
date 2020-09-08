@@ -1,0 +1,35 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T18:15:05.557+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRJustificativaIndividuoNaoIdentificado" />
+  <version value="201701A" />
+  <name value="Justificativa da Impossibilidade de Identificação do Indivíduo" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:15:25.4061393+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica as razões pelo qual não foi possível obter os dados de identificação do indivíduo em um contato assistencial. (Port. nº 84/SAS/MS/1997 e Port. nº02/SAS/SGEP/MS/2012)" />
+  <content value="complete" />
+  <concept>
+    <code value="01" />
+    <display value="Indivíduo acidentado grave" />
+  </concept>
+  <concept>
+    <code value="02" />
+    <display value="Indivíduo em sofrimento mental encontrado em via pública" />
+  </concept>
+  <concept>
+    <code value="03" />
+    <display value="Indivíduo com problema neurológico grave ou comatoso" />
+  </concept>
+  <concept>
+    <code value="04" />
+    <display value="Indivíduo incapacitado por motivos sociais e/ou culturais" />
+  </concept>
+  <concept>
+    <code value="05" />
+    <display value="Indivíduo doador de órgãos falecido" />
+  </concept>
+</CodeSystem>

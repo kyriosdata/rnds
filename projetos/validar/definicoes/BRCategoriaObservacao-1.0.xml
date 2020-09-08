@@ -1,0 +1,57 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-06-09T17:07:02.242+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRCategoriaObservacao-1.0" />
+  <version value="1.0" />
+  <name value="Categoria da observação" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-06-09T17:07:24.6148832+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Classifica a observação clínica realizada, conforme especificado no padrão FHIR." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://terminology.hl7.org/CodeSystem/observation-category" />
+      <version value="*" />
+      <concept>
+        <code value="social-history" />
+        <display value="História social" />
+      </concept>
+      <concept>
+        <code value="vital-signs" />
+        <display value="Sinais vitais" />
+      </concept>
+      <concept>
+        <code value="imaging" />
+        <display value="Imagem" />
+      </concept>
+      <concept>
+        <code value="laboratory" />
+        <display value="Laboratório" />
+      </concept>
+      <concept>
+        <code value="procedure" />
+        <display value="Procedimento" />
+      </concept>
+      <concept>
+        <code value="survey" />
+        <display value="Avaliação" />
+      </concept>
+      <concept>
+        <code value="exam" />
+        <display value="Exame físico" />
+      </concept>
+      <concept>
+        <code value="therapy" />
+        <display value="Terapia" />
+      </concept>
+      <concept>
+        <code value="activity" />
+        <display value="Atividade corporal" />
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

@@ -1,0 +1,29 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-12T13:09:54.402+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BREstadoResolucaoDiagnosticoProblema-1.0" />
+  <version value="1.0" />
+  <name value="Estado da Resolução de Diagnóstico ou Problema." />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-12T13:09:53.3447193+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Estado da resolução de um diagnóstico ou problema." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://hl7.org/fhir/ValueSet/condition-clinical" />
+      <version value="*" />
+      <concept>
+        <code value="active" />
+        <display value="Não Resolvido ou Resolvendo" />
+      </concept>
+      <concept>
+        <code value="resolved" />
+        <display value="Resolvido" />
+      </concept>
+    </include>
+  </compose>
+</ValueSet>

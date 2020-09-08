@@ -1,0 +1,81 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="c966a277-85f3-4fc7-bfa7-314a94190df6" />
+  <meta>
+    <lastUpdated value="2020-06-09T18:40:31.619+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPosicaoIndividuo-1.0" />
+  <version value="1.0" />
+  <name value="BRPosicaoIndividuo" />
+  <title value="Posição do Indivíduo" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-06-09T18:40:55.1287932+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Extensão para indicar a posição do indivíduo." />
+  <fhirVersion value="4.0.0" />
+  <kind value="complex-type" />
+  <abstract value="false" />
+  <context>
+    <type value="fhirpath" />
+    <expression value="BRObservacaoMensurada" />
+  </context>
+  <type value="Extension" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Extension">
+      <path value="Extension" />
+      <short value="Posição do Indivíduo" />
+      <definition value="Posição do indivíduo no momento da ação/procedimento." />
+      <max value="1" />
+    </element>
+    <element id="Extension.url">
+      <path value="Extension.url" />
+      <fixedUri value="http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPosicaoIndividuo-1.0" />
+    </element>
+    <element id="Extension.value[x]">
+      <path value="Extension.value[x]" />
+      <min value="1" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <binding>
+        <strength value="required" />
+        <description value="Posição do Indivíduo" />
+        <valueSet value="http://www.saude.gov.br/fhir/r4/ValueSet/BRPosicaoIndividuo-1.0" />
+      </binding>
+    </element>
+    <element id="Extension.value[x].coding">
+      <path value="Extension.value[x].coding" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Extension.value[x].coding.system">
+      <path value="Extension.value[x].coding.system" />
+      <min value="1" />
+    </element>
+    <element id="Extension.value[x].coding.code">
+      <path value="Extension.value[x].coding.code" />
+      <min value="1" />
+    </element>
+    <element id="Extension.value[x].coding.display">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Extension.value[x].coding.display" />
+      <max value="0" />
+    </element>
+    <element id="Extension.value[x].coding.userSelected">
+      <path value="Extension.value[x].coding.userSelected" />
+      <max value="0" />
+    </element>
+    <element id="Extension.value[x].text">
+      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
+        <valueBoolean value="true" />
+      </extension>
+      <path value="Extension.value[x].text" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

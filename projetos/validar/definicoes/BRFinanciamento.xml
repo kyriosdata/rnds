@@ -1,0 +1,35 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T18:12:26.041+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRFinanciamento" />
+  <version value="201701A" />
+  <name value="Financiamento" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:12:46.5570008+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="Terminologia que descreve o agente, instituição ou entidade responsável por custear as ações e serviços de saúde." />
+  <content value="complete" />
+  <concept>
+    <code value="01" />
+    <display value="Sistema Único de Saúde - SUS" />
+  </concept>
+  <concept>
+    <code value="02" />
+    <display value="Plano de Saúde Público" />
+  </concept>
+  <concept>
+    <code value="03" />
+    <display value="Plano de Saúde Privado" />
+  </concept>
+  <concept>
+    <code value="04" />
+    <display value="Particular" />
+  </concept>
+  <concept>
+    <code value="05" />
+    <display value="Gratuidade" />
+  </concept>
+</CodeSystem>

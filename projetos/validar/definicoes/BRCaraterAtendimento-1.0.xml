@@ -1,0 +1,21 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2020-03-11T18:39:15.362+00:00" />
+  </meta>
+  <language value="pt-BR" />
+  <url value="http://www.saude.gov.br/fhir/r4/ValueSet/BRCaraterAtendimento-1.0" />
+  <version value="1.0" />
+  <name value="Caráter de atendimento do Contato Assistencial" />
+  <status value="active" />
+  <experimental value="false" />
+  <date value="2020-03-11T18:39:35.2063756+00:00" />
+  <publisher value="Ministério da Saúde do Brasil" />
+  <description value="ValueSet utilizado para classificar a prioridade de realização de um Contato Assistencial." />
+  <immutable value="false" />
+  <compose>
+    <include>
+      <system value="http://www.saude.gov.br/fhir/r4/CodeSystem/BRCaraterAtendimento" />
+      <version value="*" />
+    </include>
+  </compose>
+</ValueSet>
