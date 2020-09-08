@@ -116,22 +116,24 @@ Em consequência, o "esqueleto" JSON pode ser reescrito, considerando o preenchi
 }
 ```
 
-### Elementos do resultado
+### Recursos do resultado (_Bundle_)
 
-Um _Bundle_ é empregado para reunir recursos FHIR. A propriedade _entry_ é o local onde os recursos devem ser fornecidos (observe que é um _array_). No caso em questão, tal _array_, propriedade _entry_, deverá possuir três entradas:
+Um _Bundle_ é empregado para reunir recursos FHIR, e _entry_, destacada abaixo, é a propriedade onde os recursos devem ser fornecidos, observe que é um _array_. No caso em questão, este _array_ deve possuir três entradas:
 
 ```json
-   "entry":[
-      { ... Resultado de Exame Laboratorial ... },
-      { ... Diagnóstico em Laboratório Clínico ... },
-      { ... Amostra Biológica ... }
-    ]
+"entry":[
+   { ... Resultado de Exame Laboratorial ... },
+   { ... Diagnóstico em Laboratório Clínico ... },
+   { ... Amostra Biológica ... }
+ ]
 ```
 
 Estas três entradas, respectivamente, referem-se aos seguintes perfis, personalizações definidas pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
 [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
 
-Observe que estes recursos são fornecidos em entradas próprias da propriedade _entry_ e, consequentemente, é necessário que a amostra biológica empregada seja referenciada pelo diagnóstico que, por sua vez, deve ser referenciada pelo resultado de exame laboratorial. Estas referências são comuns e amplamente empregadas quando se uso o padrão FHIR.
+Observe que estes recursos são fornecidos em entradas próprias da propriedade _entry_, ou seja, não estão "aninhadas", apesar da amostra biológica ser empregada pelo diagnóstico que, por sua vez, faz parte do resultado de exame laboratorial.
+
+A "conexão" entre recursos é realizada por meio de referências, que são amplamente empregadas quando se uso o padrão FHIR.
 
 ### Referências entre recursos
 
@@ -144,8 +146,7 @@ Em geral, em um conjunto de recursos FHIR há referências entre os recursos, fo
 
 Convém reiterar por meio de mais um exemplo. A amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada pelo diagnóstico (_Observation_) que a utiliza.
 
-O trecho de JSON abaixo, ressaltando apenas a propriedade _entry_ de um _Bundle_, é fornecido para a localização e compreensão do emprego de referências entre recursos FHIR. Cada entrada do _array_ possui o seu endereço ou identificador único na propriedade _fullUrl_ e, naturalmente, o recurso em questão (_resource_). Cada recurso possui o seu próprio _resourceType_ e, portanto, sabe-se que os três recursos são um _Composition_, um _Observation_ e, por fim, um _Specimen_. Ainda observe como é estabelecida a referência entre recursos.
-Na segunda entrada do _array_, _Observation_, há uma referência (_reference_) para a terceira entrada cujo identificador é "urn:uuid:transient-2". De forma análoga, na primeira entrada há uma referência (_reference_) cujo valor é "urn:uuid:transient-1", indicando o recurso referenciado, o _Observation_.
+A propriedade _entry_ de um _Bundle_ é fornecida no trecho abaixo para ressaltar a localização e compreensão do emprego de referências entre recursos FHIR. Cada entrada do _array_ possui o seu endereço ou identificador único definido pela propriedade _fullUrl_, e o recurso propriamente dito (_resource_), apenas parcialmente fornecido. Cada recurso possui o seu próprio _resourceType_ e, portanto, sabe-se que os três recursos fornecidos no _Bundle_ são um _Composition_, um _Observation_ e, por fim, um _Specimen_. Adicionalmente, a primeira entrada do _array_, recurso _Composition_, referencia a segunda entrada, dado que a propriedade _reference_ indica o _fullUrl_ da segunda entrada e, de forma similar, esta segunda entrada referencia a terceira, que não possui referência para outro recurso.
 
 ```json
 "entry": [
@@ -166,13 +167,16 @@ Na segunda entrada do _array_, _Observation_, há uma referência (_reference_) 
       "fullUrl": "urn:uuid:transient-2",
       "resource": {
         "resourceType": "Specimen"
+        ... outras propriedades (mas não há 'reference')...
       }
    }
 ]
 ```
 
+Observe novamente, no trecho acima, como é estabelecida a referência entre recursos. Na segunda entrada do _array_, _Observation_, há uma referência (_reference_) para a terceira entrada cujo identificador é "urn:uuid:transient-2".
+
 Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos.
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos. Novamente, o JSON completo está disponível [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
 ### Resultado de Exame Laboratorial
 
@@ -248,7 +252,7 @@ laboratório clínico. Em consequência, o valor desta propriedade é fixo e for
 ]
 ```
 
-### Diagnóstio em Laboratório Clínico
+### Diagnóstico em Laboratório Clínico
 
 O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
 diagnóstica ou investigativa. Este perfil é uma personalização do recurso [Observation](https://www.hl7.org/fhir/observation.html). As propriedades são definidas abaixo.
