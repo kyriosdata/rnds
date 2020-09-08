@@ -18,4 +18,8 @@ Este validador é uma aplicação gráfica por meio do qual é possível fornece
 de FHIR estabelecidas pela RNDS e um documento JSON, por exemplo, cuja conformidade com as definições
 deve ser verificada.
 
-Uma versão via linha de comandos é [validador](), e que está devidamente [documentada](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator).
+Uma alternativa para validação é usar o [validador](https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar), devidamente [documentado](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) e que permite seu uso via linha de comandos. Alguns deles são ilustrados abaixo:
+
+```shell
+java -jar validador_cli.jar <recurso para validar> -ig <diretorio de definicoes> -recurse -output resultado.xml
+```
