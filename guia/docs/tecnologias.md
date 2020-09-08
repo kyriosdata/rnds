@@ -53,7 +53,7 @@ A integração com a RNDS significa que há uma implementação do FHIR oferecid
 
 A implementação do FHIR oferecida pela RNDS está disponível em dois [ambientes](./ambientes.md), um de homologação e outro de produção.
 
-## Implementações para testes com o FHIR
+## Implementações para testes
 
 Há [vários](https://wiki.hl7.org/Publicly_Available_FHIR_Servers_for_testing) servidores disponíveis para experimentação com o FHIR. Ou seja, são computadores que estão executando alguma implementação do FHIR e não cobram nada por isso. Estes servidores são empregados apenas para testes, o que
 é suficiente para desenvolvedores que queiram conhecer mais sobre o padrão.

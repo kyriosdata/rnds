@@ -1,0 +1,934 @@
+{
+	"info": {
+		"_postman_id": "b6b72568-ab31-4765-b02e-8734c627071c",
+		"name": "RNDS 0.2.0",
+		"description": "Requisições para ambientação com os serviços oferecidos pela RNDS. \r\n\r\n> A expectativa é que este conjunto (_collection_ na língua Postman) de requisições seja atualizado\r\nà medida que novos serviços forem disponibilizados.\r\n\r\nA coleção depende do valor das seguintes variáveis:\r\n\r\n- **individuo-cns**: conforme o próprio nome\r\nindica, é o CNS de um indivíduo. O valor é empregado para identificar o responsável pela requisição como valor do header **Authorization** e também para identificar, em algumas operações, o subjeito de um exame.\r\n\r\n- **lab-cnes**: o código CNES do laboratório.\r\n- **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento para acesso é homologado. Observe que este identificador não é o CNES. \r\n\r\n- **auth**: servidor empregado para autenticação de quem está interessado em efetuar requisições. Observe que há um valor para o ambiente de homologação distinto daquele de produção.\r\n- **ehr**: endereço para envio das requisições de serviços. Observe que há um valor distinto para cada ambiente e, acionalmente, no caso do ambiente de produção, o endereço é específico por estado do estabelecimento.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Segurança (web services)",
+			"item": [
+				{
+					"name": "Obter token de acesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f1a5239b-909a-40ac-8e52-d3926eaa2e46",
+								"exec": [
+									"const template = `",
+									"access_token: <i>ocultado por segurança...</i><br/>",
+									"scope: {{scope}}<br />",
+									"token_type: {{token_type}}<br />",
+									"expires_in: {{expires_in}}min`;",
+									"",
+									"pm.visualizer.set(template, {",
+									"    ...pm.response.json(),",
+									"    expires_in: parseInt(pm.response.json().expires_in) / 60000",
+									"});",
+									"",
+									"pm.test(\"Código de status satisfatório\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"token de acesso disponível\", function () {",
+									"    const access_token = pm.response.json().access_token;",
+									"    pm.expect(access_token).not.eq(undefined);",
+									"    ",
+									"    // Guarda o \"access_token\" obtido ",
+									"    // (será utilizado pelas demais requisições)",
+									"    pm.collectionVariables.set(\"access_token\", access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{auth}}/api/token",
+							"protocol": "https",
+							"host": [
+								"{{auth}}"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						},
+						"description": "Serviços oferecidos pela RNDS só podem ser atendidos por estabelecimentos de saúde (laboratórios) devidamente autenticados. \r\nHá um serviço específico (endereço específico) para a autenticação do estabelecimento. \r\n\r\nSe o estabelecimento é autenticado de forma satisfatória, um _token_ de acesso é retornado e\r\npoderá ser reutilizado pelos 30 minutos seguintes. Convém observar que a autenticação de um\r\nestabelecimento via certificado digital é um processo \"oneroso\" e, portanto, a intenção é que o\r\n_token_ seja reutilizado tanto quanto possível.\r\n\r\nO _token_ de acesso obtido deve ser encaminhado nas requisições feitas aos demais serviços por meio\r\ndo _header_ identificador por **X-Authorization-Server**. Em particular, o conteúdo deste _header_ \r\ndeve ser \"Bearer token\". Observe que o _header_ não tem apenas o valor do _token_. O valor do _token_,\r\numa sequência de mais de 2000 caracteres, deve ser precedida por \"Bearer \", sem as aspas."
+					},
+					"response": []
+				},
+				{
+					"name": "Gerar contexto atendimento (p/ redirect ProSUS)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "19fe3266-74d3-47b8-80a2-347baaf7e1dd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cnes\": \"{{lab-cnes}}\",\n    \"cnsProfissional\": \"{{individuo-cns}}\",\n    \"cnsPaciente\":\"{{individuo-cns}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{ehr}}/api/contexto-atendimento",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"contexto-atendimento"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "791ad535-8846-4c22-b9df-4378e24bc885",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed571422-22fe-4646-b122-e84d1c236574",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Saúde (web services)",
+			"item": [
+				{
+					"name": "Estabelecimento pelo CNES",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba094fc5-72c5-4e74-914c-859abcc46344",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"pm.test(\"Estabelecimento de saúde encontrado\", function () {",
+									"    const cnesRecuperado = pm.response.json().id;",
+									"    const cnesFornecido = pm.collectionVariables.get(\"lab-cnes\");",
+									"",
+									"    pm.expect(cnesRecuperado).to.eql(cnesFornecido);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde lotado no estabelecimento em questão."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Organization/:cnes",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Organization",
+								":cnes"
+							],
+							"variable": [
+								{
+									"key": "cnes",
+									"value": "{{lab-cnes}}"
+								}
+							]
+						},
+						"description": "Obtém informações sobre o estabelecimento de saúde cujo CNES é fornecido."
+					},
+					"response": []
+				},
+				{
+					"name": "Profissional pelo CNS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2dcff54c-a50e-4de2-b7b9-4b317cd5e7de",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { ",
+									"    pm.response.to.have.status(200); ",
+									"});",
+									"",
+									"pm.test(\"Profissional de saúde identificado\", function () {",
+									"    const resposta = pm.response.json();",
+									"    const fornecido = pm.collectionVariables.get(\"individuo-cns\");",
+									"    pm.expect(resposta.id).to.eql(fornecido);",
+									"",
+									"    // Guarda o CPF do profissional para requisição que usa CPF",
+									"    const ids = resposta.identifier;",
+									"    const idx = ids.findIndex(i => i.system.endsWith(\"/cpf\"));",
+									"    const cpf = ids[idx].value;",
+									"    pm.collectionVariables.set(\"individuo-cpf\", cpf);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde lotado no estabelecimento em questão."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Practitioner/:cns",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Practitioner",
+								":cns"
+							],
+							"variable": [
+								{
+									"key": "cns",
+									"value": "{{individuo-cns}}"
+								}
+							]
+						},
+						"description": "Obtém informações do profissional cujo CNS é fornecido."
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar profissional pelo CPF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c7b6f0f-05af-4e4b-8833-6c783e067836",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { ",
+									"    pm.response.to.have.status(200); ",
+									"});",
+									"",
+									"pm.test(\"Total equals 1\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.total).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Practitioner"
+							],
+							"query": [
+								{
+									"key": "identifier",
+									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}",
+									"description": "Usa CPF recuperado por \"Profissional pelo CNS\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Lotações pelo CNS e/ou CNES",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f43cef37-56d8-421f-8dca-93058f2a7c0a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { ",
+									"    pm.response.to.have.status(200); ",
+									"});",
+									"",
+									"pm.test(\"Total >= 1\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.total).to.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/PractitionerRole?practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C{{individuo-cns}}&organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C{{lab-cnes}}&_include=PractitionerRole%3Aorganization",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"PractitionerRole"
+							],
+							"query": [
+								{
+									"key": "practitioner.identifier",
+									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C{{individuo-cns}}"
+								},
+								{
+									"key": "organization.identifier",
+									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C{{lab-cnes}}"
+								},
+								{
+									"key": "_include",
+									"value": "PractitionerRole%3Aorganization"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa Juridica pelo CNPJ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a102afbb-a92d-4d7b-8770-62ec6cc9127d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"pm.test(\"Organização encontrada\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    const ufgCNPJ = pm.collectionVariables.get(\"ufg-cnpj\");",
+									"    pm.expect(jsonData.id).to.eql(ufgCNPJ);",
+									"});",
+									"",
+									"pm.test(\"Confere nome da UFG\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"UNIVERSIDADE FEDERAL DE GOIAS\");",
+									"});",
+									"",
+									"pm.test(\"Return correct profile\", function () {",
+									"    const tipo = pm.response.json().type[0].coding[0];",
+									"    pm.expect(tipo.version).to.eql(\"AUTARQUIA FEDERAL\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Organization/:cnpj",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Organization",
+								":cnpj"
+							],
+							"variable": [
+								{
+									"key": "cnpj",
+									"value": "{{ufg-cnpj}}"
+								}
+							]
+						},
+						"description": "Pesquisa pessoa jurídica pelo CNPJ"
+					},
+					"response": []
+				},
+				{
+					"name": "Profissional liberal pelo CPF ou CNES do estabelecimento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48e104ee-a8cd-4e14-b4f8-26e705250ff7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"pm.test(\"Estabelecimento de saúde encontrado\", function () {",
+									"    var cnesRecuperado = pm.response.json().id;",
+									"    const labCnes = pm.collectionVariables.get(\"lab-cnes\");",
+									"    pm.expect(cnesRecuperado).to.eql(labCnes);",
+									"});",
+									"",
+									"pm.test(\"Verifica cnes via identifier\", function () {",
+									"    const ids = pm.response.json().identifier;",
+									"    const idxCnes = ids.findIndex(i => i.system.endsWith(\"/cnes\"));",
+									"    const cnesRecuperado = pm.response.json().identifier[idxCnes].value;",
+									"    const labCnes = pm.collectionVariables.get(\"lab-cnes\");",
+									"    pm.expect(cnesRecuperado).to.eql(labCnes);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Organization/:cpf",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Organization",
+								":cpf"
+							],
+							"variable": [
+								{
+									"key": "cpf",
+									"value": "{{lab-cnes}}"
+								}
+							]
+						},
+						"description": "Profissional liberal (empresa): consulta pelo CPF.\r\nConsulta também pode ser pelo CNES, no lugar do CPF."
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar demográficos Paciente pelo CPF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "97de5c88-0841-4192-9cd5-ebc9cb31288b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () { ",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verifica cns recuperado pelo identificador\", function () {",
+									"    // Recupera todos os identificadores",
+									"    const idx = pm.response.json().entry[0].resource.identifier;",
+									"",
+									"    // Extrai apenas os valores dos identificadores que são CNS",
+									"    const cnss = idx.filter(i => i.system.endsWith(\"/cns\")).map(i => i.value);",
+									"",
+									"    const fornecido = pm.collectionVariables.get(\"individuo-cns\");",
+									"    pm.expect(cnss.includes(fornecido)).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Authorization-Server",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Access Token gerado pelo \"ehr-auth\"."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{individuo-cns}}",
+								"type": "text",
+								"description": "CNS ou CPF do profissional de saúde."
+							}
+						],
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Patient?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Patient"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "identifier",
+									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar resultado de exame",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b1f841a-ec93-4020-bb11-10c360f95981",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () { ",
+									"    pm.response.to.have.status(201); ",
+									"});",
+									"",
+									"pm.test(\"Location is present\", function () {",
+									"    // Recupera o identificador atribuído ao bundle pela RNDS",
+									"    // (identificador pelo qual a RNDS reconhece o documento em questão)",
+									"    pm.response.to.have.header(\"Location\");",
+									"    const location = pm.response.headers.get(\"Location\");",
+									"    const rndsID = location.substring(location.lastIndexOf(\"/\") + 1);",
+									"",
+									"    // Guarda rndsID para facilitar substituição deste documento",
+									"    pm.collectionVariables.set(\"exame-id-rnds\", rndsID);",
+									"    console.log(\"exame-id-lab: \" + pm.collectionVariables.get(\"exame-id-lab\"));",
+									"    console.log(\"exame-id-rnds: \", rndsID);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "abe83686-3c9b-419f-bb58-3d9851cd6ec8",
+								"exec": [
+									"const uuid = require(\"uuid\");",
+									"",
+									"// Define um novo identificador para o bundle (resultado)",
+									"pm.collectionVariables.set(\"exame-id-lab\", uuid.v4())",
+									"",
+									"console.log(\"individuo-cns: \" + pm.collectionVariables.get(\"individuo-cns\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Access Token gerado pelo \"ehr-auth\".",
+								"key": "X-Authorization-Server",
+								"type": "text",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"description": "CNS ou CPF do profissional de saúde lotado no estabelecimento de saúde em questão.",
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{individuo-cns}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"Bundle\",\n    \"type\": \"document\",\n    \"timestamp\": \"2020-03-20T00:00:00-03:00\",\n    \"meta\": {\n        \"lastUpdated\": \"2020-03-20T00:00:00-03:00\"\n    },\n    \"identifier\": {\n        \"system\": \"http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{lab-identificador}}\",\n        \"value\": \"{{exame-id-lab}}\"\n    },\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:uuid:transient-0\",\n            \"resource\": {\n                \"resourceType\": \"Composition\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento\",\n                            \"code\": \"REL\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"date\": \"2020-03-23T10:30:12.947-02:00\",\n                \"author\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0\",\n                            \"value\": \"{{lab-cnes}}\"\n                        }\n                    }\n                ],\n                \"title\": \"Resultado de Exame Laboratorial\",\n                \"section\": [\n                    {\n                        \"entry\": [\n                            {\n                                \"reference\": \"urn:uuid:transient-1\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-1\",\n            \"resource\": {\n                \"resourceType\": \"Observation\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"category\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS\",\n                                \"code\": \"0214\"\n                            }\n                        ]\n                    }\n                ],\n                \"code\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC\",\n                            \"code\": \"94507-1\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"issued\": \"2020-03-23T10:30:12.947-02:00\",\n                \"performer\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0\",\n                            \"value\": \"{{lab-cnes}}\"\n                        }\n                    }\n                ],\n                \"valueCodeableConcept\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame\",\n                            \"code\": \"3\"\n                        }\n                    ]\n                },\n                \"method\": {\n                    \"text\": \"Imunocromatográfico\"\n                },\n                \"referenceRange\": [\n                    {\n                        \"text\": \"(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos\"\n                    }\n                ],\n                \"specimen\": {\n                    \"reference\": \"urn:uuid:transient-2\"\n                }\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-2\",\n            \"resource\": {\n                \"resourceType\": \"Specimen\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0\"\n                    ]\n                },\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL\",\n                            \"code\": \"SGHEM\"\n                        }\n                    ]\n                }\n            }\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Bundle",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Bundle"
+							]
+						},
+						"description": "Um _Bundle_ é um \"depósito\" ou \"contêiner\" de outros recursos FHIR, e dado que precisamos de \r\ntrês recursos FHIR para um exame, também precisamos de um _Bundle_.\r\n\r\nEste Bundle possui um identificador local (identifier.value), ou identificador fornecido pelo laboratório. \r\nEste valor é gerado, nestes testes, automaticamente e depositado na variável global \"labID\".\r\n\r\nA execução desta requisição tem como resposta o identificador atribuído, pela RNDS, ao Bundle.\r\nEste identificador é fornecido por meio do Header \"Location\". O valor deste identificador é \r\ndepositado na variável global \"rndsID\".\r\n\r\nPara que um Resultado de Exame seja substituído, o Bundle que irá substituí-lo deverá possuir o mesmo\r\nidentificador local (identifier.value). Adicionalmente, o campo relatesTo[0].targetReference.reference\r\ndeve ter como valor \"Composition/<rndsID>\". Ou seja, o identificador fornecido pela RNDS para o Bundle\r\na se substituído."
+					},
+					"response": []
+				},
+				{
+					"name": "Substituir resultado de exame",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf914338-8589-4332-bd2d-de592d9139c2",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Location is present\", function () {",
+									"    pm.response.to.have.header(\"Location\");",
+									"    var location = pm.response.headers.get(\"Location\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "14299f83-f2a6-4049-89ec-9f30d56075c1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Access Token gerado pelo \"ehr-auth\".",
+								"key": "X-Authorization-Server",
+								"type": "text",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"description": "CNS ou CPF do profissional de saúde.",
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{individuo-cns}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"resourceType\":\"Bundle\",\n   \"meta\":{\n      \"lastUpdated\":\"2020-03-25T14:23:56.567-02:00\"\n   },\n   \"identifier\":{\n      \"system\":\"http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{lab-identificador}}\",\n      \"value\":\"{{exame-id-lab}}\"\n   },\n   \"type\":\"document\",\n   \"timestamp\":\"2020-03-25T14:23:56.567-02:00\",\n   \"entry\":[\n      {\n         \"fullUrl\":\"urn:uuid:transient-0\",\n         \"resource\":{\n            \"resourceType\":\"Composition\",\n            \"meta\":{\n               \"profile\":[\n                  \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1\"\n               ]\n            },\n            \"status\":\"final\",\n            \"type\":{\n               \"coding\":[\n                  {\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento\",\n                     \"code\":\"REL\"\n                  }\n               ]\n            },\n            \"subject\":{\n               \"identifier\":{\n                  \"system\":\"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                  \"value\":\"{{individuo-cns}}\"\n               }\n            },\n            \"date\":\"2020-03-25T10:30:12.947-02:00\",\n            \"author\":[\n               {\n                  \"identifier\":{\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0\",\n                     \"value\":\"{{lab-cnes}}\"\n                  }\n               }\n            ],\n            \"title\":\"Resultado de Exame Laboratorial\",\n            \"relatesTo\":[\n               {\n                  \"code\":\"replaces\",\n                  \"targetReference\":{\n                     \"reference\":\"Composition/{{exame-id-rnds}}\"\n                  }\n               }\n            ],\n            \"section\":[\n               {\n                  \"entry\":[\n                     {\n                        \"reference\":\"urn:uuid:transient-1\"\n                     }\n                  ]\n               }\n            ]\n         }\n      },\n      {\n         \"fullUrl\":\"urn:uuid:transient-1\",\n         \"resource\":{\n            \"resourceType\":\"Observation\",\n            \"meta\":{\n               \"profile\":[\n                  \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0\"\n               ]\n            },\n            \"status\":\"final\",\n            \"category\":[\n               {\n                  \"coding\":[\n                     {\n                        \"system\":\"http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS\",\n                        \"code\":\"0214\"\n                     }\n                  ]\n               }\n            ],\n            \"code\":{\n               \"coding\":[\n                  {\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC\",\n                     \"code\":\"94507-1\"\n                  }\n               ]\n            },\n            \"subject\":{\n               \"identifier\":{\n                  \"system\":\"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                  \"value\":\"704603116764826\"\n               }\n            },\n            \"issued\":\"2020-03-23T10:30:12.947-02:00\",\n            \"performer\":[\n               {\n                  \"identifier\":{\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0\",\n                     \"value\":\"{{lab-cnes}}\"\n                  }\n               }\n            ],\n            \"valueCodeableConcept\":{\n               \"coding\":[\n                  {\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame\",\n                     \"code\":\"3\"\n                  }\n               ]\n            },\n            \"method\":{\n               \"text\":\"Imunocromatográfico\"\n            },\n            \"specimen\":{\n               \"reference\":\"urn:uuid:transient-2\"\n            },\n            \"referenceRange\":[\n               {\n                  \"text\":\"(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos\"\n               }\n            ]\n         }\n      },\n      {\n         \"fullUrl\":\"urn:uuid:transient-2\",\n         \"resource\":{\n            \"resourceType\":\"Specimen\",\n            \"meta\":{\n               \"profile\":[\n                  \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0\"\n               ]\n            },\n            \"type\":{\n               \"coding\":[\n                  {\n                     \"system\":\"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL\",\n                     \"code\":\"SGHEM\"\n                  }\n               ]\n            }\n         }\n      }\n   ]\n}"
+						},
+						"url": {
+							"raw": "https://{{ehr}}/api/fhir/r4/Bundle",
+							"protocol": "https",
+							"host": [
+								"{{ehr}}"
+							],
+							"path": [
+								"api",
+								"fhir",
+								"r4",
+								"Bundle"
+							]
+						},
+						"description": "O identificador do Bundle que requisita a substituição deve ter como identificador local o mesmo identificador local do Bundle que foi empregado para criar o documento (versão a ser substituída). \r\n\r\nAdicionalmente, em relatesTo[0].targetReference.reference, o valor deve ser \r\n\"Composition/<rndsID>\", ou seja emprega o identificador atribuído pela RNDS ao Bundle a ser substituído."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4b19778-10e8-44da-9764-276878d387ff",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "31a8e828-986c-49ca-917b-28408cfe3aa4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dc34c109-6157-41c3-9354-9671f069d476",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9f52c0d1-8c30-4054-86f0-684595286e04",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5257daf4-610f-4c21-bbfc-090056caaaaa",
+			"key": "individuo-cns",
+			"value": "980016285992687"
+		},
+		{
+			"id": "ae3dcc45-7869-4b02-a3e6-d46021600804",
+			"key": "lab-cnes",
+			"value": "2337991"
+		},
+		{
+			"id": "b437104e-3a6a-4b67-a24b-32ea544f2e19",
+			"key": "lab-identificador",
+			"value": "14008"
+		},
+		{
+			"id": "38250127-4125-444c-b3ec-c47ab90cfd30",
+			"key": "auth",
+			"value": "ehr-auth-hmg.saude.gov.br"
+		},
+		{
+			"id": "cf2bcdb3-edc3-44e1-aa5e-c2f320d13817",
+			"key": "ehr",
+			"value": "ehr-services.hmg.saude.gov.br"
+		},
+		{
+			"id": "31304f6a-a549-4deb-8de9-9de8adc7ef66",
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"id": "79b25ff3-0f62-4107-ba05-88f59b1f71e3",
+			"key": "resultado-id",
+			"value": ""
+		},
+		{
+			"id": "0fb0cb5c-cda9-4576-bcad-5450dc7777b6",
+			"key": "individuo-cpf",
+			"value": ""
+		},
+		{
+			"id": "b7060fd4-985d-4c44-af18-1511127f782f",
+			"key": "ufg-cnpj",
+			"value": "01567601000143"
+		},
+		{
+			"id": "9ef1a5ae-2ce7-4103-b403-9d6854bcdb16",
+			"key": "exame-id",
+			"value": ""
+		},
+		{
+			"id": "12f537ce-fc6d-459b-be04-b9f4af3cc2a3",
+			"key": "rndsID",
+			"value": ""
+		},
+		{
+			"id": "708a5eab-db46-410b-bb94-557bb68c68d7",
+			"key": "exame-id-lab",
+			"value": ""
+		},
+		{
+			"id": "b249fe03-bf37-48bd-acc6-987c2e52ce00",
+			"key": "exame-id-rnds",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
