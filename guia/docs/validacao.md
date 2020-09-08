@@ -18,7 +18,4 @@ Este validador é uma aplicação gráfica por meio do qual é possível fornece
 de FHIR estabelecidas pela RNDS e um documento JSON, por exemplo, cuja conformidade com as definições
 deve ser verificada.
 
-A intenção aqui é documentar o desenvolvimento de uma aplicação de funcionalidade similar àquela gráfica, comentada no parágrafo anterior.
-Contudo, uma que possa ser executada via linha de comandos e, portanto, apta a ser utilizada
-de forma automática, sem intervenção humana, o que viabiliza o seu emprego como parte de um processo (_pipeline_)
-de submissão (envio) de resultados de exames para a RNDS.
+Uma versão via linha de comandos é [validador](), e que está devidamente [documentada](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator).
