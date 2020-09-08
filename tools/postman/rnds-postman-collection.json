@@ -865,52 +865,52 @@
 	],
 	"variable": [
 		{
-			"id": "337311ef-ebfb-4fc6-a99c-b1d1d2d1f67a",
+			"id": "33455fc4-6504-42bc-b5de-cfea4ae7901d",
 			"key": "individuo-cns",
 			"value": "980016285992687"
 		},
 		{
-			"id": "82f0690b-e719-45af-9c90-11c75faea04d",
+			"id": "07d5a9ab-dea0-409a-9841-1a1738986b93",
 			"key": "lab-cnes",
 			"value": "2337991"
 		},
 		{
-			"id": "768e6c76-5346-44c8-bda6-4cd25d6514ca",
+			"id": "e044b7ad-003c-4311-b5c6-d50189d2d699",
 			"key": "lab-identificador",
 			"value": "14008"
 		},
 		{
-			"id": "553c8daf-e079-4125-9263-d21a7ec79425",
+			"id": "086ccff0-3f70-4565-b568-c229a7612d7b",
 			"key": "auth",
 			"value": "ehr-auth-hmg.saude.gov.br"
 		},
 		{
-			"id": "56f8b123-6f95-49e5-8389-8e5bee6576a5",
+			"id": "a23c7496-0d42-4285-86bd-be06deed51be",
 			"key": "ehr",
 			"value": "ehr-services.hmg.saude.gov.br"
 		},
 		{
-			"id": "60580c3e-8eb7-4955-8f95-99a38665286a",
+			"id": "7d572da3-a249-45ce-adc5-c8d654d3872c",
 			"key": "ufg-cnpj",
 			"value": "01567601000143"
 		},
 		{
-			"id": "804882b4-df77-4900-838d-c16490ba75e0",
+			"id": "f3325732-66f1-4ea4-988c-975b14b9ed6a",
 			"key": "exame-id-lab",
 			"value": ""
 		},
 		{
-			"id": "3980fa88-bc0b-498a-9289-47d28e3c1dcf",
+			"id": "3716bb9c-de50-491f-a41d-0f46fd93c2c7",
 			"key": "access_token",
 			"value": ""
 		},
 		{
-			"id": "1cbc0d4f-c121-492f-9597-2087ca47caf1",
+			"id": "e49c12f8-d449-4f5e-b2ec-6d716763b8c5",
 			"key": "individuo-cpf",
 			"value": ""
 		},
 		{
-			"id": "d44c5d8e-40e5-49e6-af3a-fa72b1a6736d",
+			"id": "b9776113-1dda-4ea4-8ad3-d1aa7feb4604",
 			"key": "exame-id-rnds",
 			"value": ""
 		}
