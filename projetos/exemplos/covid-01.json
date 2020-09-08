@@ -6,8 +6,8 @@
     "lastUpdated": "2020-03-20T00:00:00-03:00"
   },
   "identifier": {
-    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{lab-identificador}}",
-    "value": "{{exame-id-lab}}"
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99999",
+    "value": "1234567"
   },
   "entry": [
     {

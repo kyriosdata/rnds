@@ -56,7 +56,7 @@ no "esqueleto" de JSON abaixo.
 A propriedade _type_ indica o propósito do _Bundle_, no caso, trata-se de um documento (_document_). A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
 provavelmente o mesmo instante da última atualização, fornecida na propriedade _meta.lastUpdate_.
 
-As outras duas propriedades são _identifier_ e _entry_. Os valores destas propriedades são definidos nas seções seguintes, e a ausência deles tornam este conteúdo um "esqueleto". O JSON completo pode ser consultado aqui.
+As outras duas propriedades são _identifier_ e _entry_. Os valores destas propriedades são definidos nas seções seguintes, e a ausência deles tornam este conteúdo um "esqueleto". O JSON completo pode ser consultado [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
 Adicionalmente, a propriedade
 _entry_ reúne os recursos FHIR que fazem parte do _Bundle_. Neste caso,
