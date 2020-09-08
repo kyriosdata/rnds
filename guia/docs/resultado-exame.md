@@ -56,9 +56,9 @@ no "esqueleto" de JSON abaixo.
 A propriedade _type_ indica o propósito do _Bundle_, no caso, trata-se de um documento (_document_). A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
 provavelmente o mesmo instante da última atualização, fornecida na propriedade _meta.lastUpdate_.
 
-As outras duas propriedades são _identifier_ e _entry_. Os valores destas duas propriedades foram omitidos, o que torna este conteúdo um "esqueleto". As seções seguintes definem estes valores.
+As outras duas propriedades do "esqueleto" são _identifier_ e _entry_, justamente aquelas cujos valores foram omitidos, mas que são detalhadamente fornecidos nas seções seguintes.
 
-Convém destacar a propriedade _entry_, motivo da existência de um [Bundle](https://www.hl7.org/fhir/bundle.html). Exatamente por meio desta propriedade são definidos os recursos FHIR que fazem parte do _Bundle_. Neste caso,
+Em particular, a propriedade _entry_ é o motivo da existência de um [Bundle](https://www.hl7.org/fhir/bundle.html). Exatamente por meio desta propriedade são definidos os recursos FHIR que fazem parte do _Bundle_. Neste caso,
 o [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
 a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
 
@@ -66,35 +66,35 @@ Quem desejar consultar o JSON completo, já "inflado" com os valores para estas 
 
 ### Identificador (_identifier_)
 
-A montagem de um identificador (_identifier_) é realizada a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{labID}} e {{resultadoID}}:
+A montagem de um identificador (_identifier_) é realizada a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{lab-identificador}} e {{exame-id-lab}}:
 
 ```json
-    "identifier": {
-        "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{labID}}",
-        "value": "{{resultadoID}}"
-    }
+"identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{lab-identificador}}",
+    "value": "{{exame-id-lab}}"
+}
 ```
 
-O identificador do solicitante, representado acima por {{labID}}, é fornecido pela RNDS quando
-o pedido de credenciamento do laboratório em questão é aprovado. A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados por uma questão de segurança.
+O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de credenciamento do laboratório em questão é homologado.
+
+A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados.
 
 ![img](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
 
-O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados
-produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
-O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim por diante, caso o
-identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 
-De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_, a ser enviado para a RNDS, é
+O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim por diante, caso o identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+
+De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_, a ser enviado para a RNDS, seria
 
 ```json
-    "identifier": {
-        "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
-        "value": "04/09/2020-cdYQj"
-    }
+"identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
+    "value": "04/09/2020-cdYQj"
+}
 ```
 
-Em consequência, o "esqueleto" JSON pode ser reescrito, considerando o detalhamento do _identifier_, conforme abaixo:
+Em consequência, o "esqueleto" JSON pode ser reescrito, considerando o preenchimento do _identifier_, conforme abaixo:
 
 ```json
 {
