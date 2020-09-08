@@ -56,17 +56,13 @@ no "esqueleto" de JSON abaixo.
 A propriedade _type_ indica o propósito do _Bundle_, no caso, trata-se de um documento (_document_). A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
 provavelmente o mesmo instante da última atualização, fornecida na propriedade _meta.lastUpdate_.
 
-As outras duas propriedades são _identifier_ e _entry_. Os valores destas propriedades são definidos nas seções seguintes, e a ausência deles tornam este conteúdo um "esqueleto". O JSON completo pode ser consultado [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
+As outras duas propriedades são _identifier_ e _entry_. Os valores destas duas propriedades foram omitidos, o que torna este conteúdo um "esqueleto". As seções seguintes definem estes valores.
 
-Adicionalmente, a propriedade
-_entry_ reúne os recursos FHIR que fazem parte do _Bundle_. Neste caso,
+Convém destacar a propriedade _entry_, motivo da existência de um [Bundle](https://www.hl7.org/fhir/bundle.html). Exatamente por meio desta propriedade são definidos os recursos FHIR que fazem parte do _Bundle_. Neste caso,
 o [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
 a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
 
-O "esqueleto" acima ilustra como um resultado de exame laboratorial deve ser empacotado
-antes de ser enviado para a RNDS. Ou seja, falta completar este "esqueleto", produzir
-um JSON válido, "inflado" com os valores omitidos para as propriedades
-_identifier_ (identificador do _Bundle_) e _entry_ (elementos do resultado).
+Quem desejar consultar o JSON completo, já "inflado" com os valores para estas propriedades, antes de percorrer as seções seguintes, pode obtê-lo [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
 ### Identificador (_identifier_)
 
