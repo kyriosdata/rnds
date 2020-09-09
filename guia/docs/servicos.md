@@ -4,11 +4,15 @@ title: Catálogo de Serviços
 sidebar_label: Catálogo de Serviços
 ---
 
-Dois serviços (_web services_) são de _segurança_ e os demais enviam ou recuperam informações de _saúde_.
+Dois serviços (_web services_) são de _segurança_ e os demais enviam informações para a RNDS ou recuperam informações de _saúde_ disponibilizadas pela RNDS.
 
-O serviço de segurança obtém o _token_ de acesso exigido para execução dos demais serviços. Este _token_ substitui o emprego de autenticação baseada em usuário e uma senha secreta por certificado digital. O certificado digital, portanto, é empregado para autenticar a origem, ou em nome de quem, as requisições serão submetidas.
+Os serviços de segurança são intermediários, é a partir deles que se obtém
+a autenticação necessária para acesso aos demais serviços. Em particular,
+substituem o emprego de autenticação baseada em usuário/senha por certificado digital (estratégia considerada mais segura).
 
 Os serviços (_web services_) de saúde implementam a troca de informação em saúde. Estes serviços são o meio para se atingir a desejada interoperabilidade em saúde no Brasil.
+
+Abaixo segue uma visão panorâmica dos serviços e em [Interagindo com a RNDS](./tools/postman) há orientações detalhadas.
 
 ### Segurança (_web services_)
 

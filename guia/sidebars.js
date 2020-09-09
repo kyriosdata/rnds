@@ -1,8 +1,8 @@
 module.exports = {
   someSidebar: {
     Tópicos: [
-      "contexto",
       "roteiro",
+      "contexto",
       "atores",
       "servicos",
       "ambientes",
@@ -11,6 +11,7 @@ module.exports = {
       "perfis",
       "si",
       "resultado",
+      "identificador",
     ],
     Ferramentas: ["tools/fhirpath", "tools/postman", "tools/validacao"],
   },
