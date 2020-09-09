@@ -3,7 +3,7 @@ module.exports = {
   tagline: "Guia de Integração",
   url: "https://kyriosdata.github.io",
   baseUrl: "/rnds/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "log",
   favicon: "img/favicon.ico",
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
   projectName: "rnds", // Usually your repo name.
@@ -33,20 +33,16 @@ module.exports = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Tópicos",
           items: [
             {
-              label: "Style Guide",
+              label: "Conteúdo",
               to: "docs/",
-            },
-            {
-              label: "Second Doc",
-              to: "docs/doc2/",
             },
           ],
         },
         {
-          title: "Community",
+          title: "Comunidade",
           items: [
             {
               label: "Stack Overflow",
@@ -63,7 +59,7 @@ module.exports = {
           ],
         },
         {
-          title: "More",
+          title: "Outros",
           items: [
             {
               label: "Blog",
@@ -86,14 +82,13 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/",
+          editUrl: "https://github.com/kyriosdata/rnds/edit/master/website/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/blog/",
+            "https://github.com/kyriosdata/rnds/edit/master/website/blog/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

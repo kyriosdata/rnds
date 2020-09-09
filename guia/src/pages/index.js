@@ -25,7 +25,7 @@ const features = [
     description: (
       <>
         O <i>Guia</i> é produzido com foco no desenvolvedor. A integração é
-        vista como um projeto cujo principal artefato é o _software_ que
+        vista como um projeto cujo principal artefato é o <i>software</i> que
         requisita serviços oferecidos pela RNDS.
       </>
     ),
