@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b6b72568-ab31-4765-b02e-8734c627071c",
-		"name": "RNDS 0.2.1",
+		"name": "RNDS 0.2.2",
 		"description": "Requisições para ambientação com os serviços oferecidos pela RNDS. A intenção é facilitar a compreensão acerca de como uma requisição é construída e enviada, assim como a resposta retornada. A experimentação com estas requisições, alterações de parâmetros e outros é recomendada para se obter a compreensão necessária para a posterior implementação destas requisições em código.\r\n\r\n> Este conjunto (_collection_) de requisições será atualizado\r\nà medida que novos serviços forem disponibilizados pela RNDS.\r\n\r\nEsta coleção é mantida no repositório https://github.com/kyriosdata/rnds. Sugestões, erros, melhorias e outros são bem-vindos.\r\n\r\nA coleção depende do valor de várias variáveis. Aquelas abaixo devem ser definidas com valores corretos para que as requisições possam ser executadas com sucesso. \r\n\r\n- **lab-cnes**: o código CNES do laboratório responsável pelas requisições.  \r\n\r\n- **individuo-cns**: conforme o próprio nome\r\nindica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual \r\na requisição será feita. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization**. Adicionalmente a este uso, este valor também é reutilizado para outras finalidades, por exemplo,\r\ncomo o sujeito de um exame.\r\n\r\n- **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento).\r\n\r\n- **auth**: servidor (endereço) empregado para autenticação. Observe que o endereço do servidor muda do ambiente de homologação para aquele de produção.\r\n- **ehr**: servidor (endereço) para envio das requisições de serviços (_web services_) de saúde. Observe que o endereço do ambiente de homologação é distinto daquele de produção. Acionalmente, no caso do ambiente de produção, o endereço é específico por estado do estabelecimento.\r\n\r\n- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade.\r\n\r\nAs variáveis abaixo são empregadas pelos _scripts_ de testes e pelas requisições. Os valores correspondentes são gerados e atualizados pela própria execução das requisições. \r\n\r\n- **access_token**: este valor será atualizado a cada requisição satisfatória ao serviço de autenticação e será empregado por todos os demais serviços assim como o valor da variável **individuo-cns**. \r\n\r\n- **individuo-cpf**: o CPF do profissional de saúde cujo CNS é fornecido na variável **individuo-cns**. Observe que não é necessário fornecer este valor. Ele será obtido pela execução da requisição denominada \"Profissional eplo CNS\". \r\n\r\n- **exame-id-lab**: identificador único do exame realizado pelo laboratório e gerado pelo laboratório. É um identificador local ao laboratório. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado. \r\n\r\n- **exame-id-rnds**: identificador único, gerado pela RNDS, quando um resultado de exame é submetido. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado.\r\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -95,13 +95,13 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
 								"value": "{{individuo-cns}}",
 								"type": "text",
-								"description": "CNS ou CPF do profissional de saúde."
+								"description": "CNS ou CPF do profissional de saúde, lotado no estabelecimento de saúde em questão, em nome do qual a requisição é feita."
 							}
 						],
 						"body": {
@@ -123,7 +123,8 @@
 								"api",
 								"contexto-atendimento"
 							]
-						}
+						},
+						"description": "Obtém _token_ por meio do qual é assegurado acesso ao Conecte SUS Profissional."
 					},
 					"response": []
 				}
@@ -189,7 +190,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -214,7 +215,8 @@
 							"variable": [
 								{
 									"key": "cnes",
-									"value": "{{lab-cnes}}"
+									"value": "{{lab-cnes}}",
+									"description": "O CNES do estabelecimento de saúde cujas informações são requisitadas. O nome do laboratório, telefones e endereço são algumas das informações recuperadas.\n\n"
 								}
 							]
 						},
@@ -262,7 +264,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -287,7 +289,8 @@
 							"variable": [
 								{
 									"key": "cns",
-									"value": "{{individuo-cns}}"
+									"value": "{{individuo-cns}}",
+									"description": "CNS ou CPF do profissional de saúde lotado no estabelecimento em questão."
 								}
 							]
 						},
@@ -328,7 +331,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Token retornado pelo serviço de autenticação e depositado na variável \"access_token\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -353,7 +356,7 @@
 								{
 									"key": "identifier",
 									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}",
-									"description": "Usa CPF recuperado por \"Profissional pelo CNS\""
+									"description": "CPF do profissional de saúde cujas informações serão recuperadas. Dentre aquelas retornadas se encontra o nome e o CNS do profissional em questão, dentre outras. \nUsa CPF recuperado por \"Profissional pelo CNS\""
 								}
 							]
 						}
@@ -393,7 +396,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -474,7 +477,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -547,7 +550,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -619,7 +622,7 @@
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
-								"description": "Access Token gerado pelo \"ehr-auth\"."
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação)."
 							},
 							{
 								"key": "Authorization",
@@ -709,7 +712,7 @@
 								"value": "application/json"
 							},
 							{
-								"description": "Access Token gerado pelo \"ehr-auth\".",
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação).",
 								"key": "X-Authorization-Server",
 								"type": "text",
 								"value": "Bearer {{access_token}}"
@@ -782,7 +785,7 @@
 								"value": "application/json"
 							},
 							{
-								"description": "Access Token gerado pelo \"ehr-auth\".",
+								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação).",
 								"key": "X-Authorization-Server",
 								"type": "text",
 								"value": "Bearer {{access_token}}"
@@ -865,52 +868,52 @@
 	],
 	"variable": [
 		{
-			"id": "33455fc4-6504-42bc-b5de-cfea4ae7901d",
+			"id": "8d7597cf-27fe-4345-a71f-cf2e0bc0a2e5",
 			"key": "individuo-cns",
 			"value": "980016285992687"
 		},
 		{
-			"id": "07d5a9ab-dea0-409a-9841-1a1738986b93",
+			"id": "f9bceb45-aafd-4e65-b3c6-7966619d3b39",
 			"key": "lab-cnes",
 			"value": "2337991"
 		},
 		{
-			"id": "e044b7ad-003c-4311-b5c6-d50189d2d699",
+			"id": "03ed8b53-a9bb-4a1a-89b7-eb55e3e0b33c",
 			"key": "lab-identificador",
 			"value": "14008"
 		},
 		{
-			"id": "086ccff0-3f70-4565-b568-c229a7612d7b",
+			"id": "108530e1-51ed-452c-b805-8f5531e941e1",
 			"key": "auth",
 			"value": "ehr-auth-hmg.saude.gov.br"
 		},
 		{
-			"id": "a23c7496-0d42-4285-86bd-be06deed51be",
+			"id": "a9b66706-52d9-4b2b-b5d8-4e3dc7cc66e0",
 			"key": "ehr",
 			"value": "ehr-services.hmg.saude.gov.br"
 		},
 		{
-			"id": "7d572da3-a249-45ce-adc5-c8d654d3872c",
+			"id": "c30c1a05-03b8-4fb4-9c47-504204380921",
 			"key": "ufg-cnpj",
 			"value": "01567601000143"
 		},
 		{
-			"id": "f3325732-66f1-4ea4-988c-975b14b9ed6a",
+			"id": "e44bb13b-922a-4b42-9f03-d854e7ce3e2d",
 			"key": "exame-id-lab",
 			"value": ""
 		},
 		{
-			"id": "3716bb9c-de50-491f-a41d-0f46fd93c2c7",
+			"id": "b39076ef-751e-4754-a76a-f0bde489bfd2",
 			"key": "access_token",
 			"value": ""
 		},
 		{
-			"id": "e49c12f8-d449-4f5e-b2ec-6d716763b8c5",
+			"id": "173378cd-b409-4ca4-b636-1cd83cb563d2",
 			"key": "individuo-cpf",
 			"value": ""
 		},
 		{
-			"id": "b9776113-1dda-4ea4-8ad3-d1aa7feb4604",
+			"id": "7f027c21-4e45-4ad6-b7c8-8b0a6b829e2e",
 			"key": "exame-id-rnds",
 			"value": ""
 		}

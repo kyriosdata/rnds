@@ -23,11 +23,11 @@ Abaixo segue uma visão panorâmica dos serviços e em [Interagindo com a RNDS](
 
 ### Saúde (_web services_)
 
-| Método | Path                          | Descrição                     |
-| ------ | ----------------------------- | ----------------------------- |
-| GET    | /api/fhir/r4/Patient          |                               |
-| GET    | /api/fhir/r4/Organization     |                               |
-| GET    | /api/fhir/r4/Practitioner     |                               |
-| GET    | /api/fhir/r4/PractitionerRole |                               |
-| POST   | /api/fhir/r4/Bundle           | Enviar resultado de exame     |
-| POST   | /api/fhir/r4/Bundle           | Substituir resultado de exame |
+| Método | Path                          | Descrição                                                                 |
+| ------ | ----------------------------- | ------------------------------------------------------------------------- |
+| GET    | /api/fhir/r4/Patient          | Obter informações sobre paciente.                                         |
+| GET    | /api/fhir/r4/Organization     | Obter informações sobre um estabelecimento de saúde ou outra organização. |
+| GET    | /api/fhir/r4/Practitioner     | Obter informações sobre profissionais de saúde                            |
+| GET    | /api/fhir/r4/PractitionerRole |                                                                           |
+| POST   | /api/fhir/r4/Bundle           | Enviar resultado de exame                                                 |
+| POST   | /api/fhir/r4/Bundle           | Substituir resultado de exame                                             |
