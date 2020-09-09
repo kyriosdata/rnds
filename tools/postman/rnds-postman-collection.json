@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "b6b72568-ab31-4765-b02e-8734c627071c",
-		"name": "RNDS 0.2.2",
-		"description": "Requisições para ambientação com os serviços oferecidos pela RNDS. A intenção é facilitar a compreensão acerca de como uma requisição é construída e enviada, assim como a resposta retornada. A experimentação com estas requisições, alterações de parâmetros e outros é recomendada para se obter a compreensão necessária para a posterior implementação destas requisições em código.\r\n\r\n> Este conjunto (_collection_) de requisições será atualizado\r\nà medida que novos serviços forem disponibilizados pela RNDS.\r\n\r\nEsta coleção é mantida no repositório https://github.com/kyriosdata/rnds. Sugestões, erros, melhorias e outros são bem-vindos.\r\n\r\nA coleção depende do valor de várias variáveis. Aquelas abaixo devem ser definidas com valores corretos para que as requisições possam ser executadas com sucesso. \r\n\r\n- **lab-cnes**: o código CNES do laboratório responsável pelas requisições.  \r\n\r\n- **individuo-cns**: conforme o próprio nome\r\nindica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual \r\na requisição será feita. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization**. Adicionalmente a este uso, este valor também é reutilizado para outras finalidades, por exemplo,\r\ncomo o sujeito de um exame.\r\n\r\n- **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento).\r\n\r\n- **auth**: servidor (endereço) empregado para autenticação. Observe que o endereço do servidor muda do ambiente de homologação para aquele de produção.\r\n- **ehr**: servidor (endereço) para envio das requisições de serviços (_web services_) de saúde. Observe que o endereço do ambiente de homologação é distinto daquele de produção. Acionalmente, no caso do ambiente de produção, o endereço é específico por estado do estabelecimento.\r\n\r\n- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade.\r\n\r\nAs variáveis abaixo são empregadas pelos _scripts_ de testes e pelas requisições. Os valores correspondentes são gerados e atualizados pela própria execução das requisições. \r\n\r\n- **access_token**: este valor será atualizado a cada requisição satisfatória ao serviço de autenticação e será empregado por todos os demais serviços assim como o valor da variável **individuo-cns**. \r\n\r\n- **individuo-cpf**: o CPF do profissional de saúde cujo CNS é fornecido na variável **individuo-cns**. Observe que não é necessário fornecer este valor. Ele será obtido pela execução da requisição denominada \"Profissional eplo CNS\". \r\n\r\n- **exame-id-lab**: identificador único do exame realizado pelo laboratório e gerado pelo laboratório. É um identificador local ao laboratório. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado. \r\n\r\n- **exame-id-rnds**: identificador único, gerado pela RNDS, quando um resultado de exame é submetido. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado.\r\n",
+		"name": "RNDS 0.2.3",
+		"description": "Requisições para ambientação com os serviços oferecidos pela RNDS. A intenção é facilitar a compreensão acerca de como uma requisição é construída e enviada, assim como a resposta retornada. A experimentação com estas requisições, alterações de parâmetros e outros é recomendada para se obter a compreensão necessária para a posterior implementação destas requisições em código.\r\n\r\n> Este conjunto (_collection_) de requisições será atualizado\r\nà medida que novos serviços forem disponibilizados pela RNDS.\r\n\r\nEsta coleção é mantida no repositório https://github.com/kyriosdata/rnds. Sugestões, erros, melhorias e outros são bem-vindos.\r\n\r\nA coleção depende do valor de várias variáveis. Aquelas abaixo devem ser definidas com valores corretos para que as requisições possam ser executadas com sucesso. \r\n\r\n- **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento).\r\n\r\n- **lab-cnes**: o código CNES do laboratório responsável pelas requisições.  \r\n\r\n- **individuo-cns**: conforme o próprio nome\r\nindica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual \r\na requisição será feita. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization**. Adicionalmente a este uso, este valor também é reutilizado para outras finalidades, por exemplo,\r\ncomo o sujeito de um exame.\r\n\r\n- **auth**: servidor (endereço) empregado para autenticação. Observe que o endereço do servidor muda do ambiente de homologação para aquele de produção.\r\n- **ehr**: servidor (endereço) para envio das requisições de serviços (_web services_) de saúde. Observe que o endereço do ambiente de homologação é distinto daquele de produção. Acionalmente, no caso do ambiente de produção, o endereço é específico por estado do estabelecimento.\r\n\r\n- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade.\r\n\r\nAs variáveis abaixo são empregadas pelos _scripts_ de testes e pelas requisições. Os valores correspondentes são gerados e atualizados pela própria execução das requisições. \r\n\r\n- **access_token**: este valor será atualizado a cada requisição satisfatória ao serviço de autenticação e será empregado por todos os demais serviços assim como o valor da variável **individuo-cns**. \r\n\r\n- **individuo-cpf**: o CPF do profissional de saúde cujo CNS é fornecido na variável **individuo-cns**. Observe que não é necessário fornecer este valor. Ele será obtido pela execução da requisição denominada \"Profissional eplo CNS\". \r\n\r\n- **exame-id-lab**: identificador único do exame realizado pelo laboratório e gerado pelo laboratório. É um identificador local ao laboratório. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado. \r\n\r\n- **exame-id-rnds**: identificador único, gerado pela RNDS, quando um resultado de exame é submetido. Este valor é necessário para permitir a substituição de um resultado de exame previamente enviado.\r\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -868,52 +868,52 @@
 	],
 	"variable": [
 		{
-			"id": "38ea6943-22f9-46a2-8af8-56d58adea85c",
+			"id": "0f4dad96-f22d-4609-bc2a-822a6370665f",
 			"key": "individuo-cns",
-			"value": "980016285992687"
+			"value": "00112233445566"
 		},
 		{
-			"id": "b0a32cac-affa-4b62-a2ac-91be5782ecc4",
+			"id": "2c64bbf0-d65c-4f1d-b74e-eaab8ffb9678",
 			"key": "lab-cnes",
-			"value": "2337991"
+			"value": "1234567"
 		},
 		{
-			"id": "1a23630b-6a3b-49b8-9165-e5c0b0a55202",
+			"id": "213292cb-29ee-4e52-9341-7c76408396fc",
 			"key": "lab-identificador",
-			"value": "14008"
+			"value": "99"
 		},
 		{
-			"id": "396b7697-8b9c-435a-8c63-1cbd47fe3f0e",
+			"id": "8fadce64-9296-4968-a869-66ba6d70f245",
 			"key": "auth",
 			"value": "ehr-auth-hmg.saude.gov.br"
 		},
 		{
-			"id": "ff155c7e-084b-4e37-a70f-7fdfb1c53d78",
+			"id": "0e4f80fe-7cb3-4010-bf20-5a4d145db235",
 			"key": "ehr",
 			"value": "ehr-services.hmg.saude.gov.br"
 		},
 		{
-			"id": "929c04e4-4a40-4057-91e8-feeb5bb92299",
+			"id": "4efccb24-7916-4431-ad6f-c0dab515c1db",
 			"key": "ufg-cnpj",
 			"value": "01567601000143"
 		},
 		{
-			"id": "7d97bf20-66e7-464a-b063-4c357d02d2e7",
+			"id": "f98d65fe-5124-499e-9d04-46820088d494",
 			"key": "exame-id-lab",
 			"value": ""
 		},
 		{
-			"id": "e44845b3-ced7-4d7f-a7bd-ce44489f44ab",
+			"id": "e7d485a7-9ab9-4388-87f8-e011465812d1",
 			"key": "access_token",
 			"value": ""
 		},
 		{
-			"id": "c8560856-b7c8-4967-9eb5-944483ed17c9",
+			"id": "e0856ea6-0e0d-4996-b0ef-3a44e02d5a9e",
 			"key": "individuo-cpf",
 			"value": ""
 		},
 		{
-			"id": "cc8f1031-29d1-475c-becd-550b5c65f77a",
+			"id": "f844a87a-2a0e-46fe-87bf-38fb3ab7b472",
 			"key": "exame-id-rnds",
 			"value": ""
 		}
