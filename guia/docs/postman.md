@@ -22,12 +22,14 @@ Em algum momento, contudo, requisições _https_ devem partir do ecossistema do 
 - Postman. A ferramenta Postman é empregada para interação com _web services_. O _Guia_ emprega ela para ilustrar os "primeiros contatos" com a RNDS. Detalhes `criar página com detalhes`.
 - Baixe o arquivo contendo as [requisições](https://github.com/kyriosdata/rnds/blob/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json). Trata-se de um arquivo JSON.
 
-### Primeiro passo
+### E agora?
 
-- Obter as para uso pelo Postman. Este é um arquivo JSON que terá que ser importado para o Postman.
+De posse das informações necessárias para a experimentação, siga os passos abaixo ou, se preferir, o vídeo explicativo.
 
-### Detalhes da RESTFul API FHIR (RNDS)
+### E depois?
 
-As requisições estão detalhadas [aqui](https://documenter.getpostman.com/view/215332/TVCiUn6P).
+Parabéns, os "primeiros contatos" com a RNDS já foram feitos! Estão apresentados um ao outro.
+
+Detalhes das requisições podem ser obtidos interagindo com o próprio postman, ou se preferir, a [documentação](https://documenter.getpostman.com/view/215332/TVCiUn6P) correspondente.
 
 As informações incluem a finalidade de cada requisição, todos os _headers_, o _payload_ e as respostas fornecidas para as requisições.
