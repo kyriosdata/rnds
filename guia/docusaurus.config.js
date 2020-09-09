@@ -86,13 +86,12 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: "https://github.com/kyriosdata/rnds/edit/master/website/",
+          editUrl: "https://github.com/kyriosdata/rnds/edit/master/guia/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl:
-            "https://github.com/kyriosdata/rnds/edit/master/website/blog/",
+          editUrl: "https://github.com/kyriosdata/rnds/edit/master/guia/blog/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
