@@ -18,4 +18,8 @@ Em algum momento, contudo, requisições _https_ devem partir do ecossistema do 
 - Identificador do laboratório fornecido pela RNDS. Este identificador é disponibilizado pela RNDS (veja [identificador do laboratório](./identificador)).
 - CNES. O CNES do laboratório.
 
+- O CNS de um profissional de saúde, lotado no laboratório cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
+
+- A ferramenta Postman (detalhada em link para ferramentas). Existem alternativas e, em tempo, é apenas um meio para facilitar os primeiros contatos com a RNDS.
+
 A documentação das requisições está disponível em https://documenter.getpostman.com/view/215332/TVCiUn6P.
