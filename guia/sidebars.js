@@ -5,6 +5,7 @@ module.exports = {
       "contexto",
       "atores",
       "servicos",
+      "postman",
       "ambientes",
       "tecnologias",
       "requisicoes",
@@ -13,6 +14,6 @@ module.exports = {
       "resultado",
       "identificador",
     ],
-    Ferramentas: ["tools/fhirpath", "tools/postman", "tools/validacao"],
+    Ferramentas: ["tools/fhirpath", "tools/validacao"],
   },
 };

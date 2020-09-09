@@ -12,7 +12,7 @@ substituem o emprego de autenticação baseada em usuário/senha por certificado
 
 Os serviços (_web services_) de saúde implementam a troca de informação em saúde. Estes serviços são o meio para se atingir a desejada interoperabilidade em saúde no Brasil.
 
-Abaixo segue uma visão panorâmica dos serviços e em [Interagindo com a RNDS](./tools/postman) há orientações detalhadas.
+Abaixo segue uma visão panorâmica dos serviços e em [Interagindo com a RNDS](./postman) há orientações detalhadas.
 
 ### Segurança (_web services_)
 
