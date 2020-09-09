@@ -27,7 +27,7 @@ Abaixo segue uma visão panorâmica dos serviços e em [Interagindo com a RNDS](
 | ------ | ----------------------------- | ------------------------------------------------------------------------- |
 | GET    | /api/fhir/r4/Patient          | Obter informações sobre paciente.                                         |
 | GET    | /api/fhir/r4/Organization     | Obter informações sobre um estabelecimento de saúde ou outra organização. |
-| GET    | /api/fhir/r4/Practitioner     | Obter informações sobre profissionais de saúde                            |
+| GET    | /api/fhir/r4/Practitioner     | Obter informações sobre profissional de saúde                             |
 | GET    | /api/fhir/r4/PractitionerRole |                                                                           |
 | POST   | /api/fhir/r4/Bundle           | Enviar resultado de exame                                                 |
 | POST   | /api/fhir/r4/Bundle           | Substituir resultado de exame                                             |
