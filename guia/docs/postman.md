@@ -5,11 +5,17 @@ sidebar_label: Primeiros contatos
 ---
 
 A adoção do padrão FHIR significa "independência tecnológica" dos laboratórios em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões
-no escopo do ecossistema do laboratório. Dito de outra forma, a infraestrutura
-do laboratório pode estar disponível no próprio laboratório, em "nuvem", usar
-Java, C#, Javascript no desenvolvimento do seu ecossistema ou outro.
+no escopo do ecossistema do laboratório.
 
-Em algum momento, contudo, requisições _https_ devem partir do ecossistema do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+Em algum momento, contudo, requisições _https_ devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+
+> O foco aqui é o envio de requisições para o ambiente de homologação da RNDS.
+
+Ao final, espera-se que:
+
+- Você saiba quais são as requisições disponíveis.
+- Você saiba quais são os _headers_ necessários e como montar os valores correspondentes.
+- Você saiba quais os dados de fato a serem enviados por cada requisição, ou [payload](<https://en.wikipedia.org/wiki/Payload_(computing)>).l o _payload_ (dados enviados) exigido em cada requisição.
 
 ### Pré-requisitos
 
