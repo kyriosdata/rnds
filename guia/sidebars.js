@@ -11,8 +11,7 @@ module.exports = {
       "perfis",
       "si",
       "resultado",
-      "validacao",
     ],
-    Ferramentas: ["tools/fhirpath", "tools/postman"],
+    Ferramentas: ["tools/fhirpath", "tools/postman", "tools/validacao"],
   },
 };
