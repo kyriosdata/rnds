@@ -36,8 +36,12 @@ module.exports = {
           title: "Tópicos",
           items: [
             {
-              label: "Conteúdo",
-              to: "docs/",
+              label: "Roteiro",
+              to: "docs/roteiro",
+            },
+            {
+              label: "Contexto",
+              to: "docs/contexto",
             },
           ],
         },
