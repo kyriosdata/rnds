@@ -30,7 +30,7 @@ Ao final, espera-se que:
 ### Pré-requisitos
 
 - Informações:
-  - Certificado digital. O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**.
+  - Certificado digital. O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessário conhecer a senha de acesso ao conteúdo do certificado.
   - Credenciamento homologado. O credenciamento é feito pelo [portal de serviços](https://servicos-datasus.saude.gov.br/). É preciso aguardar a homologação. Sem o credenciamento aprovado não é possível ter acesso ao [ambiente](./ambientes) de homologação (usado para os "primeiros contatos").
   - Identificador do laboratório fornecido pela RNDS. Este identificador é disponibilizado pela RNDS (veja [identificador do laboratório](./identificador)).
   - CNES. O CNES do laboratório.
@@ -56,12 +56,55 @@ Você pode experimentar a execução de qualquer uma delas, todas devem
 falhar, ótimo (por enquanto, claro). É preciso, para funcionar, que as informações específicas
 para o laboratório em questão sejam configuradas (próximo passo).
 
-### Configurar e testar
+### Configurar (certificado digital)
 
-- Configurar o certificado digital e executar obter token.
+O Postman precisa ser configurado para usar o certificado digital do laboratório em questão para autenticação no ambiente de homologação.
 
-- Configurar variáveis empregadas pela collection
-- Executar a primeira requisição satisfatória.
+O único serviço que usa diretamente o certificado digital é o serviço "Obter token de acesso". Este serviço produz como resultado o _token_ de acesso. Tal _token_ é exigido por todos os demais serviços. De forma resumida, primeiro se obtém o _token_ de acesso, que tem validade por 30 minutos, conforme esclarecido abaixo, e depois ele é reutilizado, neste período, em todas as demais requisições. Transcorridos os 30 minutos, será necessário uma nova requisição ao
+serviço "Obter token de acesso", para que um novo _token_, válido pelos próximos 30 minutos, possa ser reutilizado.
+
+Selecione _File_, na sequência a opção _Settings_ e, por fim, abre-se a janela abaixo, na qual a aba _Certificates_ deve ser selecionada e, por último, _Add Certificate_.
+
+![img](https://user-images.githubusercontent.com/1735792/92801355-e8cd6500-f38b-11ea-8eea-2128ab4e5647.jpg)
+
+Quando _Add Certificate_ é pressionado, abre-se a tela similar àquela abaixo.
+Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o arquivo **.pfx** contendo o certificado digital do laboratório; (b) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](./ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
+
+![img](https://user-images.githubusercontent.com/1735792/92802156-a35d6780-f38c-11ea-8959-35db9c68d49a.png)
+
+Ao clicar no botão `Add`, o resultado será similar àquele abaixo, indicando que agora o Postman irá empregar, para o _host_ identificado, o certificado informado e, para ter acesso ao conteúdo dele, a senha ocultada.
+
+![img](https://user-images.githubusercontent.com/1735792/92803471-d6542b00-f38d-11ea-8d14-36d615672309.png)
+
+A partir desta configuração, quando se requisita a submissão do serviço "Obter token de acesso", o resultado obtido é aquele abaixo. Observe que o código de retorno é 200 OK e, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
+
+![img](https://user-images.githubusercontent.com/1735792/92804153-7742e600-f38e-11ea-8a5d-df4c19b0edaa.png)
+
+> Veja o vídeo acerca de como configurar o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
+
+As demais requisições dependem de outras configurações. Mais um passo e todas elas estarão funcionando.
+
+### Configurar (variáveis)
+
+A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
+_token_ retornado por esta requisição, dependem de outras variáveis:
+
+- **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento). Veja [identificador do laboratório](./identificador) para detalhes.
+
+- **lab-cnes**: o código CNES do laboratório cujo credenciamento foi solicitado por meio do portal de serviços da RNDS e também aprovado. Naturalmente, o
+  certificado digital empregado para configurar o Postaman deve ser do laboratório em questão.
+
+- **individuo-cns**: conforme o próprio nome
+  indica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual requisições serão feitas. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization** em todos os contatos com a RNDS. A exceção é o serviço "Obter token de acesso", que não faz uso deste _header_. Adicionalmente a este uso, com o propósito de evitar a definição de outra variável, este valor também é reutilizado para outras finalidades, por exemplo, para identificar o paciente
+  de um exame.
+
+- **auth**: servidor (endereço) empregado para autenticação. Este valor é empregado na requisição "Obter token de acesso", conforme ilustrado abaixo.
+
+![Variável auth usada em URL](https://user-images.githubusercontent.com/1735792/92814239-45834c80-f399-11ea-80b9-db68d3e4128d.png)
+
+- **ehr**: servidor (endereço) para envio das requisições de serviços (_web services_) de saúde. Enquanto o valor da variável **auth** é empregado apenas para a requisição do serviço "Obter token de acesso", o valor da variável **ehr** é empregado em todas as demais requisições.
+
+- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade.
 
 ### E depois?
 
