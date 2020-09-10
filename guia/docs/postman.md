@@ -37,7 +37,7 @@ Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não 
 
 ![postman-abertura](https://user-images.githubusercontent.com/1735792/92666083-a437c000-f2de-11ea-8ffc-9dd163784983.jpg)
 
-- Configuração do Postman. O arquivo JSON contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) precisa ser importado e, na sequência, alterado para fazer uso das informações identificadas acima, para o laboratório em questão.
+- Configuração do Postman. O arquivo JSON contendo as [requisições](https://github.com/kyriosdata/rnds/blob/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) precisa ser importado e, na sequência, alterado para fazer uso das informações identificadas acima, para o laboratório em questão.
 
 ### E depois?
 
