@@ -5,20 +5,27 @@ sidebar_label: Primeiros contatos
 ---
 
 A adoção do padrão FHIR significa "independência tecnológica" dos laboratórios em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões
-no escopo do ecossistema do laboratório. Ou seja, o que é empregado e como é utilizado no âmbito do laboratório (nó Laboratório na figura abaixo), é feito com a total autonomia do laboratório.
+no escopo do ecossistema do laboratório. Ou seja, as tecnologias empregadas e como são utilizadas no âmbito do laboratório (nó Laboratório na figura abaixo), é feito com a total autonomia do laboratório.
 
 ![img](../static/img/rnds-deployment.png)
 
-Em algum momento, contudo, requisições _https_ devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+Em algum momento, contudo, requisições _https_ devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). Ou seja, as portas Auth e EHR ilustradas acima.
 
-> O foco aqui é o envio de requisições, a partir de um laboratório, para o ambiente de homologação da RNDS.
+O foco aqui são justamente tais requisições, conforme ressaltadas na figura abaixo. Observe que em vez de um [Software de Integração](./si), a ser desenvolvido pelo laboratório e ilustrado na figura acima, emprega-se o Postman como instrumento para experimentar as requisições, alterar valores de _headers_ e outros.
+
+![img](../static/img/postman-desenvolvedor.png)
 
 Ao final, espera-se que:
 
 - Você saiba quais são as requisições disponíveis.
 - Você saiba quais são os _headers_ necessários e como montar os valores correspondentes.
 - Você saiba quais os dados a serem enviados por cada requisição, ou [payload](<https://en.wikipedia.org/wiki/Payload_(computing)>).
-- Você saiba submeter as requisições por meio da ferramenta Postman e, desta forma, alterar valores, _headers_ e observar os resultados.
+- Você saiba submeter as requisições por meio da ferramenta Postman.
+- Você saiba experimentar valores diferentes para o _payload_, _headers_ e observar os resultados.
+- Você saiba interagir com a RNDS usando HTTPS.
+- Você saiba empregar o certificado digital do laboratório.
+- Você saiba como realizar as atividades acima empregando a linguagem de programção Java.
+- Você esteja apto para construir o [Software de Integração](./si).
 
 ### Pré-requisitos
 
