@@ -36,22 +36,33 @@ Ao final, espera-se que:
   - CNES. O CNES do laboratório.
   - O CNS de um profissional de saúde, lotado no laboratório cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
 - Postman. A ferramenta Postman é empregada para interação com _web services_. O _Guia_ emprega ela para ilustrar os "primeiros contatos" com a RNDS. Detalhes `criar página com detalhes`.
-- Baixe o arquivo JSON, empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação.
+- Baixe o arquivo JSON, empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação. Detalhes das requisições podem ser obtidos interagindo com o próprio postman, após a importação deste arquivo (seção seguinte) ou, se preferir, consulte a [documentação](https://documenter.getpostman.com/view/215332/TVCmT68w) correspondente na internet.
 
 ### Importar
 
-De posse das informações necessárias (pré-requisitos), pertinentes a um dado laboratório, é necessário importar o arquivo contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json).
+De posse das informações necessárias (pré-requisitos), pertinentes a um dado laboratório, é necessário importar o arquivo contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json). Este arquivo contém, na terminologia empregada pelo Postman, uma _collection_ (as requisições).
 
-Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import` que usaremos para importar o arquivo baixado anteriormente:
+> Veja o vídeo acerca de como importar [aqui](https://drive.google.com/file/d/13hbA4uZlX_90wFt0ktCvkX2jBbhFkoDC/view)
+
+Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import`, empregado para "importar" o arquivo baixado anteriormente:
 
 ![postman-abertura](https://user-images.githubusercontent.com/1735792/92666083-a437c000-f2de-11ea-8ffc-9dd163784983.jpg)
 
-- Configuração do Postman. O arquivo JSON contendo as [requisições](https://github.com/kyriosdata/rnds/blob/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) precisa ser importado e, na sequência, alterado para fazer uso das informações identificadas acima, para o laboratório em questão.
+Após importado, o resultado deve ser similar àquele abaixo. A versão pode ser diferente, por exemplo. Observe que estão disponíveis 11 requisições, agrupadas naquelas de "Segurança" e "Saúde".
+
+![image](https://user-images.githubusercontent.com/1735792/92743020-8efe7800-f356-11ea-871e-3a4c6489ccfc.png)
+
+Você pode experimentar a execução de qualquer uma delas, todas devem
+falhar, ótimo (por enquanto, claro). É preciso, para funcionar, que as informações específicas
+para o laboratório em questão sejam configuradas (próximo passo).
+
+### Configurar e testar
+
+- Configurar o certificado digital e executar obter token.
+
+- Configurar variáveis empregadas pela collection
+- Executar a primeira requisição satisfatória.
 
 ### E depois?
 
-Parabéns, os "primeiros contatos" com a RNDS já foram feitos! Estão apresentados um ao outro.
-
-Detalhes das requisições podem ser obtidos interagindo com o próprio postman, ou se preferir, a [documentação](https://documenter.getpostman.com/view/215332/TVCiUn6P) correspondente.
-
-As informações incluem a finalidade de cada requisição, todos os _headers_, o _payload_ e as respostas fornecidas para as requisições.
+Parabéns, os "primeiros contatos" com a RNDS já foram feitos! Estão apresentados um ao outro. Agora é desenvolver o que aqui é chamado de [Software de Integração](./si). Embora este desenvolvimento seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração via. O [Software de Integração](./si), neste sentido, ilustra como a conexão com a RNDS pode ser feita via código.
