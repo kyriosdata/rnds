@@ -1,6 +1,6 @@
 <img src="./media/guia.png" width="100px">
 
-## Guia do Desenvolvedor RNDS
+## Guia de Integração RNDS
 
 Interesse:
 
