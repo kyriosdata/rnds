@@ -13,6 +13,7 @@ module.exports = {
       "si",
       "resultado",
       "identificador",
+      "erros",
     ],
     Ferramentas: ["tools/fhirpath", "tools/validacao"],
   },
