@@ -20,7 +20,8 @@ assina o certificado do servidor. Servidor, no caso, é a porta **Auth** dos [am
 ## Obtenha o keystore do projeto de segurança
 
 O arquivo **certificado.jks** é parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). 
-Este arquivo é o _keystore_ público, oferecido pelo DATASUS. 
+Este arquivo é um _keystore_ público, oferecido pelo DATASUS, cuja senha é "secret". O uso dele permite obter um _token_ de acesso, contudo, não
+terá utilidade nos demais serviços (naturalmente). 
 
 ## Exibindo o conteúdo do keystore
 Ao executar o comando `keytool -list -keystore certificado.jks` será exibido todo o conteúdo do _keystore_, no caso, contendo
