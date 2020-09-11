@@ -23,7 +23,8 @@ O arquivo **certificado.jks** é parte do projeto "Segurança - Projeto Java par
 Este arquivo é o _keystore_ público, oferecido pelo DATASUS. 
 
 ## Exibindo o conteúdo do keystore
-Ao executar o comando `keytool -list -keystore certificado.jks` será exibido o seguinte resultado:
+Ao executar o comando `keytool -list -keystore certificado.jks` será exibido todo o conteúdo do _keystore_, no caso, contendo
+três certificados, cujos nomes (_alias_) são _client_, _server_ e, o último, _*.saude.gov.br (geotrust rsa ca 2018)_, conforme abaixo.
 
 ```shell
 Keystore type: PKCS12
