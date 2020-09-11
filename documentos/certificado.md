@@ -1,13 +1,31 @@
 ## Autenticação via SSL em Java
 
-Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. 
-A confiança é estabelecida por meio de um arquivo, o _keystore_. Este _keystore_ é, inicialmente, o arquivo 
+Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" 
+no serviço com o qual está interagindo. A confiança é estabelecida por meio de um arquivo, o _keystore_. 
+
+O _keystore_ deve conter os certificados das autoridades certificadoras cujos certificados 
+por ela assinados são considerados confiáveis. Dito de outro forma,
+a aplicação em Java estabelece uma relação de confiança apenas com certificados assinados por autoridades certificadoras
+cujos certificados estão contidos no _keystore_. 
+
+O efeito prático é que uma aplicação em Java só confiará no
+certificado de um servidor da RNDS, se a autoridade certificadora que emitiu tal certificado estiver no
+_keystore_ empregado pela aplicação. Ou seja, é necessário dizer em qual autoridade certificadora a sua
+aplicação deve confiar. Quando registrar tal informação no _keystore_ da aplicação, então ela
+passará a confiar nos certificados por ela emitidos. 
+
+## Quem emitiu os certificados do DATASUS?
+
+Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**. Clique no cadeado ao lado da URL e terá
+o seguinte resultado:
+
+
+
+Este _keystore_ é, inicialmente, o arquivo 
 contendo o certificado digital adquirido pelo laboratório. Conforme aqui comentado, contudo, pode 
 ser necessário realizar algumas operações e atualizar este arquivo visando a autenticação satisfatória. 
 
-O _keystore_ deve conter os certificados das autoridades certificadoras cujos certificados por ela assinados são considerados confiáveis. Dito de outro forma,
-a aplicação em Java estabelece uma relação de confiança apenas com certificados assinados por autoridades certificadoras
-cujos certificados estão contidos no _keystore_. Caso contrário, é possível que gere a seguinte exceção em Java:
+ Caso contrário, é possível que gere a seguinte exceção em Java:
 
 ```
 javax.net.ssl.SSLHandshakeException: PKIX path building failed: 
