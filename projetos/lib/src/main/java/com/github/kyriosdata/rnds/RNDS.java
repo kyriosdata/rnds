@@ -60,6 +60,9 @@ public class RNDS {
                 trustManagerFactory.getTrustManagers(),
                 new SecureRandom());
 
+        // É necessário?
+        // SSLContext.setDefault(sslContext);
+
         return sslContext;
     }
 

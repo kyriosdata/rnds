@@ -7,8 +7,13 @@
 package com.github.kyriosdata.rnds;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.codec.binary.Base64;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,18 +46,39 @@ public class RNDSTest {
     private static String autenticador;
     private static String servicos;
 
-    private static String token;
+    private String token;
 
     @BeforeAll
-    static void setup() {
+    static void obtemConfiguracao() {
         autenticador = System.getenv("RNDS_AUTH");
+        assertNotNull(autenticador, "Auth não definido");
+        System.out.println(autenticador);
+
         servicos = System.getenv("RNDS_EHR");
-        certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
+        assertNotNull(servicos, "EHR não definido");
+        System.out.println(servicos);
+
+        // certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
+        certificadoArquivo = "f:/tmp/certificados/original.pfx";
+        assertTrue(Files.exists(Path.of(certificadoArquivo)), "arquivo com certificado inexistente");
+        System.out.println(certificadoArquivo);
+
         String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
-        certificadoSenha = senha != null ? senha.toCharArray() : null;
+        assertNotNull(senha, "senha de acesso ao certificado null");
+        assertNotEquals("", senha.trim(), "senha vazia");
+        certificadoSenha = senha.toCharArray();
+        System.out.println(senha);
+    }
+
+    @BeforeEach
+    void beforeEach() {
+
+    }
+
+    @Test
+    public void obterToken() {
         token = RNDS.getToken(
                 RNDS_AUTH, certificadoArquivo, certificadoSenha);
-
     }
 
     /**
@@ -86,7 +112,7 @@ public class RNDSTest {
     }
 
     @Test
-    public void recuperarTokenViaVariaveisDeAmbiente(){
+    public void recuperarTokenViaVariaveisDeAmbiente() {
         String[] split_string = token.split("\\.");
         String base64EncodedHeader = split_string[0];
         String base64EncodedBody = split_string[1];
