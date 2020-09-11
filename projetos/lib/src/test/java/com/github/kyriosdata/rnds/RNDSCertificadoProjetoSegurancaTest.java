@@ -34,9 +34,11 @@ public class RNDSCertificadoProjetoSegurancaTest {
 
     @BeforeAll
     static void setUp() {
-        Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
-        Logger.getLogger("httpclient").setLevel(Level.OFF);
-        Logger.getLogger("RNDS").setLevel(Level.OFF);
+        if (!DEBUG) {
+            Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
+            Logger.getLogger("httpclient").setLevel(Level.OFF);
+            Logger.getLogger("RNDS").setLevel(Level.OFF);
+        }
     }
 
     @Test
