@@ -14,27 +14,30 @@ _keystore_ empregado pela aplicação. Ou seja, é necessário dizer em qual aut
 aplicação deve confiar. Quando registrar tal informação no _keystore_ da aplicação, então ela
 passará a confiar nos certificados por ela emitidos. 
 
-## Quem emitiu os certificados do DATASUS?
-
-Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**. Clique no cadeado ao lado da URL e terá
-o seguinte resultado:
-
-![image](https://user-images.githubusercontent.com/1735792/92934190-96d51f80-f41d-11ea-96a1-eafdfa7406db.png)
-
-
-Este _keystore_ é, inicialmente, o arquivo 
-contendo o certificado digital adquirido pelo laboratório. Conforme aqui comentado, contudo, pode 
-ser necessário realizar algumas operações e atualizar este arquivo visando a autenticação satisfatória. 
-
- Caso contrário, é possível que gere a seguinte exceção em Java:
+Caso contrário, o resultado provável da tentativa de acesso à RNDS por meio de Java será
 
 ```
 javax.net.ssl.SSLHandshakeException: PKIX path building failed: 
 sun.security.provider.certpath.SunCertPathBuilderException: 
 unable to find valid certification path to requested target
 ```
-Abaixo seguem os passos para exatamente corrigir este problema: o _keystore_ não contém certificado da autoridade certificadora que 
-assina o certificado do servidor. Servidor, no caso, é a porta **Auth** dos [ambientes](./ambientes) de homologação e produção. 
+
+Abaixo seguem os passos para evitar este problema a partir do projeto de segurança disponibilizado
+pelo DATASUS.
+
+## Quem emitiu os certificados do DATASUS?
+
+Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**, se for o Chrome, clique no cadeado ao lado da URL e,
+na sequência, na opção "Certificado (válido)", o resultado será algo parecido com a tela abaixo:
+
+![image](https://user-images.githubusercontent.com/1735792/92937056-3cd65900-f421-11ea-8325-0a7cfa5794cd.png)
+
+Nesta tela, observa-se que "Let's Encrypt Authority X3" é quem emitiu o certificado pertinente à página
+exibida pelo navegador. Ou seja, Java precisa que o certificado de "Let's Encrypt Authority X3" seja
+acrescentado ao _keystore_ para que a aplicação possa confiar no certificado da RNDS. 
+
+Observe que a recíproca também é verdadeira. Em particular, a RNDS confia apenas em certificados
+ICP-Brasil. 
 
 ## Obtenha o keystore do projeto de segurança
 
@@ -60,9 +63,12 @@ Certificate fingerprint (SHA-256): 1D:DB:8B:1C:A7:0C:C4:5D:5E:38:B5:09:ED:D2:F4:
 Certificate fingerprint (SHA-256): D7:6B:42:22:8D:BE:29:F3:00:5A:C6:A1:2D:2B:43:24:26:B9:3B:35:73:8E:61:CC:FD:31:8A:F7:1C:1E:F0:5C
 ```
 
-contém o certificado da autoridade certificadora que assina os certificados dos serviços da RNDS.
+Observe que nenhum destes certificado é da autoridade certificadora "Let's Encrypt Authority X3" e, possivelmente,
+o uso deste _keystore_ pode falhar em Java. 
 
-Baixe os certificados intermediários [aqui](https://letsencrypt.org/certificates/#intermediate-certificates).
+## Certificado de autoridade certificadora
+
+Consulte os certificados intermediários empregados pela [Let's Encrypt Authority X3](https://letsencrypt.org/certificates/#intermediate-certificates).
 
 Se no _keystore_ empregado pela aplicação não está o certificado da autoridade certificadora que assina o certificado do
 serviço com o qual está tentando interagir, a confiança não é estabelecida e a exceção abaixo é gerada:
