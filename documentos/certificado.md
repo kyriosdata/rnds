@@ -19,6 +19,7 @@ passará a confiar nos certificados por ela emitidos.
 Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**. Clique no cadeado ao lado da URL e terá
 o seguinte resultado:
 
+![image](https://user-images.githubusercontent.com/1735792/92934190-96d51f80-f41d-11ea-96a1-eafdfa7406db.png)
 
 
 Este _keystore_ é, inicialmente, o arquivo 
