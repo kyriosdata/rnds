@@ -1,7 +1,7 @@
 ---
 id: postman
-title: Primeiros contatos
-sidebar_label: Primeiros contatos
+title: Primeiro contato
+sidebar_label: Primeiro contato
 ---
 
 A adoção do padrão FHIR significa "independência tecnológica" dos laboratórios em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões
@@ -58,12 +58,13 @@ para o laboratório em questão sejam configuradas (próximo passo).
 
 ### Configurar (certificado digital)
 
-O Postman precisa ser configurado para usar o certificado digital do laboratório em questão para autenticação no ambiente de homologação.
+> Veja o vídeo acerca de como configurar o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
-O único serviço que usa diretamente o certificado digital é o serviço "Obter token de acesso". Este serviço produz como resultado o _token_ de acesso. Tal _token_ é exigido por todos os demais serviços. De forma resumida, primeiro se obtém o _token_ de acesso, que tem validade por 30 minutos, conforme esclarecido abaixo, e depois ele é reutilizado, neste período, em todas as demais requisições. Transcorridos os 30 minutos, será necessário uma nova requisição ao
-serviço "Obter token de acesso", para que um novo _token_, válido pelos próximos 30 minutos, possa ser reutilizado.
+O Postman precisa ser configurado para usar o certificado digital do laboratório em questão. Esta configuração é exigida para a correta execução do serviço "Obter token de acesso". Em tempo, este é o único serviço que usa diretamente o certificado digital.
 
-Selecione _File_, na sequência a opção _Settings_ e, por fim, abre-se a janela abaixo, na qual a aba _Certificates_ deve ser selecionada e, por último, _Add Certificate_.
+O serviço "Obter token de acesso" produz como resultado (retorno) o _token_ de acesso. Tal _token_ é exigido por todos os demais serviços. Ou seja, primeiro se obtém o _token_ de acesso, que tem validade por 30 minutos, e depois ele é reutilizado, neste período, em todas as demais requisições. Transcorridos os 30 minutos, será necessário uma nova requisição ao serviço "Obter token de acesso", para que um novo _token_, válido pelos próximos 30 minutos, possa ser reutilizado.
+
+A indicação do certificado digital a ser utilizado pelo Postman é realizada da seguinte forma. Selecione _File_ (opção do _menu_), na sequência a opção _Settings_ e, por fim, abre-se a janela abaixo, na qual a aba _Certificates_ deve ser selecionada e, por último, _Add Certificate_.
 
 ![img](https://user-images.githubusercontent.com/1735792/92801355-e8cd6500-f38b-11ea-8eea-2128ab4e5647.jpg)
 
@@ -72,22 +73,22 @@ Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaix
 
 ![img](https://user-images.githubusercontent.com/1735792/92802156-a35d6780-f38c-11ea-8959-35db9c68d49a.png)
 
-Ao clicar no botão `Add`, o resultado será similar àquele abaixo, indicando que agora o Postman irá empregar, para o _host_ identificado, o certificado informado e, para ter acesso ao conteúdo dele, a senha ocultada.
+Ao clicar no botão `Add`, o resultado é fornecido abaixo, indicando que agora o Postman irá empregar, para o _host_ identificado, o certificado informado e, para ter acesso ao conteúdo dele, fará uso da senha ocultada.
 
 ![img](https://user-images.githubusercontent.com/1735792/92803471-d6542b00-f38d-11ea-8d14-36d615672309.png)
 
-A partir desta configuração, quando se requisita a submissão do serviço "Obter token de acesso", o resultado obtido é aquele abaixo. Observe que o código de retorno é 200 OK e, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
+A partir desta configuração, quando se requisita a submissão do serviço "Obter token de acesso", o código de retorno será 200 OK. Observe que, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS é exibida, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
 
 ![img](https://user-images.githubusercontent.com/1735792/92804153-7742e600-f38e-11ea-8a5d-df4c19b0edaa.png)
-
-> Veja o vídeo acerca de como configurar o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
 As demais requisições dependem de outras configurações. Mais um passo e todas elas estarão funcionando.
 
 ### Configurar (variáveis)
 
 A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
-_token_ retornado por esta requisição, dependem de outras variáveis:
+_token_ retornado por esta requisição, dependem de outras variáveis.
+
+Observe que os valores para as variáveis abaixo devem ser consistentes com o certificado digital informado no Portal de Serviços da RNDS quando o pedido de credenciamento foi realizado. Em consequência, não faz sentido valores "padrão", estas variáveis devem ser configuradas para o contexto específico de cada laboratório.
 
 - **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento). Veja [identificador do laboratório](./identificador) para detalhes.
 
@@ -98,15 +99,15 @@ _token_ retornado por esta requisição, dependem de outras variáveis:
   indica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual requisições serão feitas. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization** em todos os contatos com a RNDS. A exceção é o serviço "Obter token de acesso", que não faz uso deste _header_. Adicionalmente a este uso, com o propósito de evitar a definição de outra variável, este valor também é reutilizado para outras finalidades, por exemplo, para identificar o paciente
   de um exame.
 
-- **auth**: servidor (endereço) empregado para autenticação. Este valor é empregado na requisição "Obter token de acesso", conforme ilustrado abaixo.
+- **auth**: endereço empregado para autenticação. Este valor é empregado na requisição "Obter token de acesso", conforme ilustrado abaixo, na montagem da URL correspondente (destaque na cor laranja).
 
 ![Variável auth usada em URL](https://user-images.githubusercontent.com/1735792/92814239-45834c80-f399-11ea-80b9-db68d3e4128d.png)
 
-- **ehr**: endereço para envio das requisições de serviços (_web services_) de saúde. Enquanto o valor da variável **auth** é empregado apenas para a requisição do serviço "Obter token de acesso", o valor da variável **ehr** é empregado em todas as demais requisições. À semelhança de **auth**, a variável **ehr** é empregada na montagem da URL da requisição, conforme ilustrado abaixo.
+- **ehr**: endereço para envio das requisições de serviços (_web services_) de saúde. Enquanto o valor da variável **auth** é empregado apenas para a requisição do serviço "Obter token de acesso", o valor da variável **ehr** é empregado em todas as demais requisições. À semelhança de **auth**, a variável **ehr** é empregada na montagem da URL da requisição, conforme ilustrado abaixo (destaque na cor laranja).
 
 ![Variável ehr usada em URL](https://user-images.githubusercontent.com/1735792/92814560-bfb3d100-f399-11ea-8c8c-d811aa75b227.png)
 
-- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade.
+- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade em https://ufg.br.
 
 ### E depois?
 
