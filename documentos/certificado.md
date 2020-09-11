@@ -1,10 +1,15 @@
-## Interação via SSL em Java
+## Autenticação via SSL em Java
 
 Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. 
-A confiança é estabelecida por meio de um arquivo, o _keystore_. Em particular, este arquivo deve conter os certificados
-das autoridades certificadoras cujos certificados por ela assinados são considerados confiáveis. Dito de outro forma,
+A confiança é estabelecida por meio de um arquivo, o _keystore_. Este _keystore_ é, inicialmente, o arquivo 
+contendo o certificado digital adquirido pelo laboratório. Conforme aqui comentado, contudo, pode 
+ser necessário realizar algumas operações e atualizar este arquivo visando a autenticação satisfatória. 
+
+O _keystore_ deve conter os certificados das autoridades certificadoras cujos certificados por ela assinados são considerados confiáveis. Dito de outro forma,
 a aplicação em Java estabelece uma relação de confiança apenas com certificados assinados por autoridades certificadoras
 cujos certificados estão contidos no _keystore_. 
+
+Baixe os certificados intermediários [aqui](https://letsencrypt.org/certificates/#intermediate-certificates).
 
 Se no _keystore_ empregado pela aplicação não está o certificado da autoridade certificadora que assina o certificado do
 serviço com o qual está tentando interagir, a confiança não é estabelecida e a exceção abaixo é gerada:
