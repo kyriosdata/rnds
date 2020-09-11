@@ -14,6 +14,7 @@ module.exports = {
       "resultado",
       "identificador",
       "erros",
+      "autenticacao",
     ],
     Ferramentas: ["tools/fhirpath", "tools/validacao"],
   },
