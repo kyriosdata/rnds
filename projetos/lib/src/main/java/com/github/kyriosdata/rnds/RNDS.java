@@ -128,7 +128,7 @@ public class RNDS {
 
         return null;
     }
-    
+
     /**
      * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
      *

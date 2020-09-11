@@ -4,7 +4,7 @@ Projeto que implementa biblioteca para facilitar acesso aos serviços da RNDS.
 
 ### Maven
 
-```js
+```xml
 <dependency>
   <groupId>com.github.kyriosdata</groupId>
   <artifactId>rnds-lib</artifactId>
