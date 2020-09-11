@@ -65,6 +65,11 @@ A execução dos comandos abaixo exige a senha de acesso aos certificados. No ca
 O certificado do cliente contido neste _keystore_ tem apenas a finalidade de teste. Por outro lado, a senha do _keystore_ do 
 laboratório, definitivamente não é pública, e terá que ser conhecida por quem executar o comando. 
 
+## Baixar o certificado letsencrypt
+
+No endereço https://letsencrypt.org/certificates/#intermediate-certificates é possível ter acesso a vários certificados. Um deles é o
+_Let’s Encrypt Authority X3_. Um dos arquivos correspondentes é `letsencryptauthorityx3.der`, que está disponível [aqui](https://letsencrypt.org/certs/letsencryptauthorityx3.der).
+
 ## Importar certificado
 
 `keytool -importcert -file letsencryptauthorityx3.der -keystore certificado.jks -storepass secret -alias letsencrypt`
