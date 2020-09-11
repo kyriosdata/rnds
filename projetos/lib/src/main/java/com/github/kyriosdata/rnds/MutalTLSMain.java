@@ -24,7 +24,7 @@ public class MutalTLSMain {
     private static final String KEY_STORE_PASSWORD = "secret";
     private static final String PRIVATE_KEY_PASSWORD = "secret";
 
-    private static final boolean DEBUG_SSL = false;
+    private static final boolean DEBUG_SSL = true;
 
     public static void main(String[] args) throws Exception {
         if (DEBUG_SSL) {
