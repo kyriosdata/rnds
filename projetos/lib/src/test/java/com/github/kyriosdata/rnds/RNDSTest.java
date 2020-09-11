@@ -12,15 +12,28 @@ import org.apache.commons.codec.binary.Base64;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A execução satisfatória dos testes depende de valores para as
+ * seguintes variáveis de ambiente:
+ *
+ * <ul>
+ *     <li><b>RNDS_AUTH</b>: endereço do serviço de autenticação.</li>
+ *     <li><b>RNDS_EHR</b>: endereço do serviço de saúde.</li>
+ *     <li><b>RNDS_CERTIFICADO_ARQUIVO</b>: caminho completo do arquivo
+ *     contendo o certificado do laboratório.</li>
+ *     <li><b>RNDS_CERTIFICADO_SENHA</b>: senha para acesso ao conteúdo do
+ *     certificado digital.</li>
+ * </ul>
+ */
 public class RNDSTest {
 
     private static final String RNDS_CERTIFICADO_SENHA = "secret";
     private static final String RNDS_CERTIFICADO_ARQUIVO = "certificado.jks";
 
-    private static final String RNDS_AUTENTICADOR =
+    private static final String RNDS_AUTH =
             "https://ehr-auth-hmg.saude.gov.br/api/token";
 
-    private static final String RNDS_SERVICOS =
+    private static final String RNDS_EHR =
             "https://ehr-services-hmg.saude.gov.br/api/";
 
     private static char[] certificadoSenha;
@@ -30,16 +43,15 @@ public class RNDSTest {
 
     private static String token;
 
-
     @BeforeAll
     static void setup() {
-        autenticador = System.getenv("RNDS_AUTENTICADOR");
-        servicos = System.getenv("RNDS_SERVICOS");
+        autenticador = System.getenv("RNDS_AUTH");
+        servicos = System.getenv("RNDS_EHR");
         certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
         String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
         certificadoSenha = senha != null ? senha.toCharArray() : null;
         token = RNDS.getToken(
-                RNDS_AUTENTICADOR, certificadoArquivo, certificadoSenha);
+                RNDS_AUTH, certificadoArquivo, certificadoSenha);
 
     }
 
@@ -68,7 +80,7 @@ public class RNDSTest {
     void recuperarTokenExemploRnds() {
         String arquivo = fromResource(RNDS_CERTIFICADO_ARQUIVO);
         char[] keyStorePassword = RNDS_CERTIFICADO_SENHA.toCharArray();
-        String token = RNDS.getToken(RNDS_AUTENTICADOR, arquivo,
+        String token = RNDS.getToken(RNDS_AUTH, arquivo,
                 keyStorePassword);
         assertEquals(2334, token.length());
     }
