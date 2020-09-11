@@ -25,7 +25,7 @@ unable to find valid certification path to requested target
 Abaixo seguem os passos para evitar este problema a partir do projeto de segurança disponibilizado
 pelo DATASUS.
 
-## Quem emitiu os certificados do DATASUS?
+### Certificado empregado pelo DATASUS
 
 Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**, se for o Chrome, clique no cadeado ao lado da URL e,
 na sequência, na opção "Certificado (válido)", o resultado será algo parecido com a tela abaixo:
@@ -36,16 +36,28 @@ Nesta tela, observa-se que "Let's Encrypt Authority X3" é quem emitiu o certifi
 exibida pelo navegador. Ou seja, Java precisa que o certificado de "Let's Encrypt Authority X3" seja
 acrescentado ao _keystore_ para que a aplicação possa confiar no certificado da RNDS. 
 
+Em tempo, 
+[Let's Encrypt](https://letsencrypt.org/) é uma autoridade certificadora sem fins lucrativos.
+E, adicionalmente, os certificados por ela empregados, em particular o 
+[Let's Encrypt Authority X3](https://letsencrypt.org/certificates/#intermediate-certificates)
+pode ser baixado sem dificuldades.
+
+
 Observe que a recíproca também é verdadeira. Em particular, a RNDS confia apenas em certificados
 ICP-Brasil. 
 
-## Obtenha o keystore do projeto de segurança
+### Baixar o certificado letsencrypt
+
+No endereço https://letsencrypt.org/certificates/#intermediate-certificates é possível ter acesso a vários certificados. Um deles é o
+_Let’s Encrypt Authority X3_. Um dos arquivos correspondentes é `letsencryptauthorityx3.der`, que está disponível [aqui](https://letsencrypt.org/certs/letsencryptauthorityx3.der).
+
+### Obtenha o keystore do projeto de segurança
 
 O arquivo **certificado.jks** é parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). 
 Este arquivo é um _keystore_ público, oferecido pelo DATASUS, cuja senha é "secret". O uso dele permite obter um _token_ de acesso, contudo, não
 terá utilidade nos demais serviços (naturalmente). 
 
-## Exibindo o conteúdo do keystore
+### Exibindo o conteúdo do keystore
 Ao executar o comando `keytool -list -keystore certificado.jks` será exibido todo o conteúdo do _keystore_, no caso, contendo
 três certificados, cujos nomes (_alias_) são _client_, _server_ e, o último, _*.saude.gov.br (geotrust rsa ca 2018)_, conforme abaixo.
 
@@ -66,18 +78,6 @@ Certificate fingerprint (SHA-256): D7:6B:42:22:8D:BE:29:F3:00:5A:C6:A1:2D:2B:43:
 Observe que nenhum destes certificado é da autoridade certificadora "Let's Encrypt Authority X3" e, possivelmente,
 o uso deste _keystore_ pode falhar em Java. 
 
-## Certificado de autoridade certificadora
-
-Consulte os certificados intermediários empregados pela [Let's Encrypt Authority X3](https://letsencrypt.org/certificates/#intermediate-certificates).
-
-Se no _keystore_ empregado pela aplicação não está o certificado da autoridade certificadora que assina o certificado do
-serviço com o qual está tentando interagir, a confiança não é estabelecida e a exceção abaixo é gerada:
-
-
-Abaixo é ilustrado como acrescentar ao _keystore_ contendo o certificado digital de um laboratório, o certificado da autoridade
-certificadora que assina os certificados empregados pelos serviços da RNDS e, dessa forma, estabelecer a confiança necessária
-para comounicação via SSL por uma aplicação em Java.
-
 ## Preparando o _keystore_
 
 O arquivo **certificado.jks** é parte do projeto "Segurança - Projeto Java para gerar token autenticação", oferecido pela RNDS (baixe o arquivo [.zip](http://mobileapps.saude.gov.br/portal-servicos/files/f3bd659c8c8ae3ee966e575fde27eb58/53c86213276e091be7128abc031f5d38_8ymqlifr9.zip)). Este arquivo
@@ -91,12 +91,7 @@ A execução dos comandos abaixo exige a senha de acesso aos certificados. No ca
 O certificado do cliente contido neste _keystore_ tem apenas a finalidade de teste. Por outro lado, a senha do _keystore_ do 
 laboratório, definitivamente não é pública, e terá que ser conhecida por quem executar o comando. 
 
-## Baixar o certificado letsencrypt
-
-No endereço https://letsencrypt.org/certificates/#intermediate-certificates é possível ter acesso a vários certificados. Um deles é o
-_Let’s Encrypt Authority X3_. Um dos arquivos correspondentes é `letsencryptauthorityx3.der`, que está disponível [aqui](https://letsencrypt.org/certs/letsencryptauthorityx3.der).
-
-## Importar certificado
+### Importar certificado
 
 `keytool -importcert -file letsencryptauthorityx3.der -keystore certificado.jks -storepass secret -alias letsencrypt`
 
