@@ -40,9 +40,9 @@ Ao final, espera-se que:
 
 ### Importar
 
-De posse das informações necessárias (pré-requisitos), pertinentes a um dado laboratório, é necessário importar o arquivo contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json). Este arquivo contém, na terminologia empregada pelo Postman, uma _collection_ (as requisições).
-
 > Veja o vídeo acerca de como importar [aqui](https://drive.google.com/file/d/13hbA4uZlX_90wFt0ktCvkX2jBbhFkoDC/view)
+
+De posse das informações necessárias (pré-requisitos), pertinentes a um dado laboratório, é necessário importar o arquivo contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json). Este arquivo contém, na terminologia empregada pelo Postman, uma _collection_ (as requisições).
 
 Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import`, empregado para "importar" o arquivo baixado anteriormente:
 
@@ -58,7 +58,7 @@ para o laboratório em questão sejam configuradas (próximo passo).
 
 ### Configurar (certificado digital)
 
-> Veja o vídeo acerca de como configurar o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
+> Veja o vídeo acerca de como configurar o Postman com o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
 O Postman precisa ser configurado para usar o certificado digital do laboratório em questão. Esta configuração é exigida para a correta execução do serviço "Obter token de acesso". Em tempo, este é o único serviço que usa diretamente o certificado digital.
 
@@ -86,9 +86,17 @@ As demais requisições dependem de outras configurações. Mais um passo e toda
 ### Configurar (variáveis)
 
 A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
-_token_ retornado por esta requisição, dependem de outras variáveis.
+_token_ retornado por esta requisição, dependem de outros valores, neste caso, depositados em variáveis. Abaixo segue o conjunto das variáveis empregadas pelo Postman para execução das requisições.
 
-Observe que os valores para as variáveis abaixo devem ser consistentes com o certificado digital informado no Portal de Serviços da RNDS quando o pedido de credenciamento foi realizado. Em consequência, não faz sentido valores "padrão", estas variáveis devem ser configuradas para o contexto específico de cada laboratório.
+![image](https://user-images.githubusercontent.com/1735792/92833674-7a9a9980-f3af-11ea-8fcd-35dabc210608.png)
+
+Ao todo são 10 variáveis, conforme ilustrado acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por laboratório. Daí o motivo do emprego de valores espúrios, fictícios na figura acima (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do laboratório cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no laboratório em questão.
+
+As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do laboratório. As duas primeiras identificam valores pertinentes ao [ambiente](./ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Convém destacar que o CNPJ da Universidade Federal de Goiás (UFG) está explicitamente fornecido no próprio portal desta universidade (https://ufg.br).
+
+Os valores das 4 últimas variáveis são gerados pelo próprio Postman durante a execução das requisições. Por exemplo, a variável _access_token_ é definida pela execução do serviço "Obter token de acesso" e, como anteriormente informado, o valor desta variável é empregado por todas as demais requisições.
+
+Variáveis específicas por laboratório (assim como o certificado digital):
 
 - **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento). Veja [identificador do laboratório](./identificador) para detalhes.
 
@@ -98,6 +106,8 @@ Observe que os valores para as variáveis abaixo devem ser consistentes com o ce
 - **individuo-cns**: conforme o próprio nome
   indica, é o CNS de um indivíduo, em particular, o CNS do profissional de saúde em nome do qual requisições serão feitas. Ou seja, este CNS deve estar associado ao laboratório em questão (CNES fornecido na variável acima). Este valor será enviado para a RNDS por meio do _header_ de nome **Authorization** em todos os contatos com a RNDS. A exceção é o serviço "Obter token de acesso", que não faz uso deste _header_. Adicionalmente a este uso, com o propósito de evitar a definição de outra variável, este valor também é reutilizado para outras finalidades, por exemplo, para identificar o paciente
   de um exame.
+
+Variáveis de uso amplo:
 
 - **auth**: endereço empregado para autenticação. Este valor é empregado na requisição "Obter token de acesso", conforme ilustrado abaixo, na montagem da URL correspondente (destaque na cor laranja).
 
@@ -109,6 +119,20 @@ Observe que os valores para as variáveis abaixo devem ser consistentes com o ce
 
 - **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade em https://ufg.br.
 
+Variáveis geradas pelo próprio Postman:
+
+- **access_token**: gerada a partir da resposta para a requisição "Obter token de acesso". Se executada de forma satisfatória, deposita nesta variável o _token_ de acesso a ser consultado por todas as demais requisições.
+
+- **exame-id-lab**: identificador gerado de forma aleatória para um resultado de exame laboratorial. Este valor é gerado pela requisição "Enviar resultado de exame" e utilizado pela requisição "Substituir resultado de exame".
+
+- **exame-id-rnds**: identificador gerado pela própria RNDS para um resultado de exame submetido de forma satisfatória (requisição "Enviar resultado de exame"). Este identificador único, gerado pela RNDS, é depositado nesta variável e, à semelhança de **exame-id-lab**, também é empregado pela requisição "Substituir resultado de exame".
+
+### Executando requisições
+
+A execução de requisições é feita com a seleção da requisição a ser executada e, em seguida, ao clicar no botão `Send`. A requisição será submetida e o retorno será exibido. A sugestão é experimentar mudanças nos parâmetros das requisições, no _payload_ de um resultado de exame, remover um _header_, alterar o valor de um _header_ e observar os resultados. Desta forma será possível adquirir fluência na interação com a RNDS.
+
 ### E depois?
 
-Parabéns, os "primeiros contatos" com a RNDS já foram feitos! Estão apresentados um ao outro. Agora é desenvolver o que aqui é chamado de [Software de Integração](./si). Embora este desenvolvimento seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração via. O [Software de Integração](./si), neste sentido, ilustra como a conexão com a RNDS pode ser feita via código.
+Parabéns, o "primeiro contato" com a RNDS foi estabelecido!
+
+Uma vez adquirida esta ambientação, as questões técnicas necessárias para a integração com a RNDS estarão resolvidas. Embora o desenvolvimento do código de integração seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [Software de Integração](./si), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.
