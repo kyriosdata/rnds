@@ -81,6 +81,13 @@ public class RNDSTest {
         assertNull(RNDS.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
     }
 
+    @Test
+    public void keystoreAdicionadoDeLetsEncryptCertificate() {
+        final String keystore = fromResource("adicionado.jks");
+        final String senha = "secret";
+        assertNotNull(RNDS.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
+    }
+
     /**
      * Obtém path completo do nome do arquivo fornecido que se encontra
      * no diretório resources.
