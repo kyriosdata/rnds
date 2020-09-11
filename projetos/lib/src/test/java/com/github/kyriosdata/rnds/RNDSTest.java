@@ -12,6 +12,8 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,8 +46,18 @@ public class RNDSTest {
     private static String auth;
     private static String ehr;
 
+    private static final boolean DEBUG = false;
+
     @BeforeAll
     static void obtemConfiguracao() {
+        if (!DEBUG) {
+            Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
+            Logger.getLogger("httpclient").setLevel(Level.OFF);
+            Logger.getLogger("RNDS").setLevel(Level.OFF);
+        } else {
+            System.setProperty("javax.net.debug", "all");
+        }
+
         auth = System.getenv("RNDS_AUTH");
         assertNotNull(auth, "Auth não definido");
         System.out.println(auth);
