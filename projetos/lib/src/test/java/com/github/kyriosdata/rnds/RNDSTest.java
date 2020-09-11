@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.codec.binary.Base64;
 
+import javax.net.ssl.SSLHandshakeException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,7 +51,7 @@ public class RNDSTest {
 
     @BeforeAll
     static void obtemConfiguracao() {
-        System.setProperty("javax.net.debug", "all");
+        // System.setProperty("javax.net.debug", "all");
         autenticador = System.getenv("RNDS_AUTH");
         assertNotNull(autenticador, "Auth não definido");
         System.out.println(autenticador);
@@ -61,7 +62,8 @@ public class RNDSTest {
 
         // certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
         certificadoArquivo = "f:/tmp/certificados/certificado.jks";
-        assertTrue(Files.exists(Path.of(certificadoArquivo)), "arquivo com certificado inexistente");
+        assertTrue(Files.exists(Path.of(certificadoArquivo)), "arquivo com " +
+                "certificado inexistente");
         System.out.println(certificadoArquivo);
 
         String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
@@ -73,10 +75,10 @@ public class RNDSTest {
     }
 
     @Test
-    public void obterToken() {
-        token = RNDS.getToken(
-                RNDS_AUTH, certificadoArquivo, certificadoSenha);
-        assertNotNull(token);
+    public void keystoreOriginalWithoutLetsEncryptCertificate() {
+        final String keystore = fromResource("certificado.jks");
+        final String senha = "secret";
+        assertNull(RNDS.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
     }
 
     /**

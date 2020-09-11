@@ -91,18 +91,3 @@ Observe que nenhum destes certificado é da autoridade certificadora "Let's Encr
 ```shell
 keytool -importcert -file letsencryptauthorityx3.der -keystore certificado.jks -storepass secret -alias letsencrypt
 ```
-
-### Listar o conteúdo
-
-Após a inserção do certificado da autoridade certificadora que emitiu o certificado do DATASUS, o conteúdo o _keystore_ pode ser novamente exibido pelo comando
-
-- `keytool -list -keystore certificado.jks`
-- `keytool -list -keystore laboratorio.pfx`
-
-### Exportar certificado da autoridade certificadora em certificado.jks
-
-- `keytool -export -alias "*.saude.gov.br (geotrust rsa ca 2018)" -file ca.crt -keystore certificado.jks`
-
-### Importar certificado da autoridade certificado obtido no passo anterior
-
-- `keytool -import -trustcacerts -alias "saude.gov.br" -file ca.crt -keystore laboratorio.pfx`
