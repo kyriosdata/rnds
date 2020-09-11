@@ -7,6 +7,7 @@
 package com.github.kyriosdata.rnds;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.codec.binary.Base64;
 
@@ -32,19 +33,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RNDSTest {
 
-    private static final String RNDS_CERTIFICADO_SENHA = "secret";
-    private static final String RNDS_CERTIFICADO_ARQUIVO = "certificado.jks";
-
-    private static final String RNDS_AUTH =
-            "https://ehr-auth-hmg.saude.gov.br/api/token";
-
-    private static final String RNDS_EHR =
-            "https://ehr-services-hmg.saude.gov.br/api/";
-
     private static char[] password;
     private static String keystore;
     private static String auth;
     private static String ehr;
+    private static String token;
 
     private static final boolean DEBUG = false;
 
@@ -58,57 +51,34 @@ public class RNDSTest {
             System.setProperty("javax.net.debug", "all");
         }
 
+        // Serviço Auth
         auth = System.getenv("RNDS_AUTH");
         assertNotNull(auth, "Auth não definido");
-        System.out.println(auth);
 
+        // Serviços EHR
         ehr = System.getenv("RNDS_EHR");
         assertNotNull(ehr, "EHR não definido");
-        System.out.println(ehr);
 
+        // Arquivo (certificado)
         keystore = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
         assertTrue(Files.exists(Path.of(keystore)), "arquivo com " +
                 "certificado inexistente");
-        System.out.println(keystore);
 
+        // Senha de acesso ao conteúdo do certificado (keystore)
         final String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
         assertNotNull(senha, "senha de acesso ao certificado null");
         assertNotEquals("", senha.trim(), "senha vazia");
         password = senha.toCharArray();
-        System.out.println(senha);
     }
 
-    @Test
-    public void keystoreOriginalWithoutLetsEncryptCertificate() {
-        final String keystore = fromResource("certificado.jks");
-        final String senha = "secret";
-        assertNull(RNDS.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
-    }
-
-    @Test
-    public void keystoreAdicionadoDeLetsEncryptCertificate() {
-        final String keystore = fromResource("adicionado.jks");
-        final char[] senha = "secret".toCharArray();
-        final String token = RNDS.getToken(RNDS_AUTH, keystore, senha);
+    @BeforeEach
+    public void obtemToken() {
+        token = RNDS.getToken(auth, keystore, password);
         assertNotNull(token);
-        assertEquals(2334, token.length());
-    }
-
-    /**
-     * Obtém path completo do nome do arquivo fornecido que se encontra
-     * no diretório resources.
-     *
-     * @param arquivo Nome do arquivo contido no diretório "resources".
-     * @return O caminho completo para o arquivo cujo nome é fornecido.
-     */
-    static String fromResource(final String arquivo) {
-        Class<RNDS> appClass = RNDS.class;
-        return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 
     @Test
     public void recuperarTokenViaVariaveisDeAmbiente() {
-        final String token = RNDS.getToken(auth, keystore, password);
         String[] split_string = token.split("\\.");
         String base64EncodedHeader = split_string[0];
         String base64EncodedBody = split_string[1];
@@ -119,7 +89,6 @@ public class RNDSTest {
         assertTrue(header.contains("rnds auth"));
         assertTrue(header.contains("RS256"));
 
-
         String body = new String(base64Url.decode(base64EncodedBody));
         assertTrue(body.contains("RNDS-HMG"));
         assertTrue(body.contains("ICP-Brasil"));
@@ -127,20 +96,17 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-        final String token = RNDS.getToken(auth, keystore, password);
         String cnes = RNDS.cnes(ehr, token, "2337991", "980016287385192");
         assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
     }
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        final String token = RNDS.getToken(auth, keystore, password);
         assertNull(RNDS.cnes(ehr, token, "233799", "980016287385192"));
     }
 
     @Test
     void profissionalPeloCns() {
-        final String token = RNDS.getToken(auth, keystore, password);
         String cns = RNDS.profissional(ehr, token, "980016287385192",
                 "980016287385192");
         assertTrue(cns.contains("SANTOS"));
@@ -148,11 +114,8 @@ public class RNDSTest {
 
     @Test
     void profissionalPeloCpf() {
-        final String token = RNDS.getToken(auth, keystore, password);
         String cns = RNDS.cpf(ehr, token, "01758263156",
                 "980016287385192");
         assertTrue(cns.contains("SANTOS"));
     }
 }
-
-
