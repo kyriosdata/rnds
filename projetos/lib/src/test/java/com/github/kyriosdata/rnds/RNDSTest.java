@@ -50,6 +50,7 @@ public class RNDSTest {
 
     @BeforeAll
     static void obtemConfiguracao() {
+        // System.setProperty("javax.net.debug", "all");
         autenticador = System.getenv("RNDS_AUTH");
         assertNotNull(autenticador, "Auth não definido");
         System.out.println(autenticador);
@@ -59,26 +60,23 @@ public class RNDSTest {
         System.out.println(servicos);
 
         // certificadoArquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
-        certificadoArquivo = "f:/tmp/certificados/original.pfx";
+        certificadoArquivo = "f:/tmp/certificados/certificado.jks";
         assertTrue(Files.exists(Path.of(certificadoArquivo)), "arquivo com certificado inexistente");
         System.out.println(certificadoArquivo);
 
         String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
+        senha = "secret";
         assertNotNull(senha, "senha de acesso ao certificado null");
         assertNotEquals("", senha.trim(), "senha vazia");
         certificadoSenha = senha.toCharArray();
         System.out.println(senha);
     }
 
-    @BeforeEach
-    void beforeEach() {
-
-    }
-
     @Test
     public void obterToken() {
         token = RNDS.getToken(
                 RNDS_AUTH, certificadoArquivo, certificadoSenha);
+        assertNotNull(token);
     }
 
     /**
