@@ -54,16 +54,16 @@ public class CNES {
      */
     public static void main(String[] args) {
 
-        final String arquivo = System.getenv("RNDS_CERT_FILE");
+        final String arquivo = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
         logger.info("RNDS_CERT_FILE: {}", arquivo);
 
         final String auth = System.getenv("RNDS_AUTH");
         logger.info("RNDS_AUTH: {}", auth);
 
-        final String srv = System.getenv("RNDS_SRV");
+        final String srv = System.getenv("RNDS_EHR");
         logger.info("RNDS_SRV: {}", srv);
 
-        String senha = System.getenv("RNDS_CERT_SENHA");
+        String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
         final char[] password = senha != null ? senha.toCharArray() : null;
         logger.info("RNDS_CERT_SENHA: ******");
 
