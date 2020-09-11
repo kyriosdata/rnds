@@ -46,7 +46,6 @@ public class RNDSTest {
 
     @BeforeAll
     static void obtemConfiguracao() {
-        // System.setProperty("javax.net.debug", "all");
         auth = System.getenv("RNDS_AUTH");
         assertNotNull(auth, "Auth não definido");
         System.out.println(auth);
