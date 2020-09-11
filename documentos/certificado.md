@@ -65,6 +65,10 @@ A execução dos comandos abaixo exige a senha de acesso aos certificados. No ca
 O certificado do cliente contido neste _keystore_ tem apenas a finalidade de teste. Por outro lado, a senha do _keystore_ do 
 laboratório, definitivamente não é pública, e terá que ser conhecida por quem executar o comando. 
 
+## Importar certificado
+
+`keytool -importcert -file letsencryptauthorityx3.der -keystore certificado.jks -storepass secret -alias letsencrypt`
+
 ### Listar o conteúdo destes arquivos (opcional)
 
 - `keytool -list -keystore certificado.jks`
