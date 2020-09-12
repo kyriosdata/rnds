@@ -25,12 +25,37 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
  * Classe que implementa funções utilitárias para acesso aos serviços da RNDS.
  */
 public class RNDS {
+
+    private String auth;
+    private String ehr;
+    private String keystore;
+    private char[] password;
+    private String individuoCns;
+    private Estado estado;
+
+    private String token;
+
+    public enum Estado {
+        AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA,
+        PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
+    }
+
+    public RNDS(String auth, String ehr, String keystore, char[] password,
+                String individuoCns, Estado estado) {
+        this.auth = Objects.requireNonNull(auth);
+        this.ehr = Objects.requireNonNull(ehr);
+        this.keystore = Objects.requireNonNull(keystore);
+        this.password = Objects.requireNonNull(password);
+        this.individuoCns = Objects.requireNonNull(individuoCns);
+        this.estado = estado;
+    }
 
     static final Logger logger = Logger.getLogger("RNDS");
 
@@ -201,7 +226,8 @@ public class RNDS {
 
         try {
             final String FMT = srv +
-                    "fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov" +
+                    "fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude" +
+                    ".gov" +
                     ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
             System.out.println(FMT);
             logger.info("URL: " + FMT);
