@@ -198,13 +198,18 @@ public class RNDS {
 
     public static String cpf(String srv, String token, String cpf,
                              String authorization) {
+
         try {
             final String query = "?identifier=http://rnds.saude.gov" +
                     ".br/fhir/r4/NamingSystem/cpf|" + cpf;
             final String CPF = "fhir/r4/Practitioner" + query;
-            logger.info("SERVICO: " + CPF);
+            final String FMT = "https://ehr-services.hmg.saude.gov.br/api/fhir/r4/Practitioner" +
+                    "?identifier=http%3A%2F%2Frnds.saude.gov" +
+                    ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
+            System.out.println(FMT);
+            logger.info("URL: " + FMT);
 
-            final URL url = new URL(srv + CPF);
+            final URL url = new URL(FMT);
             HttpsURLConnection servico =
                     (HttpsURLConnection) url.openConnection();
             servico.setRequestMethod("GET");

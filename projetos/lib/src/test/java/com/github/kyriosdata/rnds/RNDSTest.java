@@ -116,6 +116,7 @@ public class RNDSTest {
     void profissionalPeloCpf() {
         String cns = RNDS.cpf(ehr, token, "01758263156",
                 "980016287385192");
+        System.out.println(cns);
         assertTrue(cns.contains("SANTOS"));
     }
 }
