@@ -1,5 +1,7 @@
 package com.github.kyriosdata.rnds;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -53,7 +55,9 @@ public class RNDSBuilder {
      * digital do estabelecimento de saúde.
      */
     public RNDSBuilder keystore(final String keystore) {
-        if (!Files.exists(Paths.get(keystore))) {
+        try {
+            new FileInputStream(keystore);
+        } catch (FileNotFoundException e) {
             throw new IllegalArgumentException("keystore não existe");
         }
 
@@ -104,6 +108,12 @@ public class RNDSBuilder {
         return this;
     }
 
+    /**
+     * Cria uma instância de {@link RNDS}.
+     *
+     * @return A instância de {@link RNDS} em conformidade com os valores
+     * definidos.
+     */
     public RNDS build() {
         return new RNDS(auth, ehr, keystore, password, requisitante, estado);
     }

@@ -37,7 +37,7 @@ public class RNDS {
     private String ehr;
     private String keystore;
     private char[] password;
-    private String individuoCns;
+    private String requisitante;
     private Estado estado;
 
     private String token;
@@ -48,12 +48,15 @@ public class RNDS {
     }
 
     public RNDS(String auth, String ehr, String keystore, char[] password,
-                String individuoCns, Estado estado) {
-        this.auth = Objects.requireNonNull(auth);
-        this.ehr = Objects.requireNonNull(ehr);
-        this.keystore = Objects.requireNonNull(keystore);
-        this.password = Objects.requireNonNull(password);
-        this.individuoCns = Objects.requireNonNull(individuoCns);
+                String requisitante, Estado estado) {
+        this.auth = Objects.requireNonNull(auth, "auth não definido");
+        this.ehr = Objects.requireNonNull(ehr, "ehr não definido");
+        this.keystore = Objects.requireNonNull(keystore, "keystore não " +
+                "definido");
+        this.password = Objects.requireNonNull(password, "password não " +
+                "fornecida");
+        this.requisitante = Objects.requireNonNull(requisitante,
+                "requisitante não definido");
         this.estado = estado;
     }
 
