@@ -2,6 +2,7 @@ module.exports = {
   someSidebar: {
     Tópicos: [
       "roteiro",
+      "portal",
       "contexto",
       "atores",
       "servicos",
