@@ -38,6 +38,7 @@ public class RNDSTest {
     private static String auth;
     private static String ehr;
     private static String token;
+    private static String individuoCns;
 
     private static final boolean DEBUG = false;
 
@@ -69,6 +70,10 @@ public class RNDSTest {
         assertNotNull(senha, "senha de acesso ao certificado null");
         assertNotEquals("", senha.trim(), "senha vazia");
         password = senha.toCharArray();
+
+        individuoCns = System.getenv("RNDS_INDIVIDUO_CNS");
+        assertNotNull(individuoCns, "responsável não fornecido");
+        assertNotEquals("", individuoCns.trim());
     }
 
     @BeforeEach
@@ -96,26 +101,26 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-        String cnes = RNDS.cnes(ehr, token, "2337991", "980016287385192");
+        String cnes = RNDS.cnes(ehr, token, "2337991", individuoCns);
         assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
     }
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        assertNull(RNDS.cnes(ehr, token, "233799", "980016287385192"));
+        assertNull(RNDS.cnes(ehr, token, "233799", individuoCns));
     }
 
     @Test
     void profissionalPeloCns() {
-        String cns = RNDS.profissional(ehr, token, "980016287385192",
-                "980016287385192");
+        String cns = RNDS.profissional(ehr, token, individuoCns,
+                individuoCns);
         assertTrue(cns.contains("SANTOS"));
     }
 
     @Test
     void profissionalPeloCpf() {
         String cns = RNDS.cpf(ehr, token, "01758263156",
-                "980016287385192");
+                individuoCns);
         assertTrue(cns.contains("SANTOS"));
     }
 }
