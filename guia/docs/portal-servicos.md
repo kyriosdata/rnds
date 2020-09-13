@@ -14,7 +14,7 @@ Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone
 
 ### Credenciamento
 
-O credenciamento do estabelecimento de saúde junto à RNDS obdece os seguintes passos:
+O credenciamento do estabelecimento de saúde é realizado com os seguintes passos:
 
 1. O profissional deverá possuir uma conta no “gov.br”, essa conta é um pré-requisito para realizar este credenciamento; (como obter essa conta? Explicar aqui);
 
