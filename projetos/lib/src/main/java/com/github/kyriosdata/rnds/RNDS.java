@@ -29,7 +29,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
- * Classe que implementa funções utilitárias para acesso aos serviços da RNDS.
+ * Classe utilitária para acesso aos serviços oferecidos pela RNDS.
  */
 public class RNDS {
 
@@ -40,15 +40,25 @@ public class RNDS {
     private String requisitante;
     private Estado estado;
 
+    /**
+     * <i>Token</i> de acesso aos serviços da RNDS. 
+     */
     private String token;
 
+    /**
+     * Unidades da Federação do Brasil.
+     */
     public enum Estado {
         AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA,
         PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
     }
 
-    public RNDS(String auth, String ehr, String keystore, char[] password,
-                String requisitante, Estado estado) {
+    public RNDS(final String auth,
+                final String ehr,
+                final String keystore,
+                final char[] password,
+                final String requisitante,
+                final Estado estado) {
         this.auth = Objects.requireNonNull(auth, "auth não definido");
         this.ehr = Objects.requireNonNull(ehr, "ehr não definido");
         this.keystore = Objects.requireNonNull(keystore, "keystore não " +
