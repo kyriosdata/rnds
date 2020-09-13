@@ -7,6 +7,7 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
   projectName: "rnds", // Usually your repo name.
+  themes: ["@docusaurus/theme-live-codeblock"],
   themeConfig: {
     navbar: {
       title: "Guia",

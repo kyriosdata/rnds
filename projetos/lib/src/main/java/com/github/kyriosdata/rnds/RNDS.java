@@ -12,8 +12,6 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
@@ -27,14 +25,42 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * Classe que implementa funções utilitárias para acesso aos serviços da RNDS.
  */
 public class RNDS {
 
-    static final Logger logger =
-            LoggerFactory.getLogger(RNDS.class);
+    private String auth;
+    private String ehr;
+    private String keystore;
+    private char[] password;
+    private String requisitante;
+    private Estado estado;
+
+    private String token;
+
+    public enum Estado {
+        AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA,
+        PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
+    }
+
+    public RNDS(String auth, String ehr, String keystore, char[] password,
+                String requisitante, Estado estado) {
+        this.auth = Objects.requireNonNull(auth, "auth não definido");
+        this.ehr = Objects.requireNonNull(ehr, "ehr não definido");
+        this.keystore = Objects.requireNonNull(keystore, "keystore não " +
+                "definido");
+        this.password = Objects.requireNonNull(password, "password não " +
+                "fornecida");
+        this.requisitante = Objects.requireNonNull(requisitante,
+                "requisitante não definido");
+        this.estado = estado;
+    }
+
+    static final Logger logger = Logger.getLogger("RNDS");
 
     private static SSLContext sslContext(final String keystoreFile,
                                          final char[] password)
@@ -126,7 +152,7 @@ public class RNDS {
                 }
             }
         } catch (IOException | GeneralSecurityException e) {
-            logger.warn(e.toString());
+            logger.warning(e.toString());
         }
 
         return null;
@@ -147,7 +173,7 @@ public class RNDS {
                               String cpf) {
         try {
             final String CNES_REQUEST = "fhir/r4/Organization/" + cnes;
-            logger.info("SERVICO: {}", CNES_REQUEST);
+            logger.info("SERVICO: " + CNES_REQUEST);
 
             final URL url = new URL(srv + CNES_REQUEST);
             HttpsURLConnection servico =
@@ -159,16 +185,16 @@ public class RNDS {
             servico.setRequestProperty("Authorization", cpf);
 
             final int codigo = servico.getResponseCode();
-            logger.warn("RESPONSE CODE: {}", codigo);
+            logger.warning("RESPONSE CODE: " + codigo);
 
             if (codigo != 200) {
-                logger.warn(fromInputStream(servico.getErrorStream()));
+                logger.warning(fromInputStream(servico.getErrorStream()));
                 return null;
             }
 
             return fromInputStream(servico.getInputStream());
         } catch (IOException exception) {
-            logger.warn("EXCECAO: {}", exception);
+            logger.warning("EXCECAO: " + exception);
             return null;
         }
     }
@@ -177,7 +203,7 @@ public class RNDS {
                                       String cpf) {
         try {
             final String PROFISSIONAL = "fhir/r4/Practitioner/" + cns;
-            logger.info("SERVICO: {}", PROFISSIONAL);
+            logger.info("SERVICO: " + PROFISSIONAL);
 
             final URL url = new URL(srv + PROFISSIONAL);
             HttpsURLConnection servico =
@@ -189,24 +215,27 @@ public class RNDS {
             servico.setRequestProperty("Authorization", cpf);
 
             final int codigo = servico.getResponseCode();
-            logger.info("RESPONSE CODE: {}", codigo);
+            logger.info("RESPONSE CODE: " + codigo);
             final String payload = fromInputStream(servico.getInputStream());
             return payload;
         } catch (IOException exception) {
-            logger.warn("EXCECAO: {}", exception);
+            logger.warning("EXCECAO: " + exception);
             return null;
         }
     }
 
     public static String cpf(String srv, String token, String cpf,
                              String authorization) {
-        try {
-            final String query = "?identifier=http://rnds.saude.gov" +
-                    ".br/fhir/r4/NamingSystem/cpf|" + cpf;
-            final String CPF = "fhir/r4/Practitioner" + query;
-            logger.info("SERVICO: {}", CPF);
 
-            final URL url = new URL(srv + CPF);
+        try {
+            final String FMT = srv +
+                    "fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude" +
+                    ".gov" +
+                    ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
+            System.out.println(FMT);
+            logger.info("URL: " + FMT);
+
+            final URL url = new URL(FMT);
             HttpsURLConnection servico =
                     (HttpsURLConnection) url.openConnection();
             servico.setRequestMethod("GET");
@@ -216,16 +245,16 @@ public class RNDS {
             servico.setRequestProperty("Authorization", authorization);
 
             final int codigo = servico.getResponseCode();
-            logger.warn("RESPONSE CODE: {}", codigo);
+            logger.warning("RESPONSE CODE: " + codigo);
 
             if (codigo != 200) {
-                logger.warn(fromInputStream(servico.getErrorStream()));
+                logger.warning(fromInputStream(servico.getErrorStream()));
                 return null;
             }
 
             return fromInputStream(servico.getInputStream());
         } catch (IOException exception) {
-            logger.warn("EXCECAO: {}", exception);
+            logger.warning("EXCECAO: " + exception);
             return null;
         }
     }
@@ -251,7 +280,7 @@ public class RNDS {
                 return baos.toString("UTF-8");
             }
         } catch (IOException exception) {
-            logger.warn("EXCECAO: {}", exception);
+            logger.warning("EXCECAO: " + exception);
             return null;
         }
     }

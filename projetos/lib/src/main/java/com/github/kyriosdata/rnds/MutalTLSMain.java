@@ -1,7 +1,5 @@
 package com.github.kyriosdata.rnds;
 
-
-
 import java.io.File;
 
 import javax.net.ssl.SSLContext;
@@ -17,10 +15,8 @@ import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
 /*
-Depdendências:
-   - org.apache.httpcomponents:httpclient:4.5.10
-   - org.apache.commons:commons-lang3:3.9
-   - commons-beanutils:commons-beanutils:1.9.4
+Procurando pela solução do erro:
+PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
 */
 public class MutalTLSMain {
     private static final String KEY_STORE_PATH = "f:/tmp" +
@@ -28,7 +24,7 @@ public class MutalTLSMain {
     private static final String KEY_STORE_PASSWORD = "secret";
     private static final String PRIVATE_KEY_PASSWORD = "secret";
 
-    private static final boolean DEBUG_SSL = false;
+    private static final boolean DEBUG_SSL = true;
 
     public static void main(String[] args) throws Exception {
         if (DEBUG_SSL) {
