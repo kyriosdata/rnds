@@ -46,3 +46,5 @@ Documentação:
   - Aplicações
     - Obter token
     - Consultar ...
+  - Biblioteca
+    - Serviços básicos de interação com a RNDS
