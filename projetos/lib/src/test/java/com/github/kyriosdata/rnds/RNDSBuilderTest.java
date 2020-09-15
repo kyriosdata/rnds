@@ -30,7 +30,8 @@ public class RNDSBuilderTest {
     @Test
     public void keystoreNaoDefinido() {
         Throwable retorno = assertThrows(NullPointerException.class,
-                () -> new RNDSBuilder().auth("auth").ehr("ehr").build());
+                () -> new RNDSBuilder()
+                        .keystore(null).auth("auth").ehr("ehr").build());
         assertTrue(retorno.getMessage().contains("keystore"));
     }
 
@@ -53,6 +54,7 @@ public class RNDSBuilderTest {
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
                         .keystore(keystore)
+                        .requisitante(null)
                         .password("senha".toCharArray())
                         .build());
         assertTrue(retorno.getMessage().contains("requisitante"));
@@ -130,12 +132,9 @@ public class RNDSBuilderTest {
 
     @Test
     public void homologacaoUsaKeystoreEnvironment() {
-        Throwable excecao = assertThrows(NullPointerException.class,
-                () -> new RNDSBuilder().password(new char[]{})
+        new RNDSBuilder().password(new char[]{})
                 .requisitante("requisitante").estado(RNDS.Estado.AC)
-                .homologacao());
-
-        assertTrue(excecao.getMessage().contains("keystore"));
+                .homologacao();
     }
 
     /**

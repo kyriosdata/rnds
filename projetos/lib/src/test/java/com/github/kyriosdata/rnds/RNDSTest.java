@@ -25,10 +25,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * <ul>
  *     <li><b>RNDS_AUTH</b>: endereço do serviço de autenticação.</li>
  *     <li><b>RNDS_EHR</b>: endereço do serviço de saúde.</li>
- *     <li><b>RNDS_CERTIFICADO_ARQUIVO</b>: caminho completo do arquivo
+ *     <li><b>RNDS_CERTIFICADO_ENDERECO</b>: caminho completo do arquivo
  *     contendo o certificado do laboratório.</li>
  *     <li><b>RNDS_CERTIFICADO_SENHA</b>: senha para acesso ao conteúdo do
  *     certificado digital.</li>
+ *     <li><b>RNDS_REQUISITANTE_CNS</b>: CNS do profissional de saúde em
+ *     nome do qual o serviço requisitado é submetido.</li>
  * </ul>
  */
 public class RNDSTest {
@@ -61,7 +63,7 @@ public class RNDSTest {
         assertNotNull(ehr, "EHR não definido");
 
         // Arquivo (certificado)
-        keystore = System.getenv("RNDS_CERTIFICADO_ARQUIVO");
+        keystore = System.getenv("RNDS_CERTIFICADO_ENDERECO");
         assertTrue(Files.exists(Path.of(keystore)), "arquivo com " +
                 "certificado inexistente");
 
@@ -71,7 +73,7 @@ public class RNDSTest {
         assertNotEquals("", senha.trim(), "senha vazia");
         password = senha.toCharArray();
 
-        individuoCns = System.getenv("RNDS_INDIVIDUO_CNS");
+        individuoCns = System.getenv("RNDS_REQUISITANTE_CNS");
         assertNotNull(individuoCns, "responsável não fornecido");
         assertNotEquals("", individuoCns.trim());
     }
