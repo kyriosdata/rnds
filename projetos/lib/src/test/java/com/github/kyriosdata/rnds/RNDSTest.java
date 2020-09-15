@@ -44,6 +44,8 @@ public class RNDSTest {
 
     private static final boolean DEBUG = false;
 
+    private static RNDS rnds;
+
     @BeforeAll
     static void obtemConfiguracao() {
         if (!DEBUG) {
@@ -76,6 +78,8 @@ public class RNDSTest {
         individuoCns = System.getenv("RNDS_REQUISITANTE_CNS");
         assertNotNull(individuoCns, "responsável não fornecido");
         assertNotEquals("", individuoCns.trim());
+
+        rnds = new RNDSBuilder().estado(RNDS.Estado.GO).build();
     }
 
     @BeforeEach

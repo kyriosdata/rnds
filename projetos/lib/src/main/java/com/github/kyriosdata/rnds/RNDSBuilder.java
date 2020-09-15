@@ -63,6 +63,8 @@ public class RNDSBuilder {
             "RNDS_CERTIFICADO_SENHA";
     public static final String RNDS_REQUISITANTE_CNS =
             "RNDS_REQUISITANTE_CNS";
+    public static final String RNDS_REQUISITANTE_UF =
+            "RNDS_REQUISITANTE_UF";
 
     private String auth;
     private String ehr;
@@ -217,16 +219,6 @@ public class RNDSBuilder {
      * definidos.
      */
     public RNDS build() {
-        if (keystore == null) {
-
-        }
-
-        if (password == null) {
-        }
-
-        if (requisitante == null) {
-        }
-
         return new RNDS(auth, ehr, keystore, password, requisitante, estado);
     }
 }
