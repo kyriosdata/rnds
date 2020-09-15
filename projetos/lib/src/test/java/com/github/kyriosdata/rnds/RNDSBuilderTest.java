@@ -61,8 +61,19 @@ public class RNDSBuilderTest {
                         .password("senha".toCharArray())
                         .requisitante("requisitante")
                         .build());
-        System.out.println(retorno.getMessage());
         assertTrue(retorno.getMessage().contains("estado"));
+    }
+
+    @Test
+    public void construcaoEsperadaTodosArgumentosExigidosFornecidos() {
+        final String keystore = fromResource("certificado.jks");
+
+        new RNDSBuilder().auth("auth").ehr("ehr")
+                .keystore(keystore)
+                .password("senha".toCharArray())
+                .requisitante("requisitante")
+                .estado(RNDS.Estado.AC)
+                .build();
     }
 
     /**
