@@ -27,6 +27,60 @@ public class RNDSBuilder {
     private RNDS.Estado estado = null;
 
     /**
+     * Cria instância de {@link RNDS} para acesso ao ambiente de homologação
+     * da RNDS.
+     *
+     * @param keystore     Caminho para o arquivo contendo o certificado
+     *                     digital.
+     * @param password     Senha para acesso ao certificado digital.
+     * @param requisitante CNS do profissional de saúde, lotado no
+     *                     estabelecimento de saúde em questão (aquele para o
+     *                     qual é fornecido o certificado digital) e em nome
+     *                     do qual requisições serão feitas. Este
+     *                     requisitante só será empregado para cada
+     *                     requisição que não indicar especificamente em nome
+     *                     de quem a requisição é realizada.
+     * @param estado       Estado no qual está localizado o estabelecimento
+     *                     de saúde.
+     * @return Instância apta para a interação com a RNDS.
+     */
+    public static RNDS homologacao(String keystore, char[] password,
+                                   String requisitante, RNDS.Estado estado) {
+        final String auth = "ehr-auth-hmg.saude.gov.br";
+        final String ehr = "ehr-services.hmg.saude.gov.br";
+        return new RNDS(auth, ehr, keystore, password, requisitante, estado);
+    }
+
+    /**
+     * Cria instância de {@link RNDS} para acesso ao ambiente de produção da
+     * RNDS.
+     *
+     * @param keystore     Caminho para o arquivo contendo o certificado
+     *                     digital.
+     * @param password     Senha para acesso ao certificado digital.
+     * @param requisitante CNS do profissional de saúde, lotado no
+     *                     estabelecimento de saúde em questão (aquele
+     *                     para o
+     *                     qual é fornecido o certificado digital) e
+     *                     em nome
+     *                     do qual requisições serão feitas. Este
+     *                     requisitante só será empregado para cada
+     *                     requisição que não indicar especificamente
+     *                     em nome
+     *                     de quem a requisição é realizada.
+     * @param estado       Estado no qual está localizado o
+     *                     estabelecimento
+     *                     de saúde.
+     * @return Instância apta a ser utilizada para interação com a RNDS.
+     */
+    public static RNDS producao(String keystore, char[] password,
+                                String requisitante, RNDS.Estado estado) {
+        final String auth = "ehr-auth.saude.gov.br";
+        final String ehr = estado.toString() + "-ehr-services.saude.gov.br";
+        return new RNDS(auth, ehr, keystore, password, requisitante, estado);
+    }
+
+    /**
      * Define o <i>host</i> do serviço de autenticação da RNDS.
      *
      * @param auth Nome do domínio (endereço) do serviço de autenticação da
