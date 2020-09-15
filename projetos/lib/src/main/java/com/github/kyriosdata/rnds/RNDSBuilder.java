@@ -65,6 +65,10 @@ public class RNDSBuilder {
     private String requisitante;
     private RNDS.Estado estado = null;
 
+    /**
+     * Cria instância do <i>builder</i> usando valores obtidos de variáveis
+     * de ambiente, caso definidas.
+     */
     public RNDSBuilder() {
         auth(System.getenv("RNDS_AUTH"));
         ehr(System.getenv("RNDS_EHR"));

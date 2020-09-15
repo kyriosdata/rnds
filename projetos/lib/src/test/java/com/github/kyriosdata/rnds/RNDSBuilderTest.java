@@ -93,6 +93,42 @@ public class RNDSBuilderTest {
     }
 
     @Test
+    public void homologacaoAuthEhrPadrao() {
+        final String keystore = fromResource("certificado.jks");
+
+        new RNDSBuilder().keystore(keystore).password(new char[]{})
+                .auth(null)
+                .ehr(null)
+                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .homologacao();
+    }
+
+    @Test
+    public void producaoAuthEhrPadrao() {
+        final String keystore = fromResource("certificado.jks");
+
+        new RNDSBuilder().keystore(keystore).password(new char[]{})
+                .auth(null)
+                .ehr(null)
+                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .producao();
+    }
+
+    @Test
+    public void producaoAuthEhrPadraoSemEstadoFalha() {
+        final String keystore = fromResource("certificado.jks");
+
+        Throwable excecao = assertThrows(NullPointerException.class, () ->
+                new RNDSBuilder().keystore(keystore).password(new char[]{})
+                        .auth(null)
+                        .ehr(null)
+                        .requisitante("requisitante")
+                        .producao());
+
+        assertTrue(excecao.getMessage().contains("estado"));
+    }
+
+    @Test
     public void homologacaoUsaKeystoreEnvironment() {
         Throwable excecao = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().password(new char[]{})
