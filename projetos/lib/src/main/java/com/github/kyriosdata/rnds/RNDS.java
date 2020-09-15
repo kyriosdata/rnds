@@ -169,23 +169,19 @@ public class RNDS {
     static final Logger logger = Logger.getLogger("RNDS");
 
     private static SSLContext sslCtx(final String keystore,
-                                     final char[] password) throws GeneralSecurityException, IOException, URISyntaxException {
-        return sslContext(password, getKeyStore(keystore, password));
-    }
-
-    private static SSLContext sslContext(final char[] password,
-                                         KeyStore keystore)
+                                     final char[] password)
             throws GeneralSecurityException {
+        KeyStore keyStore = getKeyStore(keystore, password);
 
         String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
         KeyManagerFactory keyManagerFactory =
                 KeyManagerFactory.getInstance(defaultAlgorithm);
-        keyManagerFactory.init(keystore, password);
+        keyManagerFactory.init(keyStore, password);
 
         String algorithmTrust = TrustManagerFactory.getDefaultAlgorithm();
         TrustManagerFactory trustManagerFactory =
                 TrustManagerFactory.getInstance(algorithmTrust);
-        trustManagerFactory.init(keystore);
+        trustManagerFactory.init(keyStore);
 
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(
@@ -280,17 +276,19 @@ public class RNDS {
      * @param server           Endereço do serviço que verifica o certificado
      *                         e, se devidamente autorizado, oferece o
      *                         <i>token</i> correspondente.
-     * @param file             O arquivo (path completo) contendo o certificado.
+     * @param keystoreEndereco O endereço do arquivo contendo o certificado.
+     *                         Pode se o caminho (<i>path</i>) ou endereço
+     *                         <i>web</i>, iniciado por <i>http</i>.
      * @param keyStorePassword A senha de acesso ao certificado.
      * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
      * O valor {@code null} é retornado em caso de falha.
      */
     public static String getToken(
             final String server,
-            final String file,
+            final String keystoreEndereco,
             final char[] keyStorePassword) {
         try {
-            SSLContext context = sslCtx(file, keyStorePassword);
+            SSLContext context = sslCtx(keystoreEndereco, keyStorePassword);
             try (CloseableHttpClient cliente = getClient(context)) {
                 HttpGet get = new HttpGet(server);
                 get.addHeader("accept", "application/json");
@@ -304,7 +302,7 @@ public class RNDS {
                     return extrairToken(payload);
                 }
             }
-        } catch (IOException | GeneralSecurityException | URISyntaxException e) {
+        } catch (IOException | GeneralSecurityException e) {
             logger.warning(e.toString());
         }
 
