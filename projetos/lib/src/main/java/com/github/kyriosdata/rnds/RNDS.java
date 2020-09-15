@@ -17,14 +17,10 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
-import java.security.GeneralSecurityException;
-import java.security.KeyStore;
-import java.security.SecureRandom;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -173,16 +169,11 @@ public class RNDS {
 
     private static SSLContext sslCtx(final String keystore,
                                      final char[] password) throws GeneralSecurityException, IOException {
-        return sslContext(keystore, password);
+        return sslContext(password, getKeyStore(keystore, password));
     }
 
-    private static SSLContext sslContext(final String keystoreFile,
-                                         final char[] password)
-            throws GeneralSecurityException, IOException {
-        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        try (InputStream in = new FileInputStream(keystoreFile)) {
-            keystore.load(in, password);
-        }
+    private static SSLContext sslContext(final char[] password, KeyStore keystore)
+            throws GeneralSecurityException {
 
         String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
         KeyManagerFactory keyManagerFactory =
@@ -204,6 +195,33 @@ public class RNDS {
         // SSLContext.setDefault(sslContext);
 
         return sslContext;
+    }
+
+    /**
+     * Obtém {@link KeyStore} a partir de caminho para arquivo contendo o
+     * certificado digital.
+     *
+     * @param keystoreFile Caminho para arquivo contendo o certificado digital.
+     *
+     * @param password Senha de acesso ao conteúdo do certificado digital.
+     * @return Instância de {@link KeyStore} devidamente carregada com o
+     * certificado digital fornecido.
+     *
+     * @throws KeyStoreException
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     * @throws CertificateException
+     */
+    private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
+        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+        try (InputStream in = inputStreamToKeystore(keystoreFile)) {
+            keystore.load(in, password);
+        }
+        return keystore;
+    }
+
+    private static FileInputStream inputStreamToKeystore(String keystoreFile) throws FileNotFoundException {
+        return new FileInputStream(keystoreFile);
     }
 
     /**
