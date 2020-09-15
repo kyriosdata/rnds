@@ -332,6 +332,10 @@ public class RNDS {
         }
     }
 
+    public String profissional(final String cns) {
+        return profissional(ehr, token, cns, requisitante);
+    }
+
     public static String cpf(String srv, String token, String cpf,
                              String authorization) {
 
@@ -365,6 +369,10 @@ public class RNDS {
             logger.warning("EXCECAO: " + exception);
             return null;
         }
+    }
+
+    public String cpf(final String cpf) {
+        return cpf(ehr, token, cpf, requisitante);
     }
 
     /**

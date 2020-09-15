@@ -110,8 +110,8 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-        String cnes = RNDS.cnes(ehr, token, "2337991", individuoCns);
-        assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
+//        String cnes = RNDS.cnes(ehr, token, "2337991", individuoCns);
+//        assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
 
         String retorno = rnds.cnes("2337991");
         assertTrue(retorno.contains("LABORATORIO ROMULO ROCHA"));
@@ -119,20 +119,28 @@ public class RNDSTest {
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        assertNull(RNDS.cnes(ehr, token, "233799", individuoCns));
+//        assertNull(RNDS.cnes(ehr, token, "233799", individuoCns));
+
+        assertNull(rnds.cnes("invalido"));
     }
 
     @Test
     void profissionalPeloCns() {
-        String cns = RNDS.profissional(ehr, token, individuoCns,
-                individuoCns);
-        assertTrue(cns.contains("SANTOS"));
+//        String cns = RNDS.profissional(ehr, token, individuoCns,
+//                individuoCns);
+//        assertTrue(cns.contains("SANTOS"));
+
+        String retorno = rnds.profissional(individuoCns);
+        assertTrue(retorno.contains("SANTOS"));
     }
 
     @Test
     void profissionalPeloCpf() {
-        String cns = RNDS.cpf(ehr, token, "01758263156",
-                individuoCns);
-        assertTrue(cns.contains("SANTOS"));
+//        String cns = RNDS.cpf(ehr, token, "01758263156",
+//                individuoCns);
+//        assertTrue(cns.contains("SANTOS"));
+
+        String retorno = rnds.cpf("01758263156");
+        assertTrue(retorno.contains("SANTOS"));
     }
 }
