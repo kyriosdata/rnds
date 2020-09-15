@@ -6,6 +6,8 @@
 
 package com.github.kyriosdata.rnds;
 
+import com.jsoniter.JsonIterator;
+import com.jsoniter.any.Any;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,8 +79,21 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-        String retorno = rnds.cnes("2337991");
-        assertTrue(retorno.contains("LABORATORIO ROMULO ROCHA"));
+        final String cnes = "2337991";
+
+        // Submete requisição à RNDS
+        final String retorno = rnds.cnes(cnes);
+
+        // Parse json retornado
+        final Any json = JsonIterator.deserialize(retorno);
+
+        // Verifica propriedade "id"
+        final String id = json.get("id").toString();
+        assertEquals(cnes, id);
+
+        // Verifica nome do estabelecimento de saúde
+        final String name = json.get("name").toString();
+        assertEquals("LABORATORIO ROMULO ROCHA", name);
     }
 
     @Test
