@@ -213,15 +213,17 @@ public class RNDS {
      * @throws CertificateException
      */
     private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
+        try (FileInputStream is = new FileInputStream(keystoreFile)) {
+            return keystoreFromInputStream(password, is);
+        }
+    }
+
+    private static KeyStore keystoreFromInputStream(char[] password, InputStream inputStream) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        try (InputStream in = inputStreamToKeystore(keystoreFile)) {
+        try (InputStream in = inputStream) {
             keystore.load(in, password);
         }
         return keystore;
-    }
-
-    private static FileInputStream inputStreamToKeystore(String keystoreFile) throws FileNotFoundException {
-        return new FileInputStream(keystoreFile);
     }
 
     /**
