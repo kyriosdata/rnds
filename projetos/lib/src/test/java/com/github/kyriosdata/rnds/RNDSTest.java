@@ -10,16 +10,15 @@ import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A execução satisfatória dos testes depende de valores para as
@@ -37,9 +36,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * </ul>
  */
 public class RNDSTest {
-
-    private static String token;
-
     private static final boolean DEBUG = false;
 
     private static RNDS rnds;
@@ -57,14 +53,10 @@ public class RNDSTest {
         rnds = new RNDSBuilder().build();
     }
 
-    @BeforeEach
-    public void obtemToken() {
-        token = rnds.token();
-        assertNotNull(token);
-    }
-
     @Test
     public void recuperarTokenViaVariaveisDeAmbiente() {
+        final String token = rnds.token();
+
         String[] split_string = token.split("\\.");
         String base64EncodedHeader = split_string[0];
         String base64EncodedBody = split_string[1];

@@ -112,6 +112,9 @@ public class RNDS {
         this.requisitante = Objects.requireNonNull(requisitante,
                 "requisitante não definido");
         this.estado = Objects.requireNonNull(estado, "estado não definido");
+
+        // Cache token para uso na primeira requisição
+        token();
     }
 
     static final Logger logger = Logger.getLogger("RNDS");
@@ -273,8 +276,11 @@ public class RNDS {
      * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
      * de exceção.
      */
-    public static String cnes(String srv, String token, String cnes,
-                              String cpf) {
+    public static String cnes(
+            final String srv,
+            final String token,
+            final String cnes,
+            final String cpf) {
         try {
             final String CNES_REQUEST = "fhir/r4/Organization/" + cnes;
             logger.info("SERVICO: " + CNES_REQUEST);
@@ -308,8 +314,11 @@ public class RNDS {
         return cnes(ehr, token, cnes, requisitante);
     }
 
-    public static String profissional(String srv, String token, String cns,
-                                      String cpf) {
+    public String profissional(
+            final String srv,
+            final String token,
+            final String cns,
+            final String requisitanteCns) {
         try {
             final String PROFISSIONAL = "fhir/r4/Practitioner/" + cns;
             logger.info("SERVICO: " + PROFISSIONAL);
@@ -321,11 +330,14 @@ public class RNDS {
             servico.setRequestProperty("Content-Type", "application/json");
             servico.setRequestProperty("X-Authorization-Server",
                     "Bearer " + token);
-            servico.setRequestProperty("Authorization", cpf);
+            servico.setRequestProperty("Authorization", requisitanteCns);
 
             final int codigo = servico.getResponseCode();
             logger.info("RESPONSE CODE: " + codigo);
-            final String payload = fromInputStream(servico.getInputStream());
+
+            final String payload = codigo == 200
+                    ? fromInputStream(servico.getInputStream())
+                    : fromInputStream(servico.getErrorStream());
             return payload;
         } catch (IOException exception) {
             logger.warning("EXCECAO: " + exception);
@@ -334,7 +346,15 @@ public class RNDS {
     }
 
     public String profissional(final String cns) {
-        return profissional(ehr, token, cns, requisitante);
+        String retorno = profissional(ehr, token, cns, requisitante);
+
+        // Se token expirado, obtenha token e tente novamente.
+        if (retorno.contains("JWT expired")) {
+            token();
+            return profissional(ehr, token, cns, requisitante);
+        }
+
+        return retorno;
     }
 
     public static String cpf(String srv, String token, String cpf,
