@@ -18,7 +18,6 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.*;
@@ -216,7 +215,7 @@ public class RNDS {
      */
     private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException, URISyntaxException {
 
-        try (InputStream is = fromLocation(keystoreFile)) {
+        try (InputStream is = fromEndereco(keystoreFile)) {
             return keystoreFromInputStream(is, password);
         }
     }
@@ -233,7 +232,7 @@ public class RNDS {
      * @throws RuntimeException Em caso de falha na tentativa de obter
      * {@link InputStream} para o endereço fornecido.
      */
-    private static InputStream fromLocation(final String endereco) {
+    private static InputStream fromEndereco(final String endereco) {
         try {
             if (endereco.toLowerCase().startsWith("http")) {
                 return new URL(endereco).openStream();
