@@ -98,7 +98,13 @@ public class RNDSTest {
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        assertNull(rnds.cnes("invalido"));
+        String retorno = rnds.cnes("invalido");
+
+        // Parse json retornado
+        final Any json = JsonIterator.deserialize(retorno);
+
+        final String resourceType = json.get("resourceType").toString();
+        assertEquals("OperationOutcome", resourceType);
     }
 
     @Test
