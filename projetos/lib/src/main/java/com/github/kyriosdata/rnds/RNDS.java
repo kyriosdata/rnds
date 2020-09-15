@@ -317,6 +317,35 @@ public class RNDS {
         }
     }
 
+    public String cnpj(final String cnpj) {
+        try {
+            final String CNES_REQUEST = ehr + "Organization/" + cnpj;
+            logger.info("SERVICO: " + CNES_REQUEST);
+
+            final URL url = new URL(CNES_REQUEST);
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
+            servico.setRequestProperty("Authorization", requisitante);
+
+            final int codigo = servico.getResponseCode();
+
+            if (codigo != 200) {
+                final String msg = fromInputStream(servico.getErrorStream());
+                logger.warning(msg);
+                return msg;
+            }
+
+            return fromInputStream(servico.getInputStream());
+        } catch (IOException exception) {
+            logger.warning("EXCECAO: " + exception);
+            return null;
+        }
+    }
+
     public String cnes(final String cnes) {
         return cnes(ehr, token, cnes, requisitante);
     }
@@ -403,14 +432,34 @@ public class RNDS {
     }
 
     public String lotacao(final String cns, final String cnes) {
-        String dst = "https://{{ehr}}/api/fhir/r4/PractitionerRole" +
+        String dst = ehr + "PractitionerRole" +
                 "?practitioner.identifier=http%3A%2F%2Frnds.saude.gov" +
-                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C{{individuo-cns" +
-                "}}&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
-                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C{{lab-cnes" +
-                "}}&_include=PractitionerRole%3Aorganization";
+                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" + cns +
+                "&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
+                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" + cnes +
+                "&_include=PractitionerRole%3Aorganization";
 
-        return null;
+        try {
+            final URL url = new URL(dst);
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
+            servico.setRequestProperty("Authorization", requisitante);
+
+            final int codigo = servico.getResponseCode();
+            logger.info("RESPONSE CODE: " + codigo);
+
+            final String payload = codigo == 200
+                    ? fromInputStream(servico.getInputStream())
+                    : fromInputStream(servico.getErrorStream());
+            return payload;
+        } catch (IOException exception) {
+            logger.warning("EXCECAO: " + exception);
+            return null;
+        }
     }
 
     /**

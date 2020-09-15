@@ -126,4 +126,24 @@ public class RNDSTest {
         final Any jsonCpf = JsonIterator.deserialize(buscaPorCpf);
         assertEquals(1, jsonCpf.get("total").toInt());
     }
+
+    @Test
+    public void lotacao() {
+        String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
+        String retorno = rnds.lotacao(requisitanteCns, "2337991");
+
+        // Verifica retorno
+        final Any json = JsonIterator.deserialize(retorno);
+        assertEquals(1, json.get("total").toInt());
+    }
+
+    @Test
+    public void cnpj() {
+        final String cnpjUFG = "01567601000143";
+        final String retorno = rnds.cnpj(cnpjUFG);
+
+        // Verifica retorno
+        final Any json = JsonIterator.deserialize(retorno);
+        assertEquals(cnpjUFG, json.get("id").toString());
+    }
 }
