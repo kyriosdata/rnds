@@ -257,6 +257,10 @@ public class RNDS {
         return null;
     }
 
+    public String token() {
+        return getToken(auth, keystore, password);
+    }
+
     /**
      * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
      *

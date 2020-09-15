@@ -84,7 +84,10 @@ public class RNDSTest {
 
     @BeforeEach
     public void obtemToken() {
-        token = RNDS.getToken(auth, keystore, password);
+//        token = RNDS.getToken(auth, keystore, password);
+//        assertNotNull(token);
+
+        token = rnds.token();
         assertNotNull(token);
     }
 
