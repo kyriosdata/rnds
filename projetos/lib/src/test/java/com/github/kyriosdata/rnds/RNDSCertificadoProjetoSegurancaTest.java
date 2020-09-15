@@ -32,6 +32,8 @@ public class RNDSCertificadoProjetoSegurancaTest {
 
     private static final boolean DEBUG = false;
 
+    private static RNDS rnds;
+
     @BeforeAll
     static void setUp() {
         if (!DEBUG) {
@@ -41,20 +43,22 @@ public class RNDSCertificadoProjetoSegurancaTest {
         } else {
             System.setProperty("javax.net.debug", "all");
         }
+
+        rnds = new RNDSBuilder().build();
     }
 
     @Test
     public void keystoreOriginalWithoutLetsEncryptCertificate() {
         final String keystore = fromResource("certificado.jks");
         final String senha = "secret";
-        assertNull(RNDS.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
+        assertNull(rnds.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
     }
 
     @Test
     public void keystoreAdicionadoDeLetsEncryptCertificate() {
         final String keystore = fromResource("adicionado.jks");
         final char[] senha = "secret".toCharArray();
-        final String token = RNDS.getToken(RNDS_AUTH, keystore, senha);
+        final String token = rnds.getToken(RNDS_AUTH, keystore, senha);
         assertNotNull(token);
         assertEquals(2334, token.length());
     }

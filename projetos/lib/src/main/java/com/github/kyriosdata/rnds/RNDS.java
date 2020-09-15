@@ -103,8 +103,14 @@ public class RNDS {
                 final char[] password,
                 final String requisitante,
                 final Estado estado) {
-        this.auth = Objects.requireNonNull(auth, "auth não definido");
-        this.ehr = Objects.requireNonNull(ehr, "ehr não definido");
+        // AUTH (prefixo https://) (sufixo /api/)
+        Objects.requireNonNull(auth, "auth não definido");
+        this.auth = String.format("https://%s/api", auth);
+
+        // EHR (prefixo https://) (sufixo /api/fhir/r4/)
+        Objects.requireNonNull(ehr, "ehr não definido");
+        this.ehr = String.format("https://%s/api/fhir/r4/", ehr);
+
         this.keystore = Objects.requireNonNull(keystore, "keystore não " +
                 "definido");
         this.password = Objects.requireNonNull(password, "password não " +
@@ -234,13 +240,14 @@ public class RNDS {
      * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
      * O valor {@code null} é retornado em caso de falha.
      */
-    public static String getToken(
+    public String getToken(
             final String server,
             final String keystoreEndereco,
             final char[] keyStorePassword) {
         try {
             SSLContext context = sslCtx(keystoreEndereco, keyStorePassword);
             try (CloseableHttpClient cliente = getClient(context)) {
+
                 HttpGet get = new HttpGet(server);
                 get.addHeader("accept", "application/json");
                 try (CloseableHttpResponse response = cliente.execute(get)) {
@@ -282,7 +289,7 @@ public class RNDS {
             final String cnes,
             final String cpf) {
         try {
-            final String CNES_REQUEST = "fhir/r4/Organization/" + cnes;
+            final String CNES_REQUEST = "Organization/" + cnes;
             logger.info("SERVICO: " + CNES_REQUEST);
 
             final URL url = new URL(srv + CNES_REQUEST);
@@ -320,7 +327,7 @@ public class RNDS {
             final String cns,
             final String requisitanteCns) {
         try {
-            final String PROFISSIONAL = "fhir/r4/Practitioner/" + cns;
+            final String PROFISSIONAL = "Practitioner/" + cns;
             logger.info("SERVICO: " + PROFISSIONAL);
 
             final URL url = new URL(srv + PROFISSIONAL);
@@ -393,6 +400,17 @@ public class RNDS {
 
     public String cpf(final String cpf) {
         return cpf(ehr, token, cpf, requisitante);
+    }
+
+    public String lotacao(final String cns, final String cnes) {
+        String dst = "https://{{ehr}}/api/fhir/r4/PractitionerRole" +
+                "?practitioner.identifier=http%3A%2F%2Frnds.saude.gov" +
+                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C{{individuo-cns" +
+                "}}&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
+                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C{{lab-cnes" +
+                "}}&_include=PractitionerRole%3Aorganization";
+
+        return null;
     }
 
     /**
