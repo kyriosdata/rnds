@@ -258,7 +258,8 @@ public class RNDS {
     }
 
     public String token() {
-        return getToken(auth, keystore, password);
+        token = getToken(auth, keystore, password);
+        return token;
     }
 
     /**
@@ -300,6 +301,10 @@ public class RNDS {
             logger.warning("EXCECAO: " + exception);
             return null;
         }
+    }
+
+    public String cnes(final String cnes) {
+        return cnes(ehr, token, cnes, requisitante);
     }
 
     public static String profissional(String srv, String token, String cns,

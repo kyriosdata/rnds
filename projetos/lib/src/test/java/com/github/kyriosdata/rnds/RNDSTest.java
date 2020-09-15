@@ -112,6 +112,9 @@ public class RNDSTest {
     void cnesConhecido() {
         String cnes = RNDS.cnes(ehr, token, "2337991", individuoCns);
         assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
+
+        String retorno = rnds.cnes("2337991");
+        assertTrue(retorno.contains("LABORATORIO ROMULO ROCHA"));
     }
 
     @Test
