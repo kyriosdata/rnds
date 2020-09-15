@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020.
+ * Fábio Nogueira de Lucena - Instituto de Informática (UFG)
+ * Creative Commons Attribution 4.0 International License.
+ */
+
 package com.github.kyriosdata.rnds;
 
 import java.io.FileInputStream;
@@ -7,7 +13,10 @@ import java.nio.file.Paths;
 
 /**
  * Cria uma instância de {@link RNDS} devidamente configurada para
- * submeter requisições para um determinado estabelecimento de saúde.
+ * submissão de requisições à RNDS em nome de um estabelecimento de saúde.
+ *
+ * <p>Implementação do padrão <i>builder</i> para construção de instância
+ * da classe {@link RNDS}.</p>
  */
 public class RNDSBuilder {
     private String auth;
