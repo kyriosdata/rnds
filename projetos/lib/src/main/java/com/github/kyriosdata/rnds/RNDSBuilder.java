@@ -6,9 +6,6 @@
 
 package com.github.kyriosdata.rnds;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 /**
  * Cria uma instância de {@link RNDS} devidamente configurada para
  * submissão de requisições à RNDS em nome de um estabelecimento de saúde.
@@ -58,6 +55,15 @@ public class RNDSBuilder {
     public static final String AUTH_HMG = "ehr-auth-hmg.saude.gov.br";
     public static final String EHR_HMG = "ehr-services.hmg.saude.gov.br";
 
+    public static final String RNDS_AUTH = "RNDS_AUTH";
+    public static final String RNDS_EHR = "RNDS_EHR";
+    public static final String RNDS_CERTIFICADO_ENDERECO =
+            "RNDS_CERTIFICADO_ENDERECO";
+    public static final String RNDS_CERTIFICADO_SENHA =
+            "RNDS_CERTIFICADO_SENHA";
+    public static final String RNDS_REQUISITANTE_CNS =
+            "RNDS_REQUISITANTE_CNS";
+
     private String auth;
     private String ehr;
     private String keystore;
@@ -70,11 +76,11 @@ public class RNDSBuilder {
      * de ambiente, caso definidas.
      */
     public RNDSBuilder() {
-        auth(System.getenv("RNDS_AUTH"));
-        ehr(System.getenv("RNDS_EHR"));
-        keystore(System.getenv("RNDS_CERTIFICADO_ENDERECO"));
-        password(System.getenv("RNDS_CERTIFICADO_SENHA").toCharArray());
-        requisitante(System.getenv("RNDS_REQUISITANTE_CNS"));
+        auth(System.getenv(RNDS_AUTH));
+        ehr(System.getenv(RNDS_EHR));
+        keystore(System.getenv(RNDS_CERTIFICADO_ENDERECO));
+        password(System.getenv(RNDS_CERTIFICADO_SENHA).toCharArray());
+        requisitante(System.getenv(RNDS_REQUISITANTE_CNS));
     }
 
     /**
