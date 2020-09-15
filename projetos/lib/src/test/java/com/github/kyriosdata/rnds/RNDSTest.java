@@ -79,7 +79,7 @@ public class RNDSTest {
         assertNotNull(individuoCns, "responsável não fornecido");
         assertNotEquals("", individuoCns.trim());
 
-        rnds = new RNDSBuilder().estado(RNDS.Estado.GO).build();
+        rnds = new RNDSBuilder().build();
     }
 
     @BeforeEach
