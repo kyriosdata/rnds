@@ -171,6 +171,11 @@ public class RNDS {
 
     static final Logger logger = Logger.getLogger("RNDS");
 
+    private static SSLContext sslCtx(final String keystore,
+                                     final char[] password) throws GeneralSecurityException, IOException {
+        return sslContext(keystore, password);
+    }
+
     private static SSLContext sslContext(final String keystoreFile,
                                          final char[] password)
             throws GeneralSecurityException, IOException {
@@ -246,7 +251,7 @@ public class RNDS {
             final String file,
             final char[] keyStorePassword) {
         try {
-            SSLContext context = sslContext(file, keyStorePassword);
+            SSLContext context = sslCtx(file, keyStorePassword);
             try (CloseableHttpClient cliente = getClient(context)) {
                 HttpGet get = new HttpGet(server);
                 get.addHeader("accept", "application/json");

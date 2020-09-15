@@ -40,7 +40,7 @@ public class RNDSBuilder {
     }
 
     /**
-     * Define o <i>host</i> dos serviços de saúde da RNDS.
+     * Define o <i>host</i> dos serviços (<i>web services</i>) de saúde da RNDS.
      *
      * @param ehr Nome do domínio (endereço) do serviço de autenticação da
      *             RNDS.
