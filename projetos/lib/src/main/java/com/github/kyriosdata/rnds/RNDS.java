@@ -173,7 +173,8 @@ public class RNDS {
         return sslContext(password, getKeyStore(keystore, password));
     }
 
-    private static SSLContext sslContext(final char[] password, KeyStore keystore)
+    private static SSLContext sslContext(final char[] password,
+                                         KeyStore keystore)
             throws GeneralSecurityException {
 
         String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
@@ -202,21 +203,26 @@ public class RNDS {
      * Obtém {@link KeyStore} a partir de caminho para arquivo contendo o
      * certificado digital.
      *
-     * @param keystoreFile Caminho para arquivo contendo o certificado digital.
-     *
-     * @param password Senha de acesso ao conteúdo do certificado digital.
+     * @param keystoreEndereco Endereço para arquivo contendo o certificado
+     *                         digital ou endereço <i>web</i>, por exemplo,
+     *                         iniciado por "http".
+     * @param password         Senha de acesso ao conteúdo do certificado
+     *                         digital.
      * @return Instância de {@link KeyStore} devidamente carregada com o
      * certificado digital fornecido.
-     *
-     * @throws KeyStoreException
-     * @throws IOException
-     * @throws NoSuchAlgorithmException
-     * @throws CertificateException
      */
-    private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException, URISyntaxException {
+    private static KeyStore getKeyStore(
+            final String keystoreEndereco, char[] password) {
 
-        try (InputStream is = fromEndereco(keystoreFile)) {
-            return keystoreFromInputStream(is, password);
+        try (InputStream is = fromEndereco(keystoreEndereco)) {
+            KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keystore.load(is, password);
+            return keystore;
+        } catch (KeyStoreException | IOException | NoSuchAlgorithmException
+                | CertificateException exception) {
+            logger.warning(exception.toString());
+            logger.warning("não foi possível obter keystore");
+            return null;
         }
     }
 
@@ -226,35 +232,17 @@ public class RNDS {
      * não é iniciado por <i>http</i>.
      *
      * @param endereco Endereço para o qual {@link InputStream} será obtido.
-     *
      * @return {@link InputStream} para o endereço fornecido.
-     *
      * @throws RuntimeException Em caso de falha na tentativa de obter
-     * {@link InputStream} para o endereço fornecido.
+     *                          {@link InputStream} para o endereço fornecido.
      */
-    private static InputStream fromEndereco(final String endereco) {
-        try {
-            if (endereco.toLowerCase().startsWith("http")) {
-                return new URL(endereco).openStream();
-            } else {
-                return new FileInputStream(endereco);
-            }
-        } catch (IOException exception) {
-            logger.warning(exception.getCause().getMessage());
-            throw new RuntimeException("erro ao obter InputStream para " +
-                    "endereço " + endereco);
+    private static InputStream fromEndereco(final String endereco)
+            throws IOException {
+        if (endereco.toLowerCase().startsWith("http")) {
+            return new URL(endereco).openStream();
+        } else {
+            return new FileInputStream(endereco);
         }
-    }
-
-    private static KeyStore keystoreFromInputStream(
-            final InputStream inputStream,
-            final char[] password) throws KeyStoreException, IOException,
-            NoSuchAlgorithmException, CertificateException {
-        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        try (InputStream in = inputStream) {
-            keystore.load(in, password);
-        }
-        return keystore;
     }
 
     /**
