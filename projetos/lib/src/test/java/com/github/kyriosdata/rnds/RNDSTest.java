@@ -6,13 +6,11 @@
 
 package com.github.kyriosdata.rnds;
 
+import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.apache.commons.codec.binary.Base64;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,12 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RNDSTest {
 
-    private static char[] password;
-    private static String keystore;
-    private static String auth;
-    private static String ehr;
     private static String token;
-    private static String individuoCns;
 
     private static final boolean DEBUG = false;
 
@@ -56,37 +49,11 @@ public class RNDSTest {
             System.setProperty("javax.net.debug", "all");
         }
 
-        // Serviço Auth
-        auth = System.getenv("RNDS_AUTH");
-        assertNotNull(auth, "Auth não definido");
-
-        // Serviços EHR
-        ehr = System.getenv("RNDS_EHR");
-        assertNotNull(ehr, "EHR não definido");
-
-        // Arquivo (certificado)
-        keystore = System.getenv("RNDS_CERTIFICADO_ENDERECO");
-        assertTrue(Files.exists(Path.of(keystore)), "arquivo com " +
-                "certificado inexistente");
-
-        // Senha de acesso ao conteúdo do certificado (keystore)
-        final String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
-        assertNotNull(senha, "senha de acesso ao certificado null");
-        assertNotEquals("", senha.trim(), "senha vazia");
-        password = senha.toCharArray();
-
-        individuoCns = System.getenv("RNDS_REQUISITANTE_CNS");
-        assertNotNull(individuoCns, "responsável não fornecido");
-        assertNotEquals("", individuoCns.trim());
-
         rnds = new RNDSBuilder().build();
     }
 
     @BeforeEach
     public void obtemToken() {
-//        token = RNDS.getToken(auth, keystore, password);
-//        assertNotNull(token);
-
         token = rnds.token();
         assertNotNull(token);
     }
@@ -110,36 +77,24 @@ public class RNDSTest {
 
     @Test
     void cnesConhecido() {
-//        String cnes = RNDS.cnes(ehr, token, "2337991", individuoCns);
-//        assertTrue(cnes.contains("LABORATORIO ROMULO ROCHA"));
-
         String retorno = rnds.cnes("2337991");
         assertTrue(retorno.contains("LABORATORIO ROMULO ROCHA"));
     }
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-//        assertNull(RNDS.cnes(ehr, token, "233799", individuoCns));
-
         assertNull(rnds.cnes("invalido"));
     }
 
     @Test
     void profissionalPeloCns() {
-//        String cns = RNDS.profissional(ehr, token, individuoCns,
-//                individuoCns);
-//        assertTrue(cns.contains("SANTOS"));
-
-        String retorno = rnds.profissional(individuoCns);
+        String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
+        String retorno = rnds.profissional(requisitanteCns);
         assertTrue(retorno.contains("SANTOS"));
     }
 
     @Test
     void profissionalPeloCpf() {
-//        String cns = RNDS.cpf(ehr, token, "01758263156",
-//                individuoCns);
-//        assertTrue(cns.contains("SANTOS"));
-
         String retorno = rnds.cpf("01758263156");
         assertTrue(retorno.contains("SANTOS"));
     }

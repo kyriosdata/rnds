@@ -344,7 +344,6 @@ public class RNDS {
                     "fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude" +
                     ".gov" +
                     ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
-            System.out.println(FMT);
             logger.info("URL: " + FMT);
 
             final URL url = new URL(FMT);
