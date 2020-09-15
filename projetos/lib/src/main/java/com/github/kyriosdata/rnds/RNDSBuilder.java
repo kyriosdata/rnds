@@ -15,7 +15,7 @@ public class RNDSBuilder {
     private String keystore;
     private char[] password;
     private String requisitante;
-    private RNDS.Estado estado;
+    private RNDS.Estado estado = null;
 
     /**
      * Define o <i>host</i> do serviço de autenticação da RNDS.

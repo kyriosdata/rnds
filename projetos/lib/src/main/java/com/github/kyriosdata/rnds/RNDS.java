@@ -67,7 +67,7 @@ public class RNDS {
                 "fornecida");
         this.requisitante = Objects.requireNonNull(requisitante,
                 "requisitante não definido");
-        this.estado = estado;
+        this.estado = Objects.requireNonNull(estado, "estado não definido");
     }
 
     static final Logger logger = Logger.getLogger("RNDS");

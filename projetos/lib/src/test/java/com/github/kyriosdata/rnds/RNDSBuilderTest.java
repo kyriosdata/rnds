@@ -2,8 +2,6 @@ package com.github.kyriosdata.rnds;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -42,12 +40,29 @@ public class RNDSBuilderTest {
     }
 
     @Test
-    public void estadoNaoDefinido() {
+    public void requisitanteNaoDefinido() {
+        final String keystore = fromResource("certificado.jks");
+
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
-                        .keystore("keystore")
-                        .password("senha".toCharArray()).build());
-        assertTrue(retorno.getMessage().contains("keystore"));
+                        .keystore(keystore)
+                        .password("senha".toCharArray())
+                        .build());
+        assertTrue(retorno.getMessage().contains("requisitante"));
+    }
+
+    @Test
+    public void estadoNaoDefinido() {
+        final String keystore = fromResource("certificado.jks");
+
+        Throwable retorno = assertThrows(NullPointerException.class,
+                () -> new RNDSBuilder().auth("auth").ehr("ehr")
+                        .keystore(keystore)
+                        .password("senha".toCharArray())
+                        .requisitante("requisitante")
+                        .build());
+        System.out.println(retorno.getMessage());
+        assertTrue(retorno.getMessage().contains("estado"));
     }
 
     /**
