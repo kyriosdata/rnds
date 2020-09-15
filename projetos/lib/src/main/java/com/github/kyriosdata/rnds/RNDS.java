@@ -105,7 +105,7 @@ public class RNDS {
                 final Estado estado) {
         // AUTH (prefixo https://) (sufixo /api/)
         Objects.requireNonNull(auth, "auth não definido");
-        this.auth = String.format("https://%s/api", auth);
+        this.auth = String.format("https://%s/api/", auth);
 
         // EHR (prefixo https://) (sufixo /api/fhir/r4/)
         Objects.requireNonNull(ehr, "ehr não definido");
@@ -268,7 +268,7 @@ public class RNDS {
     }
 
     public String token() {
-        token = getToken(auth, keystore, password);
+        token = getToken(auth + "token", keystore, password);
         return token;
     }
 
@@ -369,7 +369,7 @@ public class RNDS {
 
         try {
             final String FMT = srv +
-                    "fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude" +
+                    "Practitioner?identifier=http%3A%2F%2Frnds.saude" +
                     ".gov" +
                     ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
             logger.info("URL: " + FMT);
