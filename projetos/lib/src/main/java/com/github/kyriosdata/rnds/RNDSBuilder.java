@@ -8,8 +8,6 @@ package com.github.kyriosdata.rnds;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Cria uma instância de {@link RNDS} devidamente configurada para
@@ -19,6 +17,12 @@ import java.nio.file.Paths;
  * da classe {@link RNDS}.</p>
  */
 public class RNDSBuilder {
+    
+    public static final String AUTH = "ehr-auth.saude.gov.br";
+    public static final String EHR_SUFFIX = "-ehr-services.saude.gov.br";
+    public static final String AUTH_HMG = "ehr-auth-hmg.saude.gov.br";
+    public static final String EHR_HMG = "ehr-services.hmg.saude.gov.br";
+
     private String auth;
     private String ehr;
     private String keystore;
@@ -28,56 +32,44 @@ public class RNDSBuilder {
 
     /**
      * Cria instância de {@link RNDS} para acesso ao ambiente de homologação
-     * da RNDS.
+     * da RNDS. Os endereços padrão para os serviços de autenticação e saúde,
+     * caso não tenham sido fornecidos, serão empregados.
      *
-     * @param keystore     Caminho para o arquivo contendo o certificado
-     *                     digital.
-     * @param password     Senha para acesso ao certificado digital.
-     * @param requisitante CNS do profissional de saúde, lotado no
-     *                     estabelecimento de saúde em questão (aquele para o
-     *                     qual é fornecido o certificado digital) e em nome
-     *                     do qual requisições serão feitas. Este
-     *                     requisitante só será empregado para cada
-     *                     requisição que não indicar especificamente em nome
-     *                     de quem a requisição é realizada.
-     * @param estado       Estado no qual está localizado o estabelecimento
-     *                     de saúde.
      * @return Instância apta para a interação com a RNDS.
      */
-    public static RNDS homologacao(String keystore, char[] password,
-                                   String requisitante, RNDS.Estado estado) {
-        final String auth = "ehr-auth-hmg.saude.gov.br";
-        final String ehr = "ehr-services.hmg.saude.gov.br";
-        return new RNDS(auth, ehr, keystore, password, requisitante, estado);
+    public RNDS homologacao() {
+        if (auth == null) {
+            auth(AUTH_HMG);
+        }
+
+        if (ehr == null) {
+            ehr(EHR_HMG);
+        }
+
+        return build();
     }
 
     /**
      * Cria instância de {@link RNDS} para acesso ao ambiente de produção da
      * RNDS.
      *
-     * @param keystore     Caminho para o arquivo contendo o certificado
-     *                     digital.
-     * @param password     Senha para acesso ao certificado digital.
-     * @param requisitante CNS do profissional de saúde, lotado no
-     *                     estabelecimento de saúde em questão (aquele
-     *                     para o
-     *                     qual é fornecido o certificado digital) e
-     *                     em nome
-     *                     do qual requisições serão feitas. Este
-     *                     requisitante só será empregado para cada
-     *                     requisição que não indicar especificamente
-     *                     em nome
-     *                     de quem a requisição é realizada.
-     * @param estado       Estado no qual está localizado o
-     *                     estabelecimento
-     *                     de saúde.
      * @return Instância apta a ser utilizada para interação com a RNDS.
      */
-    public static RNDS producao(String keystore, char[] password,
-                                String requisitante, RNDS.Estado estado) {
-        final String auth = "ehr-auth.saude.gov.br";
-        final String ehr = estado.toString() + "-ehr-services.saude.gov.br";
-        return new RNDS(auth, ehr, keystore, password, requisitante, estado);
+    public RNDS producao() {
+
+        if (auth == null) {
+            auth(AUTH);
+        }
+
+        if (ehr == null) {
+            if (estado == null) {
+                throw new NullPointerException("estado não definido");
+            }
+
+            ehr(estado.toString() + EHR_SUFFIX);
+        }
+
+        return build();
     }
 
     /**
