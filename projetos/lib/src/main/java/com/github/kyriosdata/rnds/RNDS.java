@@ -292,8 +292,9 @@ public class RNDS {
             logger.warning("RESPONSE CODE: " + codigo);
 
             if (codigo != 200) {
-                logger.warning(fromInputStream(servico.getErrorStream()));
-                return null;
+                final String msg = fromInputStream(servico.getErrorStream());
+                logger.warning(msg);
+                return msg;
             }
 
             return fromInputStream(servico.getInputStream());
