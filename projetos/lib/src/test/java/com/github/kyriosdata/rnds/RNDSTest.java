@@ -13,8 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -108,15 +111,27 @@ public class RNDSTest {
     }
 
     @Test
-    void profissionalPeloCns() {
+    void profissionalPeloCnsPosteriormenteCpf() {
         String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
         String retorno = rnds.profissional(requisitanteCns);
-        assertTrue(retorno.contains("SANTOS"));
-    }
 
-    @Test
-    void profissionalPeloCpf() {
-        String retorno = rnds.cpf("01758263156");
-        assertTrue(retorno.contains("SANTOS"));
+        // Parse json retornado
+        final Any json = JsonIterator.deserialize(retorno);
+        assertEquals(requisitanteCns, json.get("id").toString());
+
+        // Recupera o CPF do requisitante para realizar próximo teste
+        List<String> cpfs = json.get("identifier").asList()
+                .stream()
+                .filter(i -> i.get("system").toString().endsWith("/cpf"))
+                .map(c -> c.get("value").toString())
+                .collect(Collectors.toList());
+
+        // Verifica a disponibilidade de um CPF (aquele do requisitante)
+        assertEquals(1, cpfs.size());
+
+        // Realiza busca por CPF
+        String buscaPorCpf = rnds.cpf(cpfs.get(0));
+        final Any jsonCpf = JsonIterator.deserialize(buscaPorCpf);
+        assertEquals(1, jsonCpf.get("total").toInt());
     }
 }
