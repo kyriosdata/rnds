@@ -83,6 +83,7 @@ public class RNDSBuilder {
         keystore(System.getenv(RNDS_CERTIFICADO_ENDERECO));
         password(System.getenv(RNDS_CERTIFICADO_SENHA).toCharArray());
         requisitante(System.getenv(RNDS_REQUISITANTE_CNS));
+        estado(RNDS.Estado.valueOf(System.getenv("RNDS_REQUISITANTE_UF")));
     }
 
     /**
