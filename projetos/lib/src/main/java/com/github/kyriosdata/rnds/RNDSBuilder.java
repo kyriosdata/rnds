@@ -13,11 +13,46 @@ import java.io.FileNotFoundException;
  * Cria uma instância de {@link RNDS} devidamente configurada para
  * submissão de requisições à RNDS em nome de um estabelecimento de saúde.
  *
+ * <p>Variáveis de ambiente serão empregadas, caso valor específico não seja
+ * estabelecido por meio de método. Por exemplo, se o requisitante não é
+ * definido, então o valor correspondente será buscado de variável de
+ * ambiente correspondente. As variáveis são definidas abaixo:
+ * </p>
+ *
+ * <table>
+ *     <tr>
+ *         <th>Varável</th>
+ *         <th>Descrição</th>
+ *     </tr>
+ *     <tr>
+ *         <td><b>RNDS_AUTH</b></td>
+ *         <td>Endereço do serviço de autenticação.</td>
+ *     </tr>
+ *     <tr>
+ *         <td><b>RNDS_EHR</b></td>
+ *         <td>Endereço dos serviços (<i>web services</i>) de saúde.</td>
+ *     </tr>
+ *     <tr>
+ *         <td><b>RNDS_CERTIFICADO_ENDERECO</b></td>
+ *         <td>Endereço <i>web</i> (por exemplo, iniciado por <i>http</i>)
+ *         ou caminho do arquivo contendo o certificado digital.</td>
+ *     </tr>
+ *     <tr>
+ *         <td><b>RNDS_CERTIFICADO_SENHA</b></td>
+ *         <td>Senha de acesso ao conteúdo do certificado digital.</td>
+ *     </tr>
+ *     <tr>
+ *         <td><b>RNDS_REQUISITANTE_CNS</b></td>
+ *         <td>CNS do profissional de saúde em nome do qual requisições
+ *         serão submetidas, se não informado o contrário por requisição.</td>
+ *     </tr>
+ * </table>
+ *
  * <p>Implementação do padrão <i>builder</i> para construção de instância
  * da classe {@link RNDS}.</p>
  */
 public class RNDSBuilder {
-    
+
     public static final String AUTH = "ehr-auth.saude.gov.br";
     public static final String EHR_SUFFIX = "-ehr-services.saude.gov.br";
     public static final String AUTH_HMG = "ehr-auth-hmg.saude.gov.br";
@@ -29,6 +64,14 @@ public class RNDSBuilder {
     private char[] password;
     private String requisitante;
     private RNDS.Estado estado = null;
+
+    public RNDSBuilder() {
+        auth(System.getenv("RNDS_AUTH"));
+        ehr(System.getenv("RNDS_EHR"));
+        keystore(System.getenv("RNDS_CERTIFICADO_ENDERECO"));
+        password(System.getenv("RNDS_CERTIFICADO_SENHA").toCharArray());
+        requisitante(System.getenv("RNDS_REQUISITANTE_CNS"));
+    }
 
     /**
      * Cria instância de {@link RNDS} para acesso ao ambiente de homologação
@@ -110,12 +153,6 @@ public class RNDSBuilder {
      * digital do estabelecimento de saúde.
      */
     public RNDSBuilder keystore(final String keystore) {
-        try {
-            new FileInputStream(keystore);
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("keystore não existe");
-        }
-
         this.keystore = keystore;
         return this;
     }
@@ -170,6 +207,16 @@ public class RNDSBuilder {
      * definidos.
      */
     public RNDS build() {
+        if (keystore == null) {
+
+        }
+
+        if (password == null) {
+        }
+
+        if (requisitante == null) {
+        }
+
         return new RNDS(auth, ehr, keystore, password, requisitante, estado);
     }
 }

@@ -16,14 +16,14 @@ public class RNDSBuilderTest {
     @Test
     public void authNaoDefinido() {
         Throwable retorno = assertThrows(NullPointerException.class,
-                () -> new RNDSBuilder().build());
+                () -> new RNDSBuilder().auth(null).build());
         assertTrue(retorno.getMessage().contains("auth"));
     }
 
     @Test
     public void ehrNaoDefinido() {
         Throwable retorno = assertThrows(NullPointerException.class,
-                () -> new RNDSBuilder().auth("auth").build());
+                () -> new RNDSBuilder().ehr(null).auth("auth").build());
         assertTrue(retorno.getMessage().contains("ehr"));
     }
 
@@ -40,6 +40,7 @@ public class RNDSBuilderTest {
 
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
+                        .password(null)
                         .keystore(keystore)
                         .build());
         assertTrue(retorno.getMessage().contains("password"));
@@ -80,6 +81,25 @@ public class RNDSBuilderTest {
                 .requisitante("requisitante")
                 .estado(RNDS.Estado.AC)
                 .build();
+    }
+
+    @Test
+    public void homologacaoSemVariaveisDeAmbiente() {
+        final String keystore = fromResource("certificado.jks");
+
+        new RNDSBuilder().keystore(keystore).password(new char[]{})
+                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .homologacao();
+    }
+
+    @Test
+    public void homologacaoUsaKeystoreEnvironment() {
+        Throwable excecao = assertThrows(NullPointerException.class,
+                () -> new RNDSBuilder().password(new char[]{})
+                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .homologacao());
+
+        assertTrue(excecao.getMessage().contains("keystore"));
     }
 
     /**
