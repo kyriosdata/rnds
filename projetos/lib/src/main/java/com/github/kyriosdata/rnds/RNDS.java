@@ -18,6 +18,8 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.*;
 import java.security.cert.CertificateException;
@@ -168,7 +170,7 @@ public class RNDS {
     static final Logger logger = Logger.getLogger("RNDS");
 
     private static SSLContext sslCtx(final String keystore,
-                                     final char[] password) throws GeneralSecurityException, IOException {
+                                     final char[] password) throws GeneralSecurityException, IOException, URISyntaxException {
         return sslContext(password, getKeyStore(keystore, password));
     }
 
@@ -212,9 +214,36 @@ public class RNDS {
      * @throws NoSuchAlgorithmException
      * @throws CertificateException
      */
-    private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
-        try (FileInputStream is = new FileInputStream(keystoreFile)) {
+    private static KeyStore getKeyStore(String keystoreFile, char[] password) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException, URISyntaxException {
+
+        try (InputStream is = fromLocation(keystoreFile)) {
             return keystoreFromInputStream(is, password);
+        }
+    }
+
+    /**
+     * Obtém {@link InputStream} para endereço fornecido. O endereço pode ser
+     * web, ou seja, iniciado por <i>http</i>, ou um arquivo local, quando
+     * não é iniciado por <i>http</i>.
+     *
+     * @param endereco Endereço para o qual {@link InputStream} será obtido.
+     *
+     * @return {@link InputStream} para o endereço fornecido.
+     *
+     * @throws RuntimeException Em caso de falha na tentativa de obter
+     * {@link InputStream} para o endereço fornecido.
+     */
+    private static InputStream fromLocation(final String endereco) {
+        try {
+            if (endereco.toLowerCase().startsWith("http")) {
+                return new URL(endereco).openStream();
+            } else {
+                return new FileInputStream(endereco);
+            }
+        } catch (IOException exception) {
+            logger.warning(exception.getCause().getMessage());
+            throw new RuntimeException("erro ao obter InputStream para " +
+                    "endereço " + endereco);
         }
     }
 
@@ -288,7 +317,7 @@ public class RNDS {
                     return extrairToken(payload);
                 }
             }
-        } catch (IOException | GeneralSecurityException e) {
+        } catch (IOException | GeneralSecurityException | URISyntaxException e) {
             logger.warning(e.toString());
         }
 
