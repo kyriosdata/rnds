@@ -132,50 +132,41 @@ function buildRequest(options, callback) {
   req.end();
 }
 
-function profissional(cns, callback) {
-  function searchProfissional(cns, callback) {
-    const options = {
-      method: "GET",
-      hostname: "ehr-services.hmg.saude.gov.br",
-      path: "/api/fhir/r4/Practitioner/" + cns,
-      headers: {
-        "Content-Type": "application/json",
-        "X-Authorization-Server": "Bearer " + accessToken,
-        Authorization: requisitante,
-      },
-      maxRedirects: 20,
-    };
+function pro(cns, callback) {
+  const options = {
+    method: "GET",
+    path: "/api/fhir/r4/Practitioner/" + cns,
+    maxRedirects: 20,
+  };
 
-    executeRequest(options, callback);
-  }
-
-  if (accessToken === undefined) {
-    token(function () {
-      searchProfissional(cns, callback);
-    });
-  } else {
-    searchProfissional(cns, callback);
-  }
+  makeRequest(options, callback);
 }
 
 //token(console.log);
 //cnes("2337991", console.log);
 //profissional(requisitante, console.log);
+pro(requisitante, console.log);
 
-const options = {
-  method: "GET",
-  hostname: "ehr-services.hmg.saude.gov.br",
-  path: "/api/fhir/r4/Practitioner/",
-  maxRedirects: 20,
-};
+function makeRequest(options, callback) {
+  // Se access_token não disponível, então tentar recuperar.
+  if (accessToken === undefined) {
+    token(function () {
+      makeRequest(options, callback);
+    });
 
-const securityAdded = {
-  ...options,
-  headers: {
-    "Content-Type": "application/json",
-    "X-Authorization-Server": "Bearer ",
-    Authorization: requisitante,
-  },
-};
+    return;
+  }
 
-console.log(securityAdded.headers);
+  // Token de acesso agora está disponível
+  const securityAdded = {
+    ...options,
+    hostname: ehr,
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization-Server": "Bearer " + accessToken,
+      Authorization: requisitante,
+    },
+  };
+
+  buildRequest(securityAdded, callback);
+}
