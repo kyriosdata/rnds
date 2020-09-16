@@ -62,52 +62,51 @@ function token(callback) {
   req.end();
 }
 
+function executeRequest(options, callback) {
+  const req = https.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function (chunk) {
+      const body = Buffer.concat(chunks);
+      const json = JSON.parse(body.toString());
+      callback(json);
+    });
+
+    res.on("error", function (error) {
+      console.error(error);
+    });
+  });
+
+  req.end();
+}
+
 function cnes(codigoCnes, callback) {
   function searchCnes(cnes, callback) {
-    const path = "/api/fhir/r4/Organization/" + cnes;
-    const bearer = "Bearer " + accessToken;
-    console.log(path);
-    //console.log(bearer);
-
     const options = {
       method: "GET",
       hostname: "ehr-services.hmg.saude.gov.br",
-      path: path,
+      path: "/api/fhir/r4/Organization/" + cnes,
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization-Server": bearer,
+        "X-Authorization-Server": "Bearer " + accessToken,
         Authorization: requisitante,
       },
       maxRedirects: 20,
     };
 
-    var req = https.request(options, function (res) {
-      var chunks = [];
-
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-
-      res.on("end", function (chunk) {
-        const body = Buffer.concat(chunks);
-        const json = JSON.parse(body.toString());
-        callback(json);
-      });
-
-      res.on("error", function (error) {
-        console.error(error);
-      });
-    });
-
-    req.end();
+    executeRequest(options, callback);
   }
 
   if (accessToken === undefined) {
     token(function () {
-      searchCnes(codigoCnes, console.log);
+      searchCnes(codigoCnes, callback);
     });
   } else {
-    searchCnes(codigoCnes, console.log);
+    searchCnes(codigoCnes, callback);
   }
 }
 
