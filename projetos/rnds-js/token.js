@@ -110,5 +110,72 @@ function cnes(codigoCnes, callback) {
   }
 }
 
+function buildRequest(options, callback) {
+  const req = https.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function (chunk) {
+      const body = Buffer.concat(chunks);
+      const json = JSON.parse(body.toString());
+      callback(json);
+    });
+
+    res.on("error", function (error) {
+      console.error(error);
+    });
+  });
+
+  req.end();
+}
+
+function profissional(cns, callback) {
+  function searchProfissional(cns, callback) {
+    const options = {
+      method: "GET",
+      hostname: "ehr-services.hmg.saude.gov.br",
+      path: "/api/fhir/r4/Practitioner/" + cns,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization-Server": "Bearer " + accessToken,
+        Authorization: requisitante,
+      },
+      maxRedirects: 20,
+    };
+
+    executeRequest(options, callback);
+  }
+
+  if (accessToken === undefined) {
+    token(function () {
+      searchProfissional(cns, callback);
+    });
+  } else {
+    searchProfissional(cns, callback);
+  }
+}
+
 //token(console.log);
-cnes("2337991", console.log);
+//cnes("2337991", console.log);
+//profissional(requisitante, console.log);
+
+const options = {
+  method: "GET",
+  hostname: "ehr-services.hmg.saude.gov.br",
+  path: "/api/fhir/r4/Practitioner/",
+  maxRedirects: 20,
+};
+
+const securityAdded = {
+  ...options,
+  headers: {
+    "Content-Type": "application/json",
+    "X-Authorization-Server": "Bearer ",
+    Authorization: requisitante,
+  },
+};
+
+console.log(securityAdded.headers);
