@@ -30,45 +30,86 @@ function token(callback) {
     return callback(accessToken);
   }
 
-  const req = https.request(
-    {
-      hostname: auth,
-      path: "/api/token",
-      method: "GET",
-      pfx: fs.readFileSync(certificado),
-      passphrase: senha,
-    },
-    (res) => {
-      res.on("data", function (data) {
-        console.log("recebido");
-        accessToken = JSON.parse(data.toString()).access_token;
-        callback(accessToken);
-      });
-    }
-  );
+  const options = {
+    method: "GET",
+    hostname: "ehr-auth-hmg.saude.gov.br",
+    path: "/api/token",
+    headers: {},
+    maxRedirects: 20,
+    pfx: fs.readFileSync(certificado),
+    passphrase: senha,
+  };
+
+  const req = https.request(options, function (res) {
+    const chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function (chunk) {
+      const body = Buffer.concat(chunks);
+      const resposta = JSON.parse(body.toString());
+      accessToken = resposta.access_token;
+      callback(accessToken);
+    });
+
+    res.on("error", function (error) {
+      console.error(error);
+    });
+  });
 
   req.end();
 }
 
-function cnes(searchCnes) {
-  const req = https.request(
-    {
-      hostname: ehr,
-      path: "Organization/" + searchCnes,
-      method: "GET",
-      pfx: fs.readFileSync(certificado),
-      passphrase: senha,
-    },
-    (res) => {
-      res.on("data", function (data) {
-        console.log("recebido");
-        const jwt = JSON.parse(data.toString());
-        callback(jwt.access_token);
-      });
-    }
-  );
+function cnes(codigoCnes, callback) {
+  function searchCnes(cnes, callback) {
+    const path = "/api/fhir/r4/Organization/" + cnes;
+    const bearer = "Bearer " + accessToken;
+    console.log(path);
+    //console.log(bearer);
 
-  req.end();
+    const options = {
+      method: "GET",
+      hostname: "ehr-services.hmg.saude.gov.br",
+      path: path,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization-Server": bearer,
+        Authorization: requisitante,
+      },
+      maxRedirects: 20,
+    };
+
+    var req = https.request(options, function (res) {
+      var chunks = [];
+
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+
+      res.on("end", function (chunk) {
+        const body = Buffer.concat(chunks);
+        const json = JSON.parse(body.toString());
+        callback(json);
+      });
+
+      res.on("error", function (error) {
+        console.error(error);
+      });
+    });
+
+    req.end();
+  }
+
+  if (accessToken === undefined) {
+    token(function () {
+      searchCnes(codigoCnes, console.log);
+    });
+  } else {
+    searchCnes(codigoCnes, console.log);
+  }
 }
 
-token(console.log);
+//token(console.log);
+cnes("2337991", console.log);
