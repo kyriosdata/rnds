@@ -156,9 +156,7 @@ function profissionalPorCpf(cpf, callback) {
 //cnes("2337991", console.log);
 profissional(requisitante, (json) => {
   const cpf = json.identifier[0].value;
-  profissionalPorCpf(cpf, (r) =>
-    console.log("nome:", r.entry[0].resource.name[0].text)
-  );
+  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
 });
 
 function makeRequest(options, callback) {
