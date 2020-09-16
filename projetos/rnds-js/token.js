@@ -132,11 +132,10 @@ function buildRequest(options, callback) {
   req.end();
 }
 
-function pro(cns, callback) {
+function profissional(cns, callback) {
   const options = {
     method: "GET",
     path: "/api/fhir/r4/Practitioner/" + cns,
-    maxRedirects: 20,
   };
 
   makeRequest(options, callback);
@@ -144,8 +143,7 @@ function pro(cns, callback) {
 
 //token(console.log);
 //cnes("2337991", console.log);
-//profissional(requisitante, console.log);
-pro(requisitante, console.log);
+profissional(requisitante, console.log);
 
 function makeRequest(options, callback) {
   // Se access_token não disponível, então tentar recuperar.
@@ -166,6 +164,7 @@ function makeRequest(options, callback) {
       "X-Authorization-Server": "Bearer " + accessToken,
       Authorization: requisitante,
     },
+    maxRedirects: 10,
   };
 
   buildRequest(securityAdded, callback);
