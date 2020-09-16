@@ -141,9 +141,25 @@ function profissional(cns, callback) {
   makeRequest(options, callback);
 }
 
+function profissionalPorCpf(cpf, callback) {
+  const options = {
+    method: "GET",
+    path:
+      "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
+      cpf,
+  };
+
+  makeRequest(options, callback);
+}
+
 //token(console.log);
 //cnes("2337991", console.log);
-profissional(requisitante, console.log);
+profissional(requisitante, (json) => {
+  const cpf = json.identifier[0].value;
+  profissionalPorCpf(cpf, (r) =>
+    console.log("nome:", r.entry[0].resource.name[0].text)
+  );
+});
 
 function makeRequest(options, callback) {
   // Se access_token não disponível, então tentar recuperar.
