@@ -152,12 +152,48 @@ function profissionalPorCpf(cpf, callback) {
   makeRequest(options, callback);
 }
 
+/**
+ * Requisita informações sobre os papéis desempenhados por um profissional de saúde em um
+ * dado estabelecimento em um período de tempo.
+ *
+ * @param {string} cns CNS do profissional de saúde
+ * @param {string} cnes Código CNES do estabelecimento de saúde
+ * @param {function} callback Função a ser chamada com a resposta para a lotação.
+ */
+function lotacao(cns, cnes, callback) {
+  const practitioner =
+    "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
+    cns;
+  const organization =
+    "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
+    cnes;
+
+  const options = {
+    method: "GET",
+    path: "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
+  };
+
+  makeRequest(options, callback);
+}
+
+function cnpj(cnpj, callback) {
+  const options = {
+    method: "GET",
+    path: "/api/fhir/r4/Organization/" + cnpj,
+  };
+
+  makeRequest(options, callback);
+}
+
 //token(console.log);
 //cnes("2337991", console.log);
-profissional(requisitante, (json) => {
-  const cpf = json.identifier[0].value;
-  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
-});
+//profissional(requisitante, (json) => {
+//  const cpf = json.identifier[0].value;
+//  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
+//});
+
+// lotacao(requisitante, "2337991", console.log);
+cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
 function makeRequest(options, callback) {
   // Se access_token não disponível, então tentar recuperar.
