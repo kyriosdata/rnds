@@ -17,6 +17,6 @@ module.exports = {
       "erros",
       "autenticacao",
     ],
-    Ferramentas: ["tools/fhirpath", "tools/validacao"],
+    Ferramentas: ["tools/fhirpath", "tools/keytool", "tools/validacao"],
   },
 };
