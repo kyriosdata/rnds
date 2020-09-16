@@ -1,0 +1,27 @@
+{
+  "name": "rnds-js",
+  "version": "1.0.0",
+  "description": "Biblioteca de funções de conveniência para acesso aos serviços oferecidos pela RNDS.",
+  "main": "token.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyriosdata/rnds.git"
+  },
+  "keywords": [
+    "rnds",
+    "biblioteca",
+    "javascript"
+  ],
+  "author": "Fábio Nogueira de Lucena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyriosdata/rnds/issues"
+  },
+  "homepage": "https://github.com/kyriosdata/rnds#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
