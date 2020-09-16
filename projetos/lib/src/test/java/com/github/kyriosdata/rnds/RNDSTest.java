@@ -145,5 +145,8 @@ public class RNDSTest {
         // Verifica retorno
         final Any json = JsonIterator.deserialize(retorno);
         assertEquals(cnpjUFG, json.get("id").toString());
+        final String name = json.get("name").toString();
+        assertEquals("UNIVERSIDADE FEDERAL DE GOIAS", name);
+
     }
 }
