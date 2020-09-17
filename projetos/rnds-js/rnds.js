@@ -1,6 +1,9 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
+/**
+ * Variáveis de ambiente empregadas pelas funções.
+ */
 const auth = process.env.RNDS_AUTH;
 const ehr = process.env.RNDS_EHR;
 const certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
@@ -8,17 +11,9 @@ const senha = process.env.RNDS_CERTIFICADO_SENHA;
 const requisitante = process.env.RNDS_REQUISITANTE_CNS;
 
 /**
- * Cache access toke)
+ * Cache access token
  */
 let accessToken = undefined;
-
-console.log(auth);
-console.log(ehr);
-console.log(certificado);
-console.log(senha);
-console.log(requisitante);
-
-//console.log(fs.readFileSync(certificado).length);
 
 /**
  * Recupera <i>token</i> de acesso.
