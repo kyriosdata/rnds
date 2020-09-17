@@ -19,7 +19,7 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 | ------------------------- | ------------------------------------------------------------------------------------ |
 | RNDS_AUTH                 | Endereço do serviço de autenticação.                                                 |
 | RNDS_EHR                  | Endereço dos serviços de saúde.                                                      |
-| RNDS_CERTIFICADO_ENDERECO | Endereço (web ou arquivo) do certificado digital.                                    |
+| RNDS_CERTIFICADO_ENDERECO | Endereço (web ou arquivo) do certificado digital (formato **.pfx**).                 |
 | RNDS_CERTIFICADO_SENHA    | Senha do certificado digital.                                                        |
 | RNDS_REQUISITANTE_CNS     | CNS do profissional de saúde em nome do qual requisições serão feitas.               |
 | RNDS_REQUISITANTE_UF      | Código do estado (duas letras, por exemplo, AC, DF, GO) do estabelecimento de saúde. |

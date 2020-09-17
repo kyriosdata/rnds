@@ -16,7 +16,8 @@ const requisitante = process.env.RNDS_REQUISITANTE_CNS;
 let accessToken = undefined;
 
 /**
- * Recupera <i>token</i> de acesso.
+ * Recupera <i>token</i> de acesso à RNDS por meio de um certificado
+ * digital (arquivo <b>.pfx</b>)
  * @param {function} callback O <i>token</i> de acesso é recebido e passado
  * para esta função quando recuperado.
  */
