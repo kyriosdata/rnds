@@ -1,7 +1,7 @@
 {
-  "name": "rnds-js",
-  "version": "1.0.0",
-  "description": "Biblioteca de funções de conveniência para acesso aos serviços oferecidos pela RNDS.",
+  "name": "rnds",
+  "version": "0.0.2",
+  "description": "Biblioteca para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -219,3 +219,7 @@ function makeRequest(options, callback) {
 
   buildRequest(securityAdded, callback);
 }
+
+module.exports = {
+  cnpj: cnpj,
+};
