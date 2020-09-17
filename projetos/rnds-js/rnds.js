@@ -78,34 +78,32 @@ function cns(cns, callback) {
 
 /**
  * Recupera informações sobre profissional de saúde (via CPF).
- * @param {string} cpf CPF do profissional de saúde. Caso não fornecido,
+ * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
  * será empregado o CPF do requisitante.
  * @param {function} callback Função a ser chamada com o retorno fornecido pela
  * RNDS.
  */
-function cpf(cpf, callback) {
+function cpf(numero, callback) {
   if (arguments.length === 1) {
-    callback = cpf;
+    callback = numero;
     cns((json) => {
       const ids = json.identifier;
       const idx = ids.findIndex((i) => i.system.endsWith("/cpf"));
       cpf(ids[idx].value, callback);
     });
+  } else {
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
+        numero,
+    };
 
-    return;
+    makeRequest(options, callback);
   }
-
-  const options = {
-    method: "GET",
-    path:
-      "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
-      cpf,
-  };
-
-  makeRequest(options, callback);
 }
 
-cpf(console.log);
+//cpf(console.log);
 
 function executeRequest(options, callback) {
   const req = https.request(options, function (res) {
