@@ -1,4 +1,4 @@
-## RNDS (Brasil)
+## RNDS (Rede Nacional de Dados em Saúde)
 
 Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde).
 Os serviços oferecidos pela RNDS estão encapsulados em funções de conveniência,
