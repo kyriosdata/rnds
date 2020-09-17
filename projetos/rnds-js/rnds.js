@@ -17,7 +17,7 @@ let accessToken = undefined;
 
 /**
  * Recupera <i>token</i> de acesso à RNDS por meio de um certificado
- * digital (arquivo <b>.pfx</b>)
+ * digital (arquivo <b>.pfx</b>).
  * @param {function} callback O <i>token</i> de acesso é recebido e passado
  * para esta função quando recuperado.
  */
@@ -32,7 +32,11 @@ function token(callback) {
     passphrase: senha,
   };
 
-  buildRequest(options, callback);
+  buildRequest(options, (r) => {
+    // Guarda em cache o access token para uso em chamadas posteriores
+    accessToken = r.access_token;
+    callback(r);
+  });
 }
 
 function executeRequest(options, callback) {
@@ -57,30 +61,20 @@ function executeRequest(options, callback) {
   req.end();
 }
 
-function cnes(codigoCnes, callback) {
-  function searchCnes(cnes, callback) {
-    const options = {
-      method: "GET",
-      hostname: "ehr-services.hmg.saude.gov.br",
-      path: "/api/fhir/r4/Organization/" + cnes,
-      headers: {
-        "Content-Type": "application/json",
-        "X-Authorization-Server": "Bearer " + accessToken,
-        Authorization: requisitante,
-      },
-      maxRedirects: 20,
-    };
+/**
+ * Recupera informações sobre estabelecimento de saúde.
+ *
+ * @param {string} cnes Código CNES do estabelecimento de saúde.
+ * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
+ */
+function cnes(cnes, callback) {
+  const options = {
+    method: "GET",
+    hostname: ehr,
+    path: "/api/fhir/r4/Organization/" + cnes,
+  };
 
-    executeRequest(options, callback);
-  }
-
-  if (accessToken === undefined) {
-    token(function () {
-      searchCnes(codigoCnes, callback);
-    });
-  } else {
-    searchCnes(codigoCnes, callback);
-  }
+  makeRequest(options, callback);
 }
 
 function buildRequest(options, callback) {
@@ -158,8 +152,8 @@ function cnpj(cnpj, callback) {
   makeRequest(options, callback);
 }
 
-token(console.log);
-//cnes("2337991", console.log);
+//token(console.log);
+cnes("2337991", console.log);
 //profissional(requisitante, (json) => {
 //  const cpf = json.identifier[0].value;
 //  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
