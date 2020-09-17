@@ -40,3 +40,7 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 // por variável de ambiente.
 rnds.cns(console.log);
 ```
+
+### Links
+
+- Autenticação com certificado via [Javascript](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)

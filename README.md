@@ -24,9 +24,6 @@ Avisos:
 
 ## Organização
 
-- Contexto
-- Software de integração
-- Ambientes
 - [Autenticação](./documentos/autenticacao.md)
 - [Certificado digital](./documentos/certificado.md)
 - [Resultado de exame COVID](./documentos/covid.md)
