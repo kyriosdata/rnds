@@ -2,7 +2,7 @@
   "name": "rnds-js",
   "version": "1.0.0",
   "description": "Biblioteca de funções de conveniência para acesso aos serviços oferecidos pela RNDS.",
-  "main": "token.js",
+  "main": "rnds.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
