@@ -21,13 +21,9 @@ let accessToken = undefined;
  * para esta função quando recuperado.
  */
 function token(callback) {
-  if (accessToken !== undefined) {
-    return callback(accessToken);
-  }
-
   const options = {
     method: "GET",
-    hostname: "ehr-auth-hmg.saude.gov.br",
+    hostname: auth,
     path: "/api/token",
     headers: {},
     maxRedirects: 20,
