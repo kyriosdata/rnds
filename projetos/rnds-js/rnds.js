@@ -40,26 +40,7 @@ function token(callback) {
     passphrase: senha,
   };
 
-  const req = https.request(options, function (res) {
-    const chunks = [];
-
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
-
-    res.on("end", function (chunk) {
-      const body = Buffer.concat(chunks);
-      const resposta = JSON.parse(body.toString());
-      accessToken = resposta.access_token;
-      callback(accessToken);
-    });
-
-    res.on("error", function (error) {
-      console.error(error);
-    });
-  });
-
-  req.end();
+  buildRequest(options, callback);
 }
 
 function executeRequest(options, callback) {
@@ -185,7 +166,7 @@ function cnpj(cnpj, callback) {
   makeRequest(options, callback);
 }
 
-//token(console.log);
+token(console.log);
 //cnes("2337991", console.log);
 //profissional(requisitante, (json) => {
 //  const cpf = json.identifier[0].value;
@@ -221,5 +202,6 @@ function makeRequest(options, callback) {
 }
 
 module.exports = {
+  cnes: cnes,
   cnpj: cnpj,
 };
