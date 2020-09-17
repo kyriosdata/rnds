@@ -27,7 +27,16 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 ### Usar
 
 ```js
-const rnds = require("rnds");
+// Token (access token) é obtido implicitamente e reutilizado
 
-rnds.cnpj("01567601000143", console.log);
+// Exibe informações do estabelecimento de saúde (CNES fornecido)
+// rnds.cnes("2337991", console.log);
+
+// Exibe resultado para consulta ao CNPJ fornecido
+// rnds.cnpj("01567601000143", console.log);
+
+// Exibe informações sobre profissional de saúde (CNS).
+// Quando CNS omitido, é usado o do requisitante definido
+// por variável de ambiente.
+rnds.cns(console.log);
 ```

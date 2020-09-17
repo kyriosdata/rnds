@@ -39,6 +39,43 @@ function token(callback) {
   });
 }
 
+/**
+ * Recupera informações sobre estabelecimento de saúde.
+ *
+ * @param {string} cnes Código CNES do estabelecimento de saúde.
+ * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
+ */
+function cnes(cnes, callback) {
+  const options = {
+    method: "GET",
+    hostname: ehr,
+    path: "/api/fhir/r4/Organization/" + cnes,
+  };
+
+  makeRequest(options, callback);
+}
+
+/**
+ * Recupera informações sobre profissional de saúde.
+ * @param {string} cns Código CNS do profissional de saúde. Caso não fornecido,
+ * será empregado o CNS do requisitante.
+ * @param {function} callback Função a ser chamada com o retorno fornecido pela
+ * RNDS.
+ */
+function cns(cns, callback) {
+  if (arguments.length === 1) {
+    callback = cns;
+    cns = requisitante;
+  }
+
+  const options = {
+    method: "GET",
+    path: "/api/fhir/r4/Practitioner/" + cns,
+  };
+
+  makeRequest(options, callback);
+}
+
 function executeRequest(options, callback) {
   const req = https.request(options, function (res) {
     var chunks = [];
@@ -61,22 +98,6 @@ function executeRequest(options, callback) {
   req.end();
 }
 
-/**
- * Recupera informações sobre estabelecimento de saúde.
- *
- * @param {string} cnes Código CNES do estabelecimento de saúde.
- * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
- */
-function cnes(cnes, callback) {
-  const options = {
-    method: "GET",
-    hostname: ehr,
-    path: "/api/fhir/r4/Organization/" + cnes,
-  };
-
-  makeRequest(options, callback);
-}
-
 function buildRequest(options, callback) {
   const req = https.request(options, function (res) {
     var chunks = [];
@@ -97,15 +118,6 @@ function buildRequest(options, callback) {
   });
 
   req.end();
-}
-
-function profissional(cns, callback) {
-  const options = {
-    method: "GET",
-    path: "/api/fhir/r4/Practitioner/" + cns,
-  };
-
-  makeRequest(options, callback);
 }
 
 function profissionalPorCpf(cpf, callback) {
@@ -153,7 +165,7 @@ function cnpj(cnpj, callback) {
 }
 
 //token(console.log);
-cnes("2337991", console.log);
+//cnes("2337991", console.log);
 //profissional(requisitante, (json) => {
 //  const cpf = json.identifier[0].value;
 //  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
@@ -188,6 +200,7 @@ function makeRequest(options, callback) {
 }
 
 module.exports = {
+  cns: cns,
   cnes: cnes,
   cnpj: cnpj,
 };
