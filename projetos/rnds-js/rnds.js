@@ -193,7 +193,7 @@ function cnpj(cnpj, callback) {
 //});
 
 // lotacao(requisitante, "2337991", console.log);
-cnpj("01567601000143", (r) => console.log("Organização:", r.name));
+//cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
 function makeRequest(options, callback) {
   // Se access_token não disponível, então tentar recuperar.

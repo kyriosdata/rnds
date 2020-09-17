@@ -1,5 +1,9 @@
-## Biblioteca para acesso a RNDS
+## RNDS (Brasil)
 
-A RNDS (Rede Nacional de Dados em Saúde) é o meio para interoperabilidade em
-saúde no Brasil. Este _package_ facilita o acesso à RNDS por meio de funções
-de conveniência.
+Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde).
+Os serviços oferecidos pela RNDS estão encapsulados em funções de conveniência,
+de fácil uso.
+
+### Configuração
+
+- Certificado Digital (arquivo **.pfx**)
