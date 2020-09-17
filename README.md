@@ -24,7 +24,6 @@ Avisos:
 
 ## Organização
 
-- [Autenticação](./documentos/autenticacao.md)
 - [Certificado digital](./documentos/certificado.md)
 - [Resultado de exame COVID](./documentos/covid.md)
 - [Serviços (EHR)](./documentos/servicos.md)
