@@ -32,5 +32,4 @@ Avisos:
 - [Resultado de exame COVID](./documentos/covid.md)
 - [Serviços (EHR)](./documentos/servicos.md)
 - [Postman](./documentos/postman.md)
-- [Erros](./documentos/erros.md)
 - [Dados necessários para exame COVID](./documentos/tabela-covid.md)
