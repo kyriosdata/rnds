@@ -1,6 +1,6 @@
 {
   "name": "rnds",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Biblioteca para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
   "scripts": {
