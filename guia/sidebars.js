@@ -6,7 +6,6 @@ module.exports = {
       "gestor",
       "ti",
       "portal",      
-      "atores",
       "servicos",
       "postman",
       "ambientes",
