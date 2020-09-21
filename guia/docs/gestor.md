@@ -7,7 +7,7 @@ sidebar_label: Gestor (atribuições)
 A integração com a RNDS exige atribuições distribuídas entre dois
 papéis. Um deles é o responsável pela [TI](./ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde. 
 
-![img](../static/img/papeis.png)
+![img](../static/img/gestor.png)
 
 ## Atribuições do gestor 
 

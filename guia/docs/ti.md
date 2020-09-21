@@ -10,7 +10,7 @@ O outro é o responsável pela TI, que não necessariamente executa
 as atividades técnicas. Outros termos geralmente utilizados incluem
 programador, integrador, desenvolvedor de software e engenheiro de software.
 
-![img](../static/img/papeis.png)
+![img](../static/img/ti.png)
 
 ## Atribuições da TI
 As atribuições do responsável pela TI, detalhadas abaixo, são:
