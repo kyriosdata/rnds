@@ -4,13 +4,13 @@ title: Portal de serviços
 sidebar_label: Portal de serviços
 ---
 
-### Página inicial
-
-O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo de _web services_ e APIs do Ministério da Saúde (MS) para integração à RNDS, dentre outros sistemas do MS. A página do Portal de Serviços é exibida abaixo, com destaque para itens pertinentes à solicitação de acesso.
+O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo de _web services_ e APIs do Ministério da Saúde (MS) para integração à RNDS, dentre outros sistemas do MS. A página do Portal de Serviços é exibida abaixo, com destaque para o endereço na parte superior, https://servicos-datasus.saude.gov.br, o botão ENTRAR COM O BRASIL CIDADÃO (lado direito) e a opção pertinente à RNDS (lado esquerdo).
 
 ![Portal de serviços](https://user-images.githubusercontent.com/1735792/93005243-a63f9000-f525-11ea-9c30-acff57d3dc19.jpg)
 
-Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone do serviço RNDS. Existe uma página da RNDS que apresenta o Menu lateral de navegação e o Conteúdo informativo da RNDS: contexto, objetivo, requisitos de acesso ao ambiente de homologação, central de atendimento e acesso à documentação técnica. O profissional deverá clicar no botão “Solicitar Acesso”.
+Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone do serviço RNDS (opção esquerda destacada na figura acima). A página destino da RNDS inclui várias informações: contexto, objetivo, requisitos de acesso ao ambiente de homologação, central de atendimento e acesso à documentação técnica. O profissional deverá clicar no botão “Solicitar Acesso”, o que o conduzirá à página ilustrada abaixo.
+
+![gov.br](../static/img/gov.br.png)
 
 ### Credenciamento
 
