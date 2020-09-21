@@ -2,18 +2,14 @@
 
 ## Guia de Integração RNDS
 
-Interesse:
-
-> Integração com a RNDS.
-
 Acesse o guia:
 
 - https://kyriosdata.github.io/rnds.
 
 Bibliotecas (acesso aos serviços):
 
-- Java
-- Javascript
+- [Java](projetos/lib)
+- [Javascript](./projetos/rnds-js)
 
 Avisos:
 
