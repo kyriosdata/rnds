@@ -1,12 +1,27 @@
 ---
 id: roteiro
-title: Roteiro
-sidebar_label: Roteiro
+title: Passo a passo (roteiro)
+sidebar_label: Passo a passo
 ---
 
-Abaixo segue um roteiro projetado para contemplar a necessidade de informações sobre a integração com a RNDS na perspectiva de um desenvolvedor de software.
+Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
 
 - Entenda o [contexto](./contexto).
+- Atribuições do [gestor](./gestor).
+- Certificado digital.
+- Criar uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br)
+- Credenciamento do estabelecimento de saúde ([portal de serviços](https://servicos-datasus.saude.gov.br))
+- Acesso à RNDS
+- Solicitar acesso (credenciamento, já feito acima)
+- Identificação da instituição
+- Chave pública
+- Atribuições da TI
+- Ambientes oferecidos pela RNDS
+- Desenvolvimento do Software de Integração
+- Homologação
+- Produção
+- Identificador do laboratório
+
 - Identifique as atribuições do desenvolvedor de software (o público-alvo deste guia), e do responsável pelo laboratório, ou seja, os principais [atores](./atores) da integração.
 - Conheça os [ambientes](./ambientes) oferecidos pela RNDS: o ambiente de homologação e o ambiente de produção.
 - Saiba o que é oferecido pelo catálogo de [serviços](./servicos), as entradas exigidas e os resultados produzidos.
