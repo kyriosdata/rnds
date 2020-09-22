@@ -12,7 +12,7 @@ papéis. Um deles é o responsável pela [TI](./ti) do estabelecimento de saúde
 ## Atribuições do gestor 
 
 As atribuições do gestor, detalhadas abaixo, são:
-(a) Adquirir certificado digital; (b) Solicitar acesso (credenciamento) e (c) Validar mapeamento.
+(a) Adquirir certificado digital; (b) Criar conta gov.br (caso não possua uma); (c) Solicitar acesso ao portal de serviços da RNDS e (d) Validar mapeamento.
 
 ### Adquirir certificado digital
 

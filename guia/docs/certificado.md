@@ -16,7 +16,16 @@ de saúde, junto à RNDS, seja o e-CPF ou e-CNPJ, pode ser de dois tipos: A1 ou 
 
 Seja e-CPF ou e-CNPJ, tipo A1 ou A3, o 
 certificado deve ser mantido em segurança, assim como a senha empregada 
-para acesso ao conteúdo do certificado. Tanto o certificado digital quanto a senha de acesso ao conteúdo do certificado será empregado pelo software de integração com a RNDS. 
+para acesso ao conteúdo do certificado. Tanto o certificado digital quanto a senha de acesso (código) ao conteúdo do certificado será empregado pelo software de integração com a RNDS. 
 
-Convém esclarecer que, no contexto de uso da RNDS, o certificado
-digital associado do estabelecimento de saúde no momento do credenciamento será empregado para autenticação. Ou seja, substitui o emprego de estratégia menos segura, como aquela baseada em uma conta (usuário/senha), por exemplo. 
+Convém esclarecer que o certificado
+digital do estabelecimento de saúde informado no processo de solicitação de acesso deve ser o mesmo empregado para autenticação. Ou seja, a RNDS irá identificar as requisições do estabelecimento de saúde por meio do certificado empregado no processo de solicitação de acesso. 
+
+Por fim, a existência de um certificado e de uma senha (código) de acesso exigem a adoção de "boas práticas" de segurança da informação pelo estabelecimento de saúde.
+
+A execução satisfatória desta atribuição resulta em:
+
+- Certificado digital do estabelecimento de saúde.
+- Senha de acesso ao conteúdo do certificado digital. 
+
+
