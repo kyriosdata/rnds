@@ -10,3 +10,7 @@ Conforme ilustrado abaixo, o botão verde permite criar uma conta. O gestor do e
 
 ![gov.br](../static/img/gov.br.png)
 
+A execução satisfatória desta atribuição resulta em:
+
+- Conta gov.br do gestor do estabelecimento de saúde (criada ou disponível).
+
