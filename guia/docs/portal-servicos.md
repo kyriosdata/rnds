@@ -1,10 +1,13 @@
 ---
 id: portal
-title: Portal de serviços
-sidebar_label: Portal de serviços
+title: Solicitar acesso
+sidebar_label: Solicitar acesso
 ---
 
-O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo de _web services_ e APIs do Ministério da Saúde (MS) para integração à RNDS, dentre outros sistemas do MS. A página do Portal de Serviços é exibida abaixo, com destaque para o endereço na parte superior, https://servicos-datasus.saude.gov.br, o botão ENTRAR COM O BRASIL CIDADÃO (lado direito) e a opção pertinente à RNDS (lado esquerdo).
+O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo de _web services_ e APIs do Ministério da Saúde (MS) para integração à RNDS, dentre outros sistemas do MS. É por meio do portal de
+serviços que a solicitação de acesso à RNDS é feita.
+
+A página do Portal de Serviços é exibida abaixo, com destaque para o endereço na parte superior, https://servicos-datasus.saude.gov.br, o botão ENTRAR COM O BRASIL CIDADÃO (lado direito) e a opção pertinente à RNDS (lado esquerdo).
 
 ![Portal de serviços](../static/img/portal-servicos.png)
 

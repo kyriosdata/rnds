@@ -1,7 +1,7 @@
 ---
 id: roteiro
 title: Passo a passo (roteiro)
-sidebar_label: Passo a passo
+sidebar_label: Passo a passo (roteiro)
 ---
 
 Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
@@ -11,11 +11,10 @@ Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
 - Obter o [certificado digital](./certificado).
 - Caso não possua, o gestor deve criar uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br).
 - [Solicitar acesso](./portal) à RNDS, e aguardar resposta do DATASUS. 
-- Obter [identificador](./identificador) do estabelecimento de saúde.
-- Chave pública
-- Atribuições da TI
-- Ambientes oferecidos pela RNDS
-- Desenvolvimento do Software de Integração
+- Obter [identificador](./identificador) do solicitante.
+- Atribuições da [TI](./ti)
+- [Ambientes](./ambientes) oferecidos pela RNDS
+- Desenvolvimento do [Software de Integração](./si)
 - Homologação
 - Produção
 - Identificador do laboratório
