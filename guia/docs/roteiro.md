@@ -8,8 +8,8 @@ Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
 
 - Entenda o [contexto](./contexto).
 - Atribuições do [gestor](./gestor).
-- Certificado digital.
-- Criar uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br)
+- Obter/disponibilizar o [certificado digital](./certificado).
+- Caso não possua, o gestor deve criar uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br).
 - Credenciamento do estabelecimento de saúde ([portal de serviços](https://servicos-datasus.saude.gov.br))
 - Acesso à RNDS
 - Solicitar acesso (credenciamento, já feito acima)
