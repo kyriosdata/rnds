@@ -13,17 +13,14 @@ Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
 - [Solicitar acesso](./portal) à RNDS, e aguardar resposta do DATASUS. 
 - Obter [identificador](./identificador) do solicitante.
 - Atribuições da [TI](./ti)
-- [Ambientes](./ambientes) oferecidos pela RNDS
+- [Ambientes](./ambientes) disponibilizados pela RNDS.
+- Catálogo dos [serviços](./servicos) oferecidos, as entradas exigidas e os resultados produzidos.
+- Experimente os serviços (via [Postman](./postman)).
 - Desenvolvimento do [Software de Integração](./si)
 - Homologação
 - Produção
 
-- Identifique as atribuições do desenvolvedor de software (o público-alvo deste guia), e do responsável pelo laboratório, ou seja, os principais [atores](./atores) da integração.
-- Conheça os [ambientes](./ambientes) oferecidos pela RNDS: o ambiente de homologação e o ambiente de produção.
-- Saiba o que é oferecido pelo catálogo de [serviços](./servicos), as entradas exigidas e os resultados produzidos.
-- Experimente os serviços (via [Postman](./postman)).
 - Analise cada item de dados de um [Resultado de exame laboratorial](./resultado).
-- Compreenda a organização e o código de um _Software de Integração_, que desempenha funções de integração disponibilizadas em uma biblioteca pública.
 - Certifique-se de que os recursos a serem enviados estão [validados](./tools/validacao).
-- Adquira uma noção dos fundamentos.
+- Fundamentos: FHIR, ...
 - Ambiente-se com as [personalizações](./perfis) do FHIR pela RNDS.
