@@ -23,6 +23,19 @@ A execução satisfatória desta atribuição resulta em:
 - Certificado digital, arquivo **.pfx**, disponibilizado.
 - Senha secreta de acesso ao certificado disponibilizada para uso pelo profissional de TI do laboratório.
 
+### gov.br
+
+O acesso digital a serviços oferecidos pelo governo demanda uma conta,
+que pode ser criada no portal [gov.br](https://acesso.gov.br). O gestor,
+caso não possua tal conta, terá que criar uma. Observe que esta conta será
+necessária para solicitar acesso à RNDS (próximo passo). Detalhes acerca de
+como esta conta pode ser criada, dentre outros, são fornecidos 
+[aqui](./gov.br.md).
+
+A execução satisfatória desta atribuição resulta em:
+
+- Conta gov.br do gestor do estabelecimento de saúde disponível. 
+
 ### Solicitar acesso
 
 Credenciamento junto à RNDS. Esta solicitação é necessária para credenciamento do laboratório junto à RNDS. Este credenciamento dá origem
