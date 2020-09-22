@@ -6,19 +6,19 @@ sidebar_label: Portal de serviços
 
 O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo de _web services_ e APIs do Ministério da Saúde (MS) para integração à RNDS, dentre outros sistemas do MS. A página do Portal de Serviços é exibida abaixo, com destaque para o endereço na parte superior, https://servicos-datasus.saude.gov.br, o botão ENTRAR COM O BRASIL CIDADÃO (lado direito) e a opção pertinente à RNDS (lado esquerdo).
 
-![Portal de serviços](https://user-images.githubusercontent.com/1735792/93005243-a63f9000-f525-11ea-9c30-acff57d3dc19.jpg)
+![Portal de serviços](../static/img/portal-servicos.png)
 
 Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone do serviço RNDS (opção esquerda destacada na figura acima). A página destino da RNDS inclui várias informações como contexto, objetivo, e muitos outros, conforme ilustrado abaixo, com o destaque (seta) para o botão "Solicitar acesso". 
 
 ![solicitar acesso](../static/img/rnds-solicitar-acesso.png)
 
-Quando o botão "Solicitar acesso" (veja ilustração acima) é pressionado, a página resultante é a página do [gov.br](https://acesso.gov.br). Neste ponto você já tem sua conta e, portanto, é necessário que o gester acesse sua conta gov.br. Se for o caso, veja detalhes acerca de como criar a conta [gov.br](./gov.br.md)
+Quando o botão "Solicitar acesso" (veja ilustração acima) é pressionado, a página resultante é a página do [gov.br](https://acesso.gov.br). Esta página é a mesma se o botão ENTRAR COM O BRASIL CIDADÃO, comentado acima, for acionado na primeira página. Para entrar é necessário que o gestor acesse sua conta gov.br. Se for o caso, veja detalhes acerca de como criar a conta [gov.br](./gov.br.md)
 
 ![gov.br](../static/img/gov.br.png)
 
-### Credenciamento
+### Solicitação de acesso
 
-O credenciamento do estabelecimento de saúde é realizado com os seguintes passos:
+A solicitação de acesso é realizada por meio de várias atividades. 
 
 1. O profissional deverá possuir uma conta no “gov.br”, essa conta é um pré-requisito para realizar este credenciamento; (como obter essa conta? Explicar aqui);
 
@@ -49,9 +49,3 @@ Após realizar a autorização, o fluxo de solicitação de acesso será iniciad
   - Opção 1: o usuário pode utilizar a chave pública previamente extraída de um certificado digital válido;
 
   - Opção 2: o usuário pode utilizar um certificado digital do tipo A1 da cadeia ICP-Brasil e então inserir sua chave privada. A chave privada não será armazenada pelo DATASUS. Esta será utilizada apenas para extrair a respectiva chave pública.
-
-### Público-alvo
-
-Os desenvolvedores, técnicos em saúde de departamentos de informação em saúde, bem como coordenadores do setor de tecnologia das secretarias municipais de saúde são os principais profissionais para acessar o Portal da ENDS e ter acesso ao credenciamento e às ações para enviar exames, bem como outros registros necessários. Os gestores também precisam entender como todo fluxo de informações deverá funcionar em relação a troca e envio da informação com qualidade e precisão.
-
-Os profissionais afins deverão entender como realizar implementações em seus sistemas para se conectarem à RNDS, bem como enviar as informações ao Conecte SUS.
