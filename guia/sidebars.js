@@ -5,6 +5,7 @@ module.exports = {
       "contexto",
       "gestor",
       "certificado",
+      "gov.br",
       "portal", 
       "ti",     
       "servicos",
