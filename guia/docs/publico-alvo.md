@@ -8,5 +8,6 @@ Engenheiros de Software, integradores, desenvolvedores, técnicos de TI, técnic
 
 Os gestores de estabelecimentos de saúde também precisam entender como todo fluxo de informações deverá funcionar em relação a troca e envio da informação, tanto com qualidade quanto precisão.
 
-Neste Guia, por simplicidade, os nomes, cargos, papéis e perfis citados acima, dentre outros empregados pelo país, estão reunidos pelas atribuições para a integração com a RNDS em dois atores: (a) gestor e (b) responsável pela TI (Tecnologia da Informação).
+Neste Guia, por simplicidade, os nomes, cargos, papéis e perfis citados acima, dentre outros empregados pelo país, estão reunidos pelas atribuições para a integração com a RNDS em dois atores. Estes atores, ilustrados abaixo, são: (a) [gestor](./gestor) e (b) responsável pela [TI](./ti) (Tecnologia da Informação).
 
+![atores](../static/img/atores.png)
