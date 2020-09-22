@@ -8,7 +8,11 @@ O [Portal de Serviços](https://servicos-datasus.saude.gov.br/) é um catálogo 
 
 ![Portal de serviços](https://user-images.githubusercontent.com/1735792/93005243-a63f9000-f525-11ea-9c30-acff57d3dc19.jpg)
 
-Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone do serviço RNDS (opção esquerda destacada na figura acima). A página destino da RNDS inclui várias informações: contexto, objetivo, requisitos de acesso ao ambiente de homologação, central de atendimento e acesso à documentação técnica. O profissional deverá clicar no botão “Solicitar Acesso”, o que o conduzirá à página ilustrada abaixo.
+Para solicitar o acesso aos serviços da RNDS é necessário selecionar o ícone do serviço RNDS (opção esquerda destacada na figura acima). A página destino da RNDS inclui várias informações como contexto, objetivo, e muitos outros, conforme ilustrado abaixo, com o destaque (seta) para o botão "Solicitar acesso". 
+
+![solicitar acesso](../static/img/rnds-solicitar-acesso.png)
+
+Quando o botão "Solicitar acesso" (veja ilustração acima) é pressionado, a página resultante é a página do [gov.br](https://acesso.gov.br). Neste ponto você já tem sua conta e, portanto, é necessário que o gester acesse sua conta gov.br. Se for o caso, veja detalhes acerca de como criar a conta [gov.br](./gov.br.md)
 
 ![gov.br](../static/img/gov.br.png)
 

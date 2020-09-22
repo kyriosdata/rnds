@@ -2,6 +2,7 @@ module.exports = {
   someSidebar: {
     Tópicos: [
       "roteiro",
+      "publico-alvo",
       "contexto",
       "gestor",
       "certificado",
