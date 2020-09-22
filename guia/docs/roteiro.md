@@ -17,7 +17,6 @@ Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
 - Desenvolvimento do [Software de Integração](./si)
 - Homologação
 - Produção
-- Identificador do laboratório
 
 - Identifique as atribuições do desenvolvedor de software (o público-alvo deste guia), e do responsável pelo laboratório, ou seja, os principais [atores](./atores) da integração.
 - Conheça os [ambientes](./ambientes) oferecidos pela RNDS: o ambiente de homologação e o ambiente de produção.
