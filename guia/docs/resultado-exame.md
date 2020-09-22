@@ -75,7 +75,7 @@ A montagem de um identificador (_identifier_) é realizada a partir de dois valo
 }
 ```
 
-O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de credenciamento do laboratório em questão é homologado.
+O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Veja onde o [identificador](./identificador) do solicitante pode ser obtido.
 
 A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados.
 

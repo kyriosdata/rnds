@@ -1,13 +1,17 @@
 ---
 id: identificador
-title: Identificador do laboratório
-sidebar_label: Identificador do laboratório
+title: Identificador do solicitante
+sidebar_label: Identificador do solicitante
 ---
 
-O identificador do solicitante, ou identificador do laboratório, é um identificador fornecido pela RNDS quando o pedido de credenciamento do laboratório em questão é homologado.
+O identificador do solicitante é um identificador fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Este valor
+é obrigatório, por exemplo, na composição do resultado de um exame laboratorial. Veja [aqui](./resultado#identificador-identifier) onde este 
+valor é empregado.
 
-A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador correspondente no [portal de serviços](https://servicos-datasus.saude.gov.br/). Tanto o número da solicitação de credenciamento quanto o identificador do solicitante foram ocultados nesta figura.
+A figura abaixo ilustra o local onde o gestor pode localizar o identificador do solicitante no [portal de serviços](https://servicos-datasus.saude.gov.br/). Tanto o número da solicitação de acesso quanto o identificador do solicitante foram ocultados nesta figura.
+O valor desejado, o identificador do solicitante, está ocultado pelo
+texto de fundo vermelho.
 
-![img](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
+![img](../static/img/identificador-solicitante.png)
 
 Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório.
