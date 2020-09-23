@@ -13,21 +13,23 @@ module.exports = {
       "ambientes",
       "tecnologias",
     ],
-    Gestor: [
-      "gestor",
-      "certificado",
-      "gov.br",
-      "portal", 
-      "identificador",
-     ],
-    TI: [
-      "ti",
-      "postman",
-      "requisicoes",
-      "si",
-      "erros",
-      "autenticacao",
-    ],
+    "Estabelecimentos de Saúde" : [{
+      Gestor: [
+        "gestor",
+        "certificado",
+        "gov.br",
+        "portal", 
+        "identificador",
+       ],
+      TI: [
+        "ti",
+        "postman",
+        "requisicoes",
+        "si",
+        "erros",
+        "autenticacao",
+      ],
+    }],
     Ferramentas: [
       "tools/api",
       "tools/fhirpath",

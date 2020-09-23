@@ -1,10 +1,17 @@
 ---
 id: roteiro
-title: Passo a passo (roteiro)
-sidebar_label: Passo a passo (roteiro)
+title: Passo a passo 
+sidebar_label: Passo a passo
 ---
 
-Abaixo segue uma sequência de passos sugeridos para a integração com a RNDS.
+O **Guia de Integração RNDS** orienta um [público-alvo](./publico-alvo) específico visando atender a obrigatoriedade de 
+notificação de resultados de exames (COVID)(entenda o [contexto](./contexto)). 
+
+>A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco
+deste guia, e ocorre por meio da [RNDS](./rnds).
+
+Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas pelos estabelecimentos de saúde para a integração com a [RNDS](./rnds).
+
 
 - Entenda o [contexto](./contexto).
 - Atribuições do [gestor](./gestor).
