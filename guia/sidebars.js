@@ -5,6 +5,13 @@ module.exports = {
       "publico-alvo",
       "contexto",
     ],
+    RNDS: [
+      "rnds",
+      "servicos",     
+      "perfis",
+      "resultado",
+      "ambientes",
+    ],
     Gestor: [
       "gestor",
       "certificado",
@@ -12,12 +19,6 @@ module.exports = {
       "portal", 
       "identificador",
      ],
-     RNDS: [
-      "ambientes",     
-      "servicos",
-      "perfis",
-      "resultado",
-    ],
     TI: [
       "ti",
       "postman",
