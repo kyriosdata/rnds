@@ -18,15 +18,15 @@
     <display value="Novo coronavírus (2019-nCoV)" />
   </concept>
   <concept>
-    <code value="COVID" />
-    <display value="COVID-19, Biologia Molecular" />
+    <code value="SARS-CoV-2" />
+    <display value="SARS-CoV-2-19, Biologia Molecular" />
   </concept>
   <concept>
     <code value="CVIDGG" />
-    <display value="COVID-19, IgG" />
+    <display value="SARS-CoV-2-19, IgG" />
   </concept>
   <concept>
     <code value="CVIDGM" />
-    <display value="COVID-19, IgM" />
+    <display value="SARS-CoV-2-19, IgM" />
   </concept>
 </CodeSystem>

@@ -10,7 +10,7 @@ palavras, é por meio da RNDS que a "informação em saúde estará disponível
 onde é necessária". 
 
 Os [serviços](./servicos) oferecidos, no momento, estão voltados para 
-o encaminhamento de resultados de exames de COVID. 
+a notificação de resultados de exames de SARS-CoV-2. 
 
 Tais serviços estão em conformidade com o padrão [FHIR](http://hl7.org/fhir/), adotado pelo Brasil, e com as [definições](./perfis) necessárias para acomodar as especificidades nacionais. 
 

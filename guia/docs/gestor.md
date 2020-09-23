@@ -56,6 +56,6 @@ O laboratório pode empregar uma terminologia ou códigos próprios para identif
 
 A execução satisfatória desta atribuição resulta em:
 
-- Revisão de todos os itens de dados exigidos pela RNDS para um resulta do exame de COVID.
+- Revisão de todos os itens de dados exigidos pela RNDS para um resulta do exame de SARS-CoV-2.
 - Identificação dos itens de dados dos quais aqueles exigidos pela RNDS serão obtidos.
 - Identificação do mapeamento, se for o caso, entre o item de dado de origem do laboratório e o item de dado exigido pela RNDS.

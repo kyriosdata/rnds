@@ -2,7 +2,7 @@
 
 Convém esclarecer que o laboratório que produz um laudo pode gerar outros dados, além daqueles estabelecidos pela tabela abaixo. Na tabela estão identificados
 apenas os valores exigidos pela RNDS e, não necessariamente, os únicos valores
-produzidos pelo laboratório em questão, para um exame de COVID-19.
+produzidos pelo laboratório em questão, para um exame de SARS-CoV-2-19.
 
 | Campo                          | Descrição                                                                                                                             |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |

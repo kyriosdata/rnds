@@ -5,7 +5,7 @@ sidebar_label: Passo a passo
 ---
 
 O **Guia de Integração RNDS** orienta um [público-alvo](./publico-alvo) específico visando atender a obrigatoriedade de 
-notificação de resultados de exames (COVID)(entenda o [contexto](./contexto)). 
+notificação de resultados de exames (SARS-CoV-2)(entenda o [contexto](./contexto)). 
 
 >A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco
 deste guia, e ocorre por meio da [RNDS](./rnds).

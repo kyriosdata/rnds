@@ -8,24 +8,24 @@ será construído um _Bundle_ correspondente.
 }
 ```
 
-### Detalhando resultado de exame de COVID-19
+### Detalhando resultado de exame de SARS-CoV-2-19
 
 O FHIR define um conjunto significativo de mais de uma centena recursos a serem empregados em vários contextos. Acima citamos apenas quatro deles.
 A adequação de um recurso a um contexto específico
 é realizada por meio de um perfil.
 
 A RNDS, para contemplar o cenário nacional, já definiu vários perfis. Dois deles são empregados no Bundle
-utilizado para informar o resultado de um exame de COVID-19: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3) que personaliza o recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) e (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico), que personaliza o recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html).
+utilizado para informar o resultado de um exame de SARS-CoV-2-19: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3) que personaliza o recurso FHIR [Composition](https://www.hl7.org/fhir/composition.html) e (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico), que personaliza o recurso FHIR [Observation](https://www.hl7.org/fhir/observation.html).
 
-O terceiro recurso empregado no registro de um resultado de exame de COVID-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme definido, sem adaptação.
+O terceiro recurso empregado no registro de um resultado de exame de SARS-CoV-2-19, o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), é empregado conforme definido, sem adaptação.
 
 Nas quatro seções seguintes são detalhados os campos empregados por cada um dos recursos utilizados para a submissão do resultado de um exame
-de COVID-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (c) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (d) [Specimen](https://www.hl7.org/fhir/specimen.html).
+de SARS-CoV-2-19: (a) [Bundle](https://www.hl7.org/fhir/bundle.html); (b) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (c) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (d) [Specimen](https://www.hl7.org/fhir/specimen.html).
 
 ### Campos do Bundle
 
 O Bundle é um contêiner para recursos FHIR, ou seja, serve como "pacote" no qual outros recursos FHIR são fornecidos.
-Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de COVID-19:
+Os campos seguintes são empregados no exemplo utilizado para submissão de um resultado de exame de SARS-CoV-2-19:
 
 1. **resourceType**: indica o tipo do recurso FHIR em questão, ou seja, `Bundle`.
 1. **meta**: objeto cujo único atributo fornecido é **lastUpdated**, indicando a data da última alteração do recurso.
@@ -42,15 +42,15 @@ Os campos seguintes são empregados no exemplo utilizado para submissão de um r
 1. **type**: cujo valor é `document` neste caso. Convém observar que existem vários outros tipos para este recurso, empregados em outros cenários.
 1. **timestamp**: o instante em que o recurso (_Bundle_) foi montado, ou seja, algo como `2020-03-23T14:23:56.567-02:00`, por exemplo.
 1. **entry**: é uma lista (_array_) de objetos. Cada objeto desta lista é um recurso que faz parte do "pacote". De fato,
-   um _Bundle_ existe para reunir outros recursos. No caso do resultado de exame de COVID-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html). Ou seja, a lista fornecida
+   um _Bundle_ existe para reunir outros recursos. No caso do resultado de exame de SARS-CoV-2-19, são empregados três recursos, conforme mencionado anteriormente: (a) [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3); (b) [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e (c) [Specimen](https://www.hl7.org/fhir/specimen.html). Ou seja, a lista fornecida
    no campo **entry** contém três objetos, um para cada um destes recursos. Cada objeto é detalhado pelos seguintes campos:
 
-   - **fullUrl**: referência absoluta para o recurso ou, como o caso do resultado de exame de COVID-19, o identificador do recurso empacotado pelo _Bundle_. Neste exemplo os três valores empregados são `urn:uuid:transient-0`, `urn:uuid:transient-1` e `urn:uuid:transient-2`.
-   - **resource**: objeto que detalha o recurso que faz parte do "pacote" (_Bundle_). No caso em questão, é aqui que será fornecido o conteúdo propriamente dito de cada um dos três recuros que fazem parte do _Bundle_ que registra o resultado de exame de COVID-19. Estes três recursos são detalhados nas três seções seguintes.
+   - **fullUrl**: referência absoluta para o recurso ou, como o caso do resultado de exame de SARS-CoV-2-19, o identificador do recurso empacotado pelo _Bundle_. Neste exemplo os três valores empregados são `urn:uuid:transient-0`, `urn:uuid:transient-1` e `urn:uuid:transient-2`.
+   - **resource**: objeto que detalha o recurso que faz parte do "pacote" (_Bundle_). No caso em questão, é aqui que será fornecido o conteúdo propriamente dito de cada um dos três recuros que fazem parte do _Bundle_ que registra o resultado de exame de SARS-CoV-2-19. Estes três recursos são detalhados nas três seções seguintes.
 
 ### Campos do resultado de exame laboratorial
 
-Um resultado de exame laboratorial de COVID-19 é definido pelo recurso
+Um resultado de exame laboratorial de SARS-CoV-2-19 é definido pelo recurso
 [Composition](https://www.hl7.org/fhir/composition.html), em particular,
 adaptado pela RNDS por meio do perfil
 [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial-duplicate-3). Os campos empregados são detalhados abaixo:
@@ -96,8 +96,8 @@ pela RNDS no perfil [Diagnóstio em Laboratório Clínico](https://simplifier.ne
    - **system** cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS`. Este valor identifica unicamente um sistema de códigos criado pela RNDS. Este sistema, [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), conforme a descrição fornecida, "é o segundo nível da hierarquia da Tabela SUS e seus códigos ajudam a classificar e localizar procedimentos."
    - **code**: valor `0214`. Este valor, conforme o [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsade/brsubgrupotabelasus), refere-se a `Diagnóstico por teste rápido`.
 1. **code** é um objeto que tem como propósito identificar unicamente o [exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0). Este objeto possui um único campo definido: **coding** que, por sua vez, é uma lista (_array_) com um único elemento (objeto). Este único elemento (objeto) possui dois campos:
-   - **system**: cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC`. Este valor é o identificador único de um sistema de códigos, criado pela RNDS, para [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19LOINC).
-   - **code**: aqui deve ser fornecido o valor, conforme os [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameCOVID19LOINC), conforme o valor fornecido para **system**, campo anterior. Um valor possível é `94547-7`, que correspondente a `SARS Coronavírus 2, [presença de] anticorpos IgG e IgM em soro ou plasma por imunoensaio`.
+   - **system**: cujo valor é `http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC`. Este valor é o identificador único de um sistema de códigos, criado pela RNDS, para [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameSARS-CoV-219LOINC).
+   - **code**: aqui deve ser fornecido o valor, conforme os [nomes de exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameSARS-CoV-219LOINC), conforme o valor fornecido para **system**, campo anterior. Um valor possível é `94547-7`, que correspondente a `SARS Coronavírus 2, [presença de] anticorpos IgG e IgM em soro ou plasma por imunoensaio`.
 
 ### Campos do tipo de amostra biológica
 

@@ -31,6 +31,8 @@ module.exports = {
       ],
     }],
     Ferramentas: [
+      "tools/java",
+      "tools/javascript",
       "tools/api",
       "tools/fhirpath",
       "tools/keytool",
