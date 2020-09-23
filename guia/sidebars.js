@@ -11,6 +11,7 @@ module.exports = {
       "perfis",
       "resultado",
       "ambientes",
+      "tecnologias",
     ],
     Gestor: [
       "gestor",
@@ -22,7 +23,6 @@ module.exports = {
     TI: [
       "ti",
       "postman",
-      "tecnologias",
       "requisicoes",
       "si",
       "erros",

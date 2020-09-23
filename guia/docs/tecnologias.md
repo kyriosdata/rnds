@@ -1,7 +1,7 @@
 ---
 id: tecnologias
-title: Tecnologias
-sidebar_label: Tecnologias
+title: Ecossistema FHIR
+sidebar_label: Ecossistema FHIR
 ---
 
 ### FHIR

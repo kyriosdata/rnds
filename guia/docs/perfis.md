@@ -1,6 +1,6 @@
 ---
 id: perfis
-title: Perfis (definições)
+title: Definições
 sidebar_label: Definições
 ---
 
