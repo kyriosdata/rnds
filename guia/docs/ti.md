@@ -1,7 +1,7 @@
 ---
 id: ti
 title: Responsável pela TI
-sidebar_label: TI (atribuições)
+sidebar_label: Atribuições
 ---
 
 A integração com a RNDS exige atribuições distribuídas entre dois

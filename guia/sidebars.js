@@ -1,23 +1,29 @@
 module.exports = {
   someSidebar: {
-    Tópicos: [
+    Introdução: [
       "roteiro",
       "publico-alvo",
       "contexto",
+    ],
+    Gestor: [
       "gestor",
       "certificado",
       "gov.br",
       "portal", 
       "identificador",
-      "ti",     
+     ],
+     RNDS: [
+      "ambientes",     
       "servicos",
+      "perfis",
+      "resultado",
+    ],
+    TI: [
+      "ti",
       "postman",
-      "ambientes",
       "tecnologias",
       "requisicoes",
-      "perfis",
       "si",
-      "resultado",
       "erros",
       "autenticacao",
     ],

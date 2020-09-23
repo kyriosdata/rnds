@@ -76,9 +76,9 @@ function Home() {
                 "button button--outline button--secondary button--lg",
                 styles.getStarted
               )}
-              to={useBaseUrl("docs/contexto")}
+              to={useBaseUrl("docs/roteiro")}
             >
-              Consulte
+              Passo a passo
             </Link>
           </div>
         </div>

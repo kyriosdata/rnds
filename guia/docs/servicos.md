@@ -1,7 +1,7 @@
 ---
 id: servicos
-title: Catálogo de Serviços
-sidebar_label: Catálogo de Serviços
+title: Serviços
+sidebar_label: Serviços
 ---
 
 Dois serviços (_web services_) são de _segurança_ e os demais enviam informações para a RNDS ou recuperam informações de _saúde_ disponibilizadas pela RNDS.

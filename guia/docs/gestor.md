@@ -1,7 +1,7 @@
 ---
 id: gestor
 title: Gestor
-sidebar_label: Gestor (atribuições)
+sidebar_label: Atribuições
 ---
 
 A integração com a RNDS exige atribuições distribuídas entre dois
