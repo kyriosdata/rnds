@@ -1,7 +1,7 @@
 ---
 id: si
-title: Software de Integração
-sidebar_label: Software de Integração
+title: Desenvolver
+sidebar_label: Desenvolver
 ---
 
 O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as 

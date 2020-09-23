@@ -50,16 +50,8 @@ module.exports = {
           title: "Comunidade",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/docusaurus",
+              label: "GitHub",
+              href: "https://github.com/kyriosdata/rnds",
             },
           ],
         },
@@ -67,13 +59,9 @@ module.exports = {
           title: "Outros",
           items: [
             {
-              label: "Blog",
+              label: "Notícias",
               to: "blog",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/kyriosdata/rnds",
-            },
+            }
           ],
         },
       ],

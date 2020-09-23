@@ -19,11 +19,11 @@ Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhad
 [TI](./ti). 
 
 A sequência sugerida é fornecida abaixo:
-1. Obter o [certificado digital](./certificado).
-1. Caso não possua, o gestor deve criar uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br).
-1. [Solicitar acesso](./portal) à RNDS, e aguardar resposta do DATASUS. 
-1. Obter [identificador](./identificador) do solicitante.
-1. Compreender a [interação](./postman) com os serviços (entradas/saídas).
+1. O gestor obtém o [certificado digital](./certificado).
+1. O gestor cria uma conta [gov.br](https://www.gov.br/pt-br/servicos/criar-sua-conta-meu-gov.br), caso não possua uma.
+1. O gestor [solicita acesso](./portal) à RNDS, e aguarda a resposta do DATASUS. 
+1. O gestor obtém o [identificador do solicitante](./identificador) após a aprovação da solicitante de acesso.
+1. O profissional de TI [interage](./postman) com os serviços (entradas/saídas) oferecidos e, dessa forma, os conhece e os compreende.
 1. Desenvolver o [Software de Integração](./si)
 1. Homologar
 1. Colocar em produção

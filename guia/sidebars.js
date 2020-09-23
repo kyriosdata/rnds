@@ -24,8 +24,8 @@ module.exports = {
       TI: [
         "ti",
         "postman",
-        "requisicoes",
         "si",
+        "requisicoes",
         "erros",
         "autenticacao",
       ],

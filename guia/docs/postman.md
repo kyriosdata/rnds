@@ -1,11 +1,12 @@
 ---
 id: postman
-title: Primeiro contato
-sidebar_label: Primeiro contato
+title: Interagir com os serviços
+sidebar_label: Interagir com os serviços
 ---
 
-A adoção do padrão FHIR significa "independência tecnológica" dos laboratórios em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões
-no escopo do ecossistema do laboratório. Ou seja, as tecnologias empregadas e como são utilizadas no âmbito do laboratório (nó Laboratório na figura abaixo), é feito com a total autonomia do laboratório.
+A adoção do padrão FHIR significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões no escopo do ecossistema do estabelecimento de saúde. 
+
+As tecnologias empregadas e como são utilizadas, no âmbito do estabelecimento de saúde (nó Laboratório na figura abaixo), cabem ao  estabelecimento decidir.
 
 ![img](../static/img/rnds-deployment.png)
 
