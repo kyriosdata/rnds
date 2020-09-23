@@ -1,20 +1,22 @@
-# Website
+# Guia de Integração RNDS
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+O Guia faz uso da ferramenta [Docusaurus 2](https://v2.docusaurus.io/).
+Conforme a própria definição no portal, "um gerador de site estático moderno".
 
-### Installation
+### Instalação
 
 ```
 $ yarn
 ```
 
-### Local Development
+### Disponibilizar localmente (desenvolvimento)
 
 ```
 $ yarn start
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+Esse comando disponibiliza o site estático no endereço
+`localhost:3000/rnds`
 
 ### Build
 
@@ -22,10 +24,15 @@ This command starts a local development server and open up a browser window. Mos
 $ yarn build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+Este comando produz o conteúdo estático no diretório `build`. O conteúdo
+deste diretório pode ser disponibilizado em qualquer serviço de hospedagem
+de conteúdo estático.
 
-### Deployment (gh-pages branche)
+### Liberação (gh-pages branch)
 
 ```
 $ GIT_USER=<Your GitHub username> yarn deploy
 ```
+
+Disponibiliza a documentação no endereço
+`https://kyriosdata.github.io/rnds`.
