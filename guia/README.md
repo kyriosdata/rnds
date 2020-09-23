@@ -34,5 +34,4 @@ de conteúdo estático.
 $ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
-Disponibiliza a documentação no endereço
-`https://kyriosdata.github.io/rnds`.
+Disponibiliza a documentação no endereço https://kyriosdata.github.io/rnds.
