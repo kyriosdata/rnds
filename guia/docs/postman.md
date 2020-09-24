@@ -1,7 +1,7 @@
 ---
 id: postman
-title: Interagir com os serviços
-sidebar_label: Interagir com os serviços
+title: Conhecer os serviços
+sidebar_label: Conhecer os serviços
 ---
 
 A adoção do padrão FHIR significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões no escopo do ecossistema do estabelecimento de saúde. 
@@ -132,8 +132,12 @@ Variáveis geradas pelo próprio Postman:
 
 A execução de requisições é feita com a seleção da requisição a ser executada e, em seguida, ao clicar no botão `Send`. A requisição será submetida e o retorno será exibido. A sugestão é experimentar mudanças nos parâmetros das requisições, no _payload_ de um resultado de exame, remover um _header_, alterar o valor de um _header_ e observar os resultados. Desta forma será possível adquirir fluência na interação com a RNDS.
 
-### E depois?
+### Parabéns!
 
-Parabéns, o "primeiro contato" com a RNDS foi estabelecido!
+Os "primeiros contatos" com a RNDS foram estabelecidos. Seguramente,
+após exercitar as várias requisições, a ambientação necessária tanto com
+os dados necessários, quanto aqueles produzidos e a estrutura da requisição
+estará concluída.
 
-Uma vez adquirida esta ambientação, as questões técnicas necessárias para a integração com a RNDS estarão resolvidas. Embora o desenvolvimento do código de integração seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [Software de Integração](./si), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.
+O próximo passo é o desenvolvimento do código que executa as requisições exercitadas com o propósito de integração 
+entre o estabelecimento de saúde e a RNDS. seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [Software de Integração](./si), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.

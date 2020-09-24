@@ -25,6 +25,8 @@ module.exports = {
         "ti",
         "postman",
         "si",
+        "homologar",
+        "producao",
         "requisicoes",
         "erros",
         "autenticacao",

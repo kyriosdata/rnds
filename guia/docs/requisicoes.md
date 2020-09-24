@@ -4,10 +4,13 @@ title: Requisições
 sidebar_label: Requisições
 ---
 
-Há várias formas de se construir e enviar uma requisição RESTful a um
-servidor.
+As [bibliotecas](./tools/bibliotecas) oferecidas como apoio ao desenvolvimento de software visando a integração com a RNDS, encapsulam este envio e o recebimento das respostas. Contudo, a reutilização destas bibliotecas pode não ser a opção do estabelecimento de saúde. 
 
-O servidor de testes [Hapi FHIR](http://hapi.fhir.org/) oferece uma interface gráfica por meio de um navegador. É útil para experimentação e para obter detalhes de como criar corretamente uma requisição. Uma alternativa bem mais técnica é o aplicativo oferecido via linha de comandos, [cURL](https://en.wikipedia.org/wiki/CURL), sigla para _client URL_. A abordagem oferecida no guia, contudo, baseia-se no emprego da ferramenta [Postman](./roteiro).
+Se o estabelecimento de saúde optar por construir suas próprias
+requisições, então terá à disposição o [ambiente](./ambientes) de homologação oferecido pela RNDS para suas experimentações,  todo o roteiro para se obter amplo [conhecimento dos serviços](./postman) oferecidos. 
+
+Em tempo, a ferramenta empregada para a interação com o ambiente de homologação também ilustra, para várias linguagens de programação e bibliotecas pertinentes, como cada requisição ilustrada pode ser feita.
+
 
 ### Postman
 
