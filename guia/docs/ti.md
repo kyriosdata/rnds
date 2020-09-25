@@ -7,20 +7,26 @@ sidebar_label: Atribuições
 A integração com a RNDS exige atribuições distribuídas entre dois
 papéis. Um deles é o [gestor](./gestor) do estabelecimento de saúde.
 O outro é o responsável pela TI, que não necessariamente executa
-as atividades técnicas. Outros termos geralmente utilizados incluem
-programador, integrador, desenvolvedor de software e engenheiro de software.
+as atividades técnicas. O [público-alvo](./publico-alvo) fornece detalhes.
+A intenção aqui é orientar a TI do estabelecimento de saúde.
 
 ![img](../static/img/ti.png)
 
 ## Atribuições da TI
-As atribuições do responsável pela TI, detalhadas abaixo, são:
-(a) desenvolver o software de integração; (b) homologar o software e 
-(c) colocar a integração em produção.
+As atribuições da TI incluem:
+(a) conhecer os serviços oferecidos; (b) desenvolver o software de integração; (c) homologá-lo e (d) colocá-lo em produção.
 
+
+### Conhecer os serviços
+A ambientação com os serviços oferecidos pela RNDS é considerada imprescindível. Há várias formas de se promover o conhecimento e 
+a compreensão dos serviços. A sugestão é interagir com eles,
+saber o que eles exigem como _payload_, _headers_ e a saída 
+esperada e código de retorno, dentre outros. Para tal, nada melhor
+do que seguir as orientações para [interação com o ambiente de homologação](./postman).
 
 ### Desenvolver
 
-A proposta e desenvolvimento do _software_ de integração para um dado laboratório depende do contexto em questão, contudo, invariavelmente, o _software_ a ser produzido terá que realizar funções bem-definidas. Veja aqui tais [funções](./si).
+A proposta e desenvolvimento de um _software_ de integração para um dado laboratório depende do contexto em questão, por exemplo, um estabelecimento que já faz uso de um sistema de informação, provavelmente irá considerar um projeto de manutenção (evolução) do sistema que já faz uso. De qualquer forma, invariavelmente, o _software_ a ser produzido terá que realizar funções [bem-definidas](./si).
 
 A execução satisfatória desta atribuição resulta em:
 

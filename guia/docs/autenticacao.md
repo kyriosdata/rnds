@@ -4,8 +4,7 @@ title: Autenticação
 sidebar_label: Autenticação
 ---
 
-Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia"
-no serviço com o qual está interagindo. A confiança é estabelecida por meio de um arquivo, o _keystore_.
+Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. A confiança é estabelecida por meio do conteúdo de um arquivo, o _keystore_.
 
 O _keystore_ deve conter os certificados das autoridades certificadoras cujos certificados
 por ela assinados são considerados confiáveis. Dito de outro forma,
