@@ -33,8 +33,8 @@ module.exports = {
       ],
     }],
     Ferramentas: [
-      "tools/java",
       "tools/api",
+      "tools/bibliotecas",
       "tools/fhirpath",
       "tools/keytool",
       "tools/validacao",
