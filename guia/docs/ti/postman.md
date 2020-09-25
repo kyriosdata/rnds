@@ -8,13 +8,13 @@ A adoção do padrão FHIR significa "independência tecnológica" dos estabelec
 
 As tecnologias empregadas e como são utilizadas, no âmbito do estabelecimento de saúde (nó Laboratório na figura abaixo), cabem ao  estabelecimento decidir.
 
-![img](../static/img/rnds-deployment.png)
+![img](../../static/img/rnds-deployment.png)
 
 Em algum momento, contudo, requisições _https_ devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). Ou seja, as portas Auth e EHR ilustradas acima.
 
 O foco aqui são justamente tais requisições, conforme ressaltadas na figura abaixo. Observe que em vez de um [Software de Integração](./si), a ser desenvolvido pelo laboratório e ilustrado na figura acima, emprega-se o Postman como instrumento para experimentar as requisições, alterar valores de _headers_ e outros.
 
-![img](../static/img/postman-desenvolvedor.png)
+![img](../../static/img/postman-desenvolvedor.png)
 
 Ao final, espera-se que:
 

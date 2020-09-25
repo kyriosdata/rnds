@@ -10,7 +10,7 @@ O outro é o responsável pela TI, que não necessariamente executa
 as atividades técnicas. O [público-alvo](./publico-alvo) fornece detalhes.
 A intenção aqui é orientar a TI do estabelecimento de saúde.
 
-![img](../static/img/ti.png)
+![img](../../static/img/ti.png)
 
 ## Atribuições da TI
 As atribuições da TI incluem:
