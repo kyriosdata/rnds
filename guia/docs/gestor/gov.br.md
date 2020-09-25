@@ -8,7 +8,7 @@ O acesso aos serviços digitais oferecidos pelo governo exige uma conta que qual
 
 Conforme ilustrado abaixo, o botão verde permite criar uma conta. O gestor do estabelecimento de saúde deverá criar uma conta gov.br, caso não possua uma, necessária para requisitar a solicitação de acesso à RNDS.
 
-![gov.br](../static/img/gov.br.png)
+![gov.br](../../static/img/gov.br.png)
 
 A execução satisfatória desta atribuição resulta em:
 

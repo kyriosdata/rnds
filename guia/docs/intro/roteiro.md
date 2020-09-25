@@ -7,9 +7,9 @@ sidebar_label: Passo a passo
 O **Guia de Integração RNDS** é dirigido a um [público-alvo](./publico-alvo) específico com foco na obrigatoriedade de 
 notificação de resultados de exames SARS-CoV-2 (consulte o [contexto](./contexto) para detalhes).
 
->A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco deste guia, e realizada por meio da [RNDS](./rnds).
+>A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco deste guia, e realizada por meio da [RNDS](../rnds/rnds).
 
-Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas para tal integração. Antes, contudo, é conveniente entender o [contexto](./contexto), o [público-alvo](./publico-alvo) do _Guia_ e o que a [RNDS](./rnds) oferece e estabelece para a correta integração. Adicionalmente, os passos estão distribuídos entre dois atores: [gestor](./gestor) e profissional de 
+Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas para tal integração. Antes, contudo, é conveniente entender o [contexto](./contexto), o [público-alvo](./publico-alvo) do _Guia_ e o que a [RNDS](../rnds/rnds) oferece e estabelece para a correta integração. Adicionalmente, os passos estão distribuídos entre dois atores: [gestor](./gestor) e profissional de 
 [TI](./ti). 
 
 A sequência sugerida é:

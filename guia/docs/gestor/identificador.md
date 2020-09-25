@@ -14,6 +14,6 @@ A figura abaixo ilustra o local onde o gestor pode localizar o identificador do 
 O valor desejado, o identificador do solicitante, está ocultado pelo
 texto de fundo vermelho.
 
-![img](../static/img/identificador-solicitante.png)
+![img](../../static/img/identificador-solicitante.png)
 
 Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório.

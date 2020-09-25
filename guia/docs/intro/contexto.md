@@ -12,11 +12,11 @@ A informação em saúde, contudo, "precisa chegar onde é necessária". A [Port
 
 A figura abaixo ilustra o envio de laudos de um laboratório para a RNDS, como consequência desta Portaria.
 
-![img](../static/img/laboratorio.png)
+![img](../../static/img/laboratorio.png)
 
 Na prática isso significa que cada laboratório terá que produzir _software_ para a sua integração com a RNDS. Noutras palavras, _software_ que envia o resultado de cada exame que produz para o Ministério da Saúde (veja a ilustração abaixo).
 
-![img](../static/img/pratica.png)
+![img](../../static/img/pratica.png)
 
 O **Guia de Integração RNDS** tem como compromisso identificar todos
 os passos necessários, orientações e outros, administrativos e técnicos, para _facilitar a integração com a RNDS_.

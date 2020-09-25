@@ -1,25 +1,25 @@
 module.exports = {
   someSidebar: {
     Introdução: [
-      "roteiro",
-      "publico-alvo",
-      "contexto",
+      "intro/roteiro",
+      "intro/publico-alvo",
+      "intro/contexto",
     ],
     RNDS: [
-      "rnds",
-      "servicos",     
-      "perfis",
-      "resultado",
-      "ambientes",
-      "tecnologias",
+      "rnds/rnds",
+      "rnds/servicos",     
+      "rnds/perfis",
+      "rnds/resultado",
+      "rnds/ambientes",
+      "rnds/tecnologias",
     ],
     "Estabelecimentos de Saúde" : [{
       Gestor: [
-        "gestor",
-        "certificado",
-        "gov.br",
-        "portal", 
-        "identificador",
+        "gestor/gestor",
+        "gestor/certificado",
+        "gestor/gov.br",
+        "gestor/portal", 
+        "gestor/identificador",
        ],
       TI: [
         "ti",

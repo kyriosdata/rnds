@@ -10,4 +10,4 @@ Os gestores de estabelecimentos de saúde também precisam entender como todo fl
 
 Neste Guia, por simplicidade, os nomes, cargos, papéis e perfis citados acima, dentre outros empregados pelo país, estão reunidos pelas atribuições para a integração com a RNDS em dois atores. Estes atores, ilustrados abaixo, são: (a) [gestor](./gestor) e (b) [responsável pela TI](./ti) (Tecnologia da Informação).
 
-![atores](../static/img/atores.png)
+![atores](../../static/img/atores.png)
