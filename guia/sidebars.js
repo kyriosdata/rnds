@@ -1,7 +1,7 @@
 module.exports = {
   someSidebar: {
     Introdução: [
-      "intro/roteiro",
+      "intro/passo-a-passo",
       "intro/publico-alvo",
       "intro/contexto",
       "intro/glossario",
