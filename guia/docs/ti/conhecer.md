@@ -51,13 +51,12 @@ Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não 
 
 ![postman-abertura](../../static/img/postman-import.png)
 
-Após importado, o resultado deve ser similar àquele abaixo. A versão pode ser diferente, por exemplo. Observe que estão disponíveis 11 requisições, agrupadas naquelas de "Segurança" e "Saúde".
+Após importado, o resultado é similar àquele abaixo. A versão pode ser diferente, por exemplo. Observe que estão disponíveis 11 requisições, agrupadas naquelas de "Segurança" e "Saúde".
 
 ![image](../../static/img/postman-carregado.png)
 
-Você pode experimentar a execução de qualquer uma delas, todas devem
-falhar, ótimo (por enquanto, claro). É preciso, para funcionar, que as informações específicas
-para o laboratório em questão sejam configuradas (próximo passo).
+Neste ponto pode-se selecionar uma das requisições e, no canto superior direito, botão `Send` submeter aquela selecionada. Contudo, qualquer uma delas deve falhar, afinal,
+não indicamos o certificado a ser empregado nem outras configurações necessárias.
 
 ### Configurar (certificado digital)
 
