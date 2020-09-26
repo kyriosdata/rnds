@@ -14,7 +14,7 @@ Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhad
 
 A sequência sugerida é:
 1. O gestor obtém o [certificado digital](../gestor/certificado).
-1. O gestor cria uma conta [gov.br](../gestor/gov.br), caso não possua uma.
+1. O gestor [cria uma conta gov.br](../gestor/gov.br), caso não possua uma.
 1. O gestor [solicita acesso](../gestor/portal) à RNDS, e aguarda a resposta do DATASUS. 
 1. O gestor obtém o [identificador do solicitante](../gestor/identificador) após a aprovação da solicitante de acesso.
 1. O profissional de TI [interage](../ti/postman) com os serviços (entradas/saídas) oferecidos e, dessa forma, os conhece e os compreende.
