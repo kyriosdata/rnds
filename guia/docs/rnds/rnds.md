@@ -8,6 +8,8 @@ Na perspectiva de um estabelecimento de saúde, a Rede Nacional de Dados em Saú
 para a interoperabilidade em saúde no território nacional. No Brasil, é por meio da RNDS que a "informação em saúde estará disponível
 onde é necessária". 
 
+![interoperabilidade](../../static/img/rnds-brasil.png)
+
 Os [serviços](./servicos) oferecidos, no momento, estão voltados para 
 a notificação de resultados de exames de SARS-CoV-2. 
 
