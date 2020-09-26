@@ -77,13 +77,12 @@ Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaix
 
 ![img](../../static/img/postman-certificado.png)
 
-Ao clicar no botão `Add`, o resultado é fornecido abaixo, indicando que agora o Postman irá empregar, para o _host_ identificado, o certificado informado e, para ter acesso ao conteúdo dele, fará uso da senha ocultada.
+Ao clicar no botão `Add`, o Postman estará configurado para usar o certificado, para acesso ao endereço indicado e, para o uso, empregará a senha fornecida. 
 
-![img](https://user-images.githubusercontent.com/1735792/92803471-d6542b00-f38d-11ea-8d14-36d615672309.png)
+Após a configuração do certificado, quando se requisita a submissão do serviço "Obter token de acesso", que está disponível exatamente
+no endereço fornecido na configuração acima, o certificado e a senha serão utilizados pelo Postman para submter a requisição em questão. Agora, o resultado esperado é 200 OK. Observe que, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS é exibida, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
 
-A partir desta configuração, quando se requisita a submissão do serviço "Obter token de acesso", o código de retorno será 200 OK. Observe que, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS é exibida, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
-
-![img](https://user-images.githubusercontent.com/1735792/92804153-7742e600-f38e-11ea-8a5d-df4c19b0edaa.png)
+![img](../../static/img/postman-obter-token.png)
 
 As demais requisições dependem de outras configurações. Mais um passo e todas elas estarão funcionando.
 
@@ -92,15 +91,15 @@ As demais requisições dependem de outras configurações. Mais um passo e toda
 A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
 _token_ retornado por esta requisição, dependem de outros valores, neste caso, depositados em variáveis. Abaixo segue o conjunto das variáveis empregadas pelo Postman para execução das requisições.
 
-![image](https://user-images.githubusercontent.com/1735792/92833674-7a9a9980-f3af-11ea-8fcd-35dabc210608.png)
+![image](../../static/img/postman-variaveis.png)
 
-Ao todo são 10 variáveis, conforme ilustrado acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por laboratório. Daí o motivo do emprego de valores espúrios, fictícios na figura acima (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do laboratório cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no laboratório em questão.
+Ao todo são 10 variáveis, nem todas podem ser vistas acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por estabelecimento de saúde. Na figura acima são fornecidos valores espúrios, fictícios (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do estabelecimento de saúde cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no estabelecimento de saúde em questão.
 
-As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do estabelecimento de saúde. As duas primeiras identificam valores pertinentes ao [ambiente](./ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Neste caso, este CNPJ está disonível no próprio portal da [UFG](https://ufg.br).
+As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do estabelecimento de saúde. As duas primeiras identificam valores pertinentes ao [ambiente](./ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Neste caso, este CNPJ está disonível no próprio portal da [UFG](https://ufg.br) (CNPJ utilizado no exemplo).
 
-Os valores das 4 últimas variáveis são gerados pelo próprio Postman durante a execução das requisições. Por exemplo, a variável _access_token_ é definida pela execução do serviço "Obter token de acesso" e, como anteriormente informado, o valor desta variável é empregado por todas as demais requisições.
+Os valores das 4 últimas variáveis são gerados pelo próprio Postman durante a execução das requisições. Por exemplo, a variável _access_token_ é definida pela execução do serviço "Obter token de acesso" e, como anteriormente informado, o valor desta variável é empregado na composição do _header_ de nome _X-Authorization-Server_ por todas as demais requisições.
 
-Variáveis específicas por laboratório (assim como o certificado digital):
+Variáveis específicas por estabelecimento de saúde (assim como o certificado digital):
 
 - **lab-identificador**: identificador do laboratório fornecido pela RNDS quando o credenciamento é homologado. Observe que este identificador não é o CNES. Observe que o responsável pelo laboratório deverá acompanhar o pedido de credenciamento e, quando este é homologado, este identificador estará disponível por meio do portal de serviços (o mesmo empregado para pedir o credenciamento). Veja [identificador do laboratório](./identificador) para detalhes.
 
