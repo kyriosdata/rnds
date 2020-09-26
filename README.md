@@ -2,11 +2,11 @@
 
 ## Guia de Integração RNDS
 
-Acesse o guia:
+Acesse o guia (documentação):
 
-- https://kyriosdata.github.io/rnds.
+- https://kyriosdata.github.io/rnds
 
-Bibliotecas (acesso aos serviços):
+Desenvolvedores (bibliotecas para integração):
 
 - [Java](projetos/lib)
 - [Javascript](./projetos/rnds-js)
@@ -20,8 +20,5 @@ Avisos:
 
 ## Organização
 
-- [Certificado digital](./documentos/certificado.md)
-- [Resultado de exame SARS-CoV-2](./documentos/SARS-CoV-2.md)
-- [Serviços (EHR)](./documentos/servicos.md)
 - [Postman](./documentos/postman.md)
 - [Dados necessários para exame SARS-CoV-2](./documentos/tabela-SARS-CoV-2.md)
