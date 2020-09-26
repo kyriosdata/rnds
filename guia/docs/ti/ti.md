@@ -12,21 +12,20 @@ A intenção aqui é orientar a TI do estabelecimento de saúde.
 
 ![img](../../static/img/ti.png)
 
-## Atribuições da TI
-As atribuições da TI incluem:
+As atribuições da TI, conforme ilustradas acima, incluem:
 (a) conhecer os serviços oferecidos; (b) desenvolver o software de integração; (c) homologá-lo e (d) colocá-lo em produção.
 
 
 ### Conhecer os serviços
-A ambientação com os serviços oferecidos pela RNDS é considerada imprescindível. Há várias formas de se promover o conhecimento e 
-a compreensão dos serviços. A sugestão é interagir com eles,
+A ambientação com os serviços oferecidos pela RNDS é considerada imprescindível. Há várias formas para adquirir o conhecimento e 
+a compreensão acerca dos serviços. A mais recomendada é interagir com eles,
 saber o que eles exigem como _payload_, _headers_ e a saída 
 esperada e código de retorno, dentre outros. Para tal, nada melhor
 do que seguir as orientações para [interação com o ambiente de homologação](./conhecer).
 
 ### Desenvolver
 
-A proposta e desenvolvimento de um _software_ de integração para um dado laboratório depende do contexto em questão, por exemplo, um estabelecimento que já faz uso de um sistema de informação, provavelmente irá considerar um projeto de manutenção (evolução) do sistema que já faz uso. De qualquer forma, invariavelmente, o _software_ a ser produzido terá que realizar funções [bem-definidas](./si).
+A proposta e desenvolvimento de um _software_ de integração para um dado laboratório depende do contexto em questão, por exemplo, um estabelecimento que já faz uso de um sistema de informação, provavelmente irá considerar um projeto de manutenção (evolução) do sistema que já faz uso. De qualquer forma, invariavelmente, o _software_ a ser produzido terá que realizar [funções bem-definidas](./si).
 
 A execução satisfatória desta atribuição resulta em:
 

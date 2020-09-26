@@ -24,6 +24,6 @@ A solicitação de acesso exige o fornecimento de várias informações, distrib
 
 ![etapas da solicitação](../../static/img/rnds-etapas-solicitacao.png)
 
-Conforme ilustrado acima, a primeira informação (primeira etapa) indica se a solicitação é interna ao Ministério da Saúde ou não. Na ilustração, a opção
+Conforme ilustrado acima, a primeira informação a ser fornecida, da primeira etapa, indica se a solicitação é interna ao Ministério da Saúde ou não. Na ilustração, a opção
 "Outros" encontra-se selecionada, indicando que a solicitação não é interna, mas tem como origem um estabelecimento de saúde fora do Ministério da Saúde.
 
