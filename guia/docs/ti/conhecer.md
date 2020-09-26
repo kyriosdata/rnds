@@ -4,8 +4,6 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-A adoção do padrão FHIR significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões no escopo do ecossistema do estabelecimento de saúde. 
-
 Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
 
 > Neste documento é apresentado como enviar tais requisições. 

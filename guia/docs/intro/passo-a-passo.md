@@ -17,7 +17,7 @@ A sequência sugerida é:
 1. O gestor [cria uma conta gov.br](../gestor/gov.br), caso não possua uma.
 1. O gestor [solicita acesso](../gestor/portal) à RNDS, e aguarda a resposta do DATASUS. 
 1. O gestor obtém o [identificador do solicitante](../gestor/identificador) após a aprovação da solicitante de acesso.
-1. O profissional de TI [interage](../ti/postman) com os serviços (entradas/saídas) oferecidos e, dessa forma, os conhece e os compreende.
+1. O profissional de TI [interage](../ti/conhecer) com os serviços (entradas/saídas) oferecidos e, dessa forma, os conhece e os compreende.
 1. O profissional de TI [desenvolve](../ti/si) o software necessário para a integração com a RNDS.
 1. O profissional de TI [homologa](../ti/homologar) a integração realizada via o software desenvolvido (passo anterior).
 1. O profissional de TI [coloca em produção](../ti/producao) o software que integra o estabelecimento de saúde à RNDS (e homologado no passo anterior).
