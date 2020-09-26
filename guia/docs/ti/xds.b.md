@@ -3,4 +3,4 @@
 Facilita o registro, distribuição e o acesso a dados de saúde
 entre estabelecimentos de saúde.
 
-![xds.b](../imagens/xds.b.png)
+![xds.b](../../static/img/xds.b.png)

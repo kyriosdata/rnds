@@ -5,4 +5,4 @@ Desta forma, o Postman não verifica a integridade do certificado, e ignora o fa
 empregado pelo DATASUS estar vencido. Se esta opção não for desligada, não será possível efetuar 
 requisições com o atual certificado do DATASUS. 
 
-<img src="../media/postman-certificado.png" width="500px" >
+![img](../../static/img/postman-certificado.png)
