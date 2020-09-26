@@ -97,7 +97,7 @@ _token_ retornado por esta requisição, dependem de outros valores, neste caso,
 
 Ao todo são 10 variáveis, conforme ilustrado acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por laboratório. Daí o motivo do emprego de valores espúrios, fictícios na figura acima (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do laboratório cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no laboratório em questão.
 
-As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do laboratório. As duas primeiras identificam valores pertinentes ao [ambiente](./ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Convém destacar que o CNPJ da Universidade Federal de Goiás (UFG) está explicitamente fornecido no próprio portal desta universidade (https://ufg.br).
+As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do estabelecimento de saúde. As duas primeiras identificam valores pertinentes ao [ambiente](./ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Neste caso, este CNPJ está disonível no próprio portal da [UFG](https://ufg.br).
 
 Os valores das 4 últimas variáveis são gerados pelo próprio Postman durante a execução das requisições. Por exemplo, a variável _access_token_ é definida pela execução do serviço "Obter token de acesso" e, como anteriormente informado, o valor desta variável é empregado por todas as demais requisições.
 
@@ -122,7 +122,7 @@ Variáveis de uso amplo:
 
 ![Variável ehr usada em URL](https://user-images.githubusercontent.com/1735792/92814560-bfb3d100-f399-11ea-8c8c-d811aa75b227.png)
 
-- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal desta universidade em https://ufg.br.
+- **ufg-cnpj**: CNPJ da Universidade Federal de Goiás (UFG). Empregado apenas para teste. Observe que este valor pode ser obtido do próprio portal da [UFG](https://ufg.br).
 
 Variáveis geradas pelo próprio Postman:
 
