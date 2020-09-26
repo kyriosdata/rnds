@@ -72,10 +72,10 @@ A indicação do certificado digital a ser utilizado pelo Postman é realizada d
 
 ![img](../../static/img/postman-settings.png)
 
-Quando _Add Certificate_ é pressionado, abre-se a tela similar àquela abaixo.
-Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o arquivo **.pfx** contendo o certificado digital do laboratório; (b) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](./ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
+Quando _Add Certificate_ é pressionado, abre-se tela similar àquela abaixo.
+Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](./ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; (b) o arquivo **.pfx** contendo o certificado digital do estabelecimento de saúde e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
 
-![img](https://user-images.githubusercontent.com/1735792/92802156-a35d6780-f38c-11ea-8959-35db9c68d49a.png)
+![img](../../static/img/postman-certificado.png)
 
 Ao clicar no botão `Add`, o resultado é fornecido abaixo, indicando que agora o Postman irá empregar, para o _host_ identificado, o certificado informado e, para ter acesso ao conteúdo dele, fará uso da senha ocultada.
 
