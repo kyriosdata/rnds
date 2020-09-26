@@ -4,7 +4,7 @@ title: Certificado digital
 sidebar_label: Certificado digital
 ---
 
-[Certificado Digital](../intro/glossario#certificado-digital) é o instrumento empregado para identificar uma 
+Certificado digital é o instrumento empregado para identificar uma 
 pessoa (e-CPF) ou empresa (e-CNPJ) no mundo digital. O estabelecimento de saúde que deseja se integrar à RNDS, no momento do credenciamento, deverá
 fornecer o e-CPF do gestor ou o e-CNPJ do estabelecimento de saúde. 
 

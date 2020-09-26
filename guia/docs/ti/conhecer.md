@@ -6,7 +6,7 @@ sidebar_label: Conhecer os serviços
 
 A adoção do padrão FHIR significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões no escopo do ecossistema do estabelecimento de saúde. 
 
-Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e perfis adotados pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). Ou seja, as portas Auth e EHR ilustradas abaixo.
+Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). As portas Auth e EHR são empregadas, conforme ilustrado abaixo.
 
 ![img](../../static/img/rnds-deployment.png)
 
@@ -29,12 +29,12 @@ Ao final, espera-se que:
 ### Pré-requisitos
 
 - Informações:
-  - Certificado digital. O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessário conhecer a senha de acesso ao conteúdo do certificado.
-  - Credenciamento homologado. O credenciamento é feito pelo [portal de serviços](https://servicos-datasus.saude.gov.br/). É preciso aguardar a homologação. Sem o credenciamento aprovado não é possível ter acesso ao [ambiente](./ambientes) de homologação (usado para os "primeiros contatos").
-  - Identificador do laboratório fornecido pela RNDS. Este identificador é disponibilizado pela RNDS (veja [identificador do laboratório](./identificador)).
+  - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessário conhecer a senha de acesso ao conteúdo do certificado.
+  - A [solicitação de acesso](../gestor/portal) foi realizada pelo gestor e aprovada, ou seja, o acesso [ambiente de homologação](../rnds/ambientes) foi obtido.
+  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS.
   - CNES. O CNES do laboratório.
   - O CNS de um profissional de saúde, lotado no laboratório cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
-- Postman. A ferramenta Postman é empregada para interação com _web services_. O _Guia_ emprega ela para ilustrar os "primeiros contatos" com a RNDS. Detalhes `criar página com detalhes`.
+- Postman. A ferramenta [Postman](https://www.postman.com/downloads/) é empregada para interação com _web services_. O _Guia_ emprega ela para ilustrar os "primeiros contatos" com a RNDS. Detalhes `criar página com detalhes`.
 - Baixe o arquivo JSON, empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação. Detalhes das requisições podem ser obtidos interagindo com o próprio postman, após a importação deste arquivo (seção seguinte) ou, se preferir, consulte a [documentação](https://documenter.getpostman.com/view/215332/TVCmT68w) correspondente na internet.
 
 ### Importar

@@ -28,6 +28,6 @@ Abaixo segue uma visão panorâmica dos serviços oferecidos. Desenvolvedores, c
 | GET    | /api/fhir/r4/Patient          | Obter informações sobre paciente.                                         |
 | GET    | /api/fhir/r4/Organization     | Obter informações sobre um estabelecimento de saúde ou outra organização. |
 | GET    | /api/fhir/r4/Practitioner     | Obter informações sobre profissional de saúde                             |
-| GET    | /api/fhir/r4/PractitionerRole |                                                                           |
+| GET    | /api/fhir/r4/PractitionerRole | Obter informações sobre papéis desempenhados por profissionais de saúde.                                                                          |
 | POST   | /api/fhir/r4/Bundle           | Enviar resultado de exame                                                 |
 | POST   | /api/fhir/r4/Bundle           | Substituir resultado de exame                                             |
