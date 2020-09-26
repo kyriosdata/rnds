@@ -22,7 +22,7 @@ A ambientação com os serviços oferecidos pela RNDS é considerada imprescind�
 a compreensão dos serviços. A sugestão é interagir com eles,
 saber o que eles exigem como _payload_, _headers_ e a saída 
 esperada e código de retorno, dentre outros. Para tal, nada melhor
-do que seguir as orientações para [interação com o ambiente de homologação](./postman).
+do que seguir as orientações para [interação com o ambiente de homologação](./conhecer).
 
 ### Desenvolver
 

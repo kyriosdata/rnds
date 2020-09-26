@@ -24,7 +24,7 @@ module.exports = {
        ],
       TI: [
         "ti/ti",
-        "ti/postman",
+        "ti/conhecer",
         "ti/si",
         "ti/homologar",
         "ti/producao",
