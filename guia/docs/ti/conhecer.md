@@ -8,7 +8,7 @@ A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, 
 
 > Neste documento é apresentado como submeter tais requisições. 
 
-Conforme ilustrado abaixo, a submissão de requisições será feita por meio da ferramenta
+A submissão de requisições será feita por meio da ferramenta
 [Postman](https://www.postman.com/downloads/) (empregada por desenvolvedores para interação com _web services_). Desta forma,
 sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para 
 a produção de código correspondente.
@@ -38,7 +38,7 @@ Conforme ilustrado na figura acima, o uso do Postman depende de três informaç�
 - Arquivos necessários:
   - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessária a senha para acesso ao conteúdo do certificado.
   
-  - Baixe o arquivo JSON (_collection_), empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação. Detalhes das requisições podem ser obtidos interagindo com a própria ferramenta, após a importação deste arquivo ou, se preferir, consulte a [documentação](https://documenter.getpostman.com/view/215332/TVCmT68w) correspondente na internet.
+  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A [documentação das requisições](https://documenter.getpostman.com/view/215332/TVCmT68w)(serviços) também pode ser consulta pela internet.
 
 ### Passos
 De posse das informações e dos arquivos, veja seção anterior, pode-se configurar o Postman: (a) importar _collection_; (b) configurar certificado digital e (c) configurar variáveis.
@@ -49,11 +49,11 @@ De posse das informações e dos arquivos, veja seção anterior, pode-se config
 
 Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import`, empregado para "importar" o arquivo baixado anteriormente:
 
-![postman-abertura](https://user-images.githubusercontent.com/1735792/92666083-a437c000-f2de-11ea-8ffc-9dd163784983.jpg)
+![postman-abertura](../../static/img/postman-import.png)
 
 Após importado, o resultado deve ser similar àquele abaixo. A versão pode ser diferente, por exemplo. Observe que estão disponíveis 11 requisições, agrupadas naquelas de "Segurança" e "Saúde".
 
-![image](https://user-images.githubusercontent.com/1735792/92743020-8efe7800-f356-11ea-871e-3a4c6489ccfc.png)
+![image](../../static/img/postman-carregado.png)
 
 Você pode experimentar a execução de qualquer uma delas, todas devem
 falhar, ótimo (por enquanto, claro). É preciso, para funcionar, que as informações específicas
