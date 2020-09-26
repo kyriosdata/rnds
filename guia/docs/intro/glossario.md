@@ -14,6 +14,10 @@ FHIR é acrônimo de _Fast Healthcare Interoperability Resources_. Conforme o [p
 ### ICP-Brasil
 Infraestrutura de Chaves Públicas Brasileira. Conforme o Instituto Nacional de Tecnologia da Informação ([ITI](https://www.gov.br/iti/pt-br/assuntos/icp-brasil)), a ICP-Brasil "é uma cadeia hierárquica de confiança que viabiliza a emissão de certificados digitais para identificação virtual do cidadão."
 
+### Payload
+Conteúdo efetivo ou dado propriamente dito, a ser transferido, de uma mensagem. 
+Consulte a definição na [wikipedia](https://en.wikipedia.org/wiki/Payload_(computing)).
+
 ### RNDS 
 Rede Nacional de Dados em Saúde. O portal da RNDS é https://rnds.saude.gov.br.
 

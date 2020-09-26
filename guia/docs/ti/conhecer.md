@@ -6,11 +6,14 @@ sidebar_label: Conhecer os serviços
 
 A adoção do padrão FHIR significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS. Ou seja, a RNDS não impõe, restringe ou orienta decisões no escopo do ecossistema do estabelecimento de saúde. 
 
-Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). As portas Auth e EHR são empregadas, conforme ilustrado abaixo.
+Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
 
-![img](../../static/img/rnds-deployment.png)
+> Neste documento é apresentado como enviar tais requisições. 
 
-O foco aqui são tais requisições. Observe que em vez de um [Software de Integração](./si) (usado na figura acima), a ser desenvolvido pelo laboratório, emprega-se o Postman como instrumento para experimentar as requisições, alterar valores de _headers_ e outros, conforme ilustrado abaixo.
+Conforme ilustrado abaixo, a submissão de requisições será feita por meio da ferramenta
+[Postman](https://www.postman.com/downloads/) (empregada por desenvolvedores para interação com _web services_). Desta forma,
+sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para 
+a produção de código correspondente.
 
 ![img](../../static/img/postman-desenvolvedor.png)
 
@@ -18,7 +21,7 @@ Ao final, espera-se que:
 
 - Você saiba quais são as requisições disponíveis.
 - Você saiba quais são os _headers_ necessários e como montar os valores correspondentes.
-- Você saiba quais os dados a serem enviados por cada requisição, ou [payload](<https://en.wikipedia.org/wiki/Payload_(computing)>).
+- Você saiba quais os dados a serem enviados por cada requisição, ou [payload](../intro/glossario#payload).
 - Você saiba submeter as requisições por meio da ferramenta Postman.
 - Você saiba experimentar valores diferentes para o _payload_, _headers_ e observar os resultados.
 - Você saiba interagir com a RNDS usando HTTPS.
@@ -27,21 +30,24 @@ Ao final, espera-se que:
 - Você esteja apto para construir o [Software de Integração](./si).
 
 ### Pré-requisitos
+Conforme ilustrado na figura acima, o uso do Postman depende de três informações e dois arquivos:
 
 - Informações:
-  - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessário conhecer a senha de acesso ao conteúdo do certificado.
-  - A [solicitação de acesso](../gestor/portal) foi realizada pelo gestor e aprovada, ou seja, o acesso [ambiente de homologação](../rnds/ambientes) foi obtido.
-  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS.
+  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS quando a  [solicitação de acesso](../gestor/portal) é aprovada. Esta aprovação, além de definir o identificador do solicitante, também autoriza o acesso ao [ambiente de homologação](../rnds/ambientes).
   - CNES. O CNES do laboratório.
-  - O CNS de um profissional de saúde, lotado no laboratório cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
-- Postman. A ferramenta [Postman](https://www.postman.com/downloads/) é empregada para interação com _web services_. O _Guia_ emprega ela para ilustrar os "primeiros contatos" com a RNDS. Detalhes `criar página com detalhes`.
-- Baixe o arquivo JSON, empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação. Detalhes das requisições podem ser obtidos interagindo com o próprio postman, após a importação deste arquivo (seção seguinte) ou, se preferir, consulte a [documentação](https://documenter.getpostman.com/view/215332/TVCmT68w) correspondente na internet.
+  - CNS de um profissional de saúde lotado no estabelecimento de saúde cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
 
-### Importar
+Arquivos:
+  - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessário conhecer a senha de acesso ao conteúdo do certificado.
+  
+  - Baixe o arquivo JSON (_collection_), empregado pelo Postman, contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json) a serem submetidas ao ambiente de homologação. Detalhes das requisições podem ser obtidos interagindo com a própria ferramenta, após a importação deste arquivo ou, se preferir, consulte a [documentação](https://documenter.getpostman.com/view/215332/TVCmT68w) correspondente na internet.
+
+### Passos
+De posse das informações e dos arquivos, veja seção anterior, pode-se configurar o Postman: (a) importar _collection_; (b) configurar certificado digital e (c) configurar variáveis.
+
+### Importar _collection_
 
 > Veja o vídeo acerca de como importar [aqui](https://drive.google.com/file/d/13hbA4uZlX_90wFt0ktCvkX2jBbhFkoDC/view)
-
-De posse das informações necessárias (pré-requisitos), pertinentes a um dado laboratório, é necessário importar o arquivo contendo as [requisições](https://raw.githubusercontent.com/kyriosdata/rnds/3e92565e6e7fefd4020e89073166d9282510f2c2/tools/postman/rnds-postman-collection.json). Este arquivo contém, na terminologia empregada pelo Postman, uma _collection_ (as requisições).
 
 Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import`, empregado para "importar" o arquivo baixado anteriormente:
 
