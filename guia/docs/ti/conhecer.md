@@ -62,13 +62,15 @@ não indicamos o certificado a ser empregado nem outras configurações necessá
 
 > Veja o vídeo acerca de como configurar o Postman com o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
-O Postman precisa ser configurado para usar o certificado digital do laboratório em questão. Esta configuração é exigida para a correta execução do serviço "Obter token de acesso". Em tempo, este é o único serviço que usa diretamente o certificado digital.
+O Postman precisa ser configurado para usar o certificado digital do estabelecimento de saúde em questão, quando uma requisição for direcionada ao endereço empregado para autenticação do ambiente de homologação. 
+
+Esta configuração é exigida para a correta execução do serviço denominado "Obter token de acesso". E o resultado desta requisição é necessário para a execução de todos os demais serviços. Em tempo, este é o único serviço que usa diretamente o certificado digital.
 
 O serviço "Obter token de acesso" produz como resultado (retorno) o _token_ de acesso. Tal _token_ é exigido por todos os demais serviços. Ou seja, primeiro se obtém o _token_ de acesso, que tem validade por 30 minutos, e depois ele é reutilizado, neste período, em todas as demais requisições. Transcorridos os 30 minutos, será necessário uma nova requisição ao serviço "Obter token de acesso", para que um novo _token_, válido pelos próximos 30 minutos, possa ser reutilizado.
 
 A indicação do certificado digital a ser utilizado pelo Postman é realizada da seguinte forma. Selecione _File_ (opção do _menu_), na sequência a opção _Settings_ e, por fim, abre-se a janela abaixo, na qual a aba _Certificates_ deve ser selecionada e, por último, _Add Certificate_.
 
-![img](https://user-images.githubusercontent.com/1735792/92801355-e8cd6500-f38b-11ea-8eea-2128ab4e5647.jpg)
+![img](../../static/img/postman-settings.png)
 
 Quando _Add Certificate_ é pressionado, abre-se a tela similar àquela abaixo.
 Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o arquivo **.pfx** contendo o certificado digital do laboratório; (b) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](./ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
