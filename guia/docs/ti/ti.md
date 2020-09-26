@@ -29,7 +29,7 @@ A proposta e desenvolvimento de um _software_ de integração para um dado labor
 
 A execução satisfatória desta atribuição resulta em:
 
-- _Software_ disponível para integração entre o laboratório e a RNDS.
+- _Software_ disponível para integração do estabelecimento de saúde com a RNDS.
 - Testes de integração com a RNDS.
 - _Baseline_ formada pelo código produzido, testes,
   configuração, documentação e outros itens pertinentes devidamente identificados.
@@ -40,9 +40,9 @@ O _software_ produzido deverá ser experimentado no ambiente de homologação. E
 
 A execução satisfatória desta atribuição resulta em:
 
-- Execução satisfatória dos testes de integração.
-- Registro dos resultados dos testes de integração.
-- Disponibilizar tais registros para o responsável pelo laboratório. Isto é necessário para o responsável pelo laboratório requisitar acesso ao ambiente de produção.
+- Execução satisfatória dos testes de aceitação.
+- Registro dos resultados dos testes de aceitação.
+- Disponibilizar tais registros para o gestor. Isto é necessário para o gestor possa requisitar acesso ao ambiente de produção.
 
 ### Colocar em produção
 
