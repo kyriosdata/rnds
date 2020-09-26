@@ -25,7 +25,7 @@ Por fim, a existência de um certificado e de uma senha (código) de acesso exig
 
 A execução satisfatória desta atribuição resulta em:
 
-- Certificado digital do estabelecimento de saúde.
-- Senha de acesso ao conteúdo do certificado digital. 
+- Certificado digital do estabelecimento de saúde disponível.
+- Senha de acesso ao conteúdo do certificado digital definida.
 
 
