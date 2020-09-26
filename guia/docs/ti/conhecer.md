@@ -4,9 +4,9 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-Em algum momento, contudo, requisições _https_, obdecendo o padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, devem partir do laboratório e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
+A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de requisições _https_ que devem partir do estabelecimento de saúde e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
 
-> Neste documento é apresentado como enviar tais requisições. 
+> Neste documento é apresentado como submeter tais requisições. 
 
 Conforme ilustrado abaixo, a submissão de requisições será feita por meio da ferramenta
 [Postman](https://www.postman.com/downloads/) (empregada por desenvolvedores para interação com _web services_). Desta forma,
