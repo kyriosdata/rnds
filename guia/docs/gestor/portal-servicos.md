@@ -18,9 +18,9 @@ Quando o botão "Solicitar acesso" (veja ilustração acima) é pressionado, a p
 
 ![gov.br](../../static/img/gov.br.png)
 
-### Solicitação de acesso
+### Etapas da solicitação
 
-A solicitação de acesso exige o fornecimento de várias informações, distribuídas em etapas, conforme ilustrado abaixo. Observe que a identificação do usuário gov.br foram omitidas.
+A solicitação de acesso exige o fornecimento de várias informações, distribuídas em etapas (Responsável, Sistema, Operação e Finalização), conforme ilustrado abaixo. Observe que as tarjas azuis na parte superior ocultam a identificação do usuário gov.br em questão.
 
 ![etapas da solicitação](../../static/img/rnds-etapas-solicitacao.png)
 
