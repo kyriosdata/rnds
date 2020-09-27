@@ -4,7 +4,7 @@ title: FHIRPath
 sidebar_label: FHIRPath
 ---
 
-Implementações do FHIR podem retornar representações de recursos em JSON. Neste caso, o JSON retornado pode ser consultado por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)).
+Implementações do FHIR retornam, em geral, representações de recursos em JSON. Neste caso, o JSON retornado pode ser consultado por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)).
 
 FHIRPath é similar a JsonPath, contudo, contém funções específicas para FHIR.
 
