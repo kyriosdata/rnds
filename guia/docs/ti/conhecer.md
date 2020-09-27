@@ -58,7 +58,7 @@ Após importado, o resultado é similar àquele abaixo. A versão pode ser difer
 Neste ponto pode-se selecionar uma das requisições e, no canto superior direito, botão `Send` submeter aquela selecionada. Contudo, qualquer uma delas deve falhar, afinal,
 não indicamos o certificado a ser empregado nem outras configurações necessárias.
 
-### Configurar (certificado digital)
+### Fornecer o certificado digital para uso
 
 > Veja o vídeo acerca de como configurar o Postman com o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
@@ -86,7 +86,7 @@ no endereço fornecido na configuração acima, o certificado e a senha serão u
 
 As demais requisições dependem de outras configurações. Mais um passo e todas elas estarão funcionando.
 
-### Configurar (variáveis)
+### Configurar variáveis
 
 A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
 _token_ retornado por esta requisição, dependem de outros valores, neste caso, depositados em variáveis. Abaixo segue o conjunto das variáveis empregadas pelo Postman para execução das requisições.
@@ -130,7 +130,7 @@ Variáveis geradas pelo próprio Postman:
 
 - **exame-id-rnds**: identificador gerado pela própria RNDS para um resultado de exame submetido de forma satisfatória (requisição "Enviar resultado de exame"). Este identificador único, gerado pela RNDS, é depositado nesta variável e, à semelhança de **exame-id-lab**, também é empregado pela requisição "Substituir resultado de exame".
 
-### Executando requisições
+### Experimentar requisições
 
 A execução de requisições é feita com a seleção da requisição a ser executada e, em seguida, ao clicar no botão `Send`. A requisição será submetida e o retorno será exibido. A sugestão é experimentar mudanças nos parâmetros das requisições, no _payload_ de um resultado de exame, remover um _header_, alterar o valor de um _header_ e observar os resultados. Desta forma será possível adquirir fluência na interação com a RNDS.
 
