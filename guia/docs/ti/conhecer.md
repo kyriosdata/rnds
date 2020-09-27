@@ -4,7 +4,7 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de requisições _https_ que devem partir do estabelecimento de saúde e atingir o [ambiente](./ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
+A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/215332/TVK8bfXN) que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
 
 > Neste documento é apresentado como submeter tais requisições. 
 
