@@ -12,7 +12,7 @@ papéis. Um deles é o [responsável pela TI](./ti) do estabelecimento de saúde
 ## Atribuições do gestor 
 
 As atribuições do gestor, detalhadas abaixo, são:
-(a) Adquirir certificado digital; (b) Criar conta gov.br (caso não possua uma); (c) Solicitar acesso ao portal de serviços da RNDS e (d) Validar mapeamento.
+(a) adquirir certificado digital; (b) criar conta gov.br (caso não possua uma); (c) solicitar acesso aos serviços da RNDS (ambiente de homologação); (d) validar mapeamento e (e) solicitar acesso ao ambiente de produção.
 
 ### Adquirir certificado digital
 
@@ -23,7 +23,7 @@ A execução satisfatória desta atribuição resulta em:
 - Certificado digital, arquivo **.pfx**, disponibilizado.
 - Senha secreta de acesso ao certificado disponibilizada para uso pelo profissional de TI do laboratório.
 
-### gov.br
+### Criar conta gov.br
 
 O acesso digital a serviços oferecidos pelo governo demanda uma conta,
 que pode ser criada no portal [gov.br](https://acesso.gov.br). O gestor,
@@ -36,7 +36,7 @@ A execução satisfatória desta atribuição resulta em:
 
 - Conta gov.br do gestor do estabelecimento de saúde disponível. 
 
-### Solicitar acesso
+### Solicitar acesso (ambiente de homologação)
 
 Credenciamento junto à RNDS. Esta solicitação é necessária para credenciamento do laboratório junto à RNDS. Este credenciamento dá origem
 ao **identificador do solicitante**, que será empregado pelo _software_ de integração. Esta solicitação é realizada com o apoio do responsável pela TI do laboratório, dado que depende de informações como faixa de IPs dos
@@ -56,6 +56,11 @@ O laboratório pode empregar uma terminologia ou códigos próprios para identif
 
 A execução satisfatória desta atribuição resulta em:
 
-- Revisão de todos os itens de dados exigidos pela RNDS para um resulta do exame de SARS-CoV-2.
+- Revisão de todos os itens de dados exigidos pela RNDS para um resultado de exame de SARS-CoV-2.
 - Identificação dos itens de dados dos quais aqueles exigidos pela RNDS serão obtidos.
 - Identificação do mapeamento, se for o caso, entre o item de dado de origem do laboratório e o item de dado exigido pela RNDS.
+
+### Solicitar acesso (ambiente de produção)
+
+A atribuição final do gestor é requisitar o acesso ao ambiente de 
+produção e aguardar pela aprovação correspondente. A partir da aprovação, o estabelecimento de saúde poderá utilizar os endereços do [ambiente de produção](../rnds/ambientes) para as requisições correspondentes.
