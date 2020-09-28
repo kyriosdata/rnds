@@ -64,7 +64,7 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 
 Quem desejar consultar o JSON completo, já "inflado" com os valores para estas propriedades, antes de percorrer as seções seguintes, pode obtê-lo [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/SARS-CoV-2-01.json).
 
-### Identificador (_identifier_)
+### Identificador do solicitante
 
 A montagem de um identificador (_identifier_) é realizada a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{lab-identificador}} e {{exame-id-lab}}:
 
@@ -75,7 +75,7 @@ A montagem de um identificador (_identifier_) é realizada a partir de dois valo
 }
 ```
 
-O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Veja onde o [identificador](./identificador) do solicitante pode ser obtido.
+O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Veja onde o [identificador do solicitante](../gestor/identificador) pode ser obtido.
 
 A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados.
 

@@ -5,7 +5,7 @@ sidebar_label: Atribuições
 ---
 
 A integração com a RNDS exige atribuições distribuídas entre dois
-papéis. Um deles é o [responsável pela TI](./ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde. 
+papéis. Um deles é o [responsável pela TI](../ti/ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde. 
 
 ![img](../../static/img/gestor.png)
 

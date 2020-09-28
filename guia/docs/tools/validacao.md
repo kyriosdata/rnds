@@ -28,7 +28,7 @@ Uma alternativa para validação é usar o [validador](https://github.com/hapifh
 java -jar validador_cli.jar <recurso para validar> -ig <diretorio de definicoes> -recurse -output resultado.json
 ```
 
-O recurso pode ser o resultado de exame laboratorial, arquivo JSON. As definições podem ser obtidas pelo portal da RNDS ou pelo serviço Simplifier.NET (veja [detalhes](./perfis)).
+O recurso pode ser o resultado de exame laboratorial, arquivo JSON. As [definições](../rnds/perfis) estão amplamente disponíveis.
 No acomando acima a saída será depositada em **resultado.json**. Em tempo, a representação JSON do recurso [OperationOutcome](http://hl7.org/fhir/operationoutcome.html).
 
 ## Implementações

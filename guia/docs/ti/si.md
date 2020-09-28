@@ -43,7 +43,7 @@ Cada função é definida e classificada quanto à fase em que é executada (pre
   1.  **Autenticar**. Obtém chave para acesso aos serviços da RNDS.
   1.  **Enviar**. Notifica o resultado de um exame à RNDS.
 
-A figura abaixo ilustra os processos e a classificação deles, além de indicar que dois processos, via internet, interagem com as portas Auth e EHR, oferecidas pela RNDS. Detalhes são fornecidos em [Ambientes](./ambientes).
+A figura abaixo ilustra os processos e a classificação deles, além de indicar que dois processos, via internet, interagem com as portas Auth e EHR, oferecidas pela RNDS. Detalhes são fornecidos em [Ambientes](../rnds/ambientes).
 
 ![img](../../static/img/desenvolvedor.png)
 
