@@ -1,7 +1,7 @@
 ---
 id: gov.br
-title: gov.br
-sidebar_label: gov.br
+title: Criar conta gov.br
+sidebar_label: Criar conta gov.br
 ---
 
 O acesso aos serviços digitais oferecidos pelo governo exige uma conta que qualquer cidadão pode criar pelo portal [https://acesso.gov.br](https://acesso.gov.br). 

@@ -4,12 +4,14 @@ title: Passo a passo
 sidebar_label: Passo a passo
 ---
 
-O **Guia de Integração RNDS** tem como objetivo orientar um [público-alvo](./publico-alvo) específico com foco na obrigatoriedade de 
+O **Guia de Integração RNDS** tem como objetivo orientar um [público-alvo](./publico-alvo) específico visando satisfazer a obrigatoriedade de 
 notificação de resultados de exames (SARS-CoV-2) ao Ministério da Saúde (consulte o [contexto](./contexto) para detalhes).
 
->A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco deste guia, e realizada por meio da [RNDS](../rnds/rnds).
+>A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco deste guia. Esta integração é realizada por meio da [RNDS](../rnds/rnds).
 
-Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas para tal integração. Antes, contudo, é conveniente entender o [contexto](./contexto), o [público-alvo](./publico-alvo) do _Guia_ e o que a [RNDS](../rnds/rnds) oferece e estabelece para a correta integração. Adicionalmente, os passos estão distribuídos entre dois atores: o [gestor](../gestor/gestor) da instituição de saúde e profissional de 
+Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas para tal integração. Antes, contudo, é sugerido compreender o [público-alvo](./publico-alvo) e o [contexto](./contexto)  do _Guia_, além do papel da [RNDS](../rnds/rnds) nessa integração. 
+
+Os passos estão distribuídos entre dois atores: o [gestor](../gestor/gestor) da instituição de saúde e profissional de 
 [TI](../ti/ti) dessa instituição.
 
 A sequência sugerida é:

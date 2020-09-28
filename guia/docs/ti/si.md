@@ -51,8 +51,6 @@ A figura abaixo ilustra os processos e a classificação deles, além de indicar
 
 Dentre as funções atribuídas ao _Software de Integração_, ao todo seis, conforme seção anterior, duas delas não são contempladas aqui: (a) filtrar e (b) mapear. Estas funções são bem específicas e dependentes do ecossistema disponível no laboratório.
 
-### Implantação
-
 Na perspectiva de implantação (_deployment_), a figura abaixo
 ilustra uma possível organização do ecossistema de software
 utilizado por um laboratório, e sua integração com a RNDS.
@@ -70,3 +68,7 @@ pertinentes aos resultados de exames e atualmente mantidos pelo "Software Usado 
 
 > IMPORTANTE: a figura acima, embora possa inspirar o _design_ da
 > integração de um laboratório com a RNDS, apenas registra uma possibilidade cujo objetivo é orientar desenvolvedores de software acerca de questões pertinentes à tal integração.
+
+## Implementação
+
+A construção do código do Software de Integração pode se beneficiar das [bibliotecas](../tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS. 
