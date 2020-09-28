@@ -4,14 +4,13 @@ title: FHIRPath
 sidebar_label: FHIRPath
 ---
 
-Implementações do FHIR retornam, em geral, representações de recursos em JSON. Neste caso, o JSON retornado pode ser consultado por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)).
+Implementações do FHIR retornam, em geral, representações de recursos em JSON. Neste caso, o JSON retornado pode ser consultado por meio de JsonPath. Há vasta informação sobre o Jsonpath, como a possibilidade de execução de consultas [online](https://jsonpath.com/), a [especificação detalhada](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath) e até aplicação em [java](https://github.com/json-path/JsonPath)) que executa Jsonpath.
 
-FHIRPath é similar a JsonPath, contudo, contém funções específicas para FHIR.
+FHIRPath é similar a JsonPath, contudo, contém funções específicas para FHIR. FHIRPath também é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
 
-FHIRPath está definido [aqui](http://hl7.org/fhirpath/). Consulte [detalhes](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc)). FHIRPath é usado pela _Clinical Quality Language_ ([CQL](https://cql.hl7.org/index.html)).
+A [definição de FHIRPath](http://hl7.org/fhirpath/) também está disponível, inclusive em [detalhes](https://github.com/HL7/FHIRPath/blob/master/spec/index.adoc). 
 
-Consultas baseadas em FHIRPath podem ser executadas por meio do portal [clinfhir](http://clinfhir.com). Adicionalmente, pode-se usar a implementação [fhirpath](https://github.com/HL7/fhirpath.js) em Javascript, dentre outras
-opções.
+Consultas baseadas em FHIRPath podem ser executadas por meio do portal [clinfhir](http://clinfhir.com). Adicionalmente, pode-se usar a implementação [fhirpath](https://github.com/HL7/fhirpath.js) em Javascript, dentre outras opções.
 
 Esta implementação é empregada nos exemplos fornecidos abaixo.
 
