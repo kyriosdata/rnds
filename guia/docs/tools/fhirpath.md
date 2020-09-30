@@ -22,6 +22,11 @@ $ cd rnds/tools/fhirpath
 $ yarn install
 ```
 
+Em projeto existente (dependências de desenvolvimento):
+```shell
+$ yarn add fhirpath --dev
+```
+
 ### Operação trivial
 
 Contando quantas entradas possuem no documento **exemplo.json**.
