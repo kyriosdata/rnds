@@ -134,11 +134,19 @@ function paciente(numero, callback) {
 
 // paciente("cpf aqui", console.log);
 
-function cnsOficial(id) {
-  return id.system.endsWith("/cns") && id.use === "official";
-}
 
+/**
+ * Obtém o CNS (oficial) do paciente.
+ * 
+ * @param {string} numero O número do CPF do paciente.
+ * @param {function} callback A função chamada com o CNS do paciente.
+ */
 function cnsDoPaciente(numero, callback) {
+
+  function cnsOficial(id) {
+    return id.system.endsWith("/cns") && id.use === "official";
+  }
+  
   paciente(numero, (resultado) => {
     const ids = resultado.entry[0].resource.identifier;
     const idx = ids.findIndex(i => cnsOficial(i));
@@ -265,5 +273,6 @@ module.exports = {
   cpf: cpf,
   cnes: cnes,
   cnpj: cnpj,
-  paciente: paciente
+  paciente: paciente,
+  cnsDoPaciente: cnsDoPaciente
 };

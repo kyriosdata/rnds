@@ -27,6 +27,7 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 ### Usar
 
 ```js
+// Importar biblioteca
 const rnds = require("rnsd");
 
 // Token (access token) é obtido implicitamente e reutilizado
@@ -40,7 +41,13 @@ const rnds = require("rnsd");
 // Exibe informações sobre profissional de saúde (CNS).
 // Quando CNS omitido, é usado o do requisitante definido
 // por variável de ambiente.
-rnds.cns(console.log);
+// rnds.cns(console.log);
+
+// Exibe informações sobre o profissional de saúde
+// rnds.cpf("cpf do profissional de saúde", console.log);
+
+// Exibe informações sobre o paciente 
+// rnds.paciente("cpf do paciente", console.log);
 ```
 
 ### Links
