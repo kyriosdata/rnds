@@ -32,11 +32,18 @@ function token(callback) {
     passphrase: senha,
   };
 
-  buildRequest(options, (r) => {
-    // Guarda em cache o access token para uso em chamadas posteriores
-    accessToken = r.access_token;
-    callback(r);
-  });
+  try {
+    buildRequest(options, (r) => {
+      // Guarda em cache o access token para uso em chamadas posteriores
+      accessToken = r.access_token;
+      callback(r);
+    });
+  } catch (err) {
+    throw new Error(
+      `Certifique-se de que definiu corretamente variáveis
+       de ambiente, em particular, RNDS_CERTIFICADO_SENHA.
+       Exceção: ${err}`);
+  }
 }
 
 /**
@@ -103,7 +110,43 @@ function cpf(numero, callback) {
   }
 }
 
-//cpf(console.log);
+// cpf(console.log);
+
+/**
+ * Recupera informações sobre o paciante cujo CPF é fornecido.
+ * 
+ * @param {string} numero O código (número) do CPF do paciente.
+ * 
+ * @returns Informações sobre o paciente em um objeto JavaScript.
+ */
+function paciente(numero, callback) {
+  const identifier =
+    "identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
+    numero;
+  
+  const options = {
+    method: "GET",
+    path: "/api/fhir/r4/Patient?" + identifier,
+  };
+
+  makeRequest(options, callback);
+}
+
+// paciente("cpf aqui", console.log);
+
+function cnsOficial(id) {
+  return id.system.endsWith("/cns") && id.use === "official";
+}
+
+function cnsDoPaciente(numero, callback) {
+  paciente(numero, (resultado) => {
+    const ids = resultado.entry[0].resource.identifier;
+    const idx = ids.findIndex(i => cnsOficial(i));
+    callback(ids[idx].value);
+  });
+}
+
+// cnsDoPaciente("cpf do paciente", console.log);
 
 function executeRequest(options, callback) {
   const req = https.request(options, function (res) {
@@ -219,6 +262,8 @@ function makeRequest(options, callback) {
 
 module.exports = {
   cns: cns,
+  cpf: cpf,
   cnes: cnes,
   cnpj: cnpj,
+  paciente: paciente
 };
