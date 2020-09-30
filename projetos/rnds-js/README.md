@@ -1,8 +1,7 @@
 ## RNDS (Rede Nacional de Dados em Saúde)
 
 Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde).
-Os serviços oferecidos pela RNDS estão encapsulados em funções de conveniência,
-de fácil uso.
+Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso. Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
 
 ### Instalar
 
@@ -28,7 +27,7 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 
 ```js
 // Importar biblioteca
-const rnds = require("rnsd");
+const rnds = require("rnds");
 
 // Token (access token) é obtido implicitamente e reutilizado
 
