@@ -14,7 +14,7 @@ Resultados esperados:
 - Você saberá como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
 - Você será capaz de montar um documento JSON para refletir o resultado de um dado exame.
 
-### Estrutura
+### Bundle (estrutura)
 
 O resultado de exame laboratorial, por exemplo, o resultado do exame de SARS-CoV-2-19, é definido por meio de um recurso [Composition](https://www.hl7.org/fhir/composition.html), que referencia um recurso [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html). Todos estes três recursos são necessários.
 
@@ -64,9 +64,9 @@ a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostr
 
 Quem desejar consultar o JSON completo, já "inflado" com os valores para estas propriedades, antes de percorrer as seções seguintes, pode obtê-lo [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/SARS-CoV-2-01.json).
 
-### Identificador do solicitante
+### Bundle (_identifier_)
 
-A montagem de um identificador (_identifier_) é realizada a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{lab-identificador}} e {{exame-id-lab}}:
+O identificador (_identifier_) do _Bundle_ é montado a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{lab-identificador}} e {{exame-id-lab}}:
 
 ```json
 "identifier": {
@@ -75,17 +75,15 @@ A montagem de um identificador (_identifier_) é realizada a partir de dois valo
 }
 ```
 
-O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Veja onde o [identificador do solicitante](../gestor/identificador) pode ser obtido.
-
-A figura abaixo ilustra o local onde o responsável pelo laboratório pode localizar o identificador do laboratório. Convém ressaltar que não se trata do CNES do laboratório, mas de um identificador que será criado pela RNDS e atribuído ao laboratório. Tanto o número da solicitação de credenciamento quanto o identificador do solicitante, nesta figura, estão ocultados.
-
-![img](https://user-images.githubusercontent.com/1735792/90821002-9eb30f80-e308-11ea-8636-58645a1fa3c2.png)
+O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Consulte[identificador do solicitante](../gestor/identificador) para detalhes.
 
 O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 
-O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim por diante, caso o identificar inclua o dia em que é gerado, por exemplo. Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim sucessivamente, para resultados produzidos em um determinado dia.
 
-De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_, a ser enviado para a RNDS, seria
+Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+
+De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_ do _Bundle_ a ser enviado para a RNDS, seria
 
 ```json
 "identifier": {
@@ -116,7 +114,7 @@ Em consequência, o "esqueleto" JSON pode ser reescrito, considerando o preenchi
 }
 ```
 
-### Recursos do resultado (_Bundle_)
+### Bundle (_entry_)
 
 Um _Bundle_ é empregado para reunir recursos FHIR, e _entry_, destacada abaixo, é a propriedade onde os recursos devem ser fornecidos, observe que é um _array_. No caso em questão, este _array_ deve possuir três entradas:
 
@@ -128,7 +126,7 @@ Um _Bundle_ é empregado para reunir recursos FHIR, e _entry_, destacada abaixo,
  ]
 ```
 
-Estas três entradas, respectivamente, referem-se aos seguintes perfis, personalizações definidas pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
+Estas três entradas, respectivamente, referem-se aos seguintes perfis definidos pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
 [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
 
 Observe que estes recursos são fornecidos em entradas próprias da propriedade _entry_, ou seja, não estão "aninhadas", apesar da amostra biológica ser empregada pelo diagnóstico que, por sua vez, faz parte do resultado de exame laboratorial.
@@ -252,15 +250,19 @@ laboratório clínico. Em consequência, o valor desta propriedade é fixo e for
 ]
 ```
 
-### Diagnóstico em Laboratório Clínico
+### Diagnóstico em Laboratório Clínico (recurso)
 
 O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
 diagnóstica ou investigativa. Este perfil é uma personalização do recurso [Observation](https://www.hl7.org/fhir/observation.html). As propriedades são definidas abaixo.
 
-_status_. Valor fixo "final".
+_status_. Define o [Estado da Observação](https://simplifier.net/RedeNacionaldeDadosemSade/BREstadoObservacao-1.0-duplicate-2). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o diagnóstio está concluído. A representação JSON correspondente é fornecida abaixo:
 
-_category_. Conforme a documentação do perfil, classifica o exame ou teste utilizando os subgrupos do grupo 02 - Procedimentos com finalidade diagnóstica da Tabela SUS. Ou seja, é um dos valores do [Subgrupo da Tabela SUS](https://simplifier.net/RedeNacionaldeDadosemSade/BRSubgrupoTabelaSUS). No trecho abaixo usa-se o código "0214",
-que designa "Diagnóstico por teste rápido".
+```json
+"status": "final"
+```
+
+_category_. Classifica o exame ou teste utilizando um[Subgrupo da Tabela SUS](https://simplifier.net/RedeNacionaldeDadosemSade/BRSubgrupoTabelaSUS). Se o diagnóstico é por teste rápido, então o código correspondente é "0214". Ou seja, a propriedade _category_
+para "Diagnóstico por teste rápido" é definida conforme abaixo:
 
 ```json
 "category": [
@@ -289,9 +291,7 @@ exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que
 },
 ```
 
-_subject_. Identifica o indivíduo associado ao exame ou teste. O valor só faz sentido se for
-o mesmo daquele fornecido anteriormente, para o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Em consequência, o trecho JSON correspondente, também com o mesmo propósito de não citar explictamente um indivíduo, o código CNS do indivíduo é substituído
-por "{{individuo-cns}}".
+_subject_. Identifica o indivíduo associado ao exame ou teste. O valor é o mesmo daquele fornecido anteriormente, para o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Em consequência, o trecho JSON correspondente, também com o mesmo propósito de não citar explicitamente um indivíduo, substitui o código CNS do indivíduo por "{{individuo-cns}}".
 
 ```json
 "subject": {
@@ -303,9 +303,13 @@ por "{{individuo-cns}}".
 ```
 
 _issued_. Data/hora em que o resultado foi liberado. Este instante pode ser diferente daquele em
-que o resultado é produzido e também diferente do instante em que o empacotamento, _Bundle_ é produzido.
+que o resultado é produzido e também diferente do instante em que o _Bundle_ foi produzido. Um exemplo é fornecido abaixo:
 
-_performer_. Identifica o responsável pelo resultado do exame. Observe que este responsável pode ser diferente do autor.
+```json
+"issued": "2020-09-10T10:49:10-03:00"
+```
+
+_performer_. Identifica o profissional e/ou estabelecimento de saúde responsável pelo resultado do exame. Observe que este responsável pode ser diferente do autor.
 
 ```json
 "performer": [
@@ -318,8 +322,8 @@ _performer_. Identifica o responsável pelo resultado do exame. Observe que este
 ],
 ```
 
-_valueQuantity_. O valor do resultado quando este é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Se for qualitativo, então a propriedade
-a ser utilizada deve ser _valueCodeableConcept_. Neste caso, a propriedade _valueQuantity_ não seria fornecida.
+_valueQuantity_. O valor do resultado quando este é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Se for qualitativo, então esta propriedade
+não é fornecida e, no lugar dela, é empregada _valueCodeableConcept_.
 
 _valueCodeableConcept_. O valor do resultado quando este é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)). Se o valor do resultado é quantitativo,
 então a propriedade a ser utilizada deve ser _valueQuantity_. Neste caso, a propriedade _valueCodeableConcept_ não seria fornecida. No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
@@ -372,13 +376,17 @@ o terceiro recurso, conforme ilustrado abaixo.
 }
 ```
 
-### Amostra Biológica
+### Amostra Biológica (recurso)
 
 [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica) é um perfil de
 [Specimen](https://www.hl7.org/fhir/specimen.html). Este perfil identifica a amostra de origem humana ou animal
-usada em investigações biológicas/laboratoriais para fins diagnósticos. Neste caso, a única propriedade é _type_,
+usada em investigações biológicas/laboratoriais para fins diagnósticos.
+
+Neste perfil, a única propriedade é _type_,
 que identifica o [Tipo de Amostra de Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostra-1.0). Este tipo pode vir de duas tabelas (_code systems_) distintas. Uma delas é o [Tipo de Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostraGAL) que, dentre os seus códigos se encontra
-"SGHEM" para designar "sangue", empregado no trecho abaixo.
+"SGHEM" para designar "sangue". Ou seja, se a amostra
+biológica empregada pelo laboratório foi sangue, então o
+trecho JSON correspondente é fornecido abaixo:
 
 ```json
 "type": {
@@ -388,5 +396,29 @@ que identifica o [Tipo de Amostra de Exame](https://simplifier.net/RedeNacionald
             "code": "SGHEM"
         }
     ]
+}
+```
+
+Embora a única propriedade do perfil seja _type_, ilustrado acima, todo recurso tem a propriedade _meta_, assim como _resourceType_. Tendo em vista que o recurso em questão é uma das entradas de um _Bundle_, toda a entrada é exibida abaixo:
+
+```json
+{
+  "fullUrl": "urn:uuid:transient-2",
+  "resource": {
+    "resourceType": "Specimen",
+    "meta": {
+      "profile": [
+        "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0"
+      ]
+    },
+    "type": {
+      "coding": [
+        {
+          "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+          "code": "SGHEM"
+        }
+      ]
+    }
+  }
 }
 ```
