@@ -2,8 +2,6 @@
 id: passo-a-passo
 title: Passo a passo
 sidebar_label: Passo a passo
-keywords: roteiro
-description: Passo a passo a ser realizado por estabelecimento de saúde para integração com a RNDS.
 ---
 
 O **Guia de Integração RNDS** tem como objetivo orientar um [público-alvo](./publico-alvo) específico visando satisfazer a obrigatoriedade de
