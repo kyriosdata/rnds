@@ -67,6 +67,10 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Engenharia de Software (UFG).`,
     },
+    algolia: {
+      apiKey: "25626fae796133dc1e734c6bcaaeac3c",
+      indexName: "docsearch",
+    },
   },
   presets: [
     [
