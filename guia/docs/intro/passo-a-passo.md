@@ -4,19 +4,15 @@ title: Passo a passo
 sidebar_label: Passo a passo
 ---
 
-O **Guia de Integração RNDS** tem como objetivo orientar a notificação
-obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
+O **Guia de Integração RNDS** tem como objetivo orientar o desenvolvimento
+de solução tecnológica para a notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
 
-O [público-alvo](./publico-alvo) é formado por gestores
-de estabelecimentos de saúde (laboratórios) e profissionais de TI que irão
-desenvolver a solução técnica.
+O [público-alvo](./publico-alvo) deste _Guia_ é formado por gestores
+de estabelecimentos de saúde (laboratórios) e profissionais de TI. Ambos
+são necessários para desenvolver a solução tecnológica que conecta o estabelecimento de saúde à [RNDS](../rnds/rnds). É por meio desta conexão que o estabelecimento
+submete as notificações ao Ministério da Saúde. Consulte o [contexto](./contexto) para detalhes.
 
-O **Guia de Integração RNDS** tem como objetivo orientar um [público-alvo](./publico-alvo) específico visando satisfazer a obrigatoriedade de
-notificação de resultados de exames (SARS-CoV-2) ao Ministério da Saúde (consulte o [contexto](./contexto) para detalhes).
-
-> A integração necessária entre estabelecimentos de saúde (laboratórios) e o Ministério da Saúde é o foco deste guia. Esta integração é realizada por meio da [RNDS](../rnds/rnds).
-
-Abaixo segue uma orientação, passo a passo, das atividades a serem desempenhadas para tal integração. Antes, contudo, é sugerido compreender o [público-alvo](./publico-alvo) e o [contexto](./contexto) do _Guia_, além do papel da [RNDS](../rnds/rnds) nessa integração.
+> A integração obrigatória entre estabelecimentos de saúde (laboratórios) e a [RNDS](../rnds/rnds) (Ministério da Saúde) é o foco deste guia.
 
 Os passos estão distribuídos entre dois atores: o [gestor](../gestor/gestor) da instituição de saúde e profissional de
 [TI](../ti/ti) dessa instituição.
