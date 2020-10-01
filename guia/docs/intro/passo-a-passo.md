@@ -4,6 +4,13 @@ title: Passo a passo
 sidebar_label: Passo a passo
 ---
 
+O **Guia de Integração RNDS** tem como objetivo orientar a notificação
+obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
+
+O [público-alvo](./publico-alvo) é formado por gestores
+de estabelecimentos de saúde (laboratórios) e profissionais de TI que irão
+desenvolver a solução técnica.
+
 O **Guia de Integração RNDS** tem como objetivo orientar um [público-alvo](./publico-alvo) específico visando satisfazer a obrigatoriedade de
 notificação de resultados de exames (SARS-CoV-2) ao Ministério da Saúde (consulte o [contexto](./contexto) para detalhes).
 
