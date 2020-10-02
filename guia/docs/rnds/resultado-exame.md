@@ -224,7 +224,7 @@ a definição correspondente é fornecida abaixo, onde a sequência "{{lab-cnes}
 "author":[
    {
       "identifier":{
-         "system":"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+         "system":"http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
          "value":"{{lab-cnes}}"
       }
    }

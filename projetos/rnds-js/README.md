@@ -14,14 +14,14 @@ $ npm i rnds
 Tendo em vista a sensibilidade das informações que fazem parte da configuração
 necessária, todas elas são fornecidas por meio de variáveis de ambiente, conforme tabela abaixo:
 
-| Variável                  | Conteúdo                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------------ |
-| RNDS_AUTH                 | Endereço do serviço de autenticação (sem protocolo, sem path), por exemplo, **ehr-auth-hmg.saude.gov.br**.                                                 |
-| RNDS_EHR                  | Endereço dos serviços de saúde.                                                      |
-| RNDS_CERTIFICADO_ENDERECO | Endereço (web ou arquivo) do certificado digital (formato **.pfx**).                 |
-| RNDS_CERTIFICADO_SENHA    | Senha do certificado digital.                                                        |
-| RNDS_REQUISITANTE_CNS     | CNS do profissional de saúde em nome do qual requisições serão feitas.               |
-| RNDS_REQUISITANTE_UF      | Código do estado (duas letras, por exemplo, AC, DF, GO) do estabelecimento de saúde. |
+| Variável                  | Conteúdo                                                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| RNDS_AUTH                 | Endereço do serviço de autenticação (sem protocolo, sem path), por exemplo, **ehr-auth-hmg.saude.gov.br**. |
+| RNDS_EHR                  | Endereço dos serviços de saúde.                                                                            |
+| RNDS_CERTIFICADO_ENDERECO | Endereço (web ou arquivo) do certificado digital (formato **.pfx**).                                       |
+| RNDS_CERTIFICADO_SENHA    | Senha do certificado digital.                                                                              |
+| RNDS_REQUISITANTE_CNS     | CNS do profissional de saúde em nome do qual requisições serão feitas.                                     |
+| RNDS_REQUISITANTE_UF      | Código do estado (duas letras, por exemplo, AC, DF, GO) do estabelecimento de saúde.                       |
 
 ### Usar
 
@@ -45,8 +45,13 @@ const rnds = require("rnds");
 // Exibe informações sobre o profissional de saúde
 // rnds.cpf("cpf do profissional de saúde", console.log);
 
-// Exibe informações sobre o paciente 
+// Exibe informações sobre o paciente
 // rnds.paciente("cpf do paciente", console.log);
+
+// Submete um resultado de exame
+// O conteúdo JSON é obtido de arquivo no exemplo abaixo.
+// Exibe o identificador gerado pela RNDS para o resultado.
+// rnds.notificar(fs.readFileSync("resultado.json", "utf-8"), console.log);
 ```
 
 ### Links

@@ -165,7 +165,7 @@ function notificar(payload, callback) {
   makeRequest(options, encapsulada, payload);
 }
 
-notificar(fs.readFileSync("14.json", "utf-8"), console.log);
+// notificar(fs.readFileSync("14.json", "utf-8"), console.log);
 
 /**
  * Obtém o CNS (oficial) do paciente.
@@ -321,4 +321,5 @@ module.exports = {
   cnpj: cnpj,
   paciente: paciente,
   cnsDoPaciente: cnsDoPaciente,
+  notificar: notificar,
 };
