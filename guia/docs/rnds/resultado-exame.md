@@ -176,11 +176,15 @@ Observe novamente, no trecho acima, como é estabelecida a referência entre rec
 Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
 [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos. Novamente, o JSON completo está disponível [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/SARS-CoV-2-01.json).
 
-### Resultado de Exame Laboratorial
+### Resultado de Exame Laboratorial (recurso)
 
 Um resultado de exame no Brasil é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html). Conforme o perfil, um resultado é caracterizado por várias propriedades, cada uma delas comentada abaixo.
 
-_status_. Para efeito de um resultado o valor a ser utilizado é "final".
+_status_. Identifica um dos valores dos [Estados do Documento](https://simplifier.net/redenacionaldedadosemsade/brestadodocumento-1.0). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o documento está concluído. A representação JSON correspondente é fornecida abaixo:
+
+```json
+"status": "final"
+```
 
 _type_. Identifica o tipo do documento por meio da propriedade _coding_, que é um _array_, neste caso, de uma entrada apenas e obrigatória. O objeto correspondente a tal entrada possui duas propriedades, _system_ e _code_.
 A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Documento](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoDocumento). A segunda, um dos valores possíveis. Dentre eles há "REL", que representa "Resultado de Exame(s) Laboratorial(is)". Em consequência, esta propriedade é definida conforme abaixo:
@@ -196,7 +200,7 @@ A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Docum
 },
 ```
 
-_subject_. O indivíduo ao qual está associado o resultado de exame. A identificação é fornecida pelo objeto _identifier_, que possui duas propriedades, _system_ e _value_. O primeiro possui um valor fixo "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0". O segundo, _value_, é o CNS (Cartão Nacional de Saúde) do indivíduo. Abaixo segue a representação desta propriedade na qual, em vez do CNS de um indivíduo, é fornecida a sequência "{{individuo-cns}}".
+_subject_. O indivíduo ao qual está associado o resultado de exame. A identificação é fornecida pelo objeto _identifier_, que possui duas propriedades, _system_ e _value_. A primeira, _system_, possui um valor fixo. A segunda, _value_, é utilizada para fornecer o CNS (Cartão Nacional de Saúde) do indivíduo. Abaixo segue a representação desta propriedade na qual, em vez do CNS de um indivíduo, é fornecida a sequência "{{individuo-cns}}".
 
 ```json
 "subject": {
@@ -207,7 +211,11 @@ _subject_. O indivíduo ao qual está associado o resultado de exame. A identifi
 },
 ```
 
-_date_. Data e hora em que o documento foi gerado, por exemplo, "2020-03-20T00:00:00-03:00".
+_date_. Data e hora em que o documento foi gerado, por exemplo:
+
+```json
+"date" : "2020-03-20T00:00:00-03:00"
+```
 
 _author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo ou autoria do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. À semelhança de cenários anteriores, o trecho
 JSON abaixo substitui o valor de um CNES pela sequência "{{lab-cnes}}".
@@ -225,18 +233,35 @@ JSON abaixo substitui o valor de um CNES pela sequência "{{lab-cnes}}".
 
 _title_. O título do documento é o valor fixo "Resultado de Exame Laboratorial".
 
-_relatesTo_. Esta propriedade, conforme a documentação do perfil, deve ser utilizado exclusivamente
-para indicar que este documento substitui (_replaces_) outro documento. Seu uso, portanto, está
-definido para indicar que o presente documento substitui um anterior. Conforme a documentação,
+```json
+"title": "Resultado de Exame Laboratorial"
+```
+
+_relatesTo_. Esta propriedade deve ser utilizada exclusivamente para indicar que este documento substitui (_replaces_) outro documento. Seu uso, portanto, está
+definido para indicar que o documento que faz uso
+desta propriedade visa substituir um submetido anteriormente, conforme ilustrado abaixo, onde `{{exame-id-rnds}}` é o identificador do documento,
+fornecido pela RNDS, quando submetido.
+
+```json
+"relatesTo":[
+    {
+        "code":"replaces",
+        "targetReference":{
+            "reference":"Composition/{{exame-id-rnds}}"
+        }
+    }
+]
+```
+
+Conforme a documentação,
 o documento substituído continuará disponível na RNDS e poderá ser recuperado integralmente
-por meio do identificador a ele atribuído pela RNDS, contudo, não estará diretamente disponível
-na linha do tempo do cidadão. Esta propriedade será detalhada na definição do serviço
-_Substituir resultado de exame_.
+por meio do identificador a ele atribuído pela RNDS, ou seja, acima indicado por `{{exame-id-rnds}}`, contudo, não estará diretamente disponível
+na linha do tempo do cidadão.
 
 _section_. Define as seções empregadas pelo resultado (documento). Neste caso há uma única seção na qual
 é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, um _Observation_ e,
 para ser ainda mais preciso, o perfil definido pela RNDS para registrar o diagnóstico de um
-laboratório clínico. Em consequência, o valor desta propriedade é fixo e fornecido abaixo:
+laboratório clínico. A indicação da entrada do _Bundle_ que contém o diagnóstico é fornecida abaixo:
 
 ```json
 "section": [
