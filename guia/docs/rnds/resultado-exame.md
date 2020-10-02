@@ -322,6 +322,10 @@ _performer_. Identifica o profissional e/ou estabelecimento de saúde responsáv
 ],
 ```
 
+O resultado propriamente dito de um exame é fornecido
+por apenas uma de duas propriedades possíveis. Se o resultado é quantitativo, então a propriedade que registra o resultado é _valueQuantity_. Se o resultado, por outro lado, é qualitativo, então a propriedade empregada é
+_valueCodeableConcept_.
+
 _valueQuantity_. O valor do resultado quando este é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Se for qualitativo, então esta propriedade
 não é fornecida e, no lugar dela, é empregada _valueCodeableConcept_.
 
