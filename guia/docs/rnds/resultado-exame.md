@@ -70,7 +70,7 @@ O identificador (_identifier_) do _Bundle_ é montado a partir de dois valores, 
 
 ```json
 "identifier": {
-    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{lab-identificador}}",
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}",
     "value": "{{exame-id-lab}}"
 }
 ```
