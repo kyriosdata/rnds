@@ -6,9 +6,11 @@ Acesse o guia (documentação):
 
 - https://kyriosdata.github.io/rnds
 
-Documentação detalhada dos serviços:
+Documentação detalhada de serviços disponível em dois formatos:
 
-- https://documenter.getpostman.com/view/2163377/TVRd9Wad
+- [Portal](https://documenter.getpostman.com/view/2163377/TVRd9Wad) recomendado para consulta.
+
+- Arquivo [json](./tools/postman/rnds-postman-collection.json) exigido para a configuração do Postman.
 
 Desenvolvedores (bibliotecas para integração):
 
