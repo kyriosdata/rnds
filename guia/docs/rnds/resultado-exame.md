@@ -334,14 +334,15 @@ que o resultado é produzido e também diferente do instante em que o _Bundle_ f
 "issued": "2020-09-10T10:49:10-03:00"
 ```
 
-_performer_. Identifica o profissional e/ou estabelecimento de saúde responsável pelo resultado do exame. Observe que este responsável pode ser diferente do autor.
+_performer_. Identifica o profissional e/ou estabelecimento de saúde responsável pelo resultado do exame. Abaixo a sequência `{{profissional}}` deve ser substituída pelo
+CNS do profissional responsável pelo resultado (laudo).
 
 ```json
 "performer": [
     {
         "identifier": {
             "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
-            "value": "{{lab-cnes}}"
+            "value": "{{profissional}}"
         }
     }
 ],
