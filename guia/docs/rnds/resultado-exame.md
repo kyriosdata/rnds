@@ -217,8 +217,8 @@ _date_. Data e hora em que o documento foi gerado, por exemplo:
 "date" : "2020-03-20T00:00:00-03:00"
 ```
 
-_author_. Identifica a pessoa física ou a pessoa jurídica responsável pelo conteúdo ou autoria do documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. À semelhança de cenários anteriores, o trecho
-JSON abaixo substitui o valor de um CNES pela sequência "{{lab-cnes}}".
+_author_. Identifica a pessoa física (profissional liberal) ou a pessoa jurídica responsável por gerar o documento. A estrutura deste objeto é similar àquela de _subject_, fornecida acima. A sugestão é fornecer o estabelecimento de saúde e, em consequência,
+a definição correspondente é fornecida abaixo, onde a sequência "{{lab-cnes}}" deve ser substituída pelo CNES do estabelecimento em questão.
 
 ```json
 "author":[

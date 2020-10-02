@@ -42,7 +42,8 @@ function token(callback) {
     throw new Error(
       `Certifique-se de que definiu corretamente variáveis
        de ambiente, em particular, RNDS_CERTIFICADO_SENHA.
-       Exceção: ${err}`);
+       Exceção: ${err}`
+    );
   }
 }
 
@@ -83,6 +84,8 @@ function cns(cns, callback) {
   makeRequest(options, callback);
 }
 
+// cns("cns", (r) => console.log(r));
+
 /**
  * Recupera informações sobre profissional de saúde (via CPF).
  * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
@@ -114,16 +117,16 @@ function cpf(numero, callback) {
 
 /**
  * Recupera informações sobre o paciante cujo CPF é fornecido.
- * 
+ *
  * @param {string} numero O código (número) do CPF do paciente.
- * 
+ *
  * @returns Informações sobre o paciente em um objeto JavaScript.
  */
 function paciente(numero, callback) {
   const identifier =
     "identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
     numero;
-  
+
   const options = {
     method: "GET",
     path: "/api/fhir/r4/Patient?" + identifier,
@@ -134,22 +137,35 @@ function paciente(numero, callback) {
 
 // paciente("cpf aqui", console.log);
 
+function notificar(payload, callback) {
+  const options = {
+    method: "POST",
+    path: "/api/fhir/r4/Bundle",
+  };
+
+  function encapsulada(resposta, headers) {
+    callback(resposta);
+  }
+
+  makeRequest(options, encapsulada, payload);
+}
+
+notificar(fs.readFileSync("14.json", "utf-8"), console.log);
 
 /**
  * Obtém o CNS (oficial) do paciente.
- * 
+ *
  * @param {string} numero O número do CPF do paciente.
  * @param {function} callback A função chamada com o CNS do paciente.
  */
 function cnsDoPaciente(numero, callback) {
-
   function cnsOficial(id) {
     return id.system.endsWith("/cns") && id.use === "official";
   }
-  
+
   paciente(numero, (resultado) => {
     const ids = resultado.entry[0].resource.identifier;
-    const idx = ids.findIndex(i => cnsOficial(i));
+    const idx = ids.findIndex((i) => cnsOficial(i));
     callback(ids[idx].value);
   });
 }
@@ -178,7 +194,14 @@ function executeRequest(options, callback) {
   req.end();
 }
 
-function buildRequest(options, callback) {
+/**
+ *
+ * @param {*} options
+ * @param {function} callback Função a ser chamada com dois argumentos, o
+ * retorno obtido com a requisição e os headers.
+ * @param {*} payload
+ */
+function buildRequest(options, callback, payload) {
   const req = https.request(options, function (res) {
     var chunks = [];
 
@@ -189,13 +212,20 @@ function buildRequest(options, callback) {
     res.on("end", function (chunk) {
       const body = Buffer.concat(chunks);
       const json = JSON.parse(body.toString());
-      callback(json);
+      callback(json, res.headers);
     });
 
     res.on("error", function (error) {
       console.error(error);
     });
   });
+
+  if (payload) {
+    console.log("PAYLOAD será enviado...");
+    req.write(payload);
+  } else {
+    console.log("no payload");
+  }
 
   req.end();
 }
@@ -233,21 +263,21 @@ function cnpj(cnpj, callback) {
   makeRequest(options, callback);
 }
 
-//token(console.log);
-//cnes("2337991", console.log);
+// token(console.log);
+// cnes("2337991", (r) => console.log(r));
 //profissional(requisitante, (json) => {
 //  const cpf = json.identifier[0].value;
 //  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
 //});
 
-// lotacao(requisitante, "2337991", console.log);
+// lotacao(requisitante, "2337991", (r) => console.log(r));
 //cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
-function makeRequest(options, callback) {
+function makeRequest(options, callback, payload) {
   // Se access_token não disponível, então tentar recuperar.
   if (accessToken === undefined) {
     token(function () {
-      makeRequest(options, callback);
+      makeRequest(options, callback, payload);
     });
 
     return;
@@ -265,7 +295,7 @@ function makeRequest(options, callback) {
     maxRedirects: 10,
   };
 
-  buildRequest(securityAdded, callback);
+  buildRequest(securityAdded, callback, payload);
 }
 
 module.exports = {
@@ -274,5 +304,5 @@ module.exports = {
   cnes: cnes,
   cnpj: cnpj,
   paciente: paciente,
-  cnsDoPaciente: cnsDoPaciente
+  cnsDoPaciente: cnsDoPaciente,
 };
