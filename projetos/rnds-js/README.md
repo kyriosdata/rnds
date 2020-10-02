@@ -54,3 +54,4 @@ const rnds = require("rnds");
 - Autenticação com certificado via [Javascript](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)
 - Cliente/validador para js ([fhir](https://www.npmjs.com/package/fhir))
 - [SMART on FHIR](http://docs.smarthealthit.org/client-js/)
+- Interação com servidor FHIR ([fhir.js](https://github.com/FHIR/fhir.js))
