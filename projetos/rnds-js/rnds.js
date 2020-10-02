@@ -144,7 +144,7 @@ function notificar(payload, callback) {
   };
 
   function encapsulada(resposta, headers) {
-    callback(resposta);
+    callback(headers);
   }
 
   makeRequest(options, encapsulada, payload);
@@ -211,7 +211,8 @@ function buildRequest(options, callback, payload) {
 
     res.on("end", function (chunk) {
       const body = Buffer.concat(chunks);
-      const json = JSON.parse(body.toString());
+      const corpo = body.toString();
+      const json = corpo ? JSON.parse(corpo) : "";
       callback(json, res.headers);
     });
 
