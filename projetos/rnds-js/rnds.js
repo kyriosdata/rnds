@@ -137,6 +137,19 @@ function paciente(numero, callback) {
 
 // paciente("cpf aqui", console.log);
 
+/**
+ * Notica o Ministério da Saúde, ou seja, submete resultado de
+ * exame de COVID para a RNDS conforme padrão estabelecido. A
+ * callback será chamada com o identificador único, gerado pela
+ * RNDS, para fazer referência ao resultado submetido.
+ *
+ * @param {string} payload Resultado de exame devidamente empacotado
+ * conforme perfil FHIR correspondente, definido pela RNDS.
+ * @param {function} callback Função a ser chamada quando a submissão
+ * for realizada de forma satisfatória. O argumento fornecido à função
+ * será o identificador único, geraldo pela RNDS, para o resultado
+ * submetido.
+ */
 function notificar(payload, callback) {
   const options = {
     method: "POST",
@@ -144,7 +157,9 @@ function notificar(payload, callback) {
   };
 
   function encapsulada(resposta, headers) {
-    callback(headers);
+    const location = headers["location"];
+    const rndsID = location.substring(location.lastIndexOf("/") + 1);
+    callback(rndsID);
   }
 
   makeRequest(options, encapsulada, payload);
