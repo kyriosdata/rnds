@@ -326,12 +326,13 @@ O resultado propriamente dito de um exame é fornecido
 por apenas uma de duas propriedades possíveis. Se o resultado é quantitativo, então a propriedade que registra o resultado é _valueQuantity_. Se o resultado, por outro lado, é qualitativo, então a propriedade empregada é
 _valueCodeableConcept_.
 
-_valueQuantity_. O valor do resultado quando este é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Se for qualitativo, então esta propriedade
-não é fornecida e, no lugar dela, é empregada _valueCodeableConcept_.
+_valueQuantity_. Use esta propriedade quando o valor do resultado é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)).
 
-_valueCodeableConcept_. O valor do resultado quando este é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)). Se o valor do resultado é quantitativo,
-então a propriedade a ser utilizada deve ser _valueQuantity_. Neste caso, a propriedade _valueCodeableConcept_ não seria fornecida. No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
-[Resultado qualitativo do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRResultadoQualitativoExame).
+_valueCodeableConcept_. Use esta propriedade quando o valor do resultado é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)).
+
+No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
+[Resultado qualitativo do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRResultadoQualitativoExame), na
+qual 1 representa "Detectável", 2 representa "Não detectável" e 3 representa "Inconclusivo".
 
 ```json
 "valueCodeableConcept": {
