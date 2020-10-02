@@ -6,7 +6,9 @@ sidebar_label: Resultado de exame
 
 Objetivo:
 
-> Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial. A representação JSON de um resultado completo pode ser obtido AQUI.
+> Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial.
+
+A representação JSON de um resultado completo pode ser obtida na configuração do [postman](https://documenter.getpostman.com/view/2163377/TVRd9Wad).
 
 Resultados esperados:
 

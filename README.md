@@ -6,6 +6,10 @@ Acesse o guia (documentação):
 
 - https://kyriosdata.github.io/rnds
 
+Documentação detalhada dos serviços:
+
+- https://documenter.getpostman.com/view/2163377/TVRd9Wad
+
 Desenvolvedores (bibliotecas para integração):
 
 - [Java](projetos/lib)
@@ -16,4 +20,3 @@ Avisos:
 - Este **NÃO** é um portal do DATASUS/MS.
 - Este **NÃO** é o portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br.
 - Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde.
-
