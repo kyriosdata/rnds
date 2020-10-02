@@ -19,6 +19,6 @@ Desenvolvedores (bibliotecas para integração):
 
 Avisos:
 
-- Este **NÃO** é um portal do DATASUS/MS.
 - Este **NÃO** é o portal da RNDS/DATASUS. O portal da RNDS é http://rnds.saude.gov.br.
-- Este portal **NÃO** está associado, não é mantido, não é vistoriado, não é acompanhado nem auditado pelo DATASUS ou pelo Ministério da Saúde.
+- Use o conteúdo deste portal apenas se considerar relevante,
+  após sua avaliação. Consulte a [licença](LICENSE) para detalhes.
