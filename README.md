@@ -15,7 +15,7 @@ Documentação detalhada de serviços disponível em dois formatos:
 Desenvolvedores (bibliotecas para integração):
 
 - [Java](projetos/lib)
-- [Javascript](./projetos/rnds-js)
+- [NPM RNDS](https://www.npmjs.com/package/rnds) disponibiliza aos usuários de JavaScript o projeto[rnds-js](./projetos/rnds-js)
 
 Avisos:
 
