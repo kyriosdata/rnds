@@ -12,10 +12,11 @@ Documentação detalhada de serviços disponível em dois formatos:
 
 - Arquivo [json](./tools/postman/rnds-postman-collection.json) exigido para a configuração do Postman.
 
-Desenvolvedores (bibliotecas para integração):
+Desenvolvedores:
 
-- [Java](projetos/lib)
-- [NPM RNDS](https://www.npmjs.com/package/rnds) disponibiliza aos usuários de JavaScript o projeto[rnds-js](./projetos/rnds-js)
+- Este repositório disponibiliza duas bibliotecas para integração à RNDS: uma para [Java](projetos/rnds-java) e outra para [JavaScript](./projetos/rnds-js).
+
+- [NPM RNDS](https://www.npmjs.com/package/rnds) disponibiliza amplamente a biblioteca em JavaScript.
 
 Avisos:
 
