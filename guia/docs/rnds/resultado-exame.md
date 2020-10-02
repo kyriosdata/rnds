@@ -348,7 +348,11 @@ qual 1 representa "Detectável", 2 representa "Não detectável" e 3 representa 
 _interpretation_. Interpretação qualitativa de um resultado quantitativo. Propriedade opcional e
 particularmente útil quando se deseja esclarecer o resultado quantitativo do exame.
 
-_note_. Comentários sobre os resultados dos exames. Propriedade também opcional.
+_note_. Comentários sobre os resultados dos exames. Propriedade também opcional. Várias anotações, conforme ilustrado abaixo, podem ser fornecidas.
+
+```json
+"note": [ { "text": "anotação 1" }, { "text": "anotação 2" } ]
+```
 
 _method_. O método empregado na realização do exame. Este objeto possui uma única propriedade, _text_. Abaixo
 segue um trecho JSON correspondente:
@@ -371,8 +375,10 @@ _referenceRange_. De forma análoga à _method_ (acima), para o perfil em quest�
 ```
 
 _specimen_. Estabelece referência para o recurso [Specimen](https://www.hl7.org/fhir/specimen.html). Este recurso identifica a amostra empregada na realização do exame. Neste caso específico é uma referência para o perfil
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica). Noutras palavras,
-esta propriedade é a última do segundo recurso fornecido no _Bundle_ e que, em particular, referencia
+[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
+
+Em tempo, a propriedade _specimen_
+é a última do segundo recurso fornecido no _Bundle_ e que, em particular, referencia
 o terceiro recurso, conforme ilustrado abaixo.
 
 ```json
