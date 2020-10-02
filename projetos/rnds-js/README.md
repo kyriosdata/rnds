@@ -52,3 +52,4 @@ const rnds = require("rnds");
 ### Links
 
 - Autenticação com certificado via [Javascript](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)
+- Cliente para js ([fhir](https://www.npmjs.com/package/fhir))
