@@ -40,7 +40,7 @@ function token(callback) {
   };
 
   try {
-    buildRequest(options, (r) => {
+    buildRequest(options, 200, (r) => {
       // Guarda em cache o access token para uso em chamadas posteriores
       accessToken = r.access_token;
       callback(r);
@@ -67,7 +67,7 @@ function cnes(cnes, callback) {
     path: "/api/fhir/r4/Organization/" + cnes,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 /**
@@ -88,10 +88,10 @@ function cns(cns, callback) {
     path: "/api/fhir/r4/Practitioner/" + cns,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
-// cns("cns", (r) => console.log(r));
+// cns("forneça aqui um cns", (r) => console.log(r));
 
 /**
  * Recupera informações sobre profissional de saúde (via CPF).
@@ -116,7 +116,7 @@ function cpf(numero, callback) {
         numero,
     };
 
-    makeRequest(options, callback);
+    makeRequest(options, 200, callback);
   }
 }
 
@@ -139,7 +139,7 @@ function paciente(numero, callback) {
     path: "/api/fhir/r4/Patient?" + identifier,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 // paciente("cpf aqui", console.log);
@@ -169,10 +169,10 @@ function notificar(payload, callback) {
     callback(rndsID);
   }
 
-  makeRequest(options, encapsulada, payload);
+  makeRequest(options, 201, encapsulada, payload);
 }
 
-// notificar(fs.readFileSync("14.json", "utf-8"), console.log);
+notificar(fs.readFileSync("/tmp/rnds/l1.json", "utf-8"), console.log);
 
 /**
  * Obtém o CNS (oficial) do paciente.
@@ -219,11 +219,13 @@ function executeRequest(options, callback) {
 /**
  *
  * @param {*} options
+ * @param {number} expectedCode Código de retorno esperado em uma execução
+ * satisfatória.
  * @param {function} callback Função a ser chamada com dois argumentos, o
  * retorno obtido com a requisição e os headers.
- * @param {*} payload
+ * @param {*} payload Conteúdo a ser submetido.
  */
-function buildRequest(options, callback, payload) {
+function buildRequest(options, expectedCode, callback, payload) {
   const req = https.request(options, function (res) {
     var chunks = [];
 
@@ -235,10 +237,18 @@ function buildRequest(options, callback, payload) {
       const body = Buffer.concat(chunks);
       const corpo = body.toString();
       const json = corpo ? JSON.parse(corpo) : "";
+
+      if (res.statusCode != expectedCode) {
+        throw new Error(
+          `esperado ${expectedCode}, retornado ${res.statusCode} ${corpo}`
+        );
+      }
+
       callback(json, res.headers);
     });
 
     res.on("error", function (error) {
+      console.log("Ocorreu um erro (requisição não envida satisfatoriamente");
       console.error(error);
     });
   });
@@ -274,7 +284,7 @@ function lotacao(cns, cnes, callback) {
     path: "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 function cnpj(cnpj, callback) {
@@ -283,7 +293,7 @@ function cnpj(cnpj, callback) {
     path: "/api/fhir/r4/Organization/" + cnpj,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 // token(console.log);
@@ -296,17 +306,17 @@ function cnpj(cnpj, callback) {
 // lotacao(requisitante, "2337991", (r) => console.log(r));
 //cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
-function makeRequest(options, callback, payload) {
+function makeRequest(options, expectedCode, callback, payload) {
   // Se access_token não disponível, então tentar recuperar.
   if (accessToken === undefined) {
     token(function () {
-      makeRequest(options, callback, payload);
+      makeRequest(options, 200, callback, payload);
     });
 
     return;
   }
 
-  // Token de acesso agora está disponível
+  // Token de acesso está disponível
   const securityAdded = {
     ...options,
     hostname: ehr,
@@ -318,7 +328,7 @@ function makeRequest(options, callback, payload) {
     maxRedirects: 10,
   };
 
-  buildRequest(securityAdded, callback, payload);
+  buildRequest(securityAdded, expectedCode, callback, payload);
 }
 
 module.exports = {
