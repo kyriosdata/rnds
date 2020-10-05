@@ -1,6 +1,8 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
+// TODO mensagem quando codigo de retorno é 500
+
 // TODO criar classe
 // 1. construtor verifica todas as vars
 // 2. cache 'certificate' file (pfx)
