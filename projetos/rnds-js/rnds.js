@@ -29,30 +29,35 @@ let accessToken = undefined;
  * para esta função quando recuperado.
  */
 function token(callback) {
-  const options = {
-    method: "GET",
-    hostname: auth,
-    path: "/api/token",
-    headers: {},
-    maxRedirects: 20,
-    pfx: fs.readFileSync(certificado),
-    passphrase: senha,
-  };
-
   try {
+    const options = {
+      method: "GET",
+      hostname: auth,
+      path: "/api/token",
+      headers: {},
+      maxRedirects: 20,
+      pfx: fs.readFileSync(certificado),
+      passphrase: senha,
+    };
     buildRequest(options, 200, (r) => {
       // Guarda em cache o access token para uso em chamadas posteriores
       accessToken = r.access_token;
       callback(r);
     });
   } catch (err) {
-    throw new Error(
-      `Certifique-se de que definiu corretamente variáveis
+    const error = new Error(
+      `Não foi possível obter token.
+       Certifique-se de que definiu corretamente variáveis
        de ambiente, em particular, RNDS_CERTIFICADO_SENHA.
        Exceção: ${err}`
     );
+    callback(error);
   }
 }
+
+token((r) =>
+  r instanceof Error ? console.log(r) : console.log(r.access_token)
+);
 
 /**
  * Recupera informações sobre estabelecimento de saúde.
@@ -164,15 +169,24 @@ function notificar(payload, callback) {
   };
 
   function encapsulada(resposta, headers) {
-    const location = headers["location"];
-    const rndsID = location.substring(location.lastIndexOf("/") + 1);
-    callback(rndsID);
+    if (resposta instanceof Error) {
+      callback(resposta);
+    } else {
+      const location = headers["location"];
+      const rndsID = location.substring(location.lastIndexOf("/") + 1);
+      callback(rndsID);
+    }
   }
 
   makeRequest(options, 201, encapsulada, payload);
 }
 
-notificar(fs.readFileSync("/tmp/rnds/l1.json", "utf-8"), console.log);
+// notificar(fs.readFileSync("/tmp/rnds/l1.json", "utf-8"), (r) => {
+//   if (r instanceof Error) {
+//     console.log("não foi possível executar a requisição...");
+//     console.log(r.message);
+//   }
+// });
 
 /**
  * Obtém o CNS (oficial) do paciente.
@@ -194,29 +208,8 @@ function cnsDoPaciente(numero, callback) {
 
 // cnsDoPaciente("cpf do paciente", console.log);
 
-function executeRequest(options, callback) {
-  const req = https.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
-
-    res.on("end", function (chunk) {
-      const body = Buffer.concat(chunks);
-      const json = JSON.parse(body.toString());
-      callback(json);
-    });
-
-    res.on("error", function (error) {
-      console.error(error);
-    });
-  });
-
-  req.end();
-}
-
 /**
+ * Cria e executa a requisição.
  *
  * @param {*} options
  * @param {number} expectedCode Código de retorno esperado em uma execução
@@ -238,13 +231,14 @@ function buildRequest(options, expectedCode, callback, payload) {
       const corpo = body.toString();
       const json = corpo ? JSON.parse(corpo) : "";
 
-      if (res.statusCode != expectedCode) {
-        throw new Error(
-          `esperado ${expectedCode}, retornado ${res.statusCode} ${corpo}`
-        );
-      }
+      const payloadRetorno =
+        res.statusCode != expectedCode
+          ? new Error(
+              `esperado ${expectedCode}, retornado ${res.statusCode}\nResposta:\n${corpo}`
+            )
+          : json;
 
-      callback(json, res.headers);
+      callback(payloadRetorno, res.headers);
     });
 
     res.on("error", function (error) {
@@ -254,10 +248,7 @@ function buildRequest(options, expectedCode, callback, payload) {
   });
 
   if (payload) {
-    console.log("PAYLOAD será enviado...");
     req.write(payload);
-  } else {
-    console.log("no payload");
   }
 
   req.end();
