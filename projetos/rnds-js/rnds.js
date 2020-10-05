@@ -1,6 +1,11 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
+// TODO criar classe
+// 1. construtor verifica todas as vars
+// 2. cache 'certificate' file (pfx)
+// 3. instancia falha se não for possível obter token.
+
 /**
  * Variáveis de ambiente empregadas pelas funções.
  */
