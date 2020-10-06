@@ -27,4 +27,4 @@ A sequência sugerida é:
 1. O profissional de TI deve [desenvolver](../ti/si) o software necessário para a integração com a RNDS.
 1. O profissional de TI deve produzir as evidências necessárias para [homologar](../ti/homologar) a integração implementada pelo software desenvolvido (passo anterior).
 1. O gestor deve solicitar acesso ao ambiente de produção e aguardar a resposta do DATASUS.
-1. O profissional de TI deve [colocar em produção](../ti/producao) o software que integra o estabelecimento de saúde à RNDS (e homologado no passo anterior).
+1. O profissional de TI deve [colocar em produção](../ti/producao) o software que realiza a integração entre o estabelecimento de saúde e a RNDS (e homologado no passo anterior).
