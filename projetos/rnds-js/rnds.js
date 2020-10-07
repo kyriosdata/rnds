@@ -47,17 +47,27 @@ function token(callback) {
   } catch (err) {
     const error = new Error(
       `Não foi possível obter token.
-       Certifique-se de que definiu corretamente variáveis
-       de ambiente, em particular, RNDS_CERTIFICADO_SENHA.
+       Certifique-se de que definiu corretamente 
+       as variáveis de ambiente.
        Exceção: ${err}`
     );
     callback(error);
   }
 }
 
-token((r) =>
-  r instanceof Error ? console.log(r) : console.log(r.access_token)
-);
+// token((r) => {
+//   if (r instanceof Error) {
+//     console.log("ERRO NA OBTENCAO DE TOKEN");
+//     console.log(r);
+//   } else {
+//     console.log(
+//       "TOKEN OBTIDO SATISFATORIAMENTE:",
+//       r.access_token.substring(0, 19),
+//       "..."
+//     );
+//   }
+// });
+// console.log("token is called asynchronously...");
 
 /**
  * Recupera informações sobre estabelecimento de saúde.
@@ -72,15 +82,20 @@ function cnes(cnes, callback) {
     path: "/api/fhir/r4/Organization/" + cnes,
   };
 
-  makeRequest(options, 200, callback);
+  makeRequest(options, 200, (payload) => callback(payload));
 }
+
+// cnes("2337991", (r) =>
+//   r instanceof Error ? console.log("CNES não localizado") : console.log(r)
+// );
 
 /**
  * Recupera informações sobre profissional de saúde (via CNS).
- * @param {string} cns Código CNS do profissional de saúde. Caso não fornecido,
- * será empregado o CNS do requisitante.
- * @param {function} callback Função a ser chamada com o retorno fornecido pela
- * RNDS.
+ * @param {string} cns Código CNS do profissional de saúde. Caso não
+ * fornecido, será empregado o CNS do requisitante.
+ * @param {function} callback Função a ser chamada com o retorno fornecido
+ * pela RNDS. O argumento é uma instância de Error ou o payload (JSON)
+ * contendo a informação desejada.
  */
 function cns(cns, callback) {
   if (arguments.length === 1) {
@@ -93,10 +108,12 @@ function cns(cns, callback) {
     path: "/api/fhir/r4/Practitioner/" + cns,
   };
 
-  makeRequest(options, 200, callback);
+  makeRequest(options, 200, (payload) => callback(payload));
 }
 
-// cns("forneça aqui um cns", (r) => console.log(r));
+// cns("980016287385192", (r) =>
+//   r instanceof Error ? console.log("CNS não localizado") : console.log(r)
+// );
 
 /**
  * Recupera informações sobre profissional de saúde (via CPF).
@@ -234,10 +251,14 @@ function buildRequest(options, expectedCode, callback, payload) {
       const payloadRetorno =
         res.statusCode != expectedCode
           ? new Error(
-              `esperado ${expectedCode}, retornado ${res.statusCode}\nResposta:\n${corpo}`
+              `esperado ${expectedCode}, retornado ${res.statusCode}
+              Resposta:
+              ${corpo}`
             )
           : json;
 
+      // Repassado o retorno e headers
+      // (em vários cenários os headers não são relevantes)
       callback(payloadRetorno, res.headers);
     });
 
@@ -247,6 +268,7 @@ function buildRequest(options, expectedCode, callback, payload) {
     });
   });
 
+  // Se payload fornecido, este deve ser enviado.
   if (payload) {
     req.write(payload);
   }
@@ -287,6 +309,8 @@ function cnpj(cnpj, callback) {
   makeRequest(options, 200, callback);
 }
 
+cnpj("01567601000143", (r) => console.log("Organização:", r.name));
+
 // token(console.log);
 // cnes("2337991", (r) => console.log(r));
 //profissional(requisitante, (json) => {
@@ -295,7 +319,6 @@ function cnpj(cnpj, callback) {
 //});
 
 // lotacao(requisitante, "2337991", (r) => console.log(r));
-//cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
 function makeRequest(options, expectedCode, callback, payload) {
   // Se access_token não disponível, então tentar recuperar.
