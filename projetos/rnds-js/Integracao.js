@@ -3,11 +3,6 @@ const https = require("follow-redirects").https;
 
 // TODO mensagem quando codigo de retorno é 500
 
-// TODO criar classe
-// 1. construtor verifica todas as vars
-// 2. cache 'certificate' file (pfx)
-// 3. instancia falha se não for possível obter token.
-
 /**
  * Envia requisição https conforme opções e, se for o caso,
  * com o payload indicado. É esperado que o retorno satisfatório
