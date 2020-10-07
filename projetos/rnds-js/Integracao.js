@@ -81,6 +81,8 @@ class RNDS {
     } catch (error) {
       throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
     }
+
+    this.token(() => {});
   }
 
   /**
@@ -91,6 +93,7 @@ class RNDS {
    * execução da requisição.
    */
   token(callback) {
+    console.log("token() gets called...");
     try {
       const options = {
         method: "GET",
@@ -101,10 +104,11 @@ class RNDS {
         pfx: this.pfx,
         passphrase: this.senha,
       };
-      send(options, (codigo, r, headers) => {
+      send(options, (codigo, retorno, headers) => {
         // Guarda em cache o access token para uso em chamadas posteriores
-        this.access_token = r.access_token;
-        callback(codigo, r, headers);
+        this.access_token = retorno.access_token;
+        console.log("access_token updated.");
+        callback(codigo, retorno, headers);
       });
     } catch (err) {
       const error = new Error(
@@ -137,4 +141,3 @@ class RNDS {
 module.exports = RNDS;
 
 const rnds = new RNDS(); //.token((c, r) => console.log("codigo", c, "retorno:", r.token_type));
-rnds.token((c, r) => console.log("codigo", c));
