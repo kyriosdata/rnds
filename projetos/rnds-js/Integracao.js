@@ -17,13 +17,12 @@ const https = require("follow-redirects").https;
  * esperado não seja o retornado, então instância de erro é retornada.
  *
  * @param {*} options
- * @param {number} expectedCode Código de retorno esperado em uma execução
- * satisfatória.
- * @param {function} callback Função a ser chamada com dois argumentos, o
- * retorno obtido com a requisição e os headers.
+ * @param {function} callback Função a ser chamada com três argumentos, na
+ * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
+ * (c) headers retornados.
  * @param {*} payload Conteúdo a ser submetido.
  */
-function send(options, expectedCode, callback, payload) {
+function send(options, callback, payload) {
   const req = https.request(options, function (res) {
     var chunks = [];
 
@@ -36,18 +35,9 @@ function send(options, expectedCode, callback, payload) {
       const corpo = body.toString();
       const json = corpo ? JSON.parse(corpo) : "";
 
-      const payloadRetorno =
-        res.statusCode != expectedCode
-          ? new Error(
-              `esperado ${expectedCode}, retornado ${res.statusCode}
-              Resposta:
-              ${corpo}`
-            )
-          : json;
-
-      // Repassado o retorno e headers
+      // Repassado o código de retorno, o retorno e headers
       // (em vários cenários os headers não são relevantes)
-      callback(payloadRetorno, res.headers);
+      callback(res.statusCode, json, res.headers);
     });
 
     res.on("error", function (error) {
@@ -77,6 +67,7 @@ class RNDS {
     this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
     this.senha = process.env.RNDS_CERTIFICADO_SENHA;
     this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
+    this.access_token = undefined;
 
     checkVariable("RNDS_AUTH", this.auth);
     checkVariable("RNDS_EHR", this.ehr);
@@ -91,6 +82,52 @@ class RNDS {
       throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
     }
   }
+
+  /**
+   * Recupera <i>token</i> de acesso à RNDS.
+   * @param {function} callback O <i>token</i> de acesso é recebido e passado
+   * para esta função quando recuperado. Esta função recebe três argumentos:
+   * (a) código de retorno; (b) retorno e (c) headers retornados pela
+   * execução da requisição.
+   */
+  token(callback) {
+    try {
+      const options = {
+        method: "GET",
+        path: "/api/token",
+        headers: {},
+        maxRedirects: 20,
+        hostname: this.auth,
+        pfx: this.pfx,
+        passphrase: this.senha,
+      };
+      send(options, (codigo, r, headers) => {
+        // Guarda em cache o access token para uso em chamadas posteriores
+        this.access_token = r.access_token;
+        callback(codigo, r, headers);
+      });
+    } catch (err) {
+      const error = new Error(
+        `Não foi possível obter token.
+       Certifique-se de que definiu corretamente 
+       as variáveis de ambiente.
+       Exceção: ${err}`
+      );
+      callback(-1, error);
+    }
+  }
+
+  getToken() {
+    return new Promise((resolve, reject) => {
+      this.token((c, r) => {
+        if (c === 200) {
+          resolve(r);
+        } else {
+          reject(c);
+        }
+      });
+    });
+  }
 }
 
 /**
@@ -99,4 +136,5 @@ class RNDS {
 
 module.exports = RNDS;
 
-new RNDS();
+const rnds = new RNDS(); //.token((c, r) => console.log("codigo", c, "retorno:", r.token_type));
+rnds.token((c, r) => console.log("codigo", c));
