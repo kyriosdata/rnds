@@ -76,8 +76,6 @@ class RNDS {
     } catch (error) {
       throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
     }
-
-    this.token(() => {});
   }
 
   /**
@@ -100,9 +98,6 @@ class RNDS {
         passphrase: this.senha,
       };
       send(options, (codigo, retorno, headers) => {
-        // Guarda em cache o access token para uso em chamadas posteriores
-        this.access_token = retorno.access_token;
-        console.log("access_token updated.");
         callback(codigo, retorno, headers);
       });
     } catch (err) {
@@ -116,23 +111,39 @@ class RNDS {
     }
   }
 
-  getToken() {
+  start() {
     return new Promise((resolve, reject) => {
       this.token((c, r) => {
         if (c === 200) {
-          resolve(r);
+          // Guarda em cache o access token para uso posterior
+          this.access_token = r.access_token;
+          resolve("access_token updated");
         } else {
-          reject(c);
+          this.access_token = undefined;
+          reject("failed to update access_token");
         }
       });
     });
   }
-}
 
-/**
- * Variáveis de ambiente empregadas pelas funções.
- */
+  /**
+   * Recupera informações sobre estabelecimento de saúde.
+   *
+   * @param {string} cnes Código CNES do estabelecimento de saúde.
+   * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
+   */
+  cnes(cnes, callback) {
+    const options = {
+      method: "GET",
+      hostname: ehr,
+      path: "/api/fhir/r4/Organization/" + cnes,
+    };
+
+    makeRequest(options, 200, (payload) => callback(payload));
+  }
+}
 
 module.exports = RNDS;
 
 const rnds = new RNDS(); //.token((c, r) => console.log("codigo", c, "retorno:", r.token_type));
+rnds.start().then(console.log);
