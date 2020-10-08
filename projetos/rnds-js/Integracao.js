@@ -1,8 +1,6 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
-// TODO mensagem quando codigo de retorno é 500
-
 /**
  * Envia requisição https conforme opções e, se for o caso,
  * com o payload indicado. É esperado que o retorno satisfatório
@@ -97,9 +95,7 @@ class RNDS {
         pfx: this.pfx,
         passphrase: this.senha,
       };
-      send(options, (codigo, retorno, headers) => {
-        callback(codigo, retorno, headers);
-      });
+      send(options, callback);
     } catch (err) {
       const error = new Error(
         `Não foi possível obter token.
@@ -117,13 +113,45 @@ class RNDS {
         if (c === 200) {
           // Guarda em cache o access token para uso posterior
           this.access_token = r.access_token;
-          resolve("access_token updated");
+          resolve("ok");
         } else {
           this.access_token = undefined;
-          reject("failed to update access_token");
+          reject("falha ao obter access_token");
         }
       });
     });
+  }
+
+  addSecurityToOptions(options) {
+    return {
+      ...options,
+      hostname: this.ehr,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization-Server": "Bearer " + this.access_token,
+        Authorization: this.requisitante,
+      },
+      maxRedirects: 10,
+    };
+  }
+
+  whatMustBeDone(options, callback, payload) {
+    const securityAdded = this.addSecurityToOptions(options);
+    send(securityAdded, callback, payload);
+  }
+
+  makeRequest(options, callback, payload) {
+    console.log("makeRequest called");
+
+    // Se access_token não disponível, então tentar recuperar.
+    if (this.access_token === undefined) {
+      this.start()
+        .then(() => this.whatMustBeDone(options, callback, payload))
+        .catch((v) => console.log(v));
+    } else {
+      console.log("já iniciado...");
+      this.whatMustBeDone(options, callback, payload);
+    }
   }
 
   /**
@@ -133,17 +161,27 @@ class RNDS {
    * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
    */
   cnes(cnes, callback) {
+    console.log("cnes called");
     const options = {
       method: "GET",
-      hostname: ehr,
       path: "/api/fhir/r4/Organization/" + cnes,
     };
 
-    makeRequest(options, 200, (payload) => callback(payload));
+    this.makeRequest(options, callback);
+  }
+
+  getToken() {
+    return this.access_token;
   }
 }
 
 module.exports = RNDS;
 
-const rnds = new RNDS(); //.token((c, r) => console.log("codigo", c, "retorno:", r.token_type));
-rnds.start().then(console.log);
+const rnds = new RNDS();
+//rnds.start().then(() => console.log("fim"));
+rnds
+  .start()
+  .then(() => rnds.cnes("2337991", console.log))
+  .catch((e) => console.log(e));
+
+//rnds.cnes("2337991", console.log);

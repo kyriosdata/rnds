@@ -309,7 +309,8 @@ function cnpj(cnpj, callback) {
   makeRequest(options, 200, callback);
 }
 
-cnpj("01567601000143", (r) => console.log("Organização:", r.name));
+console.log("vou chamar cnpj...");
+cnpj("01567601000143", console.log);
 
 // token(console.log);
 // cnes("2337991", (r) => console.log(r));
