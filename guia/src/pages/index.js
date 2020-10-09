@@ -35,7 +35,7 @@ const features = [
     imageUrl: "img/conteudo-guia.png",
     description: (
       <>
-        Contexto, sequência de passos, orientações, explanações, código,
+        Contexto, sequência de passos, orientações, explanações, código,&nbsp;
         <i>scripts</i>, enfim, tudo o que é necessário para compreender e fazer
         funcionar a integração com a RNDS.
       </>
