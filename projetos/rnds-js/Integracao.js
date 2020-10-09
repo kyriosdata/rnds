@@ -156,19 +156,24 @@ class RNDS {
       // unauthorized
       if (c === 401) {
         console.log("should try again after getting another token...");
-      }
 
-      callback(c, r, h);
+        // Tenta obter token o que deve ser o mais frequente (token expirado)
+        // Contudo, há outros cenários pertinentes à autorização.
+        this.start().then(() => send(optionsWithSecurity, callback, payload));
+      } else {
+        console.log("callback clean call without wrapper...");
+        callback(c, r, h);
+      }
     };
 
     // Se access_token não disponível, então tentar recuperar.
     if (this.access_token === undefined) {
       this.start()
-        .then(() => send(optionsWithSecurity, callback, payload))
+        .then(() => send(optionsWithSecurity, wrapper, payload))
         .catch((v) => console.log(v));
     } else {
       console.log("já iniciado...");
-      send(optionsWithSecurity, callback, payload);
+      send(optionsWithSecurity, wrapper, payload);
     }
   }
 
