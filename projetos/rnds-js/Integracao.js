@@ -9,7 +9,8 @@ const https = require("follow-redirects").https;
  * correspondente ao JSON retornado) e, caso o código
  * esperado não seja o retornado, então instância de erro é retornada.
  *
- * @param {*} options
+ * @param {object} options Conjunto de propriedades que estabelecem a
+ * configuração para a requisição.
  * @param {function} callback Função a ser chamada com três argumentos, na
  * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
  * (c) headers retornados.
@@ -17,7 +18,7 @@ const https = require("follow-redirects").https;
  */
 function send(options, callback, payload) {
   const req = https.request(options, function (res) {
-    var chunks = [];
+    const chunks = [];
 
     res.on("data", function (chunk) {
       chunks.push(chunk);
@@ -25,8 +26,7 @@ function send(options, callback, payload) {
 
     res.on("end", function (chunk) {
       const body = Buffer.concat(chunks);
-      const corpo = body.toString();
-      const json = corpo ? JSON.parse(corpo) : "";
+      const json = body.length === 0 ? "" : JSON.parse(body.toString());
 
       // Repassado o código de retorno, o retorno e headers
       // (em vários cenários os headers não são relevantes)
@@ -34,7 +34,7 @@ function send(options, callback, payload) {
     });
 
     res.on("error", function (error) {
-      console.log("Ocorreu um erro (requisição não envida satisfatoriamente");
+      console.log("Ocorreu um erro (requisição não envida executada");
       console.error(error);
     });
   });
@@ -84,7 +84,6 @@ class RNDS {
    * execução da requisição.
    */
   token(callback) {
-    console.log("token() gets called...");
     try {
       const options = {
         method: "GET",
@@ -113,6 +112,7 @@ class RNDS {
         if (c === 200) {
           // Guarda em cache o access token para uso posterior
           this.access_token = r.access_token;
+          console.log("access_token updated");
           resolve("ok");
         } else {
           this.access_token = undefined;
@@ -136,8 +136,8 @@ class RNDS {
   }
 
   whatMustBeDone(options, callback, payload) {
-    const securityAdded = this.addSecurityToOptions(options);
-    send(securityAdded, callback, payload);
+    const optionsWithSecurity = this.addSecurityToOptions(options);
+    send(optionsWithSecurity, callback, payload);
   }
 
   makeRequest(options, callback, payload) {
