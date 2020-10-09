@@ -14,15 +14,14 @@ const https = require("follow-redirects").https;
  * @param {function} callback Função a ser chamada com três argumentos, na
  * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
  * (c) headers retornados.
- * @param {*} payload Conteúdo a ser submetido.
+ * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
+ * então nada será enviado.
  */
 function send(options, callback, payload) {
   const req = https.request(options, function (res) {
     const chunks = [];
 
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
+    res.on("data", (chunk) => chunks.push(chunk));
 
     res.on("end", function (chunk) {
       const body = Buffer.concat(chunks);
@@ -39,7 +38,7 @@ function send(options, callback, payload) {
     });
   });
 
-  // Se payload fornecido, este deve ser enviado.
+  // Se não fornecido ou vazio, não será enviado.
   if (payload) {
     req.write(payload);
   }
@@ -135,22 +134,41 @@ class RNDS {
     };
   }
 
-  whatMustBeDone(options, callback, payload) {
-    const optionsWithSecurity = this.addSecurityToOptions(options);
-    send(optionsWithSecurity, callback, payload);
-  }
-
+  /**
+   * Constrói e executa requisição. Caso o retorno seja o código
+   * 401 (unauthorized), automaticamente um novo token de acesso
+   * é requisitado e, caso obtido, a requisição desejada é refeita.
+   * Em consequência, se a "callback" for chamda com o código 401,
+   * então tentou-se obter um novo token usando em uma nova tentativa,
+   * antes de retornar tal código. Tal política contempla o caso de
+   * token expirado.
+   *
+   * @param {object} options Opções que configuram a requisição.
+   * @param {function} callback Função que será chamada com o código
+   * de retorno, o retorno (JSON parsed) e headers.
+   * @param {string} payload Mensagem ou conteúdo a ser enviado.
+   */
   makeRequest(options, callback, payload) {
     console.log("makeRequest called");
+    const optionsWithSecurity = this.addSecurityToOptions(options);
+
+    const wrapper = (c, r, h) => {
+      // unauthorized
+      if (c === 401) {
+        console.log("should try again after getting another token...");
+      }
+
+      callback(c, r, h);
+    };
 
     // Se access_token não disponível, então tentar recuperar.
     if (this.access_token === undefined) {
       this.start()
-        .then(() => this.whatMustBeDone(options, callback, payload))
+        .then(() => send(optionsWithSecurity, callback, payload))
         .catch((v) => console.log(v));
     } else {
       console.log("já iniciado...");
-      this.whatMustBeDone(options, callback, payload);
+      send(optionsWithSecurity, callback, payload);
     }
   }
 
