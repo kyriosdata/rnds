@@ -17,33 +17,38 @@ const https = require("follow-redirects").https;
  * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
  * então nada será enviado.
  */
-function send(options, callback, payload) {
-  const req = https.request(options, function (res) {
-    const chunks = [];
+function send(options, payload) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, function (res) {
+      const chunks = [];
 
-    res.on("data", (chunk) => chunks.push(chunk));
+      res.on("data", (chunk) => chunks.push(chunk));
 
-    res.on("end", function (chunk) {
-      const body = Buffer.concat(chunks);
-      const json = body.length === 0 ? "" : JSON.parse(body.toString());
+      res.on("end", function (chunk) {
+        const body = Buffer.concat(chunks);
+        const json = body.length === 0 ? "" : JSON.parse(body.toString());
 
-      // Repassado o código de retorno, o retorno e headers
-      // (em vários cenários os headers não são relevantes)
-      callback(res.statusCode, json, res.headers);
+        // Repassado o código de retorno, o retorno e headers
+        // (em vários cenários os headers não são relevantes)
+        console.log("send received", res.statusCode);
+        resolve({ code: res.statusCode, retorno: json, headers: res.headers });
+      });
+
+      res.on("error", function (error) {
+        reject({
+          msg: "Ocorreu um erro (requisição não envida executada",
+          erro: error,
+        });
+      });
     });
 
-    res.on("error", function (error) {
-      console.log("Ocorreu um erro (requisição não envida executada");
-      console.error(error);
-    });
+    if (payload) {
+      req.write(payload);
+    }
+
+    req.end();
   });
-
   // Se não fornecido ou vazio, não será enviado.
-  if (payload) {
-    req.write(payload);
-  }
-
-  req.end();
 }
 
 class RNDS {
@@ -82,7 +87,7 @@ class RNDS {
    * (a) código de retorno; (b) retorno e (c) headers retornados pela
    * execução da requisição.
    */
-  token(callback) {
+  token() {
     try {
       const options = {
         method: "GET",
@@ -93,7 +98,7 @@ class RNDS {
         pfx: this.pfx,
         passphrase: this.senha,
       };
-      send(options, callback);
+      return send(options);
     } catch (err) {
       const error = new Error(
         `Não foi possível obter token.
@@ -101,16 +106,17 @@ class RNDS {
        as variáveis de ambiente.
        Exceção: ${err}`
       );
-      callback(-1, error);
+      return Promise.reject(error);
     }
   }
 
   start() {
     return new Promise((resolve, reject) => {
-      this.token((c, r) => {
-        if (c === 200) {
+      console.log("start called...");
+      this.token().then((o) => {
+        if (o.code === 200) {
           // Guarda em cache o access token para uso posterior
-          this.access_token = r.access_token;
+          this.access_token = o.retorno.access_token;
           console.log("access_token updated");
           resolve("ok");
         } else {
@@ -148,32 +154,46 @@ class RNDS {
    * de retorno, o retorno (JSON parsed) e headers.
    * @param {string} payload Mensagem ou conteúdo a ser enviado.
    */
-  makeRequest(options, callback, payload) {
-    console.log("makeRequest called");
-    const optionsWithSecurity = this.addSecurityToOptions(options);
-
-    const wrapper = (c, r, h) => {
-      // unauthorized
-      if (c === 401) {
-        console.log("should try again after getting another token...");
-
-        // Tenta obter token o que deve ser o mais frequente (token expirado)
-        // Contudo, há outros cenários pertinentes à autorização.
-        this.start().then(() => send(optionsWithSecurity, callback, payload));
+  makeRequest(options, payload) {
+    function reenvieSeNaoAutorizado(o) {
+      if (o.code !== 401) {
+        console.log("retorno diferente de 401");
+        return o;
       } else {
-        console.log("callback clean call without wrapper...");
-        callback(c, r, h);
+        console.log("tentando novamente...");
+        return this.start().then(() =>
+          send(this.addSecurityToOptions(options), payload)
+        );
       }
-    };
+    }
 
+    console.log("makeRequest called");
     // Se access_token não disponível, então tentar recuperar.
     if (this.access_token === undefined) {
-      this.start()
-        .then(() => send(optionsWithSecurity, wrapper, payload))
+      console.log("access_token undefined");
+      return this.start()
+        .then(() => send(this.addSecurityToOptions(options), payload))
+        .then((o) => {
+          if (o.code !== 401) {
+            return o;
+          } else {
+            return send(this.addSecurityToOptions(options), payload);
+          }
+        })
         .catch((v) => console.log(v));
     } else {
       console.log("já iniciado...");
-      send(optionsWithSecurity, wrapper, payload);
+      return send(this.addSecurityToOptions(options), payload).then((o) => {
+        if (o.code !== 401) {
+          console.log("retorno diferente de 401");
+          return o;
+        } else {
+          console.log("tentando novamente...");
+          return this.start().then(() =>
+            send(this.addSecurityToOptions(options), payload)
+          );
+        }
+      });
     }
   }
 
@@ -183,11 +203,33 @@ class RNDS {
    * @param {string} cnes Código CNES do estabelecimento de saúde.
    * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
    */
-  cnes(cnes, callback) {
+  cnes(cnes) {
     console.log("cnes called");
     const options = {
       method: "GET",
       path: "/api/fhir/r4/Organization/" + cnes,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional de saúde (via CNS).
+   * @param {string} cns Código CNS do profissional de saúde. Caso não
+   * fornecido, será empregado o CNS do requisitante.
+   * @param {function} callback Função a ser chamada com o retorno fornecido
+   * pela RNDS. O argumento é uma instância de Error ou o payload (JSON)
+   * contendo a informação desejada.
+   */
+  cns(cns, callback) {
+    if (arguments.length === 1) {
+      callback = cns;
+      cns = requisitante;
+    }
+
+    const options = {
+      method: "GET",
+      path: "/api/fhir/r4/Practitioner/" + cns,
     };
 
     this.makeRequest(options, callback);
@@ -201,10 +243,11 @@ class RNDS {
 module.exports = RNDS;
 
 const rnds = new RNDS();
-//rnds.start().then(() => console.log("fim"));
+//rnds.start().then(console.log).catch(console.log);
 rnds
   .start()
-  .then(() => rnds.cnes("2337991", console.log))
-  .catch((e) => console.log(e));
+  .then(() => rnds.cnes("2337991"))
+  .then(console.log)
+  .catch(() => console.log("erro"));
 
 //rnds.cnes("2337991", console.log);
