@@ -136,7 +136,18 @@ class RNDS {
     });
   }
 
-  addSecurity(options) {
+  /**
+   * Preenche configuração de requisição com elementos comuns
+   * às requisições: (a) hostname; (b) Content-Type;
+   * (c) X-Authorization-Server" e (d) Authorization.
+   *
+   * @param {Object} options Opções empregadas para configurar
+   * requisição https.
+   *
+   * @returns Objeto fornecido e acrescido das propriedades
+   * descritas acima.
+   */
+  inflar(options) {
     return {
       ...options,
       hostname: this.ehr,
@@ -164,7 +175,7 @@ class RNDS {
    * @param {string} payload Mensagem ou conteúdo a ser enviado.
    */
   makeRequest(options, payload) {
-    const envie = () => send(this.addSecurity(options), payload);
+    const envie = () => send(this.inflar(options), payload);
 
     const reenvieSeNaoAutorizado = (objeto) => {
       console.log("tentando novamente...");
@@ -226,6 +237,34 @@ class RNDS {
     return this.makeRequest(options);
   }
 
+  /**
+   * Recupera informações sobre pessoa jurídica.
+   *
+   * @param {string} cnpj Número do CNPJ da pessoa jurídica.
+   * @returns {Promise<Resposta>}
+   */
+  cnpj(cnpj) {
+    const options = {
+      method: "GET",
+      path: "/api/fhir/r4/Organization/" + cnpj,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional liberal pelo CNES ou
+   * CPF do profissional em questão.
+   *
+   * @param {string} cpfOuCnes Número do CPF do profissional liberal ou
+   * CNES.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  profissionalLiberal(cpfOuCnes) {
+    return this.cnes(cpfOuCnes);
+  }
+
   getToken() {
     return this.access_token ? Promise.resolve() : this.start();
   }
@@ -257,10 +296,7 @@ class RNDS {
    *
    * @param {string} payload Resultado de exame devidamente empacotado
    * conforme perfil FHIR correspondente, definido pela RNDS.
-   * @param {function} callback Função a ser chamada quando a submissão
-   * for realizada de forma satisfatória. O argumento fornecido à função
-   * será o identificador único, geraldo pela RNDS, para o resultado
-   * submetido.
+   * @returns {Promise<Resposta>}
    */
   notificar(payload) {
     const options = {
@@ -270,14 +306,99 @@ class RNDS {
 
     return this.makeRequest(options, payload);
   }
+
+  /**
+   * Substitui resultado de exame submetido anteriormente.
+   *
+   * @param {string} payload Resultado de exame devidamente empacotado
+   * conforme perfil FHIR correspondente, definido pela RNDS, para
+   * substituir resultado previamente submetido.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  substituir(payload) {
+    // TODO verificar presença de "relatesTo"?
+    return this.notificar(payload);
+  }
+
+  /**
+   * Obtém o CNS (oficial) do paciente.
+   *
+   * @param {string} numero O número do CPF do paciente.
+   * @returns {Promise<Resposta>}
+   */
+  cnsDoPaciente(numero) {
+    function cnsOficial(id) {
+      return id.system.endsWith("/cns") && id.use === "official";
+    }
+
+    const extraiCns = (resposta) => {
+      if (resposta.c !== 200) {
+        return resposta;
+      }
+
+      const ids = o.retorno.entry[0].resource.identifier;
+      const idx = ids.findIndex((i) => cnsOficial(i));
+      return { code: o.code, retorno: ids[idx].value, headers: o.headers };
+    };
+
+    return this.paciente(numero).then(extraiCns);
+  }
+
+  /**
+   * Requisita informações sobre os papéis desempenhados por um profissional de saúde em um
+   * dado estabelecimento em um período de tempo.
+   *
+   * @param {string} cns CNS do profissional de saúde
+   * @param {string} cnes Código CNES do estabelecimento de saúde
+   * @returns {Promise<Resposta>}
+   */
+  lotacao(cns, cnes) {
+    const practitioner =
+      "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
+      cns;
+    const organization =
+      "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
+      cnes;
+
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera "token" de acesso à informação do usuário.
+   *
+   * @param {string} cnes CNES do estabelecimento de saúde.
+   * @param {string} cnsProfissional CNS do profissional.
+   * @param {string} cnsPaciente CNS do paciente.
+   * @returns {Promise<Resposta>}
+   */
+  contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
+    const options = {
+      method: "POST",
+      path: "/api/contexto-atendimento",
+    };
+
+    const payload = { cnes, cnsProfissional, cnsPaciente };
+    return this.makeRequest(options, JSON.stringify(payload));
+  }
 }
 
 module.exports = RNDS;
 const showError = (objeto) => console.log("ERRO", objeto);
 
 const rnds = new RNDS();
+//rnds.contextoAtendimento("c", "p", "u").then(console.log).catch(showError);
 //rnds.cnes("2337991").then(console.log).catch(showError);
 //rnds.cns().then(console.log).catch(showError);
 //rnds.cpf("9999").then(console.log).catch(showError);
+//rnds.lotacao("cns", "cnes").then(console.log).catch(showError);
+//rnds.cnpj("999").then(console.log).catch(showError);
 //rnds.paciente("9999").then(console.log).catch(showError);
+//rnds.cnsDoPaciente("9876").then(console.log).catch(showError);
 //rnds.notificar(fs.readFileSync("14.json")).then(console.log).catch(showError);
