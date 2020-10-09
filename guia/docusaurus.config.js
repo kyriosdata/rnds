@@ -65,7 +65,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Engenharia de Software (UFG).`,
+      copyright: `Copyright © 2020 DATASUS (09/10/2020).`,
     },
   },
   presets: [
