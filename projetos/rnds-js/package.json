@@ -25,6 +25,7 @@
     "follow-redirects": "^1.13.0"
   },
   "devDependencies": {
-    "fhirpath": "^2.6.1"
+    "fhirpath": "^2.6.1",
+    "nodemon": "^2.0.4"
   }
 }

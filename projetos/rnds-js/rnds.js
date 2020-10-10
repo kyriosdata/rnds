@@ -1,6 +1,8 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
+// TODO mensagem quando codigo de retorno é 500
+
 // TODO criar classe
 // 1. construtor verifica todas as vars
 // 2. cache 'certificate' file (pfx)
@@ -27,30 +29,45 @@ let accessToken = undefined;
  * para esta função quando recuperado.
  */
 function token(callback) {
-  const options = {
-    method: "GET",
-    hostname: auth,
-    path: "/api/token",
-    headers: {},
-    maxRedirects: 20,
-    pfx: fs.readFileSync(certificado),
-    passphrase: senha,
-  };
-
   try {
-    buildRequest(options, (r) => {
+    const options = {
+      method: "GET",
+      hostname: auth,
+      path: "/api/token",
+      headers: {},
+      maxRedirects: 20,
+      pfx: fs.readFileSync(certificado),
+      passphrase: senha,
+    };
+    buildRequest(options, 200, (r) => {
       // Guarda em cache o access token para uso em chamadas posteriores
       accessToken = r.access_token;
       callback(r);
     });
   } catch (err) {
-    throw new Error(
-      `Certifique-se de que definiu corretamente variáveis
-       de ambiente, em particular, RNDS_CERTIFICADO_SENHA.
+    const error = new Error(
+      `Não foi possível obter token.
+       Certifique-se de que definiu corretamente 
+       as variáveis de ambiente.
        Exceção: ${err}`
     );
+    callback(error);
   }
 }
+
+// token((r) => {
+//   if (r instanceof Error) {
+//     console.log("ERRO NA OBTENCAO DE TOKEN");
+//     console.log(r);
+//   } else {
+//     console.log(
+//       "TOKEN OBTIDO SATISFATORIAMENTE:",
+//       r.access_token.substring(0, 19),
+//       "..."
+//     );
+//   }
+// });
+// console.log("token is called asynchronously...");
 
 /**
  * Recupera informações sobre estabelecimento de saúde.
@@ -65,15 +82,20 @@ function cnes(cnes, callback) {
     path: "/api/fhir/r4/Organization/" + cnes,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, (payload) => callback(payload));
 }
+
+// cnes("2337991", (r) =>
+//   r instanceof Error ? console.log("CNES não localizado") : console.log(r)
+// );
 
 /**
  * Recupera informações sobre profissional de saúde (via CNS).
- * @param {string} cns Código CNS do profissional de saúde. Caso não fornecido,
- * será empregado o CNS do requisitante.
- * @param {function} callback Função a ser chamada com o retorno fornecido pela
- * RNDS.
+ * @param {string} cns Código CNS do profissional de saúde. Caso não
+ * fornecido, será empregado o CNS do requisitante.
+ * @param {function} callback Função a ser chamada com o retorno fornecido
+ * pela RNDS. O argumento é uma instância de Error ou o payload (JSON)
+ * contendo a informação desejada.
  */
 function cns(cns, callback) {
   if (arguments.length === 1) {
@@ -86,10 +108,12 @@ function cns(cns, callback) {
     path: "/api/fhir/r4/Practitioner/" + cns,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, (payload) => callback(payload));
 }
 
-// cns("cns", (r) => console.log(r));
+// cns("980016287385192", (r) =>
+//   r instanceof Error ? console.log("CNS não localizado") : console.log(r)
+// );
 
 /**
  * Recupera informações sobre profissional de saúde (via CPF).
@@ -114,7 +138,7 @@ function cpf(numero, callback) {
         numero,
     };
 
-    makeRequest(options, callback);
+    makeRequest(options, 200, callback);
   }
 }
 
@@ -137,7 +161,7 @@ function paciente(numero, callback) {
     path: "/api/fhir/r4/Patient?" + identifier,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 // paciente("cpf aqui", console.log);
@@ -162,15 +186,24 @@ function notificar(payload, callback) {
   };
 
   function encapsulada(resposta, headers) {
-    const location = headers["location"];
-    const rndsID = location.substring(location.lastIndexOf("/") + 1);
-    callback(rndsID);
+    if (resposta instanceof Error) {
+      callback(resposta);
+    } else {
+      const location = headers["location"];
+      const rndsID = location.substring(location.lastIndexOf("/") + 1);
+      callback(rndsID);
+    }
   }
 
-  makeRequest(options, encapsulada, payload);
+  makeRequest(options, 201, encapsulada, payload);
 }
 
-// notificar(fs.readFileSync("14.json", "utf-8"), console.log);
+// notificar(fs.readFileSync("/tmp/rnds/l1.json", "utf-8"), (r) => {
+//   if (r instanceof Error) {
+//     console.log("não foi possível executar a requisição...");
+//     console.log(r.message);
+//   }
+// });
 
 /**
  * Obtém o CNS (oficial) do paciente.
@@ -192,36 +225,17 @@ function cnsDoPaciente(numero, callback) {
 
 // cnsDoPaciente("cpf do paciente", console.log);
 
-function executeRequest(options, callback) {
-  const req = https.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
-
-    res.on("end", function (chunk) {
-      const body = Buffer.concat(chunks);
-      const json = JSON.parse(body.toString());
-      callback(json);
-    });
-
-    res.on("error", function (error) {
-      console.error(error);
-    });
-  });
-
-  req.end();
-}
-
 /**
+ * Cria e executa a requisição.
  *
  * @param {*} options
+ * @param {number} expectedCode Código de retorno esperado em uma execução
+ * satisfatória.
  * @param {function} callback Função a ser chamada com dois argumentos, o
  * retorno obtido com a requisição e os headers.
- * @param {*} payload
+ * @param {*} payload Conteúdo a ser submetido.
  */
-function buildRequest(options, callback, payload) {
+function buildRequest(options, expectedCode, callback, payload) {
   const req = https.request(options, function (res) {
     var chunks = [];
 
@@ -233,19 +247,30 @@ function buildRequest(options, callback, payload) {
       const body = Buffer.concat(chunks);
       const corpo = body.toString();
       const json = corpo ? JSON.parse(corpo) : "";
-      callback(json, res.headers);
+
+      const payloadRetorno =
+        res.statusCode != expectedCode
+          ? new Error(
+              `esperado ${expectedCode}, retornado ${res.statusCode}
+              Resposta:
+              ${corpo}`
+            )
+          : json;
+
+      // Repassado o retorno e headers
+      // (em vários cenários os headers não são relevantes)
+      callback(payloadRetorno, res.headers);
     });
 
     res.on("error", function (error) {
+      console.log("Ocorreu um erro (requisição não envida satisfatoriamente");
       console.error(error);
     });
   });
 
+  // Se payload fornecido, este deve ser enviado.
   if (payload) {
-    console.log("PAYLOAD será enviado...");
     req.write(payload);
-  } else {
-    console.log("no payload");
   }
 
   req.end();
@@ -272,7 +297,7 @@ function lotacao(cns, cnes, callback) {
     path: "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
 
 function cnpj(cnpj, callback) {
@@ -281,8 +306,11 @@ function cnpj(cnpj, callback) {
     path: "/api/fhir/r4/Organization/" + cnpj,
   };
 
-  makeRequest(options, callback);
+  makeRequest(options, 200, callback);
 }
+
+console.log("vou chamar cnpj...");
+cnpj("01567601000143", console.log);
 
 // token(console.log);
 // cnes("2337991", (r) => console.log(r));
@@ -292,19 +320,18 @@ function cnpj(cnpj, callback) {
 //});
 
 // lotacao(requisitante, "2337991", (r) => console.log(r));
-//cnpj("01567601000143", (r) => console.log("Organização:", r.name));
 
-function makeRequest(options, callback, payload) {
+function makeRequest(options, expectedCode, callback, payload) {
   // Se access_token não disponível, então tentar recuperar.
   if (accessToken === undefined) {
     token(function () {
-      makeRequest(options, callback, payload);
+      makeRequest(options, 200, callback, payload);
     });
 
     return;
   }
 
-  // Token de acesso agora está disponível
+  // Token de acesso está disponível
   const securityAdded = {
     ...options,
     hostname: ehr,
@@ -316,7 +343,7 @@ function makeRequest(options, callback, payload) {
     maxRedirects: 10,
   };
 
-  buildRequest(securityAdded, callback, payload);
+  buildRequest(securityAdded, expectedCode, callback, payload);
 }
 
 module.exports = {
