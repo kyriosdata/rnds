@@ -69,6 +69,7 @@ public class RNDSBuilderTest {
                         .keystore(keystore)
                         .password("senha".toCharArray())
                         .requisitante("requisitante")
+                        .estado(null)
                         .build());
         assertTrue(retorno.getMessage().contains("estado"));
     }
@@ -125,6 +126,7 @@ public class RNDSBuilderTest {
                         .auth(null)
                         .ehr(null)
                         .requisitante("requisitante")
+                        .estado(null)
                         .producao());
 
         assertTrue(excecao.getMessage().contains("estado"));

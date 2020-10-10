@@ -214,7 +214,7 @@ public class RNDSBuilder {
         } catch (Exception exception) {
             this.estado = null;
         }
-        
+
         return this;
     }
 
