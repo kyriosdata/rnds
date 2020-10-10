@@ -17,8 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A execução satisfatória dos testes depende de valores para as
@@ -51,6 +50,7 @@ public class RNDSTest {
         }
 
         rnds = new RNDSBuilder().build();
+        assertNotNull(rnds);
     }
 
     @Test
