@@ -221,10 +221,9 @@ class RNDS {
     const options = {
       method: "GET",
       path:
-        "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
+        "/api/fhir/r4/Practitioner?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
         numero,
     };
-
     return this.makeRequest(options);
   }
 
@@ -239,4 +238,4 @@ const showError = (objeto) => console.log("ERRO", objeto);
 const rnds = new RNDS();
 //rnds.cnes("2337991").then(console.log).catch(showError);
 //rnds.cns().then(console.log).catch(showError);
-rnds.cpf("um cpf").then(console.log).catch(showError);
+rnds.cpf("9999").then(console.log).catch(showError);
