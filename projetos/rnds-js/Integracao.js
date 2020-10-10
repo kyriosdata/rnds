@@ -214,8 +214,7 @@ class RNDS {
    * Recupera informações sobre profissional de saúde (via CPF).
    * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
    * será empregado o CPF do requisitante.
-   * @param {function} callback Função a ser chamada com o retorno fornecido pela
-   * RNDS.
+   * @returns {Promise<Resposta>}
    */
   cpf(numero) {
     const options = {
@@ -230,6 +229,47 @@ class RNDS {
   getToken() {
     return this.access_token ? Promise.resolve() : this.start();
   }
+
+  /**
+   * Recupera informações sobre o paciante.
+   *
+   * @param {string} cpf O número do CPF do paciente.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  paciente(cpf) {
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/Patient?" +
+        "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
+        cpf,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Notica o Ministério da Saúde, ou seja, submete resultado de
+   * exame de COVID para a RNDS conforme padrão estabelecido. A
+   * callback será chamada com o identificador único, gerado pela
+   * RNDS, para fazer referência ao resultado submetido.
+   *
+   * @param {string} payload Resultado de exame devidamente empacotado
+   * conforme perfil FHIR correspondente, definido pela RNDS.
+   * @param {function} callback Função a ser chamada quando a submissão
+   * for realizada de forma satisfatória. O argumento fornecido à função
+   * será o identificador único, geraldo pela RNDS, para o resultado
+   * submetido.
+   */
+  notificar(payload) {
+    const options = {
+      method: "POST",
+      path: "/api/fhir/r4/Bundle",
+    };
+
+    return this.makeRequest(options, payload);
+  }
 }
 
 module.exports = RNDS;
@@ -238,4 +278,6 @@ const showError = (objeto) => console.log("ERRO", objeto);
 const rnds = new RNDS();
 //rnds.cnes("2337991").then(console.log).catch(showError);
 //rnds.cns().then(console.log).catch(showError);
-rnds.cpf("9999").then(console.log).catch(showError);
+//rnds.cpf("9999").then(console.log).catch(showError);
+//rnds.paciente("9999").then(console.log).catch(showError);
+//rnds.notificar(fs.readFileSync("14.json")).then(console.log).catch(showError);
