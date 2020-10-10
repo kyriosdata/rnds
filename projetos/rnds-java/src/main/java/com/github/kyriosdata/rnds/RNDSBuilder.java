@@ -83,7 +83,7 @@ public class RNDSBuilder {
         keystore(System.getenv(RNDS_CERTIFICADO_ENDERECO));
         password(System.getenv(RNDS_CERTIFICADO_SENHA).toCharArray());
         requisitante(System.getenv(RNDS_REQUISITANTE_CNS));
-        estado(RNDS.Estado.valueOf(System.getenv("RNDS_REQUISITANTE_UF")));
+        estado(System.getenv(RNDS_REQUISITANTE_UF));
     }
 
     /**
@@ -208,8 +208,13 @@ public class RNDSBuilder {
      * @param estado
      * @return
      */
-    public RNDSBuilder estado(RNDS.Estado estado) {
-        this.estado = estado;
+    public RNDSBuilder estado(String estado) {
+        try {
+            this.estado = RNDS.Estado.valueOf(estado);
+        } catch (Exception exception) {
+            this.estado = null;
+        }
+        
         return this;
     }
 

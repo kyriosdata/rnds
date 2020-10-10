@@ -81,7 +81,7 @@ public class RNDSBuilderTest {
                 .keystore(keystore)
                 .password("senha".toCharArray())
                 .requisitante("requisitante")
-                .estado(RNDS.Estado.AC)
+                .estado("AC")
                 .build();
     }
 
@@ -90,7 +90,7 @@ public class RNDSBuilderTest {
         final String keystore = fromResource("certificado.jks");
 
         new RNDSBuilder().keystore(keystore).password(new char[]{})
-                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .requisitante("requisitante").estado("AC")
                 .homologacao();
     }
 
@@ -101,7 +101,7 @@ public class RNDSBuilderTest {
         new RNDSBuilder().keystore(keystore).password(new char[]{})
                 .auth(null)
                 .ehr(null)
-                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .requisitante("requisitante").estado("AC")
                 .homologacao();
     }
 
@@ -112,7 +112,7 @@ public class RNDSBuilderTest {
         new RNDSBuilder().keystore(keystore).password(new char[]{})
                 .auth(null)
                 .ehr(null)
-                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .requisitante("requisitante").estado("AC")
                 .producao();
     }
 
@@ -133,7 +133,7 @@ public class RNDSBuilderTest {
     @Test
     public void homologacaoUsaKeystoreEnvironment() {
         new RNDSBuilder().password(new char[]{})
-                .requisitante("requisitante").estado(RNDS.Estado.AC)
+                .requisitante("requisitante").estado("AC")
                 .homologacao();
     }
 
