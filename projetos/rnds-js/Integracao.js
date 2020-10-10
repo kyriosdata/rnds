@@ -2,6 +2,15 @@ const fs = require("fs");
 const https = require("follow-redirects").https;
 
 /**
+ * A resposta fornecida pela RNDS.
+ * @typedef {Object} Resposta
+ * @property {number} code - O código HTTP da resposta.
+ * @property {Object} retorno - O objeto JavaScript correspondente ao JSON
+ * retornado.
+ * @property {Object} headers - Os headers retornados.
+ */
+
+/**
  * Envia requisição https conforme opções e, se for o caso,
  * com o payload indicado. É esperado que o retorno satisfatório
  * coincida com o código fornecido. Em caso de sucesso, a
@@ -127,7 +136,7 @@ class RNDS {
     });
   }
 
-  addSecurityToOptions(options) {
+  addSecurity(options) {
     return {
       ...options,
       hostname: this.ehr,
@@ -155,56 +164,28 @@ class RNDS {
    * @param {string} payload Mensagem ou conteúdo a ser enviado.
    */
   makeRequest(options, payload) {
-    function reenvieSeNaoAutorizado(o) {
-      if (o.code !== 401) {
-        console.log("retorno diferente de 401");
-        return o;
-      } else {
-        console.log("tentando novamente...");
-        return this.start().then(() =>
-          send(this.addSecurityToOptions(options), payload)
-        );
-      }
-    }
+    const envie = () => send(this.addSecurity(options), payload);
 
-    console.log("makeRequest called");
-    // Se access_token não disponível, então tentar recuperar.
-    if (this.access_token === undefined) {
-      console.log("access_token undefined");
-      return this.start()
-        .then(() => send(this.addSecurityToOptions(options), payload))
-        .then((o) => {
-          if (o.code !== 401) {
-            return o;
-          } else {
-            return send(this.addSecurityToOptions(options), payload);
-          }
-        })
-        .catch((v) => console.log(v));
-    } else {
-      console.log("já iniciado...");
-      return send(this.addSecurityToOptions(options), payload).then((o) => {
-        if (o.code !== 401) {
-          console.log("retorno diferente de 401");
-          return o;
-        } else {
-          console.log("tentando novamente...");
-          return this.start().then(() =>
-            send(this.addSecurityToOptions(options), payload)
-          );
-        }
-      });
-    }
+    const reenvieSeNaoAutorizado = (objeto) => {
+      console.log("tentando novamente...");
+      if (objeto.code !== 401) {
+        console.log("retorno diferente de 401");
+        return objeto;
+      }
+
+      return this.start().then(envie);
+    };
+
+    return this.getToken().then(envie).then(reenvieSeNaoAutorizado);
   }
 
   /**
-   * Recupera informações sobre estabelecimento de saúde.
+   * Recupera informações sobre o estabelecimento de saúde.
    *
    * @param {string} cnes Código CNES do estabelecimento de saúde.
-   * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
+   * @returns {Promise<Resposta>} Promise que resulta na {@link Resposta} retornada.
    */
   cnes(cnes) {
-    console.log("cnes called");
     const options = {
       method: "GET",
       path: "/api/fhir/r4/Organization/" + cnes,
@@ -217,37 +198,45 @@ class RNDS {
    * Recupera informações sobre profissional de saúde (via CNS).
    * @param {string} cns Código CNS do profissional de saúde. Caso não
    * fornecido, será empregado o CNS do requisitante.
-   * @param {function} callback Função a ser chamada com o retorno fornecido
-   * pela RNDS. O argumento é uma instância de Error ou o payload (JSON)
-   * contendo a informação desejada.
+   * @returns {Promise<Resposta>}
    */
-  cns(cns, callback) {
-    if (arguments.length === 1) {
-      callback = cns;
-      cns = requisitante;
-    }
-
+  cns(cns) {
+    const profissional = cns ? cns : this.requisitante;
     const options = {
       method: "GET",
-      path: "/api/fhir/r4/Practitioner/" + cns,
+      path: "/api/fhir/r4/Practitioner/" + profissional,
     };
 
-    this.makeRequest(options, callback);
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional de saúde (via CPF).
+   * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
+   * será empregado o CPF do requisitante.
+   * @param {function} callback Função a ser chamada com o retorno fornecido pela
+   * RNDS.
+   */
+  cpf(numero) {
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
+        numero,
+    };
+
+    return this.makeRequest(options);
   }
 
   getToken() {
-    return this.access_token;
+    return this.access_token ? Promise.resolve() : this.start();
   }
 }
 
 module.exports = RNDS;
+const showError = (objeto) => console.log("ERRO", objeto);
 
 const rnds = new RNDS();
-//rnds.start().then(console.log).catch(console.log);
-rnds
-  .start()
-  .then(() => rnds.cnes("2337991"))
-  .then(console.log)
-  .catch(() => console.log("erro"));
-
-//rnds.cnes("2337991", console.log);
+//rnds.cnes("2337991").then(console.log).catch(showError);
+//rnds.cns().then(console.log).catch(showError);
+rnds.cpf("um cpf").then(console.log).catch(showError);
