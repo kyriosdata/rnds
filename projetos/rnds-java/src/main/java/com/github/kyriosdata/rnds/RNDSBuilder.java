@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020.
  * Fábio Nogueira de Lucena - Instituto de Informática (UFG)
- * Creative Commons Attribution 4.0 International License.
+ * Apache-2.0 License - http://www.apache.org/licenses/LICENSE-2.0
  */
 
 package com.github.kyriosdata.rnds;

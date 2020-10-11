@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020.
+ * Fábio Nogueira de Lucena - Instituto de Informática (UFG)
+ * Apache-2.0 License - http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 package com.github.kyriosdata.rnds;
 
 import java.io.File;
