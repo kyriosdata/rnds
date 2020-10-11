@@ -119,28 +119,9 @@ public class RNDSTest {
     }
 
     @Test
-    void profissionalPeloCnsPosteriormenteCpf() {
-        String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
-        String retorno = rnds.profissional(requisitanteCns);
-
-        // Parse json retornado
-        final Any json = JsonIterator.deserialize(retorno);
-        assertEquals(requisitanteCns, json.get("id").toString());
-
-        // Recupera o CPF do requisitante para realizar próximo teste
-        List<String> cpfs = json.get("identifier").asList()
-                .stream()
-                .filter(i -> i.get("system").toString().endsWith("/cpf"))
-                .map(c -> c.get("value").toString())
-                .collect(Collectors.toList());
-
-        // Verifica a disponibilidade de um CPF (aquele do requisitante)
-        assertEquals(1, cpfs.size());
-
-        // Realiza busca por CPF
-        String buscaPorCpf = rnds.cpf(cpfs.get(0));
-        final Any jsonCpf = JsonIterator.deserialize(buscaPorCpf);
-        assertEquals(1, jsonCpf.get("total").toInt());
+    void cpf() {
+        final RNDS.Resposta resposta = rnds.cpf("1234");
+        assertEquals(200, resposta.code);
     }
 
     @Test

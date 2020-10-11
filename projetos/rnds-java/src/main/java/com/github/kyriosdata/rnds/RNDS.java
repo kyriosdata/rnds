@@ -45,20 +45,20 @@ public class RNDS {
     /**
      * Caminho para o arquivo contendo o certificado digital.
      */
-    private String keystore;
+    private final String keystore;
     /**
      * Senha de acesso ao conteúdo do certificado digital.
      */
-    private char[] password;
+    private final char[] password;
     /**
      * Cache do requisitante (CNS) em nome do qual requisições serão
      * realizadas, se não dito o contrário por cada requisição.
      */
-    private String requisitante;
+    private final String requisitante;
     /**
      * Unidade da Federação na qual está localizado o estabelecimento de saúde.
      */
-    private Estado estado;
+    private final Estado estado;
     /**
      * <i>Token</i> de acesso aos serviços da RNDS. Este valor é reutilizado
      * por cerca de 30 minutos.
@@ -91,11 +91,10 @@ public class RNDS {
                 final String requisitante,
                 final Estado estado) {
         // AUTH (prefixo https://) (sufixo /api/)
-        Objects.requireNonNull(auth, "auth não definido");
+        Objects.requireNonNull(auth, "auth");
         this.auth = String.format("https://%s/api/", auth);
 
-        // EHR (prefixo https://) (sufixo /api/fhir/r4/)
-        Objects.requireNonNull(ehr, "ehr não definido");
+        Objects.requireNonNull(ehr, "ehr");
         this.ehr = ehr;
         this.keystore = Objects.requireNonNull(keystore, "keystore");
         this.password = Objects.requireNonNull(password, "password");
@@ -209,38 +208,12 @@ public class RNDS {
                 .build();
     }
 
-    public static String cpf(String srv, String token, String cpf,
-                             String authorization) {
-
-        try {
-            final String FMT = srv +
-                    "Practitioner?identifier=http%3A%2F%2Frnds.saude" +
+    public Resposta cpf(String cpf                           ) {
+            final String query =
+                    "?identifier=http%3A%2F%2Frnds.saude" +
                     ".gov" +
                     ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
-            logger.info("URL: " + FMT);
-
-            final URL url = new URL(FMT);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", authorization);
-
-            final int codigo = servico.getResponseCode();
-            logger.warning("RESPONSE CODE: " + codigo);
-
-            if (codigo != 200) {
-                logger.warning(fromInputStream(servico.getErrorStream()));
-                return null;
-            }
-
-            return fromInputStream(servico.getInputStream());
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
+            return get("api/fhir/r4/Practitioner", query);
     }
 
     /**
@@ -468,10 +441,6 @@ public class RNDS {
         }
 
         return retorno;
-    }
-
-    public String cpf(final String cpf) {
-        return cpf(ehr, token, cpf, requisitante);
     }
 
     public String lotacao(final String cns, final String cnes) {
