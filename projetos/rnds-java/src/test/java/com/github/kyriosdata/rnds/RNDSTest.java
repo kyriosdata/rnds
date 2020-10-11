@@ -73,6 +73,19 @@ public class RNDSTest {
     }
 
     @Test
+    void uriParaObterToken() {
+        assertTrue(rnds.forAuth().endsWith("/api/token"));
+        assertTrue(rnds.forAuth().contains("https"));
+    }
+
+    @Test
+    void uriParaContexto() {
+        String ca = rnds.forEhr("api/contexto-atendimento");
+        assertTrue(ca.contains("https"));
+        assertTrue(ca.endsWith("/api/contexto-atendimento"));
+    }
+
+    @Test
     void cnesConhecido() {
         final String cnes = "2337991";
 

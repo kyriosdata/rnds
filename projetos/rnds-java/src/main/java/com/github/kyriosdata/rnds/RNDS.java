@@ -109,15 +109,11 @@ public class RNDS {
 
         // EHR (prefixo https://) (sufixo /api/fhir/r4/)
         Objects.requireNonNull(ehr, "ehr não definido");
-        this.ehr = String.format("https://%s/api/fhir/r4/", ehr);
-
-        this.keystore = Objects.requireNonNull(keystore, "keystore não " +
-                "definido");
-        this.password = Objects.requireNonNull(password, "password não " +
-                "fornecida");
-        this.requisitante = Objects.requireNonNull(requisitante,
-                "requisitante não definido");
-        this.estado = Objects.requireNonNull(estado, "estado não definido");
+        this.ehr = ehr;
+        this.keystore = Objects.requireNonNull(keystore, "keystore");
+        this.password = Objects.requireNonNull(password, "password");
+        this.requisitante = Objects.requireNonNull(requisitante,"requisitante");
+        this.estado = Objects.requireNonNull(estado, "estado");
 
         // Cache token para uso na primeira requisição
         token();
@@ -315,6 +311,23 @@ public class RNDS {
             logger.warning("EXCECAO: " + exception);
             return null;
         }
+    }
+
+    /**
+     * Obtém a URI empregada para requisitar <i>token</i> de acesso.
+     * @return A sequência completa da URI para requisição de <i>token</i>
+     * de acesso.
+     */
+    public String forAuth() {
+        return String.format("https://%s/api/token", auth);
+    }
+
+    public String forEhr(String path) {
+        return String.format("https://%s/%s", ehr, path);
+    }
+
+    public String forAuth(String path, String query) {
+        return String.format("https://%s/api/fhir/r4/%s/?%s", ehr, path, query);
     }
 
     public String cnpj(final String cnpj) {
