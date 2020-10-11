@@ -111,7 +111,7 @@ public class RNDS {
      * @return Sequência de caracteres disponível na entrada ou valor
      * {@code null}, em caso de erro.
      */
-    private static String fromInputStream(final InputStream is) {
+    static String fromInputStream(final InputStream is) {
         try {
             try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
                 byte[] buffer = new byte[1024];
@@ -174,7 +174,6 @@ public class RNDS {
             final String payload) throws IOException {
         final String uri = forEhr(path, query);
         logger.info("SERVICO: " + uri);
-        System.out.println(uri);
 
         final URL url = new URL(uri);
         HttpsURLConnection servico =

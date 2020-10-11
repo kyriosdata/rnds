@@ -13,6 +13,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -167,15 +170,22 @@ public class RNDSTest {
     }
 
     @Test
-    void notificar() {
-        final String resultado = fromResource("14.json");
-        final RNDS.Resposta resposta = rnds.notificar(resultado);
+    void notificar() throws IOException {
+        final String arquivo = fromResource("14.json");
+        InputStream fis = new FileInputStream(arquivo);
+        final String conteudo = RNDS.fromInputStream(fis);
+
+        final RNDS.Resposta resposta = rnds.notificar(conteudo);
         assertEquals(200, resposta.code);
     }
 
     @Test
-    void substituir() {
-        final RNDS.Resposta resposta = rnds.substituir("123");
+    void substituir() throws FileNotFoundException {
+        final String arquivo = fromResource("14.json");
+        InputStream fis = new FileInputStream(arquivo);
+        final String conteudo = RNDS.fromInputStream(fis);
+
+        final RNDS.Resposta resposta = rnds.substituir(conteudo);
         assertEquals(200, resposta.code);
     }
 
