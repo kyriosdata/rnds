@@ -172,4 +172,10 @@ public class RNDSTest {
         final RNDS.Resposta resposta = rnds.contexto("cnes", "p", "p");
         assertEquals(201, resposta.code);
     }
+
+    @Test
+    void cns() {
+        final RNDS.Resposta resposta = rnds.cns("123");
+        assertEquals(200, resposta.code);
+    }
 }

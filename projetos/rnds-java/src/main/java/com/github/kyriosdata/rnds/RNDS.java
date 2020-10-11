@@ -209,51 +209,6 @@ public class RNDS {
                 .build();
     }
 
-    /**
-     * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
-     *
-     * @param srv   O serviço que fornecerá a resposta.
-     * @param token O <i>token</i> de acesso ao serviço.
-     * @param cnes  O código CNES do estabelecimento.
-     * @param cpf   O CPF do responsável pela requisição. Deve estar associado
-     *              ao <i>token</i>.
-     * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
-     * de exceção.
-     */
-    public static String cnes(
-            final String srv,
-            final String token,
-            final String cnes,
-            final String cpf) {
-        try {
-            final String CNES_REQUEST = "Organization/" + cnes;
-            logger.info("SERVICO: " + CNES_REQUEST);
-
-            final URL url = new URL(srv + CNES_REQUEST);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", cpf);
-
-            final int codigo = servico.getResponseCode();
-            logger.warning("RESPONSE CODE: " + codigo);
-
-            if (codigo != 200) {
-                final String msg = fromInputStream(servico.getErrorStream());
-                logger.warning(msg);
-                return msg;
-            }
-
-            return fromInputStream(servico.getInputStream());
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
-    }
-
     public static String cpf(String srv, String token, String cpf,
                              String authorization) {
 
@@ -458,6 +413,10 @@ public class RNDS {
 
     public Resposta cnes(final String cnes) {
         return get("api/fhir/r4/Organization", cnes);
+    }
+
+    public Resposta cns(final String cns) {
+        return get("api/fhir/r4/Practitioner", cns);
     }
 
     public Resposta contexto(final String cnes, final String profissional,
