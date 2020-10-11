@@ -37,11 +37,11 @@ public class RNDS {
     /**
      * Endereço do serviço de autenticação.
      */
-    private String auth;
+    private final String auth;
     /**
      * Endereço dos serviços de saúde.
      */
-    private String ehr;
+    private final String ehr;
     /**
      * Caminho para o arquivo contendo o certificado digital.
      */
@@ -483,9 +483,9 @@ public class RNDS {
     }
 
     static class Resposta {
-        public int code;
-        public String retorno;
-        public Map<String, List<String>> headers;
+        public final int code;
+        public final String retorno;
+        public final Map<String, List<String>> headers;
 
         public Resposta(int code, String retorno,
                         Map<String, List<String>> headers) {
