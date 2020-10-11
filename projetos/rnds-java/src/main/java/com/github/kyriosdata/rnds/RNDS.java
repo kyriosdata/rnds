@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -33,50 +36,37 @@ import java.util.logging.Logger;
  */
 public class RNDS {
 
+    static final Logger logger = Logger.getLogger("RNDS");
     /**
      * Endereço do serviço de autenticação.
      */
     private String auth;
-
     /**
      * Endereço dos serviços de saúde.
      */
     private String ehr;
-
     /**
      * Caminho para o arquivo contendo o certificado digital.
      */
     private String keystore;
-
     /**
      * Senha de acesso ao conteúdo do certificado digital.
      */
     private char[] password;
-
     /**
      * Cache do requisitante (CNS) em nome do qual requisições serão
      * realizadas, se não dito o contrário por cada requisição.
      */
     private String requisitante;
-
     /**
      * Unidade da Federação na qual está localizado o estabelecimento de saúde.
      */
     private Estado estado;
-
     /**
      * <i>Token</i> de acesso aos serviços da RNDS. Este valor é reutilizado
      * por cerca de 30 minutos.
      */
     private String token;
-
-    /**
-     * Unidades da Federação do Brasil.
-     */
-    public enum Estado {
-        AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA,
-        PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
-    }
 
     /**
      * Cria objeto por meio do qual interação com a RNDS é encapsulada por
@@ -112,14 +102,13 @@ public class RNDS {
         this.ehr = ehr;
         this.keystore = Objects.requireNonNull(keystore, "keystore");
         this.password = Objects.requireNonNull(password, "password");
-        this.requisitante = Objects.requireNonNull(requisitante,"requisitante");
+        this.requisitante = Objects.requireNonNull(requisitante,
+                "requisitante");
         this.estado = Objects.requireNonNull(estado, "estado");
 
         // Cache token para uso na primeira requisição
         token();
     }
-
-    static final Logger logger = Logger.getLogger("RNDS");
 
     private static SSLContext sslCtx(final String keystore,
                                      final char[] password)
@@ -224,6 +213,111 @@ public class RNDS {
     }
 
     /**
+     * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
+     *
+     * @param srv   O serviço que fornecerá a resposta.
+     * @param token O <i>token</i> de acesso ao serviço.
+     * @param cnes  O código CNES do estabelecimento.
+     * @param cpf   O CPF do responsável pela requisição. Deve estar associado
+     *              ao <i>token</i>.
+     * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
+     * de exceção.
+     */
+    public static String cnes(
+            final String srv,
+            final String token,
+            final String cnes,
+            final String cpf) {
+        try {
+            final String CNES_REQUEST = "Organization/" + cnes;
+            logger.info("SERVICO: " + CNES_REQUEST);
+
+            final URL url = new URL(srv + CNES_REQUEST);
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
+            servico.setRequestProperty("Authorization", cpf);
+
+            final int codigo = servico.getResponseCode();
+            logger.warning("RESPONSE CODE: " + codigo);
+
+            if (codigo != 200) {
+                final String msg = fromInputStream(servico.getErrorStream());
+                logger.warning(msg);
+                return msg;
+            }
+
+            return fromInputStream(servico.getInputStream());
+        } catch (IOException exception) {
+            logger.warning("EXCECAO: " + exception);
+            return null;
+        }
+    }
+
+    public static String cpf(String srv, String token, String cpf,
+                             String authorization) {
+
+        try {
+            final String FMT = srv +
+                    "Practitioner?identifier=http%3A%2F%2Frnds.saude" +
+                    ".gov" +
+                    ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
+            logger.info("URL: " + FMT);
+
+            final URL url = new URL(FMT);
+            HttpsURLConnection servico =
+                    (HttpsURLConnection) url.openConnection();
+            servico.setRequestMethod("GET");
+            servico.setRequestProperty("Content-Type", "application/json");
+            servico.setRequestProperty("X-Authorization-Server",
+                    "Bearer " + token);
+            servico.setRequestProperty("Authorization", authorization);
+
+            final int codigo = servico.getResponseCode();
+            logger.warning("RESPONSE CODE: " + codigo);
+
+            if (codigo != 200) {
+                logger.warning(fromInputStream(servico.getErrorStream()));
+                return null;
+            }
+
+            return fromInputStream(servico.getInputStream());
+        } catch (IOException exception) {
+            logger.warning("EXCECAO: " + exception);
+            return null;
+        }
+    }
+
+    /**
+     * Método de conveniência para obter uma sequência de caracteres,
+     * no formato UTF-8, a partir da entrada fornecida.
+     *
+     * @param is Entrada da qual o conteúdo será obtido.
+     * @return Sequência de caracteres disponível na entrada ou valor
+     * {@code null}, em caso de erro.
+     */
+    private static String fromInputStream(final InputStream is) {
+        try {
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                byte[] buffer = new byte[1024];
+                int length;
+
+                while ((length = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                return baos.toString("UTF-8");
+            }
+        } catch (IOException exception) {
+            logger.warning("EXCECAO: " + exception);
+            return null;
+        }
+    }
+
+    /**
      * Obtém <i>token</i> para acesso aos serviços de integração da RNDS.
      *
      * @param server           Endereço do serviço que verifica o certificado
@@ -269,52 +363,8 @@ public class RNDS {
     }
 
     /**
-     * Obtém informações sobre estabelecimento de saúde cujo CNES é fornecido.
-     *
-     * @param srv   O serviço que fornecerá a resposta.
-     * @param token O <i>token</i> de acesso ao serviço.
-     * @param cnes  O código CNES do estabelecimento.
-     * @param cpf   O CPF do responsável pela requisição. Deve estar associado
-     *              ao <i>token</i>.
-     * @return O JSON retornado pelo serviço ou o valor {@code null} em caso
-     * de exceção.
-     */
-    public static String cnes(
-            final String srv,
-            final String token,
-            final String cnes,
-            final String cpf) {
-        try {
-            final String CNES_REQUEST = "Organization/" + cnes;
-            logger.info("SERVICO: " + CNES_REQUEST);
-
-            final URL url = new URL(srv + CNES_REQUEST);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", cpf);
-
-            final int codigo = servico.getResponseCode();
-            logger.warning("RESPONSE CODE: " + codigo);
-
-            if (codigo != 200) {
-                final String msg = fromInputStream(servico.getErrorStream());
-                logger.warning(msg);
-                return msg;
-            }
-
-            return fromInputStream(servico.getInputStream());
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
-    }
-
-    /**
      * Obtém a URI empregada para requisitar <i>token</i> de acesso.
+     *
      * @return A sequência completa da URI para requisição de <i>token</i>
      * de acesso.
      */
@@ -324,6 +374,7 @@ public class RNDS {
 
     /**
      * Obtém a URI para acesso aos serviços EHR oferecidos pela RNDS.
+     *
      * @param path O path da URI, não inicia por "/" nem termina por "/".
      * @return A URI para o serviço cujo path é fornecido.
      */
@@ -333,9 +384,11 @@ public class RNDS {
 
     /**
      * Obtém a URI para acesso aos serviços EHR oferecidos pela RNDS.
-     * @param path O path da URI, não inicia nem termina por "/".
+     *
+     * @param path  O path da URI, não inicia nem termina por "/".
      * @param query A query empregada para acesso ao serviço, necessariamente
-     *              inicia por "?".
+     *              inicia por "?". Caso contrário, será tratado como
+     *              complemento e deve seguir o path, iniciando por "/".
      * @return A URI para acesso ao serviço montado com os parâmetros
      * fornecidos.
      */
@@ -343,37 +396,52 @@ public class RNDS {
         return String.format("https://%s/%s/%s", ehr, path, query);
     }
 
-    public String cnpj(final String cnpj) {
+    public HttpsURLConnection connection(String method, String path,
+                                         String query) throws IOException {
+        final String uri = forEhr(path, query);
+        logger.info("SERVICO: " + uri);
+
+        final URL url = new URL(uri);
+        HttpsURLConnection servico =
+                (HttpsURLConnection) url.openConnection();
+        servico.setRequestMethod(method);
+        servico.setRequestProperty("Content-Type", "application/json");
+        servico.setRequestProperty("X-Authorization-Server",
+                "Bearer " + token);
+        servico.setRequestProperty("Authorization", requisitante);
+        return servico;
+    }
+
+    private Resposta get(String path, String query) {
         try {
-            final String CNES_REQUEST = forEhr("api/fhir/r4/Organization")
-            logger.info("SERVICO: " + CNES_REQUEST);
-
-            final URL url = new URL(CNES_REQUEST);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", requisitante);
-
+            final HttpsURLConnection servico = connection("GET", path, query);
             final int codigo = servico.getResponseCode();
 
-            if (codigo != 200) {
-                final String msg = fromInputStream(servico.getErrorStream());
-                logger.warning(msg);
-                return msg;
-            }
+            final String msg = codigo != 200
+                    ? fromInputStream(servico.getErrorStream())
+                    : fromInputStream(servico.getInputStream());
 
-            return fromInputStream(servico.getInputStream());
+            return new Resposta(codigo, msg, servico.getHeaderFields());
         } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
+            return new Resposta(599, exception.getMessage(),
+                    Collections.emptyMap());
         }
     }
 
-    public String cnes(final String cnes) {
-        return cnes(ehr, token, cnes, requisitante);
+    public Resposta cnpj(final String cnpj) {
+        return get("api/fhir/r4/Organization", cnpj);
+    }
+
+    public Resposta cnes(final String cnes) {
+        return get("api/fhir/r4/Organization", cnes);
+    }
+
+    public Resposta contexto(final String cnes, final String profissional,
+                             final String paciente) {
+        final String payload = String.format("{\"cnes\":\"%s\"," +
+                "\"cnsProffisional\":\"%s\",\"cnsPaciente\":\"%s\"}", cnes,
+                profissional, paciente);
+        return null;
     }
 
     public String profissional(
@@ -419,40 +487,6 @@ public class RNDS {
         return retorno;
     }
 
-    public static String cpf(String srv, String token, String cpf,
-                             String authorization) {
-
-        try {
-            final String FMT = srv +
-                    "Practitioner?identifier=http%3A%2F%2Frnds.saude" +
-                    ".gov" +
-                    ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
-            logger.info("URL: " + FMT);
-
-            final URL url = new URL(FMT);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", authorization);
-
-            final int codigo = servico.getResponseCode();
-            logger.warning("RESPONSE CODE: " + codigo);
-
-            if (codigo != 200) {
-                logger.warning(fromInputStream(servico.getErrorStream()));
-                return null;
-            }
-
-            return fromInputStream(servico.getInputStream());
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
-    }
-
     public String cpf(final String cpf) {
         return cpf(ehr, token, cpf, requisitante);
     }
@@ -489,28 +523,23 @@ public class RNDS {
     }
 
     /**
-     * Método de conveniência para obter uma sequência de caracteres,
-     * no formato UTF-8, a partir da entrada fornecida.
-     *
-     * @param is Entrada da qual o conteúdo será obtido.
-     * @return Sequência de caracteres disponível na entrada ou valor
-     * {@code null}, em caso de erro.
+     * Unidades da Federação do Brasil.
      */
-    private static String fromInputStream(final InputStream is) {
-        try {
-            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-                byte[] buffer = new byte[1024];
-                int length;
+    public enum Estado {
+        AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA,
+        PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
+    }
 
-                while ((length = is.read(buffer)) != -1) {
-                    baos.write(buffer, 0, length);
-                }
+    static class Resposta {
+        public int code;
+        public String retorno;
+        public Map<String, List<String>> headers;
 
-                return baos.toString("UTF-8");
-            }
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
+        public Resposta(int code, String retorno,
+                        Map<String, List<String>> headers) {
+            this.code = code;
+            this.retorno = retorno;
+            this.headers = headers;
         }
     }
 }

@@ -8,6 +8,7 @@ package com.github.kyriosdata.rnds;
 
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
+import com.jsoniter.output.JsonStream;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -90,10 +91,11 @@ public class RNDSTest {
         final String cnes = "2337991";
 
         // Submete requisição à RNDS
-        final String retorno = rnds.cnes(cnes);
+        final RNDS.Resposta resposta = rnds.cnes(cnes);
+        assertEquals(200, resposta.code);
 
         // Parse json retornado
-        final Any json = JsonIterator.deserialize(retorno);
+        final Any json = JsonIterator.deserialize(resposta.retorno);
 
         // Verifica propriedade "id"
         final String id = json.get("id").toString();
@@ -106,10 +108,11 @@ public class RNDSTest {
 
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
-        String retorno = rnds.cnes("invalido");
+        RNDS.Resposta resposta = rnds.cnes("invalido");
+        assertEquals(200, resposta.code);
 
         // Parse json retornado
-        final Any json = JsonIterator.deserialize(retorno);
+        final Any json = JsonIterator.deserialize(resposta.retorno);
 
         final String resourceType = json.get("resourceType").toString();
         assertEquals("OperationOutcome", resourceType);
@@ -153,10 +156,11 @@ public class RNDSTest {
     @Test
     public void cnpj() {
         final String cnpjUFG = "01567601000143";
-        final String retorno = rnds.cnpj(cnpjUFG);
+        final RNDS.Resposta retorno = rnds.cnpj(cnpjUFG);
+        assertEquals(200, retorno.code);
 
-        // Verifica retorno
-        final Any json = JsonIterator.deserialize(retorno);
+         // Verifica retorno
+        final Any json = JsonIterator.deserialize(retorno.retorno);
         assertEquals(cnpjUFG, json.get("id").toString());
         final String name = json.get("name").toString();
         assertEquals("UNIVERSIDADE FEDERAL DE GOIAS", name);
