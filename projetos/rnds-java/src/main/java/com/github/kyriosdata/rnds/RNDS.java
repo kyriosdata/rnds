@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class RNDS {
      * Unidade da Federação na qual está localizado o estabelecimento de saúde.
      */
     private final Estado estado;
-    private final AccessToken accessToken = new AccessToken();
+
     /**
      * <i>Token</i> de acesso aos serviços da RNDS. Este valor é reutilizado
      * por cerca de 30 minutos. Após este período, deve ser renovado.
@@ -60,6 +61,9 @@ public class RNDS {
     /**
      * Cria objeto por meio do qual interação com a RNDS é encapsulada por
      * meio de simples operações.
+     *
+     * <p>A estratégia sugerida para obtenção de uma instância, contudo,
+     * é pela classe {@link RNDSBuilder}.</p>
      *
      * @param auth         Endereço do serviço de autenticação.
      * @param ehr          Endereço dos serviços de saúde.
@@ -75,6 +79,7 @@ public class RNDS {
      *                     de quem a requisição é realizada.
      * @param estado       Estado no qual está localizado o estabelecimento
      *                     de saúde.
+     * @see RNDSBuilder
      */
     public RNDS(final String auth,
                 final String ehr,
@@ -98,14 +103,6 @@ public class RNDS {
         token();
     }
 
-    public Resposta cpf(String cpf                           ) {
-            final String query =
-                    "?identifier=http%3A%2F%2Frnds.saude" +
-                    ".gov" +
-                    ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
-            return get("api/fhir/r4/Practitioner", query);
-    }
-
     /**
      * Método de conveniência para obter uma sequência de caracteres,
      * no formato UTF-8, a partir da entrada fornecida.
@@ -124,38 +121,12 @@ public class RNDS {
                     baos.write(buffer, 0, length);
                 }
 
-                return baos.toString("UTF-8");
+                return baos.toString(StandardCharsets.UTF_8);
             }
         } catch (IOException exception) {
             logger.warning("EXCECAO: " + exception);
             return null;
         }
-    }
-
-    /**
-     * Obtém <i>token</i> para acesso aos serviços de integração da RNDS.
-     *
-     * @param server           Endereço do serviço que verifica o certificado
-     *                         e, se devidamente autorizado, oferece o
-     *                         <i>token</i> correspondente.
-     * @param keystoreEndereco O endereço do arquivo contendo o certificado.
-     *                         Pode se o caminho (<i>path</i>) ou endereço
-     *                         <i>web</i>, iniciado por <i>http</i>.
-     * @param keyStorePassword A senha de acesso ao certificado.
-     * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
-     * O valor {@code null} é retornado em caso de falha.
-     */
-    public String getToken(
-            final String server,
-            final String keystoreEndereco,
-            final char[] keyStorePassword) {
-
-        return AccessToken.get(server, keystoreEndereco, keyStorePassword);
-    }
-
-    public String token() {
-        token = AccessToken.get(auth + "token", keystore, password);
-        return token;
     }
 
     /**
@@ -196,10 +167,14 @@ public class RNDS {
         return String.format("https://%s/%s/%s", ehr, path, query);
     }
 
-    public HttpsURLConnection connection(String method, String path,
-                                         String query) throws IOException {
+    public HttpsURLConnection connection(
+            final String method,
+            final String path,
+            final String query,
+            final String payload) throws IOException {
         final String uri = forEhr(path, query);
         logger.info("SERVICO: " + uri);
+        System.out.println(uri);
 
         final URL url = new URL(uri);
         HttpsURLConnection servico =
@@ -209,38 +184,29 @@ public class RNDS {
         servico.setRequestProperty("X-Authorization-Server",
                 "Bearer " + token);
         servico.setRequestProperty("Authorization", requisitante);
-        return servico;
-    }
 
-    private Resposta get(String path, String query) {
-        try {
-            final HttpsURLConnection servico = connection("GET", path, query);
-            final int codigo = servico.getResponseCode();
-
-            final String msg = codigo != 200
-                    ? fromInputStream(servico.getErrorStream())
-                    : fromInputStream(servico.getInputStream());
-
-            return new Resposta(codigo, msg, servico.getHeaderFields());
-        } catch (IOException exception) {
-            return new Resposta(599, exception.getMessage(),
-                    Collections.emptyMap());
-        }
-    }
-
-    private Resposta post(String path, String payload) {
-        try {
-            final HttpsURLConnection servico = connection("POST", path,
-                    "");
+        if ("POST".equals(method)) {
             servico.setDoOutput(true);
 
             // Fornece payload
             final OutputStream os = servico.getOutputStream();
-            os.write(payload.getBytes("UTF-8"));
+            os.write(payload.getBytes(StandardCharsets.UTF_8));
+        }
 
+        return servico;
+    }
+
+    private Resposta send(
+            final String method,
+            final String path,
+            final String query,
+            final String payload) {
+        try {
+            final HttpsURLConnection servico = connection(method, path, query
+                    , payload);
             final int codigo = servico.getResponseCode();
 
-            final String msg = codigo != 201
+            final String msg = (codigo != 200) && (codigo != 201)
                     ? fromInputStream(servico.getErrorStream())
                     : fromInputStream(servico.getInputStream());
 
@@ -251,98 +217,67 @@ public class RNDS {
         }
     }
 
-    public Resposta cnpj(final String cnpj) {
-        return get("api/fhir/r4/Organization", cnpj);
-    }
-
-    public Resposta cnes(final String cnes) {
-        return get("api/fhir/r4/Organization", cnes);
-    }
-
-    public Resposta cns(final String cns) {
-        return get("api/fhir/r4/Practitioner", cns);
+    /**
+     * Recupera <i>token</i> de acesso aos serviços da RNDS.
+     *
+     * @return O <i>access_token</i> exigido para acesso aos serviços da
+     * RNDS.
+     */
+    public String token() {
+        token = AccessToken.get(auth + "token", keystore, password);
+        return token;
     }
 
     public Resposta contexto(final String cnes, final String profissional,
                              final String paciente) {
         final String payload = String.format("{\"cnes\":\"%s\"," +
-                "\"cnsProffisional\":\"%s\",\"cnsPaciente\":\"%s\"}", cnes,
-                profissional, paciente);
-        return post("api/contexto-atendimento", payload);
+                        "\"cnsProffisional\":\"%s\",\"cnsPaciente\":\"%s\"}",
+                cnes, profissional, paciente);
+        return send("POST", "api/contexto-atendimento", "", payload);
     }
 
-    public String profissional(
-            final String srv,
-            final String token,
-            final String cns,
-            final String requisitanteCns) {
-        try {
-            final String PROFISSIONAL = "Practitioner/" + cns;
-            logger.info("SERVICO: " + PROFISSIONAL);
-
-            final URL url = new URL(srv + PROFISSIONAL);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", requisitanteCns);
-
-            final int codigo = servico.getResponseCode();
-            logger.info("RESPONSE CODE: " + codigo);
-
-            final String payload = codigo == 200
-                    ? fromInputStream(servico.getInputStream())
-                    : fromInputStream(servico.getErrorStream());
-            return payload;
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
+    public Resposta cnes(final String cnes) {
+        return send("GET", "api/fhir/r4/Organization", cnes, null);
     }
 
-    public String profissional(final String cns) {
-        String retorno = profissional(ehr, token, cns, requisitante);
-
-        // Se token expirado, obtenha token e tente novamente.
-        if (retorno.contains("JWT expired")) {
-            token();
-            return profissional(ehr, token, cns, requisitante);
-        }
-
-        return retorno;
+    public Resposta cns(final String cns) {
+        return send("GET", "api/fhir/r4/Practitioner", cns, null);
     }
 
-    public String lotacao(final String cns, final String cnes) {
-        String dst = ehr + "PractitionerRole" +
+    public Resposta cpf(String cpf) {
+        final String query =
+                "?identifier=http%3A%2F%2Frnds.saude.gov" +
+                        ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
+        return send("GET", "api/fhir/r4/Practitioner", query, null);
+    }
+
+    public Resposta lotacao(final String cns, final String cnes) {
+        final String dst =
                 "?practitioner.identifier=http%3A%2F%2Frnds.saude.gov" +
                 ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" + cns +
                 "&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
                 ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" + cnes +
                 "&_include=PractitionerRole%3Aorganization";
+        return send("GET", "api/fhir/r4/PractitionerRole", dst, null);
+    }
 
-        try {
-            final URL url = new URL(dst);
-            HttpsURLConnection servico =
-                    (HttpsURLConnection) url.openConnection();
-            servico.setRequestMethod("GET");
-            servico.setRequestProperty("Content-Type", "application/json");
-            servico.setRequestProperty("X-Authorization-Server",
-                    "Bearer " + token);
-            servico.setRequestProperty("Authorization", requisitante);
+    public Resposta cnpj(final String cnpj) {
+        return send("GET", "api/fhir/r4/Organization", cnpj, null);
+    }
 
-            final int codigo = servico.getResponseCode();
-            logger.info("RESPONSE CODE: " + codigo);
+    public Resposta paciente(final String cpf) {
+        final String query =
+                "?identifier=http%3A%2F%2Frnds.saude.gov" +
+                        ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" + cpf;
+        return send("GET", "api/fhir/r4/Patient", query, null);
+    }
 
-            final String payload = codigo == 200
-                    ? fromInputStream(servico.getInputStream())
-                    : fromInputStream(servico.getErrorStream());
-            return payload;
-        } catch (IOException exception) {
-            logger.warning("EXCECAO: " + exception);
-            return null;
-        }
+    public Resposta notificar(final String resultado) {
+        return send("POST", "api/fhir/r4/Bundle", "", resultado);
+    }
+
+    public Resposta substituir(final String alteracao) {
+        return notificar(alteracao);
     }
 
     /**

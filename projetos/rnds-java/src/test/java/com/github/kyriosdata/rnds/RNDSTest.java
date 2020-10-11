@@ -127,10 +127,11 @@ public class RNDSTest {
     @Test
     public void lotacao() {
         String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
-        String retorno = rnds.lotacao(requisitanteCns, "2337991");
+        RNDS.Resposta resposta = rnds.lotacao(requisitanteCns, "2337991");
+        assertEquals(200, resposta.code);
 
-        // Verifica retorno
-        final Any json = JsonIterator.deserialize(retorno);
+        // Verifica resposta
+        final Any json = JsonIterator.deserialize(resposta.retorno);
         assertEquals(1, json.get("total").toInt());
     }
 
@@ -145,7 +146,6 @@ public class RNDSTest {
         assertEquals(cnpjUFG, json.get("id").toString());
         final String name = json.get("name").toString();
         assertEquals("UNIVERSIDADE FEDERAL DE GOIAS", name);
-
     }
 
     @Test
@@ -158,5 +158,36 @@ public class RNDSTest {
     void cns() {
         final RNDS.Resposta resposta = rnds.cns("123");
         assertEquals(200, resposta.code);
+    }
+
+    @Test
+    void paciente() {
+        final RNDS.Resposta resposta = rnds.paciente("123");
+        assertEquals(200, resposta.code);
+    }
+
+    @Test
+    void notificar() {
+        final String resultado = fromResource("14.json");
+        final RNDS.Resposta resposta = rnds.notificar(resultado);
+        assertEquals(200, resposta.code);
+    }
+
+    @Test
+    void substituir() {
+        final RNDS.Resposta resposta = rnds.substituir("123");
+        assertEquals(200, resposta.code);
+    }
+
+    /**
+     * Obtém path completo do nome do arquivo fornecido que se encontra
+     * no diretório resources.
+     *
+     * @param arquivo Nome do arquivo contido no diretório "resources".
+     * @return O caminho completo para o arquivo cujo nome é fornecido.
+     */
+    static String fromResource(final String arquivo) {
+        Class<RNDS> appClass = RNDS.class;
+        return appClass.getClassLoader().getResource(arquivo).getPath();
     }
 }
