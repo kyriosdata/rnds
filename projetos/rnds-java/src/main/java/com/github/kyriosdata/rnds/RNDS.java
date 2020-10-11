@@ -322,17 +322,30 @@ public class RNDS {
         return String.format("https://%s/api/token", auth);
     }
 
+    /**
+     * Obtém a URI para acesso aos serviços EHR oferecidos pela RNDS.
+     * @param path O path da URI, não inicia por "/" nem termina por "/".
+     * @return A URI para o serviço cujo path é fornecido.
+     */
     public String forEhr(String path) {
         return String.format("https://%s/%s", ehr, path);
     }
 
-    public String forAuth(String path, String query) {
-        return String.format("https://%s/api/fhir/r4/%s/?%s", ehr, path, query);
+    /**
+     * Obtém a URI para acesso aos serviços EHR oferecidos pela RNDS.
+     * @param path O path da URI, não inicia nem termina por "/".
+     * @param query A query empregada para acesso ao serviço, necessariamente
+     *              inicia por "?".
+     * @return A URI para acesso ao serviço montado com os parâmetros
+     * fornecidos.
+     */
+    public String forEhr(String path, String query) {
+        return String.format("https://%s/%s/%s", ehr, path, query);
     }
 
     public String cnpj(final String cnpj) {
         try {
-            final String CNES_REQUEST = ehr + "Organization/" + cnpj;
+            final String CNES_REQUEST = forEhr("api/fhir/r4/Organization")
             logger.info("SERVICO: " + CNES_REQUEST);
 
             final URL url = new URL(CNES_REQUEST);
