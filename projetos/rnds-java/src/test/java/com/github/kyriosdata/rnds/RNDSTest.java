@@ -166,4 +166,10 @@ public class RNDSTest {
         assertEquals("UNIVERSIDADE FEDERAL DE GOIAS", name);
 
     }
+
+    @Test
+    void contexto() {
+        final RNDS.Resposta resposta = rnds.contexto("cnes", "p", "p");
+        assertEquals(201, resposta.code);
+    }
 }

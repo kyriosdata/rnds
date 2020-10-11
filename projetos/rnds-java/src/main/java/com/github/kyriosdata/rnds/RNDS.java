@@ -17,10 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.security.*;
 import java.security.cert.CertificateException;
@@ -393,6 +390,10 @@ public class RNDS {
      * fornecidos.
      */
     public String forEhr(String path, String query) {
+        if ("".equals(query)) {
+            return forEhr(path);
+        }
+
         return String.format("https://%s/%s/%s", ehr, path, query);
     }
 
@@ -428,6 +429,29 @@ public class RNDS {
         }
     }
 
+    private Resposta post(String path, String payload) {
+        try {
+            final HttpsURLConnection servico = connection("POST", path,
+                    "");
+            servico.setDoOutput(true);
+
+            // Fornece payload
+            final OutputStream os = servico.getOutputStream();
+            os.write(payload.getBytes("UTF-8"));
+
+            final int codigo = servico.getResponseCode();
+
+            final String msg = codigo != 201
+                    ? fromInputStream(servico.getErrorStream())
+                    : fromInputStream(servico.getInputStream());
+
+            return new Resposta(codigo, msg, servico.getHeaderFields());
+        } catch (IOException exception) {
+            return new Resposta(599, exception.getMessage(),
+                    Collections.emptyMap());
+        }
+    }
+
     public Resposta cnpj(final String cnpj) {
         return get("api/fhir/r4/Organization", cnpj);
     }
@@ -441,7 +465,7 @@ public class RNDS {
         final String payload = String.format("{\"cnes\":\"%s\"," +
                 "\"cnsProffisional\":\"%s\",\"cnsPaciente\":\"%s\"}", cnes,
                 profissional, paciente);
-        return null;
+        return post("api/contexto-atendimento", payload);
     }
 
     public String profissional(
