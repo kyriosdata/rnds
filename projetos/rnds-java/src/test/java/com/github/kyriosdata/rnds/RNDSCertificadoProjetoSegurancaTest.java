@@ -51,14 +51,15 @@ public class RNDSCertificadoProjetoSegurancaTest {
     public void keystoreOriginalWithoutLetsEncryptCertificate() {
         final String keystore = fromResource("certificado.jks");
         final String senha = "secret";
-        assertNull(rnds.getToken(RNDS_AUTH, keystore, senha.toCharArray()));
+        assertNull(AccessToken.get(RNDS_AUTH, keystore, senha.toCharArray()));
     }
 
     @Test
     public void keystoreAdicionadoDeLetsEncryptCertificate() {
         final String keystore = fromResource("adicionado.jks");
         final char[] senha = "secret".toCharArray();
-        final String token = rnds.getToken(RNDS_AUTH, keystore, senha);
+        final String token = AccessToken.get(RNDS_AUTH, keystore,
+                senha);
         assertNotNull(token);
         assertEquals(2334, token.length());
     }
