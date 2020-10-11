@@ -28,8 +28,8 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
- * Classe de conveniência para acesso aos serviços oferecidos pela RNDS,
- * tanto para o ambiente de homologação quanto ao ambiente de produção.
+ * Classe para acesso aos serviços oferecidos pela RNDS. Tanto o ambiente
+ * de homologação quanto o de produção estão contemplados.
  */
 public class RNDS {
 
