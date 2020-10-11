@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * da autoridade certificadora que produziu o certificado empregado pela
  * RNDS.</p>
  */
-public class RNDSCertificadoProjetoSegurancaTest {
+public class AccessTokenTest {
 
     private static final String RNDS_AUTH =
             "https://ehr-auth-hmg.saude.gov.br/api/token";
