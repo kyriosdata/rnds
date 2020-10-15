@@ -1,357 +1,420 @@
 const fs = require("fs");
 const https = require("follow-redirects").https;
 
-// TODO mensagem quando codigo de retorno é 500
-
-// TODO criar classe
-// 1. construtor verifica todas as vars
-// 2. cache 'certificate' file (pfx)
-// 3. instancia falha se não for possível obter token.
+/**
+ * A resposta fornecida pela RNDS.
+ * @typedef {Object} Resposta
+ * @property {number} code - O código HTTP da resposta.
+ * @property {Object} retorno - O payload conforme retornado.
+ * @property {Object} headers - Os headers retornados.
+ */
 
 /**
- * Variáveis de ambiente empregadas pelas funções.
+ * Envia requisição https conforme opções e, se for o caso,
+ * com o payload indicado. É esperado que o retorno satisfatório
+ * coincida com o código fornecido. Em caso de sucesso, a
+ * callback é chamada com a resposta retornada (JavaScript object
+ * correspondente ao JSON retornado) e, caso o código
+ * esperado não seja o retornado, então instância de erro é retornada.
+ *
+ * @param {object} options Conjunto de propriedades que estabelecem a
+ * configuração para a requisição.
+ * @param {function} callback Função a ser chamada com três argumentos, na
+ * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
+ * (c) headers retornados.
+ * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
+ * então nada será enviado.
  */
-const auth = process.env.RNDS_AUTH;
-const ehr = process.env.RNDS_EHR;
-const certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
-const senha = process.env.RNDS_CERTIFICADO_SENHA;
-const requisitante = process.env.RNDS_REQUISITANTE_CNS;
+function send(options, payload) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, function (res) {
+      const chunks = [];
 
-/**
- * Cache access token
- */
-let accessToken = undefined;
+      res.on("data", (chunk) => chunks.push(chunk));
 
-/**
- * Recupera <i>token</i> de acesso à RNDS por meio de um certificado
- * digital (arquivo <b>.pfx</b>).
- * @param {function} callback O <i>token</i> de acesso é recebido e passado
- * para esta função quando recuperado.
- */
-function token(callback) {
-  try {
-    const options = {
-      method: "GET",
-      hostname: auth,
-      path: "/api/token",
-      headers: {},
-      maxRedirects: 20,
-      pfx: fs.readFileSync(certificado),
-      passphrase: senha,
-    };
-    buildRequest(options, 200, (r) => {
-      // Guarda em cache o access token para uso em chamadas posteriores
-      accessToken = r.access_token;
-      callback(r);
+      res.on("end", function (chunk) {
+        const body = Buffer.concat(chunks);
+        const json = body.length === 0 ? "" : body.toString();
+
+        // Repassado o código de retorno, o retorno e headers
+        // (em vários cenários os headers não são relevantes)
+        console.log("send received", res.statusCode);
+        resolve({ code: res.statusCode, retorno: json, headers: res.headers });
+      });
+
+      res.on("error", function (error) {
+        reject({
+          msg: "Ocorreu um erro (requisição não envida executada",
+          erro: error,
+        });
+      });
     });
-  } catch (err) {
-    const error = new Error(
-      `Não foi possível obter token.
-       Certifique-se de que definiu corretamente 
-       as variáveis de ambiente.
-       Exceção: ${err}`
-    );
-    callback(error);
-  }
+
+    if (payload) {
+      req.write(payload);
+    }
+
+    req.end();
+  });
+  // Se não fornecido ou vazio, não será enviado.
 }
 
-// token((r) => {
-//   if (r instanceof Error) {
-//     console.log("ERRO NA OBTENCAO DE TOKEN");
-//     console.log(r);
-//   } else {
-//     console.log(
-//       "TOKEN OBTIDO SATISFATORIAMENTE:",
-//       r.access_token.substring(0, 19),
-//       "..."
-//     );
-//   }
-// });
-// console.log("token is called asynchronously...");
+class RNDS {
+  constructor() {
+    function check(nome, valor) {
+      if (!valor || valor.length === 0) {
+        throw new Error(`variavel ${nome} não definida ou vazia`);
+      }
+    }
 
-/**
- * Recupera informações sobre estabelecimento de saúde.
- *
- * @param {string} cnes Código CNES do estabelecimento de saúde.
- * @param {function} callback Função a ser chamada com o retorno fornecido pela RNDS.
- */
-function cnes(cnes, callback) {
-  const options = {
-    method: "GET",
-    hostname: ehr,
-    path: "/api/fhir/r4/Organization/" + cnes,
-  };
+    this.auth = process.env.RNDS_AUTH;
+    this.ehr = process.env.RNDS_EHR;
+    this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
+    this.senha = process.env.RNDS_CERTIFICADO_SENHA;
+    this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
+    this.access_token = undefined;
 
-  makeRequest(options, 200, (payload) => callback(payload));
-}
+    check("RNDS_AUTH", this.auth);
+    check("RNDS_EHR", this.ehr);
+    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+    check("RNDS_CERTIFICADO_SENHA", this.senha);
+    check("RNDS_REQUISITANTE_CNS", this.requisitante);
 
-// cnes("2337991", (r) =>
-//   r instanceof Error ? console.log("CNES não localizado") : console.log(r)
-// );
-
-/**
- * Recupera informações sobre profissional de saúde (via CNS).
- * @param {string} cns Código CNS do profissional de saúde. Caso não
- * fornecido, será empregado o CNS do requisitante.
- * @param {function} callback Função a ser chamada com o retorno fornecido
- * pela RNDS. O argumento é uma instância de Error ou o payload (JSON)
- * contendo a informação desejada.
- */
-function cns(cns, callback) {
-  if (arguments.length === 1) {
-    callback = cns;
-    cns = requisitante;
-  }
-
-  const options = {
-    method: "GET",
-    path: "/api/fhir/r4/Practitioner/" + cns,
-  };
-
-  makeRequest(options, 200, (payload) => callback(payload));
-}
-
-// cns("980016287385192", (r) =>
-//   r instanceof Error ? console.log("CNS não localizado") : console.log(r)
-// );
-
-/**
- * Recupera informações sobre profissional de saúde (via CPF).
- * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
- * será empregado o CPF do requisitante.
- * @param {function} callback Função a ser chamada com o retorno fornecido pela
- * RNDS.
- */
-function cpf(numero, callback) {
-  if (arguments.length === 1) {
-    callback = numero;
-    cns((json) => {
-      const ids = json.identifier;
-      const idx = ids.findIndex((i) => i.system.endsWith("/cpf"));
-      cpf(ids[idx].value, callback);
-    });
-  } else {
-    const options = {
-      method: "GET",
-      path:
-        "/api/fhir/r4/Practitioner?identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
-        numero,
-    };
-
-    makeRequest(options, 200, callback);
-  }
-}
-
-// cpf(console.log);
-
-/**
- * Recupera informações sobre o paciante cujo CPF é fornecido.
- *
- * @param {string} numero O código (número) do CPF do paciente.
- *
- * @returns Informações sobre o paciente em um objeto JavaScript.
- */
-function paciente(numero, callback) {
-  const identifier =
-    "identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C" +
-    numero;
-
-  const options = {
-    method: "GET",
-    path: "/api/fhir/r4/Patient?" + identifier,
-  };
-
-  makeRequest(options, 200, callback);
-}
-
-// paciente("cpf aqui", console.log);
-
-/**
- * Notica o Ministério da Saúde, ou seja, submete resultado de
- * exame de COVID para a RNDS conforme padrão estabelecido. A
- * callback será chamada com o identificador único, gerado pela
- * RNDS, para fazer referência ao resultado submetido.
- *
- * @param {string} payload Resultado de exame devidamente empacotado
- * conforme perfil FHIR correspondente, definido pela RNDS.
- * @param {function} callback Função a ser chamada quando a submissão
- * for realizada de forma satisfatória. O argumento fornecido à função
- * será o identificador único, geraldo pela RNDS, para o resultado
- * submetido.
- */
-function notificar(payload, callback) {
-  const options = {
-    method: "POST",
-    path: "/api/fhir/r4/Bundle",
-  };
-
-  function encapsulada(resposta, headers) {
-    if (resposta instanceof Error) {
-      callback(resposta);
-    } else {
-      const location = headers["location"];
-      const rndsID = location.substring(location.lastIndexOf("/") + 1);
-      callback(rndsID);
+    // Cache certificate
+    try {
+      this.pfx = fs.readFileSync(this.certificado);
+    } catch (error) {
+      throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
     }
   }
 
-  makeRequest(options, 201, encapsulada, payload);
-}
-
-// notificar(fs.readFileSync("/tmp/rnds/l1.json", "utf-8"), (r) => {
-//   if (r instanceof Error) {
-//     console.log("não foi possível executar a requisição...");
-//     console.log(r.message);
-//   }
-// });
-
-/**
- * Obtém o CNS (oficial) do paciente.
- *
- * @param {string} numero O número do CPF do paciente.
- * @param {function} callback A função chamada com o CNS do paciente.
- */
-function cnsDoPaciente(numero, callback) {
-  function cnsOficial(id) {
-    return id.system.endsWith("/cns") && id.use === "official";
+  /**
+   * Recupera <i>token</i> de acesso à RNDS.
+   * @param {function} callback O <i>token</i> de acesso é recebido e passado
+   * para esta função quando recuperado. Esta função recebe três argumentos:
+   * (a) código de retorno; (b) retorno e (c) headers retornados pela
+   * execução da requisição.
+   */
+  token() {
+    try {
+      const options = {
+        method: "GET",
+        path: "/api/token",
+        headers: {},
+        maxRedirects: 20,
+        hostname: this.auth,
+        pfx: this.pfx,
+        passphrase: this.senha,
+      };
+      return send(options);
+    } catch (err) {
+      const error = new Error(
+        `Não foi possível obter token.
+       Certifique-se de que definiu corretamente 
+       as variáveis de ambiente.
+       Exceção: ${err}`
+      );
+      return Promise.reject(error);
+    }
   }
 
-  paciente(numero, (resultado) => {
-    const ids = resultado.entry[0].resource.identifier;
-    const idx = ids.findIndex((i) => cnsOficial(i));
-    callback(ids[idx].value);
-  });
-}
-
-// cnsDoPaciente("cpf do paciente", console.log);
-
-/**
- * Cria e executa a requisição.
- *
- * @param {*} options
- * @param {number} expectedCode Código de retorno esperado em uma execução
- * satisfatória.
- * @param {function} callback Função a ser chamada com dois argumentos, o
- * retorno obtido com a requisição e os headers.
- * @param {*} payload Conteúdo a ser submetido.
- */
-function buildRequest(options, expectedCode, callback, payload) {
-  const req = https.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
+  start() {
+    return new Promise((resolve, reject) => {
+      console.log("start called...");
+      this.token().then((o) => {
+        if (o.code === 200) {
+          // Guarda em cache o access token para uso posterior
+          this.access_token = JSON.parse(o.retorno).access_token;
+          console.log("access_token updated");
+          resolve("ok");
+        } else {
+          this.access_token = undefined;
+          reject("falha ao obter access_token");
+        }
+      });
     });
-
-    res.on("end", function (chunk) {
-      const body = Buffer.concat(chunks);
-      const corpo = body.toString();
-      const json = corpo ? JSON.parse(corpo) : "";
-
-      const payloadRetorno =
-        res.statusCode != expectedCode
-          ? new Error(
-              `esperado ${expectedCode}, retornado ${res.statusCode}
-              Resposta:
-              ${corpo}`
-            )
-          : json;
-
-      // Repassado o retorno e headers
-      // (em vários cenários os headers não são relevantes)
-      callback(payloadRetorno, res.headers);
-    });
-
-    res.on("error", function (error) {
-      console.log("Ocorreu um erro (requisição não envida satisfatoriamente");
-      console.error(error);
-    });
-  });
-
-  // Se payload fornecido, este deve ser enviado.
-  if (payload) {
-    req.write(payload);
   }
 
-  req.end();
-}
-
-/**
- * Requisita informações sobre os papéis desempenhados por um profissional de saúde em um
- * dado estabelecimento em um período de tempo.
- *
- * @param {string} cns CNS do profissional de saúde
- * @param {string} cnes Código CNES do estabelecimento de saúde
- * @param {function} callback Função a ser chamada com a resposta para a lotação.
- */
-function lotacao(cns, cnes, callback) {
-  const practitioner =
-    "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
-    cns;
-  const organization =
-    "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
-    cnes;
-
-  const options = {
-    method: "GET",
-    path: "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
-  };
-
-  makeRequest(options, 200, callback);
-}
-
-function cnpj(cnpj, callback) {
-  const options = {
-    method: "GET",
-    path: "/api/fhir/r4/Organization/" + cnpj,
-  };
-
-  makeRequest(options, 200, callback);
-}
-
-console.log("vou chamar cnpj...");
-cnpj("01567601000143", console.log);
-
-// token(console.log);
-// cnes("2337991", (r) => console.log(r));
-//profissional(requisitante, (json) => {
-//  const cpf = json.identifier[0].value;
-//  profissionalPorCpf(cpf, (r) => console.log("Total de respostas:", r.total));
-//});
-
-// lotacao(requisitante, "2337991", (r) => console.log(r));
-
-function makeRequest(options, expectedCode, callback, payload) {
-  // Se access_token não disponível, então tentar recuperar.
-  if (accessToken === undefined) {
-    token(function () {
-      makeRequest(options, 200, callback, payload);
-    });
-
-    return;
+  /**
+   * Preenche configuração de requisição com elementos comuns
+   * às requisições: (a) hostname; (b) Content-Type;
+   * (c) X-Authorization-Server" e (d) Authorization.
+   *
+   * @param {Object} options Opções empregadas para configurar
+   * requisição https.
+   *
+   * @returns Objeto fornecido e acrescido das propriedades
+   * descritas acima.
+   */
+  inflar(options) {
+    return {
+      ...options,
+      hostname: this.ehr,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization-Server": "Bearer " + this.access_token,
+        Authorization: this.requisitante,
+      },
+      maxRedirects: 10,
+    };
   }
 
-  // Token de acesso está disponível
-  const securityAdded = {
-    ...options,
-    hostname: ehr,
-    headers: {
-      "Content-Type": "application/json",
-      "X-Authorization-Server": "Bearer " + accessToken,
-      Authorization: requisitante,
-    },
-    maxRedirects: 10,
-  };
+  /**
+   * Constrói e executa requisição. Caso o retorno seja o código
+   * 401 (unauthorized) ou 502 (bad gateway), automaticamente
+   * um novo token de acesso é requisitado e, caso obtido,
+   * a requisição desejada é refeita. Nesta segunda tentativa,
+   * o resultado, qualquer que seja ele, será retornado.
+   *
+   * @param {object} options Opções que configuram a requisição.
+   * @param {function} callback Função que será chamada com o código
+   * de retorno, o retorno (JSON parsed) e headers.
+   * @param {string} payload Mensagem ou conteúdo a ser enviado.
+   */
+  makeRequest(options, payload) {
+    const envie = () => send(this.inflar(options), payload);
 
-  buildRequest(securityAdded, expectedCode, callback, payload);
+    const reenvieSeFalha = (objeto) => {
+      // Se falha de autenticacao ou bad gateway (aws)
+      if (objeto.code !== 401 || objeto.code !== 502) {
+        console.log("não é necessário reenvio");
+        return objeto;
+      }
+
+      console.log("tentando novamente...");
+      return this.start().then(envie);
+    };
+
+    return this.getToken().then(envie).then(reenvieSeFalha);
+  }
+
+  /**
+   * Recupera informações sobre o estabelecimento de saúde.
+   *
+   * @param {string} cnes Código CNES do estabelecimento de saúde.
+   * @returns {Promise<Resposta>} Promise que resulta na {@link Resposta} retornada.
+   */
+  cnes(cnes) {
+    const options = {
+      method: "GET",
+      path: "/api/fhir/r4/Organization/" + cnes,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional de saúde (via CNS).
+   * @param {string} cns Código CNS do profissional de saúde. Caso não
+   * fornecido, será empregado o CNS do requisitante.
+   * @returns {Promise<Resposta>}
+   */
+  cns(cns) {
+    const profissional = cns ? cns : this.requisitante;
+    const options = {
+      method: "GET",
+      path: "/api/fhir/r4/Practitioner/" + profissional,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional de saúde.
+   * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
+   * será empregado o CPF do requisitante.
+   * @returns {Promise<Resposta>}
+   */
+  cpf(numero) {
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/Practitioner?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
+        numero,
+    };
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre pessoa jurídica.
+   *
+   * @param {string} cnpj Número do CNPJ da pessoa jurídica.
+   * @returns {Promise<Resposta>}
+   */
+  cnpj(cnpj) {
+    const options = {
+      method: "GET",
+      path: "/api/fhir/r4/Organization/" + cnpj,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera informações sobre profissional liberal pelo CNES ou
+   * CPF do profissional em questão.
+   *
+   * @param {string} cpfOuCnes Número do CPF do profissional liberal ou
+   * CNES.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  profissionalLiberal(cpfOuCnes) {
+    return this.cnes(cpfOuCnes);
+  }
+
+  getToken() {
+    return this.access_token ? Promise.resolve() : this.start();
+  }
+
+  /**
+   * Recupera informações sobre o paciante.
+   *
+   * @param {string} cpf O número do CPF do paciente.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  paciente(cpf) {
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/Patient?" +
+        "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
+        cpf,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Notica o Ministério da Saúde, ou seja, submete resultado de
+   * exame de COVID para a RNDS conforme padrão estabelecido. A
+   * callback será chamada com o identificador único, gerado pela
+   * RNDS, para fazer referência ao resultado submetido.
+   *
+   * @param {string} payload Resultado de exame devidamente empacotado
+   * conforme perfil FHIR correspondente, definido pela RNDS.
+   * @returns {Promise<Resposta>}
+   */
+  notificar(payload) {
+    /**
+     * Extrai da resposta ao resultado de exame submetido o
+     * identificador atribuído pela RNDS à resposta.
+     *
+     * @param {Resposta} resposta A resposta recebida para o
+     * resultado submetido.
+     *
+     * @returns O objeto recebido onde a propriedade "retorno" recebe
+     * o valor do identificador do resultado de exame atribuído pela
+     * RNDS. Em caso de resposta com código diferente de 201, então a
+     * resposta recebida é retornada.
+     */
+    function extraiRndsId(resposta) {
+      if (resposta.code !== 201) {
+        return resposta;
+      }
+
+      const location = resposta.headers["location"];
+      const rndsId = location.substring(location.lastIndexOf("/") + 1);
+      resposta.retorno = rndsId;
+      return resposta;
+    }
+
+    const options = {
+      method: "POST",
+      path: "/api/fhir/r4/Bundle",
+    };
+
+    return this.makeRequest(options, payload).then(extraiRndsId);
+  }
+
+  /**
+   * Substitui resultado de exame submetido anteriormente.
+   *
+   * @param {string} payload Resultado de exame devidamente empacotado
+   * conforme perfil FHIR correspondente, definido pela RNDS, para
+   * substituir resultado previamente submetido.
+   *
+   * @returns {Promise<Resposta>}
+   */
+  substituir(payload) {
+    // TODO verificar presença de "relatesTo"?
+    return this.notificar(payload);
+  }
+
+  /**
+   * Obtém o CNS (oficial) do paciente.
+   *
+   * @param {string} numero O número do CPF do paciente.
+   * @returns {Promise<Resposta>} A propriedade "retorno" da
+   * Resposta contém o CNS do paciente correspondente ao
+   * CPF fornecido.
+   */
+  cnsDoPaciente(numero) {
+    function cnsOficial(id) {
+      return id.system.endsWith("/cns") && id.use === "official";
+    }
+
+    const extraiCns = (resposta) => {
+      if (resposta.code !== 200) {
+        return resposta;
+      }
+
+      const json = JSON.parse(resposta.retorno);
+      const ids = json.entry[0].resource.identifier;
+      const idx = ids.findIndex((i) => cnsOficial(i));
+      return {
+        code: resposta.code,
+        retorno: ids[idx].value,
+        headers: resposta.headers,
+      };
+    };
+
+    return this.paciente(numero).then(extraiCns);
+  }
+
+  /**
+   * Requisita informações sobre os papéis desempenhados por um profissional de saúde em um
+   * dado estabelecimento em um período de tempo.
+   *
+   * @param {string} cns CNS do profissional de saúde
+   * @param {string} cnes Código CNES do estabelecimento de saúde
+   * @returns {Promise<Resposta>}
+   */
+  lotacao(cns, cnes) {
+    const practitioner =
+      "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
+      cns;
+    const organization =
+      "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
+      cnes;
+
+    const options = {
+      method: "GET",
+      path:
+        "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  /**
+   * Recupera "token" de acesso à informação do usuário.
+   *
+   * @param {string} cnes CNES do estabelecimento de saúde.
+   * @param {string} cnsProfissional CNS do profissional.
+   * @param {string} cnsPaciente CNS do paciente.
+   * @returns {Promise<Resposta>}
+   */
+  contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
+    const options = {
+      method: "POST",
+      path: "/api/contexto-atendimento",
+    };
+
+    const payload = { cnes, cnsProfissional, cnsPaciente };
+    return this.makeRequest(options, JSON.stringify(payload));
+  }
 }
 
-module.exports = {
-  cns: cns,
-  cpf: cpf,
-  cnes: cnes,
-  cnpj: cnpj,
-  paciente: paciente,
-  cnsDoPaciente: cnsDoPaciente,
-  notificar: notificar,
-};
+module.exports = RNDS;
