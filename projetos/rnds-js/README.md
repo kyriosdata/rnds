@@ -54,10 +54,12 @@ const showError = (objeto) => console.log("ERRO", objeto);
 // Exibe informações sobre o paciente
 // rnds.paciente("cpf do paciente", console.log);
 
-// Submete um resultado de exame
-// O conteúdo JSON é obtido de arquivo no exemplo abaixo.
-// Exibe o identificador gerado pela RNDS para o resultado.
-// rnds.notificar(fs.readFileSync("resultado.json", "utf-8"), console.log);
+// Submete um resultado de exame depositado no arquivo "resultado.json".
+// (um identificador único é gerado pelo instante corrente)
+// const resultado = JSON.parse(fs.readFileSync("resultado.json"));
+// resultado.identifier.value = new Date().toString();
+// const payload = JSON.stringify(resultado);
+// rnds.notificar(payload).then(console.log).catch(showError);
 ```
 
 ### Links

@@ -161,12 +161,10 @@ class RNDS {
 
   /**
    * Constrói e executa requisição. Caso o retorno seja o código
-   * 401 (unauthorized), automaticamente um novo token de acesso
-   * é requisitado e, caso obtido, a requisição desejada é refeita.
-   * Em consequência, se a "callback" for chamda com o código 401,
-   * então tentou-se obter um novo token usando em uma nova tentativa,
-   * antes de retornar tal código. Tal política contempla o caso de
-   * token expirado.
+   * 401 (unauthorized) ou 502 (bad gateway), automaticamente
+   * um novo token de acesso é requisitado e, caso obtido,
+   * a requisição desejada é refeita. Nesta segunda tentativa,
+   * o resultado, qualquer que seja ele, será retornado.
    *
    * @param {object} options Opções que configuram a requisição.
    * @param {function} callback Função que será chamada com o código
@@ -176,17 +174,18 @@ class RNDS {
   makeRequest(options, payload) {
     const envie = () => send(this.inflar(options), payload);
 
-    const reenvieSeNaoAutorizado = (objeto) => {
-      console.log("tentando novamente...");
-      if (objeto.code !== 401) {
-        console.log("retorno diferente de 401");
+    const reenvieSeFalha = (objeto) => {
+      // Se falha de autenticacao ou bad gateway (aws)
+      if (objeto.code !== 401 || objeto.code !== 502) {
+        console.log("não é necessário reenvio");
         return objeto;
       }
 
+      console.log("tentando novamente...");
       return this.start().then(envie);
     };
 
-    return this.getToken().then(envie).then(reenvieSeNaoAutorizado);
+    return this.getToken().then(envie).then(reenvieSeFalha);
   }
 
   /**
@@ -298,12 +297,35 @@ class RNDS {
    * @returns {Promise<Resposta>}
    */
   notificar(payload) {
+    /**
+     * Extrai da resposta ao resultado de exame submetido o
+     * identificador atribuído pela RNDS à resposta.
+     *
+     * @param {Resposta} resposta A resposta recebida para o
+     * resultado submetido.
+     *
+     * @returns O objeto recebido onde a propriedade "retorno" recebe
+     * o valor do identificador do resultado de exame atribuído pela
+     * RNDS. Em caso de resposta com código diferente de 201, então a
+     * resposta recebida é retornada.
+     */
+    function extraiRndsId(resposta) {
+      if (resposta.code !== 201) {
+        return resposta;
+      }
+
+      const location = resposta.headers["location"];
+      const rndsId = location.substring(location.lastIndexOf("/") + 1);
+      resposta.retorno = rndsId;
+      return resposta;
+    }
+
     const options = {
       method: "POST",
       path: "/api/fhir/r4/Bundle",
     };
 
-    return this.makeRequest(options, payload);
+    return this.makeRequest(options, payload).then(extraiRndsId);
   }
 
   /**
@@ -324,7 +346,9 @@ class RNDS {
    * Obtém o CNS (oficial) do paciente.
    *
    * @param {string} numero O número do CPF do paciente.
-   * @returns {Promise<Resposta>}
+   * @returns {Promise<Resposta>} A propriedade "retorno" da
+   * Resposta contém o CNS do paciente correspondente ao
+   * CPF fornecido.
    */
   cnsDoPaciente(numero) {
     function cnsOficial(id) {
@@ -332,13 +356,18 @@ class RNDS {
     }
 
     const extraiCns = (resposta) => {
-      if (resposta.c !== 200) {
+      if (resposta.code !== 200) {
         return resposta;
       }
 
-      const ids = o.retorno.entry[0].resource.identifier;
+      const json = JSON.parse(resposta.retorno);
+      const ids = json.entry[0].resource.identifier;
       const idx = ids.findIndex((i) => cnsOficial(i));
-      return { code: o.code, retorno: ids[idx].value, headers: o.headers };
+      return {
+        code: resposta.code,
+        retorno: ids[idx].value,
+        headers: resposta.headers,
+      };
     };
 
     return this.paciente(numero).then(extraiCns);
@@ -389,23 +418,3 @@ class RNDS {
 }
 
 module.exports = RNDS;
-const showError = (objeto) => console.log("ERRO", objeto);
-
-function encontradoCpf(retorno) {
-  console.log(retorno);
-  const json = JSON.parse(retorno.retorno);
-  const encontrado = json.total > 0;
-  console.log("CPF encontrado:", encontrado);
-}
-
-const rnds = new RNDS();
-//rnds.start().catch(() => console.log("catch"));
-//rnds.contextoAtendimento("c", "p", "u").then(console.log).catch(showError);
-//rnds.cnes("2337991").then(console.log).catch(showError);
-//rnds.cns().then(console.log).catch(showError);
-//rnds.cpf("p").then(encontradoCpf).catch(showError);
-//rnds.lotacao("p", "cnes").then(console.log).catch(showError);
-//rnds.cnpj("01567601000143").then(console.log).catch(showError);
-//rnds.paciente("9999").then(console.log).catch(showError);
-//rnds.cnsDoPaciente("9876").then(console.log).catch(showError);
-//rnds.notificar(fs.readFileSync("14.json")).then(console.log).catch(showError);

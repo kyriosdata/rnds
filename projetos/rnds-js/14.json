@@ -7,7 +7,7 @@
   },
   "identifier": {
     "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-14008",
-    "value": "k10"
+    "value": "k18"
   },
   "entry": [
     {
