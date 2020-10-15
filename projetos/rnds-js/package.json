@@ -1,6 +1,6 @@
 {
   "name": "rnds",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Biblioteca para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "javascript"
   ],
   "author": "Fábio Nogueira de Lucena <fabio@inf.ufg.br> (https://github.com/kyriosdata)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/kyriosdata/rnds/issues"
   },
