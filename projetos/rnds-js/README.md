@@ -29,10 +29,16 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 // Importar biblioteca
 const rnds = require("rnds");
 
+// Função empregada para exibir erro (caso ocorra)
+const showError = (objeto) => console.log("ERRO", objeto);
+
 // Token (access token) é obtido implicitamente e reutilizado
 
 // Exibe informações do estabelecimento de saúde (CNES fornecido)
-// rnds.cnes("2337991", console.log);
+// rnds.cnes("2337991").then(console.log).catch(showError);
+
+// Exibe informações sobre papéis de profissional em estabelecimento de saúde
+// rnds.lotacao("p", "cnes").then(console.log).catch(showError);
 
 // Exibe resultado para consulta ao CNPJ fornecido
 // rnds.cnpj("01567601000143", console.log);

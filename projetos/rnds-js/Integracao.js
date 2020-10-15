@@ -5,8 +5,7 @@ const https = require("follow-redirects").https;
  * A resposta fornecida pela RNDS.
  * @typedef {Object} Resposta
  * @property {number} code - O código HTTP da resposta.
- * @property {Object} retorno - O objeto JavaScript correspondente ao JSON
- * retornado.
+ * @property {Object} retorno - O payload conforme retornado.
  * @property {Object} headers - Os headers retornados.
  */
 
@@ -35,7 +34,7 @@ function send(options, payload) {
 
       res.on("end", function (chunk) {
         const body = Buffer.concat(chunks);
-        const json = body.length === 0 ? "" : JSON.parse(body.toString());
+        const json = body.length === 0 ? "" : body.toString();
 
         // Repassado o código de retorno, o retorno e headers
         // (em vários cenários os headers não são relevantes)
@@ -62,7 +61,7 @@ function send(options, payload) {
 
 class RNDS {
   constructor() {
-    function checkVariable(nome, valor) {
+    function check(nome, valor) {
       if (!valor || valor.length === 0) {
         throw new Error(`variavel ${nome} não definida ou vazia`);
       }
@@ -75,11 +74,11 @@ class RNDS {
     this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
     this.access_token = undefined;
 
-    checkVariable("RNDS_AUTH", this.auth);
-    checkVariable("RNDS_EHR", this.ehr);
-    checkVariable("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    checkVariable("RNDS_CERTIFICADO_SENHA", this.senha);
-    checkVariable("RNDS_REQUISITANTE_CNS", this.requisitante);
+    check("RNDS_AUTH", this.auth);
+    check("RNDS_EHR", this.ehr);
+    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+    check("RNDS_CERTIFICADO_SENHA", this.senha);
+    check("RNDS_REQUISITANTE_CNS", this.requisitante);
 
     // Cache certificate
     try {
@@ -125,7 +124,7 @@ class RNDS {
       this.token().then((o) => {
         if (o.code === 200) {
           // Guarda em cache o access token para uso posterior
-          this.access_token = o.retorno.access_token;
+          this.access_token = JSON.parse(o.retorno).access_token;
           console.log("access_token updated");
           resolve("ok");
         } else {
@@ -222,7 +221,7 @@ class RNDS {
   }
 
   /**
-   * Recupera informações sobre profissional de saúde (via CPF).
+   * Recupera informações sobre profissional de saúde.
    * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
    * será empregado o CPF do requisitante.
    * @returns {Promise<Resposta>}
@@ -392,13 +391,21 @@ class RNDS {
 module.exports = RNDS;
 const showError = (objeto) => console.log("ERRO", objeto);
 
+function encontradoCpf(retorno) {
+  console.log(retorno);
+  const json = JSON.parse(retorno.retorno);
+  const encontrado = json.total > 0;
+  console.log("CPF encontrado:", encontrado);
+}
+
 const rnds = new RNDS();
+//rnds.start().catch(() => console.log("catch"));
 //rnds.contextoAtendimento("c", "p", "u").then(console.log).catch(showError);
 //rnds.cnes("2337991").then(console.log).catch(showError);
 //rnds.cns().then(console.log).catch(showError);
-//rnds.cpf("9999").then(console.log).catch(showError);
-//rnds.lotacao("cns", "cnes").then(console.log).catch(showError);
-//rnds.cnpj("999").then(console.log).catch(showError);
+//rnds.cpf("p").then(encontradoCpf).catch(showError);
+//rnds.lotacao("p", "cnes").then(console.log).catch(showError);
+//rnds.cnpj("01567601000143").then(console.log).catch(showError);
 //rnds.paciente("9999").then(console.log).catch(showError);
 //rnds.cnsDoPaciente("9876").then(console.log).catch(showError);
 //rnds.notificar(fs.readFileSync("14.json")).then(console.log).catch(showError);
