@@ -24,8 +24,12 @@ const https = require("follow-redirects").https;
  * (c) headers retornados.
  * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
  * então nada será enviado.
+ *
+ * @returns {Promise<Resposta>} Promise para a resposta obtida pela
+ * execução da requisição.
  */
 function send(options, payload) {
+  console.log(options.path);
   return new Promise((resolve, reject) => {
     const req = https.request(options, function (res) {
       const chunks = [];
@@ -94,6 +98,8 @@ class RNDS {
    * para esta função quando recuperado. Esta função recebe três argumentos:
    * (a) código de retorno; (b) retorno e (c) headers retornados pela
    * execução da requisição.
+   *
+   * @returns {Promise<Resposta>}
    */
   token() {
     try {
@@ -109,30 +115,36 @@ class RNDS {
       return send(options);
     } catch (err) {
       const error = new Error(
-        `Não foi possível obter token.
-       Certifique-se de que definiu corretamente 
-       as variáveis de ambiente.
-       Exceção: ${err}`
+        `Não foi possível obter token. Verifique variáveis de ambiente.
+        Exceção: ${err}`
       );
       return Promise.reject(error);
     }
   }
 
-  start() {
-    return new Promise((resolve, reject) => {
-      console.log("start called...");
-      this.token().then((o) => {
-        if (o.code === 200) {
-          // Guarda em cache o access token para uso posterior
-          this.access_token = JSON.parse(o.retorno).access_token;
-          console.log("access_token updated");
-          resolve("ok");
-        } else {
-          this.access_token = undefined;
-          reject("falha ao obter access_token");
-        }
-      });
+  /**
+   * Obtém e armazena em cache o access token a ser empregado
+   * para requisições à RNDS.
+   */
+  iniciar() {
+    return this.token().then((o) => {
+      if (o.code === 200) {
+        // Guarda em cache o access token para uso posterior
+        this.access_token = JSON.parse(o.retorno).access_token;
+        console.log("access_token updated");
+        return Promise.resolve("ok");
+      } else {
+        this.access_token = undefined;
+        return Promise.reject("falha ao obter access_token");
+      }
     });
+  }
+
+  /**
+   * Obtém access token caso não esteja no cache.
+   */
+  getToken() {
+    return this.access_token ? Promise.resolve() : this.iniciar();
   }
 
   /**
@@ -182,7 +194,7 @@ class RNDS {
       }
 
       console.log("tentando novamente...");
-      return this.start().then(envie);
+      return this.iniciar().then(envie);
     };
 
     return this.getToken().then(envie).then(reenvieSeFalha);
@@ -261,10 +273,6 @@ class RNDS {
    */
   profissionalLiberal(cpfOuCnes) {
     return this.cnes(cpfOuCnes);
-  }
-
-  getToken() {
-    return this.access_token ? Promise.resolve() : this.start();
   }
 
   /**
