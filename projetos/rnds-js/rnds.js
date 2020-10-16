@@ -144,6 +144,7 @@ class RNDS {
    * Obtém access token caso não esteja no cache.
    */
   getToken() {
+    console.log("getToken()");
     return this.access_token ? Promise.resolve() : this.iniciar();
   }
 

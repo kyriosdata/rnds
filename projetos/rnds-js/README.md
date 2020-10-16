@@ -27,7 +27,13 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 
 ```js
 // Importar biblioteca
-const rnds = require("rnds");
+const RNDS = require("rnds");
+
+// Crie uma instância
+const rnds = new RNDS();
+
+// Uso típico
+// rnds.iniciar().then(... execute chamadas ...);
 
 // Função empregada para exibir erro (caso ocorra)
 const showError = (objeto) => console.log("ERRO", objeto);
