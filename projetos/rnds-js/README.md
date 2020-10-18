@@ -68,7 +68,7 @@ const showError = (objeto) => console.log("ERRO", objeto);
 // rnds.cpf("cpf").then(console.log).catch(showError);
 
 // Exibe informações sobre o paciente
-// rnds.paciente("cpf do paciente", console.log);
+// rnds.paciente("cpf do paciente").then(console.log);
 
 // Submete um resultado de exame depositado no arquivo "resultado.json".
 // (um identificador único é gerado pelo instante corrente)
