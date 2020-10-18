@@ -29,8 +29,9 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 // Importar biblioteca
 const RNDS = require("rnds");
 
-// Crie uma instância
-const rnds = new RNDS();
+// Crie uma instância com logging habilitado
+// new RNDS() ou new RNDS(false) para desabilitar logging
+const rnds = new RNDS(true);
 
 // Uso típico
 // rnds.iniciar().then(... execute chamadas ...);
@@ -38,7 +39,14 @@ const rnds = new RNDS();
 // Função empregada para exibir erro (caso ocorra)
 const showError = (objeto) => console.log("ERRO", objeto);
 
+// IMPORTANTE
 // Token (access token) é obtido implicitamente e reutilizado
+// Todas as funções retornam o objeto Resposta, que possui três
+// propriedades: code (HTTP), retorno (payload), headers (headers retornados).
+
+// Contexto de atendimento
+// (deve ser fornecido o CNES, cns do profissional e do paciente)
+// rnds.contextoAtendimento("cnes", "p", "u").then(console.log).catch(showError);
 
 // Exibe informações do estabelecimento de saúde (CNES fornecido)
 // rnds.cnes("2337991").then(console.log).catch(showError);
@@ -47,15 +55,17 @@ const showError = (objeto) => console.log("ERRO", objeto);
 // rnds.lotacao("p", "cnes").then(console.log).catch(showError);
 
 // Exibe resultado para consulta ao CNPJ fornecido
-// rnds.cnpj("01567601000143", console.log);
+// rnds.cnpj("01567601000143").then(console.log);
 
 // Exibe informações sobre profissional de saúde (CNS).
 // Quando CNS omitido, é usado o do requisitante definido
 // por variável de ambiente.
-// rnds.cns(console.log);
+// (código da resposta será 404 para CNS não encontrado)
+// rnds.cns("cns").then(console.log);
 
 // Exibe informações sobre o profissional de saúde
-// rnds.cpf("cpf do profissional de saúde", console.log);
+// Retorna code 200 mesmo quando não encontrado (verifique payload)
+// rnds.cpf("cpf").then(console.log).catch(showError);
 
 // Exibe informações sobre o paciente
 // rnds.paciente("cpf do paciente", console.log);

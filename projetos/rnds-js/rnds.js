@@ -10,61 +10,22 @@ const https = require("follow-redirects").https;
  */
 
 /**
- * Envia requisição https conforme opções e, se for o caso,
- * com o payload indicado. É esperado que o retorno satisfatório
- * coincida com o código fornecido. Em caso de sucesso, a
- * callback é chamada com a resposta retornada (JavaScript object
- * correspondente ao JSON retornado) e, caso o código
- * esperado não seja o retornado, então instância de erro é retornada.
- *
- * @param {object} options Conjunto de propriedades que estabelecem a
- * configuração para a requisição.
- * @param {function} callback Função a ser chamada com três argumentos, na
- * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
- * (c) headers retornados.
- * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
- * então nada será enviado.
- *
- * @returns {Promise<Resposta>} Promise para a resposta obtida pela
- * execução da requisição.
+ * Classe que oferece acesso aos serviços oferecidos pela RNDS.
  */
-function send(options, payload) {
-  console.log(options.path);
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, function (res) {
-      const chunks = [];
-
-      res.on("data", (chunk) => chunks.push(chunk));
-
-      res.on("end", function (chunk) {
-        const body = Buffer.concat(chunks);
-        const json = body.length === 0 ? "" : body.toString();
-
-        // Repassado o código de retorno, o retorno e headers
-        // (em vários cenários os headers não são relevantes)
-        console.log("send received", res.statusCode);
-        resolve({ code: res.statusCode, retorno: json, headers: res.headers });
-      });
-
-      res.on("error", function (error) {
-        reject({
-          msg: "Ocorreu um erro (requisição não envida executada",
-          erro: error,
-        });
-      });
-    });
-
-    if (payload) {
-      req.write(payload);
-    }
-
-    req.end();
-  });
-  // Se não fornecido ou vazio, não será enviado.
-}
-
 class RNDS {
-  constructor() {
+  /**
+   * Cria uma instância necessária para a conexão com o ambiente de
+   * homologação ou produção da RNDS.
+   *
+   * @param {boolean} logging O valor true para habilitar o logging ou
+   * false, caso contrário.
+   */
+  constructor(logging) {
+    this.logging = !!logging;
+    this.log = (p, s) => {
+      if (this.logging) console.log("RNDS:", p, s || "");
+    };
+
     function check(nome, valor) {
       if (!valor || valor.length === 0) {
         throw new Error(`variavel ${nome} não definida ou vazia`);
@@ -90,6 +51,72 @@ class RNDS {
     } catch (error) {
       throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
     }
+
+    this.log("RNDS_AUTH", this.auth);
+    this.log("RNDS_EHR", this.ehr);
+    this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
+
+    /**
+     * Envia requisição https conforme opções e, se for o caso,
+     * com o payload indicado. É esperado que o retorno satisfatório
+     * coincida com o código fornecido. Em caso de sucesso, a
+     * callback é chamada com a resposta retornada (JavaScript object
+     * correspondente ao JSON retornado) e, caso o código
+     * esperado não seja o retornado, então instância de erro é retornada.
+     *
+     * @param {object} options Conjunto de propriedades que estabelecem a
+     * configuração para a requisição.
+     * @param {function} callback Função a ser chamada com três argumentos, na
+     * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
+     * (c) headers retornados.
+     * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
+     * então nada será enviado.
+     *
+     * @returns {Promise<Resposta>} Promise para a resposta obtida pela
+     * execução da requisição.
+     */
+    this.send = function (options, payload) {
+      this.log(options.method, options.path);
+
+      return new Promise((resolve, reject) => {
+        const innerLog = this.log;
+        const req = https.request(options, function (res) {
+          const chunks = [];
+
+          res.on("data", (chunk) => chunks.push(chunk));
+
+          res.on("end", function (chunk) {
+            const body = Buffer.concat(chunks);
+            const json = body.length === 0 ? "" : body.toString();
+
+            // Repassado o código de retorno, o retorno e headers
+            // (em vários cenários os headers não são relevantes)
+            innerLog(options.path, res.statusCode);
+            resolve({
+              code: res.statusCode,
+              retorno: json,
+              headers: res.headers,
+            });
+          });
+
+          res.on("error", function (error) {
+            reject({
+              msg: "Ocorreu um erro (requisição não envida executada",
+              erro: error,
+            });
+          });
+        });
+
+        // Se não fornecido ou vazio, não será enviado.
+        if (payload) {
+          req.write(payload);
+        }
+
+        req.end();
+      });
+    };
   }
 
   /**
@@ -112,7 +139,7 @@ class RNDS {
         pfx: this.pfx,
         passphrase: this.senha,
       };
-      return send(options);
+      return this.send(options);
     } catch (err) {
       const error = new Error(
         `Não foi possível obter token. Verifique variáveis de ambiente.
@@ -131,7 +158,7 @@ class RNDS {
       if (o.code === 200) {
         // Guarda em cache o access token para uso posterior
         this.access_token = JSON.parse(o.retorno).access_token;
-        console.log("access_token updated");
+        this.log("access_token redefinido");
         return Promise.resolve("ok");
       } else {
         this.access_token = undefined;
@@ -144,7 +171,7 @@ class RNDS {
    * Obtém access token caso não esteja no cache.
    */
   getToken() {
-    console.log("getToken()");
+    this.log("getToken()");
     return this.access_token ? Promise.resolve() : this.iniciar();
   }
 
@@ -185,17 +212,16 @@ class RNDS {
    * @param {string} payload Mensagem ou conteúdo a ser enviado.
    */
   makeRequest(options, payload) {
-    const envie = () => send(this.inflar(options), payload);
+    const envie = () => this.send(this.inflar(options), payload);
 
     const reenvieSeFalha = (objeto) => {
       // Se falha de autenticacao ou bad gateway (aws)
-      if (objeto.code !== 401 || objeto.code !== 502) {
-        console.log("não é necessário reenvio");
-        return objeto;
+      if (objeto.code === 401 || objeto.code === 502) {
+        this.log("resposta 401 ou 502, tentando novamente...");
+        return this.iniciar().then(envie);
       }
 
-      console.log("tentando novamente...");
-      return this.iniciar().then(envie);
+      return objeto;
     };
 
     return this.getToken().then(envie).then(reenvieSeFalha);
@@ -234,9 +260,11 @@ class RNDS {
 
   /**
    * Recupera informações sobre profissional de saúde.
-   * @param {string} numero CPF do profissional de saúde. Caso não fornecido,
-   * será empregado o CPF do requisitante.
-   * @returns {Promise<Resposta>}
+   * @param {string} numero CPF do profissional de saúde.
+   * @returns {Promise<Resposta>} Caso o CPF seja inválido ou
+   * não esteja associado a um profissional de saúde, será necessário
+   * verificar a propriedade "retorno" (payload) para identificar
+   * que profissional não foi encontrado.
    */
   cpf(numero) {
     const options = {
@@ -245,6 +273,7 @@ class RNDS {
         "/api/fhir/r4/Practitioner?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
         numero,
     };
+
     return this.makeRequest(options);
   }
 
@@ -357,7 +386,8 @@ class RNDS {
    * @param {string} numero O número do CPF do paciente.
    * @returns {Promise<Resposta>} A propriedade "retorno" da
    * Resposta contém o CNS do paciente correspondente ao
-   * CPF fornecido.
+   * CPF fornecido. Certifique-se de que o código de retorno (code)
+   * possui o valor 200.
    */
   cnsDoPaciente(numero) {
     function cnsOficial(id) {
@@ -413,7 +443,10 @@ class RNDS {
    * @param {string} cnes CNES do estabelecimento de saúde.
    * @param {string} cnsProfissional CNS do profissional.
    * @param {string} cnsPaciente CNS do paciente.
-   * @returns {Promise<Resposta>}
+   * @returns {Promise<Resposta>} O token que permite acesso a
+   * informações do paciente é retornada na propriedade
+   * "retorno". Observe que a propriedade "code" deve possuir o valor
+   * 200.
    */
   contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
     const options = {
@@ -427,3 +460,10 @@ class RNDS {
 }
 
 module.exports = RNDS;
+const showError = () => console.log("falhou....");
+const rnds = new RNDS(true);
+
+const resultado = JSON.parse(fs.readFileSync("exame.json"));
+resultado.identifier.value = new Date().toString();
+const payload = JSON.stringify(resultado);
+rnds.notificar(payload).then(console.log).catch(showError);
