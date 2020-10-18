@@ -460,12 +460,3 @@ class RNDS {
 }
 
 module.exports = RNDS;
-const showError = () => console.log("falhou....");
-const rnds = new RNDS(true);
-
-const resultado = JSON.parse(
-  fs.readFileSync("/home/fabio/meu/rr/exame-substituir.json")
-);
-resultado.identifier.value = "meu-identificador";
-const payload = JSON.stringify(resultado);
-rnds.substituir(payload).then(console.log).catch(showError);

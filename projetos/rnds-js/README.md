@@ -36,8 +36,9 @@ const rnds = new RNDS(true);
 // Uso típico
 // rnds.iniciar().then(... execute chamadas ...);
 
-// Função empregada para exibir erro (caso ocorra)
-const showError = (objeto) => console.log("ERRO", objeto);
+// Funções empregads para exibição
+const show = console.log;
+const error = (objeto) => console.log("ERRO", objeto);
 
 // IMPORTANTE
 // Token (access token) é obtido implicitamente e reutilizado
@@ -46,36 +47,36 @@ const showError = (objeto) => console.log("ERRO", objeto);
 
 // Contexto de atendimento
 // (deve ser fornecido o CNES, cns do profissional e do paciente)
-// rnds.contextoAtendimento("cnes", "p", "u").then(console.log).catch(showError);
+// rnds.contextoAtendimento("c", "p", "u").then(show).catch(error);
 
 // Exibe informações do estabelecimento de saúde (CNES fornecido)
-// rnds.cnes("2337991").then(console.log).catch(showError);
+// rnds.cnes("2337991").then(show).catch(error);
 
 // Exibe informações sobre papéis de profissional em estabelecimento de saúde
-// rnds.lotacao("p", "cnes").then(console.log).catch(showError);
+// rnds.lotacao("p", "cnes").then(show).catch(error);
 
 // Exibe resultado para consulta ao CNPJ fornecido
-// rnds.cnpj("01567601000143").then(console.log);
+// rnds.cnpj("01567601000143").then(show);
 
 // Exibe informações sobre profissional de saúde (CNS).
 // Quando CNS omitido, é usado o do requisitante definido
 // por variável de ambiente.
 // (código da resposta será 404 para CNS não encontrado)
-// rnds.cns("cns").then(console.log);
+// rnds.cns("cns").then(show);
 
 // Exibe informações sobre o profissional de saúde
 // Retorna code 200 mesmo quando não encontrado (verifique payload)
-// rnds.cpf("cpf").then(console.log).catch(showError);
+// rnds.cpf("cpf").then(show).catch(error);
 
 // Exibe informações sobre o paciente
-// rnds.paciente("cpf do paciente").then(console.log);
+// rnds.paciente("cpf do paciente").then(show);
 
 // Submete um resultado de exame depositado no arquivo "resultado.json".
 // (um identificador único é gerado pelo instante corrente)
 // const resultado = JSON.parse(fs.readFileSync("resultado.json"));
 // resultado.identifier.value = new Date().toString();
 // const payload = JSON.stringify(resultado);
-// rnds.notificar(payload).then(console.log).catch(showError);
+// rnds.notificar(payload).then(show).catch(error);
 ```
 
 ### Links
