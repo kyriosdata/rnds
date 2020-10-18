@@ -43,7 +43,7 @@ const error = (objeto) => console.log("ERRO", objeto);
 // IMPORTANTE
 // Token (access token) é obtido implicitamente e reutilizado
 // Todas as funções retornam o objeto Resposta, que possui três
-// propriedades: code (HTTP), retorno (payload), headers (headers retornados).
+// propriedades: code (HTTP), retorno (payload) e os headers retornados.
 
 // Contexto de atendimento
 // (deve ser fornecido o CNES, cns do profissional e do paciente)
@@ -52,7 +52,7 @@ const error = (objeto) => console.log("ERRO", objeto);
 // Exibe informações do estabelecimento de saúde (CNES fornecido)
 // rnds.cnes("2337991").then(show).catch(error);
 
-// Exibe informações sobre papéis de profissional em estabelecimento de saúde
+// Exibe informações sobre papéis de profissional de saúde
 // rnds.lotacao("p", "cnes").then(show).catch(error);
 
 // Exibe resultado para consulta ao CNPJ fornecido
@@ -71,9 +71,9 @@ const error = (objeto) => console.log("ERRO", objeto);
 // Exibe informações sobre o paciente
 // rnds.paciente("cpf do paciente").then(show);
 
-// Submete um resultado de exame depositado no arquivo "resultado.json".
+// Submete um resultado de exame depositado no arquivo "exame.json".
 // (um identificador único é gerado pelo instante corrente)
-// const resultado = JSON.parse(fs.readFileSync("resultado.json"));
+// const resultado = JSON.parse(fs.readFileSync("exame.json"));
 // resultado.identifier.value = new Date().toString();
 // const payload = JSON.stringify(resultado);
 // rnds.notificar(payload).then(show).catch(error);
