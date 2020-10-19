@@ -239,27 +239,6 @@ _title_. O título do documento é o valor fixo "Resultado de Exame Laboratorial
 "title": "Resultado de Exame Laboratorial"
 ```
 
-_relatesTo_. Esta propriedade deve ser utilizada exclusivamente para indicar que este documento substitui (_replaces_) outro documento. Seu uso, portanto, está
-definido para indicar que o documento que faz uso
-desta propriedade visa substituir um submetido anteriormente, conforme ilustrado abaixo, onde `{{exame-id-rnds}}` é o identificador do documento,
-fornecido pela RNDS, quando submetido.
-
-```json
-"relatesTo":[
-    {
-        "code":"replaces",
-        "targetReference":{
-            "reference":"Composition/{{exame-id-rnds}}"
-        }
-    }
-]
-```
-
-Conforme a documentação,
-o documento substituído continuará disponível na RNDS e poderá ser recuperado integralmente
-por meio do identificador a ele atribuído pela RNDS, ou seja, acima indicado por `{{exame-id-rnds}}`, contudo, não estará diretamente disponível
-na linha do tempo do cidadão.
-
 _section_. Define as seções empregadas pelo resultado (documento). Neste caso há uma única seção na qual
 é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, um _Observation_ e,
 para ser ainda mais preciso, o perfil definido pela RNDS para registrar o diagnóstico de um
