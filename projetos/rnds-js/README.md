@@ -79,7 +79,7 @@ const error = (objeto) => console.log("ERRO", objeto);
 // rnds.notificar(payload).then(show).catch(error);
 ```
 
-### Links
+### Alguns links pertinentes
 
 - Autenticação com certificado via [Javascript](https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326)
 - Cliente/validador para js ([fhir](https://www.npmjs.com/package/fhir))
