@@ -14,7 +14,7 @@ Documentação detalhada de serviços disponível em dois formatos:
 
 Desenvolvedores:
 
-- Este repositório disponibiliza duas bibliotecas para integração à RNDS: uma para [Java](projetos/rnds-java) e outra para [JavaScript](./projetos/rnds-js).
+- Este repositório disponibiliza duas bibliotecas para integração à RNDS: uma para [Java](projetos/rnds-java) e outra para [JavaScript](./projetos/rnds-js). Ambas em desenvolvimento, suas observações são bem-vindas!
 
 - [NPM RNDS](https://www.npmjs.com/package/rnds) disponibiliza amplamente a biblioteca em JavaScript.
 
