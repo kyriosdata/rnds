@@ -34,7 +34,7 @@ const RNDS = require("rnds");
 const rnds = new RNDS(true);
 
 // Uso típico
-// rnds.iniciar().then(... execute chamadas ...);
+// rnds.iniciar().then(... execute chamadas conforme abaixo...);
 
 // Funções empregads para exibição
 const show = console.log;
