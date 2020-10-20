@@ -283,7 +283,7 @@ para "Diagnóstico por teste rápido" é definida conforme abaixo:
 ],
 ```
 
-_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameSARS-CoV-219LOINC) e códigos da tabela [Exames do GAL](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExameSARS-CoV-219GAL). O trecho abaixo ilustra um
+_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsade/brnomeexamecovid19loinc) e códigos da tabela [Exames do GAL](https://simplifier.net/redenacionaldedadosemsade/brnomeexamecovid19gal). O trecho abaixo ilustra um
 exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que designa "SARS Coronavírus 2, [dosagem de] anticorpo IgG em soro ou plasma por imunoensaio".
 
 ```json
