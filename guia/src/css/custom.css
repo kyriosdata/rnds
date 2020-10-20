@@ -7,7 +7,6 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #369094;
   --ifm-color-primary-dark: rgb(33, 175, 144);
   --ifm-color-primary-darker: rgb(31, 165, 136);
   --ifm-color-primary-darkest: rgb(26, 136, 112);
@@ -26,4 +25,12 @@
 
 code {
   background-color: lightgray;
+}
+
+.introducao {
+  font-size: 18px;
+}
+
+.titulo {
+  font-size: 51px;
 }
