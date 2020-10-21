@@ -4,13 +4,13 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad) que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação). 
+A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad) que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
 
-> Neste documento é apresentado como submeter tais requisições. 
+> Neste documento é apresentado como submeter tais requisições.
 
 A submissão de requisições será feita por meio da ferramenta
 [Postman](https://www.postman.com/downloads/) (empregada por desenvolvedores para interação com _web services_). Desta forma,
-sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para 
+sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para
 a produção de código correspondente.
 
 ![img](../../static/img/postman-desenvolvedor.png)
@@ -28,19 +28,23 @@ Ao final, espera-se que:
 - Você esteja apto para construir o [Software de Integração](./si).
 
 ### Pré-requisitos
+
 Conforme ilustrado na figura acima, o uso do Postman depende de três informações e dois arquivos:
 
 - Informações necessárias:
-  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS quando a  [solicitação de acesso](../gestor/portal) é aprovada. Esta aprovação, além de definir o identificador do solicitante, também autoriza o acesso ao [ambiente de homologação](../rnds/ambientes).
+
+  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS quando a [solicitação de acesso](../gestor/portal) é aprovada. Esta aprovação, além de definir o identificador do solicitante, também autoriza o acesso ao [ambiente de homologação](../rnds/ambientes).
   - CNES. O CNES do laboratório.
   - CNS de um profissional de saúde lotado no estabelecimento de saúde cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
 
 - Arquivos necessários:
+
   - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessária a senha para acesso ao conteúdo do certificado.
-  
-  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A [documentação das requisições](https://documenter.getpostman.com/view/215332/TVCmT68w)(serviços) também pode ser consulta pela internet.
+
+  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A [documentação das requisições](https://documenter.getpostman.com/view/2163377/TVRd9Wad) (serviços) também pode ser consulta pela internet.
 
 ### Passos
+
 De posse das informações e dos arquivos, veja seção anterior, pode-se configurar o Postman: (a) importar _collection_; (b) configurar certificado digital e (c) configurar variáveis.
 
 ### Importar _collection_
@@ -62,7 +66,7 @@ não indicamos o certificado a ser empregado nem outras configurações necessá
 
 > Veja o vídeo acerca de como configurar o Postman com o certificado digital [aqui](https://drive.google.com/file/d/1V1mSYStqnEHNg0iznWhAnNBlX3jETe3o/view)
 
-O Postman precisa ser configurado para usar o certificado digital do estabelecimento de saúde em questão, quando uma requisição for direcionada ao endereço empregado para autenticação do ambiente de homologação. 
+O Postman precisa ser configurado para usar o certificado digital do estabelecimento de saúde em questão, quando uma requisição for direcionada ao endereço empregado para autenticação do ambiente de homologação.
 
 Esta configuração é exigida para a correta execução do serviço denominado "Obter token de acesso". E o resultado desta requisição é necessário para a execução de todos os demais serviços. Em tempo, este é o único serviço que usa diretamente o certificado digital.
 
@@ -77,7 +81,7 @@ Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaix
 
 ![img](../../static/img/postman-certificado.png)
 
-Ao clicar no botão `Add`, o Postman estará configurado para usar o certificado, para acesso ao endereço indicado e, para o uso, empregará a senha fornecida. 
+Ao clicar no botão `Add`, o Postman estará configurado para usar o certificado, para acesso ao endereço indicado e, para o uso, empregará a senha fornecida.
 
 Após a configuração do certificado, quando se requisita a submissão do serviço "Obter token de acesso", que está disponível exatamente
 no endereço fornecido na configuração acima, o certificado e a senha serão utilizados pelo Postman para submter a requisição em questão. Agora, o resultado esperado é 200 OK. Observe que, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS é exibida, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
@@ -141,5 +145,5 @@ após exercitar as várias requisições, a ambientação necessária tanto com
 os dados necessários, quanto aqueles produzidos e a estrutura da requisição
 estará concluída.
 
-O próximo passo é o desenvolvimento do código que executa as requisições exercitadas com o propósito de integração 
+O próximo passo é o desenvolvimento do código que executa as requisições exercitadas com o propósito de integração
 entre o estabelecimento de saúde e a RNDS. seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [Software de Integração](./si), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.
