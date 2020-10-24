@@ -8,18 +8,16 @@ package com.github.kyriosdata.rnds;
 
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
-import com.jsoniter.output.JsonStream;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,8 +41,12 @@ public class RNDSTest {
 
     private static RNDS rnds;
 
+    private static String exame;
+
+    private static String exameSubstituir;
+
     @BeforeAll
-    static void obtemConfiguracao() {
+    static void obtemConfiguracao() throws FileNotFoundException {
         if (!DEBUG) {
             Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
             Logger.getLogger("httpclient").setLevel(Level.OFF);
@@ -55,6 +57,15 @@ public class RNDSTest {
 
         rnds = new RNDSBuilder().build();
         assertNotNull(rnds);
+
+        exame = getConteudo("exame.json");
+        exameSubstituir = getConteudo("exame-substituir.json");
+    }
+
+    private static String getConteudo(String arquivo1) throws FileNotFoundException {
+        final String arquivo = fromResource(arquivo1);
+        final InputStream fis = new FileInputStream(arquivo);
+        return RNDS.fromInputStream(fis);
     }
 
     @Test
@@ -112,7 +123,7 @@ public class RNDSTest {
     @Test
     void cnesInvalidoNaoPodeSerEncontrado() {
         RNDS.Resposta resposta = rnds.cnes("invalido");
-        assertEquals(200, resposta.code);
+        assertEquals(404, resposta.code);
 
         // Parse json retornado
         final Any json = JsonIterator.deserialize(resposta.retorno);
@@ -170,23 +181,27 @@ public class RNDSTest {
     }
 
     @Test
-    void notificar() throws IOException {
-        final String arquivo = fromResource("14.json");
-        InputStream fis = new FileInputStream(arquivo);
-        final String conteudo = RNDS.fromInputStream(fis);
+    void notificar() {
+        final String labId = UUID.randomUUID().toString();
+        final String atualizada = exame.replace("{{lab-id}}", labId);
 
-        final RNDS.Resposta resposta = rnds.notificar(conteudo);
-        assertEquals(200, resposta.code);
+        final RNDS.Resposta resposta = rnds.notificar(atualizada);
+        assertEquals(201, resposta.code, resposta.retorno);
+        assertFalse(resposta.retorno.isEmpty());
     }
 
     @Test
     void substituir() throws FileNotFoundException {
-        final String arquivo = fromResource("14.json");
-        InputStream fis = new FileInputStream(arquivo);
-        final String conteudo = RNDS.fromInputStream(fis);
+        final String labId = UUID.randomUUID().toString();
+        final String atualizada = exame.replace("{{lab-id}}", labId);
+        final RNDS.Resposta resposta = rnds.notificar(atualizada);
+        final String rndsId = resposta.retorno;
 
-        final RNDS.Resposta resposta = rnds.substituir(conteudo);
-        assertEquals(200, resposta.code);
+        final String lab = exameSubstituir.replace("{{lab-id}}", labId);
+        final String montada = lab.replace("{{rnds-id}}", rndsId);
+
+        final RNDS.Resposta substituicao = rnds.substituir(montada);
+        assertEquals(200, substituicao.code, substituicao.retorno);
     }
 
     /**

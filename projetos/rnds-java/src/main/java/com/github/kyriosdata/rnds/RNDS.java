@@ -272,7 +272,11 @@ public class RNDS {
     }
 
     public Resposta notificar(final String resultado) {
-        return send("POST", "api/fhir/r4/Bundle", "", resultado);
+        Resposta r = send("POST", "api/fhir/r4/Bundle", "", resultado);
+        final String location = r.headers.get("location").get(0);
+        final int idx = location.indexOf("Bundle/");
+        final String rndsId = location.substring(idx + 7);
+        return new Resposta(r.code, rndsId, r.headers);
     }
 
     public Resposta substituir(final String alteracao) {
