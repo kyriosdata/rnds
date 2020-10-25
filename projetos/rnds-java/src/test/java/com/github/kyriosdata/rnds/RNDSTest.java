@@ -45,6 +45,9 @@ public class RNDSTest {
 
     private static String exameSubstituir;
 
+    private static String requisitante =
+            System.getenv("RNDS_REQUISITANTE_CNS");
+
     @BeforeAll
     static void obtemConfiguracao() throws FileNotFoundException {
         if (!DEBUG) {
@@ -140,13 +143,12 @@ public class RNDSTest {
 
     @Test
     public void lotacao() {
-        String requisitanteCns = System.getenv("RNDS_REQUISITANTE_CNS");
-        RNDS.Resposta resposta = rnds.lotacao(requisitanteCns, "2337991");
+        RNDS.Resposta resposta = rnds.lotacao(requisitante, "2337991");
         assertEquals(200, resposta.code);
 
         // Verifica resposta
         final Any json = JsonIterator.deserialize(resposta.retorno);
-        assertEquals(1, json.get("total").toInt());
+        assertTrue(json.get("total").toInt() > 0);
     }
 
     @Test
@@ -164,13 +166,41 @@ public class RNDSTest {
 
     @Test
     void contexto() {
-        final RNDS.Resposta resposta = rnds.contexto("cnes", "p", "p");
-        assertEquals(201, resposta.code);
+        final RNDS.Resposta resposta = rnds.contexto("2337991",
+                requisitante, requisitante);
+        assertEquals(200, resposta.code, resposta.retorno);
+    }
+
+    @Test
+    void contextoSemCnesFalha() {
+        final RNDS.Resposta resposta = rnds.contexto("cnes",
+                requisitante, requisitante);
+        assertEquals(500, resposta.code, resposta.retorno);
+    }
+
+    @Test
+    void contextoSemProfissionalFalha() {
+        final RNDS.Resposta resposta = rnds.contexto("2337991",
+                "p", requisitante);
+        assertEquals(422, resposta.code, resposta.retorno);
+    }
+
+    @Test
+    void contextoSemPacienteFalha() {
+        final RNDS.Resposta resposta = rnds.contexto("2337991",
+                requisitante, "p");
+        assertEquals(422, resposta.code, resposta.retorno);
+    }
+
+    @Test
+    void cnsInvalidoNaoLocalizado() {
+        final RNDS.Resposta resposta = rnds.cns("123");
+        assertEquals(404, resposta.code);
     }
 
     @Test
     void cns() {
-        final RNDS.Resposta resposta = rnds.cns("123");
+        final RNDS.Resposta resposta = rnds.cns(requisitante);
         assertEquals(200, resposta.code);
     }
 
@@ -191,17 +221,24 @@ public class RNDSTest {
     }
 
     @Test
-    void substituir() throws FileNotFoundException {
+    void substituir() throws InterruptedException {
         final String labId = UUID.randomUUID().toString();
         final String atualizada = exame.replace("{{lab-id}}", labId);
         final RNDS.Resposta resposta = rnds.notificar(atualizada);
+        assertEquals(201, resposta.code, resposta.retorno);
+
         final String rndsId = resposta.retorno;
 
         final String lab = exameSubstituir.replace("{{lab-id}}", labId);
         final String montada = lab.replace("{{rnds-id}}", rndsId);
+        assertTrue(montada.contains(rndsId));
 
+        // Parece que é necessário "dar um tempo" para o servidor
+        // reconhecer a notificação criada. Ou seja, a atualização
+        // imediata faz com que a notificação original não seja reconhecida.
+        Thread.sleep(3000);
         final RNDS.Resposta substituicao = rnds.substituir(montada);
-        assertEquals(200, substituicao.code, substituicao.retorno);
+        assertEquals(201, substituicao.code, substituicao.retorno);
     }
 
     /**

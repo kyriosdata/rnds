@@ -121,6 +121,7 @@ public class RNDS {
                     baos.write(buffer, 0, length);
                 }
 
+                is.close();
                 return baos.toString(StandardCharsets.UTF_8);
             }
         } catch (IOException exception) {
@@ -183,6 +184,7 @@ public class RNDS {
         servico.setRequestProperty("X-Authorization-Server",
                 "Bearer " + token);
         servico.setRequestProperty("Authorization", requisitante);
+        servico.setInstanceFollowRedirects(true);
 
         if ("POST".equals(method)) {
             servico.setDoOutput(true);
@@ -190,6 +192,7 @@ public class RNDS {
             // Fornece payload
             final OutputStream os = servico.getOutputStream();
             os.write(payload.getBytes(StandardCharsets.UTF_8));
+            os.close();
         }
 
         return servico;
@@ -201,15 +204,18 @@ public class RNDS {
             final String query,
             final String payload) {
         try {
-            final HttpsURLConnection servico = connection(method, path, query
-                    , payload);
-            final int codigo = servico.getResponseCode();
+            final HttpsURLConnection servico = connection(method, path,
+                    query, payload);
 
+            final int codigo = servico.getResponseCode();
             final String msg = (codigo != 200) && (codigo != 201)
                     ? fromInputStream(servico.getErrorStream())
                     : fromInputStream(servico.getInputStream());
 
-            return new Resposta(codigo, msg, servico.getHeaderFields());
+            Resposta answer = new Resposta(codigo, msg,
+                    servico.getHeaderFields());
+            servico.disconnect();
+            return answer;
         } catch (IOException exception) {
             return new Resposta(599, exception.getMessage(),
                     Collections.emptyMap());
@@ -227,10 +233,11 @@ public class RNDS {
         return token;
     }
 
-    public Resposta contexto(final String cnes, final String profissional,
+    public Resposta contexto(final String cnes,
+                             final String profissional,
                              final String paciente) {
         final String payload = String.format("{\"cnes\":\"%s\"," +
-                        "\"cnsProffisional\":\"%s\",\"cnsPaciente\":\"%s\"}",
+                        "\"cnsProfissional\":\"%s\",\"cnsPaciente\":\"%s\"}",
                 cnes, profissional, paciente);
         return send("POST", "api/contexto-atendimento", "", payload);
     }
@@ -271,12 +278,24 @@ public class RNDS {
         return send("GET", "api/fhir/r4/Patient", query, null);
     }
 
-    public Resposta notificar(final String resultado) {
-        Resposta r = send("POST", "api/fhir/r4/Bundle", "", resultado);
-        final String location = r.headers.get("location").get(0);
+    public Resposta notificar(final String exame) {
+        Resposta resposta = send("POST", "api/fhir/r4/Bundle", "", exame);
+
+        // Se não foi possível criar a notificação, então retorne a resposta.
+        if (resposta.code != 201) {
+            return resposta;
+        }
+
+        // Se foi possível criar a notificação, então o retorno esperado
+        // é o identificador atribuído pela RNDS ao resultado notificado.
+        final String rndsId = getRndsId(resposta.headers);
+        return new Resposta(resposta.code, rndsId, resposta.headers);
+    }
+
+    private String getRndsId(Map<String, List<String>> headers) {
+        final String location = headers.get("location").get(0);
         final int idx = location.indexOf("Bundle/");
-        final String rndsId = location.substring(idx + 7);
-        return new Resposta(r.code, rndsId, r.headers);
+        return location.substring(idx + 7);
     }
 
     public Resposta substituir(final String alteracao) {
