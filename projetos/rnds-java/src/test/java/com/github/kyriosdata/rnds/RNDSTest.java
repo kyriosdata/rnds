@@ -237,6 +237,7 @@ public class RNDSTest {
         // reconhecer a notificação criada. Ou seja, a atualização
         // imediata faz com que a notificação original não seja reconhecida.
         Thread.sleep(3000);
+        
         final RNDS.Resposta substituicao = rnds.substituir(montada);
         assertEquals(201, substituicao.code, substituicao.retorno);
     }
