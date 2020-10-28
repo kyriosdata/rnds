@@ -403,7 +403,7 @@ class RNDS {
 
       // Se não encontrado
       if (json.total === 0) {
-        return { ...resposta, retorno: ""};
+        return { ...resposta, retorno: "" };
       }
 
       const ids = json.entry[0].resource.identifier;
@@ -462,4 +462,3 @@ class RNDS {
 }
 
 module.exports = RNDS;
-new RNDS(true).cnsDoPaciente("48463361154").then(console.log);
