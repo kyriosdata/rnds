@@ -394,22 +394,24 @@ class RNDS {
       return id.system.endsWith("/cns") && id.use === "official";
     }
 
-    const extraiCns = (resposta) => {
+    const extraiCnsSeEncontrado = (resposta) => {
       if (resposta.code !== 200) {
         return resposta;
       }
 
       const json = JSON.parse(resposta.retorno);
+
+      // Se não encontrado
+      if (json.total === 0) {
+        return { ...resposta, retorno: ""};
+      }
+
       const ids = json.entry[0].resource.identifier;
       const idx = ids.findIndex((i) => cnsOficial(i));
-      return {
-        code: resposta.code,
-        retorno: ids[idx].value,
-        headers: resposta.headers,
-      };
+      return { ...resposta, retorno: ids[idx].value };
     };
 
-    return this.paciente(numero).then(extraiCns);
+    return this.paciente(numero).then(extraiCnsSeEncontrado);
   }
 
   /**
@@ -460,3 +462,4 @@ class RNDS {
 }
 
 module.exports = RNDS;
+new RNDS(true).cnsDoPaciente("48463361154").then(console.log);
