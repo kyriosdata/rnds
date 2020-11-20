@@ -23,7 +23,7 @@ O resultado de exame laboratorial, por exemplo, o resultado do exame de SARS-CoV
 Estes três recursos FHIR não são usados conforme definidos, mas por meio de personalizações
 para atender o contexto nacional. Uma personalização é definida por um perfil (_profile_).
 Respectivamente, os perfis definidos pela RNDS são [Resultado
-de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial) (_Composition_), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) (_Observation_) e, por fim, [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica) (_Specimen_).
+de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2) (_Composition_), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) (_Observation_) e, por fim, [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) (_Specimen_).
 
 Adicionalmente, um quarto recurso é necessário para compor um resultado de exame laboratorial, um recurso que reúne os outros três comentados acima. O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) foi definido especificamente para reunir recursos FHIR. Vários recursos FHIR podem ser agrupados em um [Bundle](https://www.hl7.org/fhir/bundle.html).
 Dito de outra forma, [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner de recursos FHIR.
@@ -61,10 +61,10 @@ provavelmente o mesmo instante da última atualização, fornecida na propriedad
 As outras duas propriedades do "esqueleto" são _identifier_ e _entry_, justamente aquelas cujos valores foram omitidos, mas que são detalhadamente fornecidos nas seções seguintes.
 
 Em particular, a propriedade _entry_ é o motivo da existência de um [Bundle](https://www.hl7.org/fhir/bundle.html). Exatamente por meio desta propriedade são definidos os recursos FHIR que fazem parte do _Bundle_. Neste caso,
-o [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
-a [Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
+o [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2), o [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) e
+a [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica).
 
-Quem desejar consultar o JSON completo, já "inflado" com os valores para estas propriedades, antes de percorrer as seções seguintes, pode obtê-lo [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/SARS-CoV-2-01.json).
+Quem desejar consultar o JSON completo, já "inflado" com os valores para estas propriedades, antes de percorrer as seções seguintes, pode obtê-lo [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
 ### Bundle (_identifier_)
 
@@ -128,8 +128,8 @@ Um _Bundle_ é empregado para reunir recursos FHIR, e _entry_, destacada abaixo,
  ]
 ```
 
-Estas três entradas, respectivamente, referem-se aos seguintes perfis definidos pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
+Estas três entradas, respectivamente, referem-se aos seguintes perfis definidos pela RNDS: [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) e
+[Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica).
 
 Observe que estes recursos são fornecidos em entradas próprias da propriedade _entry_, ou seja, não estão "aninhadas", apesar da amostra biológica ser empregada pelo diagnóstico que, por sua vez, faz parte do resultado de exame laboratorial.
 
@@ -175,21 +175,21 @@ A propriedade _entry_ de um _Bundle_ é fornecida no trecho abaixo para ressalta
 
 Observe novamente, no trecho acima, como é estabelecida a referência entre recursos. Na segunda entrada do _array_, _Observation_, há uma referência (_reference_) para a terceira entrada cujo identificador é "urn:uuid:transient-2".
 
-Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial), [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) e
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos. Novamente, o JSON completo está disponível [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/SARS-CoV-2-01.json).
+Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) e
+[Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos. Novamente, o JSON completo está disponível [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
 ### Resultado de Exame Laboratorial (recurso)
 
-Um resultado de exame no Brasil é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html). Conforme o perfil, um resultado é caracterizado por várias propriedades, cada uma delas comentada abaixo.
+Um resultado de exame no Brasil é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html). Conforme o perfil, um resultado é caracterizado por várias propriedades, cada uma delas comentada abaixo.
 
-_status_. Identifica um dos valores dos [Estados do Documento](https://simplifier.net/redenacionaldedadosemsade/brestadodocumento-1.0). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o documento está concluído. A representação JSON correspondente é fornecida abaixo:
+_status_. Identifica um dos valores do [Estado da Observação](https://simplifier.net/redenacionaldedadosemsaude/brestadoobservacao-1.0). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o documento está concluído. A representação JSON correspondente é fornecida abaixo:
 
 ```json
 "status": "final"
 ```
 
 _type_. Identifica o tipo do documento por meio da propriedade _coding_, que é um _array_, neste caso, de uma entrada apenas e obrigatória. O objeto correspondente a tal entrada possui duas propriedades, _system_ e _code_.
-A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Documento](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoDocumento). A segunda, um dos valores possíveis. Dentre eles há "REL", que representa "Resultado de Exame(s) Laboratorial(is)". Em consequência, esta propriedade é definida conforme abaixo:
+A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsaude/BRTipoDocumento). A segunda, um dos valores possíveis. Dentre eles há "REL", que representa "Resultado de Exame(s) Laboratorial(is)". Em consequência, esta propriedade é definida conforme abaixo:
 
 ```json
 "type": {
@@ -240,7 +240,7 @@ _title_. O título do documento é o valor fixo "Resultado de Exame Laboratorial
 ```
 
 _section_. Define as seções empregadas pelo resultado (documento). Neste caso há uma única seção na qual
-é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, um _Observation_ e,
+é registrado o [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico). Ou seja, a única seção é um recurso FHIR, um _Observation_ e,
 para ser ainda mais preciso, o perfil definido pela RNDS para registrar o diagnóstico de um
 laboratório clínico. A indicação da entrada do _Bundle_ que contém o diagnóstico é fornecida abaixo:
 
@@ -258,16 +258,16 @@ laboratório clínico. A indicação da entrada do _Bundle_ que contém o diagn�
 
 ### Diagnóstico em Laboratório Clínico (recurso)
 
-O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
+O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
 diagnóstica ou investigativa. Este perfil é uma personalização do recurso [Observation](https://www.hl7.org/fhir/observation.html). As propriedades são definidas abaixo.
 
-_status_. Define o [Estado da Observação](https://simplifier.net/RedeNacionaldeDadosemSade/BREstadoObservacao-1.0-duplicate-2). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o diagnóstio está concluído. A representação JSON correspondente é fornecida abaixo:
+_status_. Define o [Estado da Observação](https://simplifier.net/redenacionaldedadosemsaude/brestadoobservacao-1.0). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o diagnóstio está concluído. A representação JSON correspondente é fornecida abaixo:
 
 ```json
 "status": "final"
 ```
 
-_category_. Classifica o exame ou teste utilizando um[Subgrupo da Tabela SUS](https://simplifier.net/RedeNacionaldeDadosemSade/BRSubgrupoTabelaSUS). Se o diagnóstico é por teste rápido, então o código correspondente é "0214". Ou seja, a propriedade _category_
+_category_. Classifica o exame ou teste utilizando um[Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsaude/BRSubgrupoTabelaSUS). Se o diagnóstico é por teste rápido, então o código correspondente é "0214". Ou seja, a propriedade _category_
 para "Diagnóstico por teste rápido" é definida conforme abaixo:
 
 ```json
@@ -283,7 +283,7 @@ para "Diagnóstico por teste rápido" é definida conforme abaixo:
 ],
 ```
 
-_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsade/brnomeexamecovid19loinc) e códigos da tabela [Exames do GAL](https://simplifier.net/redenacionaldedadosemsade/brnomeexamecovid19gal). O trecho abaixo ilustra um
+_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/redenacionaldedadosemsaude/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsaude/brnomeexameloinc) e códigos da tabela [Exames do GAL](https://simplifier.net/redenacionaldedadosemsaude/brnomeexamegal). O trecho abaixo ilustra um
 exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que designa "SARS Coronavírus 2, [dosagem de] anticorpo IgG em soro ou plasma por imunoensaio".
 
 ```json
@@ -297,7 +297,7 @@ exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que
 },
 ```
 
-_subject_. Identifica o indivíduo associado ao exame ou teste. O valor é o mesmo daquele fornecido anteriormente, para o [Diagnóstico em Laboratório Clínico](https://simplifier.net/RedeNacionaldeDadosemSade/BRDiagnosticoLaboratorioClinico). Em consequência, o trecho JSON correspondente, também com o mesmo propósito de não citar explicitamente um indivíduo, substitui o código CNS do indivíduo por "{{individuo-cns}}".
+_subject_. Identifica o indivíduo associado ao exame ou teste. O valor é o mesmo daquele fornecido anteriormente, para o [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico). Em consequência, o trecho JSON correspondente, também com o mesmo propósito de não citar explicitamente um indivíduo, substitui o código CNS do indivíduo por "{{individuo-cns}}".
 
 ```json
 "subject": {
@@ -338,7 +338,7 @@ _valueQuantity_. Use esta propriedade quando o valor do resultado é quantitativ
 _valueCodeableConcept_. Use esta propriedade quando o valor do resultado é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)).
 
 No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
-[Resultado qualitativo do Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRResultadoQualitativoExame), na
+[Resultado qualitativo do Exame](https://simplifier.net/redenacionaldedadosemsaude/BRResultadoQualitativoExame), na
 qual 1 representa "Detectável", 2 representa "Não detectável" e 3 representa "Inconclusivo".
 
 ```json
@@ -382,7 +382,7 @@ _referenceRange_. De forma análoga à _method_ (acima), para o perfil em quest�
 ```
 
 _specimen_. Estabelece referência para o recurso [Specimen](https://www.hl7.org/fhir/specimen.html). Este recurso identifica a amostra empregada na realização do exame. Neste caso específico é uma referência para o perfil
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica).
+[Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica).
 
 Em tempo, a propriedade _specimen_
 é a última do segundo recurso fornecido no _Bundle_ e que, em particular, referencia
@@ -396,12 +396,12 @@ o terceiro recurso, conforme ilustrado abaixo.
 
 ### Amostra Biológica (recurso)
 
-[Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRAmostraBiologica) é um perfil de
+[Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) é um perfil de
 [Specimen](https://www.hl7.org/fhir/specimen.html). Este perfil identifica a amostra de origem humana ou animal
 usada em investigações biológicas/laboratoriais para fins diagnósticos.
 
 Neste perfil, a única propriedade é _type_,
-que identifica o [Tipo de Amostra de Exame](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostra-1.0). Este tipo pode vir de duas tabelas (_code systems_) distintas. Uma delas é o [Tipo de Amostra Biológica](https://simplifier.net/RedeNacionaldeDadosemSade/BRTipoAmostraGAL) que, dentre os seus códigos se encontra
+que identifica o [Tipo de Amostra de Exame](https://simplifier.net/redenacionaldedadosemsaude/BRTipoAmostra-1.0). Este tipo pode vir de duas tabelas (_code systems_) distintas. Uma delas é o [Tipo de Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRTipoAmostraGAL) que, dentre os seus códigos se encontra
 "SGHEM" para designar "sangue". Ou seja, se a amostra
 biológica empregada pelo laboratório foi sangue, então o
 trecho JSON correspondente é fornecido abaixo:
