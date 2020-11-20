@@ -35,7 +35,7 @@ Contudo, há alguns detalhes a serem esclarecidos.
   a ser substituído.
 
 A propriedade _relatesTo_ deve ser fornecida, deve fazer parte do
-[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsade/brresultadoexamelaboratorial) para indicar que o resultado em questão substitui
+[Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2) para indicar que o resultado em questão substitui
 outro, conforme comentado abaixo.
 
 _relatesTo_. Esta propriedade deve ser utilizada exclusivamente para indicar que este documento substitui (_replaces_) outro documento. Seu uso, portanto, está

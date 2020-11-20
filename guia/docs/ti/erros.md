@@ -152,7 +152,7 @@ Se tentar submeter um laudo, cujo **status** é diferente de **final**, conforme
 
 ![image](https://user-images.githubusercontent.com/1735792/91478272-f5bf6400-e875-11ea-98ab-ac7961384967.png)
 
-e compatível com o perfil [Estados do documento](https://simplifier.net/RedeNacionaldeDadosemSade/BREstadoDocumento-1.0), terá como resposta
+e compatível com o perfil [Estado da Observação](https://simplifier.net/redenacionaldedadosemsaude/brestadoobservacao-1.0), terá como resposta
 
 ```js
 {
