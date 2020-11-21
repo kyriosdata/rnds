@@ -13,6 +13,13 @@ const https = require("follow-redirects").https;
  * @property {Object} headers - Os headers retornados.
  */
 
+/**
+ * Obtém valores que configuram o acesso à RNDS por meio de
+ * variáveis de ambiente.
+ *
+ * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
+ * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR e (e) RNDS_REQUISITANTE_CNS.
+ */
 function configuracao() {
   return {
     auth: process.env.RNDS_AUTH,
@@ -21,6 +28,12 @@ function configuracao() {
     ehr: process.env.RNDS_EHR,
     requisitante: process.env.RNDS_REQUISITANTE_CNS,
   };
+}
+
+function check(nome, valor) {
+  if (!valor || valor.length === 0) {
+    throw new Error(`variavel ${nome} não definida ou vazia`);
+  }
 }
 
 /**
@@ -132,12 +145,6 @@ class RNDS {
       if (this.logging) console.log("RNDS:", p, s || "");
     };
 
-    function check(nome, valor) {
-      if (!valor || valor.length === 0) {
-        throw new Error(`variavel ${nome} não definida ou vazia`);
-      }
-    }
-
     this.ehr = ehr;
     this.requisitante = requisitante;
 
@@ -147,41 +154,12 @@ class RNDS {
     this.log("RNDS_EHR", this.ehr);
     this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
 
-    // ATRIBUTOS EXIGIDOS APENAS SE useToken É VERDADEIRO
+    // iniciar definido conforme segurança habilitada ou não
     if (noSecurity) {
-      return;
-    }
-
-    seguranca();
-  }
-
-  /**
-   * Recupera <i>token</i> de acesso à RNDS.
-   * @param {function} callback O <i>token</i> de acesso é recebido e passado
-   * para esta função quando recuperado. Esta função recebe três argumentos:
-   * (a) código de retorno; (b) retorno e (c) headers retornados pela
-   * execução da requisição.
-   *
-   * @returns {Promise<Resposta>}
-   */
-  token() {
-    try {
-      const options = {
-        method: "GET",
-        path: "/api/token",
-        headers: {},
-        maxRedirects: 20,
-        hostname: this.auth,
-        pfx: this.pfx,
-        passphrase: this.senha,
-      };
-      return this.send(options);
-    } catch (err) {
-      const error = new Error(
-        `Não foi possível obter token. Verifique variáveis de ambiente.
-        Exceção: ${err}`
-      );
-      return Promise.reject(error);
+      this.iniciar = () => Promise.resolve("undefined");
+    } else {
+      seguranca();
+      this.iniciar = this.renoveAccessToken;
     }
   }
 
@@ -189,12 +167,33 @@ class RNDS {
    * Obtém e armazena em cache o access token a ser empregado
    * para requisições à RNDS.
    */
-  iniciar() {
-    if (this.noSecurity) {
-      return Promise.resolve("undefined");
-    }
+  renoveAccessToken() {
+    /**
+     * Recupera <i>token</i> de acesso à RNDS.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    const requestAccessToken = () => {
+      try {
+        const options = {
+          path: "/api/token",
+          headers: {},
+          maxRedirects: 20,
+          hostname: this.auth,
+          pfx: this.pfx,
+          passphrase: this.senha,
+        };
+        return this.send(options);
+      } catch (err) {
+        const error = new Error(
+          `Não foi possível obter token. Verifique variáveis de ambiente.
+        Exceção: ${err}`
+        );
+        return Promise.reject(error);
+      }
+    };
 
-    return this.token().then((o) => {
+    return requestAccessToken().then((o) => {
       if (o.code === 200) {
         // Guarda em cache o access token para uso posterior
         this.access_token = JSON.parse(o.retorno).access_token;
@@ -229,7 +228,6 @@ class RNDS {
    */
   inflar(options) {
     return {
-      ...options,
       hostname: this.ehr,
       headers: {
         "Content-Type": "application/json",
@@ -237,6 +235,7 @@ class RNDS {
         Authorization: this.requisitante,
       },
       maxRedirects: 10,
+      ...options,
     };
   }
 
@@ -260,7 +259,7 @@ class RNDS {
       // Se falha de autenticacao ou bad gateway (aws)
       if (objeto.code === 401 || objeto.code === 502) {
         this.log(`recebido ${objeto.code}, tentar com novo token...`);
-        return this.iniciar().then(envie);
+        return this.renoveAccessToken().then(envie);
       }
 
       return objeto;
@@ -277,7 +276,6 @@ class RNDS {
    */
   cnes(cnes) {
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Organization/" + cnes,
     };
 
@@ -293,7 +291,6 @@ class RNDS {
   cns(cns) {
     const profissional = cns ? cns : this.requisitante;
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Practitioner/" + profissional,
     };
 
@@ -310,7 +307,6 @@ class RNDS {
    */
   cpf(numero) {
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/Practitioner?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
         numero,
@@ -327,7 +323,6 @@ class RNDS {
    */
   cnpj(cnpj) {
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Organization/" + cnpj,
     };
 
@@ -356,7 +351,6 @@ class RNDS {
    */
   paciente(cpf) {
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/Patient?" +
         "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
@@ -473,7 +467,6 @@ class RNDS {
       cnes;
 
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
     };
@@ -506,4 +499,4 @@ class RNDS {
 module.exports = RNDS;
 
 const rnds = new RNDS(true, false);
-rnds.paciente("x").then(console.log);
+rnds.paciente("48463361153").then(console.log);
