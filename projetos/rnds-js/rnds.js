@@ -2,10 +2,14 @@ const fs = require("fs");
 const https = require("follow-redirects").https;
 
 /**
- * A resposta fornecida pela RNDS.
+ * A resposta fornecida pela RNDS, conforme recebida, para a requisição
+ * submetida. O código de retorno é fornecido pela propriedade
+ * code. O payload pela propriedade retorno e, pela propriedade headers,
+ * todos os cabeçalhos fornecidos pela RNDS.
+ *
  * @typedef {Object} Resposta
  * @property {number} code - O código HTTP da resposta.
- * @property {Object} retorno - O payload conforme retornado.
+ * @property {Object} retorno - O payload retornado pela RNDS.
  * @property {Object} headers - Os headers retornados.
  */
 
@@ -19,44 +23,14 @@ class RNDS {
    *
    * @param {boolean} logging O valor true para habilitar o logging ou
    * false, caso contrário.
+   *
+   * @param {boolean} noSecurity O valor true para indicar que token de
+   * acesso não deve ser empregado (valor padrão) ou false,
+   * para empregar token de acesso.
    */
-  constructor(logging) {
+  constructor(logging, noSecurity) {
     this.logging = !!logging;
-    this.log = (p, s) => {
-      if (this.logging) console.log("RNDS:", p, s || "");
-    };
-
-    function check(nome, valor) {
-      if (!valor || valor.length === 0) {
-        throw new Error(`variavel ${nome} não definida ou vazia`);
-      }
-    }
-
-    this.auth = process.env.RNDS_AUTH;
-    this.ehr = process.env.RNDS_EHR;
-    this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
-    this.senha = process.env.RNDS_CERTIFICADO_SENHA;
-    this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
-    this.access_token = undefined;
-
-    check("RNDS_AUTH", this.auth);
-    check("RNDS_EHR", this.ehr);
-    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    check("RNDS_CERTIFICADO_SENHA", this.senha);
-    check("RNDS_REQUISITANTE_CNS", this.requisitante);
-
-    // Cache certificate
-    try {
-      this.pfx = fs.readFileSync(this.certificado);
-    } catch (error) {
-      throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
-    }
-
-    this.log("RNDS_AUTH", this.auth);
-    this.log("RNDS_EHR", this.ehr);
-    this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
-    this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
+    this.noSecurity = !!noSecurity;
 
     /**
      * Envia requisição https conforme opções e, se for o caso,
@@ -68,9 +42,11 @@ class RNDS {
      *
      * @param {object} options Conjunto de propriedades que estabelecem a
      * configuração para a requisição.
+     *
      * @param {function} callback Função a ser chamada com três argumentos, na
      * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
      * (c) headers retornados.
+     *
      * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
      * então nada será enviado.
      *
@@ -117,6 +93,50 @@ class RNDS {
         req.end();
       });
     };
+
+    this.log = (p, s) => {
+      if (this.logging) console.log("RNDS:", p, s || "");
+    };
+
+    function check(nome, valor) {
+      if (!valor || valor.length === 0) {
+        throw new Error(`variavel ${nome} não definida ou vazia`);
+      }
+    }
+
+    this.ehr = process.env.RNDS_EHR;
+    this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
+
+    check("RNDS_EHR", this.ehr);
+    check("RNDS_REQUISITANTE_CNS", this.requisitante);
+
+    this.log("RNDS_EHR", this.ehr);
+    this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
+
+    // ATRIBUTOS EXIGIDOS APENAS SE useToken É VERDADEIRO
+    if (noSecurity) {
+      return;
+    }
+
+    this.auth = process.env.RNDS_AUTH;
+    this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
+    this.senha = process.env.RNDS_CERTIFICADO_SENHA;
+    this.access_token = undefined;
+
+    check("RNDS_AUTH", this.auth);
+    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+    check("RNDS_CERTIFICADO_SENHA", this.senha);
+
+    // Cache certificate
+    try {
+      this.pfx = fs.readFileSync(this.certificado);
+    } catch (error) {
+      throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
+    }
+
+    this.log("RNDS_AUTH", this.auth);
+    this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
   }
 
   /**
@@ -154,6 +174,10 @@ class RNDS {
    * para requisições à RNDS.
    */
   iniciar() {
+    if (this.noSecurity) {
+      return Promise.resolve("undefined");
+    }
+
     return this.token().then((o) => {
       if (o.code === 200) {
         // Guarda em cache o access token para uso posterior
@@ -168,7 +192,8 @@ class RNDS {
   }
 
   /**
-   * Obtém access token caso não esteja no cache.
+   * Obtém o access token. O token é requisitado ao serviço
+   * correspondente se não estiver disponível no cache.
    */
   getToken() {
     this.log("getToken()");
@@ -200,10 +225,11 @@ class RNDS {
   }
 
   /**
-   * Constrói e executa requisição. Caso o retorno seja o código
+   * Constrói e submete uma requisição para a RNDS.
+   * Se a requisição falha, ou seja, recebe o código
    * 401 (unauthorized) ou 502 (bad gateway), automaticamente
-   * um novo token de acesso é requisitado e, caso obtido,
-   * a requisição desejada é refeita. Nesta segunda tentativa,
+   * um novo token de acesso é requisitado e uma nova
+   * tentativa é realizada. Nesta segunda tentativa,
    * o resultado, qualquer que seja ele, será retornado.
    *
    * @param {object} options Opções que configuram a requisição.
@@ -217,7 +243,7 @@ class RNDS {
     const reenvieSeFalha = (objeto) => {
       // Se falha de autenticacao ou bad gateway (aws)
       if (objeto.code === 401 || objeto.code === 502) {
-        this.log("resposta 401 ou 502, tentando novamente...");
+        this.log(`recebido ${objeto.code}, tentar com novo token...`);
         return this.iniciar().then(envie);
       }
 
@@ -462,3 +488,6 @@ class RNDS {
 }
 
 module.exports = RNDS;
+
+const rnds = new RNDS(true, false);
+rnds.paciente("x").then(console.log);
