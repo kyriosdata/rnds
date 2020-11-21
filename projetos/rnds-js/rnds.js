@@ -13,6 +13,16 @@ const https = require("follow-redirects").https;
  * @property {Object} headers - Os headers retornados.
  */
 
+function configuracao() {
+  return {
+    auth: process.env.RNDS_AUTH,
+    certificado: process.env.RNDS_CERTIFICADO_ENDERECO,
+    senha: process.env.RNDS_CERTIFICADO_SENHA,
+    ehr: process.env.RNDS_EHR,
+    requisitante: process.env.RNDS_REQUISITANTE_CNS,
+  };
+}
+
 /**
  * Classe que oferece acesso aos serviços oferecidos pela RNDS.
  */
@@ -31,6 +41,30 @@ class RNDS {
   constructor(logging, noSecurity) {
     this.logging = !!logging;
     this.noSecurity = !!noSecurity;
+
+    const { auth, certificado, senha, ehr, requisitante } = configuracao();
+
+    const seguranca = () => {
+      this.auth = auth;
+      this.certificado = certificado;
+      this.senha = senha;
+      this.access_token = undefined;
+
+      check("RNDS_AUTH", this.auth);
+      check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+      check("RNDS_CERTIFICADO_SENHA", this.senha);
+
+      // Cache certificate
+      try {
+        this.pfx = fs.readFileSync(this.certificado);
+      } catch (error) {
+        throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
+      }
+
+      this.log("RNDS_AUTH", this.auth);
+      this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+      this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    };
 
     /**
      * Envia requisição https conforme opções e, se for o caso,
@@ -104,8 +138,8 @@ class RNDS {
       }
     }
 
-    this.ehr = process.env.RNDS_EHR;
-    this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
+    this.ehr = ehr;
+    this.requisitante = requisitante;
 
     check("RNDS_EHR", this.ehr);
     check("RNDS_REQUISITANTE_CNS", this.requisitante);
@@ -118,25 +152,7 @@ class RNDS {
       return;
     }
 
-    this.auth = process.env.RNDS_AUTH;
-    this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
-    this.senha = process.env.RNDS_CERTIFICADO_SENHA;
-    this.access_token = undefined;
-
-    check("RNDS_AUTH", this.auth);
-    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    check("RNDS_CERTIFICADO_SENHA", this.senha);
-
-    // Cache certificate
-    try {
-      this.pfx = fs.readFileSync(this.certificado);
-    } catch (error) {
-      throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
-    }
-
-    this.log("RNDS_AUTH", this.auth);
-    this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    seguranca();
   }
 
   /**
