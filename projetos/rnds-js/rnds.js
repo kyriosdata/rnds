@@ -14,11 +14,26 @@ const https = require("follow-redirects").https;
  */
 
 /**
+ * A configuração das informações empregadas para acesso à RNDS.
+ *
+ * @typedef {Object} Configuracao
+ * @property {string} auth - O endereço do serviço de autenticação
+ * @property {string} certificado - O endereço (path) onde se encontra o
+ * certificado digital.
+ * @property {string} senha - A senha para acesso ao certificado digital.
+ * @property {string} ehr - O endereço do serviço de registros de saúde.
+ * @property {string} requisitante - O CNS do requisitante em nome do qual
+ * requisições são submetidas.
+ */
+
+/**
  * Obtém valores que configuram o acesso à RNDS por meio de
  * variáveis de ambiente.
  *
  * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
  * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR e (e) RNDS_REQUISITANTE_CNS.
+ *
+ * @returns {Configuracao} a configuração a ser empregada para acesso à RNDS.
  */
 function configuracao() {
   return {
@@ -55,27 +70,27 @@ class RNDS {
     this.logging = !!logging;
     this.noSecurity = !!noSecurity;
 
-    const { auth, certificado, senha, ehr, requisitante } = configuracao();
+    // Mantém todas as informações de configuração de acesso
+    this.cfg = configuracao();
 
     const seguranca = () => {
-      this.auth = auth;
-      this.certificado = certificado;
-      this.senha = senha;
       this.access_token = undefined;
 
-      check("RNDS_AUTH", this.auth);
-      check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-      check("RNDS_CERTIFICADO_SENHA", this.senha);
+      check("RNDS_AUTH", this.cfg.auth);
+      check("RNDS_CERTIFICADO_ENDERECO", this.cfg.certificado);
+      check("RNDS_CERTIFICADO_SENHA", this.cfg.senha);
 
       // Cache certificate
       try {
-        this.pfx = fs.readFileSync(this.certificado);
+        this.pfx = fs.readFileSync(this.cfg.certificado);
       } catch (error) {
-        throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
+        throw new Error(
+          `erro ao carregar arquivo pfx: ${this.cfg.certificado}`
+        );
       }
 
-      this.log("RNDS_AUTH", this.auth);
-      this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
+      this.log("RNDS_AUTH", this.cfg.auth);
+      this.log("RNDS_CERTIFICADO_ENDERECO", this.cfg.certificado);
       this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
     };
 
@@ -145,14 +160,14 @@ class RNDS {
       if (this.logging) console.log("RNDS:", p, s || "");
     };
 
-    this.ehr = ehr;
-    this.requisitante = requisitante;
+    // this.ehr = ehr;
+    // this.requisitante = requisitante;
 
-    check("RNDS_EHR", this.ehr);
-    check("RNDS_REQUISITANTE_CNS", this.requisitante);
+    check("RNDS_EHR", this.cfg.ehr);
+    check("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
     this.log("RNDS_EHR", this.ehr);
-    this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
+    this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
     function getTokenSecurityDisabled() {
       this.log("security disabled...");
@@ -195,9 +210,9 @@ class RNDS {
           path: "/api/token",
           headers: {},
           maxRedirects: 20,
-          hostname: this.auth,
+          hostname: this.cfg.auth,
           pfx: this.pfx,
-          passphrase: this.senha,
+          passphrase: this.cfg.senha,
         };
         return this.send(options);
       } catch (err) {
@@ -236,11 +251,11 @@ class RNDS {
   inflar(options) {
     return {
       method: "GET",
-      hostname: this.ehr,
+      hostname: this.cfg.ehr,
       headers: {
         "Content-Type": "application/json",
         "X-Authorization-Server": "Bearer " + this.access_token,
-        Authorization: this.requisitante,
+        Authorization: this.cfg.requisitante,
       },
       maxRedirects: 10,
       ...options,
@@ -510,5 +525,5 @@ class RNDS {
 
 module.exports = RNDS;
 
-const rnds = new RNDS(true, true);
+const rnds = new RNDS(true, false);
 rnds.paciente("48463361153").then(console.log);
