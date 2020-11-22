@@ -229,6 +229,7 @@ class RNDS {
    */
   inflar(options) {
     return {
+      method: "GET",
       hostname: this.ehr,
       headers: {
         "Content-Type": "application/json",
