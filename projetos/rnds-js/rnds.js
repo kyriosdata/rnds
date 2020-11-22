@@ -173,6 +173,11 @@ class RNDS {
     }
   }
 
+  limpaToken() {
+    this.log("access_token cleared...");
+    this.access_token = undefined;
+  }
+
   /**
    * Obtém e armazena em cache o access token a ser empregado
    * para requisições à RNDS.
@@ -186,6 +191,7 @@ class RNDS {
     const requestAccessToken = () => {
       try {
         const options = {
+          method: "GET",
           path: "/api/token",
           headers: {},
           maxRedirects: 20,
@@ -261,7 +267,8 @@ class RNDS {
       // Se falha de autenticacao ou bad gateway (aws)
       if (objeto.code === 401 || objeto.code === 502) {
         this.log(`recebido ${objeto.code}, tentar com novo token...`);
-        return this.renoveAccessToken().then(envie);
+        this.limpaToken();
+        return this.getToken().then(envie);
       }
 
       return objeto;
@@ -482,6 +489,9 @@ class RNDS {
    * @param {string} cnes CNES do estabelecimento de saúde.
    * @param {string} cnsProfissional CNS do profissional.
    * @param {string} cnsPaciente CNS do paciente.
+   * @returns {Promise<Resposta>} O token que permite acesso a
+   * informações do paciente é retornada na propriedade
+   * "retorno". Observe que a propriedade ciente.
    * @returns {Promise<Resposta>} O token que permite acesso a
    * informações do paciente é retornada na propriedade
    * "retorno". Observe que a propriedade "code" deve possuir o valor
