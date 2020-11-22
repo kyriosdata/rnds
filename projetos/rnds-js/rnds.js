@@ -154,12 +154,22 @@ class RNDS {
     this.log("RNDS_EHR", this.ehr);
     this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
 
-    // iniciar definido conforme segurança habilitada ou não
+    function getTokenSecurityDisabled() {
+      this.log("security disabled...");
+      return Promise.resolve("access_token not used");
+    }
+
+    function getTokenSecurityEnabled() {
+      this.log("security enabled...");
+      return this.access_token ? Promise.resolve() : this.renoveAccessToken();
+    }
+
+    // Se segurança não está habilitada
     if (noSecurity) {
-      this.iniciar = () => Promise.resolve("undefined");
+      this.getToken = getTokenSecurityDisabled;
     } else {
       seguranca();
-      this.iniciar = this.renoveAccessToken;
+      this.getToken = getTokenSecurityEnabled;
     }
   }
 
@@ -204,15 +214,6 @@ class RNDS {
         return Promise.reject("falha ao obter access_token");
       }
     });
-  }
-
-  /**
-   * Obtém o access token. O token é requisitado ao serviço
-   * correspondente se não estiver disponível no cache.
-   */
-  getToken() {
-    this.log("getToken()");
-    return this.access_token ? Promise.resolve() : this.iniciar();
   }
 
   /**
@@ -498,5 +499,5 @@ class RNDS {
 
 module.exports = RNDS;
 
-const rnds = new RNDS(true, false);
+const rnds = new RNDS(true, true);
 rnds.paciente("48463361153").then(console.log);
