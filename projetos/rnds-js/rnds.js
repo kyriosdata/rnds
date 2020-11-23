@@ -2,159 +2,212 @@ const fs = require("fs");
 const https = require("follow-redirects").https;
 
 /**
- * A resposta fornecida pela RNDS.
+ * A resposta fornecida pela RNDS, conforme recebida, para a requisição
+ * submetida. O código de retorno é fornecido pela propriedade
+ * code. O payload pela propriedade retorno e, pela propriedade headers,
+ * todos os cabeçalhos fornecidos pela RNDS.
+ *
  * @typedef {Object} Resposta
  * @property {number} code - O código HTTP da resposta.
- * @property {Object} retorno - O payload conforme retornado.
+ * @property {Object} retorno - O payload retornado pela RNDS.
  * @property {Object} headers - Os headers retornados.
  */
 
 /**
- * Classe que oferece acesso aos serviços oferecidos pela RNDS.
+ * A configuração das informações empregadas para acesso à RNDS.
+ *
+ * @typedef {Object} Configuracao
+ * @property {string} auth - O endereço do serviço de autenticação
+ * @property {string} certificado - O endereço (path) onde se encontra o
+ * certificado digital.
+ * @property {string} senha - A senha para acesso ao certificado digital.
+ * @property {string} ehr - O endereço do serviço de registros de saúde.
+ * @property {string} requisitante - O CNS do requisitante em nome do qual
+ * requisições são submetidas.
  */
-class RNDS {
+
+/**
+ * Obtém valores que configuram o acesso à RNDS por meio de
+ * variáveis de ambiente.
+ *
+ * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
+ * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR e (e) RNDS_REQUISITANTE_CNS.
+ *
+ * @returns {Configuracao} a configuração a ser empregada para acesso à RNDS.
+ */
+function configuracao() {
+  return {
+    auth: process.env.RNDS_AUTH,
+    certificado: process.env.RNDS_CERTIFICADO_ENDERECO,
+    senha: process.env.RNDS_CERTIFICADO_SENHA,
+    ehr: process.env.RNDS_EHR,
+    requisitante: process.env.RNDS_REQUISITANTE_CNS,
+  };
+}
+
+function check(nome, valor) {
+  if (!valor || valor.length === 0) {
+    throw new Error(`variavel ${nome} não definida ou vazia`);
+  }
+}
+
+function log(logging) {
+  if (logging) {
+    console.log("logging enabled");
+    return (p, s) => console.log("RNDS:", p, s || "");
+  } else {
+    return () => {};
+  }
+}
+
+function sendService(logging) {
   /**
-   * Cria uma instância necessária para a conexão com o ambiente de
-   * homologação ou produção da RNDS.
+   * Envia requisição https conforme opções e, se for o caso,
+   * com o payload indicado. É esperado que o retorno satisfatório
+   * coincida com o código fornecido. Em caso de sucesso, a
+   * callback é chamada com a resposta retornada (JavaScript object
+   * correspondente ao JSON retornado) e, caso o código
+   * esperado não seja o retornado, então instância de erro é retornada.
    *
-   * @param {boolean} logging O valor true para habilitar o logging ou
-   * false, caso contrário.
+   * @param {object} options Conjunto de propriedades que estabelecem a
+   * configuração para a requisição.
+   *
+   * @param {function} callback Função a ser chamada com três argumentos, na
+   * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
+   * (c) headers retornados.
+   *
+   * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
+   * então nada será enviado.
+   *
+   * @returns {Promise<Resposta>} Promise para a resposta obtida pela
+   * execução da requisição.
    */
-  constructor(logging) {
-    this.logging = !!logging;
-    this.log = (p, s) => {
-      if (this.logging) console.log("RNDS:", p, s || "");
-    };
+  return function send(options, payload) {
+    logging(options.method, options.path);
 
-    function check(nome, valor) {
-      if (!valor || valor.length === 0) {
-        throw new Error(`variavel ${nome} não definida ou vazia`);
-      }
-    }
+    return new Promise((resolve, reject) => {
+      const req = https.request(options, function (res) {
+        const chunks = [];
 
-    this.auth = process.env.RNDS_AUTH;
-    this.ehr = process.env.RNDS_EHR;
-    this.certificado = process.env.RNDS_CERTIFICADO_ENDERECO;
-    this.senha = process.env.RNDS_CERTIFICADO_SENHA;
-    this.requisitante = process.env.RNDS_REQUISITANTE_CNS;
-    this.access_token = undefined;
+        res.on("data", (chunk) => chunks.push(chunk));
 
-    check("RNDS_AUTH", this.auth);
-    check("RNDS_EHR", this.ehr);
-    check("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    check("RNDS_CERTIFICADO_SENHA", this.senha);
-    check("RNDS_REQUISITANTE_CNS", this.requisitante);
+        res.on("end", function (chunk) {
+          const body = Buffer.concat(chunks);
+          const json = body.length === 0 ? "" : body.toString();
 
-    // Cache certificate
-    try {
-      this.pfx = fs.readFileSync(this.certificado);
-    } catch (error) {
-      throw new Error(`erro ao carregar arquivo pfx: ${this.certificado}`);
-    }
-
-    this.log("RNDS_AUTH", this.auth);
-    this.log("RNDS_EHR", this.ehr);
-    this.log("RNDS_CERTIFICADO_ENDERECO", this.certificado);
-    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
-    this.log("RNDS_REQUISITANTE_CNS", this.requisitante);
-
-    /**
-     * Envia requisição https conforme opções e, se for o caso,
-     * com o payload indicado. É esperado que o retorno satisfatório
-     * coincida com o código fornecido. Em caso de sucesso, a
-     * callback é chamada com a resposta retornada (JavaScript object
-     * correspondente ao JSON retornado) e, caso o código
-     * esperado não seja o retornado, então instância de erro é retornada.
-     *
-     * @param {object} options Conjunto de propriedades que estabelecem a
-     * configuração para a requisição.
-     * @param {function} callback Função a ser chamada com três argumentos, na
-     * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
-     * (c) headers retornados.
-     * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
-     * então nada será enviado.
-     *
-     * @returns {Promise<Resposta>} Promise para a resposta obtida pela
-     * execução da requisição.
-     */
-    this.send = function (options, payload) {
-      this.log(options.method, options.path);
-
-      return new Promise((resolve, reject) => {
-        const innerLog = this.log;
-        const req = https.request(options, function (res) {
-          const chunks = [];
-
-          res.on("data", (chunk) => chunks.push(chunk));
-
-          res.on("end", function (chunk) {
-            const body = Buffer.concat(chunks);
-            const json = body.length === 0 ? "" : body.toString();
-
-            // Repassado o código de retorno, o retorno e headers
-            // (em vários cenários os headers não são relevantes)
-            innerLog(options.path, res.statusCode);
-            resolve({
-              code: res.statusCode,
-              retorno: json,
-              headers: res.headers,
-            });
-          });
-
-          res.on("error", function (error) {
-            reject({
-              msg: "Ocorreu um erro (requisição não envida executada",
-              erro: error,
-            });
+          // Repassado o código de retorno, o retorno e headers
+          // (em vários cenários os headers não são relevantes)
+          logging(options.path, res.statusCode);
+          resolve({
+            code: res.statusCode,
+            retorno: json,
+            headers: res.headers,
           });
         });
 
-        // Se não fornecido ou vazio, não será enviado.
-        if (payload) {
-          req.write(payload);
-        }
-
-        req.end();
+        res.on("error", function (error) {
+          reject({
+            msg: "Ocorreu um erro (requisição não envida executada",
+            erro: error,
+          });
+        });
       });
+
+      // Se não fornecido ou vazio, não será enviado.
+      if (payload) {
+        req.write(payload);
+      }
+
+      req.end();
+    });
+  };
+}
+
+/**
+ * Classe que oferece token de acesso aos serviços da RNDS.
+ */
+class Token {
+  /**
+   *
+   * @param {function} logging Função de logging a ser empregada.
+   * @param {Configuracao} configuracao Informa certificado, senha e serviço
+   * de autenticação.
+   * @param {*} security Habilita ou não segurança.
+   */
+  constructor(logging, configuracao, security, send) {
+    this.log = logging;
+    this.access_token = undefined;
+    this.send = send;
+
+    this.log("Criando serviço de acesso a token.");
+    this.log("Security is", security ? "ON" : "OFF");
+
+    check("RNDS_AUTH", configuracao.auth);
+    check("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
+    check("RNDS_CERTIFICADO_SENHA", configuracao.senha);
+
+    let pfx = undefined;
+    try {
+      pfx = fs.readFileSync(configuracao.certificado);
+    } catch (error) {
+      throw new Error(
+        `erro ao carregar arquivo pfx: ${configuracao.certificado}`
+      );
+    }
+
+    this.log("RNDS_AUTH", configuracao.auth);
+    this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
+    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+
+    function securityDisabled() {
+      return Promise.resolve("access_token not used");
+    }
+
+    function securityEnabled() {
+      return this.access_token ? Promise.resolve() : this.renoveAccessToken();
+    }
+
+    this.getToken = security ? securityEnabled : securityDisabled;
+
+    this.options = {
+      method: "GET",
+      path: "/api/token",
+      headers: {},
+      maxRedirects: 20,
+      hostname: configuracao.auth,
+      pfx: pfx,
+      passphrase: configuracao.senha,
     };
   }
 
-  /**
-   * Recupera <i>token</i> de acesso à RNDS.
-   * @param {function} callback O <i>token</i> de acesso é recebido e passado
-   * para esta função quando recuperado. Esta função recebe três argumentos:
-   * (a) código de retorno; (b) retorno e (c) headers retornados pela
-   * execução da requisição.
-   *
-   * @returns {Promise<Resposta>}
-   */
-  token() {
-    try {
-      const options = {
-        method: "GET",
-        path: "/api/token",
-        headers: {},
-        maxRedirects: 20,
-        hostname: this.auth,
-        pfx: this.pfx,
-        passphrase: this.senha,
-      };
-      return this.send(options);
-    } catch (err) {
-      const error = new Error(
-        `Não foi possível obter token. Verifique variáveis de ambiente.
-        Exceção: ${err}`
-      );
-      return Promise.reject(error);
-    }
+  limpaToken() {
+    this.log("access_token cleared...");
+    this.access_token = undefined;
   }
 
   /**
    * Obtém e armazena em cache o access token a ser empregado
    * para requisições à RNDS.
    */
-  iniciar() {
-    return this.token().then((o) => {
+  renoveAccessToken() {
+    /**
+     * Recupera <i>token</i> de acesso à RNDS.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    const requestAccessToken = () => {
+      try {
+        return this.send(this.options);
+      } catch (err) {
+        const error = new Error(
+          `Não foi possível obter token. Verifique variáveis de ambiente.
+        Exceção: ${err}`
+        );
+        return Promise.reject(error);
+      }
+    };
+
+    return requestAccessToken().then((o) => {
       if (o.code === 200) {
         // Guarda em cache o access token para uso posterior
         this.access_token = JSON.parse(o.retorno).access_token;
@@ -166,13 +219,38 @@ class RNDS {
       }
     });
   }
+}
 
+/**
+ * Classe que oferece acesso aos serviços oferecidos pela RNDS.
+ */
+class RNDS {
   /**
-   * Obtém access token caso não esteja no cache.
+   * Cria uma instância necessária para a conexão com o ambiente de
+   * homologação ou produção da RNDS.
+   *
+   * @param {boolean} logging O valor true para habilitar o logging ou
+   * false, caso contrário.
+   *
+   * @param {boolean} security O valor false para indicar que token de
+   * acesso não deve ser empregado ou true,
+   * para empregar token de acesso.
    */
-  getToken() {
-    this.log("getToken()");
-    return this.access_token ? Promise.resolve() : this.iniciar();
+  constructor(logging, security) {
+    this.log = log(!!logging);
+
+    // Mantém todas as informações de configuração de acesso
+    this.cfg = configuracao();
+
+    this.send = sendService(this.log);
+
+    check("RNDS_EHR", this.cfg.ehr);
+    check("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
+
+    this.log("RNDS_EHR", this.cfg.ehr);
+    this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
+
+    this.cache = new Token(this.log, this.cfg, security, this.send);
   }
 
   /**
@@ -188,22 +266,24 @@ class RNDS {
    */
   inflar(options) {
     return {
-      ...options,
-      hostname: this.ehr,
+      method: "GET",
+      hostname: this.cfg.ehr,
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization-Server": "Bearer " + this.access_token,
-        Authorization: this.requisitante,
+        "X-Authorization-Server": "Bearer " + this.cache.access_token,
+        Authorization: this.cfg.requisitante,
       },
       maxRedirects: 10,
+      ...options,
     };
   }
 
   /**
-   * Constrói e executa requisição. Caso o retorno seja o código
+   * Constrói e submete uma requisição para a RNDS.
+   * Se a requisição falha, ou seja, recebe o código
    * 401 (unauthorized) ou 502 (bad gateway), automaticamente
-   * um novo token de acesso é requisitado e, caso obtido,
-   * a requisição desejada é refeita. Nesta segunda tentativa,
+   * um novo token de acesso é requisitado e uma nova
+   * tentativa é realizada. Nesta segunda tentativa,
    * o resultado, qualquer que seja ele, será retornado.
    *
    * @param {object} options Opções que configuram a requisição.
@@ -217,14 +297,15 @@ class RNDS {
     const reenvieSeFalha = (objeto) => {
       // Se falha de autenticacao ou bad gateway (aws)
       if (objeto.code === 401 || objeto.code === 502) {
-        this.log("resposta 401 ou 502, tentando novamente...");
-        return this.iniciar().then(envie);
+        this.log(`recebido ${objeto.code}, tentar com novo token...`);
+        this.cache.limpaToken();
+        return this.cache.getToken().then(envie);
       }
 
       return objeto;
     };
 
-    return this.getToken().then(envie).then(reenvieSeFalha);
+    return this.cache.getToken().then(envie).then(reenvieSeFalha);
   }
 
   /**
@@ -235,7 +316,6 @@ class RNDS {
    */
   cnes(cnes) {
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Organization/" + cnes,
     };
 
@@ -251,7 +331,6 @@ class RNDS {
   cns(cns) {
     const profissional = cns ? cns : this.requisitante;
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Practitioner/" + profissional,
     };
 
@@ -268,7 +347,6 @@ class RNDS {
    */
   cpf(numero) {
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/Practitioner?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
         numero,
@@ -285,7 +363,6 @@ class RNDS {
    */
   cnpj(cnpj) {
     const options = {
-      method: "GET",
       path: "/api/fhir/r4/Organization/" + cnpj,
     };
 
@@ -314,7 +391,6 @@ class RNDS {
    */
   paciente(cpf) {
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/Patient?" +
         "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
@@ -431,7 +507,6 @@ class RNDS {
       cnes;
 
     const options = {
-      method: "GET",
       path:
         "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
     };
@@ -445,6 +520,9 @@ class RNDS {
    * @param {string} cnes CNES do estabelecimento de saúde.
    * @param {string} cnsProfissional CNS do profissional.
    * @param {string} cnsPaciente CNS do paciente.
+   * @returns {Promise<Resposta>} O token que permite acesso a
+   * informações do paciente é retornada na propriedade
+   * "retorno". Observe que a propriedade ciente.
    * @returns {Promise<Resposta>} O token que permite acesso a
    * informações do paciente é retornada na propriedade
    * "retorno". Observe que a propriedade "code" deve possuir o valor
