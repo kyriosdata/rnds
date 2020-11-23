@@ -4,7 +4,7 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS, realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad) que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad), que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
 
 > Neste documento é apresentado como submeter tais requisições.
 
@@ -41,7 +41,7 @@ Conforme ilustrado na figura acima, o uso do Postman depende de três informaç�
 
   - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessária a senha para acesso ao conteúdo do certificado.
 
-  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A [documentação das requisições](https://documenter.getpostman.com/view/2163377/TVRd9Wad) (serviços) também pode ser consulta pela internet.
+  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A documentação das requisições também encontra-se amplamente disponível [online]](https://documenter.getpostman.com/view/215332/TVewY47S).
 
 ### Passos
 
