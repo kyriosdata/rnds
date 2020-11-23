@@ -51,6 +51,14 @@ function check(nome, valor) {
   }
 }
 
+function log(logging) {
+  if (logging) {
+    return (p, s) => console.log("RNDS:", p, s || "");
+  } else {
+    return () => {};
+  }
+}
+
 /**
  * Classe que oferece acesso aos serviços oferecidos pela RNDS.
  */
@@ -67,8 +75,9 @@ class RNDS {
    * para empregar token de acesso.
    */
   constructor(logging, noSecurity) {
-    this.logging = !!logging;
     this.noSecurity = !!noSecurity;
+
+    this.log = log(!!logging);
 
     // Mantém todas as informações de configuração de acesso
     this.cfg = configuracao();
@@ -154,10 +163,6 @@ class RNDS {
 
         req.end();
       });
-    };
-
-    this.log = (p, s) => {
-      if (this.logging) console.log("RNDS:", p, s || "");
     };
 
     // this.ehr = ehr;
@@ -525,5 +530,5 @@ class RNDS {
 
 module.exports = RNDS;
 
-const rnds = new RNDS(true, false);
-rnds.paciente("48463361153").then(console.log);
+const rnds = new RNDS(false, false);
+rnds.paciente("x").then(console.log);
