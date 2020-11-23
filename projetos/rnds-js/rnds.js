@@ -53,9 +53,170 @@ function check(nome, valor) {
 
 function log(logging) {
   if (logging) {
+    console.log("logging enabled");
     return (p, s) => console.log("RNDS:", p, s || "");
   } else {
     return () => {};
+  }
+}
+
+function sendService(logging) {
+  /**
+   * Envia requisição https conforme opções e, se for o caso,
+   * com o payload indicado. É esperado que o retorno satisfatório
+   * coincida com o código fornecido. Em caso de sucesso, a
+   * callback é chamada com a resposta retornada (JavaScript object
+   * correspondente ao JSON retornado) e, caso o código
+   * esperado não seja o retornado, então instância de erro é retornada.
+   *
+   * @param {object} options Conjunto de propriedades que estabelecem a
+   * configuração para a requisição.
+   *
+   * @param {function} callback Função a ser chamada com três argumentos, na
+   * seguinte ordem: (a) código de retorno; (b) o conteúdo retornado e
+   * (c) headers retornados.
+   *
+   * @param {string} payload Conteúdo a ser submetido. Se não fornecido,
+   * então nada será enviado.
+   *
+   * @returns {Promise<Resposta>} Promise para a resposta obtida pela
+   * execução da requisição.
+   */
+  return function send(options, payload) {
+    logging(options.method, options.path);
+
+    return new Promise((resolve, reject) => {
+      const req = https.request(options, function (res) {
+        const chunks = [];
+
+        res.on("data", (chunk) => chunks.push(chunk));
+
+        res.on("end", function (chunk) {
+          const body = Buffer.concat(chunks);
+          const json = body.length === 0 ? "" : body.toString();
+
+          // Repassado o código de retorno, o retorno e headers
+          // (em vários cenários os headers não são relevantes)
+          logging(options.path, res.statusCode);
+          resolve({
+            code: res.statusCode,
+            retorno: json,
+            headers: res.headers,
+          });
+        });
+
+        res.on("error", function (error) {
+          reject({
+            msg: "Ocorreu um erro (requisição não envida executada",
+            erro: error,
+          });
+        });
+      });
+
+      // Se não fornecido ou vazio, não será enviado.
+      if (payload) {
+        req.write(payload);
+      }
+
+      req.end();
+    });
+  };
+}
+
+/**
+ * Classe que oferece token de acesso aos serviços da RNDS.
+ */
+class Token {
+  /**
+   *
+   * @param {function} logging Função de logging a ser empregada.
+   * @param {Configuracao} configuracao Informa certificado, senha e serviço
+   * de autenticação.
+   * @param {*} security Habilita ou não segurança.
+   */
+  constructor(logging, configuracao, security) {
+    this.log = logging;
+    this.access_token = undefined;
+    this.send = sendService(logging);
+
+    check("RNDS_AUTH", configuracao.auth);
+    check("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
+    check("RNDS_CERTIFICADO_SENHA", configuracao.senha);
+
+    let pfx = undefined;
+    try {
+      pfx = fs.readFileSync(configuracao.certificado);
+    } catch (error) {
+      throw new Error(
+        `erro ao carregar arquivo pfx: ${configuracao.certificado}`
+      );
+    }
+
+    this.log("RNDS_AUTH", configuracao.auth);
+    this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
+    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+
+    function securityDisabled() {
+      this.log("security disabled...");
+      return Promise.resolve("access_token not used");
+    }
+
+    function securityEnabled() {
+      this.log("security enabled...");
+      return this.access_token ? Promise.resolve() : this.renoveAccessToken();
+    }
+
+    this.getToken = security ? securityEnabled : securityDisabled;
+
+    this.options = {
+      method: "GET",
+      path: "/api/token",
+      headers: {},
+      maxRedirects: 20,
+      hostname: configuracao.auth,
+      pfx: pfx,
+      passphrase: configuracao.senha,
+    };
+  }
+
+  limpaToken() {
+    this.log("access_token cleared...");
+    this.access_token = undefined;
+  }
+
+  /**
+   * Obtém e armazena em cache o access token a ser empregado
+   * para requisições à RNDS.
+   */
+  renoveAccessToken() {
+    /**
+     * Recupera <i>token</i> de acesso à RNDS.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    const requestAccessToken = () => {
+      try {
+        return this.send(this.options);
+      } catch (err) {
+        const error = new Error(
+          `Não foi possível obter token. Verifique variáveis de ambiente.
+        Exceção: ${err}`
+        );
+        return Promise.reject(error);
+      }
+    };
+
+    return requestAccessToken().then((o) => {
+      if (o.code === 200) {
+        // Guarda em cache o access token para uso posterior
+        this.access_token = JSON.parse(o.retorno).access_token;
+        this.log("access_token redefinido");
+        return Promise.resolve("ok");
+      } else {
+        this.access_token = undefined;
+        return Promise.reject("falha ao obter access_token");
+      }
+    });
   }
 }
 
@@ -530,5 +691,5 @@ class RNDS {
 
 module.exports = RNDS;
 
-const rnds = new RNDS(false, false);
-rnds.paciente("x").then(console.log);
+// const rnds = new RNDS(true, false);
+// rnds.paciente("x").then(console.log);
