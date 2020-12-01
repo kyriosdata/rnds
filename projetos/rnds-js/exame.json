@@ -1,13 +1,14 @@
 {
   "resourceType": "Bundle",
+  "id": "chave",
   "type": "document",
-  "timestamp": "2020-03-20T00:00:00-03:00",
+  "timestamp": "2020-10-02T11:57:31-03:00",
   "meta": {
-    "lastUpdated": "2020-03-20T00:00:00-03:00"
+    "lastUpdated": "2020-10-02T11:57:31-03:00"
   },
   "identifier": {
     "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
-    "value": "04/09/2020-cdYQj"
+    "value": "765345678987654345678"
   },
   "entry": [
     {
@@ -16,8 +17,12 @@
         "resourceType": "Composition",
         "meta": {
           "profile": [
-            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1"
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.0"
           ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><h3>Meta</h3><table class=\"grid\"><tr><td>-</td></tr><tr><td>*</td></tr></table><p><b>status</b>: final</p><p><b>type</b>: <span title=\"Codes: {http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento REL}\">REL</span></p><p><b>date</b>: Mar 23, 2020, 9:30:12 AM</p><p><b>author</b>: <span></span></p><p><b>title</b>: Resultado de Exame Laboratorial</p></div>"
         },
         "status": "final",
         "type": {
@@ -31,15 +36,15 @@
         "subject": {
           "identifier": {
             "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
-            "value": "{{individuo-cns}}"
+            "value": "700500572752652"
           }
         },
-        "date": "2020-03-23T10:30:12.947-02:00",
+        "date": "2020-09-29T10:59:53-03:00",
         "author": [
           {
             "identifier": {
               "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
-              "value": "{{lab-cnes}}"
+              "value": "00394544000185"
             }
           }
         ],
@@ -64,6 +69,10 @@
             "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0"
           ]
         },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><h3>Meta</h3><table class=\"grid\"><tr><td>-</td></tr><tr><td>*</td></tr></table><p></p><p><b>category</b>: <span title=\"Codes: {http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS 0214}\">0214</span></p><p><b>code</b>: <span title=\"Codes: {http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL coronavirusnCoV}\">coronavirusnCoV</span></p><p><b>subject</b>: <span></span></p><p><b>issued</b>: Mar 23, 2020, 9:30:12 AM</p><p><b>performer</b>: <span></span></p><p><b>value</b>: <span title=\"Codes: {http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame 3}\">3</span></p><p><b>interpretation</b>: <span title=\"Codes: {http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame 2}\">2</span></p><p><b>note</b>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris velit, maximus a vulputate nec, interdum ut mauris. Aenean a.</p><p><b>method</b>: <span title=\"Codes: \">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></p><p><b>specimen</b>: <a href=\"#urnuuidtransient-2\">See above (Specimen/null)</a></p><h3>ReferenceRanges</h3><table class=\"grid\"><tr><td>-</td><td><b>Text</b></td></tr><tr><td>*</td><td>Vestibulum mauris velit, maximus a vulputate nec, interdum ut mauris.</td></tr></table></div>"
+        },
         "status": "final",
         "category": [
           {
@@ -86,15 +95,15 @@
         "subject": {
           "identifier": {
             "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
-            "value": "{{individuo-cns}}"
+            "value": "700500572752652"
           }
         },
         "issued": "2020-03-23T10:30:12.947-02:00",
         "performer": [
           {
             "identifier": {
-              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
-              "value": "{{lab-cnes}}"
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+              "value": "700500572752652"
             }
           }
         ],
@@ -102,10 +111,25 @@
           "coding": [
             {
               "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
-              "code": "3"
+              "code": "1"
             }
           ]
         },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+                "code": "1"
+              }
+            ]
+          }
+        ],
+        "note": [
+          {
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris velit, maximus a vulputate nec, interdum ut mauris. Aenean a."
+          }
+        ],
         "method": {
           "text": "Imunocromatográfico"
         },
