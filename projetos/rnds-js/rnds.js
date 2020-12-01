@@ -1,5 +1,5 @@
 const fs = require("fs");
-const https = require("follow-redirects").https;
+const https = require("follow-redirects").http;
 
 /**
  * A resposta fornecida pela RNDS, conforme recebida, para a requisição
@@ -40,7 +40,7 @@ function configuracao() {
     auth: process.env.RNDS_AUTH,
     certificado: process.env.RNDS_CERTIFICADO_ENDERECO,
     senha: process.env.RNDS_CERTIFICADO_SENHA,
-    ehr: process.env.RNDS_EHR,
+    ehr: "hapi.gointerop.com",
     requisitante: process.env.RNDS_REQUISITANTE_CNS,
   };
 }
@@ -54,7 +54,7 @@ function check(nome, valor) {
 function log(logging) {
   if (logging) {
     console.log("logging enabled");
-    return (p, s) => console.log("RNDS:", p, s || "");
+    return (p, s) => console.log(new Date(), p, s || "");
   } else {
     return () => {};
   }
@@ -139,7 +139,9 @@ class Token {
     this.access_token = undefined;
     this.send = send;
 
-    this.log("Criando serviço de acesso a token.");
+    if (security) {
+      this.log("Criando serviço de acesso a token.");
+    }
     this.log("Security is", security ? "ON" : "OFF");
 
     check("RNDS_AUTH", configuracao.auth);
@@ -155,9 +157,11 @@ class Token {
       );
     }
 
-    this.log("RNDS_AUTH", configuracao.auth);
-    this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
-    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    if (security) {
+      this.log("RNDS_AUTH", configuracao.auth);
+      this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
+      this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    }
 
     function securityDisabled() {
       return Promise.resolve("access_token not used");
@@ -247,8 +251,8 @@ class RNDS {
     check("RNDS_EHR", this.cfg.ehr);
     check("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
-    this.log("RNDS_EHR", this.cfg.ehr);
-    this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
+    this.log("HOST", this.cfg.ehr);
+    //this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
     this.cache = new Token(this.log, this.cfg, security, this.send);
   }
@@ -436,7 +440,7 @@ class RNDS {
 
     const options = {
       method: "POST",
-      path: "/api/fhir/r4/Bundle",
+      path: "/hapi-fhir-server-connectathon/fhir/Bundle",
     };
 
     return this.makeRequest(options, payload).then(extraiRndsId);
@@ -537,6 +541,82 @@ class RNDS {
     const payload = { cnes, cnsProfissional, cnsPaciente };
     return this.makeRequest(options, JSON.stringify(payload));
   }
+
+  usuarioById(id) {
+    const options = {
+      method: "GET",
+      path: "/hapi-fhir-server-connectathon/fhir/Patient/" + id,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  usuarioByCpf(cpf) {
+    const options = {
+      method: "GET",
+      path:
+        "/hapi-fhir-server-connectathon/fhir/Patient?identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
+        cpf,
+    };
+
+    return this.makeRequest(options);
+  }
+
+  homemMaiorDeIdade() {
+    const options = {
+      method: "GET",
+      path:
+        "http://hapi.gointerop.com/hapi-fhir-server-connectathon/fhir/Patient?gender=male&birthdate=le2002-12-01",
+    };
+
+    return this.makeRequest(options);
+  }
 }
 
 module.exports = RNDS;
+
+function conectatonaNotificar() {
+  let exame = undefined;
+  try {
+    exame = fs.readFileSync("exame.json", "utf-8");
+  } catch (error) {
+    throw new Error(`erro ao carregar arquivo pfx`);
+  }
+
+  const rnds = new RNDS(true, false);
+  rnds.notificar(exame).then(console.log);
+}
+
+function show(r) {
+  const body = JSON.parse(r.retorno);
+  if (r.code === 404) {
+    console.log(new Date(), "Paciente nao encontrado (404)");
+  } else {
+    console.log(new Date(), "Nome (text)", body.name[0].text);
+  }
+  console.log(new Date(), "Headers", r.headers);
+}
+
+function showCpf(r) {
+  const body = JSON.parse(r.retorno);
+  console.log(new Date(), "Total de resultados encontrados:", body.total);
+  if (body.total > 0) {
+    console.log(
+      new Date(),
+      "Nome (text) body.entry[0].resource.name[0].text",
+      body.entry[0].resource.name[0].text
+    );
+  }
+}
+
+function conectatonaPaciente() {
+  const rnds = new RNDS(true, false);
+
+  // paciente 5 (existente)
+  rnds.usuarioById(5).then(show);
+  rnds.usuarioById(6).then(show);
+  rnds.usuarioByCpf("98222935003").then(showCpf);
+  rnds.homemMaiorDeIdade().then(showCpf);
+}
+
+conectatonaPaciente();
