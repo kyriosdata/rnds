@@ -69,11 +69,16 @@ function Home() {
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div class="row">
-            <div class="col col--6 text--left">
+            <div class="col">
               <h1 className="hero__title titulo">
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
-              <p className="hero__subtitle">{siteConfig.tagline}</p>
+              <p className="hero__subtitle">
+                O Guia de Integração RNDS tem como objetivo orientar o
+                desenvolvimento de solução tecnológica para a notificação
+                obrigatória de resultados de exames (SARS-CoV-2) ao Ministério
+                da Saúde.
+              </p>
               <div>
                 <Link
                   className={clsx(
@@ -86,14 +91,6 @@ function Home() {
                 </Link>
               </div>
             </div>
-
-            <div class="col col--4 text--left introducao">
-              O Guia de Integração RNDS tem como objetivo orientar o
-              desenvolvimento de solução tecnológica para a notificação
-              obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da
-              Saúde.
-            </div>
-            <div class="col col--6"></div>
           </div>
         </div>
       </header>
