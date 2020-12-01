@@ -5,11 +5,11 @@ sidebar_label: Atribuições
 ---
 
 A integração com a RNDS exige atribuições distribuídas entre dois
-papéis. Um deles é o [responsável pela TI](../ti/ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde. 
+papéis. Um deles é o [responsável pela TI](../ti/ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde.
 
-![img](../../static/img/gestor.png)
+![img](../../../static/img/gestor.png)
 
-## Atribuições do gestor 
+## Atribuições do gestor
 
 As atribuições do gestor, detalhadas abaixo, são:
 (a) adquirir certificado digital; (b) criar conta gov.br (caso não possua uma); (c) solicitar acesso aos serviços da RNDS (ambiente de homologação); (d) validar mapeamento e (e) solicitar acesso ao ambiente de produção.
@@ -29,12 +29,12 @@ O acesso digital a serviços oferecidos pelo governo demanda uma conta,
 que pode ser criada no portal [gov.br](https://acesso.gov.br). O gestor,
 caso não possua tal conta, terá que criar uma. Observe que esta conta será
 necessária para solicitar acesso à RNDS (próximo passo). Detalhes acerca de
-como esta conta pode ser criada, dentre outros, são fornecidos 
+como esta conta pode ser criada, dentre outros, são fornecidos
 [aqui](./gov.br.md).
 
 A execução satisfatória desta atribuição resulta em:
 
-- Conta gov.br do gestor do estabelecimento de saúde disponível. 
+- Conta gov.br do gestor do estabelecimento de saúde disponível.
 
 ### Solicitar acesso (ambiente de homologação)
 
@@ -62,5 +62,5 @@ A execução satisfatória desta atribuição resulta em:
 
 ### Solicitar acesso (ambiente de produção)
 
-A atribuição final do gestor é requisitar o acesso ao ambiente de 
+A atribuição final do gestor é requisitar o acesso ao ambiente de
 produção e aguardar pela aprovação correspondente. A partir da aprovação, o estabelecimento de saúde poderá utilizar os endereços do [ambiente de produção](../rnds/ambientes) para as requisições correspondentes.

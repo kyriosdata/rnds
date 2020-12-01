@@ -10,16 +10,16 @@ O outro é o responsável pela TI, que não necessariamente executa
 as atividades técnicas. O [público-alvo](../intro/publico-alvo) fornece detalhes.
 A intenção aqui é orientar a TI do estabelecimento de saúde.
 
-![img](../../static/img/ti.png)
+![img](../../../static/img/ti.png)
 
 As atribuições da TI, conforme ilustradas acima, incluem:
 (a) conhecer os serviços oferecidos; (b) desenvolver o software de integração; (c) homologá-lo e (d) colocá-lo em produção.
 
-
 ### Conhecer os serviços
-A ambientação com os serviços oferecidos pela RNDS é considerada imprescindível. Há várias formas para adquirir o conhecimento e 
+
+A ambientação com os serviços oferecidos pela RNDS é considerada imprescindível. Há várias formas para adquirir o conhecimento e
 a compreensão acerca dos serviços. A mais recomendada é interagir com eles,
-saber o que eles exigem como _payload_, _headers_ e a saída 
+saber o que eles exigem como _payload_, _headers_ e a saída
 esperada e código de retorno, dentre outros. Para tal, nada melhor
 do que seguir as orientações para [interação com o ambiente de homologação](./conhecer).
 

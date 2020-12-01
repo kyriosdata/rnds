@@ -4,7 +4,7 @@ title: Desenvolver
 sidebar_label: Desenvolver
 ---
 
-O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as 
+O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as
 disponibilizadas para apoiar a integração.
 
 As funcionalidades esperadas são fornecidas na seção seguinte. O _design_ de um _software_ correspondente e a implementação, por outro lado, dependem de um número significativo de variáveis, por exemplo, a linguagem de programação, o sistema de software utilizado pelo laboratório e
@@ -20,14 +20,14 @@ Este documento apresenta as funcionalidas, o _design_ para um cenário "clássic
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, fará uso de vários serviços oferecidos. Dois deles são
 representativos e estão explicitamente indicados na figura abaixo.
 
-![img](../../static/img/rnds-uc.png)
+![img](../../../static/img/rnds-uc.png)
 
 O diagrama acima contempla _Obter token de acesso_ e _Enviar resultado de exame_, não apenas por serem os principais, mas porque cobrem tudo o
 que é necessário nos demais serviços.
 
 Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
 
-![img](../../static/img/rnds-dfd.png)
+![img](../../../static/img/rnds-dfd.png)
 
 Cada função é definida e classificada quanto à fase em que é executada (preparação ou entrega).
 
@@ -45,7 +45,7 @@ Cada função é definida e classificada quanto à fase em que é executada (pre
 
 A figura abaixo ilustra os processos e a classificação deles, além de indicar que dois processos, via internet, interagem com as portas Auth e EHR, oferecidas pela RNDS. Detalhes são fornecidos em [Ambientes](../rnds/ambientes).
 
-![img](../../static/img/desenvolvedor.png)
+![img](../../../static/img/desenvolvedor.png)
 
 ## Design
 
@@ -55,7 +55,7 @@ Na perspectiva de implantação (_deployment_), a figura abaixo
 ilustra uma possível organização do ecossistema de software
 utilizado por um laboratório, e sua integração com a RNDS.
 
-![img](../../static/img/rnds-deployment.png)
+![img](../../../static/img/rnds-deployment.png)
 
 Na figura, _Software de integração_ é
 um componente isolado, distinto de um "Sistema Usado pelo Laboratório".
@@ -71,4 +71,4 @@ pertinentes aos resultados de exames e atualmente mantidos pelo "Software Usado 
 
 ## Implementação
 
-A construção do código do Software de Integração pode se beneficiar das [bibliotecas](../tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS. 
+A construção do código do Software de Integração pode se beneficiar das [bibliotecas](../tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS.

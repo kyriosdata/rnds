@@ -31,7 +31,7 @@ Dito de outra forma, [Bundle](https://www.hl7.org/fhir/bundle.html) é um contê
 Feitas tais considerações,
 o diagrama UML abaixo esclarece que um _Bundle_ é o "envelope" ou "pacote" no qual é depositado um resultado de exame laboratorial, que inclui um diagnóstio em laboratório clínico que, por sua vez, faz uso de uma amostra biológica.
 
-![img](../../static/img/resultado-exame.png)
+![img](../../../static/img/resultado-exame.png)
 
 Todo recurso FHIR pode ser representado em JSON. A propriedade _resourceType_
 é obrigatória e identifica o tipo de recurso. Para um recurso
@@ -142,7 +142,7 @@ em vez do diagnóstico em laboratório clínico (_Observation_) ser fornecido "e
 
 Em geral, em um conjunto de recursos FHIR há referências entre os recursos, formando uma rede de informação em saúde. Conforme ilustrado abaixo, a rede para um resultado de exame laboratórial é formada por três recursos, entre os quais há duas referências. O recurso Resultado possui uma referência para Diagnóstico que, por sua vez, referencia o recurso Amostra.
 
-![img](../../static/img/referencias.png)
+![img](../../../static/img/referencias.png)
 
 Convém reiterar por meio de mais um exemplo. A amostra biológica (_Specimen_) é parte de um diagnóstico (_Observation_), contudo, esta parte (_Specimen_) é fornecida em sua própria entrada em _entry_, e referenciada pelo diagnóstico (_Observation_) que a utiliza.
 

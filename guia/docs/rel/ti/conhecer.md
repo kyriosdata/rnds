@@ -13,7 +13,7 @@ A submissão de requisições será feita por meio da ferramenta
 sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para
 a produção de código correspondente.
 
-![img](../../static/img/postman-desenvolvedor.png)
+![img](../../../static/img/postman-desenvolvedor.png)
 
 Ao final, espera-se que:
 
@@ -53,11 +53,11 @@ De posse das informações e dos arquivos, veja seção anterior, pode-se config
 
 Ao abrir o Postman você verá uma tela similar àquela abaixo, exceto que não terá o destaque para o botão `Import`, empregado para "importar" o arquivo baixado anteriormente:
 
-![postman-abertura](../../static/img/postman-import.png)
+![postman-abertura](../../../static/img/postman-import.png)
 
 Após importado, o resultado é similar àquele abaixo. A versão pode ser diferente, por exemplo. Observe que estão disponíveis 11 requisições, agrupadas naquelas de "Segurança" e "Saúde".
 
-![image](../../static/img/postman-carregado.png)
+![image](../../../static/img/postman-carregado.png)
 
 Neste ponto pode-se selecionar uma das requisições e, no canto superior direito, botão `Send` submeter aquela selecionada. Contudo, qualquer uma delas deve falhar, afinal,
 não indicamos o certificado a ser empregado nem outras configurações necessárias.
@@ -74,19 +74,19 @@ O serviço "Obter token de acesso" produz como resultado (retorno) o _token_ de 
 
 A indicação do certificado digital a ser utilizado pelo Postman é realizada da seguinte forma. Selecione _File_ (opção do _menu_), na sequência a opção _Settings_ e, por fim, abre-se a janela abaixo, na qual a aba _Certificates_ deve ser selecionada e, por último, _Add Certificate_.
 
-![img](../../static/img/postman-settings.png)
+![img](../../../static/img/postman-settings.png)
 
 Quando _Add Certificate_ é pressionado, abre-se tela similar àquela abaixo.
 Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](../rnds/ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; (b) o arquivo **.pfx** contendo o certificado digital do estabelecimento de saúde e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
 
-![img](../../static/img/postman-certificado.png)
+![img](../../../static/img/postman-certificado.png)
 
 Ao clicar no botão `Add`, o Postman estará configurado para usar o certificado, para acesso ao endereço indicado e, para o uso, empregará a senha fornecida.
 
 Após a configuração do certificado, quando se requisita a submissão do serviço "Obter token de acesso", que está disponível exatamente
 no endereço fornecido na configuração acima, o certificado e a senha serão utilizados pelo Postman para submter a requisição em questão. Agora, o resultado esperado é 200 OK. Observe que, logo abaixo, uma visualização (_visualize_) alternativa do retorno oferecido pela RNDS é exibida, na qual o _access_token_ é ocultado. As demais informações não são sigilosas. Em particular, observe que o _token_ tem uma validade de 30 minutos, ou seja, a intenção é que seja reutilizado neste período, conforme mencionado anteriormente.
 
-![img](../../static/img/postman-obter-token.png)
+![img](../../../static/img/postman-obter-token.png)
 
 As demais requisições dependem de outras configurações. Mais um passo e todas elas estarão funcionando.
 
@@ -95,7 +95,7 @@ As demais requisições dependem de outras configurações. Mais um passo e toda
 A configuração do Postman para fazer uso do certifica digital viabiliza a execução da requisição "Obter token de acesso". As demais, contudo, além do
 _token_ retornado por esta requisição, dependem de outros valores, neste caso, depositados em variáveis. Abaixo segue o conjunto das variáveis empregadas pelo Postman para execução das requisições.
 
-![image](../../static/img/postman-variaveis.png)
+![image](../../../static/img/postman-variaveis.png)
 
 Ao todo são 10 variáveis, nem todas podem ser vistas acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por estabelecimento de saúde. Na figura acima são fornecidos valores espúrios, fictícios (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do estabelecimento de saúde cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no estabelecimento de saúde em questão.
 
