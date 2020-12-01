@@ -6,12 +6,6 @@ module.exports = {
       "intro/contexto",
       "intro/glossario",
     ],
-    Destaques: [
-      "rnds/resultado",
-      "rnds/alterar-resultado",
-      "ti/conhecer",
-      "tools/bibliotecas",
-    ],
     RNDS: [
       "rnds/rnds",
       "rnds/servicos",

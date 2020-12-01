@@ -65,7 +65,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © 2020 DATASUS (20/11/2020)`,
+      copyright: `Copyright © 2020 DATASUS (01/12/2020)`,
     },
     algolia: {
       apiKey: "773e8639e2cf11a7a1b3e06912c0a294",
