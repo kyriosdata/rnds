@@ -4,6 +4,7 @@ module.exports = {
     REL: [
       {
         Introdução: [
+          "rel/objetivo-rel",
           "rel/intro/passo-a-passo",
           "rel/intro/publico-alvo",
           "rel/intro/contexto",
@@ -44,5 +45,7 @@ module.exports = {
         ],
       },
     ],
+    SA: ["sa/objetivo-sa", "sa/passo-a-passo-sa"],
+    RAC: ["rac/objetivo-rac", "rac/passo-a-passo-rac"],
   },
 };

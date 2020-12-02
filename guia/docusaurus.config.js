@@ -37,11 +37,15 @@ module.exports = {
           title: "Tópicos",
           items: [
             {
-              label: "Passo a passo",
-              to: "docs/intro/passo-a-passo",
+              label: "Resultado de Exame Laboratorial",
+              to: "docs/rel/intro/passo-a-passo",
             },
             {
-              label: "Contexto",
+              label: "Sumário de Alta (SA)",
+              to: "docs/intro/contexto",
+            },
+            {
+              label: "Registro de Atendimento Clínico (RAC)",
               to: "docs/intro/contexto",
             },
           ],

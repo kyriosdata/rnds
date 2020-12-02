@@ -4,6 +4,8 @@ title: RNDS
 sidebar_label: Apresentação
 ---
 
+Conteúdo duplicado na [introdução](../../introducao).
+
 Na perspectiva de um estabelecimento de saúde, a Rede Nacional de Dados em Saúde (RNDS) oferece serviços
 para a interoperabilidade em saúde no território nacional. No Brasil, é por meio da RNDS que a "informação em saúde estará disponível
 onde é necessária".
