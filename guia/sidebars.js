@@ -1,7 +1,7 @@
 module.exports = {
   someSidebar: {
     Conteúdo: ["introducao"],
-    REL: [
+    "Resultado de Exame Laboratorial": [
       {
         Introdução: [
           "rel/objetivo-rel",
@@ -45,7 +45,10 @@ module.exports = {
         ],
       },
     ],
-    SA: ["sa/objetivo-sa", "sa/passo-a-passo-sa"],
-    RAC: ["rac/objetivo-rac", "rac/passo-a-passo-rac"],
+    "Sumário de Alta": ["sa/objetivo-sa", "sa/passo-a-passo-sa"],
+    "Registro de Atendimento Clínico": [
+      "rac/objetivo-rac",
+      "rac/passo-a-passo-rac",
+    ],
   },
 };
