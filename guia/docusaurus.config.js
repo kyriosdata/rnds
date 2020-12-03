@@ -42,11 +42,11 @@ module.exports = {
             },
             {
               label: "Sumário de Alta (SA)",
-              to: "docs/intro/contexto",
+              to: "docs/sa/objetivo-sa",
             },
             {
               label: "Registro de Atendimento Clínico (RAC)",
-              to: "docs/intro/contexto",
+              to: "docs/rac/objetivo-rac",
             },
           ],
         },
