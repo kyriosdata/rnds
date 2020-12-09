@@ -2,18 +2,17 @@ module.exports = {
   someSidebar: [
     {
       RNDS: [
-        "rel/rnds/servicos",
-        "rel/rnds/perfis",
         "rel/rnds/resultado",
         "rel/rnds/ambientes",
         "rel/rnds/tecnologias",
       ],
     },
-    "introducao",
+    "introducao", "servicos", "definicoes",
   {
     "Resultado de Exame Laboratorial": [
       "rel/objetivo-rel",
       "rel/mi-rel",
+      "rel/mc-rel",
       "rel/intro/passo-a-passo",
       "rel/intro/publico-alvo",
       "rel/intro/contexto",

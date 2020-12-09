@@ -1,5 +1,5 @@
 ---
-id: perfis
+id: definicoes
 title: Definições
 sidebar_label: Definições
 ---
