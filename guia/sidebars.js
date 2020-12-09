@@ -58,8 +58,13 @@ module.exports = {
       "sa/glossario-sa"
     ],
     "Registro de Atendimento Clínico": [
-      "rac/objetivo-rac",
-      "rac/passo-a-passo-rac",
+      "rac/objetivo-rac", 
+      "rac/mi-rac", 
+      "rac/mc-rac", 
+      "rac/passo-a-passo-rac", 
+      "rac/pa-rac", 
+      "rac/contexto-rac",
+      "rac/glossario-rac"
     ],
   }],
 };
