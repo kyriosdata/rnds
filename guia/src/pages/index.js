@@ -73,11 +73,18 @@ function Home() {
               <h1 className="hero__title titulo">
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
-              <p className="hero__subtitle">
-                O Guia de Integração RNDS tem como objetivo orientar o
-                desenvolvimento de solução tecnológica para a notificação
-                obrigatória de resultados de exames (SARS-CoV-2) ao Ministério
-                da Saúde.
+              <p className="subtitulo">
+                O Guia de Integração RNDS orienta o desenvolvimento de solução
+                tecnológica para envio de informações essenciais da notificação
+                obrigatória de resultados de exames (SARS-CoV-2), do Sumário de
+                Alta Hospitalar (SA) e do Registro de Atendimento Clínico (RAC),
+                dentre outros modelos de informação, ao Ministério da Saúde.</p>
+                
+                <p className="subtitulo">
+                Cada modelo de informação é acompanhado do objetivo,
+                passo a passo para o credenciamento no Portal de Serviços (gestor), bem como, 
+                para a integração entre o sistema local e a RNDS (desenvolvedor), dentre outras
+                informações relevantes.              
               </p>
               <div>
                 <Link

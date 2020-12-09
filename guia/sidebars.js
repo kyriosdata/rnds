@@ -1,5 +1,17 @@
 module.exports = {
-  someSidebar: {
+  someSidebar: [
+    {
+      RNDS: [
+        "rel/rnds/rnds",
+        "rel/rnds/servicos",
+        "rel/rnds/perfis",
+        "rel/rnds/resultado",
+        "rel/rnds/ambientes",
+        "rel/rnds/tecnologias",
+      ],
+    },
+    "introducao",
+  {
     Conteúdo: ["introducao"],
     "Resultado de Exame Laboratorial": [
       "rel/objetivo-rel",
@@ -8,15 +20,8 @@ module.exports = {
       "rel/intro/contexto",
       "rel/intro/glossario",
       {
-        RNDS: [
-          "rel/rnds/rnds",
-          "rel/rnds/servicos",
-          "rel/rnds/perfis",
-          "rel/rnds/resultado",
-          "rel/rnds/ambientes",
-          "rel/rnds/tecnologias",
-        ],
 
+        
         Gestor: [
           "rel/gestor/gestor",
           "rel/gestor/certificado",
@@ -43,10 +48,19 @@ module.exports = {
         ],
       },
     ],
-    "Sumário de Alta": ["sa/objetivo-sa", "sa/passo-a-passo-sa"],
+    "Sumário de Alta": [
+      "sa/objetivo-sa", 
+      "sa/mi-sa", 
+      "sa/mc-sa", 
+      "sa/passo-a-passo-sa", 
+      "sa/pa-sa", 
+      "sa/contexto-sa",
+      "sa/glossario-sa"
+    ],
     "Registro de Atendimento Clínico": [
       "rac/objetivo-rac",
       "rac/passo-a-passo-rac",
     ],
-  },
+  }],
 };
+
