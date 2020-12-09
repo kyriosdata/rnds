@@ -67,3 +67,11 @@ Tabela 1 - Modelo de informação do Resultado de Exame Laboratorial COVID-19
 | 3     | 1..1       | Faixa de referência               | Faixa de valores de resultado esperada para determinada população de indivíduos.                                                                                      | Texto            |                                          |
 | 3     | 1..1       | Data hora do resultado            | Data hora na qual o resultado do exame laboratorial foi registrado.                                                                                                   | Data/Hora        |                                          |
 | 3     | 0..N       | Nota                              | Narrativa adicional sobre o exame laboratorial.                                                                                                                       | Texto            |                                          |
+
+## Referências
+
+1. World Health Organization. Novel Coronavirus - China. Emergencies preparedness, response. [Online] 12 de janeiro de 2020. [Citado em: 11 de março de 2020.] https://www.who.int/csr/don/12january-2020-novel-coronavirus-china/en/.
+1. OPAS Brasil. OMS afirma que COVID agora é caracterizada como pandemia. [Online] 11 de 03 de 2020. [Citado em: 02 de abril de 2020.] https://www.paho.org/bra/index.php?option=com
+   \_content&view=article&id=6120:omsafirma-que-covid-19-e-agora-caracterizada-como- pandemia&Itemid=812.
+1. World Health Organization. Naming the coronavirus disease (COVID-19) and the virus that causes it. World Health Organization. [Online] [Citado em: 11 de março de 2020.] https://www.who.int/emergencies/diseases/novel-coronavirus-2019/technicalguidance/naming-the-coronavirus-disease-(covid-2019)-and-the-virus-that-causes-it.
+1. Ministério da Saúde. A solução tecnológica. RNDS. [Online] [Citado em: 11 de março de 2020.] https://rnds.saude.gov.br/solucao-tecnologica/.
