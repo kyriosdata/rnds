@@ -2,9 +2,8 @@
 
 ## Guia de Integração RNDS
 
-Acesse o guia (documentação):
-
-- https://kyriosdata.github.io/rnds
+- Versão mais recente: https://kyriosdata.github.io/rnds
+- Versão oficial: https://rnds-guia.saude.gov.br/
 
 Documentação detalhada de serviços disponível em dois formatos:
 
