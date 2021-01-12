@@ -4,8 +4,13 @@ title: Software de Integração
 sidebar_label: Software de Integração
 ---
 
-Um estabelecimento de saúde faz uso de um Sistema de Informação em Saúde (SIS) e se integra à RNDS por meio deste SIS. Ou seja, a integração ocorre por meio de software, em particular, que faz uso do padrão FHIR. Usar o padrão FHIR significa empregar uma API bem definida para transferir e obter dados em saúde no território nacional. As especificidades nacionais, aqui chamadas de “adaptação”, são contempladas por perfis (profiles) e extensões, ambos
-instrumentos definidos pelo padrão FHIR para esta finalidade.
+Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software, em particular, definida
+pelo padrão FHIR. No momento certo os detalhes de FHIR
+necessários para a integração serão apresentados.
+
+Usar o padrão FHIR significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional.
+Adicionalmente, reconhecendo a impossibilidade de contemplar as especificidades e os
+interesses locais de todo o planeta, o FHIR inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
 
 ![img](../../../static/img/rnds-pilha-independente.png)
 
