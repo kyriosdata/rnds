@@ -33,17 +33,18 @@ O software de um SIS e a RNDS são “independentes”, podem evoluir independen
 
 Antes de iniciar um esforço de desenvolvimento de software propriamente dito, é importante uma análise das funcionalidades esperadas na integração, bem como de oções de _design_ de software para tal. Natralmente, tendo em vista as especificidades de cada cenário de integração, não é possível definir uma análise e _design_ adequados para qualquer estabelecimento de saúde,
 contudo, isto não impede uma investigação preliminar. A expectativa é que este esforço
-de análise e _design_ que seguem possam fornecer um ponto de referência e orientar integradores.
+de análise e _design_ que segue possa fornecer um ponto de referência e orientar integradores.
 
-### Funcionalidades
+### Casos de uso
 
-O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, fará uso de vários serviços oferecidos. Dois deles são
-representativos e estão explicitamente indicados na figura abaixo.
+O _software_ de integração com a RNDS visa atender alguma demanda, neste contexto, a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
 
-![img](../../../static/img/rnds-uc.png)
+Convém observar que outros cenários poderão ser tratados de forma similar e, portanto, a análise e o _design_ permanecem relevantes para outros tipos de exames, outras informações e, naturalmente, não apenas laboratórios.
 
 O diagrama acima contempla _Obter token de acesso_ e _Enviar resultado de exame_, não apenas por serem os principais, mas porque cobrem tudo o
 que é necessário nos demais serviços.
+
+![img](../../../static/img/rnds-uc.png)
 
 Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
 
