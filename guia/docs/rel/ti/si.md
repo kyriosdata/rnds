@@ -13,7 +13,7 @@ define o padrão nacional de tomadas.
 
 ®Health Level Seven, HL7 e FHIR são marcas registrada da Health Level
 Seven International. Estas marcas são usadas com a permissão da HL7 e este uso não
-significa aprovação ou endosso da HL7.
+significa que a HL7 aprova ou endossa o presente Guia.
 
 ## Independência
 
