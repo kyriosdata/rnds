@@ -14,7 +14,15 @@ interesses locais de todo o planeta, o FHIR inclui instrumentos para "personaliz
 
 ![img](../../../static/img/rnds-pilha-independente.png)
 
-Em consequência, o software de um SIS e a RNDS são “independentes”. Eles podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, por exemplo. Nenhum deles depende do outro, ambos dependem do padrão FHIR e, em particular, da personalização nacional.
+O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, por exemplo. Desde que conectados à internet, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro.
+Ambos dependem do padrão FHIR e, em particular, da personalização nacional.
+
+À semelhança de um padrão de tomadas, se o padrão é obedecido, então o usuário independe do fornecedor da energia. (criar figura)
+
+“®Health Level Seven, HL7, FHIR and the FHIR [FLAME DESIGN] are registered trademarks of Health Level
+Seven International, registered with the United States Patent and Trademark Office. These trademarks are
+used with the permission of HL7 and the use of these trademarks does not constitute HL7’s approval or
+endorsement.”
 
 Em tempo, na perspectiva de integração de software, FHIR é uma RESTful API com esquemas bem definidos para empacotar dados.
 
