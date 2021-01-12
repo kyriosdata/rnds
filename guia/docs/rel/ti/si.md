@@ -27,21 +27,15 @@ interesses locais de todo o planeta, o padrão inclui instrumentos para "persona
 
 ![img](../../../static/img/rnds-pilha-independente.png)
 
-O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, por exemplo. Desde que conectados à internet, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro.
-Ambos respeitam o contrato estabelecido e, em particular, a personalização nacional (adaptação).
+O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, desde que conectados à internet e obedecendo o contrato, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro. O contrato é a personalização nacional (adaptação).
 
-O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as
-disponibilizadas para apoiar a integração.
+## Análise
 
-As funcionalidades esperadas são fornecidas na seção seguinte. O _design_ de um _software_ correspondente e a implementação, por outro lado, dependem de um número significativo de variáveis, por exemplo, a linguagem de programação, o sistema de software utilizado pelo laboratório e
-a política a ser utilizada para envio dos resultados, dentre outros.
-Em consequência, só podem ser realizados caso a caso por cada laboratório.
+Antes de iniciar um esforço de desenvolvimento de software propriamente dito, é importante uma análise das funcionalidades esperadas na integração, bem como de oções de _design_ de software para tal. Natralmente, tendo em vista as especificidades de cada cenário de integração, não é possível definir uma análise e _design_ adequados para qualquer estabelecimento de saúde,
+contudo, isto não impede uma investigação preliminar. A expectativa é que este esforço
+de análise e _design_ que seguem possam fornecer um ponto de referência e orientar integradores.
 
-As especificidades de cada laboratório, contudo, não impedem a produção de um _design_ para orientar e, inclusive, a implementação correspondente pronta para ser reutilizada por desenvolvedores (profissionais de TI), onde for o caso.
-
-Este documento apresenta as funcionalidas, o _design_ para um cenário "clássico", a implementação correspondente e ferramentas para desenvolvedores.
-
-## Funcionalidades
+### Funcionalidades
 
 O _software_ de integração com a RNDS, a ser desenvolvido por cada laboratório, fará uso de vários serviços oferecidos. Dois deles são
 representativos e estão explicitamente indicados na figura abaixo.
