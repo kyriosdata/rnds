@@ -1,8 +1,17 @@
 ---
 id: si
-title: Desenvolver
-sidebar_label: Desenvolver
+title: Software de Integração
+sidebar_label: Software de Integração
 ---
+
+Um estabelecimento de saúde faz uso de um Sistema de Informação em Saúde (SIS) e se integra à RNDS por meio deste SIS. Ou seja, a integração ocorre por meio de software, em particular, que faz uso do padrão FHIR. Usar o padrão FHIR significa empregar uma API bem definida para transferir e obter dados em saúde no território nacional. As especificidades nacionais, aqui chamadas de “adaptação”, são contempladas por perfis (profiles) e extensões, ambos
+instrumentos definidos pelo padrão FHIR para esta finalidade.
+
+![img](../../../static/img/rnds-pilha-independente.png)
+
+Em consequência, o software de um SIS e a RNDS são “independentes”. Eles podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, por exemplo. Nenhum deles depende do outro, ambos dependem do padrão FHIR e, em particular, da personalização nacional.
+
+Em tempo, na perspectiva de integração de software, FHIR é uma RESTful API com esquemas bem definidos para empacotar dados.
 
 O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as
 disponibilizadas para apoiar a integração.
