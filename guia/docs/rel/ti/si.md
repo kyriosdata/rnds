@@ -4,27 +4,31 @@ title: Software de Integração
 sidebar_label: Software de Integração
 ---
 
-Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software, em particular, definida
-pelo padrão FHIR. No momento certo os detalhes de FHIR
-necessários para a integração serão apresentados.
+## Contexto
 
-Usar o padrão FHIR significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional.
+No domínio da energia elétrica, se um padrão é obedecido, então o usuário pode conectar o seu aparelho independe do fornecedor da energia. De forma análoga, um SIS pode ser desenvolvido independentemente da RNDS e trocar informações em saúde, desde que o contrato de interoperabilidade (o padrão adotado) seja observado. Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que
+define o padrão nacional de tomadas.
+
+![img](../../../static/img/rnds-tomadas-padrao.png)
+
+®Health Level Seven, HL7 e FHIR são marcas registrada da Health Level
+Seven International. Estas marcas são usadas com a permissão da HL7 e este uso não
+significa aprovação ou endosso da HL7.
+
+## Independência
+
+Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software, em particular, definida
+pelo padrão adotado pelo Brasil (a saber, FHIR). No momento certo os detalhes deste
+padrão são apresentados.
+
+Usar o padrão adotado pelo Brasil significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional.
 Adicionalmente, reconhecendo a impossibilidade de contemplar as especificidades e os
-interesses locais de todo o planeta, o FHIR inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
+interesses locais de todo o planeta, o padrão inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
 
 ![img](../../../static/img/rnds-pilha-independente.png)
 
 O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, por exemplo. Desde que conectados à internet, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro.
-Ambos dependem do padrão FHIR e, em particular, da personalização nacional.
-
-À semelhança de um padrão de tomadas, se o padrão é obedecido, então o usuário independe do fornecedor da energia. (criar figura)
-
-“®Health Level Seven, HL7, FHIR and the FHIR [FLAME DESIGN] are registered trademarks of Health Level
-Seven International, registered with the United States Patent and Trademark Office. These trademarks are
-used with the permission of HL7 and the use of these trademarks does not constitute HL7’s approval or
-endorsement.”
-
-Em tempo, na perspectiva de integração de software, FHIR é uma RESTful API com esquemas bem definidos para empacotar dados.
+Ambos respeitam o contrato estabelecido e, em particular, a personalização nacional (adaptação).
 
 O _software_ de integração com a RNDS é específico para esta finalidade e, portanto, demanda esforço correspondente de profissional de TI. Abaixo segue uma análise preliminar e genérica tanto das funcionalidades quando do _design_ de um software que atende tais funcionalidades para a integração. Cada cenário de integração é específico e, portanto, talvez você prefira saltar o que segue e ir diretamente para as
 disponibilizadas para apoiar a integração.
