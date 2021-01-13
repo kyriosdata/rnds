@@ -33,20 +33,31 @@ interesses locais de todo o planeta, o padrão inclui instrumentos para "persona
 
 O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, desde que conectados à internet e obedecendo o contrato, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro. O contrato é a personalização nacional (adaptação).
 
-## Desenvolvimento
+## Desenvolvimento de referência
 
-Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades esperadas no software a ser desenvolvido, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que pode fornecer um ponto de referência e orientar integradores.
+Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades esperadas no software a ser desenvolvido, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma referência para orientar integradores.
 
 ### Análise
 
-O _software_ de integração com a RNDS visa atender alguma demanda, neste contexto, a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
+#### Escopo
 
-Convém observar que outros cenários poderão ser tratados de forma similar e, portanto, a análise e o _design_ permanecem relevantes para outros tipos de exames, outras informações e, naturalmente, não apenas laboratórios.
+O _software_ de integração com a RNDS, como qualquer outro, visa atender alguma demanda. Para o desenvolvimento de referência tal demanda (escopo) é a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
 
-O diagrama acima contempla _Obter token de acesso_ e _Enviar resultado de exame_, não apenas por serem os principais, mas porque cobrem tudo o
-que é necessário nos demais serviços.
+Convém observar que este escopo é o primeiro contemplado pela RNDS que, ao longo do tempo, incluirá outros como o Sumário de Alta (SA) e o Registro de Atendimento Clínico (RAC), por exemplo. À medida que novas necessidades de integração forem implementadas pela RNDS,
+mais informações em saúde e outros tipos de estabelecimentos de saúde estarão envolvidos.
+
+![img](../../../static/img/rnds-curso.png)
+
+#### Requisitos
+
+Toda a integração no escopo identificado acima pode ser suficientemente representada por dois casos de uso: _Obter token de acesso_ e _Enviar resultado de exame_. Respectivamente cobrindo a segurança e uma necessidade de interoperabilidade em saúde.
 
 ![img](../../../static/img/rnds-uc.png)
+
+Conforme mencionado anteriormente, ao longo do tempo novos casos de uso serão acrescentados,
+contudo, acredita-se que estes dois capturem o que é relevante e provavelmente será necessário em toda e qualquer integração.
+
+##### Obter token de acesso
 
 Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
 
