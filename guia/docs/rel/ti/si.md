@@ -6,8 +6,12 @@ sidebar_label: Software de Integração
 
 ## Contexto
 
-No domínio da energia elétrica, se um padrão é obedecido, então o usuário pode conectar o seu aparelho independe do fornecedor da energia. De forma análoga, um SIS pode ser desenvolvido independentemente da RNDS e trocar informações em saúde, desde que o contrato de interoperabilidade (o padrão adotado) seja observado. Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que
-define o padrão nacional de tomadas.
+Padrões são amplamente empregados, por exemplo, o cumprimento de um metro
+ou o tamanho de uma folha de papel A4. No Brasil, não faz muito tempo
+que o formato de tomadas elétricas foi padronizado. A intenção é fazer
+com que seus aparelhos possam se conectar à rede elétrica. De forma análoga,
+para que um SIS possa trocar informações em saúde é preciso um padrão.
+Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que define o padrão nacional de tomadas.
 
 ![img](../../../static/img/rnds-tomadas-padrao.png)
 
@@ -29,13 +33,11 @@ interesses locais de todo o planeta, o padrão inclui instrumentos para "persona
 
 O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, desde que conectados à internet e obedecendo o contrato, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro. O contrato é a personalização nacional (adaptação).
 
-## Análise
+## Desenvolvimento
 
-Antes de iniciar um esforço de desenvolvimento de software propriamente dito, é importante uma análise das funcionalidades esperadas na integração, bem como de oções de _design_ de software para tal. Natralmente, tendo em vista as especificidades de cada cenário de integração, não é possível definir uma análise e _design_ adequados para qualquer estabelecimento de saúde,
-contudo, isto não impede uma investigação preliminar. A expectativa é que este esforço
-de análise e _design_ que segue possa fornecer um ponto de referência e orientar integradores.
+Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades esperadas no software a ser desenvolvido, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que pode fornecer um ponto de referência e orientar integradores.
 
-### Casos de uso
+### Análise
 
 O _software_ de integração com a RNDS visa atender alguma demanda, neste contexto, a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
 
@@ -68,7 +70,7 @@ A figura abaixo ilustra os processos e a classificação deles, além de indicar
 
 ![img](../../../static/img/desenvolvedor.png)
 
-## Design
+### Design
 
 Dentre as funções atribuídas ao _Software de Integração_, ao todo seis, conforme seção anterior, duas delas não são contempladas aqui: (a) filtrar e (b) mapear. Estas funções são bem específicas e dependentes do ecossistema disponível no laboratório.
 
@@ -90,6 +92,6 @@ pertinentes aos resultados de exames e atualmente mantidos pelo "Software Usado 
 > IMPORTANTE: a figura acima, embora possa inspirar o _design_ da
 > integração de um laboratório com a RNDS, apenas registra uma possibilidade cujo objetivo é orientar desenvolvedores de software acerca de questões pertinentes à tal integração.
 
-## Implementação
+### Implementação
 
 A construção do código do Software de Integração pode se beneficiar das [bibliotecas](../tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS.
