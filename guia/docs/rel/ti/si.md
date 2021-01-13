@@ -54,10 +54,11 @@ Toda a integração no escopo identificado acima pode ser suficientemente repres
 
 ![img](../../../static/img/rnds-uc.png)
 
-Conforme mencionado anteriormente, ao longo do tempo novos casos de uso serão acrescentados,
-contudo, acredita-se que estes dois capturem o que é relevante e provavelmente será necessário em toda e qualquer integração.
+Apesar do desenvolvimento de referência ter como foco estes dois casos de uso, de interesse de laboratórios, eles capturem o que é relevante e provavelmente será necessário em toda e qualquer integração.
 
 ##### Obter token de acesso
+
+##### Enviar resultado de exame
 
 Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
 
