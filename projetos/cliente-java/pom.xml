@@ -55,13 +55,13 @@
     </scm>
 
     <properties>
-        <java.version>9</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.mainClass>
-            com.github.kyriosdata.rnds.Token
-        </project.mainClass>
+        <exec.mainClass>
+            com.github.kyriosdata.rnds.ForcaConexao
+        </exec.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
 
@@ -355,7 +355,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>${project.mainClass}</mainClass>
+                    <mainClass>${exec.mainClass}</mainClass>
                 </configuration>
             </plugin>
 
