@@ -1,7 +1,7 @@
 ## RNDS (Rede Nacional de Dados em Saúde)
 
-Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde).
-Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso ([façade](https://en.wikipedia.org/wiki/Facade_pattern)). Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
+Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde) que contempla o envio de resultads de exames laboratoriais (COVID-19).
+Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso, ou seja, o presente projeto implementa um [façade](https://en.wikipedia.org/wiki/Facade_pattern) para a adaptação do FHIR definida pelo Brasil. Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
 
 ### Instalar
 
