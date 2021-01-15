@@ -1,7 +1,7 @@
 ## RNDS (Rede Nacional de Dados em Saúde)
 
 Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde).
-Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso. Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
+Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso ([façade](https://en.wikipedia.org/wiki/Facade_pattern)). Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
 
 ### Instalar
 
