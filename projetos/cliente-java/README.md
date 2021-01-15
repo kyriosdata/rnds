@@ -1,16 +1,6 @@
 ﻿# Biblioteca
 
-Projeto que implementa biblioteca para facilitar acesso aos serviços da RNDS.
-
-### Maven
-
-```xml
-<dependency>
-  <groupId>com.github.kyriosdata</groupId>
-  <artifactId>rnds-lib</artifactId>
-  <version>0.0.1</version>
-</dependency>
-```
+Projeto que ilustra uso da HAPI API.
 
 ### Links
 
