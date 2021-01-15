@@ -16,7 +16,7 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 
 | Variável                  | Conteúdo                                                                                                   |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| RNDS_AUTH                 | Endereço do serviço de autenticação (sem protocolo, sem path), por exemplo, **ehr-auth-hmg.saude.gov.br**. |
+| RNDS_AUTH                 | Endereço do serviço de autenticação (sem protocolo, sem path).Exemplo: **ehr-auth-hmg.saude.gov.br**       |
 | RNDS_EHR                  | Endereço dos serviços de saúde.                                                                            |
 | RNDS_CERTIFICADO_ENDERECO | Endereço (web ou arquivo) do certificado digital (formato **.pfx**).                                       |
 | RNDS_CERTIFICADO_SENHA    | Senha do certificado digital.                                                                              |
