@@ -107,7 +107,7 @@ function sendService(logging) {
 
         res.on("error", function (error) {
           reject({
-            msg: "Ocorreu um erro (requisição não envida executada",
+            msg: "Ocorreu um erro (requisição não executada)",
             erro: error,
           });
         });
@@ -159,10 +159,19 @@ class Token {
     this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
     this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
 
+    /**
+     * Se segurança não está habilitada, simplesmente
+     * resolve.
+     */
     function securityDisabled() {
       return Promise.resolve("access_token not used");
     }
 
+    /**
+     * Se segurança está habilitada, na disponibilidade de token,
+     * simplesmente retorne-o. Se o token não está definido,
+     * então renove-o.
+     */
     function securityEnabled() {
       return this.access_token ? Promise.resolve() : this.renoveAccessToken();
     }
@@ -212,7 +221,7 @@ class Token {
         // Guarda em cache o access token para uso posterior
         this.access_token = JSON.parse(o.retorno).access_token;
         this.log("access_token redefinido");
-        return Promise.resolve("ok");
+        return Promise.resolve("access_token disponível");
       } else {
         this.access_token = undefined;
         return Promise.reject("falha ao obter access_token");
@@ -223,6 +232,8 @@ class Token {
 
 /**
  * Classe que oferece acesso aos serviços oferecidos pela RNDS.
+ * É necessário criar uma instância desta classe para requisição
+ * de qualquer serviço à RNDS.
  */
 class RNDS {
   /**
@@ -536,6 +547,14 @@ class RNDS {
 
     const payload = { cnes, cnsProfissional, cnsPaciente };
     return this.makeRequest(options, JSON.stringify(payload));
+  }
+
+  /**
+   * Retorna promise com a indicação de sucesso ou falha
+   * na obtenção de token de acesso.
+   */
+  verifica() {
+    return this.cache.getToken();
   }
 }
 
