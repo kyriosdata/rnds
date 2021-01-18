@@ -4,32 +4,34 @@ title: Modelo Computacional
 sidebar_label: Modelo Computacional
 ---
 
-Objetivo:
+### Objetivo
 
-> Detalhar itens de dado necessários para registrar um Resultado de Exame Laboratorial.
+Especificar os recursos FHIR (_resources_) utilizados no registro de um Resultado de Exame Laboratorial. Os recursos são identificados e detalhados por meio da representação JSON de um resultado. Ou seja, é para consumo de integradores (profissionais com habilidades em desenvolvimento de software). Gestores e outros profissionais não interessados em detalhes técnicos podem consultar o [modelo de informação](mi-rel) correspondente.
 
-A representação JSON de um resultado completo pode ser obtida na configuração do [postman](https://documenter.getpostman.com/view/2163377/TVRd9Wad).
+### O integrador deverá...
 
-Resultados esperados:
+- Saber quais são as informações necessários para montar um resultado de exame de SARS-CoV-2-19.
+- Saber como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
+- Ser capaz de montar um documento JSON para refletir o resultado de um dado exame.
 
-- Você saberá quais são os dados necessários para montar um resultado de exame de SARS-CoV-2-19.
-- Você saberá como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
-- Você será capaz de montar um documento JSON para refletir o resultado de um dado exame.
+### Material para consulta
 
-### Bundle (estrutura)
+A representação JSON completa de um resultado de exame laboratorial pode ser obtida [aqui](/assets/exemplo.txt).
+
+## As partes de um resultado
 
 O resultado de exame laboratorial, por exemplo, o resultado do exame de SARS-CoV-2-19, é definido por meio de um recurso [Composition](https://www.hl7.org/fhir/composition.html), que referencia um recurso [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html). Todos estes três recursos são necessários.
 
-Estes três recursos FHIR não são usados conforme definidos, mas por meio de personalizações
-para atender o contexto nacional. Uma personalização é definida por um perfil (_profile_).
-Respectivamente, os perfis definidos pela RNDS são [Resultado
+Estes três recursos FHIR não são usados conforme definidos, mas por meio de perfis (_profiles_) que permitem adaptações. As adaptações para o contexto nacional, definidas pela RNDS, são [Resultado
 de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2) (_Composition_), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) (_Observation_) e, por fim, [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) (_Specimen_).
+
+### Bundle (pacote)
 
 Adicionalmente, um quarto recurso é necessário para compor um resultado de exame laboratorial, um recurso que reúne os outros três comentados acima. O recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html) foi definido especificamente para reunir recursos FHIR. Vários recursos FHIR podem ser agrupados em um [Bundle](https://www.hl7.org/fhir/bundle.html).
 Dito de outra forma, [Bundle](https://www.hl7.org/fhir/bundle.html) é um contêiner de recursos FHIR.
 
 Feitas tais considerações,
-o diagrama UML abaixo esclarece que um _Bundle_ é o "envelope" ou "pacote" no qual é depositado um resultado de exame laboratorial, que inclui um diagnóstio em laboratório clínico que, por sua vez, faz uso de uma amostra biológica.
+o diagrama UML abaixo esclarece que um _Bundle_ é o "envelope" ou "pacote" no qual é depositado um resultado de exame laboratorial, que referencia um diagnóstio em laboratório clínico que, por sua vez, referencia a amostra biológica correspondente.
 
 ![img](../../static/img/resultado-exame.png)
 
@@ -178,7 +180,7 @@ Observe novamente, no trecho acima, como é estabelecida a referência entre rec
 Tendo em vista que os recursos que definem um resultado de exame laboratorial foram identificados ([Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) e
 [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica)), e que cada um deles é fornecido em entrada própria na propriedade _entry_ (conforme ilustrado acima), e que a ligação entre eles é estabelecida por meio de referências, é preciso prosseguir e preencher cada um destes recursos. Novamente, o JSON completo está disponível [aqui](https://raw.githubusercontent.com/kyriosdata/rnds/master/projetos/exemplos/covid-01.json).
 
-### Resultado de Exame Laboratorial (recurso)
+## Resultado de Exame Laboratorial (recurso)
 
 Um resultado de exame no Brasil é definido pela RNDS por meio do perfil [Resultado de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2). Este perfil é uma personalização do recurso [Composition](https://www.hl7.org/fhir/composition.html). Conforme o perfil, um resultado é caracterizado por várias propriedades, cada uma delas comentada abaixo.
 
@@ -256,7 +258,7 @@ laboratório clínico. A indicação da entrada do _Bundle_ que contém o diagn�
 ]
 ```
 
-### Diagnóstico em Laboratório Clínico (recurso)
+## Diagnóstico em Laboratório Clínico (recurso)
 
 O perfil [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) detalha um exame ou teste realizado em laboratório com finalidade
 diagnóstica ou investigativa. Este perfil é uma personalização do recurso [Observation](https://www.hl7.org/fhir/observation.html). As propriedades são definidas abaixo.
@@ -394,7 +396,7 @@ o terceiro recurso, conforme ilustrado abaixo.
 }
 ```
 
-### Amostra Biológica (recurso)
+## Amostra Biológica (recurso)
 
 [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) é um perfil de
 [Specimen](https://www.hl7.org/fhir/specimen.html). Este perfil identifica a amostra de origem humana ou animal

@@ -18,7 +18,7 @@ A Rede Nacional de Dados em Saúde (RNDS) vem ao encontro desta questão, contri
 
 Trata-se de uma plataforma nacional de integração de dados em saúde, sendo um projeto estruturante do Conecte SUS, programa do Governo Federal para a transformação digital da saúde no Brasil. Contém um repositório de documentos responsável por armazenar informações de saúde dos cidadãos, mantendo a privacidade, integridade e auditabilidade dos dados e promovendo a acessibilidade e interoperabilidade das informações de forma segura e controlada (4).
 
-## Escopo
+## Especificação
 
 A versão da proposta de modelo de informação descrita neste documento considera o registro de resultados de exame para COVID-19 na Rede Nacional de Dados de Saúde (RNDS).
 
