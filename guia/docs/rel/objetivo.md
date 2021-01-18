@@ -9,4 +9,4 @@ solução tecnológica para notificação obrigatória dos resultados de exames
 (SARS-CoV-2) ao Ministério da Saúde.
 
 Esta integração é de responsabilidade dos Laboratórios de Análises Clínicas, permitindo a visualização dos resultados pelo cidadão e pelos profissionais de
-saúde envolidos na continuidade do cuidado.
+saúde envolvidos na continuidade do cuidado.
