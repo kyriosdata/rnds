@@ -19,3 +19,13 @@ Em algum momento, contudo, requisições _https_, obedecendo o padrão FHIR e a 
 A interoperabilidade, no momento, contempla a notificação de resultados de exames de SARS-CoV-2. O conjunto será estendido ao longo do tempo, contudo,
 tendo em vista a adoção do padrão FHIR, integrar para notificar um resultado de exame é "similar" à submissão de um Registro de Atendimento Clínico (RAC)
 ou Sumário de Alta (SA), dentre outros.
+
+## Guia
+
+O **Guia de Integração RNDS** tem como objetivo orientar o desenvolvimento
+de solução tecnológica para a integração com a RNDS. Esta integração é
+ilustrada pela notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde pelos laboratórios em território nacional.
+
+Dois papéis definem o [público-alvo](./rel/intro/publico-alvo) deste _Guia_: (a) gestor (responsável pelo laboratório) e (b) integrador (tecnologia da informação).
+
+> A integração entre estabelecimentos de saúde (laboratórios) e a [RNDS](../rnds/rnds) (Ministério da Saúde) é o foco dos exemplos deste guia.

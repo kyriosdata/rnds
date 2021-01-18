@@ -4,9 +4,6 @@ title: Objetivo
 sidebar_label: Objetivo
 ---
 
-Promover o compartilhamento de informações por meio de desenvolvimento de
-solução tecnológica para notificação obrigatória dos resultados de exames
-(SARS-CoV-2) ao Ministério da Saúde.
+Especificar a integração entre laboratórios e a RNDS para a notificação de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
 
-Esta integração é de responsabilidade dos Laboratórios de Análises Clínicas, permitindo a visualização dos resultados pelo cidadão e pelos profissionais de
-saúde envolvidos na continuidade do cuidado.
+Esta integração é de responsabilidade dos Laboratórios de Análises Clínicas, e quando concluída permite a visualização dos resultados pelo cidadão e pelos profissionais de saúde envolvidos na continuidade do cuidado.

@@ -4,16 +4,6 @@ title: Passo a passo
 sidebar_label: Passo a passo
 ---
 
-O **Guia de Integração RNDS** tem como objetivo orientar o desenvolvimento
-de solução tecnológica para a notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
-
-O [público-alvo](./publico-alvo) deste _Guia_ é formado por gestores
-de estabelecimentos de saúde (laboratórios) e profissionais de TI. Ambos
-são necessários para desenvolver a solução tecnológica que conecta o estabelecimento de saúde à [RNDS](../rnds/rnds). É por meio desta conexão que o estabelecimento
-submete as notificações ao Ministério da Saúde. Consulte o [contexto](./contexto) para detalhes.
-
-> A integração obrigatória entre estabelecimentos de saúde (laboratórios) e a [RNDS](../rnds/rnds) (Ministério da Saúde) é o foco deste guia.
-
 Os passos estão distribuídos entre dois atores: o [gestor](../gestor/gestor) da instituição de saúde e profissional de
 [TI](../ti/ti) dessa instituição.
 
