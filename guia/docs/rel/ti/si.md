@@ -6,11 +6,7 @@ sidebar_label: Software de Integração
 
 ## Contexto
 
-Padrões são amplamente empregados, por exemplo, o cumprimento de um metro
-ou o tamanho de uma folha de papel A4. No Brasil, não faz muito tempo
-que o formato de tomadas elétricas foi padronizado. A intenção é fazer
-com que seus aparelhos possam se conectar à rede elétrica. De forma análoga,
-para que um SIS possa trocar informações em saúde é preciso um padrão.
+Padrões são amplamente empregados, por exemplo, a extensão (ou cumprimento) atribuído a um metro ou o tamanho de uma folha de papel A4. No Brasil, não faz muito tempo que o formato de tomadas elétricas foi padronizado. A intenção é fazer com que seus aparelhos possam se conectar à rede elétrica. De forma análoga, para que um SIS possa trocar informações em saúde é preciso um padrão.
 Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que define o padrão nacional de tomadas.
 
 ![img](../../../static/img/rnds-tomadas-padrao.png)
@@ -37,7 +33,7 @@ O software de um SIS e a RNDS são “independentes”, podem evoluir independen
 
 Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades esperadas no software a ser desenvolvido, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma referência para orientar integradores.
 
-### Análise
+### Especificação
 
 #### Escopo
 
