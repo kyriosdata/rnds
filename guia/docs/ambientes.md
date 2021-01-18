@@ -4,9 +4,11 @@ title: Ambientes
 sidebar_label: Ambientes
 ---
 
-O Software de Integração a ser criado por um estabelecimeto de
-saúde fará uso da RESTful API FHIR para se integrar à RNDS.
-A API é oferecida em dois ambientes, um de homologação (desenvolvimento e testes) e outro de produção. Cada um destes ambientes é
+O software a ser criado por um estabelecimeto de
+saúde para integração com a RNDS fará uso da RESTful API FHIR.
+Esta API é oferecida em dois ambientes, um de homologação (desenvolvimento e testes) e outro de produção.
+
+Cada um destes ambientes é
 acessível pelo estabelecimento de saúde por meio de dois endereços: um para obtenção do _token_ de acesso (_Auth_) e
 outro para os serviços (_EHR_) propriamente ditos para troca de informações em saúde, conforme ilustrado abaixo.
 
