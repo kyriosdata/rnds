@@ -4,25 +4,34 @@ title: Ambientes
 sidebar_label: Ambientes
 ---
 
-O software a ser criado por um estabelecimeto de
-saúde para integração com a RNDS fará uso da RESTful API FHIR.
-Esta API é oferecida em dois ambientes, um de homologação (desenvolvimento e testes) e outro de produção.
-
-Cada um destes ambientes é
-acessível pelo estabelecimento de saúde por meio de dois endereços: um para obtenção do _token_ de acesso (_Auth_) e
-outro para os serviços (_EHR_) propriamente ditos para troca de informações em saúde, conforme ilustrado abaixo.
+A RNDS é acessível a um software de integração por meio de dois ambientes:
+o ambiente de homologação e o ambiente de produção.
 
 ![img](../static/img/ambientes.png)
 
-:::caution IMPORTANTE
-A obtenção do _token_ de acesso exige a disponibilidade
-do Certificado Digital do estabelecimento de saúde em questão. O
-certificado deve ser ICP-Brasil (e-CPF ou e-CNPJ).
-:::
+## Qual ambiente usar?
+
+Durante o desenvolvimento/teste do software que se conecta à RNDS, o ambiente a ser utilizado é o ambiente de homologação.
+
+Quando o software estiver pronto para cumprir sua função de integração com a RNDS, evidências deverão ser coletadas e submetidas para apreciação, cuja aprovação é necessária para que o acesso ao ambiente de produção seja disponibilizado. Isto é detalhado no processo de [homologação](rel/ti/homologar).
+
+Após aprovação da requisição de acesso ao ambiente de produção, parte do processo de [homologação](rel/ti/homologar), o software de integração do estabelecimento de saúde em questão poderá acessá-lo.
+
+## Integração com a RNDS usa dois endereços
+
+Tanto o ambiente de homologação quanto o de produção oferecem dois endereços para acesso: um para finalidade de segurança, denominado _Auth_, e outro para acesso aos serviços de troca de informações em saúde, denominado de _EHR_.
+
+O endereço _Auth_ é exclusivo para obtenção do _token_ de acesso e exige o emprego de [certificado digital](rel/gestor/certificado). Convém destacar que este _token_ de acesso é exigido como parte das requisições enviadas ao endereço _EHR_.
+
+Dito de outra forma, em toda requisição enviada ao endereço _EHR_, ou seja, uma requisição _https_, o valor do _header_ **X-Authorization-Server** deve ser a concatenação de "Bearer " com o _token_ de acesso. Consulte [Serviços](servicos) para detalhes.
+
+## Endereços
+
+Os endereços para acesso à RNDS são fornecidos por ambiente. Convém destacar que detalhes da integração, por exemplo, o emprego do protocolo _https_, dentre outros, são fornecidos em [Serviços](servicos).
 
 ### Ambiente de homologação (endereços)
 
-O ambiente de homologação existe para testes e experimentações.
+O ambiente de homologação existe para testes e experimentações. Este ambiente é único para todo o Brasil.
 
 | Função       | Endereço                          |
 | :----------- | :-------------------------------- |
