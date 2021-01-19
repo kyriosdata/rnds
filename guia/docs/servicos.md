@@ -4,13 +4,11 @@ title: Serviços
 sidebar_label: Serviços
 ---
 
-São serviços (\_web services) oferecidos pelos [ambientes](ambientes) da RNDS que implementam a desejada interoperabilidade em saúde no Brasil.
+São serviços (_web services_) oferecidos pela RNDS que implementam a desejada interoperabilidade em saúde no Brasil.
 
-Estes serviços estão logicamente agrupados abaixo em serviços de segurança e serviços de saúde. Os serviços de segurança substituem o emprego de autenticação baseada em usuário/senha por [certificado digital](rel/gestor/certificado) (estratégia considerada mais segura). A partir deles obtém-se _token_ de acesso exigido nas requisições aos _web services_ de saúde.
+Os endereços dos serviçoes estão identificados na documentação dos [ambientes](ambientes). A experimentação dos serviços é recomendada antes da produção do software de integração. Por meio da experimentação pode-se ambientar com _headers_ exigidos, retornados, o conteúdo do _payload_ por requisição e outros. Preparamos um [roteiro](rel/ti/conhecer) para facilitar.
 
-Os serviços de saúde implementam a troca de informação em saúde. Estes serviços são o meio para se atingir a desejada interoperabilidade em saúde no Brasil.
-
-Abaixo segue uma visão panorâmica dos serviços oferecidos. Desenvolvedores, contudo, terão que [interagir e conhecer detalhes](rel/ti/conhecer).
+Abaixo segue a identificação dos serviços disponibilizados e distribuídos em serviços de segurança e serviços de saúde. Os serviços de segurança substituem o emprego de autenticação baseada em usuário/senha por [certificado digital](rel/gestor/certificado) (estratégia considerada mais segura). A partir deles obtém-se _token_ de acesso exigido nas requisições aos demais serviços.
 
 ### Segurança (_web services_)
 
