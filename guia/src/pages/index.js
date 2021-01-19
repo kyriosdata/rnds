@@ -24,9 +24,9 @@ const features = [
     imageUrl: "img/desenvolvedor-guia.png",
     description: (
       <>
-        O <i>Guia</i> é produzido com foco no desenvolvedor. A integração é
-        vista como um projeto cujo principal artefato é o <i>software</i> que
-        requisita serviços oferecidos pela RNDS.
+        O <i>Guia</i> é produzido com foco no integrador (desenvolvedor de
+        software). A integração é vista como um projeto cujo principal artefato
+        é o <i>software</i> que requisita serviços oferecidos pela RNDS.
       </>
     ),
   },
@@ -75,16 +75,15 @@ function Home() {
               </h1>
               <p className="subtitulo">
                 O Guia de Integração RNDS orienta o desenvolvimento de solução
-                tecnológica para envio de informações essenciais da notificação
-                obrigatória de resultados de exames (SARS-CoV-2), do Sumário de
-                Alta Hospitalar (SA) e do Registro de Atendimento Clínico (RAC),
-                dentre outros modelos de informação, ao Ministério da Saúde.</p>
-                
-                <p className="subtitulo">
-                Cada modelo de informação é acompanhado do objetivo,
-                passo a passo para o credenciamento no Portal de Serviços (gestor), bem como, 
-                para a integração entre o sistema local e a RNDS (desenvolvedor), dentre outras
-                informações relevantes.              
+                tecnológica (software de integração) para trca de informações em
+                saúde, por exemplo, envio de resultados de exames (SARS-CoV-2).
+              </p>
+
+              <p className="subtitulo">
+                Cada modelo de informação é acompanhado do objetivo, passo a
+                passo para o credenciamento no Portal de Serviços (gestor), bem
+                como, para a integração entre o sistema local e a RNDS
+                (desenvolvedor), dentre outras informações relevantes.
               </p>
               <div>
                 <Link
