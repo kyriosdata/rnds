@@ -4,6 +4,31 @@ title: Software de Integração
 sidebar_label: Software de Integração
 ---
 
+Software de Integração é o nome dado à solução tecnológica para acesso à RNDS. É este software que, de fato, implementa a troca de informação em saúde,
+por exemplo, envia resultado de exame laboratorial de um laboratório para a
+RNDS.
+
+### Sem interoperabilidade
+
+Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usários, profissionais de saúde, procedimentos e laudos, por exemplo.
+
+Pode-se representar todo e qualquer Sistema de Informação em Saúde (SIS) como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS. Esta organização abstrata é relevante para identificar o software de integração. Naturalmente, se não há interoperabilidade com outro sistema, não há software de integração e,
+consequentemente, não há integração com a RNDS.
+
+![img](../../../static/img/rnds-m0.png)
+
+### Com interoperabilidade
+
+A integração exige a existência do software de integração.
+Pode-se perceber este software, com a finalidade de "caracterizá-lo", de duas formas distintas.
+
+Na primeira, o SIS empregado pelo laboratório passa por uma manutenção na qual o software de integração é fundido ao SIS. O SIS, agora modificado, torna-se
+um SIS que interage com a RNDS.
+
+![img](../../../static/img/rnds-m1.png)
+
+Na segunda, aqui empregada apenas por clareza, e não com o propósito de induzir uma forma de organização, o que não é possível, tendo em vista os inúmeros sistemas existentes.
+
 ## Contexto
 
 Padrões são amplamente empregados, por exemplo, a extensão (ou cumprimento) atribuído a um metro ou o tamanho de uma folha de papel A4. No Brasil, não faz muito tempo que o formato de tomadas elétricas foi padronizado. A intenção é fazer com que seus aparelhos possam se conectar à rede elétrica. De forma análoga, para que um SIS possa trocar informações em saúde é preciso um padrão.
