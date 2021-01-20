@@ -1,33 +1,40 @@
 ---
 id: si
-title: Software de Integração
-sidebar_label: Software de Integração
+title: Conector
+sidebar_label: Conector
 ---
 
-Software de Integração é o nome dado à solução tecnológica para acesso à RNDS. É este software que, de fato, implementa a troca de informação em saúde,
-por exemplo, envia resultado de exame laboratorial de um laboratório para a
-RNDS.
+Conector é o nome dado à solução tecnológica que acessa a RNDS. É este software que, de fato, implementa a troca de informação em saúde com a RNDS.
+Por exemplo, envia resultado de exame laboratorial de um laboratório para a RNDS.
 
-### Sem interoperabilidade
+As seções seguintes apresentam questões típicas da integração com a RNDS.
+Isto é feito de forma abstrata e flexível o suficiente para que possa servir de referência para vários estabelecimentos de saúde interessados na integração com a RNDS.
 
-Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usários, profissionais de saúde, procedimentos e laudos, por exemplo.
+### Sistema de Informação em Saúde (SIS)
 
-Pode-se representar todo e qualquer Sistema de Informação em Saúde (SIS) como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS. Esta organização abstrata é relevante para identificar o software de integração. Naturalmente, se não há interoperabilidade com outro sistema, não há software de integração e,
-consequentemente, não há integração com a RNDS.
+Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usuários, profissionais de saúde, procedimentos e laudos, por exemplo.
+
+Pode-se representar todo e qualquer Sistema de Informação em Saúde (SIS) como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS. Esta organização abstrata é suficiente para identificar o que é denominado de software de integração.
+
+Usando esta abstração, a ausência de interoperabilidade do SIS com outro sistema, não há software de integração e, consequentemente, não há integração com a RNDS.
 
 ![img](../../../static/img/rnds-m0.png)
 
-### Com interoperabilidade
+### Após a integração
 
-A integração exige a existência do software de integração.
-Pode-se perceber este software, com a finalidade de "caracterizá-lo", de duas formas distintas.
+A integração exige a existência do software de integração (conector).
+A implementação das funções atribuídas a este software pode assumir
+várias formas. Duas delas, relevantes para o contexto, são apresentadas abaixo.
 
-Na primeira, o SIS empregado pelo laboratório passa por uma manutenção na qual o software de integração é fundido ao SIS. O SIS, agora modificado, torna-se
-um SIS que interage com a RNDS.
+Na primeira, o SIS empregado pelo laboratório passa por uma manutenção na qual o software de integração (conector) é fundido ao SIS existente. O SIS, agora modificado, torna-se um SIS que interage com a RNDS.
 
 ![img](../../../static/img/rnds-m1.png)
 
-Na segunda, aqui empregada apenas por clareza, e não com o propósito de induzir uma forma de organização, o que não é possível, tendo em vista os inúmeros sistemas existentes.
+Na segunda, um componente específico reúne as funções necessárias para a integração com a RNDS. Neste caso, o Conector é encarregado de obter as informações em saúde a serem transferidas, possivelmente acessando diretamente o Banco de Dados.
+
+![img](../../../static/img/rnds-m2.png)
+
+Convém esclarecer que estas duas formas de integração não são as únicas e a integração com a RNDS não impõe exigências na organização do SIS em questão, conforme elucidado abaixo.
 
 ## Contexto
 
@@ -40,23 +47,21 @@ Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta s
 Seven International. Estas marcas são usadas com a permissão da HL7 e este uso não
 significa que a HL7 aprova ou endossa o presente Guia.
 
-## Independência
+### Independência
 
-Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software, em particular, definida
-pelo padrão adotado pelo Brasil (a saber, FHIR). No momento certo os detalhes deste
-padrão são apresentados.
+Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software (conector), que usa o padrão FHIR, adotado pelo Brasil, para tal. No momento certo os detalhes deste padrão são apresentados.
 
-Usar o padrão adotado pelo Brasil significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional.
-Adicionalmente, reconhecendo a impossibilidade de contemplar as especificidades e os
-interesses locais de todo o planeta, o padrão inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
+Usar o padrão adotado pelo Brasil significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional. Adicionalmente, reconhecendo a impossibilidade de contemplar as especificidades e os interesses locais de todo o planeta, o padrão inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
 
 ![img](../../../static/img/rnds-pilha-independente.png)
 
-O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos, desde que conectados à internet e obedecendo o contrato, o SIS em execução local (_on premise_) ou nas "nuvens", a interação pode ocorrer. Nenhum deles depende ou impõe restrições ao outro. O contrato é a personalização nacional (adaptação).
+O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos.
+
+A integração é assegurada se o SIS e a RNDS estão conectados à internet e obedecem o contrato ou personalização nacional (adaptação). Nenhum deles depende ou impõe restrições ao outro.
 
 ## Desenvolvimento de referência
 
-Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades esperadas no software a ser desenvolvido, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma referência para orientar integradores.
+Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades a serem desenvolvidas, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e um _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma referência para orientar integradores.
 
 ### Especificação
 
