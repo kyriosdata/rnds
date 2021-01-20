@@ -7,8 +7,7 @@ sidebar_label: Conector
 Conector é o nome dado à solução tecnológica que acessa a RNDS. É este software que, de fato, implementa a troca de informação em saúde com a RNDS.
 Por exemplo, envia resultado de exame laboratorial de um laboratório para a RNDS.
 
-As seções seguintes apresentam questões típicas da integração com a RNDS.
-Isto é feito de forma abstrata e flexível o suficiente para que possa servir de referência para vários estabelecimentos de saúde interessados na integração com a RNDS.
+As seções seguintes apresentam questões típicas da integração com a RNDS por meio do desenvolvimento de um conector de referência. Isto é feito de forma abstrata e flexível o suficiente para que possa servir de orientação para vários estabelecimentos de saúde interessados na integração com a RNDS.
 
 ### Sistema de Informação em Saúde (SIS)
 
@@ -61,16 +60,15 @@ A integração é assegurada se o SIS e a RNDS estão conectados à internet e o
 
 ## Desenvolvimento de referência
 
-Antes do início de um esforço de desenvolvimento de software propriamente dito, é razoável uma análise das funcionalidades a serem desenvolvidas, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração de um estabelecimento de saúde com a RNDS, não é possível definir uma análise e um _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma referência para orientar integradores.
+Antes do início de desenvolvimento do conector, é razoável uma análise das funcionalidades a serem contempladas, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração, único por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma orientação para integradores.
 
 ### Especificação
 
 #### Escopo
 
-O _software_ de integração com a RNDS, como qualquer outro, visa atender alguma demanda. Para o desenvolvimento de referência tal demanda (escopo) é a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
+O conector, como qualquer outro software, visa atender alguma demanda. Para o desenvolvimento de referência tal demanda (escopo) é a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
 
-Convém observar que este escopo é o primeiro contemplado pela RNDS que, ao longo do tempo, incluirá outros como o Sumário de Alta (SA) e o Registro de Atendimento Clínico (RAC), por exemplo. À medida que novas necessidades de integração forem implementadas pela RNDS,
-mais informações em saúde e outros tipos de estabelecimentos de saúde estarão envolvidos.
+Convém observar que a notificação de laudo de COVID-19 é a primeira necessidade de troca de informação contemplada pela RNDS. Ao longo do tempo, outras necessidades serão incluída, como o Sumário de Alta (SA) e o Registro de Atendimento Clínico (RAC), por exemplo. À medida que novas necessidades de integração forem implementadas pela RNDS, mais informações em saúde e outros tipos de estabelecimentos de saúde estarão envolvidos.
 
 ![img](../../../static/img/rnds-curso.png)
 
