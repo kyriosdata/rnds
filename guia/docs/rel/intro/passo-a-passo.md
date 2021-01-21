@@ -4,9 +4,6 @@ title: Passo a passo
 sidebar_label: Passo a passo
 ---
 
-Os passos estão distribuídos entre dois atores: o [gestor](../gestor/gestor) da instituição de saúde e profissional de
-[TI](../ti/ti) dessa instituição.
-
 A sequência sugerida é:
 
 1. O gestor deve obter o [certificado digital](../gestor/certificado).

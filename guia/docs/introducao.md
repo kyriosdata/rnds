@@ -20,12 +20,29 @@ A interoperabilidade, no momento, contempla a notificação de resultados de exa
 tendo em vista a adoção do padrão FHIR, integrar para notificar um resultado de exame é "similar" à submissão de um Registro de Atendimento Clínico (RAC)
 ou Sumário de Alta (SA), dentre outros.
 
-## Guia
+## O que muda?
 
-O **Guia de Integração RNDS** tem como objetivo orientar o desenvolvimento
-de solução tecnológica para a integração com a RNDS. Esta integração é
-ilustrada pela notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde pelos laboratórios em território nacional.
+Em um cenário convencional, sem a integração com a RNDS, laudos produzidos permanecem restritos ao sistema de software do laboratório em questão.
+Em algum momento são enviados para uma base de dados segura, e tornam-se inacessíveis até aos pacientes.
 
-Dois papéis definem o [público-alvo](./rel/intro/publico-alvo) deste _Guia_: (a) gestor (responsável pelo laboratório) e (b) integrador (tecnologia da informação).
+A informação em saúde, contudo, "precisa chegar onde é necessária". A [Portaria 1.792, de 17 de julho de 2020](https://www.in.gov.br/en/web/dou/-/portaria-n-1.792-de-17-de-julho-de-2020-267730859), do Ministério da Saúde,
+é um marco histórico neste sentido. Essa portaria estabelece a obrigatoriedade de notificar o Ministério da Saúde acerca dos resultados de testes de SARS-CoV-2 produzidos em todo o território nacional.
 
-> A integração entre estabelecimentos de saúde (laboratórios) e a [RNDS](../rnds/rnds) (Ministério da Saúde) é o foco dos exemplos deste guia.
+A figura abaixo ilustra o envio de laudos de um laboratório para a RNDS, como consequência desta Portaria.
+
+![img](../static/img/laboratorio.png)
+
+Na prática isso significa que cada laboratório terá que produzir _software_ para a sua integração com a RNDS. Noutras palavras, _software_ que envia o resultado de cada exame que produz para o Ministério da Saúde (veja a ilustração abaixo).
+
+![img](../static/img/pratica.png)
+
+## Este Guia
+
+O **Guia de Integração RNDS** tem como compromisso identificar todos
+os passos necessários, orientações e outras informações, sejam administrativas ou técnicas, para _facilitar a integração com a RNDS_.
+
+O objetivo orientar estabelecimentos de saúde acerca da integração com a RNDS. Esta integração é ilustrada pela notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde pelos laboratórios em território nacional.
+
+Dois papéis definem o [público-alvo](./publico-alvo/publico-alvo) deste _Guia_: (a) gestor (responsável pelo laboratório) e (b) integrador (tecnologia da informação).
+
+> A integração entre estabelecimentos de saúde e a RNDS (Ministério da Saúde) é o foco deste guia. Os exemplos são baseados no envio de lados de COVID-19 de Laboratórios de Análises Clínicas para a RNDS.

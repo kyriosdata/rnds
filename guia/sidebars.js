@@ -1,37 +1,42 @@
 module.exports = {
   someSidebar: [
     "introducao",
+    {
+      "Público-alvo": [
+        "publico-alvo/publico-alvo",
+        {
+          Gestor: [
+            "publico-alvo/gestor/gestor",
+            "publico-alvo/gestor/certificado",
+            "publico-alvo/gestor/gov.br",
+            "publico-alvo/gestor/portal",
+            "publico-alvo/gestor/identificador",
+          ],
+          Integrador: [
+            "publico-alvo/ti/ti",
+            "publico-alvo/ti/conhecer",
+            "publico-alvo/ti/si",
+            "publico-alvo/ti/homologar",
+            "publico-alvo/ti/producao",
+            "publico-alvo/ti/requisicoes",
+            "publico-alvo/ti/erros",
+            "publico-alvo/ti/autenticacao",
+          ],
+        },
+      ],
+    },
+    "rel/intro/passo-a-passo",
     "servicos",
     "definicoes",
     "tecnologias",
     "ambientes",
     {
-      "Resultado de Exame Laboratorial": [
+      "Resultado de Exame Laboratorial (REL)": [
         "rel/objetivo-rel",
         "rel/mi-rel",
         "rel/mc-rel",
-        "rel/intro/passo-a-passo",
-        "rel/intro/publico-alvo",
-        "rel/intro/contexto",
         "rel/intro/glossario",
         {
-          Gestor: [
-            "rel/gestor/gestor",
-            "rel/gestor/certificado",
-            "rel/gestor/gov.br",
-            "rel/gestor/portal",
-            "rel/gestor/identificador",
-          ],
-          TI: [
-            "rel/ti/ti",
-            "rel/ti/conhecer",
-            "rel/ti/si",
-            "rel/ti/homologar",
-            "rel/ti/producao",
-            "rel/ti/requisicoes",
-            "rel/ti/erros",
-            "rel/ti/autenticacao",
-          ],
           Ferramentas: [
             "rel/tools/api",
             "rel/tools/bibliotecas",
@@ -42,7 +47,7 @@ module.exports = {
           ],
         },
       ],
-      "Sumário de Alta": [
+      "Sumário de Alta (SA)": [
         "sa/objetivo-sa",
         "sa/mi-sa",
         "sa/mc-sa",
@@ -51,7 +56,7 @@ module.exports = {
         "sa/contexto-sa",
         "sa/glossario-sa",
       ],
-      "Registro de Atendimento Clínico": [
+      "Registro de Atendimento Clínico (RAC)": [
         "rac/objetivo-rac",
         "rac/mi-rac",
         "rac/mc-rac",
@@ -59,6 +64,15 @@ module.exports = {
         "rac/pa-rac",
         "rac/contexto-rac",
         "rac/glossario-rac",
+      ],
+      "Registro de Imunobiológico Administrado (RIA)": [
+        "ria/objetivo-ria",
+        "ria/mi-ria",
+        "ria/mc-ria",
+        "ria/passo-a-passo-ria",
+        "ria/pa-ria",
+        "ria/contexto-ria",
+        "ria/glossario-ria",
       ],
     },
   ],

@@ -1,5 +1,5 @@
 ---
-id: mi-sa
+id: mi-ria
 title: Modelo de Informação
 sidebar_label: Modelo de Informação
 ---

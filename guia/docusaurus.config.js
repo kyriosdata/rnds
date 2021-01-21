@@ -38,7 +38,7 @@ module.exports = {
           items: [
             {
               label: "Resultado de Exame Laboratorial",
-              to: "docs/rel/intro/passo-a-passo",
+              to: "docs/rel/objetivo-rel",
             },
             {
               label: "Sumário de Alta (SA)",
@@ -69,7 +69,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © 2020 DATASUS (02/01/2021)`,
+      copyright: `Copyright © 2020 DATASUS (21/01/2021)`,
     },
     algolia: {
       apiKey: "773e8639e2cf11a7a1b3e06912c0a294",

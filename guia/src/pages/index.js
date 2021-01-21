@@ -74,16 +74,17 @@ function Home() {
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
               <p className="subtitulo">
-                O Guia de Integração RNDS orienta o desenvolvimento de solução
-                tecnológica (software de integração) para trca de informações em
-                saúde, por exemplo, envio de resultados de exames (SARS-CoV-2).
+                Este Guia de Integração RNDS orienta o desenvolvimento de
+                solução tecnológica (conector) para interoperabilidade em saúde
+                no Brasil.
               </p>
 
               <p className="subtitulo">
-                Cada modelo de informação é acompanhado do objetivo, passo a
-                passo para o credenciamento no Portal de Serviços (gestor), bem
-                como, para a integração entre o sistema local e a RNDS
-                (desenvolvedor), dentre outras informações relevantes.
+                O passo a passo apresenta uma sequência de atividades para a
+                integração, distribuídas entre o gestor e o integrador
+                (desenvolvedor de software). Cada necessidade de troca de
+                informação é detalhada pelos modelos informacional e
+                computacional, bem como outras orientações.
               </p>
               <div>
                 <Link

@@ -1,5 +1,5 @@
 ---
-id: pa-sa
+id: pa-ria
 title: Público-alvo
 sidebar_label: Público-alvo
 ---
