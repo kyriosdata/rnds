@@ -4,6 +4,8 @@ title: Objetivo
 sidebar_label: Objetivo
 ---
 
-Especificar a integração entre laboratórios e a RNDS para a notificação de resultados de exames (SARS-CoV-2) ao Ministério da Saúde.
+Promover o compartilhamento de resultado de exame laboratorial por meio de solução tecnológica (conector) referente aos laudos de COVID-19, realizado em qualquer laboratório de análises clínicas, público ou privado, permitindo a visualização dos dados essenciais deste paiente ao profissional de saúde
+para garantir a continuidade do cuidado na atenção primária em saúde,
+bem como na atenção especializada ou internamento.
 
-Esta integração é de responsabilidade dos Laboratórios de Análises Clínicas, e quando concluída permite a visualização dos resultados pelo cidadão e pelos profissionais de saúde envolvidos na continuidade do cuidado.
+Essas informações também estarão acessíveis aos cidadãos.

@@ -5,9 +5,7 @@ sidebar_label: Objetivo
 ---
 
 Promover o compartilhamento de informações por meio de desenvolvimento de
-solução tecnológica referentes ao atendimento clínico do usuário realizado
-em qualquer estabelecimento de saúde, público ou privado, permitindo a
-visualização dos dados essenciais deste paiente ao profissional de saúde
+solução tecnológica (conector) referente ao atendimento clínico do usuário realizado em qualquer estabelecimento de saúde, público ou privado, permitindo a visualização dos dados essenciais deste paiente ao profissional de saúde
 para garantir a continuidade do cuidado na atenção primária em saúde,
 bem como na atenção especializada ou internamento.
 
