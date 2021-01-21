@@ -4,4 +4,4 @@ title: Modelo Computacional
 sidebar_label: Modelo Computacional
 ---
 
-Preencher aqui...
+Em desenvolvimento.

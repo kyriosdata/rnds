@@ -4,4 +4,4 @@ title: Glossário
 sidebar_label: Glossário
 ---
 
-Termos aqui...
+Em desenvolvimento.
