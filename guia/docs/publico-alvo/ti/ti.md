@@ -4,17 +4,12 @@ title: Integrador
 sidebar_label: Atribuições
 ---
 
-Integrador é o responsável pela TI do estabelecimento de saúde. O
-integrador orienta e/ou executa ações necessárias para o desenvolvimento
-da solução tecnológica (conector) para a integração com a RNDS.
+O integrador é um desenvolvedor de software. Ele orienta e/ou executa ações necessárias para o desenvolvimento da solução tecnológica (conector) para a integração com a RNDS. Possivelmente é o responsável pela TI do estabelecimento de saúde.
 
 Outras denominações: engenheiros de Software, programadores, desenvolvedores, técnicos de TI, técnicos de departamentos de informação em saúde, bem como coordenadores de setor de tecnologia das secretarias municipais de saúde.
 
 A integração com a RNDS exige atribuições distribuídas entre dois
-papéis. Um deles é o [gestor](../gestor/gestor) do estabelecimento de saúde.
-O outro é o responsável pela TI, que não necessariamente executa
-as atividades técnicas. O [público-alvo](../intro/publico-alvo) fornece detalhes.
-A intenção aqui é orientar a TI do estabelecimento de saúde.
+papéis de um estabelecimento de saúde. Um é o integrador, o outro é o [gestor](../gestor/gestor).
 
 ![img](../../../static/img/ti.png)
 
