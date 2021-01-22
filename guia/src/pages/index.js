@@ -92,7 +92,7 @@ function Home() {
                     "button button--outline button--secondary button--lg",
                     styles.getStarted
                   )}
-                  to={useBaseUrl("docs/rel/intro/passo-a-passo")}
+                  to={useBaseUrl("docs/passo-a-passo")}
                 >
                   Passo a passo
                 </Link>
