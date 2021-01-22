@@ -5,21 +5,21 @@ sidebar_label: Passo a passo
 ---
 
 O processo de credenciamento de um estabelecimento de saúde
-junto à RNDS é realizado em dois passos. No primeiro o estabelecimento requisita acesso ao ambiente de homologação. No segundo, o estabelecimento requisita acesso ao ambiente de produção. Quando este último é
-concedido, o estabelecimento está autorizado a trocar informações com a RNDS.
+junto à RNDS é realizado em duas fases. Na primeira o estabelecimento requisita acesso ao ambiente de homologação. Na segunda, o estabelecimento requisita acesso ao ambiente de produção. Quando esta última é
+concedida, o estabelecimento está autorizado a trocar informações com a RNDS.
 
-Os detalhes destes passos em um fluxo típico, aderente a muitos cenários, é fornecido abaixo. Variações neste fluxo são naturais, até porque a maioria das atividades é realizada pelo gestor e o integrador, ou seja, pelo estabelecimento. A intenção, convém mencionar, não é impor um processo, mas mostrar como o credenciamento pode ser obtido.
+Os detalhes destas fases são forncidos abaixo, por meio de um fluxo típico, representativo de vários cenários. Variações são naturais, pois a maioria das atividades é realizada pelo gestor e o integrador, ou seja, pelo estabelecimento de saúde.
 
 Fluxo típico:
 
-1. O gestor deve obter o [certificado digital](../gestor/certificado).
-1. O gestor deve [criar uma conta gov.br](../gestor/gov.br), caso não possua uma.
-1. O gestor deve [solicitar acesso](../gestor/portal) à RNDS, e aguardar a resposta do DATASUS.
-1. O gestor deve obter o [identificador do solicitante](../gestor/identificador) após a aprovação da solicitação de acesso pelo DATASUS.
-1. O profissional de TI deve [interagir](../ti/conhecer) com os serviços (entradas/saídas) oferecidos e, dessa forma, conhecê-los e compreendê-los.
-1. O profissional de TI deve [desenvolver](../ti/si) o software necessário para a integração com a RNDS.
-1. O profissional de TI deve produzir as evidências necessárias para [homologar](../ti/homologar) a integração implementada pelo software desenvolvido (passo anterior).
+1. O gestor deve [obter o certificado digital](publico-alvo/gestor/certificado), se não possuir um.
+1. O gestor deve [criar uma conta gov.br](publico-alvo/gestor/gov.br), caso não possua uma.
+1. O gestor deve [solicitar acesso](publico-alvo/gestor/portal) à RNDS (primeira fase). A solicitação de acesso é feita pelo Portal de Serviços cujo acesso exige uma conta gov.br (passo anterior). São requisitadas várias informações sobre o estabelecimento de saúde, inclusive o certificado digital (primeiro passo).
+1. O gestor deve [obter o identificador do solicitante](publico-alvo/gestor/identificador), ou seja, um identificador fornecido pelo DATASUS para o estabelecimento de saúde em questão, cujo acesso ao ambiente de homologação é concedido.
+1. O integrador deve [ambientar-se](publico-alvo/ti/conhecer) com os serviços (entradas/saídas) oferecidos e, dessa forma, conhecê-los e compreendê-los. Observe que esta atividade pode ser iniciada antes dos passos anteriores.
+1. O integrador deve [desenvolver](publico-alvo/ti/si) a solução tecnológica, aqui chamada de conector, para a integração com a RNDS.
+1. O integrador deve produzir as evidências necessárias para [homologar](publico-alvo/ti/homologar) o conector desenvolvido.
 1. O gestor deve solicitar acesso ao ambiente de produção e aguardar a resposta do DATASUS.
-1. O profissional de TI deve [colocar em produção](../ti/producao) o software que realiza a integração entre o estabelecimento de saúde e a RNDS (e homologado no passo anterior).
+1. O integrador deve [colocar em produção](publico-alvo/ti/producao) o software que realiza a integração entre o estabelecimento de saúde e a RNDS (e homologado no passo anterior).
 
 ![](../static/img/rnds-processo-credenciamento.png)
