@@ -8,9 +8,9 @@ O processo de credenciamento de um estabelecimento de saúde
 junto à RNDS é realizado em duas fases. Na primeira o estabelecimento requisita acesso ao ambiente de homologação. Na segunda, o estabelecimento requisita acesso ao ambiente de produção. Quando esta última é
 concedida, o estabelecimento está autorizado a trocar informações com a RNDS.
 
-Os detalhes destas fases são forncidos abaixo, por meio de um fluxo típico, representativo de vários cenários. Variações são naturais, pois a maioria das atividades é realizada pelo gestor e o integrador, ou seja, pelo estabelecimento de saúde.
+Os detalhes destas fases são fornecidos abaixo, por meio de um fluxo típico, representativo de vários cenários. Variações são naturais, pois a maioria das atividades é realizada pelo gestor e o integrador, ou seja, pelo estabelecimento de saúde.
 
-Fluxo típico:
+## Fluxo típico
 
 1. O gestor deve [obter o certificado digital](publico-alvo/gestor/certificado), se não possuir um.
 1. O gestor deve [criar uma conta gov.br](publico-alvo/gestor/gov.br), caso não possua uma.
@@ -21,5 +21,9 @@ Fluxo típico:
 1. O integrador deve produzir as evidências necessárias para [homologar](publico-alvo/ti/homologar) o conector desenvolvido.
 1. O gestor deve solicitar acesso ao ambiente de produção e aguardar a resposta do DATASUS.
 1. O integrador deve [colocar em produção](publico-alvo/ti/producao) o software que realiza a integração entre o estabelecimento de saúde e a RNDS (e homologado no passo anterior).
+
+## Diagrama
+
+O diagrama abaixo, na notação BPMN, ilustra o fluxo acima.
 
 ![](../static/img/rnds-processo-credenciamento.png)

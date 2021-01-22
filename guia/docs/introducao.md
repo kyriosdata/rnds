@@ -43,6 +43,6 @@ os passos necessários, orientações e outras informações, sejam administrati
 
 O objetivo orientar estabelecimentos de saúde acerca da integração com a RNDS. Esta integração é ilustrada pela notificação obrigatória de resultados de exames (SARS-CoV-2) ao Ministério da Saúde pelos laboratórios em território nacional.
 
-Dois papéis definem o [público-alvo](./publico-alvo/publico-alvo) deste _Guia_: (a) gestor (responsável pelo laboratório) e (b) integrador (tecnologia da informação).
+Dois papéis definem o [público-alvo](./publico-alvo/publico-alvo) deste _Guia_: (a) gestor (responsável pelo laboratório) e (b) integrador (desenvolvedor).
 
 > A integração entre estabelecimentos de saúde e a RNDS (Ministério da Saúde) é o foco deste guia. Os exemplos são baseados no envio de lados de COVID-19 de Laboratórios de Análises Clínicas para a RNDS.
