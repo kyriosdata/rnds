@@ -38,3 +38,8 @@ code {
 .subtitulo {
   font-size: 16px;
 }
+
+.emDesenvolvimento {
+  font-size: 20px;
+  color: gray;
+}
