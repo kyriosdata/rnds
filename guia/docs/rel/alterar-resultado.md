@@ -30,7 +30,7 @@ Contudo, há alguns detalhes a serem esclarecidos.
   submete o resultado.
 
 - Montar _Bundle_ de substituição. Monte o resultado de exame laboratorial que deve substituir aquele enviado anteriormente de forma semelhante ao
-  documento em [Resultado de exame](./resultado). O identificador do novo
+  documento em [Resultado de exame](mc-rel). O identificador do novo
   _Bundle_ deve ser o mesmo atribuído pelo laboratório ao resultado de exame
   a ser substituído.
 

@@ -4,7 +4,7 @@ title: Conhecer os serviços
 sidebar_label: Conhecer os serviços
 ---
 
-A integração via padrão FHIR e [perfis](../rnds/perfis) definidos pela RNDS realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad), que devem partir do estabelecimento de saúde e atingir o [ambiente](../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+A integração via padrão FHIR e [perfis](../../rnds/definicoes) definidos pela RNDS realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad), que devem partir do estabelecimento de saúde e atingir o [ambiente](../../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
 
 > Neste documento é apresentado como submeter tais requisições.
 
@@ -19,13 +19,13 @@ Ao final, espera-se que:
 
 - Você saiba quais são as requisições disponíveis.
 - Você saiba quais são os _headers_ necessários e como montar os valores correspondentes.
-- Você saiba quais os dados a serem enviados por cada requisição, ou [payload](../intro/glossario#payload).
+- Você saiba quais os dados a serem enviados por cada requisição, ou [payload](../../glossario#payload).
 - Você saiba submeter as requisições por meio da ferramenta Postman.
 - Você saiba experimentar valores diferentes para o _payload_, _headers_ e observar os resultados.
 - Você saiba interagir com a RNDS usando HTTPS.
 - Você saiba empregar o certificado digital do laboratório.
 - Você saiba como realizar as atividades acima empregando a linguagem de programção Java.
-- Você esteja apto para construir o [Software de Integração](./si).
+- Você esteja apto para construir o [conector](./si).
 
 ### Pré-requisitos
 
@@ -33,7 +33,7 @@ Conforme ilustrado na figura acima, o uso do Postman depende de três informaç�
 
 - Informações necessárias:
 
-  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS quando a [solicitação de acesso](../gestor/portal) é aprovada. Esta aprovação, além de definir o identificador do solicitante, também autoriza o acesso ao [ambiente de homologação](../rnds/ambientes).
+  - [Identificador do solicitante](../gestor/identificador) fornecido pela RNDS quando a [solicitação de acesso](../gestor/portal) é aprovada. Esta aprovação, além de definir o identificador do solicitante, também autoriza o acesso ao [ambiente de homologação](../../rnds/ambientes).
   - CNES. O CNES do laboratório.
   - CNS de um profissional de saúde lotado no estabelecimento de saúde cujo CNES é fornecido acima. O CNS indica em nome do quem as requisições ao ambiente de homologação serão feitas.
 
@@ -77,7 +77,7 @@ A indicação do certificado digital a ser utilizado pelo Postman é realizada d
 ![img](../../../static/img/postman-settings.png)
 
 Quando _Add Certificate_ é pressionado, abre-se tela similar àquela abaixo.
-Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](../rnds/ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; (b) o arquivo **.pfx** contendo o certificado digital do estabelecimento de saúde e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
+Observe que nenhum valor estará preenchido, ao contrário da tela exibida abaixo, na qual as três informações exigidas já estão fornecidas: (a) o domínio para o qual o certificado será utilizado pelo Postman, ou seja, a porta _Auth_ do [ambiente](../../rnds/ambientes) de homologação ou, especificamente, o endereço **ehr-auth-hmg.saude.gov.br**; (b) o arquivo **.pfx** contendo o certificado digital do estabelecimento de saúde e, por último, (c) a senha empregada para se ter acesso ao conteúdo do certificado.
 
 ![img](../../../static/img/postman-certificado.png)
 
@@ -99,7 +99,7 @@ _token_ retornado por esta requisição, dependem de outros valores, neste caso,
 
 Ao todo são 10 variáveis, nem todas podem ser vistas acima. Os valores para as 3 primeiras, **individuo-cns**, **lab-cnes** e **lab-identificador**, devem ser definidos de forma compatível com o certificado digital utilizado. São valores específicos por estabelecimento de saúde. Na figura acima são fornecidos valores espúrios, fictícios (a serem substituídos). Por exemplo, **lab-cnes** deve ter como valor o CNES do estabelecimento de saúde cujo certificado digital foi fornecido ao Postman no passo anterior. Assim como **individuo-cns** deve ser o CNS de um profissional de saúde lotado no estabelecimento de saúde em questão.
 
-As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do estabelecimento de saúde. As duas primeiras identificam valores pertinentes ao [ambiente](../rnds/ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Neste caso, este CNPJ está disonível no próprio portal da [UFG](https://ufg.br) (CNPJ utilizado no exemplo).
+As 3 variáveis seguintes, **auth**, **ehr** e **ufg-cnpj**, são independentes do estabelecimento de saúde. As duas primeiras identificam valores pertinentes ao [ambiente](../../rnds/ambientes) de homologação da RNDS. A última apenas configura um CNPJ para facilitar a execução de requisição de consulta por CNPJ. Neste caso, este CNPJ está disonível no próprio portal da [UFG](https://ufg.br) (CNPJ utilizado no exemplo).
 
 Os valores das 4 últimas variáveis são gerados pelo próprio Postman durante a execução das requisições. Por exemplo, a variável _access_token_ é definida pela execução do serviço "Obter token de acesso" e, como anteriormente informado, o valor desta variável é empregado na composição do _header_ de nome _X-Authorization-Server_ por todas as demais requisições.
 
