@@ -67,4 +67,4 @@ A execução satisfatória desta atribuição resulta em:
 ### Solicitar acesso (ambiente de produção)
 
 A atribuição final do gestor é requisitar o acesso ao ambiente de
-produção e aguardar pela aprovação correspondente. A partir da aprovação, o estabelecimento de saúde poderá utilizar os endereços do [ambiente de produção](../rnds/ambientes) para as requisições correspondentes.
+produção e aguardar pela aprovação correspondente. A partir da aprovação, o estabelecimento de saúde poderá utilizar os endereços do [ambiente de produção](../../rnds/ambientes) para as requisições correspondentes.
