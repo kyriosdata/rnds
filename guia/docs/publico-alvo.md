@@ -4,11 +4,11 @@ title: Público-alvo
 sidebar_label: Quem?
 ---
 
-Estabelecimentos de saúde dependem de muitos profissionais para a realização de várias atividades. A interoperabilidade com a RNDS, por sua vez, depende de novas responsabilidades atribuídas a tais estabelecimentos.
+Estabelecimentos de saúde dependem de muitos profissionais para a realização de várias atividades. A interoperabilidade com a RNDS depende de novas responsabilidades atribuídas a tais estabelecimentos. Em consequência, torna-se necessário estabelecer claramente quais são as responsabilidades atribuídas aos estabelecimentos de saúde e, naturalmente, quem são os profissionais que as executam.
 
-Em consequência, torna-se necessário estabelecer claramente quais são as responsabilidades atribuídas aos estabelecimentos de saúde e, naturalmente, quem são os profissionais que as executam, na perspectiva da RNDS.
+Adicionalmente, estabelecimentos de saúde distintos fazem uso de informações distintas, por exemplo, um Laboratório de Análises Clínicas não gera Sumário de Alta. Ou seja, cada necessidade de troca de informação identifica os estabelecimentos correspondentes por meio do seu público-alvo específico.
 
-São fundamentais dois profissionais para a integração com a RNDS: o [gestor](../gestor/gestor) e o [integrador](../ti/ti).
+Apesar da informação em saúde variar, e com ela os estabelecimentos de saúde pertinentes, dois profissionais persistem, assim como suas atividades, para a integração com a RNDS: o [gestor](../gestor/gestor) e o [integrador](../ti/ti).
 
 ![atores](../static/img/atores.png)
 

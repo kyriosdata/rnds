@@ -23,11 +23,6 @@ module.exports = {
           position: "left",
         },
         { to: "blog", label: "Notícias", position: "left" },
-        {
-          href: "https://github.com/kyriosdata/rnds",
-          label: "GitHub",
-          position: "right",
-        },
       ],
     },
     footer: {
