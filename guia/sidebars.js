@@ -32,14 +32,6 @@ module.exports = {
         "rnds/servicos",
         "rnds/definicoes",
         "rnds/tecnologias",
-      ],
-    },
-    {
-      "Resultado de Exame Laboratorial (REL)": [
-        "rel/objetivo-rel",
-        "rel/mi-rel",
-        "rel/mc-rel",
-        "rel/intro/glossario",
         {
           Ferramentas: [
             "rel/tools/api",
@@ -50,6 +42,14 @@ module.exports = {
             "rel/tools/fhirserver",
           ],
         },
+      ],
+    },
+    {
+      "Resultado de Exame Laboratorial (REL)": [
+        "rel/objetivo-rel",
+        "rel/mi-rel",
+        "rel/mc-rel",
+        "rel/intro/glossario",
       ],
       "Sumário de Alta (SA)": [
         "sa/objetivo-sa",

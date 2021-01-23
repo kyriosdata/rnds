@@ -16,7 +16,7 @@
         "resourceType": "Composition",
         "meta": {
           "profile": [
-            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.0"
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1"
           ]
         },
         "status": "final",
