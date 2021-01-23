@@ -26,10 +26,14 @@ module.exports = {
       ],
     },
     "passo-a-passo",
-    "servicos",
-    "definicoes",
-    "tecnologias",
-    "ambientes",
+    {
+      RNDS: [
+        "rnds/ambientes",
+        "rnds/servicos",
+        "rnds/definicoes",
+        "rnds/tecnologias",
+      ],
+    },
     {
       "Resultado de Exame Laboratorial (REL)": [
         "rel/objetivo-rel",

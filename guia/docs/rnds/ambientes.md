@@ -7,7 +7,7 @@ sidebar_label: Ambientes
 A RNDS é acessível a um software de integração por meio de dois ambientes:
 o ambiente de homologação e o ambiente de produção.
 
-![img](../static/img/ambientes.png)
+![img](../../static/img/ambientes.png)
 
 ## Qual ambiente usar?
 

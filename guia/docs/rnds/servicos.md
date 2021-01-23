@@ -8,7 +8,7 @@ A integração com a RNDS é realiza por meio de _web services_, ou serviços, p
 
 Os serviços encontram-se disponíveis por meio de dois ambientes. Consulte a documentação dos [ambientes](ambientes) para detalhes, inclusive os endereços dos serviços. Abaixo seguem os métodos HTTP e _paths_ dos serviços.
 
-O integrador, contudo, precisa ir além destas informações sobre os serviços. É preciso, por exemplo, detalhes dos _headers_ das requisições, das respostas, e o formato do _payload_, dentre outras. Para isto, a sugestão é experimentar os serviços por meio de um [roteiro](rel/ti/conhecer) especificamente produzido para esta finalidade.
+O integrador, contudo, precisa ir além destas informações sobre os serviços. É preciso, por exemplo, detalhes dos _headers_ das requisições, das respostas, e o formato do _payload_, dentre outras. Para isto, a sugestão é experimentar os serviços por meio de um [roteiro](publico-alvo/ti/conhecer) especificamente produzido para esta finalidade.
 
 ### Segurança (_web services_)
 
