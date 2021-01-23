@@ -4,15 +4,14 @@ title: Validação de Recursos
 sidebar_label: Validação
 ---
 
-A validação permite identificar a conformidade
-de um recurso em relação a vários critérios. Por exemplo,
-assegurar que um resultado de exame contém todas as informações necessárias conforme definidas pela RNDS. Há vários outros cenarios, consulte [Validating Resources](https://www.hl7.org/fhir/validation.html)
-para detalhes.
+Validar um recurso é assegurar que um resultado de exame, por exemplo, contém todas as informações exigidas conforme definidas pela RNDS. A [validação de recursos](https://www.hl7.org/fhir/validation.html) pode considerar vários aspectos.
+
+A validação é particularmente útil durante o desenvolvimento ou outro cenário no qual
+se deseja conferir um recurso a ser enviado ou recebido.
 
 ### Interface gráfica
 
-No [Portal de Serviços](https://servicos-datasus.saude.gov.br/detalhe/UZQjoYDDFN) da RNDS,
-dentre os vários artefatos disponibilizados está o [Validador local aplicativo](https://doc-0k-b0-docs.googleusercontent.com/docs/securesc/pv16ckcadsrom8ll89o65she880al4qi/je4967phlp7b1fhq5kovqf8gnaakio7m/1599249225000/10214180060604046643/00115241587149400156/19c5hNwXv8qZk8Ylq-PJAnTFPr8_d5z8n?e=download&authuser=0&nonce=m7h2r4gkh32jk&user=00115241587149400156&hash=31u37radoua6t6fot61ga1qad9qsauev). Abaixo segue uma ilustração da execução deste aplicativo.
+A RNDS disponibiliza um [validador](https://doc-0k-b0-docs.googleusercontent.com/docs/securesc/pv16ckcadsrom8ll89o65she880al4qi/je4967phlp7b1fhq5kovqf8gnaakio7m/1599249225000/10214180060604046643/00115241587149400156/19c5hNwXv8qZk8Ylq-PJAnTFPr8_d5z8n?e=download&authuser=0&nonce=m7h2r4gkh32jk&user=00115241587149400156&hash=31u37radoua6t6fot61ga1qad9qsauev) gráfico local. Abaixo segue uma ilustração da execução deste aplicativo.
 
 ![image](https://user-images.githubusercontent.com/1735792/92491044-21244600-f1c8-11ea-921b-541e9b77d967.png)
 

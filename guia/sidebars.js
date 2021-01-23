@@ -34,12 +34,12 @@ module.exports = {
         "rnds/tecnologias",
         {
           Ferramentas: [
-            "rel/tools/api",
-            "rel/tools/bibliotecas",
-            "rel/tools/fhirpath",
-            "rel/tools/keytool",
-            "rel/tools/validacao",
-            "rel/tools/fhirserver",
+            "rnds/tools/api",
+            "rnds/tools/bibliotecas",
+            "rnds/tools/fhirpath",
+            "rnds/tools/keytool",
+            "rnds/tools/validacao",
+            "rnds/tools/fhirserver",
           ],
         },
       ],
