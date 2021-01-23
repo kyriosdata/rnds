@@ -4,12 +4,12 @@ title: Gestor
 sidebar_label: Atribuições
 ---
 
-Gestor é o responsável pelo compromisso do estabelecimento de saúde com a RNDS. Esta relação é formalmente estabelecida com a assinatura do termo de compromisso.
+Gestor é o responsável pelo estabelecimento de saúde e quem formalmente assina o termo de compromisso com a RNDS.
 
 O gestor também precisa compreender como o fluxo de informações deverá funcionar em relação ao envio e recebimento de informação, tanto com qualidade quanto precisão.
 
 A integração com a RNDS exige atribuições distribuídas entre dois
-papéis. Um deles é o [responsável pela TI](../ti/ti) do estabelecimento de saúde. O outro é o gestor do estabelecimento de saúde.
+papéis. Além do gestor, o outro é o [integrador](../ti/ti).
 
 ![img](../../../static/img/gestor.png)
 
