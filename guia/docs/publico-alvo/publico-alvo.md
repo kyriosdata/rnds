@@ -8,6 +8,6 @@ Estabelecimentos de saúde dependem de muitos profissionais para a realização 
 
 Em consequência, torna-se necessário estabelecer claramente quais são as novas atividades e, naturalmente, quem são os profissionais que as executam. Isto é feito na persectiva da RNDS e visa facilitar a compreensão do Guia.
 
-São fundamentais dois profissionais para a integração com a RNDS: o [gestor](./gestor/gestor) e o [integrador](./ti/ti). Este Guia contempla ambos, contudo, a maioria do conteúdo é voltado para o Integrador.
+São fundamentais dois profissionais para a integração com a RNDS: o [gestor](./gestor/gestor) e o [integrador](./ti/ti). Este Guia contempla as atividades de ambos.
 
 ![atores](../../static/img/atores.png)

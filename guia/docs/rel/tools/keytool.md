@@ -12,4 +12,4 @@ várias ferramentas que acompanham as distribuições de Java, por exemplo,
 A ferramenta _keytool_ é empregada para acrescentar o certificado da autoridade
 certificadora que criou o certificado empregado pelos serviços oferecidos pelo
 DATASUS. Desta forma, uma aplicação em Java terá "confiança" no certificado
-empregado pelos servidores do DATASUS. Veja [autenticação](../ti/autenticacao.md) para detalhes.
+empregado pelos servidores do DATASUS. Veja [autenticação](../../publico-alvo/ti/autenticacao.md) para detalhes.

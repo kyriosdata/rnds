@@ -6,7 +6,7 @@ sidebar_label: Passo a passo
 
 O processo de credenciamento de um estabelecimento de saúde
 junto à RNDS é realizado em duas fases. Na primeira o estabelecimento requisita acesso ao ambiente de homologação. Na segunda, o estabelecimento requisita acesso ao ambiente de produção. Quando esta última é
-concedida, o estabelecimento está autorizado a trocar informações com a RNDS.
+concedida, o estabelecimento está autorizado a trocar informações com a RNDS. Antes, contudo, a [introdução](introducao) e o [público-alvo](publico-alvo/publico-alvo) oferecem um contexto para o entendimento do Guia.
 
 Os detalhes destas fases são fornecidos abaixo, por meio de um fluxo típico, representativo de vários cenários. Variações são naturais, pois a maioria das atividades é realizada pelo gestor e o integrador, ou seja, pelo estabelecimento de saúde.
 

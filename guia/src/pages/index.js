@@ -74,9 +74,9 @@ function Home() {
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
               <p className="subtitulo">
-                Este Guia de Integração RNDS orienta o desenvolvimento de
-                solução tecnológica (conector) para interoperabilidade em saúde
-                no Brasil.
+                Este Guia orienta estabelecimentos de saúde acerca da integração
+                com a RNDS. Tal integração é necessária para a
+                interoperabilidade em saúde no Brasil.
               </p>
 
               <p className="subtitulo">

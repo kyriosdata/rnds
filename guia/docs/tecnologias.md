@@ -18,7 +18,7 @@ O FHIR visa contemplar um conjunto razoável de cenários, mas não é possível
 
 A definição de perfis é um esforço de modelagem de informação em saúde.
 Desenvolvedores terão que ter acesso aos perfis que personalizam os recursos a serem trocados. Afinal, toda a troca de
-dados deverá estar em conformidade com os perfis definidos. Veja [Perfis](./perfis) para acesso aos perfis definidos pela RNDS.
+dados deverá estar em conformidade com os perfis definidos. Consulte os [perfis](https://simplifier.net/RedeNacionaldeDadosemSaude) definidos pela RNDS para detalhes.
 
 A edição de um perfil é melhor realizada com o apoio de um editor
 específico para esta finalidade. [Forge](https://simplifier.net/forge), disponível para Windows, é uma opção.

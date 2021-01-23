@@ -3,7 +3,7 @@ module.exports = {
   tagline: "Guia de Integração",
   url: "https://kyriosdata.github.io",
   baseUrl: "/rnds/",
-  onBrokenLinks: "log",
+  onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
   projectName: "rnds", // Usually your repo name.
