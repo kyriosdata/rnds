@@ -4,7 +4,7 @@ title: Servidor FHIR
 sidebar_label: Servidor FHIR
 ---
 
-A experimentação com o FHIR pode ser feita com vários servidores de [acesso livre](../../tecnologias#implementa%C3%A7%C3%A3o-do-fhir). Por outro lado, há possibilidade
+A experimentação com o FHIR pode ser feita com vários servidores de [acesso livre](../tecnologias#implementa%C3%A7%C3%A3o-do-fhir). Por outro lado, há possibilidade
 de controle total em um servidor local.
 
 ## Servidor FHIR local
@@ -16,4 +16,3 @@ de controle total em um servidor local.
 
 - Coloque o servidor FHIR em execução com o comando abaixo. Consulte detalhes das opções [aqui](https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html).  
   `hapi-fhir-cli run-server -v r4`
-
