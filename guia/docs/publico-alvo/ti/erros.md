@@ -24,6 +24,8 @@ meio do header **X-Authorization-Server**. Em particular, o valor deste _header_
 X-Authorization-Server: Bearer <valor-de-access-token-aqui>
 ```
 
+Convém observar que esta não é a única informação de segurança exigida, outro _header_, **Authorization**, cujo valor deve ser o CNS do requisitante, também deve ser fornecido nas requisições aos serviços _EHR_.
+
 #### Código inválido CNS
 
 Na consulta por profissional via CNS, se o código CNS é inválido, por exemplo, então tem-se o resultado abaixo:

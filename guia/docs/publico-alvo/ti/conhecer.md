@@ -43,6 +43,13 @@ Conforme ilustrado na figura acima, o uso do Postman depende de três informaç�
 
   - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A documentação das requisições também encontra-se amplamente disponível [online]](https://documenter.getpostman.com/view/215332/TVewY47S).
 
+### Segurança (_headers_)
+
+Toda requisição ao endereço _EHR_(veja [ambientes](../../rnds/ambientes)), faz uso de dois _headers_ obrigatórios, aqui definidos como _headers_ de segurança:
+
+- **X-Authorization-Server**: este é _header_ por meio do qual o valor do _token_ de acesso é fornecido. O valor deste _header_ é definido pela concatenação de **Bearer ** com o valor do _token_. Em consequência, para o _token_ de valor "token", o valor do _header_ seria `Bearer token`. Convém ressaltar que o _token_ de acesso é uma sequência de mais de 2000 caracteres e, portanto, bem mais extensa que o simples valor "token".
+- **Authorization**: neste _header_ é identificado o profissional de saúde, lotado no estabelecimento de saúde em questão, em nome do qual a requisição é feita. O valor fornecido deve ser o CNS deste profissional.
+
 ### Passos
 
 De posse das informações e dos arquivos, veja seção anterior, pode-se configurar o Postman: (a) importar _collection_; (b) configurar certificado digital e (c) configurar variáveis.

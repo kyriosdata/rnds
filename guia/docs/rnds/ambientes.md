@@ -21,9 +21,7 @@ Após aprovação da requisição de acesso ao ambiente de produção, parte do 
 
 Tanto o ambiente de homologação quanto o de produção oferecem dois endereços para acesso: um para finalidade de segurança, denominado _Auth_, e outro para acesso aos serviços de troca de informações em saúde, denominado de _EHR_.
 
-O endereço _Auth_ é exclusivo para obtenção do _token_ de acesso e exige o emprego de [certificado digital](../publico-alvo/gestor/certificado). Convém destacar que este _token_ de acesso é exigido como parte das requisições enviadas ao endereço _EHR_.
-
-Dito de outra forma, em toda requisição enviada ao endereço _EHR_, ou seja, uma requisição _https_, o valor do _header_ **X-Authorization-Server** deve ser a concatenação de "Bearer " com o _token_ de acesso. Consulte [Serviços](servicos) para detalhes.
+O endereço _Auth_ é exclusivo para obtenção do _token_ de acesso e exige o emprego de [certificado digital](../publico-alvo/gestor/certificado). Este _token_ de acesso é exigido como parte de cada uma das requisições enviadas ao endereço _EHR_. Isto é feito por meio de _header_ próprio, **X-Authorization-Server**. O valor deste _header_ assim como o conteúdo do outro _header_ de segurança exigido, **Authorization**, são discutidos em detalhes na definição dos [serviços](../publico-alvo/ti/conhecer).
 
 ## Endereços
 
