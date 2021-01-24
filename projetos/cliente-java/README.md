@@ -12,21 +12,18 @@ O desenvolvedor (integrador) saberá como empregar a bibliteca
 HAPI FHIR para acesso a um Servidor FHIR, por exemplo, aquele
 disponibilizado pela RNDS.
 
-## Exemplos
+## Como executar cada exemplo?
 
-#### Conexão com servidr
-
-Os exemplos fazem uso do servidor http://hapi.fhir.org/baseR4.
+Via linha de comandos, primeiro compile-os e, na sequência,
+execute um deles. Abaixo é ilustrada a execução da
+aplicação disponível na classe **com.github.kyriosdata.rnds.ForcaConexao**.
+Em tempo, os exemplos fazem uso do servidor http://hapi.fhir.org/baseR4,
+definido no próprio código-fonte.
 
 - `mvn compile`
 - `mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.ForcaConexao"`
 
-#### Consulta a pacientes disponíveis
-
-- `mvn compile`
-- `mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.BuscaPacientes"`
-
-### Classes disponíveis para execução
+## Exemplos
 
 - `com.github.kyriosdata.rnds.ForcaConexao`  
   Força conexão com servidor definido no próprio código. Se
