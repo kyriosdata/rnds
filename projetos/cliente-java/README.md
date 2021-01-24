@@ -1,7 +1,13 @@
-﻿# Biblioteca
+﻿## Objetivo
 
-Projeto que ilustra uso da HAPI API por meio de vários e pequenos
-programas em Java, prontos para execução.
+Ilustrar o acesso a um Servidor FHIR, via vários pequenos
+programas em Java, empregando a biblioteca HAPI FHIR.
+
+## Resultado esperado
+
+O desenvolvedor (integrador) saberá como empregar a bibliteca
+HAPI FHIR para acesso a um Servidor FHIR, por exemplo, aquele
+disponibilizado pela RNDS.
 
 ### Execução
 
