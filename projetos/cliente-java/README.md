@@ -1,7 +1,10 @@
 ﻿## Objetivo
 
-Ilustrar o acesso a um Servidor FHIR, via vários pequenos
+Ilustrar o acesso a um Servidor FHIR, por meio de pequenos
 programas em Java, empregando a biblioteca HAPI FHIR.
+
+> O uso em produção desta biblioteca provavelmente exige
+> projeto (_design_) diferente daquele dos exemplos.
 
 ## Resultado esperado
 
@@ -9,11 +12,19 @@ O desenvolvedor (integrador) saberá como empregar a bibliteca
 HAPI FHIR para acesso a um Servidor FHIR, por exemplo, aquele
 disponibilizado pela RNDS.
 
-### Execução
+## Exemplos
+
+#### Conexão com servidr
+
+Os exemplos fazem uso do servidor http://hapi.fhir.org/baseR4.
 
 - `mvn compile`
-- `mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.ForcaConexao"`  
-  Para executar a classe indicada.
+- `mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.ForcaConexao"`
+
+#### Consulta a pacientes disponíveis
+
+- `mvn compile`
+- `mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.BuscaPacientes"`
 
 ### Classes disponíveis para execução
 
