@@ -35,9 +35,8 @@ code {
   font-size: 51px;
 }
 
-.subtitulo {
-  font-size: 16px;
-  padding: 0 20px 0 20px;
+.destaque {
+  background-color: var(--ifm-color-success-lightest);
 }
 
 .emDesenvolvimento {

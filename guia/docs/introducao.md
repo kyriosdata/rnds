@@ -10,7 +10,7 @@ para a interoperabilidade em saúde no território nacional. No Brasil, é por m
 Quando um estabelecimento de saúde se integra à RNDS, cria-se a possibilidade dele contribuir com informações em saúde pertinentes aos usuários que assiste,
 bem como consumir informações geradas por outros estabelecimentos.
 
-Conforme ilustrado abaixo, a integração com a RNDS segue o padrão [FHIR](./glossario#fhir). Isso significa "independência tecnológica" dos estabelecimentos de saúde em relação à RNDS, que não impõe, não restringe e nem tampouco orienta decisões no escopo do ecossistema do estabelecimento de saúde.
+Conforme ilustrado abaixo, a integração com a RNDS segue o padrão [FHIR](./glossario#fhir). Isso significa "independência do estabelecimento de saúde" em relação à tecnologia e ao seu ecossistema. Noutras palavras, a RNDS não impõe, não restringe e nem tampouco orienta decisões do estabelecimento de saúde.
 
 Em algum momento, contudo, requisições _https_, obedecendo o padrão FHIR e a [adaptação](./rnds/definicoes) definida pela RNDS, devem partir do estabelecimento de saúde e atingir o [ambiente](./rnds/ambientes) de produção da RNDS, seja para enviar ou requisitar informação em saúde.
 

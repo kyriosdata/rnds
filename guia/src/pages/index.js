@@ -73,21 +73,10 @@ function Home() {
               <h1 className="hero__title titulo">
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
-              <p className="subtitulo">
+              <p className="hero__subtitle">
                 Este Guia orienta estabelecimentos de saúde acerca da
                 <b> integração com a RNDS</b>, visando a interoperabilidade para
-                a atenção e os cuidados em saúde no Brasil.
-              </p>
-
-              <p className="subtitulo">
-                A <b>ntegração com a RNDS</b> é apresentada na forma de uma
-                sequência de atividades (passo a passo), que envolve os atores
-                (papéis) Gestor de Saúde (responsável pelo estabelecimento de
-                saúde) e Integrador (desenvolvedor de software). A{" "}
-                <b>ntegração com a RNDS</b>
-                promove a troca sistemática de informação em saúde, que é
-                descrita aqui pelo Modelo Informacional e pelo Modelo
-                Computacional, bem como por outras orientações.
+                os cuidados em saúde no Brasil.
               </p>
               <div>
                 <Link
@@ -105,6 +94,22 @@ function Home() {
         </div>
       </header>
       <main>
+        <div className="destaque">
+          <div className="container padding-vert--md">
+            <div className="row">
+              <div className="col col--10 col--offset-1">
+                A <b>integração com a RNDS</b> é apresentada na forma de uma
+                sequência de atividades (passo a passo), que envolve os atores
+                (papéis) Gestor de Saúde (responsável pelo estabelecimento de
+                saúde) e Integrador (desenvolvedor de software). A{" "}
+                <b>integração com a RNDS </b>
+                promove a troca sistemática de informação em saúde, que é
+                descrita aqui pelo Modelo Informacional e pelo Modelo
+                Computacional, acompanhados de outras orientações.
+              </div>
+            </div>
+          </div>
+        </div>
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
