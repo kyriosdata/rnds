@@ -14,30 +14,30 @@ const features = [
       <>
         A Rede Nacional de Dados em Saúde (
         <a href="https://rnds.saude.gov.br/">RNDS</a>) é uma "plataforma
-        nacional de integração de dados em saúde" visando a transformação
-        digital da saúde no Brasil.
+        nacional de integração de dados em saúde" visando a{" "}
+        <i>transformação digital da saúde no Brasil</i>.
       </>
     ),
   },
   {
-    title: "Foco no desenvolvedor",
-    imageUrl: "img/desenvolvedor-guia.png",
+    title: "Foco no integrador",
+    imageUrl: "img/integrador.png",
     description: (
       <>
-        O <i>Guia</i> é produzido com foco no integrador (desenvolvedor de
-        software). A integração é vista como um projeto cujo principal artefato
-        é o <i>software</i> que requisita serviços oferecidos pela RNDS.
+        O <i>Guia</i> é produzido com foco no <i>integrador</i> (desenvolvedor
+        de software). O principal artefato é o software que requisita serviços
+        oferecidos pela RNDS.
       </>
     ),
   },
   {
     title: "Conteúdo",
-    imageUrl: "img/conteudo-guia.png",
+    imageUrl: "img/conteudo.png",
     description: (
       <>
-        Contexto, sequência de passos, orientações, explanações, código,&nbsp;
-        <i>scripts</i>, enfim, tudo o que é necessário para compreender e fazer
-        funcionar a integração com a RNDS.
+        O <i>Guia</i> inclui contexto, passos, orientações, código, enfim, o
+        conteúdo suficiente para compreender e colocar em funcionamento a
+        integração com a RNDS.
       </>
     ),
   },
@@ -74,17 +74,20 @@ function Home() {
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
               <p className="subtitulo">
-                Este Guia orienta estabelecimentos de saúde acerca da integração
-                com a RNDS. Tal integração é necessária para a
-                interoperabilidade em saúde no Brasil.
+                Este Guia orienta estabelecimentos de saúde acerca da
+                <b> integração com a RNDS</b>, visando a interoperabilidade para
+                a atenção e os cuidados em saúde no Brasil.
               </p>
 
               <p className="subtitulo">
-                O passo a passo apresenta uma sequência de atividades para a
-                integração, distribuídas entre o gestor e o integrador
-                (desenvolvedor de software). Cada necessidade de troca de
-                informação é detalhada pelos modelos informacional e
-                computacional, bem como outras orientações.
+                A <b>ntegração com a RNDS</b> é apresentada na forma de uma
+                sequência de atividades (passo a passo), que envolve os atores
+                (papéis) Gestor de Saúde (responsável pelo estabelecimento de
+                saúde) e Integrador (desenvolvedor de software). A{" "}
+                <b>ntegração com a RNDS</b>
+                promove a troca sistemática de informação em saúde, que é
+                descrita aqui pelo Modelo Informacional e pelo Modelo
+                Computacional, bem como por outras orientações.
               </p>
               <div>
                 <Link
