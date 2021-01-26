@@ -1,6 +1,7 @@
 module.exports = {
   someSidebar: [
     "introducao",
+    "conector",
     {
       "Público-alvo": [
         "publico-alvo/publico-alvo",
@@ -15,7 +16,6 @@ module.exports = {
           Integrador: [
             "publico-alvo/ti/ti",
             "publico-alvo/ti/conhecer",
-            "publico-alvo/ti/si",
             "publico-alvo/ti/homologar",
             "publico-alvo/ti/producao",
             "publico-alvo/ti/requisicoes",
