@@ -25,7 +25,7 @@ Ao final, espera-se que:
 - Você saiba interagir com a RNDS usando HTTPS.
 - Você saiba empregar o certificado digital do laboratório.
 - Você saiba como realizar as atividades acima empregando a linguagem de programção Java.
-- Você esteja apto para construir o [conector](./si).
+- Você esteja apto para construir o [conector](../../conector).
 
 ### Pré-requisitos
 
@@ -153,4 +153,4 @@ os dados necessários, quanto aqueles produzidos e a estrutura da requisição
 estará concluída.
 
 O próximo passo é o desenvolvimento do código que executa as requisições exercitadas com o propósito de integração
-entre o estabelecimento de saúde e a RNDS. seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [Software de Integração](./si), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.
+entre o estabelecimento de saúde e a RNDS. seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [conector](../../conector)(software de integração), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.

@@ -26,7 +26,7 @@ do que seguir as orientações para [interação com o ambiente de homologação
 
 ### Desenvolver
 
-A proposta e desenvolvimento de um _software_ de integração para um dado laboratório depende do contexto em questão, por exemplo, um estabelecimento que já faz uso de um sistema de informação, provavelmente irá considerar um projeto de manutenção (evolução) do sistema que já faz uso. De qualquer forma, invariavelmente, o _software_ a ser produzido terá que realizar [funções bem-definidas](./si).
+A proposta e desenvolvimento de um _software_ de integração para um dado laboratório depende do contexto em questão, por exemplo, um estabelecimento que já faz uso de um sistema de informação, provavelmente irá considerar um projeto de manutenção (evolução) do sistema que já faz uso. De qualquer forma, invariavelmente, o _software_ a ser produzido terá que realizar [funções bem-definidas](../../conector).
 
 A execução satisfatória desta atribuição resulta em:
 

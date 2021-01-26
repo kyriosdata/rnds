@@ -17,7 +17,7 @@ Os detalhes destas fases são fornecidos abaixo, por meio de um fluxo típico, r
 1. O gestor deve [solicitar acesso](publico-alvo/gestor/portal) à RNDS (primeira fase). A solicitação de acesso é feita pelo Portal de Serviços cujo acesso exige uma conta gov.br (passo anterior). São requisitadas várias informações sobre o estabelecimento de saúde, inclusive o certificado digital (primeiro passo).
 1. O gestor deve [obter o identificador do solicitante](publico-alvo/gestor/identificador), ou seja, um identificador fornecido pelo DATASUS para o estabelecimento de saúde em questão, cujo acesso ao ambiente de homologação é concedido.
 1. O integrador deve [ambientar-se](publico-alvo/ti/conhecer) com os serviços (entradas/saídas) oferecidos e, dessa forma, conhecê-los e compreendê-los. Observe que esta atividade pode ser iniciada antes dos passos anteriores.
-1. O integrador deve [desenvolver](publico-alvo/ti/si) a solução tecnológica, aqui chamada de conector, para a integração com a RNDS.
+1. O integrador deve [desenvolver](conector) a solução tecnológica, aqui chamada de conector, para a integração com a RNDS.
 1. O integrador deve verificar a conformidade do conector com o contrato estabelecido para a integração com a RNDS.
 1. O integrador deve produzir as evidências necessárias para [homologar](publico-alvo/ti/homologar) o conector desenvolvido.
 1. O gestor deve solicitar acesso ao ambiente de produção e aguardar a resposta do DATASUS.
