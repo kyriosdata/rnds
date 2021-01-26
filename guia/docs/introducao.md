@@ -12,13 +12,11 @@ bem como consumir informações geradas por outros estabelecimentos.
 
 Conforme ilustrado abaixo, a integração com a RNDS segue o padrão [FHIR](./glossario#fhir). Isso significa "independência do estabelecimento de saúde" em relação à tecnologia e ao seu ecossistema. Noutras palavras, a RNDS não impõe, não restringe e nem tampouco orienta decisões do estabelecimento de saúde.
 
-Em algum momento, contudo, requisições _https_, obedecendo o padrão FHIR e a [adaptação](./rnds/definicoes) definida pela RNDS, devem partir do estabelecimento de saúde e atingir o [ambiente](./rnds/ambientes) de produção da RNDS, seja para enviar ou requisitar informação em saúde.
+Nesse sentido, a interoperabilidade realiza-se por meio de requisições _https_, que obedecem ao padrão FHIR e à [adaptação](./rnds/definicoes) definida pela RNDS, e partem do estabelecimento de saúde para atingir o [ambiente](./rnds/ambientes) de produção da RNDS, seja para enviar ou requisitar informação em saúde.
 
 ![interoperabilidade](../static/img/rnds-brasil.png)
 
-A interoperabilidade, no momento, contempla a notificação de resultados de exames de SARS-CoV-2. O conjunto será estendido ao longo do tempo, contudo,
-tendo em vista a adoção do padrão FHIR, integrar para notificar um resultado de exame é "similar" à submissão de um Registro de Atendimento Clínico (RAC)
-ou Sumário de Alta (SA), dentre outros.
+Os serviços oferecidos pela RNDS para interoperabilidade serão estendidos, ao longo do tempo, para viabilizar as necessidades de troca de informação em saúde no Brasil. A primeira necessidade contemplada é a notificação de resultados de exames de SARS-CoV-2. Para ilustrar a adoção do padrão FHIR, integrar para notificar um resultado de exame é "similar" à submissão de um Registro de Atendimento Clínico (RAC) ou Sumário de Alta (SA), dentre outros.
 
 ## O que muda?
 

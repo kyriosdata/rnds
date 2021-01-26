@@ -99,13 +99,12 @@ function Home() {
             <div className="row">
               <div className="col col--10 col--offset-1">
                 A <b>integração com a RNDS</b> é apresentada na forma de uma
-                sequência de atividades (passo a passo), que envolve os atores
-                (papéis) Gestor de Saúde (responsável pelo estabelecimento de
-                saúde) e Integrador (desenvolvedor de software). A{" "}
-                <b>integração com a RNDS </b>
-                promove a troca sistemática de informação em saúde, que é
-                descrita aqui pelo Modelo Informacional e pelo Modelo
-                Computacional, acompanhados de outras orientações.
+                sequência de atividades (passo a passo), que envolve o gestor
+                (responsável pelo estabelecimento de saúde) e o integrador
+                (desenvolvedor de software). Esta integração promove a troca
+                sistemática de informação em saúde, que é descrita aqui pelo
+                Modelo Informacional e pelo Modelo Computacional, acompanhados
+                de outras orientações.
               </div>
             </div>
           </div>
