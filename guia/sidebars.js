@@ -76,5 +76,6 @@ module.exports = {
         "ria/glossario-ria",
       ],
     },
+    "faq",
   ],
 };
