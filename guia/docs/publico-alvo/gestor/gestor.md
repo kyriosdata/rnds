@@ -16,16 +16,18 @@ papéis. Além do gestor, o outro é o [integrador](../ti/ti).
 ## Atribuições do gestor
 
 As atribuições do gestor, detalhadas abaixo, são:
-(a) adquirir certificado digital; (b) criar conta gov.br (caso não possua uma); (c) solicitar acesso aos serviços da RNDS (ambiente de homologação); (d) validar mapeamento e (e) solicitar acesso ao ambiente de produção.
+(a) adquirir certificado digital; (b) criar conta gov.br (caso não possua uma); e (c) solicitar acesso aos serviços da RNDS (ambiente de homologação e de produção).
+
+Estas atribuições estão intercaladas com outras realizadas pelo integrador (o outro ator do estabelecimento de saúde) e pelo DATASUS, conforme ilustra o [diagrama](../../passo-a-passo#diagrama).
 
 ### Adquirir certificado digital
 
-Adquirir o certificado digital a ser utilizado para identificar o laboratório junto à RNDS. Este certificado é empregado no item seguinte (_solicitar acesso_) e também pelo _software_ de integração com a RNDS. O _software_ de integração é atribuição do responsável pela TI do laboratório (seção seguinte).
+Adquirir o certificado digital a ser utilizado para identificar o estabelecimento de saúde junto à RNDS. Este certificado é empregado na solicitação de acesso e, em especial, pelo conector (software de integração) para obter acesso aos serviços oferecidos pela RNDS. O desenvolvimento do conector é atribuição do [integrador](../ti/ti).
 
-A execução satisfatória desta atribuição resulta em:
+Resultado esperado:
 
 - Certificado digital, arquivo **.pfx**, disponibilizado.
-- Senha secreta de acesso ao certificado disponibilizada para uso pelo profissional de TI do laboratório.
+- Senha secreta de acesso ao certificado disponibilizada para uso pelo conector.
 
 ### Criar conta gov.br
 

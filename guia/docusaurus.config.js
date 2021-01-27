@@ -78,8 +78,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          // Remove link "Edit this file"
+          // O comentário abaixo remove link "Edit this file"
           // editUrl: "https://github.com/kyriosdata/rnds/edit/master/guia/",
           // Exibe data em que página foi atualizada.
           showLastUpdateTime: true,

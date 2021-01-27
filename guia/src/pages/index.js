@@ -74,9 +74,11 @@ function Home() {
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
               <p className="hero__subtitle">
-                Este Guia orienta estabelecimentos de saúde acerca da
-                <b> integração com a RNDS</b>, visando a interoperabilidade para
-                os cuidados em saúde no Brasil.
+                Este guia orienta gestores de estabelecimentos de Saúde, bem
+                como profissionais de tecnologia da informação acerca da
+                integração com a RNDS, visando a interoperabilidade de
+                informações em saúde para continuidade do cuidado do usuário no
+                momento da assistência em qualquer lugar do Brasil.
               </p>
               <div>
                 <Link

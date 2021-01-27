@@ -4,7 +4,10 @@ title: Público-alvo
 sidebar_label: Quem?
 ---
 
-_Estabelecimentos de saúde do país_. Em algum momento, todos os estabelecimentos de saúde estarão integrados à RNDS, contudo, isto ocorrerá ao longo do tempo. Por exemplo, a primeira necessidade contemplada para a interoperabilidade foi o envio de resultado de exame de COVID-19, o que cabe a parte dos estabelecimentos de saúde (apenas os laboratórios de análises clínicas). Quando o Sumário de Alta, Registro de Atendimento Clínico e outras informações forem contempladas, novos estabelecimentos serão incluídos.
+O público-alvo são os _estabelecimentos de saúde_ do país.
+
+A primeira necessidade contemplada para a interoperabilidade via RNDS foi o envio de resultados de exame de COVID-19, o que cabe somente a estabelecimentos de saúde específicos (apenas os laboratórios de análises clínicas).
+Ao longo do tempo, todos os estabelecimentos de saúde estarão integrados à RNDS. Por exemplo, quando o Sumário de Alta, Registro de Atendimento Clínico e outras informações forem contempladas, novos estabelecimentos serão incluídos.
 
 > O Guia está organizado por tipo de informação em saúde trocada com a RNDS.
 
