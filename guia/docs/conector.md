@@ -37,8 +37,10 @@ Convém esclarecer que estas duas formas de integração não são as únicas e 
 
 ## Contexto
 
-Padrões são amplamente empregados, por exemplo, a extensão (ou cumprimento) atribuído a um metro ou o tamanho de uma folha de papel A4. No Brasil, não faz muito tempo que o formato de tomadas elétricas foi padronizado. A intenção é fazer com que seus aparelhos possam se conectar à rede elétrica. De forma análoga, para que um SIS possa trocar informações em saúde é preciso um padrão.
-Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que define o padrão nacional de tomadas.
+Padrões são amplamente empregados. Por exemplo, a extensão ou comprimento atribuído a um metro, ou o tamanho de uma folha de papel A4 são estabelecidos por meio de padrões.
+No Brasil, não faz muito tempo que o formato de tomadas elétricas foi padronizado. A intenção é fazer com que aparelhos possam se conectar à rede elétrica nacional.
+
+De forma análoga, para que um Sistema de Informação em Saúde (SIS), empregado por uma unidade de saúde, possa trocar informações em saúde com a RNDS, é preciso fazer uso de padrões. Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que define o padrão nacional de tomadas, conforme ilustrado abaixo.
 
 ![img](../static/img/rnds-tomadas-padrao.png)
 
