@@ -62,9 +62,41 @@ Toda a integração no escopo identificado acima pode ser suficientemente repres
 
 ![img](../static/img/rnds-uc.png)
 
-Apesar destes dois casos de uso serem apenas parte das funções do Conector, eles capturem o que é relevante e natural em toda e qualquer integração com a RNDS.
+Apesar destes dois casos de uso serem apenas parte das funções do Conector, eles capturam o que é relevante e natural em toda e qualquer integração com a RNDS.
 
 ### Obter token de acesso
+
+A obtenção de um _token_ de acesso é necessária para identificar o estabelecimento de saúde e verificar se o mesmo possui acesso aos serviços que irá requisitar à RNDS. Esta função, portanto, é exclusivamente para segurança.
+
+Será necessário o certificado digital (e-CPF ou e-CNPJ) associado ao estabelecimento de saúde e a senha de acesso ao certificado. Estas duas informações serão empregadas para
+efetuar uma requisição _https_ que, se executada satisfatoriamente, deverá retornar um objeto JSON como aquele abaixo.
+
+```json
+{
+  "access_token": "longa sequência de caracteres",
+  "scope": "read write",
+  "token_type": "jwt",
+  "expires_in": 1800000
+}
+```
+
+O que interessa é o valor para `access_token`, uma sequência
+de mais de 2K caracteres. Outro valor retornado é o tempo
+de validade deste _token_, neste caso, 30min, ou 1.800.000ms. A expectativa é de que o Conector só realize uma requisição para obter _token_ de acesso cerca de 30 minutos após a última requisição. Neste intervalo, o Conector deve guardar o valor do _token_ a ser reutilizado, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
+
+:::info IMPORTANTE
+O Conector deve reutilizar o valor obtido para `access_token`
+durante o período em que ele é válido. Isto significa que
+muitas requisições aos _web services_ de saúde possivelmente serão feitas usando um mesmo valor de _token_, obtido de uma
+única requisição para um _web service_ de segurança.
+:::
+
+A obtenção do _token_ de acesso é uma forma de autenticação
+do Conector, ou melhor, do estabelecimento de saúde, usando
+um certificado digital, uma estratégia mais segura que a autenticação comum usando o par usuário/senha.
+
+Aos interessados, muita informação pode ser encontrada
+na internet para o assunto "ssl client authentication".
 
 ### Enviar resultado de exame
 
