@@ -140,19 +140,20 @@ para a formação do integrador.
 
 ## Design
 
-As funções identificadas podem ser realizadas em software
-de várias maneiras. Sem detalhes de uma integração específica, contudo, não é possível nem mesmo apontar uma solução, no máximo, apenas especular uma possível solução, o que é feito abaixo.
+As funções identificadas para o Conector podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica.
 
-O Conector pode ser realizado por meio de um
-microsserviço acionado por evento que sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
+Nesta possível solução, o Conector é implementado por um
+microsserviço acionado por evento. O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
 SIS é modificado para gerar um evento, e o microsserviço
-Conector criado para notificar o Ministério da Saúde por meio da RNDS.
+notifica o Ministério da Saúde por meio da RNDS.
 
 ![img](../static/img/rnds-m3.png)
 
 > IMPORTANTE: o emprego de um
 > microsserviço visa ilustrar como o Conector pode ser
 > implementado, em algum possível cenário, e não se confunde com uma recomendação.
+
+Se um microsserviço vai se encarregar da integração, então deve armazenar os eventos recebidos, tentar submeter aqueles que ainda não foram enviados, talvez até por indisponibilidade temporária do serviço, e outras funções, como responder se um determinado evento foi submetido satisfatoriamente ou não e até mesmo a resposta da RNDS para um dado evento. Estas funções não serão tratadas aqui. Em vez destas operações derivadas, serão consideradas aquelas identificadas na seção anterior.
 
 ## Implementação
 
