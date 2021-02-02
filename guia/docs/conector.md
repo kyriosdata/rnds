@@ -35,31 +35,6 @@ Na segunda, um componente específico reúne as funções necessárias para a in
 
 Convém esclarecer que estas duas formas de integração não são as únicas e a integração com a RNDS não impõe exigências na organização do SIS em questão, conforme elucidado abaixo.
 
-## Contexto
-
-Padrões são amplamente empregados. Por exemplo, a extensão ou comprimento atribuído a um metro, ou o tamanho de uma folha de papel A4 são estabelecidos por meio de padrões.
-No Brasil, não faz muito tempo que o formato de tomadas elétricas foi padronizado. A intenção é fazer com que aparelhos possam se conectar à rede elétrica nacional.
-
-De forma análoga, para que um Sistema de Informação em Saúde (SIS), empregado por uma unidade de saúde, possa trocar informações em saúde com a RNDS, é preciso fazer uso de padrões. Neste sentido, a Portaria 1.434, de 28/05/2020 do Ministério da Saúde presta serviço análogo ao da norma ABNT NBR 14136:2012, que define o padrão nacional de tomadas, conforme ilustrado abaixo.
-
-![img](../static/img/rnds-tomadas-padrao.png)
-
-®Health Level Seven, HL7 e FHIR são marcas registrada da Health Level
-Seven International. Estas marcas são usadas com a permissão da HL7 e este uso não
-significa que a HL7 aprova ou endossa o presente Guia.
-
-### Independência
-
-Um estabelecimento de saúde integra-se à RNDS por meio do Sistema de Informação em Saúde (SIS) que utiliza. Ou seja, a integração ocorre por meio de software (conector), que usa o padrão FHIR, adotado pelo Brasil, para tal. No momento certo os detalhes deste padrão são apresentados.
-
-Usar o padrão adotado pelo Brasil significa empregar uma API e esquemas de dados bem estabelecidos para transferir e obter informações em saúde no território nacional. Adicionalmente, reconhecendo a impossibilidade de contemplar as especificidades e os interesses locais de todo o planeta, o padrão inclui instrumentos para "personalização", como _perfis_ e _extensões_, o que resultam em uma adaptação.
-
-![img](../static/img/rnds-pilha-independente.png)
-
-O software de um SIS e a RNDS são “independentes”, podem evoluir independentemente, podem fazer uso de tecnologias distintas, linguagens de programação distintas e sistemas operacionais distintos.
-
-A integração é assegurada se o SIS e a RNDS estão conectados à internet e obedecem o contrato ou personalização nacional (adaptação). Nenhum deles depende ou impõe restrições ao outro.
-
 ## Desenvolvimento de referência
 
 Antes do início de desenvolvimento do conector, é razoável uma análise das funcionalidades a serem contempladas, bem como de oções de _design_. Naturalmente, tendo em vista as especificidades de cada cenário de integração, único por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar, que ofereça uma orientação para integradores.
