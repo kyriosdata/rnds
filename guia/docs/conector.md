@@ -95,54 +95,64 @@ A obtenção do _token_ de acesso é uma forma de autenticação
 do Conector, ou melhor, do estabelecimento de saúde, usando
 um certificado digital, uma estratégia mais segura que a autenticação comum usando o par usuário/senha.
 
+:::info Java e JavaScript
+Em https://github.com/kyriosdata/rnds encontram-se os
+projetos `rnds-java` e `rnds-js`, ambos ilustram como obter
+o _token_ de acesso, respectivamente nas linguagens Java e JavaScript.
+:::
+
 Aos interessados, muita informação pode ser encontrada
 na internet para o assunto "ssl client authentication".
 
 ### Enviar resultado de exame
 
-Na perspectiva de processos (funções) e do fluxo de informações entre eles, o diagrama correspondente é fornecido abaixo. Aqueles destacados estão diretamente associados aos casos de uso identificados acima, ou seja, fazem parte do escopo a ser implementado. Os demais processos (funções) são necessários, mas ao mesmo tempo, dependentes do ecossistema do laboratório.
+Na perspectiva de processos (funções) e do fluxo de informações entre eles, o envio de resultado de exame é ilustrado abaixo. Aqueles processos coloridos são genéricos no sentido em que não dependem do SIS em questão. Os demais dependem diretamente do SIS para o qual o Conector é criado.
 
 ![img](../static/img/rnds-dfd.png)
 
-Cada função é definida e classificada quanto à fase em que é executada (preparação ou entrega).
+As funções são comentadas abaixo após ressaltar que, dependendo do SIS em questão, algumas delas podem não ser
+necessárias. Por exemplo, se um dado SIS já guarda informações sobre cada resultado de exame em documento XML próprio, então não será necessário coletar informações dispersas, filtrar e talvez nem tampouco efetuar algum mapeamento. Ou, se preferir,
+estas funções foram realizadas, mas em momento distinto do
+envio propriamente dito.
 
-- PREPARAÇÃO
+- **Filtrar dados**. Seleciona os dados de um resultado de exame contendo o que é necessário para o envio.
 
-  1.  **Filtrar**. Seleciona os dados de um resultado de exame a partir dos quais aqueles exigidos pela RNDS serão produzidos.
-  1.  **Mapear**. Realiza a conversão e/ou mapeamento necessário entre os dados selecionados (filtrados) e aqueles no formato exigido pela RNDS.
-  1.  **Empacotar**. Cria a representação JSON dos dados correspondentes a um
-      resultado.
+- **Mapear dados**. Realiza a conversão e/ou mapeamento, se for o caso, entre o que é recuperado (função acima) e o formato exigido pela RNDS. Por exemplo, a data "01/01/21" é
+  mapeada para "01/01/2021".
 
-- ENTREGA
-  1.  **Verificar**. Confere se o empacotamento do resultado a ser enviado está consistente com especificação da RNDS.
-  1.  **Autenticar**. Obtém chave para acesso aos serviços da RNDS.
-  1.  **Enviar**. Notifica o resultado de um exame à RNDS.
+- **Criar instância de recurso**. Os dados já filtrados e mapeados empregam uma estrutura de dados que precisa ser representada em JSON, em conformidade com o recurso FHIR (_resource_) pertinente.
 
-A figura abaixo ilustra os processos e a classificação deles, além de indicar que dois processos, via internet, interagem com as portas Auth e EHR, oferecidas pela RNDS. Detalhes são fornecidos em [Ambientes](rnds/ambientes).
+- **Montar bundle**. Empacota os recursos pertinentes na representação JSON de um _Bundle_ (um dos recursos FHIR).
+  Quando executada, esta função também pode realizar a
+  verificação da representação resultante. Ou seja, assegurar
+  que foi criada conforme esperado pela RNDS.
+
+- **Obter token**. Obtém _token_ do _web service_ de segurança da RNDS para acesso aos demais serviços.
+
+- **Submeter requisição**. Notifica o resultado de um exame à RNDS. Esta é a função que, de fato, realiza o envio desejado, faz uso de um _web service_ com foco na saúde. Observe que este envio depende do _token_ obtido pela função acima.
+
+A figura abaixo ilustra os processos executados em uma sequência típica, além do _web service_ de segurança e daqueles de saúde oferecidos pela RNDS, identificados respectivamente por _Auth_ e _EHR_. Em tempo, tais serviços são oferecidos pelos [ambientes](rnds/ambientes) da RNDS.
 
 ![img](../static/img/desenvolvedor.png)
 
+Convém esclarecer que a especificação de requisitos de software está além do alcance deste documento, dado que só poderia ser produzida para uma situação específica de integração. A boa notícia é que estaria além do necessário
+para a formação do integrador.
+
 ## Design
 
-Dentre as funções atribuídas ao _Software de Integração_, ao todo seis, conforme seção anterior, duas delas não são contempladas aqui: (a) filtrar e (b) mapear. Estas funções são bem específicas e dependentes do ecossistema disponível no laboratório.
+As funções identificadas podem ser realizadas em software
+de várias maneiras. Sem detalhes de uma integração específica, contudo, não é possível nem mesmo apontar uma solução, no máximo, apenas especular uma possível solução, o que é feito abaixo.
 
-Na perspectiva de implantação (_deployment_), a figura abaixo
-ilustra uma possível organização do ecossistema de software
-utilizado por um laboratório, e sua integração com a RNDS.
+O Conector pode ser realizado por meio de um
+microsserviço acionado por evento que sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
+SIS é modificado para gerar um evento, e o microsserviço
+Conector criado para notificar o Ministério da Saúde por meio da RNDS.
 
-![img](../static/img/rnds-deployment.png)
+![img](../static/img/rnds-m3.png)
 
-Na figura, _Software de integração_ é
-um componente isolado, distinto de um "Sistema Usado pelo Laboratório".
-Em um dado laboratório, contudo, pode não existir um "Sistema Usado pelo Laboratório", ou até existir, mas a TI do laboratório propor um _design_ distinto no qual as funções aqui atribuídas ao _Software de Integração_
-seriam incorporadas pelo "Sistema Usado pelo Laboratório".
-
-Adicionalmente, se esta figura, por acaso, reflete parte do _design_ adotado por algum laboratório, ainda existem vários detalhes omitidos e relevantes para
-o _design_ da integração. Por exemplo, a forma de obtenção dos dados
-pertinentes aos resultados de exames e atualmente mantidos pelo "Software Usado pelo Laboratório", conforme nota pertinente na figura acima.
-
-> IMPORTANTE: a figura acima, embora possa inspirar o _design_ da
-> integração de um laboratório com a RNDS, apenas registra uma possibilidade cujo objetivo é orientar desenvolvedores de software acerca de questões pertinentes à tal integração.
+> IMPORTANTE: o emprego de um
+> microsserviço visa ilustrar como o Conector pode ser
+> implementado, em algum possível cenário, e não se confunde com uma recomendação.
 
 ## Implementação
 
