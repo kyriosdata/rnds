@@ -28,6 +28,7 @@ module.exports = {
     "passo-a-passo",
     {
       RNDS: [
+        "rnds/padrao",
         "rnds/ambientes",
         "rnds/servicos",
         "rnds/definicoes",
