@@ -13,27 +13,27 @@ As seções seguintes apresentam questões típicas da integração com a RNDS p
 
 Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usuários, profissionais de saúde, procedimentos e laudos, por exemplo.
 
-Pode-se representar todo e qualquer Sistema de Informação em Saúde (SIS) como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS. Esta organização abstrata é suficiente para identificar o que é denominado de software de integração.
+Pode-se abstratamente representar todo e qualquer SIS como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS. Esta abstração é útil para identificar o que é denominado de conector.
 
-Usando esta abstração, a ausência de interoperabilidade do SIS com outro sistema, não há software de integração e, consequentemente, não há integração com a RNDS.
+Nesta organização de um SIS, não há interoperabilidade do SIS com outro sistema, não há software de integração e, consequentemente, não há integração com a RNDS.
 
 ![img](../static/img/rnds-m0.png)
 
-### Após a integração
+### SIS integrado
 
 A integração exige a existência do software de integração (conector).
 A implementação das funções atribuídas a este software pode assumir
-várias formas. Duas delas, relevantes para o contexto, são apresentadas abaixo.
+várias formas. Duas delas são relevantes para o contexto e apresentadas abaixo.
 
-Na primeira, o SIS empregado pelo laboratório passa por uma manutenção na qual o software de integração (conector) é fundido ao SIS existente. O SIS, agora modificado, torna-se um SIS que interage com a RNDS.
+Na primeira, o SIS empregado pelo estabelecimento de saúde passa por uma manutenção na qual o conector é fundido ao SIS existente. O SIS, agora modificado, torna-se um SIS que interage com a RNDS, um SIS integrado à RNDS.
 
 ![img](../static/img/rnds-m1.png)
 
-Na segunda, um componente específico reúne as funções necessárias para a integração com a RNDS. Neste caso, o Conector é encarregado de obter as informações em saúde a serem transferidas, possivelmente acessando diretamente o Banco de Dados.
+Na segunda, um componente específico reúne as funções necessárias para a integração com a RNDS. Neste caso, o Conector é encarregado de obter as informações em saúde a serem transferidas, possivelmente acessando diretamente o Banco de Dados do estabelecimento de saúde.
 
 ![img](../static/img/rnds-m2.png)
 
-Convém esclarecer que estas duas formas de integração não são as únicas e a integração com a RNDS não impõe exigências na organização do SIS em questão, conforme elucidado abaixo.
+Convém esclarecer que estas duas formas de integração não são as únicas e a integração com a RNDS não impõe exigências na organização do SIS em questão.
 
 ## Desenvolvimento de referência
 
