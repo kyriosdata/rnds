@@ -10,19 +10,22 @@ As seções seguintes apresentam questões típicas da integração com a RNDS p
 
 ## Sistema de Informação em Saúde (SIS)
 
-Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usuários, profissionais de saúde, procedimentos e outros.
+Um estabelecimento de saúde usa, em geral, um Sistema de Informação em Saúde (SIS) para auxiliar na gestão das suas demandas, usuários, profissionais de saúde, procedimentos e outros. Tal sistema está ou não integrado à RNDS, o que é ilustrado pelos
+cenários abaixo.
 
-Pode-se abstratamente representar todo e qualquer SIS como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS.
+![img](../static/img/cenarios.png)
 
-Esta abstração de um SIS qualquer é útil para identificar o que é denominado de Conector, o que é feito abaixo por meio de dois cenários, um no qual não há integração, e outro no qual há integração com a RNDS.
+Adicionalmente, pode-se representar abstratamente qualquer SIS como a união de dois componentes: (a) um Banco de Dados, no qual informações administrativas e outras de saúde são armazenadas; e (b) o software propriamente dito do SIS.
 
-### SIS não integrado
+Esta organização abstrada de um SIS em apenas dois componetes é útil para identificar o que é denominado de Conector, o que é feito abaixo por meio dos dois cenários ilustrados acima.
+
+### Sem integração
 
 Usando esta abstração, quando não há interoperabilidade do SIS com outro sistema, não há software de integração, não há Conector e, consequentemente, não há integração com a RNDS, conforme ilustrado abaixo.
 
 ![img](../static/img/rnds-m0.png)
 
-### SIS integrado
+### Com integração
 
 A integração exige a existência do Conector.
 A implementação das funções deste software pode assumir várias formas. Duas delas são apresentadas abaixo.
@@ -37,29 +40,35 @@ Na segunda, um componente específico reúne e isola as funções necessárias p
 
 ### _Design_ do Conector (sem restrições)
 
-Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, o que depende de inúmeras variáveis específicas de cada estabelecimento de saúde e, consequentemente, além do escopo da RNDS.
+Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, o que depende de inúmeras variáveis específicas de cada estabelecimento de saúde e, consequentemente, é assunto interno de cada estabelecimento.
 
 ## Conector de referência
 
-Tendo em vista as especificidades de cada integração, única por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles. O que segue, portanto, é uma investigação preliminar com o objetio de oferecer uma orientação para integradores. A estratégia é familiarizar o integrador com questões naturais da integração com a RNDS.
+Tendo em vista as especificidades de cada integração, única por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles. O que segue, portanto, é uma investigação preliminar com o objetivo de oferecer uma orientação para integradores. A estratégia é familiarizar o integrador com questões naturais da integração com a RNDS.
 
-## Escopo
+### Escopo
 
-O Conector, como qualquer outro software, visa atender alguma demanda. Neste caso, tal demanda (escopo) é a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19.
+O Conector, como qualquer outro software, visa atender alguma demanda. Para o Conector de referência a demanda (escopo) é a Portaria 1.792, que determina a obrigatoriedade de notificação de resultados de exame da COVID-19. Convém observar que a notificação de laudo de COVID-19 é a primeira necessidade de troca de informação contemplada pela RNDS.
 
-Convém observar que a notificação de laudo de COVID-19 é a primeira necessidade de troca de informação contemplada pela RNDS. Ao longo do tempo, outras necessidades serão incluídas, como o Sumário de Alta (SA) e o Registro de Atendimento Clínico (RAC), por exemplo. À medida que novas necessidades de integração forem implementadas pela RNDS, mais informações em saúde e outros tipos de estabelecimentos de saúde estarão envolvidos.
+Ao longo do tempo, outras necessidades serão incluídas, como a notificação do Sumário de Alta (SA) e do Registro de Atendimento Clínico (RAC), por exemplo. Cada necessidade é detalhada tanto pelo modelo de informação quanto pelo modelo computacional, o que viabiliza a integração com a RNDS para a necessidade em questão.
+
+Naturalmente, à medida que novas necessidades de integração forem implementadas pela RNDS, mais informações em saúde e outros tipos de estabelecimentos de saúde estarão envolvidos.
 
 ![img](../static/img/rnds-percurso.png)
 
-A discussão pertinente ao Conector de referência permanece relevante para outros estabelecimentos de saúde e para outras informações a serem trocadas.
+Apesar do Conector de referência atender uma necessidade específica (notificar laudos de COVID-19), a discussão do mesmo permanece relevante para outras demandas.
 
 ## Requisitos
 
-Toda a integração no escopo identificado acima pode ser representada por dois casos de uso: _Obter token de acesso_ e _Enviar resultado de exame_. Respectivamente, cobrem a segurança e uma necessidade de interoperabilidade em saúde.
+A integração, no escopo identificado acima, possui dois casos de uso principais: _Obter token de acesso_ e _Enviar resultado de exame_.
 
 ![img](../static/img/rnds-uc.png)
 
-Apesar destes dois casos de uso serem apenas parte das funções do Conector, eles capturam o que é relevante e natural em toda e qualquer integração com a RNDS.
+Um Conector pode envolver outras funções. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue são algumas das possibilidades. Estas funções são possivelmente necessárias, mas ao mesmo tempo "genéricas", não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
+
+:::tip Nota
+Compreender os casos de uso _Obter token de acesso_ e _Enviar resultado de exame_ significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade de interoperabilidade em saúde, respectivamente.
+:::
 
 ### Obter token de acesso
 
@@ -137,7 +146,7 @@ para a formação do integrador.
 
 ## Design
 
-As funções identificadas para o Conector podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica.
+Os cass de uso podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica.
 
 Nesta possível solução, o Conector é implementado por um
 microsserviço acionado por evento. O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
@@ -149,9 +158,6 @@ notifica o Ministério da Saúde por meio da RNDS.
 > IMPORTANTE: o emprego de um
 > microsserviço visa ilustrar como o Conector pode ser
 > implementado, em algum possível cenário, e não se confunde com uma recomendação.
-
-Se um microsserviço vai se encarregar da integração, então deve armazenar os eventos recebidos, tentar submeter aqueles que ainda não foram enviados, talvez até por indisponibilidade temporária do serviço, e outras funções, como responder se um determinado evento foi submetido satisfatoriamente ou não e até mesmo a resposta da RNDS para uma dada notificação entregue. Estas funções não são tratadas aqui. Em vez destas,
-o foco está naquelas identificadas anteriormente.
 
 ## Implementação
 
