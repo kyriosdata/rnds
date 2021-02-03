@@ -37,14 +37,11 @@ Na segunda, um componente específico reúne e isola as funções necessárias p
 
 ### _Design_ do Conector (sem restrições)
 
-Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, o que depende de inúmeras variáveis específicas de cada estabelecimento de saúde, o que está além do escopo da RNDS.
+Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, o que depende de inúmeras variáveis específicas de cada estabelecimento de saúde e, consequentemente, além do escopo da RNDS.
 
 ## Conector de referência
 
-Tendo em vista as especificidades de cada integração, única por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles, contudo, isto não impede uma investigação preliminar com o objetio de oferecer uma orientação para integradores.
-
-A compreensão de um Conector de referência, portanto,
-visa familiarizar o integrador com questões naturais da integração com a RNDS.
+Tendo em vista as especificidades de cada integração, única por estabelecimento de saúde, não é factível definir uma análise e um _design_ adequados para todos eles. O que segue, portanto, é uma investigação preliminar com o objetio de oferecer uma orientação para integradores. A estratégia é familiarizar o integrador com questões naturais da integração com a RNDS.
 
 ## Escopo
 
@@ -58,7 +55,7 @@ A discussão pertinente ao Conector de referência permanece relevante para outr
 
 ## Requisitos
 
-Toda a integração no escopo identificado acima pode ser suficientemente representada por dois casos de uso: _Obter token de acesso_ e _Enviar resultado de exame_. Respectivamente cobrindo a segurança e uma necessidade de interoperabilidade em saúde.
+Toda a integração no escopo identificado acima pode ser representada por dois casos de uso: _Obter token de acesso_ e _Enviar resultado de exame_. Respectivamente, cobrem a segurança e uma necessidade de interoperabilidade em saúde.
 
 ![img](../static/img/rnds-uc.png)
 
@@ -144,7 +141,7 @@ As funções identificadas para o Conector podem ser realizadas de várias manei
 
 Nesta possível solução, o Conector é implementado por um
 microsserviço acionado por evento. O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
-SIS é modificado para gerar um evento, e o microsserviço
+SIS é modificado para gerar um evento, e o microsserviço (Conector)
 notifica o Ministério da Saúde por meio da RNDS.
 
 ![img](../static/img/rnds-m3.png)
@@ -153,7 +150,8 @@ notifica o Ministério da Saúde por meio da RNDS.
 > microsserviço visa ilustrar como o Conector pode ser
 > implementado, em algum possível cenário, e não se confunde com uma recomendação.
 
-Se um microsserviço vai se encarregar da integração, então deve armazenar os eventos recebidos, tentar submeter aqueles que ainda não foram enviados, talvez até por indisponibilidade temporária do serviço, e outras funções, como responder se um determinado evento foi submetido satisfatoriamente ou não e até mesmo a resposta da RNDS para um dado evento. Estas funções não serão tratadas aqui. Em vez destas operações derivadas, serão consideradas aquelas identificadas na seção anterior.
+Se um microsserviço vai se encarregar da integração, então deve armazenar os eventos recebidos, tentar submeter aqueles que ainda não foram enviados, talvez até por indisponibilidade temporária do serviço, e outras funções, como responder se um determinado evento foi submetido satisfatoriamente ou não e até mesmo a resposta da RNDS para uma dada notificação entregue. Estas funções não são tratadas aqui. Em vez destas,
+o foco está naquelas identificadas anteriormente.
 
 ## Implementação
 
