@@ -146,10 +146,14 @@ para a formação do integrador.
 
 ## Design
 
-Os cass de uso podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica.
+Os cass de uso podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica. Nesta possível solução, o Conector é implementado por um
+microsserviço acionado por evento.
 
-Nesta possível solução, o Conector é implementado por um
-microsserviço acionado por evento. O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
+> IMPORTANTE: o emprego de um
+> microsserviço visa ilustrar como o Conector pode ser
+> implementado, em algum possível cenário, e não se confunde com uma recomendação.
+
+O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
 SIS é modificado para gerar um evento, e o microsserviço (Conector)
 notifica o Ministério da Saúde por meio da RNDS.
 
@@ -190,9 +194,10 @@ Em consequência, podemos definir duas bibliotecas e nos concentrar, na próxima
 
 ![img](../static/img/conector-bibliotecas.png)
 
-> IMPORTANTE: o emprego de um
-> microsserviço visa ilustrar como o Conector pode ser
-> implementado, em algum possível cenário, e não se confunde com uma recomendação.
+### Esboço resultante
+
+Tratar as funções (processos) filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java, embora possa ser implementado usando C#, por exemplo, por meio de _delegates_. Noutras palavras, este
+_design_ não é restrito à Java.
 
 ## Implementação
 
