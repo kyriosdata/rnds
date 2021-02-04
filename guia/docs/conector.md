@@ -199,8 +199,70 @@ Em consequência, podemos definir duas bibliotecas e nos concentrar, na próxima
 Tratar as funções (processos) filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java, embora possa ser implementado usando C#, por exemplo, por meio de _delegates_. Noutras palavras, este
 _design_ não é restrito à Java.
 
+A figura abaixo refina as classes identificadas anteriormente, cada uma delas com uma
+função bem-definida, em classe própria, o que promove a coesão. A combinação delas,
+em uma única linha, conforme ilustrada na figura, sugere que é uma alternativa a ser considerada para transformar uma `Resposta` na representação JSON de um _Bundle_ (recurso FHIR), esperado pela RNDS.
+
+![img](../static/img/conector-domain-v1.png)
+
+A classe `Filtrar` implementa a função de mesmo nome identificada acima. Qualquer
+que seja a estrutura e as informações em `Resultado`, o que é relevante é depositado em
+um dicionário com chave pertinente, por exemplo, "cns" para o CNS do usuário em questão.
+
+A classe `Mapear` realiza eventuais mapeamentos, por exemplo, o valor "positivo" para o código correspondente esperado pela RNDS e assim por diante.
+
+A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Por exemplo, um resultado de exame laboratorial de COVID-19 inclui a amostra biológica. O recurso FHIR correspondente é [Specimen](https://www.hl7.org/fhir/specimen.html), a especialização ou adaptação nacional deste recurso é denominada de [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica). Portanto, respeitando as restrições nacionais, definidas na [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica), para o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), será criado o JSON correspondente para o resultado em questão, a ser notificado para a RNDS. Se a amostra biológica em questão é sangue, então a representação JSON correspondente é aquela abaixo:
+
+```json
+{
+  "fullUrl": "urn:uuid:transient-2",
+  "resource": {
+    "resourceType": "Specimen",
+    "meta": {
+      "profile": [
+        "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0"
+      ]
+    },
+    "type": {
+      "coding": [
+        {
+          "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+          "code": "SGHEM"
+        }
+      ]
+    }
+  }
+}
+```
+
+A representação a ser produzida pela classe `ToJson` pode ser realizada de várias formas, desde um mapeamento de cada possível amostra biológica para a estrutura correspondente, até o uso de uma API como a HAPI FHIR API, na qual se monta uma
+instância da classe `Specimen` usando métodos de "alto nível" (_fluent interface_). O objeto resultado pode ser serializado usando recursos da própria API.
+
+A classe `Empacotar` recebe os recursos pertinentes ao resultado já serializados e os deposita em um _Bundle_, que possui seus próprios atributos, além dos recursos que inclui, o que pode ser facilmente visto no JSON abaixo, onde o valor para `identifier` e os elementos do vetor `entry` foram omitidos por simplicidade.
+
+```json
+{
+   "resourceType":"Bundle",
+   "type":"document",
+   "timestamp":"2020-03-20T00:00:00-03:00",
+   "meta": {
+      "lastUpdated": "2020-03-20T00:00:00-03:00"
+   },
+   "identifier":{ ... omitido ... },
+   "entry":[
+      { ... Resultado de Exame Laboratorial ... },
+      { ... Diagnóstico em Laboratório Clínico ... },
+      { ... Amostra Biológica ... }
+    ]
+}
+```
+
+Os comentários acima para as classes `ToJson` e `Empacotar` podem ser complementados
+pelo detalhamento dos dados a serem enviados, ou seja, a discussão do [Modelo Computacional](./rel/mc-rel) de um resultado de exame laboratorial.
+
 ## Implementação
 
-- Comunicacao SIS com Conector. Sinalização do evento por requisiçao http backed by Lambda, api gateway ou sns, por exemplo.
+O _design_ organiza o código, mas não impôs restrições, por exemplo, a classe `Conector` deve encapsular a comunicacao do SIS com Conector e, conforme destacado, isto pode ser feito de inúmeras formas.
 
-A construção do código do Software de Integração pode se beneficiar das [bibliotecas](rnds/tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS.
+Em um cenário onde a nuvem da Amazon é empregada, apenas para exemplificar, o microsserviço Conector pode ser implementado por uma Lambda Function exposta por meio do serviço API Gateway. Neste cenário, a classe `Conector` terá que fazer requisições _https_ para implementar o método `Conector.notificar(Resultado)`.
+Naturalmente, a nuvem da Amazon pode não ser uma opção e, neste caso, outra estratégia pode ser empregada, conforme o que melhor se alinha às restrições do estabelecimento de saúde em questão.
