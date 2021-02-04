@@ -155,10 +155,47 @@ notifica o Ministério da Saúde por meio da RNDS.
 
 ![img](../static/img/rnds-m3.png)
 
+O Conector está isolado do restante do SIS, é um microsserviço. O _design_ do
+código deste microsserviço pode ser influenciado por vários fatores, questão já levantada anteriormente, até mesmo a formação do integrador e a expectativa de qualidade para o Conector, por exemplo, dentre muitos outros. Ou seja, é natural existirem alternativas para o que segue, inclusive "melhores" (sugestões são bem-vindas).
+
+Considerações feitas, a orientação é um _design_ que privilegie a legibilidade e
+a manutenibilidade. Qualquer outra questão será secundária a estas.
+
+A visão funcional do caso de uso _Enviar resultado de exame_ inspira o _design_.
+
+### Esboço inicial
+
+Em um primeiro esforço foram identificadas as classes abaixo. Aquelas não coloridas realizam as funções do negócio (caso de uso _Enviar resultado de exame_). As demais
+oferecem o suporte necessário.
+
+![img](../static/img/conector-domain-v0.png)
+
+A classe `Conector` encapsula a conexão do SIS com o microsserviço. Desta forma,
+a implementação correspondente, por exemplo, se uma requisição _https_ ou o envio
+de uma mensagem por meio de [ActiveMQ](https://activemq.apache.org/) (_message broker_) ou [SNS](https://aws.amazon.com/sns/), fica encapsulada nesta classe.
+Em consequência, o código que faz uso desta classe executa uma simples mensagem como
+`Conector.notifique(resultado)`, por exemplo.
+
+Este microsserviço deve possuir o seu próprio repositório onde são registradas as
+requisições recebidas e os resultados obtidos das submissões. Cada submissão reúne o que é submetido, o `Resultado` de um exame e a resposta apresentada pela RNDS (para eventual consulta posterior). Talvez um nome melhor
+para o repositório seja `ConectorRepositry`, em vez de `ResultadoRepository`.
+
+O envio propriamente dito de informação para a RNDS está encapsulada na classe `RNDSProxy`. Este envio depende do _token_ de acesso cuja gestão pode estar encapsulada
+na classe `TokenCache`. Naturalmente, estas funções dependem de valores que variam ao
+longo do tempo e são obtidos, nesta proposta, pela classe `Configuracao`. Por exemplo, o certificado digital e a senha correspondente são algumas das informações obtidas por meio desta classe.
+
+As três classes comentadas no parágrafo anterior implementam funções de acesso à RNDS e, naturalmente, devem ser reutilizadas, o que as tornam candidatas a serem transferidas para uma biblioteca. A biblioteca [rnds](https://www.npmjs.com/package/rnds) é um exemplo deste _design_.
+
+Em consequência, podemos definir duas bibliotecas e nos concentrar, na próxima versão, apenas no negócio _Enviar resultado de exame_, e abstrair as funções de suporte.
+
+![img](../static/img/conector-bibliotecas.png)
+
 > IMPORTANTE: o emprego de um
 > microsserviço visa ilustrar como o Conector pode ser
 > implementado, em algum possível cenário, e não se confunde com uma recomendação.
 
 ## Implementação
+
+- Comunicacao SIS com Conector. Sinalização do evento por requisiçao http backed by Lambda, api gateway ou sns, por exemplo.
 
 A construção do código do Software de Integração pode se beneficiar das [bibliotecas](rnds/tools/bibliotecas) disponibilizadas para compreensão acerca de como implementar a submissão de requisições para a RNDS.
