@@ -11,7 +11,7 @@ de controle total em um servidor local.
 
 - Faça o download do aplicativo _Command Line Interface Tool for HAPI FHIR_. A versão 5.1.0 pode ser baixada [aqui](https://github.com/hapifhir/hapi-fhir/releases/download/v5.1.0/hapi-fhir-5.1.0-cli.zip).
 
-- Extraia o conteúdo do arquivo .zip. Possivelmente com o comando  
+- Extraia o conteúdo do arquivo .zip. Isto pode ser feito com o utilitário [jar](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/jar.html) que acompanha o JDK. Possivelmente com o comando  
   `jar xvf hapi-fhir-5.1.0-cli.zip`.
 
 - Coloque o servidor FHIR em execução com o comando abaixo. Consulte detalhes das opções [aqui](https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html).  
