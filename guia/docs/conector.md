@@ -262,7 +262,37 @@ pelo detalhamento dos dados a serem enviados, ou seja, a discussão do [Modelo C
 
 ## Implementação
 
-O _design_ organiza o código, mas não impôs restrições, por exemplo, a classe `Conector` deve encapsular a comunicacao do SIS com Conector e, conforme destacado, isto pode ser feito de inúmeras formas.
+O _design_ acima organiza o código, mas não impôe restrições ou define detalhes pela ausência de um cenário concreto de um estabelecimento de saúde, conforme discutido abaixo, tanto para as bibliotecas identificadas quanto para as funções princiais.
 
-Em um cenário onde a nuvem da Amazon é empregada, apenas para exemplificar, o microsserviço Conector pode ser implementado por uma Lambda Function exposta por meio do serviço API Gateway. Neste cenário, a classe `Conector` terá que fazer requisições _https_ para implementar o método `Conector.notificar(Resultado)`.
-Naturalmente, a nuvem da Amazon pode não ser uma opção e, neste caso, outra estratégia pode ser empregada, conforme o que melhor se alinha às restrições do estabelecimento de saúde em questão.
+### conector-cliente (aws)
+
+A classe `Conector` deve encapsular a comunicação do SIS com Conector e, conforme destacado, isto pode ser feito de inúmeras formas.
+
+Em um cenário onde a nuvem da Amazon é empregada, apenas para exemplificar, o microsserviço Conector pode ser implementado por uma Lambda Function exposta por meio do serviço API Gateway. Neste cenário, a a implementação do método `Conector.notificar(Resultado)` terá que fazer requisições _https_ para o _endpoint_ exposto pelo serviço API Gateway, qe serão redirecionadas para a Lambda Function corresondente.
+
+### conector-cliente (arquivo)
+
+Naturalmente, a nuvem da Amazon pode não ser uma opção e, neste caso, outra estratégia pode ser empregada, conforme o que melhor se alinha
+ao contexto do estabelecimento de saúde em questão. Por exemplo, o cenário no qual o laboratório não emprega um SIS em execução em uma nuvem, mas em
+sua própria infraestrutura.
+
+Adicionalmente, o SIS já oferece recurso para exportar em documento XML,
+por exemplo, um laudo, com esquema bem-definido. Neste cenário não seria mais aproriado monitorar um diretório e a cada arquivo ali depositado, disparar o caso de uso _Enviar resultado de exame_? Observe que o SIS
+existente, neste cenário hipotético, não necessariamente sofre alteração.
+
+Apenas como informação adicional, a biblioteca [Chokidar](https://www.npmjs.com/package/chokidar) tem como foco monitorar arquivos e diretórios de forma eficiente, conforme sua documentação, e já foi baixada mais de 30 milhões de vezes "nesta semana". Naturalmente é uma opção para implementar, em JavaScript, o que foi atribuído à biblioteca `conector-cliente`, neste estabelecimento fictício.
+
+### rnds (biblioteca)
+
+Às funções atribuídas a esta biblioteca são bem específicas e podem ser encapsuladas, independente do cenário do estabelecimento de saúde em questão. É o que é feito por meio da HAPI FHIR API, dentre outras opções como a biblioteca [rnds](https://www.npmjs.com/package/rnds).
+
+Considerações feitas, o caso de uso _Obter token_ está implementado, enquanto _Enviar resultado de exame_, apenas parcialmente, em JavaScript por meio do projeto [rnds](https://www.npmjs.com/package/rnds) (projeto _open source_). Observe que o envio propriamente dito está implementado, enquanto as demais funções, filtrar, mapear e outras, tendo em vista a dependência do contexto de um estabelecimento de saúde real, não.
+
+### Funções principais
+
+As estratégias adotadas nas bibliotecas acima dificilmente podem ser replicadas aqui na implementação das funções ditas principais, como filtrar e mapear, por exemplo.
+
+Quando em cenário anterior foi dito que um SIS hipotético é capaz de exportar um documento XML pertinente a um resultado de exame, tem-se uma função útil e que viabiliza o acréscimo do Conector sem necessidade de alteração do SIS. Contudo, o esquema empregado pelo SIS, provavelmente, é diferente daquele estabelecido pelo modelo computacional e também pelo informacional correspondente. Em consequência, não há como implementar uma função _filtrar_ de forma genérica, mas específica e caso por caso.
+
+Apesar de não ser viável uma implementação que possa ser reutilizada, é possível indicar ferramentas úteis aos desenvolvedores, por exemplo,
+que realizam operações sobre documentos XML. Observe que, mesmo neste exemplo, a sugestão pode não se aplicar, pois um formato binário próprio pode ser empregado pelo SIS, o que torna a indicação pertinente à XML irrelevante.
