@@ -60,7 +60,7 @@ Apesar do Conector de referência atender uma necessidade específica (notificar
 
 ## Requisitos
 
-A integração, no escopo identificado acima, possui dois casos de uso principais: _Obter token de acesso_ e _Enviar resultado de exame_.
+A integração, no escopo de um Laboratório de Análises Clínicas, possui três casos de uso principais: (a) _Obter token de acesso_; (b) _Preparar payload para resultado de COVID_ e (c) _Enviar resultado de COVID_.
 
 ![img](../static/img/conector-uc.png)
 
