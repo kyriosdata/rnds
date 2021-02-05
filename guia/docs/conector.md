@@ -60,11 +60,44 @@ Apesar do Conector de referência atender uma necessidade específica (notificar
 
 ## Requisitos
 
-A integração com a RNDS exige a interação entre o estabelecimento de saúde em questão e a RNDS. As interações relevantes para a integração de um laboratório, conforme escopo identificado acima, são ilustradas abaixo por meio de casos de uso: (a) _Obter token de acesso_; (b) _Preparar payload para resultado de COVID_ e (c) _Enviar resultado de COVID_.
+Os requisitos são apresentados em duas perspectivas: uma de fluxo de dados e outra de casos de uso. O objetivo é contribuir com a compreensão das funções a serem implementadas pelo Conector. São, portanto, duas visões distintas das mesmas atribuições do Conector.
+
+### Fluxo de dados
+
+A notificação de exame de COVID-19 é ilustrada abaixo na perspectiva de processos (funções) e do fluxo de informações entre eles. Aqueles processos coloridos são "genéricos", enquanto os demais dependem diretamente do SIS para o qual o Conector é criado.
+
+![img](../static/img/rnds-dfd.png)
+
+Cada uma das funções acima são comentadas abaixo. Dependendo do SIS em questão, contudo, algumas delas podem não ser
+necessárias. Por exemplo, se um dado SIS já guarda informações sobre cada resultado de exame em documento XML próprio, então não será necessário coletar informações dispersas, filtrar e talvez nem tampouco efetuar algum mapeamento.
+
+- **Filtrar dados**. Seleciona os dados de um resultado de exame contendo o que é necessário para o envio. Consome informações registradas no depósito de dados do laboratório.
+
+- **Mapear dados**. Realiza a conversão e/ou mapeamento, se for o caso, entre o que é recuperado (função acima) e o formato exigido pela RNDS. Por exemplo, a data "01/01/21" é
+  mapeada para "01/01/2021".
+
+- **Criar instância de recurso**. Os dados já filtrados e mapeados empregam uma estrutura de dados que precisa ser representada em JSON, em conformidade com o recurso FHIR (_resource_) pertinente.
+
+- **Montar bundle**. Empacota os recursos pertinentes na representação JSON de um _Bundle_ (um dos recursos FHIR).
+  Quando executada, esta função também pode realizar a
+  verificação da representação resultante. Ou seja, assegurar
+  que foi criada conforme esperado pela RNDS.
+
+- **Obter token**. Obtém _token_ do _web service_ de segurança da RNDS para acesso aos demais serviços, inclusive aquele pelo qual a notificação de exame é realizada.
+
+- **Submeter requisição**. Notifica o resultado de um exame à RNDS. Esta é a função que, de fato, realiza o envio desejado, faz uso de um _web service_ distinto daquele de segurança, empregado para obter o _token_ de acesso.
+
+A figura abaixo ilustra os processos executados em uma sequência típica, além do _web service_ de segurança e daqueles de saúde oferecidos pela RNDS, identificados respectivamente por _Auth_ e _EHR_. Em tempo, tais serviços são oferecidos pelos [ambientes](rnds/ambientes) da RNDS.
+
+![img](../static/img/desenvolvedor.png)
+
+### Casos de uso
+
+A integração exige a interação entre um estabelecimento de saúde e a RNDS. As interações relevantes para a notificação de exame de COVID-19 são ilustradas abaixo por meio de casos de uso: (a) _Obter token de acesso_; (b) _Montar payload para resultado de COVID_ e (c) _Enviar resultado de COVID_.
 
 ![img](../static/img/conector-uc.png)
 
-A integração pode demandar outras atividades a serem contempladas pelo Conector. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue, dentre outras. Estas e outras atividades podem ser necessárias, mas ao mesmo tempo são "genéricas" no sentido em que não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
+Uma integração pode demandar outras atividades a serem contempladas pelo Conector. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não, e recuperar a resposta da RNDS para uma dada notificação entregue, dentre outras. Estas e outras atividades podem ser necessárias, mas não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados doravante.
 
 :::tip Nota
 Compreender estes casos de uso significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade típica de interoperabilidade em saúde.
@@ -91,53 +124,35 @@ para a chave `access_token`, uma "longa" sequência de caracteres que, no exempl
 }
 ```
 
-A resposta acima indica que o _token_ tem validade de 30min, ou 1.800.000ms, e que idealmente deve ser reutilizado, neste período, ou seja, estabelece uma expectatia a ser honrada pelo Conector.
+A resposta acima indica que o _token_ tem validade de 30min, ou 1.800.000ms, e que idealmente deve ser reutilizado, neste período, ou seja, estabelece uma expectativa a ser honrada pelo Conector.
 
-A descrição resumida deste caso de uso é: o Conector deve realizar uma requisição para obter o _token_ de acesso, guardar o valor recebido e reutilizá-lo, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
+Noutras palavras, o Conector deve realizar uma requisição para obter o _token_ de acesso, guardar o valor recebido e reutilizá-lo, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
 
-:::info IMPORTANTE
-O Conector deve reutilizar o valor obtido para `access_token`
-durante o período em que ele é válido. Isto significa que
-muitas requisições aos _web services_ da RNDS possivelmente serão feitas usando um mesmo valor de _token_, obtido de uma
-única requisição para o _web service_ de segurança.
-:::
+Durante o período de validade muitas requisições aos _web services_ da RNDS possivelmente serão feitas usando um mesmo valor de _token_, obtido de uma única requisição para o _web service_ de segurança.
 
-A obtenção do _token_ de acesso é a estratégia de autenticação exigida pela RNDS.
-Esta estratégia é mais segura que a autenticação usando o par usuário/senha, por exemplo.
+### Montar payload para resultado de COVID
 
-### Enviar resultado de exame
+Um resultado de COVID-19 deve ser montado conforme
+os perfis definidos por modelos computacionais, para que possa ser compreendido pela RNDS. Este caso de uso caracteriza esta funcionalidade.
 
-Na perspectiva de processos (funções) e do fluxo de informações entre eles, o envio de resultado de exame é ilustrado abaixo. Aqueles processos coloridos são genéricos no sentido em que não dependem do SIS em questão. Os demais dependem diretamente do SIS para o qual o Conector é criado.
+A montagem é realizada por quatro processos identificados anteriormente: (a) filtrar dados; (b) mapear dados; (c) criar instância e (d) montar bundle. Estes processos, executados nesta ordem, devem produzir um _Bundle_, o _payload_ a ser submetido, os dados correspondente a um resultado de exame laboratorial no formato esperado pela RNDS. O [modelo computacional](./rel/mc-rel) detalha exaustivamente o formato a ser utilizado para enviar um resltado.
 
-![img](../static/img/rnds-dfd.png)
+Este caso de uso, portanto, reúne processos que visam converter um resultado de exame laboratorial, qualquer que seja o formato empregado pelo estabelecimento de saúde em questão, em versão equivalente no formato esperado pela RNDS.
 
-As funções são comentadas abaixo após ressaltar que, dependendo do SIS em questão, algumas delas podem não ser
-necessárias. Por exemplo, se um dado SIS já guarda informações sobre cada resultado de exame em documento XML próprio, então não será necessário coletar informações dispersas, filtrar e talvez nem tampouco efetuar algum mapeamento. Ou, se preferir,
-estas funções foram realizadas, mas em momento distinto do
-envio propriamente dito.
+A filtragem dos dados exige conhecer o formato de dados empregado pelo SIS do estabelecimento de saúde em questão (entrada) e o que deve ser enviado para a RNDS (saída), o que exige o conhecimento do [modelo de informação](./rel/mi-rel).
 
-- **Filtrar dados**. Seleciona os dados de um resultado de exame contendo o que é necessário para o envio.
+O processo de mapeamento realiza alguma transformação necessária entre formatos de dados.
 
-- **Mapear dados**. Realiza a conversão e/ou mapeamento, se for o caso, entre o que é recuperado (função acima) e o formato exigido pela RNDS. Por exemplo, a data "01/01/21" é
-  mapeada para "01/01/2021".
+A criação de instância de recurso exige o conhecimento do recurso FHIR empregado e, em particular, de eventuais perfis que estabelecem restrições a serem observadas.
 
-- **Criar instância de recurso**. Os dados já filtrados e mapeados empregam uma estrutura de dados que precisa ser representada em JSON, em conformidade com o recurso FHIR (_resource_) pertinente.
+Por último, o _Bundle_ empacota os recursos criados no processo anterior, já serializados em JSON, em JSON resultante, o _payload_
+do resultado de COVID a ser enviado.
 
-- **Montar bundle**. Empacota os recursos pertinentes na representação JSON de um _Bundle_ (um dos recursos FHIR).
-  Quando executada, esta função também pode realizar a
-  verificação da representação resultante. Ou seja, assegurar
-  que foi criada conforme esperado pela RNDS.
+### Enviar resultado de COVID
 
-- **Obter token**. Obtém _token_ do _web service_ de segurança da RNDS para acesso aos demais serviços.
-
-- **Submeter requisição**. Notifica o resultado de um exame à RNDS. Esta é a função que, de fato, realiza o envio desejado, faz uso de um _web service_ com foco na saúde. Observe que este envio depende do _token_ obtido pela função acima.
-
-A figura abaixo ilustra os processos executados em uma sequência típica, além do _web service_ de segurança e daqueles de saúde oferecidos pela RNDS, identificados respectivamente por _Auth_ e _EHR_. Em tempo, tais serviços são oferecidos pelos [ambientes](rnds/ambientes) da RNDS.
-
-![img](../static/img/desenvolvedor.png)
-
-Convém esclarecer que a especificação de requisitos de software está além do alcance deste documento, dado que só poderia ser produzida para uma situação específica de integração. A boa notícia é que estaria além do necessário
-para a formação do integrador.
+Este caso de uso cria uma requisição _https_ e a submete ao _web service_ oferecido pela RNDS. Há dois _headers_ específicos que devem ser fornecidos: `X-Athorization-Server` e `Authorization`. O valor do primeiro é definido pela concatenação de "Bearer " com o valor do
+_token_ de acesso. O valor do segndo deve ser o valor do CNS do
+profissional de saúde em nome do qual a requisição é feita.
 
 ## Design
 
