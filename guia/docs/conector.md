@@ -38,9 +38,9 @@ Na segunda, um componente específico reúne e isola as funções necessárias p
 
 ![img](../static/img/rnds-m2.png)
 
-### _Design_ do Conector (sem restrições)
+### _Design_ do Conector (sem restrições?)
 
-Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, o que depende de inúmeras variáveis específicas de cada estabelecimento de saúde e, consequentemente, é assunto interno de cada estabelecimento.
+Convém esclarecer que estas duas formas de integração não são as únicas, e que a RNDS não impõe exigências na organização do SIS em questão. De fato, nem sequer há uma sugestão de _design_ para o Conector, pois isto depende de inúmeras variáveis específicas de cada estabelecimento de saúde e, consequentemente, é assunto interno de cada estabelecimento.
 
 ## Conector de referência
 
@@ -62,7 +62,7 @@ Apesar do Conector de referência atender uma necessidade específica (notificar
 
 A integração, no escopo identificado acima, possui dois casos de uso principais: _Obter token de acesso_ e _Enviar resultado de exame_.
 
-![img](../static/img/rnds-uc.png)
+![img](../static/img/conector-uc.png)
 
 Um Conector pode envolver outras funções. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue são algumas das possibilidades. Estas funções são possivelmente necessárias, mas ao mesmo tempo "genéricas", não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
 
