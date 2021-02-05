@@ -91,28 +91,19 @@ para a chave `access_token`, uma "longa" sequência de caracteres que, no exempl
 }
 ```
 
-A resposta acima indica que o _token_ tem validade de 30min, ou 1.800.000ms, que estabelece uma expectativa a ser observada pela implementação do Conector.
-Expectativa: o Conector deve realizar uma requisição para obter _token_ de acesso cerca de 30 minutos após a última requisição. Neste intervalo, é esperada a reutilização do _token_ obtido na última requisição. Dito de outra forma, o Conector deve guardar o valor do _token_ e reutilizá-lo, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
+A resposta acima indica que o _token_ tem validade de 30min, ou 1.800.000ms, e que idealmente deve ser reutilizado, neste período, ou seja, estabelece uma expectatia a ser honrada pelo Conector.
+
+A descrição resumida deste caso de uso é: o Conector deve realizar uma requisição para obter o _token_ de acesso, guardar o valor recebido e reutilizá-lo, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
 
 :::info IMPORTANTE
 O Conector deve reutilizar o valor obtido para `access_token`
 durante o período em que ele é válido. Isto significa que
-muitas requisições aos _web services_ de saúde possivelmente serão feitas usando um mesmo valor de _token_, obtido de uma
-única requisição para um _web service_ de segurança.
+muitas requisições aos _web services_ da RNDS possivelmente serão feitas usando um mesmo valor de _token_, obtido de uma
+única requisição para o _web service_ de segurança.
 :::
 
-A obtenção do _token_ de acesso é uma forma de autenticação
-do Conector, ou melhor, do estabelecimento de saúde, usando
-um certificado digital, uma estratégia mais segura que a autenticação comum usando o par usuário/senha.
-
-:::info Java e JavaScript
-Em https://github.com/kyriosdata/rnds encontram-se os
-projetos `rnds-java` e `rnds-js`, ambos ilustram como obter
-o _token_ de acesso, respectivamente nas linguagens Java e JavaScript.
-:::
-
-Aos interessados, muita informação pode ser encontrada
-na internet para o assunto "ssl client authentication".
+A obtenção do _token_ de acesso é a estratégia de autenticação exigida pela RNDS.
+Esta estratégia é mais segura que a autenticação usando o par usuário/senha, por exemplo.
 
 ### Enviar resultado de exame
 
@@ -300,3 +291,12 @@ Quando em cenário anterior foi dito que um SIS hipotético é capaz de exportar
 
 Apesar de não ser viável uma implementação que possa ser reutilizada, é possível indicar ferramentas úteis aos desenvolvedores, por exemplo,
 que realizam operações sobre documentos XML. Observe que, mesmo neste exemplo, a sugestão pode não se aplicar, pois um formato binário próprio pode ser empregado pelo SIS para exportar um resultado de exame, o que torna a indicação pertinente à XML irrelevante.
+
+:::info Java e JavaScript
+Em https://github.com/kyriosdata/rnds encontram-se os
+projetos `rnds-java` e `rnds-js`, ambos ilustram como obter
+o _token_ de acesso, respectivamente nas linguagens Java e JavaScript.
+:::
+
+Aos interessados, muita informação pode ser encontrada
+na internet para o assunto "ssl client authentication".
