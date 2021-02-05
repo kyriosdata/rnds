@@ -60,14 +60,14 @@ Apesar do Conector de referência atender uma necessidade específica (notificar
 
 ## Requisitos
 
-A integração, no escopo de um Laboratório de Análises Clínicas, possui três casos de uso principais: (a) _Obter token de acesso_; (b) _Preparar payload para resultado de COVID_ e (c) _Enviar resultado de COVID_.
+A integração com a RNDS exige a interação entre o estabelecimento de saúde em questão e a RNDS. As interações relevantes para a integração de um laboratório, conforme escopo identificado acima, são ilustradas abaixo por meio de casos de uso: (a) _Obter token de acesso_; (b) _Preparar payload para resultado de COVID_ e (c) _Enviar resultado de COVID_.
 
 ![img](../static/img/conector-uc.png)
 
-Um Conector pode envolver outras funções. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue são algumas das possibilidades. Estas funções são possivelmente necessárias, mas ao mesmo tempo "genéricas", não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
+A integração pode demandar outras atividades a serem contempladas pelo Conector. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue, dentre outras. Estas e outras atividades podem ser necessárias, mas ao mesmo tempo são "genéricas" no sentido em que não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
 
 :::tip Nota
-Compreender os casos de uso _Obter token de acesso_ e _Enviar resultado de exame_ significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade de interoperabilidade em saúde, respectivamente.
+Compreender estes casos de uso significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade de interoperabilidade em saúde, respectivamente.
 :::
 
 ### Obter token de acesso
