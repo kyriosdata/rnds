@@ -67,28 +67,32 @@ A integração com a RNDS exige a interação entre o estabelecimento de saúde 
 A integração pode demandar outras atividades a serem contempladas pelo Conector. Por exemplo, responder se um determinado resultado foi submetido satisfatoriamente ou não e recuperar a resposta da RNDS para uma dada notificação entregue, dentre outras. Estas e outras atividades podem ser necessárias, mas ao mesmo tempo são "genéricas" no sentido em que não são específicas da integração com a RNDS. Em consequência, apenas os casos de uso citados acima são considerados.
 
 :::tip Nota
-Compreender estes casos de uso significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade de interoperabilidade em saúde, respectivamente.
+Compreender estes casos de uso significa compreender o que é relevante para qualquer integração com a RNDS, e não apenas para a notificação de resultado do COVID-19. Eles representam a segurança e uma necessidade típica de interoperabilidade em saúde.
 :::
 
 ### Obter token de acesso
 
-A obtenção de um _token_ de acesso é necessária para identificar o estabelecimento de saúde e verificar se o mesmo possui acesso aos serviços que irá requisitar à RNDS. Esta função, portanto, é exclusivamente para segurança.
+A obtenção de um _token_ de acesso é obrigatória e visa contemplar aspectos de segurança. O _token_ é obtido por meio de _web service_ específico, e o valor recuperado será exigido em todas as requições endereçadas aos demais _web services_ oferecidos pela RNDS.
 
-Será necessário o certificado digital (e-CPF ou e-CNPJ) associado ao estabelecimento de saúde e a senha de acesso ao certificado. Estas duas informações serão empregadas para
-efetuar uma requisição _https_ que, se executada satisfatoriamente, deverá retornar um objeto JSON como aquele abaixo.
+Esta atividade é realizada por meio de uma requisição _https_, método GET, endereçada ao _web service_ de autenticação. Este serviço é identificado por _Auth_, na documentação dos [ambientes](./rnds/ambientes) são fornecidos detalhes, inclusive o endereço onde está disponível. Esta requisição depende do certificado digital associado ao estabelecimento de saúde em questão.
+
+Observe que o certificado digital é associado ao estabelecimento de saúde pelo gestor, durante a solicitação de acesso à RNDS. Consulte os passos do [credenciamento](passo-a-passo) para detalhes.
+
+Uma requisição satisfatória deverá retornar o código HTTP 200, e o corpo
+da resposta terá o seguinte formato ilustrado abaixo. O principal valor é aquele
+para a chave `access_token`, uma "longa" sequência de caracteres que, no exemplo abaixo, foi substituída por texto explicativo.
 
 ```json
 {
-  "access_token": "longa sequência de caracteres",
+  "access_token": "token (longa sequência de carateres)",
   "scope": "read write",
   "token_type": "jwt",
   "expires_in": 1800000
 }
 ```
 
-O que interessa é o valor para `access_token`, uma sequência
-de mais de 2K caracteres. Outro valor retornado é o tempo
-de validade deste _token_, neste caso, 30min, ou 1.800.000ms. A expectativa é de que o Conector só realize uma requisição para obter _token_ de acesso cerca de 30 minutos após a última requisição. Neste intervalo, o Conector deve guardar o valor do _token_ a ser reutilizado, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
+A resposta acima indica que o _token_ tem validade de 30min, ou 1.800.000ms, que estabelece uma expectativa a ser observada pela implementação do Conector.
+Expectativa: o Conector deve realizar uma requisição para obter _token_ de acesso cerca de 30 minutos após a última requisição. Neste intervalo, é esperada a reutilização do _token_ obtido na última requisição. Dito de outra forma, o Conector deve guardar o valor do _token_ e reutilizá-lo, até que seja substituído por uma nova requisição, cerca de 30 minutos depois.
 
 :::info IMPORTANTE
 O Conector deve reutilizar o valor obtido para `access_token`
