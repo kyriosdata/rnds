@@ -237,7 +237,7 @@ um dicionário com chave pertinente, por exemplo, "cns" para o CNS do usuário e
 
 A classe `Mapear` realiza eventuais mapeamentos, por exemplo, o valor "positivo" para o código correspondente esperado pela RNDS e assim por diante.
 
-A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Por exemplo, um resultado de exame laboratorial de COVID-19 inclui a amostra biológica. O recurso FHIR correspondente é [Specimen](https://www.hl7.org/fhir/specimen.html), a especialização ou adaptação nacional deste recurso é denominada de [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica). Portanto, respeitando as restrições nacionais, definidas na [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica), para o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), será criado o JSON correspondente para o resultado em questão, a ser notificado para a RNDS. Se a amostra biológica em questão é sangue, então a representação JSON correspondente esperada pela RNDS é aquela abaixo:
+A classe `ToJson` cria a representação JSON para um recurso FHIR. Um resultado de exame laboratorial de COVID-19 inclui a amostra biológica utilizada pelo exame. Esta amostra é definida pelo recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html). Em particular, há uma adapação nacional para este recurso, o que é chamado de perfil, neste caso, o perfil [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica). Para ilustrar, se a amostra utilizada é "sangue", então a representação JSON, a ser gerada pela classe `ToJson` para esta amostra é fornecida abaixo:
 
 ```json
 {
@@ -261,8 +261,7 @@ A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Po
 }
 ```
 
-A representação a ser produzida pela classe `ToJson` pode ser realizada de várias formas, desde um mapeamento de cada possível amostra biológica para a estrutura correspondente, até o uso de uma API como a HAPI FHIR API, na qual se monta uma
-instância da classe `Specimen` usando métodos de "alto nível" (_fluent interface_). O objeto resultante pode ser serializado usando recursos da própria API.
+A produção da representação JSON, para um dado recurso, pode ser realizada de várias formas, desde um mapeamento de cada possível amostra biológica para a estrutura correspondente, até o uso de uma biblioteca para esta finalidade, como a [HAPI FHIR](https://hapifhir.io/hapi-fhir/docs/introduction/introduction.html). Neste caso, cria-se uma instância da classe `Specimen` ([javadoc](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/undefined/org/hl7/fhir/r4/model/Specimen.html)) por meio do uso de métodos de "alto nível" (_fluent interface_) e a serialização em JSON pode ser usada por recurso da própria biblioteca.
 
 A classe `Empacotar` recebe os recursos pertinentes ao resultado já serializados e os deposita em um _Bundle_, que possui seus próprios atributos, além dos recursos que inclui, o que pode ser facilmente visto no JSON abaixo, onde o valor para `identifier` e os elementos do vetor `entry` foram omitidos por simplicidade.
 
