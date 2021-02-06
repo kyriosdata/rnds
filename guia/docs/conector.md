@@ -195,7 +195,8 @@ O Conector está isolado do restante do SIS, é um microsserviço. O _design_ do
 código deste microsserviço pode ser influenciado por vários fatores, questão já levantada anteriormente, isto inclui até mesmo a formação do integrador e a expectativa de qualidade para o Conector, por exemplo, dentre muitos outros. Ou seja, é natural existirem alternativas para o que segue, principalmente na ausência de requisitos de um cenário real.
 
 Considerações feitas, o _design_ visa privilegiar a legibilidade e
-a manutenibilidade. Um esboço inicial é apresentado, refinado e a versão resultante apresentada na sequência.
+a manutenibilidade. Um esboço inicial é apresentado, refinado e a versão resultante apresentada na sequência, por meio das
+seções seguintes.
 
 ### Esboço inicial
 
@@ -218,13 +219,13 @@ longo do tempo e são obtidos, nesta proposta, pela classe `Configuracao`. Por e
 
 As três classes comentadas no parágrafo anterior implementam funções de acesso à RNDS e, naturalmente, são candidatas naturais para serem reutilizadas. Em consequência, serão implementadas em uma biblioteca. A biblioteca [rnds](https://www.npmjs.com/package/rnds) é uma implementação desta decisão.
 
-Dado que as classes `Conector` e `Resultado` são empregadas para sinalizar a ocorrência de um event de resultado, o que é feito por código que não está em execução no microsserviço, outra decisão é disponibilizá-las em uma outra biblioteca. Esta, ao contrário da anterior, deve ser utilizada pela parte do SIS a ser adaptada. Ou seja, esta investigação inicial resulta em alguns comentários e duas bibliotecas.
+Dado que as classes `Conector` e `Resultado` são empregadas para sinalizar a ocorrência de um evento (produção de um resultado de exame), o código que as emprega não é executado pelo microsserviço, mas pelo cliente do microsserviço, outra decisão é disponibilizá-las em uma outra biblioteca. Esta, ao contrário da anterior, deve ser utilizada pela parte do SIS a ser adaptada. Ou seja, esta investigação inicial resulta em algumas decisões e duas bibliotecas.
 
 ![img](../static/img/conector-bibliotecas.png)
 
 ### Esboço resultante
 
-Visando aprofundar um pouco mais, tratar os processos filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java e o alerta foi feito anteriormente na "ausência de um cenário real" que impõe restrições como a linguagem de programação a ser adotada. Adicionalmente, C# também pode ser empregada por meio de _delegates_. De fato, este _design_ não é restrito à Java, nem tampouco C#.
+Visando aprofundar um pouco mais, tratar os processos filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java e o alerta foi feito anteriormente pela "ausência de um cenário real" que definiria restrições como a linguagem de programação a ser adotada. Adicionalmente, C# também pode ser empregada por meio de _delegates_. De fato, este _design_ não é implementável apenas em Java ou C#.
 
 Ao excluir as classes a serem implementadas nas bibliotecas comentadas anteriormente e introduzirmos detalhes para as funções, obtém-se o resultado abaixo. A opção de uma classe por função promove a coesão e a independência entre elas. A combinação destas funções, em uma única linha, conforme nota na figura, sugere que é uma alternativa a ser considerada para transformar uma `Resposta` na representação JSON de um _Bundle_ (recurso FHIR), esperado pela RNDS.
 
