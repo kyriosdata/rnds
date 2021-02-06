@@ -168,6 +168,14 @@ O postman é uma ferramenta empregada para experimentar _web services_. As requi
 
 A resposta de código HTTP 200 indica que a requisição foi executada satisfatoriamente. Neste caso, dentre os _headers_ retornados está `Location`, que informa o identificador único atribuído pela RNDS ao resultado de exame submetido.
 
+Este caso de uso observa uma sequência comum às requisições enviadas aos _web services_ da RNDS:
+
+1. Obter o _token_ de acesso, possivelmente de _cache_.
+1. Montar valor para `X-Authorization-Server`. Concatenar "Bearer " (observe o espaço em branco) com o _token_ (passo anterior).
+1. Definir valor para `Authorization`. Recuperar o CNS do profissional de saúde, do estabelecimento em questão, em nome do qual a requisição será submetida.
+1. Montar a requisição. Isto exige o endereço e o _path_ para a montagem da URL corresondente. Também é possível a existência de parâmetros. A orientação aqui é consultar o script postman que contém URLs prontas para as requisições oferecidas pela RNDS.
+1. Submeter a requisição.
+
 ## Design
 
 Os cass de uso podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica. Nesta possível solução, o Conector é implementado por um
