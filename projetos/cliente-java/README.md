@@ -36,3 +36,6 @@ definido no próprio código-fonte.
 
 - `com.github.kyriosdata.rnds.BuscaPacientes`  
   Verifica se há pelo menos um paciente no servidor consultado.
+
+- `com.github.kyriosdata.rnds.BuscaPacientes`  
+  Monta instância de Specimen e produz representação JSON.
