@@ -1,0 +1,2 @@
+GET http://go-ehr-services.saude.gov.br/api/fhir/r4/metadata HTTP/1.1
+Content-Type: application/json

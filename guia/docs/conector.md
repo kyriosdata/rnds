@@ -163,77 +163,70 @@ Dois _headers_ devem ser fornecidos: `X-Athorization-Server` e `Authorization`. 
 profissional de saúde em nome do qual a requisição é feita. Necessariamente deve ser um profissional de saúde lotado no estabelecimento de saúde em questão.
 
 :::tipo Dica
-O postman é uma ferramenta empregada para experimentar _web services_. As requisições oferecidas pela RNDS estão todas detalhadas.
+O postman é uma ferramenta empregada para experimentar _web services_ e há uma _collection_ (cofiguração) pronta para experimentar o que a RNDS oferece.
+Veja [aqui](publico-alvo/ti/conhecer).
 :::
 
 A resposta de código HTTP 200 indica que a requisição foi executada satisfatoriamente. Neste caso, dentre os _headers_ retornados está `Location`, que informa o identificador único atribuído pela RNDS ao resultado de exame submetido.
 
 Este caso de uso observa uma sequência comum às requisições enviadas aos _web services_ da RNDS:
 
-1. Obter o _token_ de acesso, possivelmente de _cache_.
-1. Montar valor para `X-Authorization-Server`. Concatenar "Bearer " (observe o espaço em branco) com o _token_ (passo anterior).
-1. Definir valor para `Authorization`. Recuperar o CNS do profissional de saúde, do estabelecimento em questão, em nome do qual a requisição será submetida.
-1. Montar a requisição. Isto exige o endereço e o _path_ para a montagem da URL corresondente. Também é possível a existência de parâmetros. A orientação aqui é consultar o script postman que contém URLs prontas para as requisições oferecidas pela RNDS.
+1. Obter o _token_ de acesso, possivelmente de _cache_. Consultar caso de uso _Obter token de acesso_.
+1. Montar valor para `X-Authorization-Server`. Concatenar "Bearer " (observe o espaço em branco) com o valor do _token_ de acesso (passo anterior).
+1. Definir valor para `Authorization`. Recuperar o CNS do profissional de saúde do estabelecimento em questão, em nome do qual a requisição será submetida.
+1. Montar a requisição. Isto exige o endereço e o _path_ para a montagem da URL correspondente. Também é possível a existência de parâmetros. A sugestão aqui é consultar URLs prontas para as requisições oferecidas pela RNDS ([aqui](publico-alvo/ti/conhecer)).
 1. Submeter a requisição.
 
 ## Design
 
-Os cass de uso podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica. Nesta possível solução, o Conector é implementado por um
-microsserviço acionado por evento.
+Os requisitos atribuídos ao Conector podem ser realizadas de várias maneiras. Abaixo segue apenas um possível _design_, dado que não são fornecidos detalhes de uma integração específica. Noutras palavras, seguramente não é aplicável a todos os estabelecimento de saúde. Por outro lado, é relevante compreendê-lo como parte da formação de um integrador.
+
+Nesta possível solução o Conector é implementado por um microsserviço acionado por evento.
 
 > IMPORTANTE: o emprego de um
 > microsserviço visa ilustrar como o Conector pode ser
-> implementado, em algum possível cenário, e não se confunde com uma recomendação.
+> implementado, e não se confunde com uma recomendação.
 
-O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o
-SIS é modificado para gerar um evento, e o microsserviço (Conector)
-notifica o Ministério da Saúde por meio da RNDS.
+O evento sinaliza a geração de um laudo de exame, conforme ilustrado abaixo. Dessa forma, o SIS é modificado para gerar um evento, quando um laudo é registrado, e o microsserviço (Conector), ao recebê-lo, notifica o Ministério da Saúde por meio da RNDS.
 
 ![img](../static/img/rnds-m3.png)
 
 O Conector está isolado do restante do SIS, é um microsserviço. O _design_ do
-código deste microsserviço pode ser influenciado por vários fatores, questão já levantada anteriormente, até mesmo a formação do integrador e a expectativa de qualidade para o Conector, por exemplo, dentre muitos outros. Ou seja, é natural existirem alternativas para o que segue, inclusive "melhores" (sugestões são bem-vindas).
+código deste microsserviço pode ser influenciado por vários fatores, questão já levantada anteriormente, isto inclui até mesmo a formação do integrador e a expectativa de qualidade para o Conector, por exemplo, dentre muitos outros. Ou seja, é natural existirem alternativas para o que segue, principalmente na ausência de requisitos de um cenário real.
 
-Considerações feitas, a orientação é um _design_ que privilegie a legibilidade e
-a manutenibilidade. Qualquer outra questão será secundária a estas.
-
-A visão funcional do caso de uso _Enviar resultado de exame_ inspira o _design_.
+Considerações feitas, o _design_ visa privilegiar a legibilidade e
+a manutenibilidade. Um esboço inicial é apresentado, refinado e a versão resultante apresentada na sequência.
 
 ### Esboço inicial
 
-Em um primeiro esforço foram identificadas as classes abaixo. Aquelas não coloridas realizam as funções do negócio (caso de uso _Enviar resultado de exame_). As demais
-oferecem o suporte necessário.
+Em um primeiro esforço foram identificadas as classes abaixo após uma leitura criteriosa dos casos de uso. Aquelas não coloridas realizam as funções do negócio, enquanto as demais oferecem o suporte necessário.
 
 ![img](../static/img/conector-domain-v0.png)
 
-A classe `Conector` encapsula a conexão do SIS com o microsserviço. Desta forma,
+A classe `Conector` encapsula a conexão do SIS com o microsserviço (não confunda com a conexão do Conector com a RNDS). Desta forma,
 a implementação correspondente, por exemplo, se uma requisição _https_ ou o envio
 de uma mensagem por meio de [ActiveMQ](https://activemq.apache.org/) (_message broker_) ou [SNS](https://aws.amazon.com/sns/), fica encapsulada nesta classe.
 Em consequência, o código que faz uso desta classe executa uma simples mensagem como
 `Conector.notifique(resultado)`, por exemplo.
 
 Este microsserviço deve possuir o seu próprio repositório onde são registradas as
-requisições recebidas e os resultados obtidos das submissões. Cada submissão reúne o que é submetido, o `Resultado` de um exame e a resposta apresentada pela RNDS (para eventual consulta posterior). Talvez um nome melhor
-para o repositório seja `ConectorRepositry`, em vez de `ResultadoRepository`.
+requisições recebidas para serem notificadas (eventos) e as respostas obtidas das submissões. Cada submissão reúne o que é submetido, além do `Resultado` de um exame e da resposta apresentada pela RNDS. A resposta inclui o identificadr único, atribuído pela RNDS, ao resultado de exame. Talvez um nome melhor para o repositório seja `ConectorRepositry`, em vez de `ResultadoRepository`.
 
 O envio propriamente dito de informação para a RNDS está encapsulada na classe `RNDSProxy`. Este envio depende do _token_ de acesso cuja gestão pode estar encapsulada
 na classe `TokenCache`. Naturalmente, estas funções dependem de valores que variam ao
 longo do tempo e são obtidos, nesta proposta, pela classe `Configuracao`. Por exemplo, o certificado digital e a senha correspondente são algumas das informações obtidas por meio desta classe.
 
-As três classes comentadas no parágrafo anterior implementam funções de acesso à RNDS e, naturalmente, devem ser reutilizadas, o que as tornam candidatas a serem transferidas para uma biblioteca. A biblioteca [rnds](https://www.npmjs.com/package/rnds) é um exemplo deste _design_.
+As três classes comentadas no parágrafo anterior implementam funções de acesso à RNDS e, naturalmente, são candidatas naturais para serem reutilizadas. Em consequência, serão implementadas em uma biblioteca. A biblioteca [rnds](https://www.npmjs.com/package/rnds) é uma implementação desta decisão.
 
-Em consequência, podemos definir duas bibliotecas e nos concentrar, na próxima versão, apenas no negócio _Enviar resultado de exame_, e abstrair as funções de suporte.
+Dado que as classes `Conector` e `Resultado` são empregadas para sinalizar a ocorrência de um event de resultado, o que é feito por código que não está em execução no microsserviço, outra decisão é disponibilizá-las em uma outra biblioteca. Esta, ao contrário da anterior, deve ser utilizada pela parte do SIS a ser adaptada. Ou seja, esta investigação inicial resulta em alguns comentários e duas bibliotecas.
 
 ![img](../static/img/conector-bibliotecas.png)
 
 ### Esboço resultante
 
-Tratar as funções (processos) filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java, embora possa ser implementado usando C#, por exemplo, por meio de _delegates_. Noutras palavras, este
-_design_ não é restrito à Java.
+Visando aprofundar um pouco mais, tratar os processos filtrar, mapear e demais como função ([Function](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html) em Java) é um passo natural. Sim, o _design_, neste caso, sofre influência de Java e o alerta foi feito anteriormente na "ausência de um cenário real" que impõe restrições como a linguagem de programação a ser adotada. Adicionalmente, C# também pode ser empregada por meio de _delegates_. De fato, este _design_ não é restrito à Java, nem tampouco C#.
 
-A figura abaixo refina as classes identificadas anteriormente, cada uma delas com uma
-função bem-definida, em classe própria, o que promove a coesão. A combinação delas,
-em uma única linha, conforme ilustrada na figura, sugere que é uma alternativa a ser considerada para transformar uma `Resposta` na representação JSON de um _Bundle_ (recurso FHIR), esperado pela RNDS.
+Ao excluir as classes a serem implementadas nas bibliotecas comentadas anteriormente e introduzirmos detalhes para as funções, obtém-se o resultado abaixo. A opção de uma classe por função promove a coesão e a independência entre elas. A combinação destas funções, em uma única linha, conforme nota na figura, sugere que é uma alternativa a ser considerada para transformar uma `Resposta` na representação JSON de um _Bundle_ (recurso FHIR), esperado pela RNDS.
 
 ![img](../static/img/conector-domain-v1.png)
 
@@ -243,7 +236,7 @@ um dicionário com chave pertinente, por exemplo, "cns" para o CNS do usuário e
 
 A classe `Mapear` realiza eventuais mapeamentos, por exemplo, o valor "positivo" para o código correspondente esperado pela RNDS e assim por diante.
 
-A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Por exemplo, um resultado de exame laboratorial de COVID-19 inclui a amostra biológica. O recurso FHIR correspondente é [Specimen](https://www.hl7.org/fhir/specimen.html), a especialização ou adaptação nacional deste recurso é denominada de [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica). Portanto, respeitando as restrições nacionais, definidas na [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica), para o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), será criado o JSON correspondente para o resultado em questão, a ser notificado para a RNDS. Se a amostra biológica em questão é sangue, então a representação JSON correspondente é aquela abaixo:
+A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Por exemplo, um resultado de exame laboratorial de COVID-19 inclui a amostra biológica. O recurso FHIR correspondente é [Specimen](https://www.hl7.org/fhir/specimen.html), a especialização ou adaptação nacional deste recurso é denominada de [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica). Portanto, respeitando as restrições nacionais, definidas na [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica), para o recurso FHIR [Specimen](https://www.hl7.org/fhir/specimen.html), será criado o JSON correspondente para o resultado em questão, a ser notificado para a RNDS. Se a amostra biológica em questão é sangue, então a representação JSON correspondente esperada pela RNDS é aquela abaixo:
 
 ```json
 {
@@ -268,7 +261,7 @@ A classe `ToJson` cria a representação JSON para cada recurso FHIR exigido. Po
 ```
 
 A representação a ser produzida pela classe `ToJson` pode ser realizada de várias formas, desde um mapeamento de cada possível amostra biológica para a estrutura correspondente, até o uso de uma API como a HAPI FHIR API, na qual se monta uma
-instância da classe `Specimen` usando métodos de "alto nível" (_fluent interface_). O objeto resultado pode ser serializado usando recursos da própria API.
+instância da classe `Specimen` usando métodos de "alto nível" (_fluent interface_). O objeto resultante pode ser serializado usando recursos da própria API.
 
 A classe `Empacotar` recebe os recursos pertinentes ao resultado já serializados e os deposita em um _Bundle_, que possui seus próprios atributos, além dos recursos que inclui, o que pode ser facilmente visto no JSON abaixo, onde o valor para `identifier` e os elementos do vetor `entry` foram omitidos por simplicidade.
 
