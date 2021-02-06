@@ -150,9 +150,23 @@ do resultado de COVID a ser enviado.
 
 ### Enviar resultado de COVID
 
-Este caso de uso cria uma requisição _https_ e a submete ao _web service_ oferecido pela RNDS. Há dois _headers_ específicos que devem ser fornecidos: `X-Athorization-Server` e `Authorization`. O valor do primeiro é definido pela concatenação de "Bearer " com o valor do
-_token_ de acesso. O valor do segndo deve ser o valor do CNS do
-profissional de saúde em nome do qual a requisição é feita.
+Cria uma requisição _https_ e a submete à RNDS.
+
+O caso de uso _Montar payload para resultado de COVID_ define o que é necessário para produzir o conteúdo a ser enviado. De posse do _payload_ a requisição ainda depende da URL e de _headers_.
+
+A URL segue o formato `htts://{{endereco}}/api/fhir/r4/Bundle`.
+
+Observe que `{{endereco}}` é substituído conforme o ambiente empregado. Por exemplo, para acesso ao ambiente de homologação o endereço é
+**ehr-auth-hmg.saude.gov.br**. Consulte [ambientes](rnds/ambientes) para detalhes.
+
+Dois _headers_ devem ser fornecidos: `X-Athorization-Server` e `Authorization`. O primeiro é definido pela concatenação de "Bearer " com o valor do _token_ de acesso. Consulte _Obter token de acesso_ para detalhes de como obter o valor do _token_. O segundo é o CNS do
+profissional de saúde em nome do qual a requisição é feita. Necessariamente deve ser um profissional de saúde lotado no estabelecimento de saúde em questão.
+
+:::tipo Dica
+O postman é uma ferramenta empregada para experimentar _web services_. As requisições oferecidas pela RNDS estão todas detalhadas.
+:::
+
+A resposta de código HTTP 200 indica que a requisição foi executada satisfatoriamente. Neste caso, dentre os _headers_ retornados está `Location`, que informa o identificador único atribuído pela RNDS ao resultado de exame submetido.
 
 ## Design
 
