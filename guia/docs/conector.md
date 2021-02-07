@@ -4,9 +4,11 @@ title: Conector
 sidebar_label: Conector
 ---
 
-Conector é o nome dado à solução tecnológica que acessa a RNDS. É este software que precisa ser desenvolvido pelo integrador e, de fato, o que implementa a troca de informação em saúde com a RNDS. Por exemplo, no contexto de um laboratorio, faz parte das funções do Conector enviar o resultado de um exame laboratorial para a RNDS.
+Conector é o nome dado à solução tecnológica que acessa a RNDS. É este software que precisa ser desenvolvido pelo integrador e, de fato, o que implementa a troca de informação em saúde com a RNDS.
 
-As seções seguintes apresentam questões típicas da integração com a RNDS por meio de um Conector de referência, abstrato o suficiente para que possa servir de orientação para vários estabelecimentos de saúde interessados em detalhes técnicos da integração com a RNDS.
+Atribuir funções e discutir aspectos de _design_ e de implementação do software de integração com a RNDS, aqui denominado de Conector, atende o propósito de orientar integradores acerca de questões técnicas pertinentes à integração com a RNDS.
+
+Este conteúdo não é prescritivo.
 
 ## Sistema de Informação em Saúde (SIS)
 
@@ -302,24 +304,16 @@ A opção acima é uma estratégia amplamente empregada. A biblioteca [Chokidar]
 
 ### rnds (biblioteca)
 
-Às funções atribuídas a esta biblioteca são bem específicas e podem ser encapsuladas, independente do cenário do estabelecimento de saúde em questão. É o que é feito por meio da HAPI FHIR API, dentre outras opções como a biblioteca [rnds](https://www.npmjs.com/package/rnds).
+Às funções atribuídas a esta biblioteca são bem específicas e podem ser encapsuladas e reutilizadas. É o que é feito por meio de bibliotecas como a [HAPI FHIR](https://hapifhir.io/hapi-fhir/docs/introduction/introduction.html) e [rnds](https://www.npmjs.com/package/rnds).
 
-Considerações feitas, o caso de uso _Obter token_ está implementado, enquanto _Enviar resultado de exame_, apenas parcialmente, em JavaScript por meio do projeto [rnds](https://www.npmjs.com/package/rnds) (projeto _open source_). Observe que o envio propriamente dito está implementado, enquanto as demais funções, filtrar, mapear e outras, tendo em vista a dependência do contexto de um estabelecimento de saúde real, não.
+Enquanto as funções de suporte podem ser reutilizadas, as funções como filtrar e mapear, por exemplo, dependem do contexto específico de cada estabelecimento de saúde.
 
-### Funções principais
+### Funções específicas por estabelecimento
 
-As estratégias adotadas nas bibliotecas acima dificilmente podem ser replicadas aqui na implementação das funções ditas principais, como filtrar e mapear, por exemplo.
+As estratégias adotadas nas bibliotecas acima dificilmente podem ser replicadas na implementação das funções filtrar e mapear, por exemplo.
 
-Quando em cenário anterior foi dito que um SIS hipotético é capaz de exportar um documento XML pertinente a um resultado de exame, tem-se uma função útil e que viabiliza o acréscimo do Conector sem necessidade de alteração do SIS. Contudo, o esquema empregado pelo SIS, provavelmente, é diferente daquele estabelecido pelo modelo computacional e também pelo informacional correspondente. Em consequência, não há como implementar uma função _filtrar_ de forma genérica, mas específica e caso por caso.
+Quando um SIS é capaz de exportar um documento XML pertinente a um resultado de exame, tem-se uma função útil e que viabiliza o acréscimo do Conector sem necessidade de alteração do SIS. Contudo, o esquema empregado pelo SIS, provavelmente, é diferente daquele estabelecido pelo modelo computacional. Em consequência, não há como implementar uma função _filtrar_ de forma genérica, que obtenha dados de um esquema desconhecido.
 
-Apesar de não ser viável uma implementação que possa ser reutilizada, é possível indicar ferramentas úteis aos desenvolvedores, por exemplo,
-que realizam operações sobre documentos XML. Observe que, mesmo neste exemplo, a sugestão pode não se aplicar, pois um formato binário próprio pode ser empregado pelo SIS para exportar um resultado de exame, o que torna a indicação pertinente à XML irrelevante.
+Em outro exemplo, a função filtrar pode exigir consultas em um Banco de Dados relacional, e que são naturalmente específicas para o esquema em questão.
 
-:::info Java e JavaScript
-Em https://github.com/kyriosdata/rnds encontram-se os
-projetos `rnds-java` e `rnds-js`, ambos ilustram como obter
-o _token_ de acesso, respectivamente nas linguagens Java e JavaScript.
-:::
-
-Aos interessados, muita informação pode ser encontrada
-na internet para o assunto "ssl client authentication".
+Apesar de não ser viável uma implementação que possa ser reutilizada, é possível indicar [ferramentas](rnds/tecnologias) possivelmente relevantes para vários cenários.
