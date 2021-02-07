@@ -50,7 +50,6 @@ module.exports = {
         "rel/objetivo-rel",
         "rel/mi-rel",
         "rel/mc-rel",
-        "rel/intro/glossario",
       ],
       "Sumário de Alta (SA)": [
         "sa/objetivo-sa",
