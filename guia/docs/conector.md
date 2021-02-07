@@ -263,7 +263,7 @@ A classe `ToJson` cria a representação JSON para um recurso FHIR. Um resultado
 
 A produção da representação JSON, para um dado recurso, pode ser realizada de várias formas, desde um mapeamento de cada possível amostra biológica para a estrutura correspondente, até o uso de uma biblioteca para esta finalidade, como a [HAPI FHIR](https://hapifhir.io/hapi-fhir/docs/introduction/introduction.html). Neste caso, cria-se uma instância da classe `Specimen` ([javadoc](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/undefined/org/hl7/fhir/r4/model/Specimen.html)) por meio do uso de métodos de "alto nível" (_fluent interface_) e a serialização em JSON pode ser usada por recurso da própria biblioteca.
 
-A classe `Empacotar` recebe os recursos pertinentes ao resultado já serializados e os deposita em um _Bundle_, que possui seus próprios atributos, além dos recursos que inclui, o que pode ser facilmente visto no JSON abaixo, onde o valor para `identifier` e os elementos do vetor `entry` foram omitidos por simplicidade.
+A classe `Empacotar` recebe os recursos serializados em JSON e os agrupa em um _Bundle_, que possui seus próprios atributos. O resultado abaixo omite o valor para `identifier` e os elementos do vetor `entry`, por simplicidade.
 
 ```json
 {
@@ -282,30 +282,23 @@ A classe `Empacotar` recebe os recursos pertinentes ao resultado já serializado
 }
 ```
 
-Os comentários acima para as classes `ToJson` e `Empacotar` podem ser complementados
-pelo detalhamento dos dados a serem enviados, ou seja, a discussão do [Modelo Computacional](./rel/mc-rel) de um resultado de exame laboratorial.
+Os exemplos JSON fornecidos acima são parciais e
+os detalhes estão disponíveis no [Modelo Computacional](./rel/mc-rel).
 
 ## Implementação
 
-O _design_ acima organiza o código, mas não impôe restrições ou define detalhes pela ausência de um cenário concreto de um estabelecimento de saúde, conforme discutido abaixo, tanto para as bibliotecas identificadas quanto para as funções princiais.
+O _design_ fornece uma orientação para o código, mas ainda persistem opções de implementação, algumas delas são comentadas abaixo. Em vez de apresentar instruções em uma dada linguagem de programação, detalhes técnicos são comentados.
 
 ### conector-cliente (aws)
 
-A classe `Conector` deve encapsular a comunicação do SIS com Conector e, conforme destacado, isto pode ser feito de inúmeras formas.
-
-Em um cenário onde a nuvem da Amazon é empregada, apenas para exemplificar, o microsserviço Conector pode ser implementado por uma Lambda Function exposta por meio do serviço API Gateway. Neste cenário, a a implementação do método `Conector.notificar(Resultado)` terá que fazer requisições _https_ para o _endpoint_ exposto pelo serviço API Gateway, qe serão redirecionadas para a Lambda Function corresondente.
+A classe `Conector` deve encapsular a comunicação do SIS com o Conector e, em um cenário onde a nuvem da Amazon é empregada, o microsserviço Conector pode ser implementado por uma Lambda Function exposta por meio do serviço API Gateway. Neste cenário, a implementação do método `Conector.notificar(Resultado)` terá que fazer requisições _https_ para o _endpoint_ exposto pelo serviço API Gateway, que serão redirecionadas para a Lambda Function corresondente.
 
 ### conector-cliente (arquivo)
 
-Naturalmente, a nuvem da Amazon pode não ser uma opção e, neste caso, outra estratégia pode ser empregada, conforme o que melhor se alinha
-ao contexto do estabelecimento de saúde em questão. Por exemplo, o cenário no qual o laboratório não emprega um SIS em execução em uma nuvem, mas em
-sua própria infraestrutura.
+O laboratório que usa infraestrutura própria e cujo SIS oferece recurso para exportar um laudo em documento XML, pode não demandar manutenção.
+O diretório em que tais documentos são depositados pode ser monitorado e, a cada novo arquivo, o método `Conector.notificar(Resultado)` deve iniciar o caso de uso _Enviar resultado de COVID_, após a montagem do _payload_.
 
-Adicionalmente, o SIS já oferece recurso para exportar em documento XML,
-por exemplo, um laudo, com esquema bem-definido. Neste cenário não seria mais aproriado monitorar um diretório e a cada arquivo ali depositado, disparar o caso de uso _Enviar resultado de exame_? Observe que o SIS
-existente, neste cenário hipotético, não necessariamente sofre alteração.
-
-Apenas como informação adicional, a biblioteca [Chokidar](https://www.npmjs.com/package/chokidar) tem como foco monitorar arquivos e diretórios de forma eficiente, conforme sua documentação, e já foi baixada mais de 30 milhões de vezes "nesta semana". Naturalmente é uma opção para implementar, em JavaScript, o que foi atribuído à biblioteca `conector-cliente`, neste estabelecimento fictício.
+A opção acima é uma estratégia amplamente empregada. A biblioteca [Chokidar](https://www.npmjs.com/package/chokidar) é uma evidência.
 
 ### rnds (biblioteca)
 
