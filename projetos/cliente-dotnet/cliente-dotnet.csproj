@@ -6,4 +6,8 @@
     <RootNamespace>cliente_dotnet</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Hl7.Fhir.R4" Version="2.0.3" />
+  </ItemGroup>
+
 </Project>
