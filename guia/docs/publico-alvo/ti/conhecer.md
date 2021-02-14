@@ -166,7 +166,29 @@ A execução de requisições é feita com a seleção da requisição a ser exe
 
 O Postman novamente ajuda aqui. Para cada requisição o Postman apresenta como a mesma pode ser implementada usando várias estratégias, incluindo ferramentas de linha de comandos como **curl** e **wget**, por exemplo, além de código em Java, C#, JavaScript, Swift e outras, perfazendo dezenas de alternativas.
 
-A exceção é a obtenção do token de acesso. Contudo, esta necessidade está devidamente desenvolvida tanto para Java quanto JavaScript e [documentada](../../conector#obter-token-de-acesso).
+Apenas por curiosidade (e por diversão) segue como executar uma das requisições oferecidas pela RNDS em Ocaml:
+
+```ocaml
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let reqBody =
+  let uri = Uri.of_string "https://ehr-services.hmg.saude.gov.br/api/fhir/r4/Organization/01567601000143" in
+  let headers = Header.init ()
+    |> fun h -> Header.add h "Content-Type" "application/json"
+    |> fun h -> Header.add h "X-Authorization-Server" "Bearer tokenAqui"
+    |> fun h -> Header.add h "Authorization" "00112233445566"
+  in
+  Client.call ~headers `GET uri >>= fun (_resp, body) ->
+  body |> Cohttp_lwt.Body.to_string >|= fun body -> body
+
+let () =
+  let respBody = Lwt_main.run reqBody in
+  print_endline (respBody)
+```
+
+A exceção não adequadamente contemplada pelo Postman é a obtenção do token de acesso. Contudo, esta necessidade está devidamente desenvolvida, tanto para Java quanto JavaScript, e [documentada](../../conector#obter-token-de-acesso).
 
 ### Parabéns!
 
