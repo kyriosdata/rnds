@@ -4,32 +4,49 @@ title: Conheça os serviços
 sidebar_label: Conheça os serviços
 ---
 
-A integração via padrão FHIR e [perfis](../../rnds/definicoes) definidos pela RNDS realiza-se por meio de [requisições https](https://documenter.getpostman.com/view/2163377/TVRd9Wad), que devem partir do estabelecimento de saúde e atingir o [ambiente](../../rnds/ambientes) de produção da RNDS (neste guia é feito uso do ambiente de homologação).
+A conexão com a RNDS ocorre por meio de requisições _https_ em conformidade com o padrão FHIR. As requisições devem partir da infraestrutura empregada pelo estabelecimento de saúde e atingir os _web services_ da RNDS.
 
-> Neste documento é apresentado como submeter tais requisições.
+As requisições disponíveis estão devidamente [documentadas](https://documenter.getpostman.com/view/2163377/TVRd9Wad). Os _web services_ estão acessíveis por meio de dois
+[ambientes](../../rnds/ambientes).
 
-A submissão de requisições será feita por meio da ferramenta
-[Postman](https://www.postman.com/downloads/) (empregada por desenvolvedores para interação com _web services_). Desta forma,
-sem escrever uma única linha de código, detalhes das requisições podem consultados e o ambiente de homologação experimentado (portas Auth e EHR), o que é relevante para
-a produção de código correspondente.
+> O foco aqui é esclarecer como submeter tais requisições. Mesmo que o integrador já possua experiência com requisições _https_, é sugerida a leitura deste texto com o propósito de ambientação com os serviços oferecidos pela RNDS.
 
-![img](../../../static/img/postman-desenvolvedor.png)
+### Cenário de prática
 
-Ao final, espera-se que:
+A submissão de requisições é comentada com ilustrações que empregam a ferramenta [Postman](https://www.postman.com/downloads/) (usada por desenvolvedores para interação com _web services_). Existem muitas outras opções e pode-se empregar qualquer uma delas.
 
-- Você saiba quais são as requisições disponíveis.
-- Você saiba quais são os _headers_ necessários e como montar os valores correspondentes.
-- Você saiba quais os dados a serem enviados por cada requisição, ou [payload](../../glossario#payload).
-- Você saiba submeter as requisições por meio da ferramenta Postman.
-- Você saiba experimentar valores diferentes para o _payload_, _headers_ e observar os resultados.
-- Você saiba interagir com a RNDS usando HTTPS.
-- Você saiba empregar o certificado digital do laboratório.
-- Você saiba como realizar as atividades acima empregando a linguagem de programção Java.
-- Você esteja apto para construir o [conector](../../conector).
+Os exemplos oferecidos são compatíveis com as expectativas configuradas nos servidores FHIR da RNDS. Ou seja, as requisições ilustram as respostas obtidas dos ambientes oferecidos pela RNDS. De fato, foram experimentadas no ambiente de homologação.
+
+:::danger CUIDADO
+O ambiente de produção **não deve** ser empregado com a finalidade de experimentar a integração com os _web services_ da RNDS.
+:::
+
+Embora desejável o acesso ao ambiente de homologação para validar o que está sendo produzido, este acesso pode não estar disponível, o que não impede a prática.
+
+:::tip RECOMENDAÇÃO
+Empregar um servidor FHIR publicamente disponível para experimentação.
+:::
+
+### Metas
+
+Ao final, espera-se que você saiba:
+
+- As requisições disponíveis.
+- Os _headers_ necessários e como montar os valores correspondentes.
+- A estrutura do [payload](../../glossario#payload) para cada requisição.
+- Submeter as requisições por meio da ferramenta Postman.
+- Interpretar as respostas.
+- Experimentar valores diferentes para o _payload_, _headers_ e parâmetros (URL).
+- O fluxo típico da interação com a RNDS usando HTTPS.
+- Empregar o certificado digital para obter token de acesso.
+
+Em consequência, estará apto a parte relevante do [conector](../../conector).
 
 ### Pré-requisitos
 
-Conforme ilustrado na figura acima, o uso do Postman depende de três informações e dois arquivos:
+Conforme ilustrado, a interação com a RNDS depende de várias informações e um arquivo (certificado digital) (destacados em verde). O arquivo adicional é a configuração do Postman (destacado em amarelo), ou seja, uma demanda específica desta ferramenta, ao contrário das demais.
+
+![img](../../../static/img/postman-desenvolvedor.png)
 
 - Informações necessárias:
 
