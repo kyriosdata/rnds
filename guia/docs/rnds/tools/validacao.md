@@ -4,13 +4,17 @@ title: Validação de Recursos
 sidebar_label: Validação
 ---
 
-A validação visa assegurar que recursos criados e/ou recebidos são válidos. Vários [critérios](https://www.hl7.org/fhir/validation.html) podem ser considerados na validação de recursos FHIR.
+A validação visa assegurar que recursos criados e/ou recebidos são válidos. Vários [critérios](https://www.hl7.org/fhir/validation.html) podem ser considerados na validação de recursos FHIR, como a presença de elementos obrigatórios, a cardinalidade de coleções e outros.
 
-Além das exigências predefinidas pelo FHIR, também é possível validar a conformidade com perfis, que introduzem restrições adicionais visando atender um uso específico. A RNDS, por exemplo, estabelece dezenas de perfis (profiles), ValueSets, CodeSystems e Extensions, que são elementos por meio dos quais especificidades, no caso, aquelas do Brasil, podem ser contempladas.
+Além das exigências predefinidas pelo FHIR, também é possível validar a conformidade em relação a perfis (que introduzem restrições para atender necessidades locais não contempladas pelo FHIR). De fato, a RNDS estabelece dezenas de perfis (profiles), ValueSets, CodeSystems e Extensions.
 
-## Exemplo
+## Onde encontrar as definições nacionais?
 
-Abaixo segue uma Amostra Biológica em conformidade com as restrições nacionais.
+Naturalmente, todas as definições nacionais devem ser do conhecimento de integradores e serem empregadas nas validações realizadas. Todas elas podem ser baixadas do [Portal de Serviços da RNDS](https://servicos-datasus.saude.gov.br/) ou ainda do Simplifier.Net, onde as definições da RNDS também estão [publicadas](https://simplifier.net/redenacionaldedadosemsaude).
+
+## Recurso válido (e outro inválido)
+
+Abaixo segue uma Amostra Biológica em conformidade com as restrições nacionais. Por curiosidade, "SGHEM" é o código para "sangue".
 
 ```json
 {
@@ -31,7 +35,7 @@ Abaixo segue uma Amostra Biológica em conformidade com as restrições nacionai
 }
 ```
 
-Um laboratório, ao construir uma Amostra Biológica, deve observar que o Brasil restringe o uso de vários elementos do recurso Specimen, dentre eles, _receivedTime_, utilizado para registrar o instante em que a amostra foi recebida para processamento e outros, além de _status_. Isto significa que uma Amostra Biológica, em conformidade com as especificidades nacionais, não deve conter o instante em que amostra foi recebida, assim como também não deve conter o elemento _status_, conforme a Amostra Biológica válida fornecida acima.
+Um laboratório, ao construir uma Amostra Biológica, deve observar que o Brasil restringe o uso de vários elementos do recurso Specimen, dentre eles, _receivedTime_, utilizado para registrar o instante em que a amostra foi recebida para processamento e outros, além de _status_. Isto significa que uma Amostra Biológica, em conformidade com as especificidades nacionais, não deve conter o instante em que a amostra foi recebida, assim como também não deve conter o elemento _status_. A amostra acima satisfaz estas e outras restrições.
 
 Uma Amostra Biológica com o elemento _status_, por exemplo, conforme ilustrada abaixo é, portanto, uma Amostra Biológica que não está em conformidade com as especificidades nacionais.
 
@@ -55,18 +59,9 @@ Uma Amostra Biológica com o elemento _status_, por exemplo, conforme ilustrada 
 }
 ```
 
-Por fim, ao se tentar validar o recurso fornecido acima, o processo deve falhar, dado que não está em conformidade com o perfil indicado. De fato,
-a resposta
+De fato, ao se tentar validar o recurso fornecido acima, o processo indica a presença do elemento _status_, definido para o recurso _Specimen_ conforme originalmente estabelecido pelo FHIR, mas excluído pela RNDS. A mensagem retornada pelo aplicativo gráfico claramente registra esta não conformidade:
 
-Instance count for 'Specimen.status' is 1, which is not within the specified cardinality of 0..0
-
-indica exatamente a falha, a introdução de um elemento não permitido
-nas definições nacionais. Esta resposta foi produzida por um validador
-fornecido pelo Simplifier.Net, comentado abaixo, o mesmo serviço utilizado pela RNDS para divulgação das especificidades nacionais para o padrão FHIR. As definições encontram-se disponíveis no endereço
-
-https://simplifier.net/redenacionaldedadosemsaude
-
-Naturalmente, todas as definições nacionais devem ser do conhecimento de integradores e serem empregadas nas validações realizadas. Além do endereço acima as definições podem ser obtidas do próprio portal de serviços da RNDS.
+Element 'Specimen.status': max allowed = 0, but found 1"
 
 ## Como validar um recurso?
 
@@ -74,25 +69,45 @@ Naturalmente, todas as definições nacionais devem ser do conhecimento de integ
 
 ### Interface gráfica
 
-A RNDS disponibiliza um [validador](https://doc-0k-b0-docs.googleusercontent.com/docs/securesc/pv16ckcadsrom8ll89o65she880al4qi/je4967phlp7b1fhq5kovqf8gnaakio7m/1599249225000/10214180060604046643/00115241587149400156/19c5hNwXv8qZk8Ylq-PJAnTFPr8_d5z8n?e=download&authuser=0&nonce=m7h2r4gkh32jk&user=00115241587149400156&hash=31u37radoua6t6fot61ga1qad9qsauev) gráfico local. Abaixo segue uma ilustração da execução deste aplicativo.
+Um aplicativo gráfico é disponibilizado pelo [Portal de Serviços da RNDS](https://servicos-datasus.saude.gov.br/). Abaixo segue a tela deste aplicativo após a validação de um recurso.
 
 ![image](https://user-images.githubusercontent.com/1735792/92491044-21244600-f1c8-11ea-921b-541e9b77d967.png)
 
-Este validador é uma aplicação gráfica por meio do qual é possível fornecer as definições ou personalizações
-de FHIR estabelecidas pela RNDS e um documento JSON, por exemplo, cuja conformidade com as definições
-deve ser verificada.
+No primeiro campo forneça o diretório contendo as definições nacionais (veja como obtê-las acima), depois indique a representação do recurso a ser validado no formato JSON e, por fim, clique no botão `Validar` para que a validação seja executada.
 
 ### Linha de comandos
 
-Uma alternativa para validação é usar o aplicativo de linha de comandos [validator](https://github.com/hapifhir/org.hl7.fhir.core/), devidamente [documentado](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator) e que permite seu uso via linha de comandos. Abaixo segue o formato de um comando para validar um recurso conforme definições e depositar o resultado em um arquivo JSON.
+Uma alternativa é o aplicativo de linha de comandos **validator_cli**.
+Detalhes da instalação e opções disponíveis estão devidamente [documentadas](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator).
+
+O comando abaixo ilustra como validar o recurso representado no formato JSON e depositado no arquivo **amostra.json**, considerando as definições contidas no diretório **d:\definicoes**.
 
 ```shell
-java -jar validador_cli.jar <recurso para validar> -ig <diretorio de definicoes> -recurse -output resultado.json
+java -jar validador_cli.jar amostra-invalida.json -ig d:\definicoes -recurse
 ```
 
-O recurso pode ser o resultado de exame laboratorial, arquivo JSON. As [definições](../definicoes) estão amplamente disponíveis.
-No acomando acima a saída será depositada em **resultado.json**. Em tempo, a representação JSON do recurso [OperationOutcome](http://hl7.org/fhir/operationoutcome.html).
+Na saída padrão será exibida a mensagem
 
-## Implementações
+```
+Specimen.status: max allowed = 0, but found 1
+```
 
-- https://github.com/hapifhir/org.hl7.fhir.core
+Há muitas opções, conforme a documentação indicada acima. Duas delas incluem `-output saida.json` para depositar a saída no arquivo indicado (neste caso, **saida.json**) e `-version 4.0.1` para indicar a versão do FHIR a ser considerada no processo de validação. Se não fornecido, a versão mais recente é empregada.
+
+Por fim, a primeira execução inclui a obtenção de várias definições do FHIR, reutilizadas posteriormente e tornando o processo mais rápido.
+
+### Simplifier.Net
+
+Além de publicar perfis FHIR, como feito pela RNDS, você também pode executar validações diretamente no portal, pelo navegador. Esta é uma opção particularmente útil para ambientação com o FHIR e com os perfis nacionais.
+
+É preciso se cadastrar no [Simplifier.Net](https://simplifier.net/), felizmente, é gratuito.
+
+Em sua conta, no canto superior direito encontra-se a opção `SNIPPET`.
+Você pode empregar este recurso para compartilhar recursos FHIR e para validar tais recursos. Ao clicar nesta opção abre-se uma tela como aquela abaixo.
+
+![image](../../../static/img/snippet-amostra-invalida.png)
+
+Observe que terá que indicar a versão, R4, e o escopo, neste caso, as definições da Rede Nacional de Dados em Saúde, conforme ilustrado.
+Neste exemplo, por simplicidade é exeperimentado o recurso Specimen e,
+em particular, o perfil nacional Amostra Biológica. Observe que foi
+introduzido o elemento _status_, justamente para provocar um erro.
