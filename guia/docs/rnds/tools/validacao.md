@@ -66,7 +66,7 @@ fornecido pelo Simplifier.Net, comentado abaixo, o mesmo serviço utilizado pela
 
 https://simplifier.net/redenacionaldedadosemsaude
 
-Naturalmente, todas as definições nacionais devem estar disponíveis e serem conhecidas pelos integradores, até para que possam ser observadas e as validações realizadas.
+Naturalmente, todas as definições nacionais devem ser do conhecimento de integradores e serem empregadas nas validações realizadas. Além do endereço acima as definições podem ser obtidas do próprio portal de serviços da RNDS.
 
 ## Como validar um recurso?
 

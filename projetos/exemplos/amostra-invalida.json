@@ -1,0 +1,17 @@
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": [
+      "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0"
+    ]
+  },
+  "status": "available",
+  "type": {
+    "coding": [
+      {
+        "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+        "code": "SGHEM"
+      }
+    ]
+  }
+}
