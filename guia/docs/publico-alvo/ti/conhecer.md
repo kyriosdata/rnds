@@ -40,7 +40,7 @@ Ao final, espera-se que você saiba:
 - O fluxo típico da interação com a RNDS usando HTTPS.
 - Empregar o certificado digital para obter token de acesso.
 
-Em consequência, estará apto a parte relevante do [conector](../../conector).
+Caso siga, compreenda e tenha praticado cada um dos itens abaixo, terá adquirido parte relevante da habilidade necessária para construir o [conector](../../conector).
 
 ### Pré-requisitos
 
@@ -58,7 +58,7 @@ Conforme ilustrado, a interação com a RNDS depende de várias informações e 
 
   - [Certificado digital](../gestor/certificado). O arquivo correspondente deve estar disponível, é um arquivo com a extensão **.pfx**, aqui será referenciado por **certificado.pfx**. Também será necessária a senha para acesso ao conteúdo do certificado.
 
-  - Baixe o arquivo JSON ([collection](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)), empregado pelo Postman, contendo as requisições a serem submetidas ao ambiente de homologação. Além das requisições este arquivo também contém a documentação de cada uma delas. A documentação das requisições também encontra-se amplamente disponível [online]](https://documenter.getpostman.com/view/215332/TVewY47S).
+  - Baixe o arquivo JSON de ([configuração](https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/postman/rnds-postman-collection.json)) do Postman, contendo exemplos de requisições prontas. Além das requisições este arquivo também contém a documentação de cada uma delas. A [documentação](https://documenter.getpostman.com/view/215332/TVewY47S) das requisições também encontra-se amplamente disponível.
 
 ### Segurança (_headers_)
 
