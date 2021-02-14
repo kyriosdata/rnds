@@ -162,12 +162,16 @@ Variáveis geradas pelo próprio Postman:
 
 A execução de requisições é feita com a seleção da requisição a ser executada e, em seguida, ao clicar no botão `Send`. A requisição será submetida e o retorno será exibido. A sugestão é experimentar mudanças nos parâmetros das requisições, no _payload_ de um resultado de exame, remover um _header_, alterar o valor de um _header_ e observar os resultados. Desta forma será possível adquirir fluência na interação com a RNDS.
 
+### Como criar código correspondente às requisições?
+
+O Postman novamente ajuda aqui. Para cada requisição o Postman apresenta como a mesma pode ser implementada usando várias estratégias, incluindo ferramentas de linha de comandos como **curl** e **wget**, por exemplo, além de código em Java, C#, JavaScript, Swift e outras, perfazendo dezenas de alternativas.
+
+A exceção é a obtenção do token de acesso. Contudo, esta necessidade está devidamente desenvolvida tanto para Java quanto JavaScript e [documentada](../../conector#obter-token-de-acesso).
+
 ### Parabéns!
 
-Os "primeiros contatos" com a RNDS foram estabelecidos. Seguramente,
-após exercitar as várias requisições, a ambientação necessária tanto com
-os dados necessários, quanto aqueles produzidos e a estrutura da requisição
-estará concluída.
+Os "primeiros contatos" com um servidr FHIR, possivelmente do ambiente de homologação da RNDS foram estabelecidos. Seguramente,
+após exercitar as várias requisições, a ambientação necessária tanto com as informações necessárias, quanto aquelas retornadas, e a estrutura da requisição, estará concluída.
 
 O próximo passo é o desenvolvimento do código que executa as requisições exercitadas com o propósito de integração
 entre o estabelecimento de saúde e a RNDS. seja atribuição de cada laboratório, e cada um possui suas especificidades, isto não inviabiliza mais um passo na direção de facilitar esta integração, que é o motivo de existência do presente guia: ilustrar o [conector](../../conector)(software de integração), um componente de software implementado, que pode inspirar ou até ser reutilizado pelo laboratório para a sua integração.
