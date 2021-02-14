@@ -96,7 +96,7 @@ Há muitas opções, conforme a documentação indicada acima. Duas delas inclue
 
 Por fim, a primeira execução inclui a obtenção de várias definições do FHIR, reutilizadas posteriormente e tornando o processo mais rápido.
 
-### Simplifier.Net
+### Simplifier.Net (também valida)
 
 Além de publicar perfis FHIR, como feito pela RNDS, você também pode executar validações diretamente no portal, pelo navegador. Esta é uma opção particularmente útil para ambientação com o FHIR e com os perfis nacionais.
 
@@ -111,3 +111,11 @@ Observe que terá que indicar a versão, R4, e o escopo, neste caso, as definiç
 Neste exemplo, por simplicidade é exeperimentado o recurso Specimen e,
 em particular, o perfil nacional Amostra Biológica. Observe que foi
 introduzido o elemento _status_, justamente para provocar um erro.
+
+Pode-se então salvar o recurso e, na sequência, validar (canto superior direito), o que conduz ao resultado abaixo.
+
+![image](../../../static/img/snippet-amostra-validacao.png)
+
+Observe que pode ser retornado ao modo edição e, se o elemento não permitido no perfil (_status_) é removido, uma nova validação resulta na imagem abaixo.
+
+![image](../../../static/img/snippet-validacao-sucesso.png)
