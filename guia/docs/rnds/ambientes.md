@@ -11,9 +11,15 @@ o ambiente de homologação e o ambiente de produção.
 
 ## Qual ambiente usar?
 
-Durante o desenvolvimento/teste do software que se conecta à RNDS, o ambiente a ser utilizado é o ambiente de homologação.
+Durante o desenvolvimento/teste de software que se conecta à RNDS, 
+o ambiente a ser utilizado é o ambiente de homologação.
 
-Quando o software estiver pronto para cumprir sua função de integração com a RNDS, evidências deverão ser coletadas e submetidas para apreciação, cuja aprovação é necessária para que o acesso ao ambiente de produção seja disponibilizado. Isto é detalhado no processo de [homologação](../publico-alvo/ti/homologar).
+E quando o software for considerado pronto para cumprir sua função de integração 
+com a RNDS? Neste caso, evidências deverão ser coletadas e submetidas pelo 
+estabelecimento de saúde em questão para serem apreciadas pelo DATASUS. 
+Caso a resposta seja positiva, então o acesso ao ambiente de produção 
+é disponibilizado. Isto é detalhado no processo de 
+[homologação](../publico-alvo/ti/homologar).
 
 Após aprovação da requisição de acesso ao ambiente de produção, parte do processo de [homologação](../publico-alvo/ti/homologar), o software de integração do estabelecimento de saúde em questão poderá acessá-lo.
 
