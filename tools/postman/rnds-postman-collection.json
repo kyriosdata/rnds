@@ -1077,16 +1077,8 @@
 	],
 	"variable": [
 		{
-			"key": "individuo-cns",
-			"value": "980016287385192"
-		},
-		{
-			"key": "lab-cnes",
-			"value": "2337991"
-		},
-		{
-			"key": "identificador-solicitante",
-			"value": "14008"
+			"key": "path",
+			"value": "api/fhir/r4"
 		},
 		{
 			"key": "auth",
@@ -1095,6 +1087,18 @@
 		{
 			"key": "ehr",
 			"value": "ehr-services.hmg.saude.gov.br"
+		},
+		{
+			"key": "individuo-cns",
+			"value": "00112233445566"
+		},
+		{
+			"key": "lab-cnes",
+			"value": "1234567"
+		},
+		{
+			"key": "identificador-solicitante",
+			"value": "99"
 		},
 		{
 			"key": "ufg-cnpj",
@@ -1115,10 +1119,6 @@
 		{
 			"key": "individuo-cpf",
 			"value": ""
-		},
-		{
-			"key": "path",
-			"value": "api/fhir/r4"
 		}
 	]
 }
