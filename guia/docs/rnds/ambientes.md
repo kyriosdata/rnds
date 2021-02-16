@@ -11,7 +11,7 @@ o ambiente de homologação e o ambiente de produção.
 
 ## Qual ambiente usar?
 
-Durante o desenvolvimento ou teste de software que se conecta à RNDS,
+Durante o desenvolvimento e/ou teste de software que se conecta à RNDS,
 o ambiente a ser utilizado é o ambiente de homologação.
 
 E quando o software for considerado pronto para cumprir sua função de integração
