@@ -6,8 +6,8 @@ sidebar_label: Conheça os serviços
 
 A conexão com a RNDS ocorre por meio de requisições _https_ em conformidade com o padrão FHIR. As requisições devem partir da infraestrutura empregada pelo estabelecimento de saúde e atingir os _web services_ da RNDS.
 
-As requisições disponíveis estão devidamente [documentadas](https://documenter.getpostman.com/view/2163377/TVRd9Wad). Os _web services_ estão acessíveis por meio de dois
-[ambientes](../../rnds/ambientes).
+As requisições estão devidamente [documentadas](https://documenter.getpostman.com/view/215332/TVewY47S) e disponíveis nos _web services_ dos
+[ambientes](../../rnds/ambientes) oferecidos pela RNDS.
 
 > O foco aqui é esclarecer como submeter tais requisições. Mesmo que o integrador já possua experiência com requisições _https_, é sugerida a leitura deste texto com o propósito de ambientação com os serviços oferecidos pela RNDS.
 
