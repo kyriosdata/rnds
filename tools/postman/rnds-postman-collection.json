@@ -180,11 +180,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -252,11 +247,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -317,11 +307,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -378,11 +363,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
 							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
@@ -457,11 +437,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -528,11 +503,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -598,11 +568,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -626,11 +591,6 @@
 								"Patient"
 							],
 							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
-								},
 								{
 									"key": "identifier",
 									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C{{individuo-cns}}"
@@ -670,11 +630,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							},
-							{
 								"key": "X-Authorization-Server",
 								"value": "Bearer {{access_token}}",
 								"type": "text",
@@ -698,11 +653,6 @@
 								"Patient"
 							],
 							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
-								},
 								{
 									"key": "identifier",
 									"value": "http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcpf%7C{{individuo-cpf}}"
@@ -742,11 +692,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/fhir+json"
-							},
-							{
 								"description": "_Token_ de acesso gerado pelo serviço \"Obter token de acesso\" (serviço de autenticação).",
 								"key": "X-Authorization-Server",
 								"type": "text",
@@ -770,11 +715,6 @@
 								"Patient"
 							],
 							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
-								},
 								{
 									"key": "mothers-name",
 									"value": "nome da mãe",
@@ -818,13 +758,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/fhir+json",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "https://{{uf}}-ehr-services.saude.gov.br/{{path}}/metadata?mode=full",
 							"protocol": "https",
@@ -839,11 +773,6 @@
 								"metadata"
 							],
 							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
-								},
 								{
 									"key": "mode",
 									"value": "full"
@@ -920,7 +849,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\n{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"{{exame-id-lab}}\",\n    \"type\": \"document\",\n    \"timestamp\": \"2020-10-02T11:57:31-03:00\",\n    \"meta\": {\n        \"lastUpdated\": \"2020-10-02T11:57:31-03:00\"\n    },\n    \"identifier\": {\n        \"system\": \"http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}\",\n        \"value\": \"100\"\n    },\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:uuid:transient-0\",\n            \"resource\": {\n                \"resourceType\": \"Composition\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento\",\n                            \"code\": \"REL\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"date\": \"2020-09-29T10:59:53-03:00\",\n                \"author\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0\",\n                            \"value\": \"{{lab-cnes}}\"\n                        }\n                    }\n                ],\n                \"title\": \"Resultado de Exame Laboratorial\",\n                \"section\": [\n                    {\n                        \"entry\": [\n                            {\n                                \"reference\": \"urn:uuid:transient-1\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-1\",\n            \"resource\": {\n                \"resourceType\": \"Observation\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"category\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS\",\n                                \"code\": \"0214\"\n                            }\n                        ]\n                    }\n                ],\n                \"code\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC\",\n                            \"code\": \"94507-1\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"issued\": \"2020-03-23T10:30:12.947-02:00\",\n                \"performer\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0\",\n                            \"value\": \"{{individuo-cns}}\"\n                        }\n                    }\n                ],\n                \"valueCodeableConcept\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame\",\n                            \"code\": \"1\"\n                        }\n                    ]\n                },\n                \"method\": {\n                    \"text\": \"Imunocromatográfico\"\n                },\n                \"referenceRange\": [\n                    {\n                        \"text\": \"(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos\"\n                    }\n                ],\n                \"specimen\": {\n                    \"reference\": \"urn:uuid:transient-2\"\n                }\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-2\",\n            \"resource\": {\n                \"resourceType\": \"Specimen\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0\"\n                    ]\n                },\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL\",\n                            \"code\": \"SGHEM\"\n                        }\n                    ]\n                }\n            }\n        }\n    ]\n}\n  "
+							"raw": "\n{\n    \"resourceType\": \"Bundle\",\n    \"id\": \"{{exame-id-lab}}\",\n    \"type\": \"document\",\n    \"timestamp\": \"2020-10-02T11:57:31-03:00\",\n    \"meta\": {\n        \"lastUpdated\": \"2020-10-02T11:57:31-03:00\"\n    },\n    \"identifier\": {\n        \"system\": \"http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}\",\n        \"value\": \"{{exame-id-lab}}\"\n    },\n    \"entry\": [\n        {\n            \"fullUrl\": \"urn:uuid:transient-0\",\n            \"resource\": {\n                \"resourceType\": \"Composition\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento\",\n                            \"code\": \"REL\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"date\": \"2020-09-29T10:59:53-03:00\",\n                \"author\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0\",\n                            \"value\": \"{{lab-cnes}}\"\n                        }\n                    }\n                ],\n                \"title\": \"Resultado de Exame Laboratorial\",\n                \"section\": [\n                    {\n                        \"entry\": [\n                            {\n                                \"reference\": \"urn:uuid:transient-1\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-1\",\n            \"resource\": {\n                \"resourceType\": \"Observation\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0\"\n                    ]\n                },\n                \"status\": \"final\",\n                \"category\": [\n                    {\n                        \"coding\": [\n                            {\n                                \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS\",\n                                \"code\": \"0214\"\n                            }\n                        ]\n                    }\n                ],\n                \"code\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC\",\n                            \"code\": \"94507-1\"\n                        }\n                    ]\n                },\n                \"subject\": {\n                    \"identifier\": {\n                        \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0\",\n                        \"value\": \"{{individuo-cns}}\"\n                    }\n                },\n                \"issued\": \"2020-03-23T10:30:12.947-02:00\",\n                \"performer\": [\n                    {\n                        \"identifier\": {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0\",\n                            \"value\": \"{{individuo-cns}}\"\n                        }\n                    }\n                ],\n                \"valueCodeableConcept\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame\",\n                            \"code\": \"1\"\n                        }\n                    ]\n                },\n                \"method\": {\n                    \"text\": \"Imunocromatográfico\"\n                },\n                \"referenceRange\": [\n                    {\n                        \"text\": \"(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos\"\n                    }\n                ],\n                \"specimen\": {\n                    \"reference\": \"urn:uuid:transient-2\"\n                }\n            }\n        },\n        {\n            \"fullUrl\": \"urn:uuid:transient-2\",\n            \"resource\": {\n                \"resourceType\": \"Specimen\",\n                \"meta\": {\n                    \"profile\": [\n                        \"http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0\"\n                    ]\n                },\n                \"type\": {\n                    \"coding\": [\n                        {\n                            \"system\": \"http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL\",\n                            \"code\": \"SGHEM\"\n                        }\n                    ]\n                }\n            }\n        }\n    ]\n}\n  "
 						},
 						"url": {
 							"raw": "https://{{ehr}}/{{path}}/Bundle",
@@ -1075,15 +1004,15 @@
 		},
 		{
 			"key": "individuo-cns",
-			"value": "980016287385192"
+			"value": "11223344556677"
 		},
 		{
 			"key": "lab-cnes",
-			"value": "2337991"
+			"value": "112233"
 		},
 		{
 			"key": "identificador-solicitante",
-			"value": "14008"
+			"value": "12345"
 		},
 		{
 			"key": "ufg-cnpj",
@@ -1091,7 +1020,7 @@
 		},
 		{
 			"key": "access_token",
-			"value": "eyJraWQiOiJybmRzIGF1dGgiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTM3NzE1NTQsImV4cCI6MTYxMzc3MzM1NCwiaXNzIjoiUk5EUy1ITUciLCJzdWIiOiIwMTc1ODI2MzE1NiIsImNlcnRpZmljYWRvIjp7InN1YmplY3QiOiJDTj1USEFMWVRBIFJFTkFUQSBBUkFVSk8gU0FOVE9TIFJPRFJJR1VFUzowMTc1ODI2MzE1NixPVT1DZXJ0aWZpY2FkbyBQRiBBMSxPVT0wOTQ2MTY0NzAwMDE5NSxPVT1BQyBTT0xVVEkgTXVsdGlwbGEgdjUsTz1JQ1AtQnJhc2lsLEM9QlIiLCJpc3N1ZXIiOiJDTj1BQyBTT0xVVEkgTXVsdGlwbGEgdjUsIE9VPUFDIFNPTFVUSSB2NSwgTz1JQ1AtQnJhc2lsLCBDPUJSIiwic2VyaWFsTnVtYmVyIjoiMDA6MDA6MDA6MDA6MDA6MDA6MDA6MDA6MDA6MDA6MTE6REU6MjA6MDg6MTg6Mzk6Q0M6QzYiLCJtZDUiOiJBMDoyMjo0RDo4MDpEMzozRDoyQjpGMzpGMjpDMDpGMjozNTo1RToyODo5NzozRCIsInNoYTEiOiI2MzpDRTpGRjpERTpEQzpDNjo0OTo4RjozQzozNjoyQTpDQzo0ODoyMDpFMzpCQzowNDpFNDo3ODoxNiIsInNoYTI1NiI6IjRDOjk4OkIzOjA2OjcxOjg4OkYwOjE1OjAyOjhDOjM5Ojk0OkYyOkMyOkQ3OkY2OkQzOjNCOjczOjNBOkZFOjg0OjZCOjk5OjgwOjEwOjJEOkRCOjYyOjdCOjdCOjMyIiwia2V5TW9kdWx1cyI6IjE4Mjg4OTM1OTgxOTMwMTIyMDU5NDI3OTgwMzU5NDk2MjI5NDYzMjc0NjM0ODA4NDg5NTYwNTk3NjQyNTMzODYzNjI1OTM0MTIyODQ2MDk0MTM2NzQxMDU3MDk4NTM0NDgzMzQ5NjUzNjM5Mzc0ODk3NjYxMzY3MTg1MzY4MDYyNzk3ODU3MDA3MTYzMjYxNDk1NjY2NzI1NjcyNjMyNzEyNjMxNDMwMTI5NDYwODk1NzY3NzM4NjY1OTU0NzI5NDQ3ODQwNTE5NjYwMDQwOTEwMzA3NTk1MjMyODQ5NTUwODM4NjY2NzMzODU1NzYyMTIwNDUyNDczNDc0NTE3NzA1ODczODg3OTk3NTkzMjYzNTQ4Mzk3MDA3OTg1NDczMjg2MjYxOTI2MjcwMDIyMDUyMTgxNDc4NjQ1Mjc0MzU3MjM5MDY1NTk5MDc2MzYyMzU1MTMzMzk5MjUxMzk1MTY2NDEzODYyNjMxNTY0MTEzNjkwMDQ1NTEzMjk0OTY5Mjk2OTA0MzgxOTMwMDE4OTg2OTE3MzQwNDU2MzcyODc0MjA2OTkzNTk3MTU2MzMxNTYwMTk1NDY0NDMwOTgyMzg4MTQ3MzM5NjA3NjQ1ODA0ODMwMDIyMTQyNTM4NTY1MjY2NTUzMzc3OTY4ODE4MDE2MzUyMzU0NjAxMzQxMzA3Njc3MjcyODgzNjM3MTk1ODgwODU4ODA4MDcxMDkyMjk4Nzg2MTM4OTYyNTExOTE1OTkyMzYzMzM0MDk5NDk3MzcyMjE2NDAzMTc2ODc5NTE5MTQ2OTU5NzMyMzA2NjY3Njg5NzM4MDY3Iiwia2V5RXhwb25lbnQiOiI2NTUzNyIsImlzc3VlclNlcmlhbE51bWJlciI6IjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjAwOjBDIiwiaXNzdWVyU2hhMjU2RmluZ2VycHJpbnQiOiJDMjpBNDpERTpDMjoyNTpGQjoyQzo5NDowQzpBNTo0Njo1QTpBQjpENjo3NDoyQjo5RDpFOTo0Njo2QzoyNTozMDpGMDo2OTpBQzpEMDo2RDoyNDo4NToyRDo3QTo0RSJ9LCJwZXNzb2EiOnsiZmlzaWNhIjp0cnVlLCJpZGVudGlmaWNhZG9yIjoiMDE3NTgyNjMxNTYifX0.D8NKVzn5YOJTk3AS7Mxhsk8SLkYFpdhTmJDPDwQiW3B2s7Rjy-MDDT9x9usxfbg8ynZsMpbjWUfM60sy2rSnNW0ReODwx2E1AUoyrrujuDD9JS-gA2eSUSWwYDoRnr9ZFq1mzkZ2bpTDLtqnhke3aZeNn-cJcUwkLoMMAE2H1gMaEfRr7LXDETfIr7ByEmBoMSObGwU_GfKU47aM5K8SyaJDfrNZhOyoxPY7e3rFjeS41b-lQfq1GwfpvnsA_aK_DmW_LsgZ3HllkuI539Y9sgRQWc9Cyelbi2gnM5dHOOHiNTEZZNBbPqS5ZD6FONPO0iltPDwpZQDZYExbTzwxyg"
+			"value": "longaSequenciaDeCaracteres"
 		},
 		{
 			"key": "exame-id-lab",
@@ -1103,7 +1032,7 @@
 		},
 		{
 			"key": "individuo-cpf",
-			"value": "01758263156"
+			"value": "112233445566"
 		}
 	]
 }
