@@ -1,0 +1,6 @@
+- Correções ortográficas
+- Revisão do objetivo do REL (destaque para restrição para COVID)
+- "Manual" usa POST em vez de GET /api/token resposta 405 (method not allowed)
+- Retirada referência a certificado do tipo A3, ou seja, apenas A1 é comentado.
+- Script Postman para acesso atualizado (com documentação mais clara).
+- Evidências de homologação (acrescentado sem validação)

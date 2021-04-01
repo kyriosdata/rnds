@@ -13,9 +13,9 @@ Um certificado digital pode ser adquirido junto a uma _autoridade certificadora_
 O [Serpro](https://www.serpro.gov.br/clientes/certificacao_digital) e os [Correios](https://www.correios.com.br/atendimento/para-o-cidadao/certificado-digital) são dois exemplos.
 
 O certificado digital a ser fornecido no credenciamento do estabelecimento
-de saúde, junto à RNDS, seja o e-CPF ou e-CNPJ, pode ser de dois tipos: A1 ou A3. O A3 é fornecido por meio de um _token_ (hardware) ou _smart card_ e pode ter uma duração (validade) maior do que o A1. Estas opções cabem ao estabelecimento de saúde decidir.
+de saúde, junto à RNDS, seja o e-CPF ou e-CNPJ, pode ser do tipo A1. O A3 é fornecido por meio de um _token_ (hardware) ou _smart card_ e pode ter uma duração (validade) maior do que o A1.
 
-Seja e-CPF ou e-CNPJ, tipo A1 ou A3, o
+Seja e-CPF ou e-CNPJ, tipo A1, o
 certificado deve ser mantido em segurança, assim como a senha empregada
 para acesso ao conteúdo do certificado. Tanto o certificado digital quanto a senha de acesso (código) ao conteúdo do certificado será empregado pelo conector para obter acesso aos serviços oferecidos pela RNDS.
 

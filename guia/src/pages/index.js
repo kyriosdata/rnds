@@ -15,7 +15,7 @@ const features = [
         A Rede Nacional de Dados em Saúde (
         <a href="https://rnds.saude.gov.br/">RNDS</a>) é uma "plataforma
         nacional de integração de dados em saúde" visando a{" "}
-        <i>transformação digital da saúde no Brasil</i>.
+        <i>transformação digital</i> da saúde no Brasil.
       </>
     ),
   },
@@ -74,11 +74,11 @@ function Home() {
                 Rede Nacional de Dados em Saúde ({siteConfig.title})
               </h1>
               <p className="hero__subtitle">
-                Este guia orienta gestores de estabelecimentos de Saúde, bem
-                como profissionais de tecnologia da informação acerca da
-                integração com a RNDS, visando a interoperabilidade de
-                informações em saúde para continuidade do cuidado do usuário no
-                momento da assistência em qualquer lugar do Brasil.
+                Este guia orienta gestores de estabelecimentos de Saúde e
+                profissionais de tecnologia da informação, acerca da integração
+                com a RNDS, visando a interoperabilidade de informações em saúde
+                para continuidade do cuidado do usuário no momento da
+                assistência em qualquer lugar do Brasil.
               </p>
               <div>
                 <Link
