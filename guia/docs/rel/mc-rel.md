@@ -70,7 +70,7 @@ Quem desejar consultar o JSON completo, já "inflado" com os valores para estas 
 
 ### Bundle (_identifier_)
 
-O identificador (_identifier_) do _Bundle_ é montado a partir de dois valores, o identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por {{lab-identificador}} e {{exame-id-lab}}:
+O identificador (_identifier_) do _Bundle_ é definido pelas propriedades `system` e `value`. O identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por `{{lab-identificador}}` e `{{exame-id-lab}}`, são empregados na definição destas duas propriedades:
 
 ```json
 "identifier": {
@@ -79,13 +79,13 @@ O identificador (_identifier_) do _Bundle_ é montado a partir de dois valores, 
 }
 ```
 
-O identificador do solicitante, representado acima por {{lab-identificador}}, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Consulte[identificador do solicitante](../publico-alvo/gestor/identificador) para detalhes.
+O identificador do solicitante, representado acima por `{{lab-identificador}}`, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
 
 O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 
 O laboratório pode optar por criar identificadores sequenciais, por exemplo, "1", "2", e assim por diante. Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim sucessivamente, para resultados produzidos em um determinado dia.
 
-Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/uuid), por exemplo.
+Também pode gerar um identificador universalmente único (_Universally Unique IDentifier_) ou [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e [JavaScript](https://www.npmjs.com/package/nanoid), por exemplo.
 
 De posse tanto do identificador do solicitante, por exemplo, "99", quanto do identificador de um resultado de exame a ser enviado para a RNDS, digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à propriedade _identifier_ do _Bundle_ a ser enviado para a RNDS, seria
 
