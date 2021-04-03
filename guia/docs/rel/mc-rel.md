@@ -4,19 +4,19 @@ title: Modelo Computacional
 sidebar_label: Modelo Computacional
 ---
 
-### Objetivo
+O objetivo é especificar e comentar os recursos FHIR (_resources_) utilizados no registro de um Resultado de Exame Laboratorial (REL). Este objetivo contempla dois cenários básicos de uso de um REL: (a) registro e (b) substituição (eventual necessidade).
 
-Especificar os recursos FHIR (_resources_) utilizados no registro de um Resultado de Exame Laboratorial. Os recursos são identificados e detalhados por meio da representação JSON de um resultado. Ou seja, é para consumo de integradores (profissionais com habilidades em desenvolvimento de software). Gestores e outros profissionais não interessados em detalhes técnicos podem consultar o [modelo de informação](mi-rel) correspondente.
+### Orientações gerais
+
+A representação JSON completa do resultado de exame laboratorial comentado abaixo pode ser obtida [aqui](/assets/exemplo.txt).
+
+O modelo computacional, até pelo nome, é para consumo de integradores (profissionais com habilidades em desenvolvimento de software). Gestores e outros profissionais não interessados em detalhes técnicos podem consultar o [modelo de informação](mi-rel) correspondente.
 
 ### O integrador deverá...
 
 - Saber quais são as informações necessários para montar um resultado de exame de SARS-CoV-2-19.
 - Saber como estes dados devem ser fornecidos no documento JSON exigido pela RNDS.
 - Ser capaz de montar um documento JSON para refletir o resultado de um dado exame.
-
-### Material para consulta
-
-A representação JSON completa de um resultado de exame laboratorial pode ser obtida [aqui](/assets/exemplo.txt).
 
 ## As partes de um resultado
 
@@ -268,7 +268,7 @@ _status_. Define o [Estado da Observação](https://simplifier.net/redenacionald
 "status": "final"
 ```
 
-_category_. Classifica o exame ou teste utilizando um[Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsaude/BRSubgrupoTabelaSUS). Se o diagnóstico é por teste rápido, então o código correspondente é "0214". Ou seja, a propriedade _category_
+_category_. Classifica o exame ou teste utilizando um [Subgrupo da Tabela SUS](https://simplifier.net/redenacionaldedadosemsaude/BRSubgrupoTabelaSUS). Se o diagnóstico é por teste rápido, então o código correspondente é "0214". Ou seja, a propriedade _category_
 para "Diagnóstico por teste rápido" é definida conforme abaixo:
 
 ```json
@@ -316,7 +316,7 @@ que o resultado é produzido e também diferente do instante em que o _Bundle_ f
 "issued": "2020-09-10T10:49:10-03:00"
 ```
 
-_performer_. Identifica o profissional e/ou estabelecimento de saúde responsável pelo resultado do exame. Abaixo a sequência `{{individuo-cns}}` deve ser substituída pelo
+_performer_. Identifica o profissional ou estabelecimento de saúde responsável pelo resultado do exame. Abaixo a sequência `{{individuo-cns}}` deve ser substituída pelo
 CNS do profissional responsável pelo resultado (laudo).
 
 ```json
@@ -353,8 +353,24 @@ qual 1 representa "Detectável", 2 representa "Não detectável" e 3 representa 
 },
 ```
 
-_interpretation_. Interpretação qualitativa de um resultado quantitativo. Propriedade opcional e
-particularmente útil quando se deseja esclarecer o resultado quantitativo do exame.
+_interpretation_. Interpretação qualitativa de um resultado quantitativo. Ou seja, esta propriedade deve ser definida apenas para um resultado quantitativo (em outras palavras, quando _valueQuantity_ for a propriedade empregada). A propriedade _interpretation_ é útil para esclarecer o resultado quantitativo do exame.
+
+Abaixo segue um trecho para um resultado quantitativo. Novamente,
+se o resultado não for quantitativo, então o que segue abaixo não faz parte do resultado, ou seja, as propriedadee _valueQuantity_ e _interpretation_ são substituídas pela propriedade _valueCodeableConcept_.
+
+```json
+"valueQuantity": {
+    "value" : "1,5",
+    "unit" : "UI"
+},
+
+"interpretation" : [ {
+    "coding" : [ {
+        "system" : "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+        "code": "2"
+    }]
+}]
+```
 
 _note_. Comentários sobre os resultados dos exames. Propriedade também opcional. Várias anotações, conforme ilustrado abaixo, podem ser fornecidas.
 
@@ -441,3 +457,30 @@ Embora a única propriedade do perfil seja _type_, ilustrado acima, todo recurso
   }
 }
 ```
+
+## Substituição de um resultado
+
+Um REL já registrado junto à RNDS pode ser substituído. Neste caso, valem todos os comentários já feitos acima para a montagem do REL substituto. O fluxo é o seguinte:
+
+1. Laboratório envia resultado de exame R para a RNDS.
+1. RNDS registra o resultado de exame R e retorna o identificador único por ela criado para o resultado R.
+1. Laboratório guarda o identificador único atribuído pela RNDS ao resultado R.
+1. Laboratório monta um novo resultado, o resultado S que visa substituir o resultado R. A montagem de S é similar à montagem de R e foi comentada nas seções anteriores. Contudo, uma propriedade adicional, **relatesTo**, conforme ilustrada abaixo, é necessária.
+
+```json
+"relatesTo":[
+   {
+      "code":"replaces",
+      "targetReference":{
+         "reference":"Composition/{{exame-id-rnds}}"
+      }
+   }
+]
+```
+
+O valor de `replaces` para **code** indica que o resultado em questão substitui outro. A identificação do resultado substituído, no fluxo acima identificado por resultado R, fica por conta da propriedade _reference_ do objeto _targetReference_.
+
+O valor de _targetReference_ identifica o recurso a ser substituído, neste caso um _Composition_, e exatamente aquele cujo identificador é identificado no exemplo pela sequência
+`{{exame-id-rnds}}`. Convém esclarecer que este identificador não é o identificador fornecido pelo autor (laboratório) ao resultado, mas aquele atribuído ao resultado R pela RNDS, quando R foi submetido.
+
+O identificador de qualquer resultado atribuído pela RNDS é retornado quando o resultado é submetido de forma satisfatória. O retorno ocorre por meio do _header_ identificado por **content-location** ou **location**. Consulte [identificador atribuído pela RNDS ao resultado](../publico-alvo/ti/homologar#código-atribuído-pela-rnds-ao-resultado) para detalhes.

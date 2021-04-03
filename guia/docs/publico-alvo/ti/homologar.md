@@ -13,7 +13,7 @@ e deve ser submetido quando o acesso ao ambiente de produção for requisitado.
 As evidências devem ser preparadas com base em um resultado de exame laboratorial, submetido de forma satisfatória, ao ambiente de homologação. Evidências:
 
 1. Resultado de exame (COVID-19). Conteúdo do _Bundle_ correspondente a um exame laboratorial submetido com sucesso ao ambiente de homologação.
-1. Foto da tela (_screenshot_) do aplicativo [validador](validador) contendo a
+1. Foto da tela (_screenshot_) do aplicativo [validador](../../rnds/tools/validacao) contendo a
    validação com sucesso do _Bundle_ submetido.
 1. Código atribuído pela RNDS ao resultado.
 
