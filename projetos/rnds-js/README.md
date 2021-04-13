@@ -32,9 +32,6 @@ const RNDS = require("rnds");
 // Crie uma instância com logging e segurança habilitados
 const rnds = new RNDS(true, true);
 
-// Uso típico
-// rnds.iniciar().then(... execute chamadas conforme abaixo...);
-
 // Funções empregads para exibição
 const show = console.log;
 const error = (objeto) => console.log("ERRO", objeto);
