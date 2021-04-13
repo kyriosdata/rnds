@@ -4,7 +4,7 @@
   "description": "Biblioteca para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "fhirpath": "^2.6.1",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.4"
   }
 }
