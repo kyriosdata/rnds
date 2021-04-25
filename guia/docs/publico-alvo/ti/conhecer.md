@@ -62,7 +62,7 @@ Conforme ilustrado, a interação com a RNDS depende de várias informações e 
 
 ### Segurança (_headers_)
 
-Toda requisição ao endereço _EHR_(veja [ambientes](../../rnds/ambientes)), faz uso de dois _headers_ obrigatórios, aqui definidos como _headers_ de segurança:
+Toda requisição ao endereço _EHR_ (veja [ambientes](../../rnds/ambientes)), faz uso de dois _headers_ obrigatórios, aqui definidos como _headers_ de segurança:
 
 - **X-Authorization-Server**: este é _header_ por meio do qual o valor do _token_ de acesso é fornecido. O valor deste _header_ é definido pela concatenação de **Bearer ** com o valor do _token_. Em consequência, para o _token_ de valor "token", o valor do _header_ seria `Bearer token`. Convém ressaltar que o _token_ de acesso é uma sequência de mais de 2000 caracteres e, portanto, bem mais extensa que o simples valor "token".
 - **Authorization**: neste _header_ é identificado o profissional de saúde, lotado no estabelecimento de saúde em questão, em nome do qual a requisição é feita. O valor fornecido deve ser o CNS deste profissional.
