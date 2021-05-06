@@ -462,10 +462,12 @@ Embora a única propriedade do perfil seja _type_, ilustrado acima, todo recurso
 
 Um REL já registrado junto à RNDS pode ser substituído. Neste caso, valem todos os comentários já feitos acima para a montagem do REL substituto. O fluxo é o seguinte:
 
-1. Laboratório envia resultado de exame R para a RNDS.
-1. RNDS registra o resultado de exame R e retorna o identificador único por ela criado para o resultado R.
-1. Laboratório guarda o identificador único atribuído pela RNDS ao resultado R.
-1. Laboratório monta um novo resultado, o resultado S que visa substituir o resultado R. A montagem de S é similar à montagem de R e foi comentada nas seções anteriores. Contudo, uma propriedade adicional, **relatesTo**, conforme ilustrada abaixo, é necessária.
+1. Laboratório envia resultado de exame R para a RNDS com identificador I (gerado pelo laboratório).
+1. RNDS registra o resultado de exame R e retorna o identificador único por ela criado para o resultado R. Seja N o valor deste identificador.
+1. Observe que o resultado R é identificado pelo laboratório por I e identificado pela RNDS por N.
+1. Laboratório monta um novo resultado, o resultado S que visa substituir o resultado R. A montagem de S é similar à montagem de R e foi comentada nas seções anteriores. Duas regras devem ser observadas, contudo:
+   1. o identificador de S deve ser I, ou seja, o identificador do documento a ser substituído, R, deve ser o mesmo identificador do documento que o substitui, S. Observe que este identificador é aquele criado pelo laboratório.
+   1. uma propriedade adicional, **relatesTo**, conforme ilustrada abaixo, é necessária.
 
 ```json
 "relatesTo":[
