@@ -77,8 +77,8 @@ function Home() {
                 Este guia orienta gestores de estabelecimentos de Saúde e
                 profissionais de tecnologia da informação, acerca da integração
                 com a RNDS, visando a interoperabilidade de informações em saúde
-                para continuidade do cuidado do usuário no momento da
-                assistência em qualquer lugar do Brasil.
+                para continuidade do cuidado do usuário, no momento da
+                assistência, em qualquer lugar do Brasil.
               </p>
               <div>
                 <Link
