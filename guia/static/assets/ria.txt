@@ -1,0 +1,126 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+      "lastUpdated": "2001-06-23T15:41:19-03:00"
+    },
+    "identifier": {
+      "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}",
+      "value": "{{id-lab-ria}}"
+    },
+    "type": "document",
+    "timestamp": "2001-06-23T15:41:19-03:00",
+    "entry": [
+      {
+        "fullUrl": "urn:uuid:transient-0",
+        "resource": {
+          "resourceType": "Composition",
+          "id": "transient-0",
+          "meta": {
+            "profile": [
+              "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRRegistroImunobiologicoAdministradoCampanha-1.0"
+            ]
+          },
+          "status": "final",
+          "type": {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento",
+                "code": "RIA"
+              }
+            ]
+          },
+          "subject": {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+              "value": "712176901347489"
+            }
+          },
+          "date": "2020-10-07T14:19:29-03:00",
+          "author": [
+            {
+              "identifier": {
+                "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
+                "value": "{{cnes}}"
+              }
+            }
+          ],
+          "title": "Registro de Imunobiologico Administrado na Campanha",
+          "section": [
+            {
+              "entry": [
+                {
+                  "reference": "urn:uuid:transient-1"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "fullUrl": "urn:uuid:transient-1",
+        "resource": {
+          "resourceType": "Immunization",
+          "id": "transient-1",
+          "meta": {
+            "profile": [
+              "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRImunobiologicoAdministradoCampanha-1.0"
+            ]
+          },
+          "extension": [
+            {
+                "url": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRGrupoAtendimento",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRGrupoAtendimento",
+                      "code": "000907"
+                    }
+                  ]
+                }
+              }
+          ],
+          "status": "completed",
+          "vaccineCode": {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRImunobiologico",
+                "code": "15"
+              }
+            ]
+          },
+          "patient": {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+              "value": "712176901347489"
+            }
+          },
+          "occurrenceDateTime": "2020-01-01",
+          "manufacturer": {
+            "reference": "Organization/00394544000185",
+            "display": "Display of Organization/00394544000185"
+          },
+          "lotNumber": "L-transient-1",
+          "performer": [
+            {
+              "function": {
+                "coding": [
+                  {
+                    "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBO",
+                    "code": "223505"
+                  }
+                ]
+              },
+              "actor": {
+                "reference": "Practitioner/980016287706436"
+              }
+            }
+          ],
+          "protocolApplied": [
+              {
+                "doseNumberString": "1"
+              }
+            ]
+          }
+      }
+   ]
+  }

@@ -4,6 +4,461 @@ title: Modelo Computacional
 sidebar_label: Modelo Computacional
 ---
 
-import EmDesenvolvimento from "../../src/pages/_emdesenvolvimento.js";
+O presente modelo computacional detalha como o [modelo de informação](./mi-ria) correspondente
+deve ser registrado em conformidade com o padrão FHIR para um
+Registro de Imunobiológico Administrado em Campanha, ou simplesmente **RIA**, doravante.
 
-<EmDesenvolvimento />
+Adicionalmente, especificidades nacionais, registradas e publicadas
+[amplamente](https://simplifier.net/redenacionaldedadosemsaude) devem
+ser observadas, conforme a documentação que segue.
+
+### Orientações gerais
+
+A representação JSON completa de um Registro de Imunobiológico
+Administrado em Campanha (RIA) pode ser obtido
+[aqui](/assets/ria.txt).
+
+:::info Importante
+O documento acima contém campos identificados por sequências como `{{id-lab-ria}}` que devem ser substituídos pelo valor apropriado. Cada um deles é comentado abaixo.
+:::
+
+O modelo computacional, até pelo nome, é para consumo de
+integradores (profissionais com habilidades em desenvolvimento de
+software). Gestores e outros profissionais não interessados em
+detalhes técnicos podem consultar o [modelo de informação](mi-ria)
+correspondente.
+
+## As partes de um RIA
+
+O Registro de Imunobiológico Administrado em Campanha (RIA) realiza-se
+por meio dos recursos [Composition](https://www.hl7.org/fhir/composition.html) e
+um [Immunization](https://www.hl7.org/fhir/immunization.html). Ambos são necessários.
+
+Convém observar que estes dois recursos FHIR não são usados conforme toda a flexibilidade
+original, mas por meio de perfis (_profiles_) que estabelecem as adaptações/restrições nacionais,
+a saber, respectivamente, por meio dos perfis
+[Registro de Imunobiológico Administrado em Campanha](https://simplifier.net/redenacionaldedadosemsaude/brregistroimunobiologicoadministradocampanha)
+e [Imunobiológico Administrado em Campanha](https://simplifier.net/redenacionaldedadosemsaude/brimunobiologicoadministradocampanha).
+
+### Bundle (pacote)
+
+Adicionalmente, um terceiro recurso FHIR é necessário para montar um
+documento de um registro de imunobiológico administrado,
+o recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html), que funciona
+como um um contêiner para outros recursos FHIR.
+
+Neste caso do RIA, a representação JSON de um documento a ser enviado,
+com algumas partes suprimidas, é fornecida abaixo. Todos os detalhes
+serão fornecidos nas seções seguintes. Esta representação permite
+identificar os dois recursos FHIR citados anteriormente,
+
+```json
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2001-06-23T15:41:19-03:00"
+  },
+  "identifier": { ... omitido ... }
+  "type": "document",
+  "timestamp": "2001-06-23T15:41:19-03:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "transient-0",
+        ...
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Immunization",
+        "id": "transient-1",
+        ...
+      }
+    }
+  ]
+}
+```
+
+Esta representaçào refere-se ao recurso _Bundle_ conforme
+o valor da propriedade _resourceType_. A propriedade
+_meta_ permite identificar quando foi realizada a última
+alteração deste _Bundle_. A propriedade _identifier_ será
+comentada posteriormente.
+A propriedade _type_ indica o propósito do _Bundle_,
+no caso, trata-se de um documento (_document_).
+A propriedade _timestamp_ indica o instante em que o _Bundle_ foi criado,
+provavelmente o mesmo instante da última atualização,
+fornecida na propriedade _meta.lastUpdate_.
+
+A outra propriedade da estrutura parcial acima é _entry_,
+justamente aquela por meio da qual são fornecidos os recursos
+agrupados no _Bundle_, ou seja, _Composition_ e _Immunization_,
+por meio dos perfis nacionais,
+conforme será detalhado nas seções seguintes.
+
+### Bundle (_identifier_)
+
+O identificador (propriedade _identifier_) do _Bundle_ cuja representação
+JSON foi omitida no exemplo acima, é definida por duas propriedades
+`system` e `value`. A definição dos valores destas proprieades,
+conforme ilustrado abaixo, faz uso do identificador do solicitante e do
+identificador do registro, respectivamente representados pelas sequências
+`{{identificador-solicitante}}` e `{{id-lab-ria}}`.
+
+```json
+"identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}",
+    "value": "{{id-lab-ria}}"
+}
+```
+
+O identificador do solicitante, representado acima por
+`{{identificador-solicitante}}`, é fornecido pela RNDS quando o pedido
+de solicitação de acesso à RNDS é aprovado. Cada estabelecimento de saúde
+terá o seu próprio identificador fornecido pela RNDS.
+Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
+
+O identificador do registro, por outro lado, é um identificador criado pelo
+estabelecimento de saúde para unicamente identificar o registro de imunobiológico administrado em questão.
+Quaisquer dois registros produzidos pelo estabelecimento de saúde devem,
+necessariamente, possuir identificadores distintos.
+
+O estabelecimento de saúde pode optar por criar identificadores sequenciais,
+por exemplo, "1", "2", e assim por diante.
+Ou ainda, "2020-09-04-0001", "2020-09-04-0002" e assim sucessivamente,
+dentre inúmeras outras possibilidades.
+
+Também pode gerar um identificador universalmente único
+(_Universally Unique IDentifier_) ou
+[UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+Veja como podem ser gerados em [Java](https://www.baeldung.com/java-uuid) e
+[JavaScript](https://www.npmjs.com/package/nanoid), por exemplo.
+
+De posse tanto do identificador do solicitante, por exemplo, "99",
+quanto do identificador de um registro a ser enviado para a RNDS, `
+digamos "04/09/2020-cdYQj", o trecho do JSON correspondente à
+propriedade _identifier_ do _Bundle_ a ser enviado para a RNDS, seria
+
+```json
+"identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
+    "value": "04/09/2020-cdYQj"
+}
+```
+
+Em consequência, a estrutura JSON pode ser reescrita,
+considerando o preenchimento da propriedade _identifier_, conforme abaixo:
+
+```json
+{
+   "resourceType":"Bundle",
+   "type":"document",
+   "timestamp":"2020-03-20T00:00:00-03:00",
+   "meta": {
+      "lastUpdated": "2020-03-20T00:00:00-03:00"
+   },
+   "identifier": {
+      "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-99",
+      "value": "04/09/2020-cdYQj"
+   },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "transient-0",
+        ...
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Immunization",
+        "id": "transient-1",
+        ...
+      }
+    }
+  ]
+}
+```
+
+### Bundle (recursos agrupados)
+
+Um _Bundle_ é empregado para reunir recursos FHIR, e _entry_,
+destacada abaixo, é a propriedade onde os recursos devem ser fornecidos,
+observe que é um _array_. No caso em questão, este _array_ deve
+possuir duas entradas:
+
+```json
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "transient-0",
+        ...
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Immunization",
+        "id": "transient-1",
+        ...
+      }
+    }
+  ]
+```
+
+Estas duas entradas referem-se respectivamente aos perfis
+nacionais definidos para _Composition_ e _Immunization_, conforme comentado
+acima.
+
+Cada uma destas duas entradas de um documento de registro são identificadas
+unicamente neste _Bundle_. Conforme acima, seus identificadores são
+fornecidos pela propriedade _id_. Todo recurso pode ser unicamente
+identificado por sua propriedade _id_.
+
+Há uma "conexão" entre os recursos de um registro. O recurso _Composition_
+faz referência ao recurso _Immunization_, o que é comentado na
+seção seguinte.
+
+### Referências entre recursos
+
+O FHIR faz uso extensivo do conceito de
+[referência](https://www.hl7.org/fhir/references.html).
+Ou seja, muitos dos elementos que compõem um recurso são
+referências para outros recursos.
+
+Neste caso específico do RIA, o registro de imunobiológico administrado
+faz referência para o imunobiológico propriamente dito, que é fornecido
+em recurso próprio.
+
+Cada entrada do _array_ possui o seu endereço único definido
+pela propriedade _fullUrl_, e o recurso propriamente dito (_resource_),
+apenas parcialmente fornecido. Cada recurso possui o seu próprio
+_resourceType_ e, portanto, sabe-se que os dois recursos fornecidos no
+_Bundle_ de um RIA são um _Composition_ e _Immunization_.
+
+Adicionalmente, a primeira entrada do _array_, recurso
+_Composition_, referencia a segunda entrada, _Immunization_,
+conforme a propriedade _section.entry[0].reference_, ilustrando
+a referência entre recursos.
+
+```json
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "transient-0",
+        ...
+        "section": [
+            {
+              "entry": [
+                {
+                  "reference": "urn:uuid:transient-1"
+                }
+              ]
+            }
+          ]
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Immunization",
+        "id": "transient-1",
+        ...
+      }
+    }
+  ]
+```
+
+## Registro de Imunobiológico Administrado em Campanha (perfil)
+
+Um documento de registro de imunobiológico administrado é
+definido pela RNDS por meio do perfil
+[Registro de Imunobiológico Administrado em Campanha](https://simplifier.net/redenacionaldedadosemsaude/brregistroimunobiologicoadministradocampanha).
+As propriedades deste perfil são documentadas abaixo.
+
+_status_. Identifica o
+[estado do documento](https://simplifier.net/redenacionaldedadosemsaude/ff3b68ef-31be-43d5-b67c-c6fc58023ada).
+São possíveis dois valores: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o documento está concluído.
+A representação JSON correspondente é fornecida abaixo:
+
+```json
+"status": "final"
+```
+
+_type_. Identifica o tipo do documento por meio da propriedade _coding_, que é um _array_, neste caso, de uma entrada apenas e obrigatória. O objeto correspondente a tal entrada possui duas propriedades, _system_ e _code_.
+A primeira define o conjunto de valores possíveis, neste caso, o [Tipo de Documento](https://simplifier.net/redenacionaldedadosemsaude/BRTipoDocumento). A segunda, um dos valores possíveis. Dentre eles há "REL", que representa "Resultado de Exame(s) Laboratorial(is)". Em consequência, esta propriedade é definida conforme abaixo:
+
+```json
+"type": {
+   "coding": [
+      {
+        "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento",
+        "code": "RIA"
+      }
+   ]
+},
+```
+
+_subject_. O indivíduo vacinado. A identificação é fornecida pelo objeto _identifier_, que possui duas propriedades, _system_ e _value_. A primeira, _system_, possui um valor fixo. A segunda, _value_, é utilizada para fornecer o CNS (Cartão Nacional de Saúde) do indivíduo. Abaixo segue a representação desta propriedade na qual, em vez do CNS de um indivíduo, é fornecida a sequência "{{individuo-cns}}".
+
+```json
+"subject": {
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+        "value": "{{individuo-cns}}"
+    }
+},
+```
+
+_date_. Data e hora em que o documento foi gerado, por exemplo:
+
+```json
+"date" : "2020-03-20T00:00:00-03:00"
+```
+
+_author_. Identifica o responsável pelo conteúdo do registro. No caso ilustrado
+abaixo é o estabelecimento de saúde, cujo código CNES deve substituir a sequência`{{lab-cnes}}`.
+
+```json
+"author":[
+   {
+      "identifier":{
+         "system":"http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
+         "value":"{{lab-cnes}}"
+      }
+   }
+],
+```
+
+_title_. O título do documento, para registro de imunobiológico administrado
+é o valor fornecido abaixo.
+
+```json
+"title": "Registro de Imunobiologico Administrado na Campanha"
+```
+
+_section_. Define as seções empregadas pelo registro. Neste caso há uma única
+seção na qual é registrado o [Imunobiológico Administrado em Campanha](https://simplifier.net/redenacionaldedadosemsaude/brimunobiologicoadministradocampanha).
+Ou seja, a única seção é um recurso FHIR, _Immunization_ definido
+pelo perfil citado.
+
+```json
+"section": [
+    {
+        "entry": [
+            {
+                "reference": "urn:uuid:transient-1"
+            }
+        ]
+    }
+]
+```
+
+## Imunobiológico Administrado em Campanha (recurso)
+
+O perfil [Imunobiológico Administrado em Campanha](https://simplifier.net/redenacionaldedadosemsaude/brimunobiologicoadministradocampanha)
+identifica o imunobiológico administrado. As propriedades pertinentes são
+identificadas abaixo.
+
+_status_. Define o [Estado da Observação](https://simplifier.net/redenacionaldedadosemsaude/brestadoobservacao-1.0). São dois valores possíveis: "final" e "entered-in-error". Neste caso, o valor correto é "final", para indicar que o diagnóstio está concluído. A representação JSON correspondente é fornecida abaixo:
+
+```json
+"status": "final"
+```
+
+_vaccineCode_.
+
+```json
+"category": [
+    {
+      "coding": [
+       {
+         "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS",
+         "code": "0214"
+       }
+      ]
+    }
+],
+```
+
+_patient_.
+
+```json
+"code": {
+    "coding": [
+        {
+            "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC",
+            "code": "94507-1"
+        }
+    ]
+},
+```
+
+_occurenceDateTime_.
+
+```json
+"subject": {
+    "identifier": {
+        "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+        "value": "{{individuo-cns}}"
+    }
+},
+```
+
+_manufacturer_.
+
+```json
+"issued": "2020-09-10T10:49:10-03:00"
+```
+
+_lotNumber_.
+
+_performer_. Identifica o profissional ou estabelecimento de saúde responsável pelo resultado do exame. Abaixo a sequência `{{individuo-cns}}` deve ser substituída pelo
+CNS do profissional responsável pelo resultado (laudo).
+
+```json
+"performer": [
+    {
+        "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRPessoaJuridicaProfissionalLiberal-1.0",
+            "value": "{{individuo-cns}}"
+        }
+    }
+],
+```
+
+_protocolApplied_.
+
+## Substituição de um registro
+
+Um REL já registrado junto à RNDS pode ser substituído. Neste caso, valem todos os comentários já feitos acima para a montagem do REL substituto. O fluxo é o seguinte:
+
+1. Laboratório envia resultado de exame R para a RNDS com identificador I (gerado pelo laboratório).
+1. RNDS registra o resultado de exame R e retorna o identificador único por ela criado para o resultado R. Seja N o valor deste identificador.
+1. Observe que o resultado R é identificado pelo laboratório por I e identificado pela RNDS por N.
+1. Laboratório monta um novo resultado, o resultado S que visa substituir o resultado R. A montagem de S é similar à montagem de R e foi comentada nas seções anteriores. Duas regras devem ser observadas, contudo:
+   1. o identificador de S deve ser I, ou seja, o identificador do documento a ser substituído, R, deve ser o mesmo identificador do documento que o substitui, S. Observe que este identificador é aquele criado pelo laboratório.
+   1. uma propriedade adicional, **relatesTo**, conforme ilustrada abaixo, é necessária.
+
+```json
+"relatesTo":[
+   {
+      "code":"replaces",
+      "targetReference":{
+         "reference":"Composition/{{exame-id-rnds}}"
+      }
+   }
+]
+```
+
+O valor de `replaces` para **code** indica que o resultado em questão substitui outro. A identificação do resultado substituído, no fluxo acima identificado por resultado R, fica por conta da propriedade _reference_ do objeto _targetReference_.
+
+O valor de _targetReference_ identifica o recurso a ser substituído, neste caso um _Composition_, e exatamente aquele cujo identificador é identificado no exemplo pela sequência
+`{{exame-id-rnds}}`. Convém esclarecer que este identificador não é o identificador fornecido pelo autor (laboratório) ao resultado, mas aquele atribuído ao resultado R pela RNDS, quando R foi submetido.
+
+O identificador de qualquer resultado atribuído pela RNDS é retornado quando o resultado é submetido de forma satisfatória. O retorno ocorre por meio do _header_ identificado por **content-location** ou **location**. Consulte [identificador atribuído pela RNDS ao resultado](../publico-alvo/ti/homologar#código-atribuído-pela-rnds-ao-resultado) para detalhes.
