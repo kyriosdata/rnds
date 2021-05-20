@@ -5,7 +5,7 @@
     },
     "identifier": {
       "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-{{identificador-solicitante}}",
-      "value": "{{id-lab-ria}}"
+      "value": "{{id-es-ria}}"
     },
     "type": "document",
     "timestamp": "2001-06-23T15:41:19-03:00",
@@ -14,7 +14,6 @@
         "fullUrl": "urn:uuid:transient-0",
         "resource": {
           "resourceType": "Composition",
-          "id": "transient-0",
           "meta": {
             "profile": [
               "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRRegistroImunobiologicoAdministradoCampanha-1.0"
@@ -60,7 +59,6 @@
         "fullUrl": "urn:uuid:transient-1",
         "resource": {
           "resourceType": "Immunization",
-          "id": "transient-1",
           "meta": {
             "profile": [
               "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRImunobiologicoAdministradoCampanha-1.0"
