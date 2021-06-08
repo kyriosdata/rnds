@@ -59,6 +59,13 @@ function obtemConfiguracao() {
   };
 }
 
+/**
+ * Funcão que retorna função a ser empregada para logging, ou seja,
+ * console.log ou função vazia (sem efeito).
+ *
+ * @param {bool} logging Verdadeiro para habilitar logging via console.log ou false para desabilitar.
+ * @returns {function} Função empregada para logging, possivelmente vazia, sem efeito, caso o argumento fornecido seja false.
+ */
 function log(logging) {
   if (logging) {
     console.log("logging enabled");
@@ -96,7 +103,7 @@ class RNDS {
     this.log("RNDS_EHR", this.cfg.ehr);
     this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
-    this.cache = new Token(this.log, this.cfg, security, this.send);
+    this.cache = new Token(this.log, this.cfg, !!security, this.send);
   }
 
   /**
