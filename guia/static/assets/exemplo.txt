@@ -16,7 +16,7 @@
         "resourceType": "Composition",
         "meta": {
           "profile": [
-            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1"
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-2.0"
           ]
         },
         "status": "final",
@@ -61,7 +61,7 @@
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0"
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-2.0"
           ]
         },
         "status": "final",
@@ -89,6 +89,7 @@
             "value": "700500572752652"
           }
         },
+        "effectiveDateTime": "2021-06-08T09:23:00-03:00",
         "issued": "2020-03-23T10:30:12.947-02:00",
         "performer": [
           {

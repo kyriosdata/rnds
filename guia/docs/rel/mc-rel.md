@@ -4,13 +4,13 @@ title: Modelo Computacional
 sidebar_label: Modelo Computacional
 ---
 
-O objetivo é especificar e comentar os recursos FHIR (_resources_) utilizados no registro de um Resultado de Exame Laboratorial (REL). Este objetivo contempla dois cenários básicos de uso de um REL: (a) registro e (b) substituição (eventual necessidade).
+Especifica e comenta os recursos FHIR (_resources_) utilizados no registro de um Resultado de Exame Laboratorial (REL), tanto para registro quanto para substituição de um registro (eventual necessidade).
 
 ### Orientações gerais
 
-A representação JSON completa do resultado de exame laboratorial comentado abaixo pode ser obtida [aqui](/assets/exemplo.txt).
-
 O modelo computacional, até pelo nome, é para consumo de integradores (profissionais com habilidades em desenvolvimento de software). Gestores e outros profissionais não interessados em detalhes técnicos podem consultar o [modelo de informação](mi-rel) correspondente.
+
+A representação JSON completa do resultado de exame laboratorial comentado abaixo pode ser obtida [aqui](/assets/exemplo.txt).
 
 ### O integrador deverá...
 
@@ -20,10 +20,14 @@ O modelo computacional, até pelo nome, é para consumo de integradores (profiss
 
 ## As partes de um resultado
 
-O resultado de exame laboratorial, por exemplo, o resultado do exame de SARS-CoV-2-19, é definido por meio de um recurso [Composition](https://www.hl7.org/fhir/composition.html), que referencia um recurso [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html). Todos estes três recursos são necessários.
+O resultado de exame laboratorial, especificamente, o resultado do exame de SARS-CoV-2-19, é definido por meio de um recurso [Composition](https://www.hl7.org/fhir/composition.html), que referencia um recurso [Observation](https://www.hl7.org/fhir/observation.html) que, por fim, faz uso de um tercerio recurso FHIR, o [Specimen](https://www.hl7.org/fhir/specimen.html). Todos estes três recursos são necessários.
 
-Estes três recursos FHIR não são usados conforme definidos, mas por meio de perfis (_profiles_) que permitem adaptações. As adaptações para o contexto nacional, definidas pela RNDS, são [Resultado
-de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2) (_Composition_), [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) (_Observation_) e, por fim, [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) (_Specimen_).
+Estes três recursos FHIR não são usados conforme definidos, mas por meio de perfis (_profiles_) que permitem adaptações. As adaptações para o contexto nacional, definidas pela RNDS, são:
+
+- [Resultado
+  de Exame Laboratorial](https://simplifier.net/redenacionaldedadosemsaude/brresultadoexamelaboratorial-duplicate-2) (_Composition_),
+- [Diagnóstico em Laboratório Clínico](https://simplifier.net/redenacionaldedadosemsaude/BRDiagnosticoLaboratorioClinico) (_Observation_) e, por fim,
+- [Amostra Biológica](https://simplifier.net/redenacionaldedadosemsaude/BRAmostraBiologica) (_Specimen_).
 
 ### Bundle (pacote)
 
@@ -308,6 +312,9 @@ _subject_. Identifica o indivíduo associado ao exame ou teste. O valor é o mes
     }
 },
 ```
+
+_effectiveDateTime_. A data e a hora da coleta da amostra para a realização do exame. Por exemplo, "2021-06-08" para o oitavo dia do mês de junho de 2021. Se a hora for fornecida, então o correto é "2021-06-08T09:23:00-03:00",
+onde a hora, os minutos e os segundos necessariamente são fornecidos, com dois dígitos, seguidos da _timezone_. Conforme [aqui](https://en.wikipedia.org/wiki/Time_in_Brazil), o Brasil possui quatro _timezones_. O valor **-03:00** correspondente ao horário de Brasília. Uma coleta realizada no Acre, deverá usar **-05:00**, por exemplo.
 
 _issued_. Data/hora em que o resultado foi liberado. Este instante pode ser diferente daquele em
 que o resultado é produzido e também diferente do instante em que o _Bundle_ foi produzido. Um exemplo é fornecido abaixo:

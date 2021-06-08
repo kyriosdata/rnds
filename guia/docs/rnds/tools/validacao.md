@@ -4,13 +4,19 @@ title: Validação de Recursos
 sidebar_label: Validação
 ---
 
-A validação visa assegurar que recursos criados e/ou recebidos são válidos. Vários [critérios](https://www.hl7.org/fhir/validation.html) podem ser considerados na validação de recursos FHIR, como a presença de elementos obrigatórios, a cardinalidade de coleções e outros.
+A validação visa assegurar que as informações criadas e/ou recebidas estão em conformidade com os perfis nacionais, além das exigências predefinidas pelo FHIR.
 
-Além das exigências predefinidas pelo FHIR, também é possível validar a conformidade em relação a perfis (que introduzem restrições para atender necessidades locais não contempladas pelo FHIR). De fato, a RNDS estabelece dezenas de perfis (profiles), ValueSets, CodeSystems e Extensions.
+Vários [critérios](https://www.hl7.org/fhir/validation.html) podem ser considerados na validação de recursos FHIR, como a presença de elementos obrigatórios, a cardinalidade de coleções e outros.
 
-## Onde encontrar as definições nacionais?
+## Onde encontrar as definições nacionais (perfis)?
 
 Naturalmente, todas as definições nacionais devem ser do conhecimento de integradores e serem empregadas nas validações realizadas. Todas elas podem ser baixadas do [Portal de Serviços da RNDS](https://servicos-datasus.saude.gov.br/) ou ainda do Simplifier.Net, onde as definições da RNDS também estão [publicadas](https://simplifier.net/redenacionaldedadosemsaude).
+
+:::info Detalhe Simplifier.Net
+Canto superior direito, _Download_ e, na sequência,
+_Zip valid resources as XML_. Baixe e descomprima o arquivo
+em diretório a ser fornecido para a aplicação de validação (comentada posteriormente).
+:::
 
 ## Recurso válido (e outro inválido)
 
