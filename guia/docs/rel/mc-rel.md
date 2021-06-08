@@ -314,7 +314,13 @@ _subject_. Identifica o indivíduo associado ao exame ou teste. O valor é o mes
 ```
 
 _effectiveDateTime_. A data e a hora da coleta da amostra para a realização do exame. Por exemplo, "2021-06-08" para o oitavo dia do mês de junho de 2021. Se a hora for fornecida, então o correto é "2021-06-08T09:23:00-03:00",
-onde a hora, os minutos e os segundos necessariamente são fornecidos, com dois dígitos, seguidos da _timezone_. Conforme [aqui](https://en.wikipedia.org/wiki/Time_in_Brazil), o Brasil possui quatro _timezones_. O valor **-03:00** correspondente ao horário de Brasília. Uma coleta realizada no Acre, deverá usar **-05:00**, por exemplo.
+onde a hora, os minutos e os segundos necessariamente são fornecidos, com dois dígitos, seguidos da _timezone_. Conforme [aqui](https://en.wikipedia.org/wiki/Time_in_Brazil), o Brasil possui quatro _timezones_ e
+cada estabelecimento de saúde deverá usar a _timezone_ correspondente. O valor **-03:00** correspondente ao horário de Brasília, por outro lado,
+um estabelecimento localizado no Acre, deverá usar **-05:00**. Abaixo é ilustrada esta entrada para um estabelecimento no estado de Goiás:
+
+```json
+"effectiveDateTime": "2020-09-10T10:49:10-03:00"
+```
 
 _issued_. Data/hora em que o resultado foi liberado. Este instante pode ser diferente daquele em
 que o resultado é produzido e também diferente do instante em que o _Bundle_ foi produzido. Um exemplo é fornecido abaixo:
