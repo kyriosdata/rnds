@@ -35,20 +35,28 @@ const https = require("follow-redirects").https;
  *
  * @returns {Configuracao} a configuração a ser empregada para acesso à RNDS.
  */
-function configuracao() {
-  return {
-    auth: process.env.RNDS_AUTH,
-    certificado: process.env.RNDS_CERTIFICADO_ENDERECO,
-    senha: process.env.RNDS_CERTIFICADO_SENHA,
-    ehr: process.env.RNDS_EHR,
-    requisitante: process.env.RNDS_REQUISITANTE_CNS,
-  };
-}
+function obtemConfiguracao() {
+  function check(nome, valor) {
+    if (!valor || valor.length === 0) {
+      throw new Error(`variável ${nome} não definida ou vazia`);
+    }
 
-function check(nome, valor) {
-  if (!valor || valor.length === 0) {
-    throw new Error(`variavel ${nome} não definida ou vazia`);
+    return valor;
   }
+
+  return {
+    auth: check("RNDS_AUTH", process.env.RNDS_AUTH),
+    certificado: check(
+      "RNDS_CERTIFICADO_ENDERECO",
+      process.env.RNDS_CERTIFICADO_ENDERECO
+    ),
+    senha: check("RNDS_CERTIFICADO_SENHA", process.env.RNDS_CERTIFICADO_SENHA),
+    ehr: check("RNDS_EHR", process.env.RNDS_EHR),
+    requisitante: check(
+      "RNDS_REQUISITANTE_CNS",
+      process.env.RNDS_REQUISITANTE_CNS
+    ),
+  };
 }
 
 function log(logging) {
@@ -142,10 +150,6 @@ class Token {
     this.log("Criando serviço de acesso a token.");
     this.log("Security is", security ? "ON" : "OFF");
 
-    check("RNDS_AUTH", configuracao.auth);
-    check("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
-    check("RNDS_CERTIFICADO_SENHA", configuracao.senha);
-
     let pfx = undefined;
     try {
       pfx = fs.readFileSync(configuracao.certificado);
@@ -173,7 +177,9 @@ class Token {
      * então renove-o.
      */
     function securityEnabled() {
-      return this.access_token ? Promise.resolve() : this.renoveAccessToken();
+      return this.access_token
+        ? Promise.resolve("access_token disponível")
+        : this.renoveAccessToken();
     }
 
     this.getToken = security ? securityEnabled : securityDisabled;
@@ -251,12 +257,9 @@ class RNDS {
     this.log = log(!!logging);
 
     // Mantém todas as informações de configuração de acesso
-    this.cfg = configuracao();
+    this.cfg = obtemConfiguracao();
 
     this.send = sendService(this.log);
-
-    check("RNDS_EHR", this.cfg.ehr);
-    check("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
     this.log("RNDS_EHR", this.cfg.ehr);
     this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
@@ -558,4 +561,4 @@ class RNDS {
   }
 }
 
-module.exports = RNDS;
+module.exports = { RNDS, Token, obtemConfiguracao, sendService };
