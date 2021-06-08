@@ -29,17 +29,21 @@ test("github zen", async () => {
   expect(resposta.retorno).toBeTruthy();
 });
 
-test("nome de github user", async () => {
-  const options = {
-    method: "GET",
-    path: "/users/kyriosdata",
-    headers: {
-      "User-Agent": "kyriosdata",
-    },
-    hostname: "api.github.com",
-  };
+// Teste abaixo exige autenticação para assegurar execução correta
+// Sem autenticação limite pode ser atingido e teste falha
 
-  const resposta = await send(options);
-  const json = JSON.parse(resposta.retorno);
-  expect(json.name).toBe("Fábio Nogueira de Lucena");
-});
+// test("nome de github user", async () => {
+//   const options = {
+//     method: "GET",
+//     path: "/users/kyriosdata",
+//     headers: {
+//       "User-Agent": "kyriosdata",
+//     },
+//     hostname: "api.github.com",
+//   };
+
+//   const resposta = await send(options);
+//   const json = JSON.parse(resposta.retorno);
+//   console.log(json);
+//   expect(json.name).toBe("Fábio Nogueira de Lucena");
+// });

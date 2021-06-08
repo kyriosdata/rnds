@@ -1,3 +1,6 @@
+const Token = require("./Token");
+const sendService = require("./send");
+
 /**
  * A resposta fornecida pela RNDS, conforme recebida, para a requisição
  * submetida. O código de retorno é fornecido pela propriedade
