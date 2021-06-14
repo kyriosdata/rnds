@@ -12,6 +12,17 @@ Biblioteca que encapsula requisições submetidas para a RNDS por meio de uma in
 </dependency>
 ```
 
+### Código
+
+```java
+RNDS rnds = new RNDSBuilder().build();
+final RNDS.Resposta resposta = rnds.cnes("2337991");
+// "resposta" conterá o resultado da requisição, neste caso, busca por CNES.
+// resposta.code (código HTTP resposta)
+// resposta.retorno (payload) e
+// resposta.headers (headers retornados). 
+```
+
 ### Links
 
 - [keytool](https://docs.oracle.com/javase/10/tools/keytool.htm#JSWOR-GUID-5990A2E4-78E3-47B7-AE75-6D1826259549)
