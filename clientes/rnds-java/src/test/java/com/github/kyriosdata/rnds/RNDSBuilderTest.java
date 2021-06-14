@@ -6,12 +6,21 @@
 
 package com.github.kyriosdata.rnds;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.github.kyriosdata.rnds.RNDSBuilder.RNDS_CERTIFICADO_ENDERECO;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RNDSBuilderTest {
+
+    private static String keystore;
+
+    @BeforeAll
+    public static void before() {
+        keystore = System.getenv(RNDS_CERTIFICADO_ENDERECO);
+    }
 
     @Test
     public void authNaoDefinido() {
@@ -37,8 +46,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void passowrdNaoDefinido() {
-        final String keystore = fromResource("certificado.jks");
-
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
                         .password(null)
@@ -49,8 +56,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void requisitanteNaoDefinido() {
-        final String keystore = fromResource("certificado.jks");
-
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
                         .keystore(keystore)
@@ -62,8 +67,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void estadoNaoDefinido() {
-        final String keystore = fromResource("certificado.jks");
-
         Throwable retorno = assertThrows(NullPointerException.class,
                 () -> new RNDSBuilder().auth("auth").ehr("ehr")
                         .keystore(keystore)
@@ -76,8 +79,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void construcaoEsperadaTodosArgumentosExigidosFornecidos() {
-        final String keystore = fromResource("certificado.jks");
-
         new RNDSBuilder().auth("auth").ehr("ehr")
                 .keystore(keystore)
                 .password("senha".toCharArray())
@@ -88,17 +89,13 @@ public class RNDSBuilderTest {
 
     @Test
     public void homologacaoSemVariaveisDeAmbiente() {
-        final String keystore = fromResource("certificado.jks");
-
-        new RNDSBuilder().keystore(keystore).password(new char[]{})
+                new RNDSBuilder().keystore(keystore).password(new char[]{})
                 .requisitante("requisitante").estado("AC")
                 .homologacao();
     }
 
     @Test
     public void homologacaoAuthEhrPadrao() {
-        final String keystore = fromResource("certificado.jks");
-
         new RNDSBuilder().keystore(keystore).password(new char[]{})
                 .auth(null)
                 .ehr(null)
@@ -108,8 +105,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void producaoAuthEhrPadrao() {
-        final String keystore = fromResource("certificado.jks");
-
         new RNDSBuilder().keystore(keystore).password(new char[]{})
                 .auth(null)
                 .ehr(null)
@@ -119,8 +114,6 @@ public class RNDSBuilderTest {
 
     @Test
     public void producaoAuthEhrPadraoSemEstadoFalha() {
-        final String keystore = fromResource("certificado.jks");
-
         Throwable excecao = assertThrows(NullPointerException.class, () ->
                 new RNDSBuilder().keystore(keystore).password(new char[]{})
                         .auth(null)

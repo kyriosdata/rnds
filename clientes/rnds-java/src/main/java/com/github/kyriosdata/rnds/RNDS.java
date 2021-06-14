@@ -26,22 +26,12 @@ import java.util.logging.Logger;
 public class RNDS {
 
     static final Logger logger = Logger.getLogger("RNDS");
-    /**
-     * Endereço do serviço de autenticação.
-     */
-    private final String auth;
+
     /**
      * Endereço dos serviços de saúde.
      */
     private final String ehr;
-    /**
-     * Caminho para o arquivo contendo o certificado digital.
-     */
-    private final String keystore;
-    /**
-     * Senha de acesso ao conteúdo do certificado digital.
-     */
-    private final char[] password;
+
     /**
      * Cache do requisitante (CNS) em nome do qual requisições serão
      * realizadas, se não dito o contrário por cada requisição.
@@ -56,7 +46,7 @@ public class RNDS {
      * <i>Token</i> de acesso aos serviços da RNDS. Este valor é reutilizado
      * por cerca de 30 minutos. Após este período, deve ser renovado.
      */
-    private String token;
+    private AccessToken tokenCache;
 
     /**
      * Cria objeto por meio do qual interação com a RNDS é encapsulada por
@@ -88,19 +78,19 @@ public class RNDS {
                 final String requisitante,
                 final Estado estado) {
         // AUTH (prefixo https://) (sufixo /api/)
-        Objects.requireNonNull(auth, "auth");
-        this.auth = String.format("https://%s/api/", auth);
 
         Objects.requireNonNull(ehr, "ehr");
         this.ehr = ehr;
-        this.keystore = Objects.requireNonNull(keystore, "keystore");
-        this.password = Objects.requireNonNull(password, "password");
         this.requisitante = Objects.requireNonNull(requisitante,
                 "requisitante");
         this.estado = Objects.requireNonNull(estado, "estado");
 
         // Cache token para uso na primeira requisição
-        token();
+        Objects.requireNonNull(auth, "auth");
+        Objects.requireNonNull(keystore, "keystore");
+        Objects.requireNonNull(password, "password");
+        final String url = String.format("https://%s/api/token", auth);
+        tokenCache = new AccessToken(url, keystore, password);
     }
 
     /**
@@ -128,16 +118,6 @@ public class RNDS {
             logger.warning("EXCECAO: " + exception);
             return null;
         }
-    }
-
-    /**
-     * Obtém a URI empregada para requisitar <i>token</i> de acesso.
-     *
-     * @return A sequência completa da URI para requisição de <i>token</i>
-     * de acesso.
-     */
-    public String forAuth() {
-        return String.format("https://%s/api/token", auth);
     }
 
     /**
@@ -181,8 +161,9 @@ public class RNDS {
                 (HttpsURLConnection) url.openConnection();
         servico.setRequestMethod(method);
         servico.setRequestProperty("Content-Type", "application/json");
-        servico.setRequestProperty("X-Authorization-Server",
-                "Bearer " + token);
+
+        final String token = tokenCache.token();
+        servico.setRequestProperty("X-Authorization-Server", "Bearer " + token);
         servico.setRequestProperty("Authorization", requisitante);
         servico.setInstanceFollowRedirects(true);
 
@@ -222,17 +203,6 @@ public class RNDS {
         }
     }
 
-    /**
-     * Recupera <i>token</i> de acesso aos serviços da RNDS.
-     *
-     * @return O <i>access_token</i> exigido para acesso aos serviços da
-     * RNDS.
-     */
-    public String token() {
-        token = AccessToken.get(auth + "token", keystore, password);
-        return token;
-    }
-
     public Resposta contexto(final String cnes,
                              final String profissional,
                              final String paciente) {
@@ -260,10 +230,10 @@ public class RNDS {
     public Resposta lotacao(final String cns, final String cnes) {
         final String dst =
                 "?practitioner.identifier=http%3A%2F%2Frnds.saude.gov" +
-                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" + cns +
-                "&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
-                ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" + cnes +
-                "&_include=PractitionerRole%3Aorganization";
+                        ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" + cns +
+                        "&organization.identifier=http%3A%2F%2Frnds.saude.gov" +
+                        ".br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" + cnes +
+                        "&_include=PractitionerRole%3Aorganization";
         return send("GET", "api/fhir/r4/PractitionerRole", dst, null);
     }
 

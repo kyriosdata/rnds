@@ -21,14 +21,44 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.security.*;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.cert.CertificateException;
+import java.time.Instant;
 
 /**
- * Classe exclusiva para obtenção de <i>token</i> de acesso aos serviços
- * oferecidos pela RNDS.
+ * Implementação de política de obtenção e uso de token de acesso
+ * aos serviços oferecidos pela RNDS>
  */
 public class AccessToken {
+
+    /**
+     * Mantém cliente (cache) para acesso ao serviço de autenticação da RNDS.
+     */
+    private CloseableHttpClient cliente;
+
+    /**
+     * Cache para requisição HTTP (get) para o serviço de autenticação.
+     */
+    private HttpGet get;
+
+    /**
+     * Indica validade do token. Sempre que o instante corrente não
+     * ocorrer após a 'validade', tem-se que o token disponível é
+     * válido. Inicialmente está no passado, para assegurar que
+     * primeira tentativa forçará obtenção do token.
+     */
+    private Instant validade;
+
+    /**
+     * Token armazenado para reutilização, durante o período
+     * em que é válido (30 minutos).
+     */
+    private String token;
+
     private static SSLContext sslCtx(final String keystore,
                                      final char[] password)
             throws GeneralSecurityException {
@@ -49,9 +79,6 @@ public class AccessToken {
                 keyManagerFactory.getKeyManagers(),
                 trustManagerFactory.getTrustManagers(),
                 new SecureRandom());
-
-        // É necessário?
-        // SSLContext.setDefault(sslContext);
 
         return sslContext;
     }
@@ -87,6 +114,7 @@ public class AccessToken {
      * Extrai do JSON fornecido o valor do par cujo nome é "access_token".
      * Assume que a entrada contém JSON válido e que o par de nome
      * "access_token" está presente.
+     * TODO assume que token está montado corretamente, resposta pode ser diferente
      *
      * @param payload O JSON do qual o valor será extraído.
      * @return O valor do par cujo nome é "access_token" no JSON fornecido.
@@ -131,8 +159,29 @@ public class AccessToken {
         }
     }
 
+    private String newToken() {
+        try (CloseableHttpResponse response = cliente.execute(get)) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            response.getEntity().writeTo(baos);
+
+            // Resposta do servidor
+            final int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new RuntimeException("expected 200 got " + statusCode);
+            }
+
+            String payload = baos.toString();
+            return extrairToken(payload);
+        } catch (RuntimeException | IOException e) {
+            RNDS.logger.warning(e.toString());
+        }
+
+        return "";
+    }
+
     /**
-     * Obtém <i>token</i> para acesso aos serviços de integração da RNDS.
+     * Cria objeto que implementa política de token de acesso para autenticação em
+     * serviços oferecidos pela RNDS.
      *
      * @param server           Endereço do serviço que verifica o certificado
      *                         e, se devidamente autorizado, oferece o
@@ -141,33 +190,52 @@ public class AccessToken {
      *                         Pode se o caminho (<i>path</i>) ou endereço
      *                         <i>web</i>, iniciado por <i>http</i>.
      * @param keyStorePassword A senha de acesso ao certificado.
-     * @return O <i>token</i> a ser utilizado para requisitar serviços da RNDS.
-     * O valor {@code null} é retornado em caso de falha.
      */
-    public static String get(
+    public AccessToken(
             final String server,
             final String keystoreEndereco,
             final char[] keyStorePassword) {
         try {
             SSLContext context = sslCtx(keystoreEndereco, keyStorePassword);
-            try (CloseableHttpClient cliente = getClient(context)) {
+            cliente = getClient(context);
 
-                HttpGet get = new HttpGet(server);
-                get.addHeader("accept", "application/json");
-                try (CloseableHttpResponse response = cliente.execute(get)) {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    response.getEntity().writeTo(baos);
+            get = new HttpGet(server);
+            get.addHeader("accept", "application/json");
 
-                    // Resposta do servidor
-                    String payload = baos.toString();
-
-                    return extrairToken(payload);
-                }
-            }
-        } catch (IOException | GeneralSecurityException e) {
+            // Nenhum token é válido, inicialmente.
+            invalidar();
+        } catch (RuntimeException | GeneralSecurityException e) {
             RNDS.logger.warning(e.toString());
         }
+    }
 
-        return null;
+    /**
+     * Invalida o token. Isto significa que chamada ao
+     * método {@link #token()} irá recuperar novo valor.
+     */
+    public void invalidar() {
+         validade = Instant.now().minusMillis(1000);
+    }
+
+    /**
+     * Recupera token disponível para acesso aos serviços da RNDS.
+     * O token retornado pode ser o mesmo retornado em consulta
+     * anterior, caso ainda esteja no período de validade.
+     *
+     * <p>Chave o método </p>
+     * @return
+     */
+    public String token() {
+        Instant agora = Instant.now();
+        if (agora.isBefore(validade)) {
+            return token;
+        }
+
+        token = newToken();
+        if (token.length() != 0) {
+            validade = Instant.now().plusSeconds(29 * 60);
+        }
+
+        return token;
     }
 }

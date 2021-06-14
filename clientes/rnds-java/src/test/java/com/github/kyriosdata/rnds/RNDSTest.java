@@ -72,38 +72,6 @@ public class RNDSTest {
     }
 
     @Test
-    public void recuperarTokenViaVariaveisDeAmbiente() {
-        final String token = rnds.token();
-
-        String[] split_string = token.split("\\.");
-        String base64EncodedHeader = split_string[0];
-        String base64EncodedBody = split_string[1];
-
-        Base64 base64Url = new Base64(true);
-        String header = new String(base64Url.decode(base64EncodedHeader));
-        assertTrue(header.contains("kid"));
-        assertTrue(header.contains("rnds auth"));
-        assertTrue(header.contains("RS256"));
-
-        String body = new String(base64Url.decode(base64EncodedBody));
-        assertTrue(body.contains("RNDS-HMG"));
-        assertTrue(body.contains("ICP-Brasil"));
-    }
-
-    @Test
-    void uriParaObterToken() {
-        assertTrue(rnds.forAuth().endsWith("/api/token"));
-        assertTrue(rnds.forAuth().contains("https"));
-    }
-
-    @Test
-    void uriParaContexto() {
-        String ca = rnds.forEhr("api/contexto-atendimento");
-        assertTrue(ca.contains("https"));
-        assertTrue(ca.endsWith("/api/contexto-atendimento"));
-    }
-
-    @Test
     void cnesConhecido() {
         final String cnes = "2337991";
 
@@ -175,7 +143,7 @@ public class RNDSTest {
     void contextoSemCnesFalha() {
         final RNDS.Resposta resposta = rnds.contexto("cnes",
                 requisitante, requisitante);
-        assertEquals(500, resposta.code, resposta.retorno);
+        assertEquals(422, resposta.code, resposta.retorno);
     }
 
     @Test
