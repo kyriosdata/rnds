@@ -16,8 +16,8 @@ bem como na atenção especializada o internamento.
 Essas informações também estarão acessíveis aos cidadãos.
 
 :::tip Importante
-O resultado de exame laboratorial está restrito
-aos resultados de exame de COVID-19. Outros exames não estão contemplados.
+O resultado de exame laboratorial, aqui documentado, está restrito
+aos resultados de exame de COVID-19.
 :::
 
 ## Público-alvo

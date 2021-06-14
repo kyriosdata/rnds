@@ -288,7 +288,15 @@ para "Diagnóstico por teste rápido" é definida conforme abaixo:
 ],
 ```
 
-_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/redenacionaldedadosemsaude/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsaude/brnomeexameloinc) e códigos da tabela [Exames do GAL](https://simplifier.net/redenacionaldedadosemsaude/brnomeexamegal). O trecho abaixo ilustra um
+_code_. Identifica o exame ou teste. Os valores são obtidos de códigos de [Nome do Exame](https://simplifier.net/redenacionaldedadosemsaude/BRNomeExame-1.0), que é formada pela união dos valores fornecidos na tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsaude/brnomeexameloinc) e códigos da tabela [Exames do GAL](https://simplifier.net/redenacionaldedadosemsaude/brnomeexamegal).
+
+:::caution Restrição
+Laboratórios privados NÃO devem usar os códigos da tabela
+[Exames do GAL](https://simplifier.net/redenacionaldedadosemsaude/brnomeexamegal). Ou seja, tais laboratórios devem usar
+exclusivamente a tabela [Exames LOINC](https://simplifier.net/redenacionaldedadosemsaude/brnomeexameloinc).
+:::
+
+O trecho abaixo ilustra um
 exame identificado pelo código LOINC correspondente, neste caso, "94507-1", que designa "SARS Coronavírus 2, [dosagem de] anticorpo IgG em soro ou plasma por imunoensaio".
 
 ```json
@@ -347,9 +355,9 @@ O resultado propriamente dito de um exame é fornecido
 por apenas uma de duas propriedades possíveis. Se o resultado é quantitativo, então a propriedade que registra o resultado é _valueQuantity_. Se o resultado, por outro lado, é qualitativo, então a propriedade empregada é
 _valueCodeableConcept_.
 
-_valueQuantity_. Use esta propriedade quando o valor do resultado é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)).
+_valueQuantity_. Use esta propriedade quando o valor do resultado é quantitativo ([Quantity](https://www.hl7.org/fhir/datatypes.html#Quantity)). Neste caso, também forneça a interpretação (campo _interpretation_ comentado abaixo).
 
-_valueCodeableConcept_. Use esta propriedade quando o valor do resultado é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)).
+_valueCodeableConcept_. Use esta propriedade quando o valor do resultado é qualitativo ([CodeableConcept](https://www.hl7.org/fhir/datatypes.html#CodeableConcept)). Neste caso, não forneça a interpretação (campo _interpretation_ comentado abaixo).
 
 No trecho JSON abaixo o resultado é qualitativo e o código obtido da tabela
 [Resultado qualitativo do Exame](https://simplifier.net/redenacionaldedadosemsaude/BRResultadoQualitativoExame), na
