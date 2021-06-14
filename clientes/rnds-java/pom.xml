@@ -5,7 +5,7 @@
     <groupId>com.github.kyriosdata</groupId>
     <artifactId>rnds-lib</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
 

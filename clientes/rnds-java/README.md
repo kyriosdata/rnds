@@ -8,7 +8,7 @@ Biblioteca que encapsula requisições submetidas para a RNDS por meio de uma in
 <dependency>
   <groupId>com.github.kyriosdata</groupId>
   <artifactId>rnds-lib</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
 </dependency>
 ```
 
