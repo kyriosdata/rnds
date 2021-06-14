@@ -6,9 +6,11 @@
 
 package com.github.kyriosdata.rnds;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.net.ssl.SSLHandshakeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,6 +47,15 @@ public class AccessTokenTest {
         }
 
         rnds = new RNDSBuilder().build();
+    }
+
+    /**
+     * Veja como corrigir...
+     * https://stackoverflow.com/questions/21076179/pkix-path-building-failed-and-unable-to-find-valid-certification-path-to-requ
+     */
+    @Test
+    public void tokenConformeVariaveisDeAmbienteSemAcrescentarCertificadoToCacerts() {
+        assertNull(rnds.token());
     }
 
     @Test

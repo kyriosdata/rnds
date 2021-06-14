@@ -1,6 +1,6 @@
 ﻿# Biblioteca
 
-Projeto que implementa biblioteca para facilitar acesso aos serviços da RNDS.
+Biblioteca que encapsula requisições submetidas para a RNDS por meio de uma interface em Java.
 
 ### Maven
 
@@ -8,7 +8,7 @@ Projeto que implementa biblioteca para facilitar acesso aos serviços da RNDS.
 <dependency>
   <groupId>com.github.kyriosdata</groupId>
   <artifactId>rnds-lib</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.3</version>
 </dependency>
 ```
 

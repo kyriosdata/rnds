@@ -210,7 +210,7 @@ public class RNDSBuilder {
      */
     public RNDSBuilder estado(String estado) {
         try {
-            this.estado = RNDS.Estado.valueOf(estado);
+            this.estado = RNDS.Estado.valueOf(estado.toUpperCase());
         } catch (Exception exception) {
             this.estado = null;
         }

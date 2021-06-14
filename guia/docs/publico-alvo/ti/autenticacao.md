@@ -1,7 +1,7 @@
 ---
 id: autenticacao
-title: Autenticação
-sidebar_label: Autenticação
+title: Autenticação Java
+sidebar_label: Autenticação Java
 ---
 
 Java apenas faz uso de comunicação via SSL quando a aplicação em questão "confia" no serviço com o qual está interagindo. A confiança é estabelecida por meio do conteúdo de um arquivo, o _keystore_.
@@ -30,7 +30,7 @@ pelo DATASUS.
 
 ### Certificado DATASUS
 
-Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**, se for o Chrome, clique no cadeado ao lado da URL e,
+Abra o seu navegador e navegue até **ehr-auth-hmg.saude.gov.br**, por conveniência clique https://ehr-auth-hmg.saude.gov.br. Ignore a resposta do navegador, se for o Chrome, clique no cadeado ao lado da URL e,
 na sequência, na opção "Certificado (válido)", o resultado será algo parecido com a tela abaixo:
 
 ![image](https://user-images.githubusercontent.com/1735792/92937056-3cd65900-f421-11ea-8325-0a7cfa5794cd.png)
@@ -90,3 +90,13 @@ Observe que nenhum destes certificado é da autoridade certificadora "Let's Encr
 ```shell
 keytool -importcert -file letsencryptauthorityx3.der -keystore certificado.jks -storepass secret -alias letsencrypt
 ```
+
+## Exibindo conteúdo "cacerts"
+
+No diretório **lib/security/cacerts** contém certificados que a JVM
+"confia". A lista deve incluir o certificado da autoridade certificadora que
+emitiu o certificado da RNDS.
+
+A senha fornecida por padrão é "changeit". Naturalmente, você pode auterá-la.
+
+- `keytool -import -alias rnp -keystore cacerts -file rnp.cer`
