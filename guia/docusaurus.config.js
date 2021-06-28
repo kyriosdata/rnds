@@ -10,11 +10,7 @@ module.exports = {
   themes: ["@docusaurus/theme-live-codeblock"],
   themeConfig: {
     navbar: {
-      title: "Guia",
-      logo: {
-        alt: "Guia de Integração RNDS",
-        src: "img/guia-logo.png",
-      },
+      title: "Portal de Serviços",
       items: [
         {
           to: "docs/introducao",
@@ -22,50 +18,9 @@ module.exports = {
           label: "Conteúdo",
           position: "left",
         },
-        { to: "blog", label: "Notícias", position: "left" },
       ],
     },
-    footer: {
-      style: "dark",
-      links: [
-        {
-          title: "Tópicos",
-          items: [
-            {
-              label: "Resultado de Exame Laboratorial",
-              to: "docs/rel/objetivo-rel",
-            },
-            {
-              label: "Sumário de Alta (SA)",
-              to: "docs/sa/objetivo-sa",
-            },
-            {
-              label: "Registro de Atendimento Clínico (RAC)",
-              to: "docs/rac/objetivo-rac",
-            },
-          ],
-        },
-        {
-          title: "Comunidade",
-          items: [
-            {
-              label: "GitHub",
-              href: "https://github.com/kyriosdata/rnds",
-            },
-          ],
-        },
-        {
-          title: "Outros",
-          items: [
-            {
-              label: "Notícias",
-              to: "blog",
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © 2020, 2021 DATASUS (Ministério da Saúde)`,
-    },
+
     algolia: {
       apiKey: "773e8639e2cf11a7a1b3e06912c0a294",
       indexName: "rnds",

@@ -1,7 +1,8 @@
-# Guia de Integração RNDS
+# Portal de Integração com a RNDS
 
-O Guia faz uso da ferramenta [Docusaurus 2](https://v2.docusaurus.io/).
-Conforme a própria definição no portal, "um gerador de site estático moderno".
+O portal é desenvolvido com [Docusaurus 2](https://docusaurus.io/) que se
+apresenta como "um gerador de site estático moderno". O framework
+empregado para definição de estilos é o [Infima](https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima).
 
 ### Instalação
 

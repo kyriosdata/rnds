@@ -39,6 +39,19 @@ code {
   background-color: var(--ifm-color-success-lightest);
 }
 
+.rodape {
+  background-color: #043464;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+.footer__logo {
+  width: 250px;
+  max-width: 300px;
+}
+
 .emDesenvolvimento {
   font-size: 20px;
   color: gray;

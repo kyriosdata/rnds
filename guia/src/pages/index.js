@@ -63,7 +63,8 @@ function Home() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Guia ${siteConfig.title}`}
+      class="meuleiaute"
+      title={`${siteConfig.title}`}
       description="Guia de Integração da RNDS"
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
@@ -71,14 +72,15 @@ function Home() {
           <div class="row">
             <div class="col">
               <h1 className="hero__title titulo">
-                Rede Nacional de Dados em Saúde ({siteConfig.title})
+                Rede Nacional de Dados em Saúde (RNDS)
               </h1>
               <p className="hero__subtitle">
-                Este guia orienta gestores de estabelecimentos de Saúde e
-                profissionais de tecnologia da informação, acerca da integração
-                com a RNDS, visando a interoperabilidade de informações em saúde
-                para continuidade do cuidado do usuário, no momento da
-                assistência, em qualquer lugar do Brasil.
+                Este portal tem como objetivo orientar gestores de
+                estabelecimentos de Saúde e profissionais de tecnologia da
+                informação, acerca da integração com a RNDS, visando a
+                interoperabilidade de informações em saúde para continuidade do
+                cuidado do usuário, no momento da assistência, em qualquer lugar
+                do Brasil.
               </p>
               <div>
                 <Link
@@ -88,7 +90,7 @@ function Home() {
                   )}
                   to={useBaseUrl("docs/passo-a-passo")}
                 >
-                  Passo a passo
+                  Acesso aos modelos clínicos: informacional e computacional
                 </Link>
               </div>
             </div>
@@ -123,6 +125,34 @@ function Home() {
           </section>
         )}
       </main>
+
+      <footer class="footer rodape">
+        <div class="container container--fluid">
+          <div class="row footer__links">
+            <div class="col footer__col">
+              <img
+                class="footer__logo"
+                alt="Facebook Open Source Logo"
+                src="img/acesso.png"
+              />
+            </div>
+            <div class="col footer__col">
+              <img
+                class="footer__logo"
+                alt="Facebook Open Source Logo"
+                src="img/datasus.png"
+              />
+            </div>
+            <div class="col footer__col">
+              <img
+                class="footer__logo"
+                alt="Facebook Open Source Logo"
+                src="img/ms.png"
+              />
+            </div>
+          </div>
+        </div>
+      </footer>
     </Layout>
   );
 }
