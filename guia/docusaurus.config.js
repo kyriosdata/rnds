@@ -8,14 +8,19 @@ module.exports = {
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
   projectName: "rnds", // Usually your repo name.
   themes: ["@docusaurus/theme-live-codeblock"],
+  trailingSlash: false,
   themeConfig: {
     navbar: {
       title: "Guia",
       items: [
         {
+          to: "docs/rel/objetivo-rel",
+          label: "Modelos",
+          position: "left",
+        },
+        {
           to: "docs/introducao",
-          activeBasePath: "docs",
-          label: "Conteúdo",
+          label: "Contexto",
           position: "left",
         },
         {
@@ -54,7 +59,6 @@ module.exports = {
         sitemap: {
           changefreq: "weekly",
           priority: 0.5,
-          trailingSlash: false,
         },
       },
     ],

@@ -1,5 +1,5 @@
 module.exports = {
-  someSidebar: [
+  contexto: [
     "introducao",
     "conector",
     {
@@ -45,11 +45,19 @@ module.exports = {
         },
       ],
     },
+    "faq",
+  ],
+  modelos: [
     {
       "Resultado de Exame Laboratorial (REL)": [
         "rel/objetivo-rel",
         "rel/mi-rel",
         "rel/mc-rel",
+      ],
+      "Registro de Imunobiológico Administrado (RIA)": [
+        "ria/objetivo-ria",
+        "ria/mi-ria",
+        "ria/mc-ria",
       ],
       "Sumário de Alta (SA)": ["sa/objetivo-sa", "sa/mi-sa", "sa/mc-sa"],
       "Registro de Atendimento Clínico (RAC)": [
@@ -57,12 +65,6 @@ module.exports = {
         "rac/mi-rac",
         "rac/mc-rac",
       ],
-      "Registro de Imunobiológico Administrado (RIA)": [
-        "ria/objetivo-ria",
-        "ria/mi-ria",
-        "ria/mc-ria",
-      ],
     },
-    "faq",
   ],
 };
