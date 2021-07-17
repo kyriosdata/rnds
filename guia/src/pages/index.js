@@ -105,10 +105,14 @@ function Home() {
                 A <b>integração com a RNDS</b> é apresentada na forma de uma
                 sequência de atividades (passo a passo), que envolve o gestor
                 (responsável pelo estabelecimento de saúde) e o integrador
-                (desenvolvedor de software). Esta integração promove a troca
-                sistemática de informação em saúde, que é descrita aqui pelo
-                Modelo Informacional e pelo Modelo Computacional, acompanhados
-                de outras orientações.
+                (desenvolvedor de software). Esta integração promove a troca de
+                informação em saúde, descrita pelos modelos Informacional e
+                Computacional, acompanhados de outras orientações. Um curso
+                completo, gratuito e online encontra-se disponível&nbsp;
+                <a href="https://www.unasus.gov.br/cursos/oferta/418988">
+                  aqui
+                </a>
+                .
               </div>
             </div>
           </div>

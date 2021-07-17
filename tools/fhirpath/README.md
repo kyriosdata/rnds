@@ -9,6 +9,8 @@ Esta implementação é empregada nos exemplos fornecidos abaixo.
 
 ### Instalação
 
+Projeto que usa a implementação [fhirpath](https://github.com/HL7/fhirpath.js) em Javascript.
+
 ```shell
 $ git clone https://github.com/kyriosdata/rnds
 $ cd rnds/tools/fhirpath

@@ -10,12 +10,17 @@ module.exports = {
   themes: ["@docusaurus/theme-live-codeblock"],
   themeConfig: {
     navbar: {
-      title: "Portal de Serviços",
+      title: "Guia",
       items: [
         {
           to: "docs/introducao",
           activeBasePath: "docs",
           label: "Conteúdo",
+          position: "left",
+        },
+        {
+          to: "https://servicos-datasus.saude.gov.br/",
+          label: "Portal de Serviços",
           position: "left",
         },
       ],
