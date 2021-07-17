@@ -20,24 +20,25 @@ const features = [
     ),
   },
   {
-    title: "Foco no integrador",
+    title: "Guia",
     imageUrl: "img/integrador.png",
     description: (
       <>
-        O <i>Guia</i> é produzido com foco no <i>integrador</i> (desenvolvedor
-        de software). O principal artefato é o software que requisita serviços
-        oferecidos pela RNDS.
+        Este <i>Guia</i> inclui orientações para gestores e integradores, além
+        de modelos de informação e computacional correspondentes a cada troca de
+        informação em saúde com a RNDS.
       </>
     ),
   },
   {
-    title: "Conteúdo",
+    title: "Curso",
     imageUrl: "img/conteudo.png",
     description: (
       <>
-        O <i>Guia</i> inclui contexto, passos, orientações, código, enfim, o
-        conteúdo suficiente para compreender e colocar em funcionamento a
-        integração com a RNDS.
+        Se você é desenvolvedor de software e está interessado na integração com
+        a RNDS, então consulte o{" "}
+        <a href="https://www.unasus.gov.br/cursos/oferta/418988">curso</a>{" "}
+        gratuito e online para detalhes.
       </>
     ),
   },
@@ -107,12 +108,7 @@ function Home() {
                 (responsável pelo estabelecimento de saúde) e o integrador
                 (desenvolvedor de software). Esta integração promove a troca de
                 informação em saúde, descrita pelos modelos Informacional e
-                Computacional, acompanhados de outras orientações. Um curso
-                completo, gratuito e online encontra-se disponível&nbsp;
-                <a href="https://www.unasus.gov.br/cursos/oferta/418988">
-                  aqui
-                </a>
-                .
+                Computacional, acompanhados de outras orientações.
               </div>
             </div>
           </div>
