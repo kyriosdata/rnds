@@ -37,7 +37,12 @@ const features = [
       <>
         Se você é desenvolvedor de software e está interessado na integração com
         a RNDS, então consulte o{" "}
-        <a href="https://www.unasus.gov.br/cursos/oferta/418988">curso</a>{" "}
+        <a
+          href="https://www.unasus.gov.br/cursos/oferta/418988"
+          target="_blank"
+        >
+          curso
+        </a>{" "}
         gratuito e online para detalhes.
       </>
     ),
