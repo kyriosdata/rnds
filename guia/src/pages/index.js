@@ -94,7 +94,7 @@ function Home() {
                     "button button--outline button--secondary button--lg",
                     styles.getStarted
                   )}
-                  to={useBaseUrl("docs/passo-a-passo")}
+                  to={useBaseUrl("docs/rel/objetivo-rel")}
                 >
                   Acesso aos modelos clínicos: informacional e computacional
                 </Link>
