@@ -97,6 +97,6 @@ No diretório **lib/security/cacerts** contém certificados que a JVM
 "confia". A lista deve incluir o certificado da autoridade certificadora que
 emitiu o certificado da RNDS.
 
-A senha fornecida por padrão é "changeit". Naturalmente, você pode auterá-la.
+A senha fornecida por padrão é "changeit". Naturalmente, você pode alterá-la.
 
 - `keytool -import -alias rnp -keystore cacerts -file rnp.cer`
