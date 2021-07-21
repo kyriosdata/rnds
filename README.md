@@ -9,7 +9,7 @@ Documentação detalhada de serviços disponível em dois formatos:
 
 - [Portal](https://documenter.getpostman.com/view/2163377/TVRd9Wad) recomendado para consulta.
 
-- Arquivo [json](./tools/postman/rnds-postman-collection.json) exigido para a configuração do Postman.
+- [Documentação](https://documenter.getpostman.com/view/215332/TVewY47S) de requisições de exemplo via Postman.
 
 Desenvolvedores:
 
