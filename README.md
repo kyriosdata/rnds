@@ -5,9 +5,7 @@
 - Versão mais recente: https://kyriosdata.github.io/rnds
 - Versão oficial: https://rnds-guia.saude.gov.br/
 
-Documentação detalhada de serviços disponível em dois formatos:
-
-- [Portal](https://documenter.getpostman.com/view/2163377/TVRd9Wad) recomendado para consulta.
+Documentação detalhada das requisições disponíveis:
 
 - [Documentação](https://documenter.getpostman.com/view/215332/TVewY47S) de requisições de exemplo via Postman.
 
