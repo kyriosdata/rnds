@@ -32,7 +32,11 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 const RNDS = require("rnds");
 
 // Crie uma instância com logging e segurança habilitados
-const rnds = new RNDS(true, true);
+// Adicionalmente, se o terceiro argumento é verdadeiro, então
+// verifica se versão de cliente e servidor são compatíveis,
+// bem como requisita token e o guarda em cache. Em qualquer destes
+// casos, em caso de falha, exceção é gerada.
+const cliente = RNDS.cliente(true, true, true);
 
 // Funções empregads para exibição
 const show = console.log;
@@ -45,36 +49,36 @@ const error = (objeto) => console.log("ERRO", objeto);
 
 // Contexto de atendimento
 // (deve ser fornecido o CNES, cns do profissional e do paciente)
-// rnds.contextoAtendimento("c", "p", "u").then(show).catch(error);
+// cliente.contextoAtendimento("c", "p", "u").then(show).catch(error);
 
 // Exibe informações do estabelecimento de saúde (CNES fornecido)
-// rnds.cnes("2337991").then(show).catch(error);
+// cliente.cnes("2337991").then(show).catch(error);
 
 // Exibe informações sobre papéis de profissional de saúde
-// rnds.lotacao("p", "cnes").then(show).catch(error);
+// cliente.lotacao("p", "cnes").then(show).catch(error);
 
 // Exibe resultado para consulta ao CNPJ fornecido
-// rnds.cnpj("01567601000143").then(show);
+// cliente.cnpj("01567601000143").then(show);
 
 // Exibe informações sobre profissional de saúde (CNS).
 // Quando CNS omitido, é usado o do requisitante definido
 // por variável de ambiente.
 // (código da resposta será 404 para CNS não encontrado)
-// rnds.cns("cns").then(show);
+// cliente.cns("cns").then(show);
 
 // Exibe informações sobre o profissional de saúde
 // Retorna code 200 mesmo quando não encontrado (verifique payload)
-// rnds.cpf("cpf").then(show).catch(error);
+// cliente.cpf("cpf").then(show).catch(error);
 
 // Exibe informações sobre o paciente
-// rnds.paciente("cpf do paciente").then(show);
+// cliente.paciente("cpf do paciente").then(show);
 
 // Submete um resultado de exame depositado no arquivo "exame.json".
 // (um identificador único é gerado pelo instante corrente)
 // const resultado = JSON.parse(fs.readFileSync("exame.json"));
 // resultado.identifier.value = new Date().toString();
 // const payload = JSON.stringify(resultado);
-// rnds.notificar(payload).then(show).catch(error);
+// cliente.notificar(payload).then(show).catch(error);
 ```
 
 ### Alguns links pertinentes

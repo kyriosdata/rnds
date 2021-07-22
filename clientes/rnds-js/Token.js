@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { config } = require("process");
 
 /**
  * Classe que oferece token de acesso aos serviços da RNDS usando
@@ -63,6 +64,9 @@ class Token {
         : this.renoveAccessToken();
     }
 
+    /**
+     * Recupera token.
+     */
     this.getToken = security ? securityEnabled : securityDisabled;
   }
 
@@ -93,17 +97,19 @@ class Token {
       }
     };
 
-    return requestAccessToken().then((o) => {
-      if (o.code === 200) {
-        // Guarda em cache o access token para uso posterior
-        this.access_token = JSON.parse(o.retorno).access_token;
-        this.log("access_token redefinido");
-        return Promise.resolve(this.access_token);
-      } else {
-        this.access_token = undefined;
-        return Promise.reject("falha ao obter access_token");
-      }
-    });
+    return requestAccessToken()
+      .then((o) => {
+        if (o.code === 200) {
+          // Guarda em cache o access token para uso posterior
+          this.access_token = JSON.parse(o.retorno).access_token;
+          this.log("access_token redefinido");
+          return Promise.resolve(this.access_token);
+        } else {
+          this.access_token = undefined;
+          return Promise.reject("falha ao obter access_token");
+        }
+      })
+      .catch(() => Promise.reject("senha inválida (erro ao obter token)"));
   }
 }
 
