@@ -1,0 +1,18 @@
+{
+  "name": "rnds-testes",
+  "version": "1.0.0",
+  "description": "Testes de serviços oferecidos pela RNDS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Fábio Nogueira de Lucena",
+  "license": "MIT",
+  "dependencies": {
+    "rnds": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
