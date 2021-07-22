@@ -2,6 +2,13 @@ const Token = require("./Token");
 const sendService = require("./send");
 
 /**
+ * Versão contemplada pelo presente cliente.
+ * Apenas servidor que implementa esta versão
+ * será considerado.
+ */
+const FHIR_VERSION = "4.0.1";
+
+/**
  * A resposta fornecida pela RNDS, conforme recebida, para a requisição
  * submetida. O código de retorno é fornecido pela propriedade
  * code. O payload pela propriedade retorno e, pela propriedade headers,
@@ -31,7 +38,8 @@ const sendService = require("./send");
  * variáveis de ambiente.
  *
  * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
- * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR e (e) RNDS_REQUISITANTE_CNS.
+ * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR, (e) RNDS_REQUISITANTE_CNS
+ * e (f) RNDS_REQUISITANTE_UF.
  *
  * @returns {Configuracao} a configuração a ser empregada para acesso à RNDS.
  */
@@ -56,6 +64,7 @@ function obtemConfiguracao() {
       "RNDS_REQUISITANTE_CNS",
       process.env.RNDS_REQUISITANTE_CNS
     ),
+    uf: check("RNDS_REQUISITANTE_UF", process.env.RNDS_REQUISITANTE_UF),
   };
 }
 
@@ -104,6 +113,53 @@ class RNDS {
     this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
 
     this.cache = new Token(this.log, this.cfg, !!security, this.send);
+  }
+
+  /**
+   * Cria uma instância necessária para a conexão com o ambiente de
+   * homologação ou produção da RNDS.
+   *
+   * @param {boolean} logging O valor true para habilitar o logging ou
+   * false, caso contrário.
+   *
+   * @param {boolean} security O valor false para indicar que token de
+   * acesso não deve ser empregado ou true,
+   * para empregar token de acesso.
+   *
+   * @param {boolean} check O valor deve ser verdadeiro para indicar
+   * que a verificação de versão deve ser realizada. Se o servidor empregar
+   * versão diferente do cliente, então gera exceção.
+   */
+  static async cliente(logging, security, check) {
+    const rnds = new RNDS(logging, security);
+    if (check) {
+      await rnds.checkVersion();
+      await rnds.cache.getToken();
+    }
+
+    return rnds;
+  }
+
+  /**
+   * Verifica compatibilidade entre a versão do servidor e o cliente.
+   *
+   * @returns true se a versão do cliente é compatível com aquela do
+   * servidor.
+   */
+  async checkVersion() {
+    const CAPABILITY = {
+      method: "GET",
+      path: "/api/fhir/r4/metadata",
+      headers: {},
+      maxRedirects: 20,
+      hostname: `${this.cfg.uf}-ehr-services.saude.gov.br`,
+    };
+
+    const resposta = await this.send(CAPABILITY);
+    const json = JSON.parse(resposta.retorno);
+    if (json.fhirVersion !== FHIR_VERSION) {
+      throw new Error(`Cliente: ${FHIR_VERSION} e server ${json.fhirVersion}`);
+    }
   }
 
   /**
