@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "env-cmd -f d:/meu/rr/configuracao.env node index.js"
   },
   "author": "Fábio Nogueira de Lucena",
   "license": "MIT",
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "rnds": "^0.1.4"
   },
   "devDependencies": {

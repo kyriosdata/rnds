@@ -3,7 +3,8 @@ const { RNDS } = require("rnds");
 async function inicio() {
   const cliente = await RNDS.cliente(true, true, true);
 
-  // Apenas para ilustrar já é chamada pela configuração acima.
+  // Apenas para assegurar que todas as funções são executadas,
+  // pois esta já é chamada (veja parâmetros acima).
   cliente.checkVersion();
 
   // CNES
