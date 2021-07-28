@@ -4,6 +4,11 @@ O portal é desenvolvido com [Docusaurus 2](https://docusaurus.io/) que se
 apresenta como "um gerador de site estático moderno". O framework
 empregado para definição de estilos é o [Infima](https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima).
 
+### Qualidade
+
+- Verificar links ([W3C Link Checker](https://validator.w3.org/checklink))
+- Verificar links ([Google Search Console](https://www.google.com/webmasters/tools/home))
+
 ### Instalação
 
 ```
