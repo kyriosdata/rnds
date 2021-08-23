@@ -5,7 +5,7 @@ sidebar_label: Modelo Computacional
 ---
 
 O presente modelo computacional refere-se ao
-Registro de Imunobiológico Administrado em Campanha, ou simplesmente **RIA**.
+Registro de Imunobiológico Administrado em Campanha, ou simplesmente **RIA-C**.
 
 O modelo computacional, até pelo nome, é para consumo de
 integradores (profissionais com habilidades em desenvolvimento de
@@ -16,7 +16,7 @@ correspondente.
 ### Orientações gerais
 
 A representação JSON completa de um Registro de Imunobiológico
-Administrado em Campanha (RIA) pode ser obtido
+Administrado em Campanha (RIA-C) pode ser obtido
 [aqui](/assets/ria.txt).
 
 :::info Importante
@@ -30,7 +30,7 @@ Os modelos computacionais empregados pelo Ministério da Saúde e
 empregados para a integração com a RNDS estão registrados e publicados
 [amplamente](https://simplifier.net/redenacionaldedadosemsaude).
 
-## As partes de um RIA
+## As partes de um RIA-C
 
 O Registro de Imunobiológico Administrado em Campanha (RIA) realiza-se
 por meio dos recursos [Composition](https://www.hl7.org/fhir/composition.html) e
@@ -53,7 +53,7 @@ documento de um registro de imunobiológico administrado,
 o recurso FHIR [Bundle](https://www.hl7.org/fhir/bundle.html), que funciona
 como um um contêiner para outros recursos FHIR.
 
-Neste caso do RIA, a representação JSON de um documento a ser enviado,
+Neste caso do RIA-C, a representação JSON de um documento a ser enviado,
 com algumas partes suprimidas, é fornecida abaixo. Todos os detalhes
 serão fornecidos nas seções seguintes. Esta representação permite
 identificar os dois recursos FHIR citados anteriormente,
@@ -215,9 +215,9 @@ possuir duas entradas:
 ```
 
 Estas duas entradas, conforme comentado acima, devem estar em
-conformidade com os perfis nacionais definidos para o RIA.
+conformidade com os perfis nacionais definidos para o RIA-C.
 
-Há uma "conexão" entre os recursos do RIA. O recurso _Composition_
+Há uma "conexão" entre os recursos do RIA-C. O recurso _Composition_
 faz referência ao recurso _Immunization_, o que é comentado na
 seção seguinte.
 
@@ -228,7 +228,7 @@ O FHIR faz uso extensivo do conceito de
 Ou seja, muitos dos elementos que compõem um recurso são
 referências para outros recursos.
 
-Neste caso específico do RIA, o registro de imunobiológico administrado
+Neste caso específico do RIA-C, o registro de imunobiológico administrado
 faz referência para a imunização propriamente dita, que é fornecido
 em recurso próprio, ou seja, a descrição do evento no qual a vacina é
 administrada.
@@ -244,7 +244,7 @@ a propriedade _section_ fornecida apenas para o primeiro recurso.
 
 Cada recurso possui o seu próprio
 _resourceType_ e, portanto, sabe-se que os dois recursos fornecidos no
-_Bundle_ de um RIA são um _Composition_ e _Immunization_, nesta ordem.
+_Bundle_ de um RIA-C são um _Composition_ e _Immunization_, nesta ordem.
 
 Adicionalmente, a primeira entrada do _array_, recurso
 _Composition_, referencia a segunda entrada, _Immunization_,

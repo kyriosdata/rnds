@@ -54,7 +54,7 @@ module.exports = {
         "rel/mi-rel",
         "rel/mc-rel",
       ],
-      "Registro de Imunobiológico Administrado (RIA)": [
+      "Registro de Imunobiológico Administrado em Campanha (RIA-C)": [
         "ria/objetivo-ria",
         "ria/mi-ria",
         "ria/mc-ria",
