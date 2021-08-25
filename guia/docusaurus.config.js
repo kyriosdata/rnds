@@ -8,7 +8,6 @@ module.exports = {
   organizationName: "kyriosdata", // Usually your GitHub org/user name.
   projectName: "rnds", // Usually your repo name.
   themes: ["@docusaurus/theme-live-codeblock"],
-  trailingSlash: false,
   themeConfig: {
     navbar: {
       title: "Guia",
