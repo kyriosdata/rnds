@@ -74,7 +74,7 @@ Quem desejar consultar o JSON completo, já "inflado" com os valores para estas 
 
 ### Bundle (_identifier_)
 
-O identificador (_identifier_) do _Bundle_ é definido pelas propriedades `system` e `value`. O identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por `{{lab-identificador}}` e `{{exame-id-lab}}`, são empregados na definição destas duas propriedades:
+O identificador (_identifier_) do _Bundle_ é definido pelas propriedades `system` e `value`. O identificador do solicitante e o identificador do resultado, respectivamente representados abaixo por `{{identificador-solicitante}}` e `{{exame-id-lab}}`, são empregados na definição destas duas propriedades:
 
 ```json
 "identifier": {
@@ -83,7 +83,7 @@ O identificador (_identifier_) do _Bundle_ é definido pelas propriedades `syste
 }
 ```
 
-O identificador do solicitante, representado acima por `{{lab-identificador}}`, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
+O identificador do solicitante, representado acima por `{{identificador-solicitante}}`, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
 
 O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 
