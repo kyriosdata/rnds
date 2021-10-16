@@ -83,7 +83,7 @@ O identificador (_identifier_) do _Bundle_ é definido pelas propriedades `syste
 }
 ```
 
-O identificador do solicitante, representado acima por `{{identificador-solicitante}}`, é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
+O identificador do solicitante, representado acima por `{{identificador-solicitante}}`, é criado e atribuído pela RNDS ao estabelecimento de saúde em questão (aquele que está submetendo o resultado). Este identificador é fornecido pela RNDS quando o pedido de solicitação de acesso à RNDS é aprovado. Detalhes são fornecidos em [identificador do solicitante](../publico-alvo/gestor/identificador).
 
 O identificador do resultado de exame, por outro lado, é um identificador criado pelo laboratório para unicamente identificar o resultado em questão. Quaisquer dois resultados produzidos pelo laboratório devem, necessariamente, possuir identificadores distintos.
 
