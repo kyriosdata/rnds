@@ -17,6 +17,8 @@ public class FhirPathApp {
         IBase patient = Serializacao.fromJson("patient.json");
         List<Base> evaluate = fp.evaluate(patient, "Patient.telecom.where(rank.hasValue())", Base.class);
         System.out.println(String.format("Resultados: %d", evaluate.size()));
+        System.out.println(String.format("Recurso: %b", evaluate.get(0).isResource()));
+        System.out.println(String.format("Primitivo: %b", evaluate.get(0).isPrimitive()));
         Base base = evaluate.get(0);
         for (Property property : base.children()) {
             System.out.println(property + " " + property.getValues());
