@@ -1,10 +1,13 @@
 package com.github.kyriosdata.rnds;
 
+import org.hl7.fhir.instance.model.api.IBase;
 import org.hl7.fhir.r4.model.Patient;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.InputStream;
 
 public class Serializacao {
 
@@ -22,8 +25,7 @@ public class Serializacao {
 
         // Para XML use ctx.newXmlParser()
         IParser parser = ctx.newJsonParser().setPrettyPrint(true);
-        String json = parser.encodeResourceToString(paciente);
-        return json;
+        return parser.encodeResourceToString(paciente);
     }
 
     @NotNull
@@ -31,5 +33,13 @@ public class Serializacao {
         Patient paciente = new Patient();
         paciente.addName().setFamily("da Silva").addGiven("João");
         return paciente;
+    }
+
+    public static IBase fromJson(String arquivo) {
+        FhirContext ctx = FhirContext.forR4();
+        IParser parser = ctx.newJsonParser();
+
+        InputStream is = ClassLoader.getSystemResourceAsStream(arquivo);
+        return parser.parseResource(Patient.class, is);
     }
 }
