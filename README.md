@@ -8,9 +8,7 @@ para profissionais técnicos envolvidos com o desenvolvimento
 de software de integração.
 
 - Documentação on-line: https://kyriosdata.github.io/rnds
-
-Consulte o portal "irmão"
-[Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br).
+- Consulte o portal [Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br).
 
 Desenvolvedores:
 
