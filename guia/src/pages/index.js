@@ -6,10 +6,17 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 
+import rndsImg from "@site/static/img/rnds-logo.png";
+import integradorImg from "@site/static/img/integrador.png";
+import conteudoImg from "@site/static/img/conteudo.png";
+import cgisImg from "@site/static/img/cgis.png";
+import datasusImg from "@site/static/img/datasus.png";
+import msImg from "@site/static/img/ms.png";
+
 const features = [
   {
     title: "RNDS",
-    imageUrl: "img/rnds-logo.png",
+    imageUrl: rndsImg,
     description: (
       <>
         A Rede Nacional de Dados em Saúde (
@@ -21,7 +28,7 @@ const features = [
   },
   {
     title: "Guia",
-    imageUrl: "img/integrador.png",
+    imageUrl: integradorImg,
     description: (
       <>
         Este <i>Guia</i> inclui orientações para gestores e integradores, além
@@ -32,7 +39,7 @@ const features = [
   },
   {
     title: "Curso",
-    imageUrl: "img/conteudo.png",
+    imageUrl: conteudoImg,
     description: (
       <>
         Se você é desenvolvedor de software e está interessado na integração com
@@ -50,7 +57,7 @@ const features = [
 ];
 
 function Feature({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
+  const imgUrl = imageUrl;
   return (
     <div className={clsx("col col--4", styles.feature)}>
       {imgUrl && (
@@ -71,22 +78,19 @@ function Home() {
     <Layout
       class="meuleiaute"
       title={`${siteConfig.title}`}
-      description="Guia de Integração da RNDS"
+      description="Software para Integração com a RNDS"
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div class="row">
             <div class="col">
               <h1 className="hero__title titulo">
-                Rede Nacional de Dados em Saúde (RNDS)
+                Ferramentas de integração com a RNDS
               </h1>
               <p className="hero__subtitle">
-                Este portal tem como objetivo orientar gestores de
-                estabelecimentos de Saúde e profissionais de tecnologia da
-                informação, acerca da integração com a RNDS, visando a
-                interoperabilidade de informações em saúde para continuidade do
-                cuidado do usuário, no momento da assistência, em qualquer lugar
-                do Brasil.
+                A integração com a RNDS é realizada por meio de software.
+                Algumas ferramentas para auxiliar esta integração são aqui
+                documentadas.
               </p>
               <div>
                 <Link
@@ -108,12 +112,10 @@ function Home() {
           <div className="container padding-vert--md">
             <div className="row">
               <div className="col col--10 col--offset-1">
-                A <b>integração com a RNDS</b> é apresentada na forma de uma
-                sequência de atividades (passo a passo), que envolve o gestor
-                (responsável pelo estabelecimento de saúde) e o integrador
-                (desenvolvedor de software). Esta integração promove a troca de
-                informação em saúde, descrita pelos modelos Informacional e
-                Computacional, acompanhados de outras orientações.
+                A <b>integração com a RNDS</b> exige a produção de código que se
+                beneficia de ferramentas de apoio ao desenvolvedor. Desde
+                aquelas dirigidas para a produção de código até aquelas que
+                apoio, ou oferecem suporte.
               </div>
             </div>
           </div>
@@ -134,25 +136,23 @@ function Home() {
       <footer class="footer rodape">
         <div class="container container--fluid">
           <div class="row footer__links">
-            <div class="col footer__col">
+            <div class="col footer__col footer__center">
               <img
                 class="footer__logo"
-                alt="Facebook Open Source Logo"
-                src="img/acesso.png"
+                alt="CGIS Logo"
+                src={cgisImg}
+                width="170"
+                height="60"
               />
+            </div>
+            <div class="col footer__col footer__center">
+              <img class="footer__logo" alt="DATASUS Logo" src={datasusImg} />
             </div>
             <div class="col footer__col">
               <img
                 class="footer__logo"
-                alt="Facebook Open Source Logo"
-                src="img/datasus.png"
-              />
-            </div>
-            <div class="col footer__col">
-              <img
-                class="footer__logo"
-                alt="Facebook Open Source Logo"
-                src="img/ms.png"
+                alt="Ministério da Saúde Logo"
+                src={msImg}
               />
             </div>
           </div>

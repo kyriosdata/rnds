@@ -36,11 +36,11 @@ code {
 }
 
 .destaque {
-  background-color: var(--ifm-color-success-lightest);
+  background-color: rgb(238, 238, 204);
 }
 
 .rodape {
-  background-color: #043464;
+  background-color: #becedf;
   margin: 0;
   padding: 0;
   border: 0;
@@ -48,8 +48,13 @@ code {
 }
 
 .footer__logo {
-  width: 250px;
   max-width: 300px;
+}
+
+.footer__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .emDesenvolvimento {

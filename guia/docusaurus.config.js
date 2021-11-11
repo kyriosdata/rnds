@@ -1,5 +1,5 @@
 module.exports = {
-  title: "RNDS",
+  title: "Ferramentas",
   tagline: "Guia de Integração",
   url: "https://kyriosdata.github.io",
   baseUrl: "/rnds/",
@@ -10,30 +10,24 @@ module.exports = {
   themes: ["@docusaurus/theme-live-codeblock"],
   themeConfig: {
     navbar: {
-      title: "Guia",
+      title: "Ferramentas",
       items: [
-        {
-          to: "docs/rel/objetivo-rel",
-          label: "Modelos",
-          position: "left",
-        },
         {
           to: "docs/introducao",
           label: "Contexto",
           position: "left",
         },
         {
-          to: "https://servicos-datasus.saude.gov.br/",
-          label: "Portal de Serviços",
+          to: "https://rnds-guia.saude.gov.br/docs/rel/objetivo-rel",
+          label: "Modelos",
+          position: "left",
+        },
+        {
+          to: "https://rnds-guia.saude.gov.br/",
+          label: "Guia de Integração",
           position: "left",
         },
       ],
-    },
-
-    algolia: {
-      apiKey: "773e8639e2cf11a7a1b3e06912c0a294",
-      indexName: "rnds",
-      searchParameters: {}, // Optional (if provided by Algolia)
     },
   },
   presets: [

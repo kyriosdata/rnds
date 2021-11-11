@@ -54,22 +54,6 @@ module.exports = {
         "rel/mi-rel",
         "rel/mc-rel",
       ],
-      "Registro de Imunobiológico Administrado em Campanha (RIA-C)": [
-        "ria/objetivo-ria",
-        "ria/mi-ria",
-        "ria/mc-ria",
-      ],
-      "Registro de Imunobiológico Administrado em Rotina (RIA-R)": [
-        "ria-rotina/objetivo-ria-rotina",
-        "ria-rotina/mi-ria-r",
-        "ria-rotina/mc-ria-r",
-      ],
-      "Sumário de Alta (SA)": ["sa/objetivo-sa", "sa/mi-sa", "sa/mc-sa"],
-      "Registro de Atendimento Clínico (RAC)": [
-        "rac/objetivo-rac",
-        "rac/mi-rac",
-        "rac/mc-rac",
-      ],
     },
   ],
 };

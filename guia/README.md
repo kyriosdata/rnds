@@ -1,4 +1,4 @@
-# Portal de Integração com a RNDS
+# Portal de ferramentas de integração com a RNDS
 
 O portal é desenvolvido com [Docusaurus 2](https://docusaurus.io/) que se
 apresenta como "um gerador de site estático moderno". O framework
