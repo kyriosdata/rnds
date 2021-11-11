@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  */
 public class AccessTokenTest {
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final String RNDS_AUTH = "RNDS_AUTH";
     private static final String RNDS_CERTIFICADO_ENDERECO = "RNDS_CERTIFICADO_ENDERECO";

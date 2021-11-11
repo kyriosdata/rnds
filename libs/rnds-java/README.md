@@ -91,19 +91,18 @@ empregado nos passos abaixo.
 
 **Importante**: o _keystore_ criado fez uso da mesma senha do certificado do estabelecimento.
 
-- Criar _keystore_ denominado **rnds.jks** (uma chave arbitrária é gerada)  
-`keytool -genkey -alias minhachave -keyalg RSA -keysize 2048 -keystore rnds.jks`
-- A chave arbitrária é removida (_keystore_ é esvaziado)  
-`keytool -delete -alias minhachave -keystore rnds.jsk`
+- Criar _keystore_ denominado **rnds.pfx** (uma chave arbitrária é gerada)  
+`>keytool -genkey -alias main -keystore rnds.pfx -storetype PKCS12 -keyalg RSA -storepass 123456`
+
 - Verifique o conteúdo do _keystore_ (estará vazio)    
-`keytool -list -keystore rnds.jks`
+`keytool -list -keystore rnds.pfx` (senha '123456')
   
 - Importe o certificado do estabelecimento de saúde  
-`keytool -importkeystore -srckeystore estabelecimento.pfx -srcstoretype PKCS12 -destkeystore rnds.jks -deststoretype JKS`
-  
-- Importe o certificado da autoridade certificadora que criou o certificado da RNDS  
-`keytool -import -alias rnp -keystore rnds.jks -file rnp-chave-publica.cer`
-  
+`keytool -importkeystore -srckeystore estabelecimento.pfx -srcstoretype PKCS12 -destkeystore rnds.pfx -deststoretype PKCS12`
+
+- Importe o certificado da autoridade certificadora (CA)  
+`keytool -import -noprompt -trustcacerts -file Root-R3.crt -keystore rnds.pfx -storepass 123456`
+
 ### Uso do arquivo _keystore_
 
 - O arquivo _keystore_ criado no passo anterior deve ser indicado

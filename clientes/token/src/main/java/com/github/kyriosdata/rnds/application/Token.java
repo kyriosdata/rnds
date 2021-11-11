@@ -30,13 +30,15 @@ import org.slf4j.LoggerFactory;
 public class Token {
 
     /**
-     * Endereço do qual o token será obtido (ambiente de homologação).
+     * Endereço a partir do qual o token será requisitado
+     * (ambiente de homologação).
      */
     public static final String HOMOLOGACAO =
             "https://ehr-auth-hmg.saude.gov.br/api/token";
 
     /**
-     * Endereço do qual o token será obtido (ambiente de produção).
+     * Endereço a partir do qual o token será requisitado
+     * (ambiente de produção).
      */
     public static final String PRODUCAO =
             "https://ehr-auth.saude.gov.br/api/token";
@@ -49,15 +51,15 @@ public class Token {
         final Logger logger =
                 LoggerFactory.getLogger(Token.class);
 
-        final String arquivo = System.getenv("RNDS_CERT_FILE");
-        logger.info("RNDS_CERT_FILE: {}", arquivo);
+        final String arquivo = System.getenv("RNDS_CERTIFICADO_ENDERECO");
+        logger.info("RNDS_CERTIFICADO_ENDERECO: {}", arquivo);
 
-        final String server = System.getenv("RNDS_AUTH_SERVER");
+        final String server = System.getenv("RNDS_AUTH");
         logger.info("RNDS_AUTH_SERVER: {}", server);
 
-        String senha = System.getenv("RNDS_CERT_SENHA");
+        String senha = System.getenv("RNDS_CERTIFICADO_SENHA");
         final char[] password = senha != null ? senha.toCharArray() : null;
-        logger.info("RNDS_CERT_SENHA: ******");
+        logger.info("RNDS_CERTIFICADO_SENHA: ******");
 
         if (arquivo == null || server == null || password == null) {
             logger.info("Pelo menos uma var de ambiente não definida");

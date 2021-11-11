@@ -196,14 +196,14 @@ public class AccessToken {
             final String keystoreEndereco,
             final char[] keyStorePassword) {
         try {
+            // Nenhum token é válido, inicialmente.
+            invalidar();
+
             SSLContext context = sslCtx(keystoreEndereco, keyStorePassword);
             cliente = getClient(context);
 
             get = new HttpGet(server);
             get.addHeader("accept", "application/json");
-
-            // Nenhum token é válido, inicialmente.
-            invalidar();
         } catch (RuntimeException | GeneralSecurityException e) {
             RNDS.logger.warning(e.toString());
         }
