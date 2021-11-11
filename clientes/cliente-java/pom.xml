@@ -81,7 +81,7 @@
         <spring.boot.versao>2.2.5.RELEASE</spring.boot.versao>
         <surefire.versao>2.22.2</surefire.versao>
         <findsecbugs-plugin.version>1.10.1</findsecbugs-plugin.version>
-        <hapi.fhir.version>5.5.2</hapi.fhir.version>
+        <hapi.fhir.version>5.5.3</hapi.fhir.version>
     </properties>
 
     <dependencies>
@@ -106,25 +106,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-client -->
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-client</artifactId>
-            <version>5.5.3</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
             <version>3.0.4</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-r4</artifactId>
-            <version>${hapi.fhir.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
@@ -134,9 +120,24 @@
             <version>4.9.0</version>
         </dependency>
 
+        <!-- CORE -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>
+            <version>${hapi.fhir.version}</version>
+        </dependency>
+
+        <!-- FHIR R4 Model classes -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-structures-r4</artifactId>
+            <version>${hapi.fhir.version}</version>
+        </dependency>
+
+        <!-- FHIR Client -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-client</artifactId>
             <version>${hapi.fhir.version}</version>
         </dependency>
 
@@ -145,11 +146,7 @@
             <artifactId>org.hl7.fhir.utilities</artifactId>
             <version>5.5.7</version>
         </dependency>
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>org.hl7.fhir.r4</artifactId>
-            <version>5.5.7</version>
-        </dependency>
+
         <dependency>
             <groupId>org.fhir</groupId>
             <artifactId>ucum</artifactId>

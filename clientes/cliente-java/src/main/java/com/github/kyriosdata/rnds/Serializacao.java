@@ -39,7 +39,7 @@ public class Serializacao {
         FhirContext ctx = FhirContext.forR4();
         IParser parser = ctx.newJsonParser();
 
-        InputStream is = ClassLoader.getSystemResourceAsStream(arquivo);
+        InputStream is = Serializacao.class.getClassLoader().getResourceAsStream(arquivo);
         return parser.parseResource(Patient.class, is);
     }
 }

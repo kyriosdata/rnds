@@ -1,7 +1,6 @@
 package com.github.kyriosdata.rnds;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.parser.IParser;
 import org.hl7.fhir.instance.model.api.IBase;
 import org.hl7.fhir.r4.hapi.fluentpath.FhirPathR4;
 import org.hl7.fhir.r4.model.Base;
@@ -24,8 +23,9 @@ public class FhirPathApp {
             System.out.println(property + " " + property.getValues());
         }
 
-//        IParser parser = ctx.newJsonParser().setPrettyPrint(true);
-//        String json = parser.encodeResourceToString(evaluate.get(0).castToResource(evaluate.get(0)));
-//        System.out.println(json);
+        // IParser parser = ctx.newJsonParser().setPrettyPrint(true);
+        // String json =
+        // parser.encodeResourceToString(evaluate.get(0).castToResource(evaluate.get(0)));
+        // System.out.println(json);
     }
 }
