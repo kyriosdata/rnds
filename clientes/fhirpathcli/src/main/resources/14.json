@@ -1,0 +1,142 @@
+{
+  "resourceType": "Bundle",
+  "type": "document",
+  "timestamp": "2020-10-02T12:17:58-03:00",
+  "meta": {
+    "lastUpdated": "2020-10-02T12:17:58-03:00"
+  },
+  "identifier": {
+    "system": "http://www.saude.gov.br/fhir/r4/NamingSystem/BRRNDS-14008",
+    "value": "k10"
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:transient-0",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRResultadoExameLaboratorial-1.1"
+          ]
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento",
+              "code": "REL"
+            }
+          ]
+        },
+        "subject": {
+          "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+            "value": "704603116764826"
+          }
+        },
+        "date": "2020-09-29T10:59:53-03:00",
+        "author": [
+          {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
+              "value": "2337991"
+            }
+          }
+        ],
+        "title": "Resultado de Exame Laboratorial",
+        "section": [
+          {
+            "entry": [
+              {
+                "reference": "urn:uuid:transient-1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:transient-1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRDiagnosticoLaboratorioClinico-1.0"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS",
+                "code": "0214"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC",
+              "code": "94507-1"
+            }
+          ]
+        },
+        "subject": {
+          "identifier": {
+            "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRIndividuo-1.0",
+            "value": "704603116764826"
+          }
+        },
+        "issued": "2020-03-23T10:30:12.947-02:00",
+        "performer": [
+          {
+            "identifier": {
+              "system": "http://www.saude.gov.br/fhir/r4/StructureDefinition/BREstabelecimentoSaude-1.0",
+              "value": "980016287385192"
+            }
+          }
+        ],
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame",
+              "code": "1"
+            }
+          ]
+        },
+        "method": {
+          "text": "Imunocromatográfico"
+        },
+        "referenceRange": [
+          {
+            "text": "(1) Detectável = presença de anticorpos; (2) Não detectável = ausência de anticorpos"
+          }
+        ],
+        "specimen": {
+          "reference": "urn:uuid:transient-2"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:transient-2",
+      "resource": {
+        "resourceType": "Specimen",
+        "meta": {
+          "profile": [
+            "http://www.saude.gov.br/fhir/r4/StructureDefinition/BRAmostraBiologica-1.0"
+          ]
+        },
+        "type": {
+          "coding": [
+            {
+              "system": "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL",
+              "code": "SGHEM"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
