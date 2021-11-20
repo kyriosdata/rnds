@@ -1,6 +1,7 @@
 package com.github.kyriosdata.rnds;
 
 import org.hl7.fhir.instance.model.api.IBase;
+import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.Patient;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -41,5 +42,13 @@ public class Serializacao {
 
         InputStream is = Serializacao.class.getClassLoader().getResourceAsStream(arquivo);
         return parser.parseResource(Patient.class, is);
+    }
+
+    public static IBase codeSystemFromXml(String arquivo) {
+        FhirContext ctx = FhirContext.forR4();
+        IParser parser = ctx.newXmlParser();
+
+        InputStream is = Serializacao.class.getClassLoader().getResourceAsStream(arquivo);
+        return parser.parseResource(CodeSystem.class, is);
     }
 }

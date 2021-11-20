@@ -60,7 +60,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
-            com.github.kyriosdata.rnds.FhirPathApp
+            com.github.kyriosdata.rnds.ExibeCodigosCid10
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
