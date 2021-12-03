@@ -1,5 +1,8 @@
 const Token = require("./Token");
 const sendService = require("./send");
+const pacote = require('./package.json');
+
+console.log("rnds-js", pacote.version);
 
 /**
  * Versão contemplada pelo presente cliente.
@@ -72,7 +75,7 @@ function obtemConfiguracao() {
  * Funcão que retorna função a ser empregada para logging, ou seja,
  * console.log ou função vazia (sem efeito).
  *
- * @param {bool} logging Verdadeiro para habilitar logging via console.log ou false para desabilitar.
+ * @param {boolean} logging Verdadeiro para habilitar logging via console.log ou false para desabilitar.
  * @returns {function} Função empregada para logging, possivelmente vazia, sem efeito, caso o argumento fornecido seja false.
  */
 function log(logging) {
