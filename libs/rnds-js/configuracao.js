@@ -1,9 +1,12 @@
 import chalk from "chalk";
-
 import fs from "fs";
-const pacote = JSON.parse(fs.readFileSync('./package.json'));
 
-console.log(chalk.bold("rnds-js"), pacote.version);
+console.log(chalk.bold("rnds-js"), getVersao());
+
+function getVersao() {
+    const json = fs.readFileSync("./package.json").toString();
+    return JSON.parse(json).version;
+}
 
 /**
  * Variáveis exigidas para configuração do acesso
