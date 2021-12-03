@@ -1,4 +1,4 @@
-const https = require("follow-redirects").https;
+const { https } = require("follow-redirects");
 
 /**
  * Cria função para requisição HTTP(s).

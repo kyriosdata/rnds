@@ -1,8 +1,7 @@
+console.log("rnds-js", require('./package.json').version);
+
 const Token = require("./Token");
 const sendService = require("./send");
-const pacote = require('./package.json');
-
-console.log("rnds-js", pacote.version);
 
 /**
  * Versão contemplada pelo presente cliente.
@@ -24,7 +23,8 @@ const FHIR_VERSION = "4.0.1";
  */
 
 /**
- * A configuração das informações empregadas para acesso à RNDS.
+ * Estrutura que mantém os valores empregados para configuração
+ * do acesso aos serviços oferecidos pela RNDS.
  *
  * @typedef {Object} Configuracao
  * @property {string} auth - O endereço do serviço de autenticação
@@ -37,14 +37,15 @@ const FHIR_VERSION = "4.0.1";
  */
 
 /**
- * Obtém valores que configuram o acesso à RNDS por meio de
- * variáveis de ambiente.
+ * Obtém valores de variáveis de ambiente que são empregadas
+ * para configurar acesso aos serviços da RNDS.
  *
  * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
  * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR, (e) RNDS_REQUISITANTE_CNS
  * e (f) RNDS_REQUISITANTE_UF.
  *
- * @returns {Configuracao} a configuração a ser empregada para acesso à RNDS.
+ * @returns {Configuracao} a configuração para acesso aos serviços
+ * oferecidos pela RNDS.
  */
 function obtemConfiguracao() {
   function check(nome, valor) {
