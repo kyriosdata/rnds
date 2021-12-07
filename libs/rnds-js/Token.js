@@ -8,21 +8,26 @@ import fs from "fs";
 export default class Token {
   /**
    * Construtor.
-   * @param {function} logging Função de logging a ser empregada, por
-   * exemplo, console.log.
    * @param {Configuracao} configuracao Informa certificado, senha e serviço
    * de autenticação.
    * @param {*} security Habilita ou não segurança.
    * @param {function} send Função que retorna promise para requisição HTTP.
+   * Esta função deve ser chamada com função a ser empregada para exibição
+   * de informações, se for o caso.
+   * @param {function} logging Função de logging a ser empregada, por
+   * exemplo, console.log. Se não fornecida, não serão exibidas informações.
    */
-  constructor(logging, configuracao, security, send) {
-    this.log = logging;
+  constructor(configuracao, security, send, logging) {
+    this.log = logging || (() => {});
     this.access_token = undefined;
-    this.send = send;
 
     if (!send) {
       throw new Error("função 'send' não fornecida");
     }
+
+    // Define real função a ser utilizada, juntamente
+    // com recurso para exibir informações, se for o caso.
+    this.send = send(this.log);
 
     this.log("Token. Security is", security ? "ON" : "OFF");
 

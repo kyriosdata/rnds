@@ -11,16 +11,16 @@ function getVersao() {
     return JSON.parse(json).version;
 }
 
-function check(nome, valor) {
-    if (!valor || valor.length === 0) {
-        throw new Error(`variável ${nome} não definida ou vazia`);
-    }
-
-    return valor;
+function exibeToken(t) {
+    console.log("Token", chalk.blue("OK"), t.length, "bytes");
 }
 
-const configuracao = obtemConfiguracao();
-exibeConfiguracao(configuracao);
+function applicacao() {
+    const configuracao = obtemConfiguracao();
+    exibeConfiguracao(configuracao);
 
-const token = new Token(console.log, configuracao, true, sendService(console.log));
-token.getToken().then(console.log).catch((erro) => console.log(erro));
+    const token = new Token(configuracao, true, sendService);
+    token.getToken().then(exibeToken).catch((erro) => console.log(erro));
+}
+
+applicacao();
