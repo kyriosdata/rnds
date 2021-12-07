@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import fs from "fs";
 
 /**
  * Estrutura que mantém os valores empregados para configuração
@@ -73,3 +74,14 @@ export function exibeConfiguracao(configuracao) {
         }
     }
 }
+
+/**
+ * Recupera a versão da biblioteca rnds-js.
+ *
+ * @returns {string} Versão da biblioteca (semantic versioning).
+ */
+export function getVersao() {
+    const json = fs.readFileSync("./package.json").toString();
+    return JSON.parse(json).version;
+}
+

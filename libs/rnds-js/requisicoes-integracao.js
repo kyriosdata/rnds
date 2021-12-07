@@ -1,12 +1,15 @@
 import chalk from "chalk";
 import Token from "./Token.js";
+import fs from "fs";
 import {sendService} from "./send.js";
-import {obtemConfiguracao, exibeConfiguracao, getVersao} from "./configuracao.js";
+import {obtemConfiguracao, exibeConfiguracao} from "./configuracao.js";
+import RNDS from "./rnds.js";
 
 console.log(chalk.bold("rnds-js"), getVersao());
 
-function exibeToken(t) {
-    console.log("Token", chalk.blue("OK"), t.length, "bytes");
+function getVersao() {
+    const json = fs.readFileSync("./package.json").toString();
+    return JSON.parse(json).version;
 }
 
 function applicacao() {

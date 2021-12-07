@@ -43,7 +43,7 @@ function log(logging) {
  * É necessário criar uma instância desta classe para requisição
  * de qualquer serviço à RNDS.
  */
-class RNDS {
+export default class RNDS {
   /**
    * Cria uma instância necessária para a conexão com o ambiente de
    * homologação ou produção da RNDS.
