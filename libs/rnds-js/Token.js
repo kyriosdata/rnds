@@ -1,11 +1,11 @@
-const fs = require("fs");
-const { config } = require("process");
+import fs from "fs";
 
 /**
- * Classe que oferece token de acesso aos serviços da RNDS usando
- * a política de reutilização durante intervalo de 30 minutos.
+ * Classe que implementa obtenção do token de acesso aos serviços
+ * a RNDS usando a política de reutilização durante intervalo de
+ * 30 minutos.
  */
-class Token {
+export default class Token {
   /**
    * Construtor.
    * @param {function} logging Função de logging a ser empregada, por
@@ -20,18 +20,18 @@ class Token {
     this.access_token = undefined;
     this.send = send;
 
-    this.log("Criando serviço de acesso a token.");
-    this.log("Security is", security ? "ON" : "OFF");
-    this.log("RNDS_AUTH", configuracao.auth);
-    this.log("RNDS_CERTIFICADO_ENDERECO", configuracao.certificado);
-    this.log("RNDS_CERTIFICADO_SENHA", "omitida por segurança");
+    if (!send) {
+      throw new Error("função 'send' não fornecida");
+    }
+
+    this.log("Token. Security is", security ? "ON" : "OFF");
 
     let pfx = undefined;
     try {
-      pfx = fs.readFileSync(configuracao.certificado);
+      pfx = fs.readFileSync(configuracao.certificado.valor);
     } catch (error) {
       throw new Error(
-        `erro ao carregar arquivo pfx: ${configuracao.certificado}`
+        `erro ao carregar arquivo pfx: ${configuracao.certificado.valor}`
       );
     }
 
@@ -40,9 +40,9 @@ class Token {
       path: "/api/token",
       headers: {},
       maxRedirects: 20,
-      hostname: configuracao.auth,
+      hostname: configuracao.auth.valor,
       pfx: pfx,
-      passphrase: configuracao.senha,
+      passphrase: configuracao.senha.valor,
     };
 
     /**
@@ -113,4 +113,3 @@ class Token {
   }
 }
 
-module.exports = Token;

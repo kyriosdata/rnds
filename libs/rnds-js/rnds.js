@@ -23,56 +23,6 @@ const FHIR_VERSION = "4.0.1";
  */
 
 /**
- * Estrutura que mantém os valores empregados para configuração
- * do acesso aos serviços oferecidos pela RNDS.
- *
- * @typedef {Object} Configuracao
- * @property {string} auth - O endereço do serviço de autenticação
- * @property {string} certificado - O endereço (path) onde se encontra o
- * certificado digital.
- * @property {string} senha - A senha para acesso ao certificado digital.
- * @property {string} ehr - O endereço do serviço de registros de saúde.
- * @property {string} requisitante - O CNS do requisitante em nome do qual
- * requisições são submetidas.
- */
-
-/**
- * Obtém valores de variáveis de ambiente que são empregadas
- * para configurar acesso aos serviços da RNDS.
- *
- * As variáveis são: (a) RNDS_AUTH; (b) RNDS_CERTIFICADO_ENDERECO;
- * (c) RNDS_CERTIFICADO_SENHA; (d) RNDS_EHR, (e) RNDS_REQUISITANTE_CNS
- * e (f) RNDS_REQUISITANTE_UF.
- *
- * @returns {Configuracao} a configuração para acesso aos serviços
- * oferecidos pela RNDS.
- */
-function obtemConfiguracao() {
-  function check(nome, valor) {
-    if (!valor || valor.length === 0) {
-      throw new Error(`variável ${nome} não definida ou vazia`);
-    }
-
-    return valor;
-  }
-
-  return {
-    auth: check("RNDS_AUTH", process.env.RNDS_AUTH),
-    certificado: check(
-      "RNDS_CERTIFICADO_ENDERECO",
-      process.env.RNDS_CERTIFICADO_ENDERECO
-    ),
-    senha: check("RNDS_CERTIFICADO_SENHA", process.env.RNDS_CERTIFICADO_SENHA),
-    ehr: check("RNDS_EHR", process.env.RNDS_EHR),
-    requisitante: check(
-      "RNDS_REQUISITANTE_CNS",
-      process.env.RNDS_REQUISITANTE_CNS
-    ),
-    uf: check("RNDS_REQUISITANTE_UF", process.env.RNDS_REQUISITANTE_UF),
-  };
-}
-
-/**
  * Funcão que retorna função a ser empregada para logging, ou seja,
  * console.log ou função vazia (sem efeito).
  *
