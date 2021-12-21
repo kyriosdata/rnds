@@ -1,7 +1,9 @@
-console.log("rnds-js", require('./package.json').version);
+import {obtemConfiguracao, getVersao} from "./configuracao.js";
 
-const Token = require("./Token");
-const sendService = require("./send");
+console.log("rnds-js", getVersao());
+
+import Token from "./Token.js";
+import {sendService} from "./send.js";
 
 /**
  * Versão contemplada pelo presente cliente.
@@ -56,17 +58,21 @@ export default class RNDS {
    * para empregar token de acesso.
    */
   constructor(logging, security) {
-    this.log = log(!!logging);
+    if (!logging || !security) {
+      throw new Error("forneça true/false (logging) e true/false (security)");
+    }
+
+    this.log = log(logging);
 
     // Mantém todas as informações de configuração de acesso
     this.cfg = obtemConfiguracao();
 
     this.send = sendService(this.log);
 
-    this.log("RNDS_EHR", this.cfg.ehr);
-    this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante);
+    this.log("RNDS_EHR", this.cfg.ehr.valor);
+    this.log("RNDS_REQUISITANTE_CNS", this.cfg.requisitante.valor);
 
-    this.cache = new Token(this.log, this.cfg, !!security, this.send);
+    this.cache = new Token(this.cfg, security, sendService, this.log);
   }
 
   /**
@@ -106,7 +112,7 @@ export default class RNDS {
       path: "/api/fhir/r4/metadata",
       headers: {},
       maxRedirects: 20,
-      hostname: `${this.cfg.uf}-ehr-services.saude.gov.br`,
+      hostname: `${this.cfg.uf.valor}-ehr-services.saude.gov.br`,
     };
 
     const resposta = await this.send(CAPABILITY);
@@ -130,11 +136,11 @@ export default class RNDS {
   inflar(options) {
     return {
       method: "GET",
-      hostname: this.cfg.ehr,
+      hostname: this.cfg.ehr.valor,
       headers: {
         "Content-Type": "application/json",
         "X-Authorization-Server": "Bearer " + this.cache.access_token,
-        Authorization: this.cfg.requisitante,
+        Authorization: this.cfg.requisitante.valor,
       },
       maxRedirects: 10,
       ...options,
@@ -409,5 +415,3 @@ export default class RNDS {
     return this.cache.getToken();
   }
 }
-
-module.exports = { RNDS, obtemConfiguracao };

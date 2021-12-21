@@ -17,8 +17,8 @@ export default class Token {
    * @param {function} logging Função de logging a ser empregada, por
    * exemplo, console.log. Se não fornecida, não serão exibidas informações.
    */
-  constructor(configuracao, security, send, logging) {
-    this.log = logging || (() => {});
+  constructor(configuracao, security, send, logging = () => {}) {
+    this.log = logging;
     this.access_token = undefined;
 
     if (!send) {
