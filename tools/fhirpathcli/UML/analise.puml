@@ -14,5 +14,5 @@ Arquivo -up-|> Entrada
 Diretório -up-|> Entrada
 
 "Sentença em FHIRPath" -right-> Entrada : "Executada sobre"
-"Sentença em FHIRPath" -down-> Lista : " Resultado"
+"Sentença em FHIRPath" -down-> "Lista<IBase>" : " Resultado"
 @enduml
