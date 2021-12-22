@@ -14,4 +14,5 @@ Arquivo -up-|> Entrada
 Diretório -up-|> Entrada
 
 "Sentença em FHIRPATH" -right-> Entrada : "Executada sobre"
+"Sentença em FHIRPATH" -down-> Lista : " Resultado"
 @enduml
