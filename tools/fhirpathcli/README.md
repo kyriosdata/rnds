@@ -25,11 +25,6 @@ A entrada para o aplicativo é formada por recurso(s) FHIR e uma sentença
 em FHIRPAth para ser executada. A saída é o resultado da execução da sentença 
 sobre o recurso ou recursos fornecidos.
 
-```puml
-@startuml
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Zingam/Markdown-Document-UML-Use-Test/master/UML/Instance.puml)
 
-Bob -> Alice : Hello
-
-@enduml
-```
 
