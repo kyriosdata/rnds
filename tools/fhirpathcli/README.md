@@ -21,10 +21,18 @@ para uso da implementação de referência:
 
 ## Análise
 
+A implementação de referência é fornecida pela classe 
+[FhirPathR4](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-structures-r4/undefined/org/hl7/fhir/r4/hapi/fluentpath/FhirPathR4.html), 
+que implementa a interface [IFhirPath](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/undefined/ca/uhn/fhir/fhirpath/IFhirPath.html).
+
 A entrada para o aplicativo é formada por recurso(s) FHIR e uma sentença
 em FHIRPAth para ser executada. A saída é o resultado da execução da sentença 
 sobre o recurso ou recursos fornecidos.
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Zingam/Markdown-Document-UML-Use-Test/master/UML/Instance.puml)
+![analise](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/analise.puml)
 
-
+A execução é fornecida pelo método [evaluate](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/undefined/ca/uhn/fhir/fhirpath/IFhirPath.html#evaluate(org.hl7.fhir.instance.model.api.IBase,java.lang.String,java.lang.Class)).
+O primeiro argumento é um recurso ou tipo de dado FHIR.
+O segundo argumento é a sentença em FHIRPath. 
+O retorno é uma [lista](https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true)
+cujo tipo é fornecido pelo terceiro argumento deste método.
