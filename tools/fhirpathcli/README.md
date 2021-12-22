@@ -58,5 +58,6 @@ return parser.parseResource(Patient.class, is);
 Observe que também existe o método `newXmlParser` para documentos em 
 XML e, por fim, também existem variantes como [parseResource](https://hapifhir.io/hapi-fhir/apidocs/hapi-fhir-base/undefined/ca/uhn/fhir/parser/IParser.html#parseResource(java.io.InputStream))
 que não depende do conhecimento prévio do tipo do recurso que está contido
-no documento lido.
+no documento lido. Observe que no trecho de código acima sabe-se que o conteúdo
+é para um recurso específico (_Patient_).
 
