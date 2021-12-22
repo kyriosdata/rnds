@@ -37,6 +37,6 @@ A entrada para o aplicativo é formada por recurso(s) FHIR e uma sentença
 em FHIRPAth para ser executada. A saída é o resultado da execução da sentença 
 sobre o recurso ou recursos fornecidos.
 
-![analise](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/analise.puml)
+![modelo](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/analise.puml)
 
 
