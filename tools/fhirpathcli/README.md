@@ -10,7 +10,7 @@ Sentenças em FHIRPath podem ser criadas e executadas _online_ via
 
 ## Análise
 
-### Implementação de referência
+### Implementação de referência (FHIRPath)
 
 A implementação de referência de FHIRPath encontra-se disponível no
 [GitHub](https://github.com/hapifhir/hapi-fhir). Consulte a
@@ -61,3 +61,8 @@ que não depende do conhecimento prévio do tipo do recurso que está contido
 no documento lido. Observe que no trecho de código acima sabe-se que o conteúdo
 é para um recurso específico (_Patient_).
 
+## Design
+
+A aplicação está dividida em dois módulos principais: (a) cli e (b) negócio.
+O módulo cli implementa a interação com o usuário, enquanto o módulo negócio 
+interage com a implementação de referência de FHIRPath. 

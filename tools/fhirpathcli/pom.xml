@@ -60,7 +60,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
-            com.github.kyriosdata.rnds.Repl
+            com.github.kyriosdata.rnds.CLI
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>

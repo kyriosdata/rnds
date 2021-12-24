@@ -52,11 +52,14 @@ import static org.jline.builtins.Completers.TreeCompleter.node;
 import static org.jline.keymap.KeyMap.ctrl;
 import static org.jline.keymap.KeyMap.key;
 
-public class Repl
+/**
+ * mvn exec:java -Dexec.mainClass="com.github.kyriosdata.rnds.CLI" -Dexec.args="simple"
+ */
+public class CLI
 {
     public static void usage() {
         String[] usage = {
-                "Usage: java " + Repl.class.getName() + " [cases... [trigger mask]]"
+                "Usage: java " + CLI.class.getName() + " [cases... [trigger mask]]"
                 , "  Terminal:"
                 , "    -system          terminalBuilder.system(false)"
                 , "    +system          terminalBuilder.system(true)"
@@ -80,7 +83,7 @@ public class Repl
                 , "    timer            widget 'Hello world'"
                 , "    <trigger> <mask> password mask"
                 , "  Example:"
-                , "    java " + Repl.class.getName() + " simple su '*'"};
+                , "    java " + CLI.class.getName() + " simple su '*'"};
         for (String u: usage) {
             System.out.println(u);
         }
@@ -245,7 +248,7 @@ public class Repl
                         DefaultParser p3 = new DefaultParser();
                         p3.setEscapeChars(new char[]{});
                         parser = p3;
-                        completer = new StringsCompleter("foo", "bar", "baz", "pip pop");
+                        completer = new StringsCompleter("foo", "bar", "baz", "pip pop", "fabio");
                         break;
                     case "quotes":
                         DefaultParser p = new DefaultParser();
@@ -446,7 +449,8 @@ public class Repl
                         line = reader.readLine("password> ", mask);
                     }
                     if (line.equalsIgnoreCase("quit") || line.equalsIgnoreCase("exit")) {
-                        break;
+                        //break;
+                        return;
                     }
                     ParsedLine pl = reader.getParser().parse(line, 0);
                     String[] argv = pl.words().subList(1, pl.words().size()).toArray(new String[0]);
