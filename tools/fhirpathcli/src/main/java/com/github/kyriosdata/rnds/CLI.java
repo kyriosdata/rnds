@@ -195,7 +195,7 @@ public class CLI
     public static void main(String[] args) throws IOException {
         try {
             String prompt = "prompt> ";
-            String rightPrompt = null;
+            String rightPrompt = "<right";
             Character mask = null;
             String trigger = null;
             boolean color = false;
@@ -401,6 +401,7 @@ public class CLI
                             reader.getTerminal().writer().flush();
                         }, 1, 1, TimeUnit.SECONDS);
             }
+
             if (mouse != 0) {
                 reader.setOpt(LineReader.Option.MOUSE);
                 if (mouse == 2) {
@@ -449,6 +450,7 @@ public class CLI
                         line = reader.readLine("password> ", mask);
                     }
                     if (line.equalsIgnoreCase("quit") || line.equalsIgnoreCase("exit")) {
+                        reader.printAbove("quit enviado...");
                         //break;
                         return;
                     }
