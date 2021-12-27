@@ -63,6 +63,11 @@ histórico de sentenças e comandos.
 
 A persistência pode ser realizada via [MicroStream](https://microstream.one/). 
 Convém observar que o aplicativo será fornecido via um único aplicativo executável.
+Os dados devem ser armazenados nos seguintes diretórios, e a base deles via
+`System.getProperty("user.home")`:
+- Windows: `%USERPROFILE%\AppData\Local\fhirpathcli\` 
+- Linux: `~/.config/fhirpathcli`
+- MacOS: `/Users/username/Library/Preferences/fhirpathci` (precisa confirmar)
 
 Esta camada também é responsável pela conversão entre JSON e XML, em 
 ambos os sentidos. De fato, as conversões também incluem o formato Yaml. 
