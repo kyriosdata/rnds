@@ -63,13 +63,7 @@ no documento lido. Observe que no trecho de código acima sabe-se que o conteúd
 
 ## Design
 
-Os requisitos correntes exigem uma aplicação via linha de comandos. Situação futura,
-contudo, pode considerar opção "mais sofisticada" via interface gráfica. Ambas são
-contempladas no diagrama abaixo.
-
-![design](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/design.puml)
-
-Na figura acima são citados [jline3](https://github.com/jline/jline3) e 
-[hapifhir](https://github.com/hapifhir/hapi-fhir) para auxiliar na implementação
-da aplicação via linha de comandos.
+Os requisitos e a análise acima podem ser considerados para alguns suficientes
+para a construção correspondente, contudo, uma proposta de _design_ 
+deste aplicativo está disponível [aqui](design.md).
 
