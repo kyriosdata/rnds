@@ -31,13 +31,11 @@ package "Aplicação Gráfica (opções)" {
 
 package "Aplicação CLI" {
     Component CLI
-    Component jline3 as JLINE3 <<library>>
     Component "FHIRPath Library" as FPL <<library>>
     Component "Hapifhir" as HF <<FHIR>>
     CLI .down.> API : use
     API - FPL
     FPL .left.> HF : use
-    CLI .left.> JLINE3
 }
 
 @enduml
