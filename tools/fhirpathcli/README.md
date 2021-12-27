@@ -1,7 +1,7 @@
 ﻿# FhirPathCli
 
 > Aplicação para execução de sentenças em 
-> [FHIRPath](http://hl7.org/fhirpath/) via linha de comandos.
+> [FHIRPath](http://hl7.org/fhirpath/) via linha de comandos. A gramática [aqui](http://hl7.org/fhirpath/grammar.html).
 
 Esta linguagem foi desenvolvida com foco na definição de expressões 
 lógicas e consultas sobre recursos [FHIR](https://www.hl7.org/fhir/).
