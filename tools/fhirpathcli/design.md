@@ -1,14 +1,17 @@
-# Design
+# Design (fhirpathcli)
 
-A figura abaixo ilustra dois cenários, aquele que atende os requisitos (Aplicação CLI) e um
-futuro (Aplicação Gráfica). Observe que a versão gráfica é uma especulação. 
+A figura abaixo ilustra dois cenários, aquele que atende os requisitos 
+estabelecidos (Aplicação CLI) e um outro que atende eventual 
+necessidade futura (Aplicação Gráfica). Este último cenário é uma especulação. 
 
 ![design](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/design.puml)
 
 Nesta figura há uma proposta de organização do código da Aplicação CLI com o 
 propósito de destacar a biblioteca FHIRPath. Esta organização promove a 
 eventual reutilização de código numa aplicação gráfica (especulação). 
-O detalhamento desta proposta segue abaixo em tópicos.
+
+O detalhamento desta proposta segue abaixo em tópicos assim como outros
+itens pertinentes ao _design_ de artefatos necessários para a aplicação CLI.
 
 ## Landing page
 Página que disponibiliza o aplicativo para _download_ bem como orientações de uso. 
@@ -30,7 +33,7 @@ A GraalVM (https://www.graalvm.org/), ou similar, pode ser utilizada para esta f
 
 O módulo CLI está organizado em camadas: (a) apresentação; (b) negócio e (c) dados. 
 
-### Apresentação
+### Apresentação (camada)
 
 A interface por meio da qual o usuário requisita a execução de sentenças em FHIRPath 
 e consome os resultados. Inclui definição de teclas, leiaute, cores e outros. 
@@ -51,13 +54,13 @@ Uma outra opção para inspiração é o
 [cliente gráfico]((https://docs.microstream.one/manual/storage/rest-interface/client-gui.html)) 
 para MicroStream. É empregado para objetos em Java, ou seja, “exatamente” o cenário em questão.
 
-### Negócio
+### Negócio (camada)
 
 A principal função oferecida pela aplicação é a execução de sentenças em
 FHIRPath, contudo, algumas operações de suporte fazem-se necessárias. 
 Todas as funções são definidas pela linguagem de comandos abaixo.
 
-### Dados
+### Dados (camada)
 Inclui dados e gestão de configuração, os recursos utilizados, _cache_ e o 
 histórico de sentenças e comandos. 
 
