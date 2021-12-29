@@ -7,7 +7,6 @@ import org.hl7.fhir.r4.model.Base;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Property;
 import org.hl7.fhir.r4.model.Resource;
-import org.hl7.fhir.r4.model.codesystems.BundleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,10 @@ public class FhirPathApp {
         FhirContext ctx = FhirContext.forR4();
         FhirPathR4 fp = new FhirPathR4(ctx);
 
-        IBase patient = Serializacao.fromJson("patient.json");
-        IBase outro = Serializacao.fromJson("patient-outro.json");
+        FhirPathLib fpl = new FhirPathLib();
+
+        IBase patient = fpl.fromJson(FhirPathLib.class.getClassLoader().getResourceAsStream("patient.json"));
+        IBase outro = fpl.fromJson(FhirPathLib.class.getClassLoader().getResourceAsStream("patient-outro.json"));
 
         // Montar um bundle
         Bundle bundle = new Bundle();
