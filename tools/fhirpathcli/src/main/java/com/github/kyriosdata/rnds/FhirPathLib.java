@@ -50,18 +50,35 @@ public class FhirPathLib {
         return paciente;
     }
 
+    /**
+     * Serializa recurso em JSON.
+     *
+     * @param resource Recurso a ser serializado.
+     *
+     * @return Sequência de caracteres JSON correspondente ao recurso
+     * fornecido.
+     *
+     * @see #fromJson(InputStream)
+     */
     public String toJson(IBaseResource resource) {
         return json.encodeResourceToString(resource);
     }
 
+    /**
+     * Obtém recurso a partir do stream fornecido.
+     *
+     * @param is O stream a partir do qual o recurso será obtido.
+     *
+     * @return Recurso recuperado a partir do stream.
+     *
+     * @see #toJson(IBaseResource)
+     */
     public IBaseResource fromJson(InputStream is) {
         return json.parseResource(is);
     }
 
-    public List<String> avaliar(IBaseResource resource, String sentenca) {
-        List<Base> avaliado = fpr4.evaluate(resource, sentenca, Base.class);
-        return avaliado.stream()
-                .map(b -> toJson((IBaseResource) b)).collect(Collectors.toList());
+    public List<Base> avaliar(IBaseResource resource, String sentenca) {
+        return fpr4.evaluate(resource, sentenca, Base.class);
     }
 
     public String toJson(IElement datatype) throws JsonProcessingException {
