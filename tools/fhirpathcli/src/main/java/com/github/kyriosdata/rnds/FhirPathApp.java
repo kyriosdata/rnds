@@ -1,6 +1,7 @@
 package com.github.kyriosdata.rnds;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.IElement;
 import org.hl7.fhir.instance.model.api.IBase;
 import org.hl7.fhir.r4.hapi.fluentpath.FhirPathR4;
 import org.hl7.fhir.r4.model.Base;
@@ -41,10 +42,13 @@ public class FhirPathApp {
 
         showTotal(resposta);
         showTipos(resposta);
-        System.out.println(resposta.get(0).fhirType());
-        System.out.println(String.format("isResource: %b", resposta.get(0).isResource()));
-        System.out.println(String.format("isPrimitive: %b", resposta.get(0).isPrimitive()));
-        Base base = resposta.get(0);
+        Base item = resposta.get(0);
+        System.out.println(item.fhirType());
+        System.out.println(String.format("isResource: %b", item.isResource()));
+        System.out.println(String.format("isPrimitive: %b", item.isPrimitive()));
+        System.out.println(String.format("isElement: %b", item instanceof IElement));
+
+        Base base = item;
         for (Property property : base.children()) {
             System.out.println(property + " " + property.getValues());
         }
