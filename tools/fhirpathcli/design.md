@@ -1,14 +1,17 @@
 # Design (fhirpathcli)
 
 A figura abaixo ilustra dois cenários, aquele que atende os requisitos 
-estabelecidos (Aplicação CLI) e um outro que atende eventual 
-necessidade futura (Aplicação Gráfica). Este último cenário é uma especulação. 
+estabelecidos (Aplicação CLI) e um segundo que atende eventual 
+necessidade futura (Aplicação Gráfica). Este último cenário é uma especulação.
 
 ![design](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/kyriosdata/rnds/master/tools/fhirpathcli/UML/design.puml)
 
 Nesta figura há uma proposta de organização do código da Aplicação CLI com o 
 propósito de destacar a biblioteca FHIRPath. Esta organização promove a 
 eventual reutilização de código numa aplicação gráfica (especulação). 
+Observe que dentre as opções está uma alternativa para a execução via
+linha de comandos (console), o que permite isolar a tecnologia empregada
+na linha de comandos de Java.
 
 O detalhamento desta proposta segue abaixo em tópicos assim como outros
 itens pertinentes ao _design_ de artefatos necessários para a aplicação CLI.

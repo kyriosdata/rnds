@@ -16,14 +16,16 @@ skinparam interface {
     BorderColor #505050
 }
 
-package "Aplicação Gráfica (opções)" {
+package "Opções" {
     Component "FHIRPath Service" as WS << Spring Boot >>
     Component "GUI" as EGUI <<electron>>
     Component "GUI" as WGUI <<web>>
+    Component "CONSOLE" as CONSOLE <<cli>>
 
     EGUI .right.> () "HTTP API" : use
     [HTTP API] - WS
     WGUI .down.> () "HTTP API" : use
+    CONSOLE .up.> () "HTTP API" : use
 }
 
    WS .right.> () API : use
