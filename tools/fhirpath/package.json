@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/kyriosdata/rnds#readme",
   "devDependencies": {
-    "fhirpath": "^2.9.1"
+    "fhirpath": "^2.10.1"
   }
 }

@@ -1,10 +1,15 @@
 //const { https } = require("follow-redirects");
-import followRedirects from "follow-redirects";
-const { https } = followRedirects;
+
+//import followRedirects from "follow-redirects";
+//const { https } = followRedirects;
+
+// import em vez de require e https em vez de follow-redirects.
+import https from "https";
+
 /**
  * Cria função para requisição HTTP(s).
  * @param {function} logging Serviço para registro de log, por exemplo, console.log.
- * @returns {Promise} com retorno de requisição http(s).
+ * @returns {function(*, *): Promise<unknown>} com retorno de requisição http(s).
  */
 export function sendService(logging) {
   /**
