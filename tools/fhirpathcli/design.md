@@ -9,9 +9,13 @@ necessidade futura (Aplicação Gráfica). Este último cenário é uma especula
 Nesta figura há uma proposta de organização do código da Aplicação CLI com o 
 propósito de destacar a biblioteca FHIRPath. Esta organização promove a 
 eventual reutilização de código numa aplicação gráfica (especulação). 
+
 Observe que dentre as opções está uma alternativa para a execução via
 linha de comandos (console), o que permite isolar a tecnologia empregada
-na linha de comandos de Java.
+na linha de comandos de Java, por exemplo, uma aplicação em NodeJS que
+obtém ou atualiza o serviço (FhirPath Service), assim como a si próprio,
+inicia o serviço, interage com o usuário e repassa comandos e recebe 
+as respostas do serviço. 
 
 O detalhamento desta proposta segue abaixo em tópicos assim como outros
 itens pertinentes ao _design_ de artefatos necessários para a aplicação CLI.
