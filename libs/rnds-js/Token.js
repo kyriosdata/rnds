@@ -111,10 +111,10 @@ export default class Token {
           return Promise.resolve(this.access_token);
         } else {
           this.access_token = undefined;
-          return Promise.reject("falha ao obter access_token");
+          return Promise.reject(o);
         }
       })
-      .catch(() => Promise.reject("senha inválida (erro ao obter token)"));
+      .catch((error) => Promise.reject(error));
   }
 }
 

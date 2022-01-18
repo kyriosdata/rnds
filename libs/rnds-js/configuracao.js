@@ -1,5 +1,7 @@
 import chalk from "chalk";
 import fs from "fs";
+import Token from "./Token.js";
+import {sendService} from "./send.js";
 
 /**
  * Estrutura que mantém os valores empregados para configuração
@@ -83,5 +85,34 @@ export function exibeConfiguracao(configuracao) {
 export function getVersao() {
     const json = fs.readFileSync("./package.json").toString();
     return JSON.parse(json).version;
+}
+
+/**
+ * Realiza tentativa de obtenção de token conforme a configuração
+ * disponível e exibe na saída padrão o resultado correspondente.
+ */
+export function verificacao() {
+    const configuracao = obtemConfiguracao();
+
+    const falha = chalk.red.inverse;
+    const ok = chalk.green.inverse;
+
+    function exibeToken(t) {
+        console.log("Token", chalk.blue("OK"), t.length, "bytes");
+    }
+
+    function getOnrejected(erro) {
+        if (erro.erro.code === "ECONNREFUSED") {
+            console.log("Verifique os endereços de acesso à RNDS.");
+        }
+
+        console.log(falha("Não foi possível conexão com a RNDS."));
+    }
+
+    const token = new Token(configuracao, true, sendService);
+    token.getToken()
+        .then(exibeToken)
+        .then(() => console.log(ok("Estabelecida conexão com a RNDS.")))
+        .catch(getOnrejected);
 }
 
