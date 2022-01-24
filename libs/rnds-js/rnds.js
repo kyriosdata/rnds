@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import {obtemConfiguracao, getVersao} from "./configuracao.js";
 
 console.log("rnds-js", getVersao());
@@ -119,29 +120,20 @@ export default class RNDS {
    */
   async checkVersion() {
     const CAPABILITY = {
-      method: "GET",
       path: "/api/fhir/r4/metadata",
-      headers: {},
       hostname: `${this.cfg.uf.valor}-ehr-services.saude.gov.br`,
     };
 
     let resposta;
 
     try {
-      resposta = await this.send(CAPABILITY);
+      resposta = await this.send(this.inflar(CAPABILITY));
     } catch (error) {
-      if (error.code == 403) {
-        console.log("Permissão negada (403)");
-      }
-
-      console.log(error);
-      return;
+      return false;
     }
 
     const json = JSON.parse(resposta.retorno);
-    if (json.fhirVersion !== FHIR_VERSION) {
-      throw new Error(`Cliente: ${FHIR_VERSION} e server ${json.fhirVersion}`);
-    }
+    return json.fhirVersion === FHIR_VERSION;
   }
 
   /**
@@ -161,6 +153,7 @@ export default class RNDS {
       method: "GET",
       hostname: this.cfg.ehr.valor,
       headers: {
+        "User-Agent" : "RNDS Library",
         "Content-Type": "application/json",
         "X-Authorization-Server": "Bearer " + this.cache.access_token,
         Authorization: this.cfg.requisitante.valor,
