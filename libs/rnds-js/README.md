@@ -2,8 +2,10 @@
 
 Biblioteca de acesso à RNDS (Rede Nacional de Dados em Saúde) que contempla o envio de resultads de exames laboratoriais (COVID-19).
 
-Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso que implementam um [façade](https://en.wikipedia.org/wiki/Facade_pattern) para a implementação do FHIR oferecida pelo
-Ministério da Saúde (DATASUS) para o Brasil. Consulte o [Guia de Integração com a RNDS](https://kyriosdata.github.io/rnds) para detalhes.
+Os serviços oferecidos pela RNDS estão encapsulados em funções de fácil uso que implementam um [façade](https://en.wikipedia.org/wiki/Facade_pattern) para os ambientes FHIR (homologação e produção) oferecidos pelo
+Ministério da Saúde (DATASUS) para o Brasil.
+
+Consulte o [Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br/) para detalhes da integração com a RNDS.
 
 ### Instalar
 
