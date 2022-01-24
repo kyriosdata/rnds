@@ -58,7 +58,7 @@ export default class RNDS {
    * para empregar token de acesso.
    */
   constructor(logging, security) {
-    if (!logging || !security) {
+    if (logging === undefined || security === undefined) {
       throw new Error("forneça true/false (logging) e true/false (security)");
     }
 
