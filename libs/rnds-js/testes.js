@@ -1,31 +1,21 @@
 import RNDS from "./rnds.js";
 
 process.on('uncaughtException', function(err) {
-    console.log();
-    console.log("A exceção abaixo ocorreu e não foi tratada...");
-    console.log();
+    console.log("\nA exceção abaixo ocorreu e não foi tratada...\n");
     console.log(err);
 })
 
-// logging está habilitado (primeiro argumento)
+// Crie uma instância
 const rnds = await RNDS.cliente(true, true, true);
 
-// rnds.verifica().then(resposta => {
-//     if (resposta) {
-//         console.log("Acesso verificado.");
-//     } else {
-//         console.log("Falha na verificação.");
-//     }
-// });
+rnds.checkVersion()
+    .then(c => console.log("Versão FHIR", c ? "ok" : "erro"))
+    .catch(() => console.log("erro ao verificar versão..."));
 
-// Estilo
-// rnds.checkVersion().then(console.log).catch(() => console.log("problema..."));
+rnds.cnes("2337991")
+    .then(cnes  => console.log("CNES", cnes.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter CNES"));
 
-// Alternativa
-try {
-    const compativel = await rnds.checkVersion();
-    const msg = compativel ? "sim" : "não";
-    console.log("Há compatibilidade:", msg);
-} catch (error) {
-    console.log("houve algum problema...");
-}
+rnds.cns("980016287385192")
+    .then(cns  => console.log("CNS", cns.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter CNES"));
