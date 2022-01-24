@@ -228,7 +228,7 @@ export default class RNDS {
     }
 
     /**
-     * Recupera informações sobre profissional de saúde.
+     * Recupera informações sobre profissional de saúde pelo CPF.
      * @param {string} numero CPF do profissional de saúde.
      * @returns {Promise<Resposta>} Caso o CPF seja inválido ou
      * não esteja associado a um profissional de saúde, será necessário

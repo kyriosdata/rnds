@@ -5,11 +5,10 @@ process.on('uncaughtException', function(err) {
     console.log(err);
 })
 
-// Crie uma instância
 const rnds = await RNDS.cliente(true, true, true);
 
 rnds.checkVersion()
-    .then(c => console.log("Versão FHIR", c ? "ok" : "erro"))
+    .then(c => console.log("FHIR VERSION", c ? "ok" : "erro"))
     .catch(() => console.log("erro ao verificar versão..."));
 
 rnds.cnes("2337991")
@@ -18,4 +17,13 @@ rnds.cnes("2337991")
 
 rnds.cns("980016287385192")
     .then(cns  => console.log("CNS", cns.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter CNES"));
+    .catch(() => console.log("erro ao obter CNS"));
+
+// Comentado para evitar divulgação de um CPF
+// rnds.cpf("<cpf aqui>")
+//     .then(cpf  => console.log("CPF", cpf.code === 200 ? "ok" : "erro"))
+//     .catch(() => console.log("erro ao obter CNES"));
+
+rnds.cnpj("01567601000143")
+    .then(cnpj  => console.log("CNPJ", cnpj.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter CNPJ"));
