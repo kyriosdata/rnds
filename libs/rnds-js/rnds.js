@@ -33,7 +33,7 @@ const FHIR_VERSION = "4.0.1";
  */
 function log(logging) {
   if (logging) {
-    console.log("logging enabled");
+    console.log("logging habilitado");
     return (p, s) => console.log("RNDS:", p, s || "");
   } else {
     return () => {};
@@ -88,17 +88,23 @@ export default class RNDS {
    *
    * @param {boolean} check O valor deve ser verdadeiro para indicar
    * que a verificação de versão deve ser realizada. Se o servidor empregar
-   * versão diferente do cliente, então gera exceção.
+   * versão diferente do cliente, então gera exceção. Se falso, então
+   * esta verificação não é realizada.
    */
   static async cliente(logging, security, check) {
+    if (check === undefined) {
+      check = false;
+    }
+
     const rnds = new RNDS(logging, security);
     if (check) {
       try {
-        // TODO gera 403?!!!!??
-        // await rnds.checkVersion();
-        await rnds.cache.getToken();
+        const verificaVersao = await rnds.verifica();
+        if (!verificaVersao) {
+          throw Error;
+        }
       } catch (error) {
-        console.log(error);
+        throw new Error("Verificação de versão de servidor FHIR não validada.");
       }
     }
 
