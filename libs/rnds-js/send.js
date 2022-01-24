@@ -68,7 +68,7 @@ export function sendService(logging) {
 
             req.on("error", function (error) {
                 reject({
-                    msg: "Ocorreu um erro (requisição não executada)",
+                    msg: "Ocorreu um erro ao executar requisição",
                     erro: error,
                 });
             });
