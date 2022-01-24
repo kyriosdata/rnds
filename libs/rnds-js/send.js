@@ -1,9 +1,3 @@
-//const { https } = require("follow-redirects");
-
-//import followRedirects from "follow-redirects";
-//const { https } = followRedirects;
-
-// import em vez de require e https em vez de follow-redirects.
 import https from "https";
 
 /**
@@ -49,18 +43,28 @@ export function sendService(logging) {
                     // Repassado o código de retorno, o retorno e headers
                     // (em vários cenários os headers não são relevantes)
                     logging(options.path, res.statusCode);
-                    resolve({
+
+                    let resposta = {
                         code: res.statusCode,
                         retorno: texto,
                         headers: res.headers,
+                    };
+
+                    if (res.statusCode === 403) {
+                        reject(resposta);
+                    } else {
+                        resolve(resposta);
+                    }
+                });
+
+                res.on("error", function (error) {
+                    reject({
+                        msg: "Ocorreu um erro (requisição não executada)",
+                        erro: error,
                     });
                 });
-            });
 
-            // Se não fornecido ou vazio, não será enviado.
-            if (payload) {
-                req.write(payload);
-            }
+            });
 
             req.on("error", function (error) {
                 reject({
@@ -68,6 +72,11 @@ export function sendService(logging) {
                     erro: error,
                 });
             });
+
+            // Se não fornecido ou vazio, não será enviado.
+            if (payload) {
+                req.write(payload);
+            }
 
             req.end();
         });

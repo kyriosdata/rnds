@@ -93,8 +93,13 @@ export default class RNDS {
   static async cliente(logging, security, check) {
     const rnds = new RNDS(logging, security);
     if (check) {
-      await rnds.checkVersion();
-      await rnds.cache.getToken();
+      try {
+        // TODO gera 403?!!!!??
+        // await rnds.checkVersion();
+        await rnds.cache.getToken();
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return rnds;
@@ -111,11 +116,22 @@ export default class RNDS {
       method: "GET",
       path: "/api/fhir/r4/metadata",
       headers: {},
-      maxRedirects: 20,
       hostname: `${this.cfg.uf.valor}-ehr-services.saude.gov.br`,
     };
 
-    const resposta = await this.send(CAPABILITY);
+    let resposta;
+
+    try {
+      resposta = await this.send(CAPABILITY);
+    } catch (error) {
+      if (error.code == 403) {
+        console.log("Permissão negada (403)");
+      }
+
+      console.log(error);
+      return;
+    }
+
     const json = JSON.parse(resposta.retorno);
     if (json.fhirVersion !== FHIR_VERSION) {
       throw new Error(`Cliente: ${FHIR_VERSION} e server ${json.fhirVersion}`);
@@ -132,6 +148,7 @@ export default class RNDS {
    *
    * @returns Objeto fornecido e acrescido das propriedades
    * descritas acima.
+   *
    */
   inflar(options) {
     return {
@@ -412,6 +429,6 @@ export default class RNDS {
    * na obtenção de token de acesso.
    */
   verifica() {
-    return this.cache.getToken();
+    return this.cache.getToken().then(t => t.length !== 0).catch(w => false);
   }
 }
