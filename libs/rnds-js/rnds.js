@@ -214,14 +214,14 @@ export default class RNDS {
     /**
      * Recupera informações sobre o profissional de saúde pelo seu
      * código CNS.
+     *
      * @param {string} cns Código CNS do profissional de saúde. Caso não
      * fornecido, será empregado o CNS do requisitante.
      * @returns {Promise<Resposta>}
      */
     cns(cns) {
-        const profissional = cns ? cns : this.requisitante;
         const options = {
-            path: "/api/fhir/r4/Practitioner/" + profissional,
+            path: "/api/fhir/r4/Practitioner/" + cns,
         };
 
         return this.makeRequest(options);
