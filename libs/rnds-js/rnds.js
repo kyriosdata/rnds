@@ -217,7 +217,8 @@ export default class RNDS {
      *
      * @param {string} cns Código CNS do profissional de saúde. Caso não
      * fornecido, será empregado o CNS do requisitante.
-     * @returns {Promise<Resposta>}
+     * 
+     * @returns {Promise<Resposta>} A {@link Resposta} produzida pela RNDS.
      */
     cns(cns) {
         const options = {
