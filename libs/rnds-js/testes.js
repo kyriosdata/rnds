@@ -57,3 +57,7 @@ rnds.lotacaoPorCns("980016287385192")
 rnds.lotacaoPorCnes("2337991")
     .then(l => console.log("CNES (lotações)", l.code === 200 ? "ok" : "erro"))
     .catch(() => console.log("erro ao obter lotações"));
+
+rnds.lotacaoCnsEmCnes("980016287385192", "2337991")
+    .then(l => console.log("CNS em CNES (lotações)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter lotações"));

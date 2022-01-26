@@ -363,6 +363,23 @@ export default class RNDS {
     }
 
     /**
+     * Requisita informações sobre a lotação de um dado
+     * profissional num estabelecimento de saúde.
+     *
+     * @param {string} cns Código CNS do profissional de saúde
+     * @param {string} cnes Código CNES do estabelecimento de saúde
+     * @returns {Promise<Resposta>}
+     */
+    lotacaoCnsEmCnes(cns, cnes) {
+        const options = {
+            path:
+                "/api/fhir/r4/PractitionerRole/" + cns + "-" + cnes,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
      * Recupera informações sobre profissional liberal pelo CNES ou
      * CPF do profissional em questão.
      *
