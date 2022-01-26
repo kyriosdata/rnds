@@ -61,3 +61,15 @@ rnds.lotacaoPorCnes("2337991")
 rnds.lotacaoCnsEmCnes("980016287385192", "2337991")
     .then(l => console.log("CNS em CNES (lotações)", l.code === 200 ? "ok" : "erro"))
     .catch(() => console.log("erro ao obter lotações"));
+
+rnds.pacientePorCns("980016287385192")
+    .then(l => console.log("CNS (paciente - Bundle)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter informações do paciente pelo CNS"));
+
+rnds.pacientePorCpf(codigoCPF)
+    .then(l => console.log("CPF (paciente)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter informações do paciente pelo CPF"));
+
+rnds.paciente("980016287385192")
+    .then(l => console.log("CNS (paciente - Patient)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter informações do paciente pelo CNS"));

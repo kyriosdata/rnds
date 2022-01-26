@@ -255,7 +255,7 @@ export default class RNDS {
      *
      * @param {string} cns Código CNS do profissional de saúde. Caso não
      * fornecido, será empregado o CNS do requisitante.
-     * 
+     *
      * @returns {Promise<Resposta>} A {@link Resposta} produzida pela RNDS.
      */
     cns(cns) {
@@ -380,6 +380,59 @@ export default class RNDS {
     }
 
     /**
+     * Recupera informações do paciante pelo CNS correspondente.
+     * O recurso retornado é um Bundle.
+     *
+     * @param {string} cns O número do CNS do paciente.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    pacientePorCns(cns) {
+        const options = {
+            path:
+                "/api/fhir/r4/Patient?" +
+                "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cns%7C" +
+                cns,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
+     * Recupera informações sobre o paciante.
+     *
+     * @param {string} cpf O número do CPF do paciente.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    pacientePorCpf(cpf) {
+        const options = {
+            path:
+                "/api/fhir/r4/Patient?" +
+                "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
+                cpf,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
+     * Recupera informações do paciante pelo CNS correspondente.
+     * O recurso retornado é um Patient.
+     *
+     * @param {string} cns O número do CNS do paciente.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    paciente(cns) {
+        const options = {
+            path: "/api/fhir/r4/Patient/" + cns,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
      * Recupera informações sobre profissional liberal pelo CNES ou
      * CPF do profissional em questão.
      *
@@ -390,24 +443,6 @@ export default class RNDS {
      */
     profissionalLiberal(cpfOuCnes) {
         return this.cnes(cpfOuCnes);
-    }
-
-    /**
-     * Recupera informações sobre o paciante.
-     *
-     * @param {string} cpf O número do CPF do paciente.
-     *
-     * @returns {Promise<Resposta>}
-     */
-    paciente(cpf) {
-        const options = {
-            path:
-                "/api/fhir/r4/Patient?" +
-                "identifier=http://rnds.saude.gov.br/fhir/r4/NamingSystem/cpf%7C" +
-                cpf,
-        };
-
-        return this.makeRequest(options);
     }
 
     /**
