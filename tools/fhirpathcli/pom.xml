@@ -69,7 +69,7 @@
         <checkstyle.versao>8.29</checkstyle.versao>
         <dependency.check.versao>5.2.2</dependency.check.versao>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-        <h2.versao>1.4.200</h2.versao>
+        <h2.versao>2.1.210</h2.versao>
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <jline.version>3.21.0</jline.version>
         <junit.versao>5.5.2</junit.versao>
