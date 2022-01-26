@@ -299,6 +299,70 @@ export default class RNDS {
     }
 
     /**
+     * Requisita informações sobre os papéis desempenhados por um profissional de saúde num
+     * dado estabelecimento.
+     *
+     * @param {string} cns CNS do profissional de saúde
+     * @param {string} cnes Código CNES do estabelecimento de saúde
+     * @returns {Promise<Resposta>}
+     */
+    lotacoes(cns, cnes) {
+        const practitioner =
+            "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
+            cns;
+        const organization =
+            "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
+            cnes;
+
+        const options = {
+            path:
+                "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
+     * Requisita informações sobre os papéis desempenhados por um profissional de saúde.
+     *
+     * @param {string} cns CNS do profissional de saúde
+     * @returns {Promise<Resposta>}
+     */
+    lotacaoPorCns(cns) {
+        const practitioner =
+            "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
+            cns;
+
+        const options = {
+            path:
+                "/api/fhir/r4/PractitionerRole?" + practitioner,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
+     * Requisita informações sobre os papéis desempenhados por
+     * profissionais lotados num estabelecimento de saúde.
+     *
+     * @param {string} cnes Código CNES do estabelecimento de saúde
+     * @returns {Promise<Resposta>}
+     */
+    lotacaoPorCnes(cnes) {
+
+        const organization =
+            "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
+            cnes;
+
+        const options = {
+            path:
+                "/api/fhir/r4/PractitionerRole?" + organization,
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
      * Recupera informações sobre profissional liberal pelo CNES ou
      * CPF do profissional em questão.
      *
@@ -417,30 +481,6 @@ export default class RNDS {
         };
 
         return this.paciente(numero).then(extraiCnsSeEncontrado);
-    }
-
-    /**
-     * Requisita informações sobre os papéis desempenhados por um profissional de saúde em um
-     * dado estabelecimento em um período de tempo.
-     *
-     * @param {string} cns CNS do profissional de saúde
-     * @param {string} cnes Código CNES do estabelecimento de saúde
-     * @returns {Promise<Resposta>}
-     */
-    lotacao(cns, cnes) {
-        const practitioner =
-            "practitioner.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcns%7C" +
-            cns;
-        const organization =
-            "organization.identifier=http%3A%2F%2Frnds.saude.gov.br%2Ffhir%2Fr4%2FNamingSystem%2Fcnes%7C" +
-            cnes;
-
-        const options = {
-            path:
-                "/api/fhir/r4/PractitionerRole?" + practitioner + "&" + organization,
-        };
-
-        return this.makeRequest(options);
     }
 
     /**

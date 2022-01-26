@@ -39,9 +39,21 @@ await rnds.cns("980016287385192")
     .catch(() => console.log("erro ao obter CNS"));
 
 rnds.cpf(codigoCPF)
-    .then(cpf  => console.log("CPF", cpf.code === 200 ? "ok" : "erro"))
+    .then(cpf => console.log("CPF", cpf.code === 200 ? "ok" : "erro"))
     .catch(() => console.log("erro ao obter CPF"));
 
 rnds.cnpj("01567601000143")
     .then(cnpj => console.log("CNPJ", cnpj.code === 200 ? "ok" : "erro"))
     .catch(() => console.log("erro ao obter CNPJ"));
+
+rnds.lotacoes("980016287385192", "2337991")
+    .then(l => console.log("CNS/CNES (lotações)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter lotações"));
+
+rnds.lotacaoPorCns("980016287385192")
+    .then(l => console.log("CNS (lotações)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter lotações"));
+
+rnds.lotacaoPorCnes("2337991")
+    .then(l => console.log("CNES (lotações)", l.code === 200 ? "ok" : "erro"))
+    .catch(() => console.log("erro ao obter lotações"));
