@@ -13,10 +13,12 @@ import {sendService} from "./send.js";
 const FHIR_VERSION = "4.0.1";
 
 /**
- * A resposta fornecida pela RNDS, conforme recebida, para a requisição
- * submetida. O código de retorno é fornecido pela propriedade
- * code. O payload pela propriedade retorno e, pela propriedade headers,
- * todos os cabeçalhos fornecidos pela RNDS.
+ * A resposta obtida da execução de requisição à RNDS.
+ * O código de retorno é fornecido pela propriedade
+ * code. O payload retornado pela RNDS é fornecido na
+ * propriedade retorno e, pela propriedade headers,
+ * todos os cabeçalhos fornecidos pelo servidor FHIR
+ * da RNDS.
  *
  * @typedef {Object} Resposta
  * @property {number} code - O código HTTP da resposta.
@@ -116,30 +118,6 @@ export default class RNDS {
     }
 
     /**
-     * Verifica compatibilidade entre a versão do servidor e o cliente.
-     *
-     * @returns true se a versão do cliente é compatível com aquela do
-     * servidor.
-     */
-    async checkVersion() {
-        const CAPABILITY = {
-            path: "/api/fhir/r4/metadata",
-            hostname: `${this.cfg.uf.valor}-ehr-services.saude.gov.br`,
-        };
-
-        let resposta;
-
-        try {
-            resposta = await this.send(this.inflar(CAPABILITY));
-        } catch (error) {
-            return false;
-        }
-
-        const json = JSON.parse(resposta.retorno);
-        return json.fhirVersion === FHIR_VERSION;
-    }
-
-    /**
      * Preenche configuração de requisição com elementos comuns
      * às requisições: (a) hostname; (b) Content-Type;
      * (c) X-Authorization-Server" e (d) Authorization.
@@ -194,6 +172,66 @@ export default class RNDS {
         };
 
         return this.cache.getToken().then(envie).then(reenvieSeFalha);
+    }
+
+    /**
+     * Recupera as capacidades oferecidas pelo
+     * servidor FHIR disponibilizado pela RNDS.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    async capability() {
+        const options = {
+            path: "/api/fhir/r4/metadata",
+        };
+
+        return this.makeRequest(options);
+    }
+
+    /**
+     * Verifica compatibilidade entre a versão do servidor e o cliente.
+     *
+     * @returns true se a versão do cliente é compatível com aquela do
+     * servidor.
+     */
+    async checkVersion() {
+        let resposta;
+
+        try {
+            resposta = await this.capability();
+            if (resposta.code !== 200) {
+                return false;
+            }
+        } catch (error) {
+            return false;
+        }
+
+        const json = JSON.parse(resposta.retorno);
+        return json.fhirVersion === FHIR_VERSION;
+    }
+
+    /**
+     * Recupera "token" de acesso à informação do usuário.
+     *
+     * @param {string} cnes CNES do estabelecimento de saúde.
+     * @param {string} cnsProfissional CNS do profissional.
+     * @param {string} cnsPaciente CNS do paciente.
+     * @returns {Promise<Resposta>} O token que permite acesso a
+     * informações do paciente é retornada na propriedade
+     * "retorno". Observe que a propriedade ciente.
+     * @returns {Promise<Resposta>} O token que permite acesso a
+     * informações do paciente é retornada na propriedade
+     * "retorno". Observe que a propriedade "code" deve possuir o valor
+     * 200.
+     */
+    contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
+        const options = {
+            method: "POST",
+            path: "/api/contexto-atendimento",
+        };
+
+        const payload = {cnes, cnsProfissional, cnsPaciente};
+        return this.makeRequest(options, JSON.stringify(payload));
     }
 
     /**
@@ -403,30 +441,6 @@ export default class RNDS {
         };
 
         return this.makeRequest(options);
-    }
-
-    /**
-     * Recupera "token" de acesso à informação do usuário.
-     *
-     * @param {string} cnes CNES do estabelecimento de saúde.
-     * @param {string} cnsProfissional CNS do profissional.
-     * @param {string} cnsPaciente CNS do paciente.
-     * @returns {Promise<Resposta>} O token que permite acesso a
-     * informações do paciente é retornada na propriedade
-     * "retorno". Observe que a propriedade ciente.
-     * @returns {Promise<Resposta>} O token que permite acesso a
-     * informações do paciente é retornada na propriedade
-     * "retorno". Observe que a propriedade "code" deve possuir o valor
-     * 200.
-     */
-    contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
-        const options = {
-            method: "POST",
-            path: "/api/contexto-atendimento",
-        };
-
-        const payload = {cnes, cnsProfissional, cnsPaciente};
-        return this.makeRequest(options, JSON.stringify(payload));
     }
 
     /**
