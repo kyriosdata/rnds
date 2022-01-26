@@ -5,13 +5,14 @@ import {sendService} from "./send.js";
 
 /**
  * Estrutura que mantém os valores empregados para configuração
- * do acesso aos serviços oferecidos pela RNDS.
+ * e acesso aos serviços oferecidos pela RNDS.
  *
  * @typedef {Object} Configuracao
  * @property {Object} auth - O endereço do serviço de autenticação
  * @property {Object} certificado - O endereço (path) onde se encontra o
  * certificado digital.
  * @property {Object} senha - A senha para acesso ao certificado digital.
+ * @property {Buffer} pfx - Conteúdo do certificado.
  * @property {Object} ehr - O endereço do serviço de registros de saúde.
  * @property {Object} requisitante - O CNS do requisitante em nome do qual
  * requisições são submetidas.
@@ -29,7 +30,7 @@ import {sendService} from "./send.js";
  * oferecidos pela RNDS.
  */
 export function obtemConfiguracao() {
-    return {
+    const cfg = {
         auth: {
             nome: "RNDS_AUTH",
             valor: process.env.RNDS_AUTH
@@ -41,6 +42,10 @@ export function obtemConfiguracao() {
         senha: {
             nome: "RNDS_CERTIFICADO_SENHA",
             valor: process.env.RNDS_CERTIFICADO_SENHA
+        },
+        pfx: {
+            nome: "PFX",
+            valor: undefined
         },
         ehr: {
             nome: "RNDS_EHR",
@@ -55,6 +60,16 @@ export function obtemConfiguracao() {
             valor: process.env.RNDS_REQUISITANTE_UF
         }
     };
+
+    try {
+        cfg.pfx.valor = fs.readFileSync(cfg.certificado.valor);
+    } catch (error) {
+        throw new Error(
+            `erro ao carregar arquivo pfx: ${cfg.certificado.valor}`
+        );
+    }
+
+    return cfg;
 }
 
 /**

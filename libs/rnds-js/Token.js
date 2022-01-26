@@ -1,5 +1,3 @@
-import fs from "fs";
-
 /**
  * Classe que implementa obtenção do token de acesso aos serviços
  * a RNDS usando a política de reutilização durante intervalo de
@@ -25,20 +23,11 @@ export default class Token {
       throw new Error("função 'send' não fornecida");
     }
 
-    // Define real função a ser utilizada, juntamente
-    // com recurso para exibir informações, se for o caso.
+    // Define função a ser utilizada para executar
+    // a requisição propriamente dita.
     this.send = send(this.log);
 
     this.log("Token. Security is", security ? "ON" : "OFF");
-
-    let pfx = undefined;
-    try {
-      pfx = fs.readFileSync(configuracao.certificado.valor);
-    } catch (error) {
-      throw new Error(
-        `erro ao carregar arquivo pfx: ${configuracao.certificado.valor}`
-      );
-    }
 
     this.options = {
       method: "GET",
@@ -46,7 +35,7 @@ export default class Token {
       headers: {},
       maxRedirects: 20,
       hostname: configuracao.auth.valor,
-      pfx: pfx,
+      pfx: configuracao.pfx.valor,
       passphrase: configuracao.senha.valor,
     };
 
@@ -70,7 +59,7 @@ export default class Token {
     }
 
     /**
-     * Recupera token.
+     * Define função para recuperar o token conforme configuração de segurança.
      */
     this.getToken = security ? securityEnabled : securityDisabled;
   }
@@ -81,8 +70,7 @@ export default class Token {
   }
 
   /**
-   * Obtém e armazena em cache o access token a ser empregado
-   * para requisições à RNDS.
+   * Obtém e armazena em cache o access token.
    */
   renoveAccessToken() {
     /**
