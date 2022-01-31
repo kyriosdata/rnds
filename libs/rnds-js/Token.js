@@ -13,7 +13,7 @@ export default class Token {
    * Esta função deve ser chamada com função a ser empregada para exibição
    * de informações, se for o caso.
    * @param {function} logging Função de logging a ser empregada, por
-   * exemplo, console.log. Se não fornecida, não serão exibidas informações.
+   * exemplo, mostre. Se não fornecida, não serão exibidas informações.
    */
   constructor(configuracao, security, send, logging = () => {}) {
     this.log = logging;

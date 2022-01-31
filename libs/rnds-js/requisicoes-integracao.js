@@ -5,7 +5,7 @@ async function applicacao() {
 
     const pessoaJuridica = await rnds.cnpj("01567601000143");
     const dados = JSON.parse(pessoaJuridica.retorno.toString());
-    console.log(dados);
+    mostre(dados);
 }
 
 await applicacao();

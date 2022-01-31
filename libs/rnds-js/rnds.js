@@ -22,21 +22,21 @@ const FHIR_VERSION = "4.0.1";
  *
  * @typedef {Object} Resposta
  * @property {number} code - O código HTTP da resposta.
- * @property {Object} retorno - O payload retornado pela RNDS.
+ * @property {string} retorno - O payload retornado pela RNDS.
  * @property {Object} headers - Os headers retornados.
  */
 
 /**
  * Funcão que retorna função a ser empregada para logging, ou seja,
- * console.log ou função vazia (sem efeito).
+ * mostre ou função vazia (sem efeito).
  *
- * @param {boolean} logging Verdadeiro para habilitar logging via console.log ou false para desabilitar.
+ * @param {boolean} logging Verdadeiro para habilitar logging via mostre ou false para desabilitar.
  * @returns {function} Função empregada para logging, possivelmente vazia, sem efeito, caso o argumento fornecido seja false.
  */
 function log(logging) {
     if (logging) {
-        console.log("logging habilitado");
-        return (p, s) => console.log("RNDS:", p, s || "");
+        mostre("logging habilitado");
+        return (p, s) => mostre("RNDS:", p, s || "");
     } else {
         return () => {
         };
@@ -224,7 +224,7 @@ export default class RNDS {
      * "retorno". Observe que a propriedade "code" deve possuir o valor
      * 200.
      */
-    contextoAtendimento(cnes, cnsProfissional, cnsPaciente) {
+    atendimento(cnes, cnsProfissional, cnsPaciente) {
         const options = {
             method: "POST",
             path: "/api/contexto-atendimento",

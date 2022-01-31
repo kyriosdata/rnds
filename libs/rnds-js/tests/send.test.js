@@ -44,6 +44,6 @@ test("github zen", async () => {
 
 //   const resposta = await send(options);
 //   const json = JSON.parse(resposta.retorno);
-//   console.log(json);
+//   mostre(json);
 //   expect(json.name).toBe("Fábio Nogueira de Lucena");
 // });

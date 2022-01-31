@@ -1,75 +1,43 @@
 import RNDS from "./rnds.js";
 
-process.on('uncaughtException', function (err) {
-    console.log("\nA exceção abaixo ocorreu e não foi tratada...\n");
-    console.log(err);
-})
+process.on('uncaughtException', (err) => console.log("!!??\n", err));
 
-const rnds = await RNDS.cliente(true, true, true);
+async function status(requisicao, msg) {
+    const retorno = await requisicao;
+    console.log(retorno.code === 200 ? "ok" : "erro", msg);
+}
 
-rnds.capability()
-    .then(c => console.log("CapabilityStatement: ", c.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao recuperar CapabilityStatement..."));
+// Informações públicas empregadas nos testes
+const CNPJ = "01567601000143";
+const CNES = "2337991";
+const CNS = "980016287385192";
 
-rnds.checkVersion()
-    .then(c => console.log("FHIR VERSION", c ? "ok" : "erro"))
-    .catch(() => console.log("erro ao verificar versão..."));
+try {
+    const rnds = await RNDS.cliente(false, true, true);
 
-rnds.contextoAtendimento("2337991", "980016287385192", "980016287385192")
-    .then(ca => console.log("contextoAtendimento", ca.code === 200 ? "ok" : "erro"))
-    .catch(console.log);
+    await status(rnds.capability(), "CapabilityStatement");
 
-rnds.cnes("2337991")
-    .then(cnes => console.log("CNES", cnes.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter CNES"));
+    console.log(await rnds.checkVersion() ? "ok" : "erro", "FHIR VERSION");
 
-// Usado para guardar CPF para consulta posterior.
-// Desta forma, nenhuma informação "sensível" é
-// fornecida neste arquivo.
+    await status(rnds.atendimento(CNES, CNS, CNS), "contextoAtendimento");
+    await status(rnds.cnes(CNES), "CNES");
 
-let codigoCPF;
+    // Obtém CPF para uso posterior (informação sensível não registrada)
+    const resposta = await rnds.cns(CNS)
+    console.log(resposta.code === 200 ? "ok" : "erro", "CNS");
+    const idt = JSON.parse(resposta.retorno).identifier;
+    const idx = idt.findIndex(i => i.system.endsWith("/cpf"));
+    const codigoCPF = idt[idx].value;
 
-await rnds.cns("980016287385192")
-    .then(cns => {
-        console.log("CNS", cns.code === 200 ? "ok" : "erro");
-        const idt = JSON.parse(cns.retorno).identifier;
-        const idx = idt.findIndex(i => i.system.endsWith("/cpf"));
-        codigoCPF = idt[idx].value;
-    })
-    .catch(() => console.log("erro ao obter CNS"));
-
-rnds.cpf(codigoCPF)
-    .then(cpf => console.log("CPF", cpf.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter CPF"));
-
-rnds.cnpj("01567601000143")
-    .then(cnpj => console.log("CNPJ", cnpj.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter CNPJ"));
-
-rnds.lotacoes("980016287385192", "2337991")
-    .then(l => console.log("CNS/CNES (lotações)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter lotações"));
-
-rnds.lotacaoPorCns("980016287385192")
-    .then(l => console.log("CNS (lotações)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter lotações"));
-
-rnds.lotacaoPorCnes("2337991")
-    .then(l => console.log("CNES (lotações)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter lotações"));
-
-rnds.lotacaoCnsEmCnes("980016287385192", "2337991")
-    .then(l => console.log("CNS em CNES (lotações)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter lotações"));
-
-rnds.pacientePorCns("980016287385192")
-    .then(l => console.log("CNS (paciente - Bundle)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter informações do paciente pelo CNS"));
-
-rnds.pacientePorCpf(codigoCPF)
-    .then(l => console.log("CPF (paciente)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter informações do paciente pelo CPF"));
-
-rnds.paciente("980016287385192")
-    .then(l => console.log("CNS (paciente - Patient)", l.code === 200 ? "ok" : "erro"))
-    .catch(() => console.log("erro ao obter informações do paciente pelo CNS"));
+    await status(rnds.cpf(codigoCPF), "CPF");
+    await status(rnds.cnpj(CNPJ), "CNPJ");
+    await status(rnds.lotacoes(CNS, CNES), "CNS/CNES");
+    await status(rnds.lotacaoPorCns(CNS), "CNS (lotações)");
+    await status(rnds.lotacaoPorCnes(CNES), "CNES (lotações)");
+    await status(rnds.lotacaoCnsEmCnes(CNS, CNES), "CNS/CNES");
+    await status(rnds.pacientePorCns(CNS), "CNS (Bundle)");
+    await status(rnds.pacientePorCpf(codigoCPF), "CPF (Patient)");
+    await status(rnds.paciente(CNS), "CNS (paciente - Patient)");
+} catch (erro) {
+    console.log(erro);
+}
