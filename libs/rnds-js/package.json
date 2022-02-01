@@ -1,6 +1,6 @@
 {
   "name": "rnds",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "type": "module",
   "description": "Biblioteca de conveniência para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
@@ -24,7 +24,6 @@
   "homepage": "https://github.com/kyriosdata/rnds#readme",
   "dependencies": {
     "chalk": "^5.0.0",
-    "follow-redirects": "^1.14.7",
     "node-fetch": "^3.2.0"
   },
   "devDependencies": {

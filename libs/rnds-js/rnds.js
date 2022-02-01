@@ -28,15 +28,15 @@ const FHIR_VERSION = "4.0.1";
 
 /**
  * Funcão que retorna função a ser empregada para logging, ou seja,
- * mostre ou função vazia (sem efeito).
+ * console.log ou função vazia (sem efeito).
  *
- * @param {boolean} logging Verdadeiro para habilitar logging via mostre ou false para desabilitar.
+ * @param {boolean} logging Verdadeiro para habilitar logging via console.log ou false para desabilitar.
  * @returns {function} Função empregada para logging, possivelmente vazia, sem efeito, caso o argumento fornecido seja false.
  */
 function log(logging) {
     if (logging) {
-        mostre("logging habilitado");
-        return (p, s) => mostre("RNDS:", p, s || "");
+        console.log("logging habilitado");
+        return (p, s) => console.log("RNDS:", p, s || "");
     } else {
         return () => {
         };

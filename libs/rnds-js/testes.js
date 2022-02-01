@@ -13,7 +13,7 @@ const CNES = "2337991";
 const CNS = "980016287385192";
 
 try {
-    const rnds = await RNDS.cliente(false, true, true);
+    const rnds = await RNDS.cliente(true, true, true);
 
     await status(rnds.capability(), "CapabilityStatement");
 

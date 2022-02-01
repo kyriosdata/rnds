@@ -85,9 +85,9 @@ export function exibeConfiguracao(configuracao) {
     for (let key of Object.keys(configuracao)) {
         const objeto = configuracao[key];
         if (check(objeto.valor)) {
-            mostre(objeto.nome, chalk.blue("OK"), objeto.valor);
+            console.log(objeto.nome, chalk.blue("OK"), objeto.valor);
         } else {
-            mostre(objeto.nome, chalk.red("variável não definida"));
+            console.log(objeto.nome, chalk.red("variável não definida"));
         }
     }
 }
@@ -113,21 +113,21 @@ export function verificacao() {
     const ok = chalk.green.inverse;
 
     function exibeToken(t) {
-        mostre("Token", chalk.blue("OK"), t.length, "bytes");
+        console.log("Token", chalk.blue("OK"), t.length, "bytes");
     }
 
     function getOnrejected(erro) {
         if (erro.erro.code === "ECONNREFUSED") {
-            mostre("Verifique os endereços de acesso à RNDS.");
+            console.log("Verifique os endereços de acesso à RNDS.");
         }
 
-        mostre(falha("Não foi possível conexão com a RNDS."));
+        console.log(falha("Não foi possível conexão com a RNDS."));
     }
 
     const token = new Token(configuracao, true, sendService);
     token.getToken()
         .then(exibeToken)
-        .then(() => mostre(ok("Estabelecida conexão com a RNDS.")))
+        .then(() => console.log(ok("Estabelecida conexão com a RNDS.")))
         .catch(getOnrejected);
 }
 

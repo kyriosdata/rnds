@@ -2,7 +2,7 @@ const { RNDS } = require("../rnds");
 
 test("busca por cnpj", async (done) => {
   const rnds = await RNDS.cliente(false, true, false);
-  mostre(await rnds.cache.getToken());
+  console.log(await rnds.cache.getToken());
   const pessoaJuridica = await rnds.cnpj("01567601000143");
   const dados = JSON.parse(pessoaJuridica.retorno);
   expect(dados.name).toBe("UNIVERSIDADE FEDERAL DE GOIAS");

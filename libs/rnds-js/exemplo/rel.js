@@ -5,7 +5,7 @@ async function applicacao() {
 
   const resultado = await rnds.notificar("01567601000143");
   const dados = JSON.parse(resultado.retorno.toString());
-  mostre(dados);
+  console.log(dados);
 }
 
 await applicacao();
