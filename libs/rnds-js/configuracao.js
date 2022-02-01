@@ -12,7 +12,7 @@ import {sendService} from "./send.js";
  * @property {Object} certificado - O endereço (path) onde se encontra o
  * certificado digital.
  * @property {Object} senha - A senha para acesso ao certificado digital.
- * @property {Buffer} pfx - Conteúdo do certificado.
+ * @property {Object} pfx - Conteúdo do certificado.
  * @property {Object} ehr - O endereço do serviço de registros de saúde.
  * @property {Object} requisitante - O CNS do requisitante em nome do qual
  * requisições são submetidas.
@@ -64,9 +64,7 @@ export function obtemConfiguracao() {
     try {
         cfg.pfx.valor = fs.readFileSync(cfg.certificado.valor);
     } catch (error) {
-        throw new Error(
-            `erro ao carregar arquivo pfx: ${cfg.certificado.valor}`
-        );
+        throw new Error(`erro ao carregar arquivo ${cfg.certificado.valor}`);
     }
 
     return cfg;
@@ -106,7 +104,7 @@ export function getVersao() {
  * Realiza tentativa de obtenção de token conforme a configuração
  * disponível e exibe na saída padrão o resultado correspondente.
  */
-export function verificacao() {
+export async function verificacao() {
     const configuracao = obtemConfiguracao();
 
     const falha = chalk.red.inverse;
@@ -117,6 +115,7 @@ export function verificacao() {
     }
 
     function getOnrejected(erro) {
+        // TODO erro.erro.code undefined !!!!????
         if (erro.erro.code === "ECONNREFUSED") {
             console.log("Verifique os endereços de acesso à RNDS.");
         }
@@ -124,10 +123,14 @@ export function verificacao() {
         console.log(falha("Não foi possível conexão com a RNDS."));
     }
 
-    const token = new Token(configuracao, true, sendService);
-    token.getToken()
-        .then(exibeToken)
-        .then(() => console.log(ok("Estabelecida conexão com a RNDS.")))
-        .catch(getOnrejected);
+    try {
+        const token = new Token(configuracao, true, sendService, console.log);
+        const retornado = await token.getToken();
+        exibeToken(retornado);
+        console.log(ok("Estabelecida conexão com a RNDS."));
+    } catch (erro) {
+        console.log(erro);
+        getOnrejected(erro);
+    }
 }
 

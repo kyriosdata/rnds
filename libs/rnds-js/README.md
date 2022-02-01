@@ -29,14 +29,17 @@ necessária, todas elas são fornecidas por meio de variáveis de ambiente, conf
 
 ### Usar
 
+**IMPORTANTE**: foi necessário usar a opção **--openssl-legacy-provider** para que 
+funcione com a versão 17 do NodeJS.
+
 ```js
 import RNDS from "./rnds.js";
 
 const rnds = await RNDS.cliente(true, true, true);
 
 rnds.checkVersion()
-    .then(c => mostre("FHIR VERSION", c ? "ok" : "erro"))
-    .catch(() => mostre("erro ao verificar versão..."));
+    .then(c => console.log("FHIR VERSION", c ? "ok" : "erro"))
+    .catch(() => console.log("erro ao verificar versão..."));
 ```
 
 Ou ainda, 

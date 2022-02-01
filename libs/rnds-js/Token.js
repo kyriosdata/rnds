@@ -13,7 +13,7 @@ export default class Token {
    * Esta função deve ser chamada com função a ser empregada para exibição
    * de informações, se for o caso.
    * @param {function} logging Função de logging a ser empregada, por
-   * exemplo, mostre. Se não fornecida, não serão exibidas informações.
+   * exemplo, console.log. Se não fornecida, não serão exibidas informações.
    */
   constructor(configuracao, security, send, logging = () => {}) {
     this.log = logging;
@@ -23,8 +23,7 @@ export default class Token {
       throw new Error("função 'send' não fornecida");
     }
 
-    // Define função a ser utilizada para executar
-    // a requisição propriamente dita.
+    // Define função usada para requisições
     this.send = send(this.log);
 
     this.log("Token. Security is", security ? "ON" : "OFF");
@@ -32,9 +31,11 @@ export default class Token {
     this.options = {
       method: "GET",
       path: "/api/token",
-      headers: {},
+      headers: {
+        "User-Agent": "RNDS Library",
+      },
       maxRedirects: 20,
-      hostname: configuracao.auth.valor,
+      host: configuracao.auth.valor,
       pfx: configuracao.pfx.valor,
       passphrase: configuracao.senha.valor,
     };
@@ -70,39 +71,21 @@ export default class Token {
   }
 
   /**
-   * Obtém e armazena em cache o access token.
+   * Obtém e armazena o access token.
    */
-  renoveAccessToken() {
-    /**
-     * Recupera <i>token</i> de acesso à RNDS.
-     *
-     * @returns {Promise<Resposta>}
-     */
-    const requestAccessToken = () => {
-      try {
-        return this.send(this.options);
-      } catch (err) {
-        const error = new Error(
-          `Não foi possível obter token. Verifique variáveis de ambiente.
-          Exceção: ${err}`
-        );
-        return Promise.reject(error);
+  async renoveAccessToken() {
+    try {
+      const resposta = await this.send(this.options);
+      if (resposta.code === 200) {
+        this.access_token = JSON.parse(resposta.retorno).access_token;
+        this.log("access_token redefinido");
+        return Promise.resolve(this.access_token);
+      } else {
+        return Promise.reject(resposta);
       }
-    };
-
-    return requestAccessToken()
-      .then((o) => {
-        if (o.code === 200) {
-          // Guarda em cache o access token para uso posterior
-          this.access_token = JSON.parse(o.retorno).access_token;
-          this.log("access_token redefinido");
-          return Promise.resolve(this.access_token);
-        } else {
-          this.access_token = undefined;
-          return Promise.reject(o);
-        }
-      })
-      .catch((error) => Promise.reject(error));
+    } catch (erro) {
+      return Promise.reject(erro);
+    }
   }
 }
 
