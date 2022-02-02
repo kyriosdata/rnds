@@ -433,19 +433,6 @@ export default class RNDS {
     }
 
     /**
-     * Recupera informações sobre profissional liberal pelo CNES ou
-     * CPF do profissional em questão.
-     *
-     * @param {string} cpfOuCnes Número do CPF do profissional liberal ou
-     * CNES.
-     *
-     * @returns {Promise<Resposta>}
-     */
-    profissionalLiberal(cpfOuCnes) {
-        return this.cnes(cpfOuCnes);
-    }
-
-    /**
      * Notica o Ministério da Saúde, ou seja, submete resultado de
      * exame de COVID para a RNDS conforme padrão estabelecido. A
      * callback será chamada com o identificador único, gerado pela
@@ -502,7 +489,7 @@ export default class RNDS {
     }
 
     /**
-     * Obtém o CNS (oficial) do paciente.
+     * Obtém o CNS (oficial) a partir do CPF do paciente.
      *
      * @param {string} numero O número do CPF do paciente.
      * @returns {Promise<Resposta>} A propriedade "retorno" da
@@ -511,6 +498,8 @@ export default class RNDS {
      * possui o valor 200.
      */
     cnsDoPaciente(numero) {
+
+        // Obtém CNS considerado "oficial".
         function cnsOficial(id) {
             return id.system.endsWith("/cns") && id.use === "official";
         }
@@ -532,7 +521,7 @@ export default class RNDS {
             return {...resposta, retorno: ids[idx].value};
         };
 
-        return this.paciente(numero).then(extraiCnsSeEncontrado);
+        return this.pacientePorCpf(numero).then(extraiCnsSeEncontrado);
     }
 
     /**

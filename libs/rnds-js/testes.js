@@ -38,6 +38,8 @@ try {
     await status(rnds.pacientePorCns(CNS), "CNS (Bundle)");
     await status(rnds.pacientePorCpf(codigoCPF), "CPF (Patient)");
     await status(rnds.paciente(CNS), "CNS (paciente - Patient)");
+
+    await status(rnds.cnsDoPaciente(codigoCPF), "CNS a partir do CPF");
 } catch (erro) {
     console.log(erro);
 }

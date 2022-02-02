@@ -45,6 +45,15 @@ rnds.checkVersion()
 Ou ainda, 
 
 ```javascript
+import RNDS from "./rnds.js";
+
+process.on('uncaughtException', (err) => console.log("!!??\n", err));
+
+async function status(requisicao, msg) {
+    const retorno = await requisicao;
+    console.log(retorno.code === 200 ? "ok" : "erro", msg);
+}
+
 const CNPJ = "01567601000143";
 const CNES = "2337991";
 const CNS = "980016287385192";
