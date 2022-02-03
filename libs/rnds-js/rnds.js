@@ -104,7 +104,7 @@ export default class RNDS {
         }
 
         try {
-            const verificaToken = await rnds.verifica();
+            const verificaToken = await rnds.tokenDisponivel();
             const verificaVersao = await rnds.checkVersion();
 
             if (!verificaToken || !verificaVersao) {
@@ -429,7 +429,7 @@ export default class RNDS {
             path: "/api/fhir/r4/Patient/" + cns,
         };
 
-        return this.makeRequest(options);
+        return this.makeRequest(options, undefined);
     }
 
     /**
@@ -526,7 +526,38 @@ export default class RNDS {
      * Retorna promise com a indicação de sucesso ou falha
      * na obtenção de token de acesso.
      */
-    verifica() {
+    tokenDisponivel() {
         return this.cache.getToken().then(t => t.length !== 0).catch(() => false);
+    }
+
+    /**
+     * Localiza paciente pelo nome. O nome da mãe também deve ser fornecido.
+     * Adicionalmente, cada um dos nomes deve conter, pelo menos, dois
+     * termos. Ou seja, a busca por "maria" resulta em erro, ao passo que
+     * "maria tereza", por exemplo, contém dois termos, exigidos pela busca.
+     *
+     * @param nome Nome do paciente contendo pelo menos dois termos.
+     *
+     * @param nomeMae Nome da mãe do paciente contendo pelo menos dois termos.
+     *
+     * @returns {Promise<Resposta>} Resposta para a requisição.
+     */
+    pacientePorNome(nome, nomeMae) {
+        if (!nome || !nomeMae) {
+            throw Error("forneça nome do paciente e da mãe");
+        }
+
+        if (nome.split(" ").length < 2 || nomeMae.split(" ").length < 2) {
+            throw new Error("nome e nome da mãe devem possuir pelo menos 2 termos");
+        }
+
+        const paciente = encodeURI(nome);
+        const mae = encodeURI(nomeMae);
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/Patient?mothers-name=${mae}&name=${paciente}`,
+        };
+
+        return this.makeRequest(options);
     }
 }
