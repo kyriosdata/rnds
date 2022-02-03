@@ -489,20 +489,18 @@ export default class RNDS {
     }
 
     /**
-     * Obtém o CNS (oficial) a partir do CPF do paciente.
+     * Obtém todos os CNSs associados ao CPF fornecido.
      *
      * @param {string} numero O número do CPF do paciente.
      * @returns {Promise<Resposta>} A propriedade "retorno" da
-     * Resposta contém o CNS do paciente correspondente ao
+     * Resposta contém o vetor de CNSs do paciente correspondente ao
      * CPF fornecido. Certifique-se de que o código de retorno (code)
      * possui o valor 200.
      */
     cnsDoPaciente(numero) {
 
         // Obtém CNS considerado "oficial".
-        function cnsOficial(id) {
-            return id.system.endsWith("/cns") && id.use === "official";
-        }
+        const  cnsFiltro = (id) => id.system.endsWith("/cns");
 
         const extraiCnsSeEncontrado = (resposta) => {
             if (resposta.code !== 200) {
@@ -517,8 +515,8 @@ export default class RNDS {
             }
 
             const ids = json.entry[0].resource.identifier;
-            const idx = ids.findIndex((i) => cnsOficial(i));
-            return {...resposta, retorno: ids[idx].value};
+            const cnss = ids.filter(cnsFiltro).map(e => { return { use: e.use, value: e.value }})
+            return {...resposta, retorno: cnss };
         };
 
         return this.pacientePorCpf(numero).then(extraiCnsSeEncontrado);
