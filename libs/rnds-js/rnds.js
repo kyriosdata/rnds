@@ -560,4 +560,64 @@ export default class RNDS {
 
         return this.makeRequest(options);
     }
+
+    /**
+     * Localiza paciente pela data de nascimento e nome.
+     * O nome deve conter, pelo menos, dois
+     * termos. A data de nascimento no formato AAAA-MM-DD,
+     * AAAA-MM ou ainda AAAA. Ou seja, ano com quatro dígitos,
+     * mês com dois dígitos (se fornecido) e, se fornecido o dia,
+     * então deve conter também o ano e o mês.
+     *
+     * @param nome Nome do paciente contendo pelo menos dois termos.
+     *
+     * @param dataNascimento Data de nascimento do paciente.
+     *
+     * @returns {Promise<Resposta>} Resposta para a requisição.
+     */
+    pacientePorNascimento(nome, dataNascimento) {
+        if (!nome || !dataNascimento) {
+            throw Error("forneça nome do paciente e data de nascimento");
+        }
+
+        if (nome.split(" ").length < 2) {
+            throw new Error("nome deve possuir pelo menos 2 termos");
+        }
+
+        const paciente = encodeURI(nome);
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/Patient?name=${paciente}&birthdate=${dataNascimento}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    /**
+     * Localiza paciente pelo nome do paciente (pelo menos dois termos),
+     * e pelo local de nascimento.
+     *
+     * @param nome Nome do paciente contendo pelo menos dois termos.
+     *
+     * @param dataNascimento Local de nascimento.
+     *
+     * @returns {Promise<Resposta>} Resposta para a requisição.
+     */
+    pacientePorLocalDeNascimento(nome, local) {
+        if (!nome || !local) {
+            throw Error("forneça nome do paciente e local de nascimento");
+        }
+
+        if (nome.split(" ").length < 2) {
+            throw new Error("nome deve possuir pelo menos 2 termos");
+        }
+
+        const paciente = encodeURI(nome);
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/Patient?name=${paciente}&birthplace=${local}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
 }
