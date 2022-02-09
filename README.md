@@ -2,17 +2,15 @@
 
 ## Ferramentas de Integração com a RNDS
 
-Este repositório reúne ferramentas consideradas úteis à
-integração com a RNDS. O conteúdo é fornecido exclusivamente
-para profissionais técnicos envolvidos com o desenvolvimento
-de software de integração.
+Este repositório reúne ferramentas para profissionais técnicos envolvidos com o desenvolvimento
+de software de integração com a RNDS.
 
-- Documentação on-line: https://kyriosdata.github.io/rnds
-- Consulte o portal [Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br).
+- A documentação on-line: https://kyriosdata.github.io/rnds
+- Outra fonte de referência relevante é o [Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br).
 
 Desenvolvedores:
 
-- Este repositório disponibiliza duas bibliotecas para integração à RNDS: uma para [Java](projetos/rnds-java) e outra para [JavaScript](./projetos/rnds-js). Ambas em desenvolvimento, suas observações são bem-vindas!
+- Este repositório disponibiliza duas bibliotecas para integração à RNDS: uma para [Java](projetos/rnds-java) e outra para [JavaScript](./libs/rnds-js). Ambas em desenvolvimento, suas observações são bem-vindas!
 
 - [Documentação](https://documenter.getpostman.com/view/215332/TVewY47S) de requisições de exemplo via Postman.
 

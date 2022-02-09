@@ -620,4 +620,43 @@ export default class RNDS {
 
         return this.makeRequest(options, undefined);
     }
+
+    /**
+     * Recupera informações sobre o exame cujo código LOINC é fornecido.
+     * @param codigo Código LOINC do exame.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    loinc(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    amostraGal(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    exameGal(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
 }
