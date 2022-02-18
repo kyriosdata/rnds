@@ -659,4 +659,48 @@ export default class RNDS {
 
         return this.makeRequest(options, undefined);
     }
+
+    caraterAtendimento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCaraterAtendimento";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    procedimento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBHPMTUSS";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    cbco(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBO";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    ciap2(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCIAP2";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
 }
