@@ -10,7 +10,7 @@ import {sendService} from "./send.js";
  * Apenas servidor que implementa esta versão
  * será considerado.
  */
-const FHIR_VERSION = "4.0.1";
+const FHIR_VERSION = "4.2.0";
 
 /**
  * A resposta obtida da execução de requisição à RNDS.
@@ -103,15 +103,22 @@ export default class RNDS {
             return rnds;
         }
 
-        try {
-            const verificaToken = await rnds.tokenDisponivel();
-            const verificaVersao = await rnds.checkVersion();
+        let verificaToken;
+        let verificaVersao;
 
-            if (!verificaToken || !verificaVersao) {
-                throw Error;
-            }
+        try {
+            verificaToken = await rnds.tokenDisponivel();
+            verificaVersao = await rnds.checkVersion();
         } catch (error) {
-            throw new Error("Versão de servidor FHIR não validada.");
+            throw new Error("Erro ao obter token ou verificar versão");
+        }
+
+        if (!verificaToken) {
+            throw Error("Erro ao obter token");
+        }
+
+        if (!verificaVersao) {
+            throw Error(`Servidor oferece versão diferente de ${FHIR_VERSION}`);
         }
 
         return rnds;
@@ -207,7 +214,7 @@ export default class RNDS {
         }
 
         const json = JSON.parse(resposta.retorno);
-        return json.fhirVersion === FHIR_VERSION;
+        return json.software.version === FHIR_VERSION;
     }
 
     /**
@@ -621,44 +628,9 @@ export default class RNDS {
         return this.makeRequest(options, undefined);
     }
 
-    /**
-     * Recupera informações sobre o exame cujo código LOINC é fornecido.
-     * @param codigo Código LOINC do exame.
-     *
-     * @returns {Promise<Resposta>}
-     */
-    loinc(codigo) {
-        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC";
-
-        const options = {
-            method: "GET",
-            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
-        };
-
-        return this.makeRequest(options, undefined);
-    }
-
-    amostraGal(codigo) {
-        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL";
-
-        const options = {
-            method: "GET",
-            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
-        };
-
-        return this.makeRequest(options, undefined);
-    }
-
-    exameGal(codigo) {
-        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL";
-
-        const options = {
-            method: "GET",
-            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
-        };
-
-        return this.makeRequest(options, undefined);
-    }
+    //
+    // CodeSystem
+    //
 
     caraterAtendimento(codigo) {
         const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCaraterAtendimento";
@@ -671,7 +643,7 @@ export default class RNDS {
         return this.makeRequest(options, undefined);
     }
 
-    procedimento(codigo) {
+    cbhpm(codigo) {
         const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBHPMTUSS";
 
         const options = {
@@ -682,7 +654,7 @@ export default class RNDS {
         return this.makeRequest(options, undefined);
     }
 
-    cbco(codigo) {
+    cbo(codigo) {
         const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCBO";
 
         const options = {
@@ -703,4 +675,264 @@ export default class RNDS {
 
         return this.makeRequest(options, undefined);
     }
+
+    cid10(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRCID10";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    dose(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRDose";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    estrategiaVacinacao(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BREstrategiaVacinacao";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    financiamento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRFinanciamento";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    grupoAtendimento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRGrupoAtendimento";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    imunobiologico(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRImunobiologico";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    localAplicacao(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRLocalAplicacao";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    modalidadeAssistencial(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRModalidadeAssistencial";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    motivoDesfecho(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRMotivoDesfecho";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    naturezaJuridica(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNaturezaJuridica";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    nomeExameGal(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameGAL";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    /**
+     * Recupera informações sobre o exame cujo código LOINC é fornecido.
+     * @param codigo Código LOINC do exame.
+     *
+     * @returns {Promise<Resposta>}
+     */
+    nomeExameLoinc(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRNomeExameLOINC";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    pais(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRPais";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    procedencia(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRProcedencia";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    raca(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRRacaCor";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    resultadoQualitativo(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRResultadoQualitativoExame";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    situacaoCondicaoIndividuo(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSituacaoCondicaoIndividuo";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    subgrupoTabelaSUS(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRSubgrupoTabelaSUS";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    tabelaSUS(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTabelaSUS";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    tipoAmostra(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoAmostraGAL";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    tipoDocumento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoDocumento";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    tipoEstabelecimento(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRTipoEstabelecimentoSaude";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
+    viaAdministracao(codigo) {
+        const system = "http://www.saude.gov.br/fhir/r4/CodeSystem/BRViaAdministracao";
+
+        const options = {
+            method: "GET",
+            path: `/api/fhir/r4/CodeSystem/$lookup?system=${system}&code=${codigo}`,
+        };
+
+        return this.makeRequest(options, undefined);
+    }
+
 }
