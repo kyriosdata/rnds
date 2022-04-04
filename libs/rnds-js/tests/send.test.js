@@ -1,4 +1,4 @@
-const sendRequest = require("../send");
+import sendRequest from "../send.js";
 
 const send = sendRequest(() => {});
 

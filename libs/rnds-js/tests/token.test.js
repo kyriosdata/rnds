@@ -1,6 +1,8 @@
-const { obtemConfiguracao } = require("../rnds");
-const Token = require("../Token");
-const sendService = require("../send");
+import {obtemConfiguracao} from "../rnds";
+
+import Token from "../Token";
+
+import sendService from "../send";
 
 const cfg = obtemConfiguracao();
 const empty = () => {};

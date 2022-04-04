@@ -5,7 +5,8 @@
   "description": "Biblioteca de conveniência para acesso aos serviços oferecidos pela Rede Nacional de Dados em Saúde (RNDS).",
   "main": "rnds.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "node --openssl-legacy-provider --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "testes": "node --openssl-legacy-provider testes.js"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-const { RNDS } = require("../rnds");
+import RNDS from "../rnds.js";
 
 test("busca por cnpj", async (done) => {
   const rnds = await RNDS.cliente(false, true, false);
