@@ -1,3 +1,16 @@
+## Exemplos
+
+Informa para cada nome se contém ou não a letra ‘e’.
+- name.given.select($this +  iif($this.contains('e'), '', ' does not') + ' contains letter e')
+
+Quantos nomes distintos há no recurso?
+- name.given.distinct().count()
+
+## Ferramenta online
+
+- http://niquola.github.io/fhirpath-demo/#/
+
+
 ## FHIRPath
 
 Documentos JSON, por exemplo, aqueles retornados por um servidor FHIR, em geral, podem ser consultados por meio de JsonPath ([online](https://jsonpath.com/), [specification](https://goessner.net/articles/JsonPath/), [tutorial](https://www.baeldung.com/guide-to-jayway-jsonpath), [java](https://github.com/json-path/JsonPath)). FHIRPath é similar a JsonPath, contudo, contém funções específicas.
