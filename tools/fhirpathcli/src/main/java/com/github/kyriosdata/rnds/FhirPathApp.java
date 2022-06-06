@@ -16,16 +16,21 @@ public class FhirPathApp {
     public static void main(String[] args) throws IOException {
         FhirContext ctx = FhirContext.forR4();
         FhirPathR4 fp = new FhirPathR4(ctx);
-
         IParser json = ctx.newJsonParser();
 
+        // Pass 'medicationRequestUSCORE.json' file as arg
         InputStream fis = Files.newInputStream(Paths.get(args[0]));
 
-        IBase medicationRequest = json.parseResource(fis);
+        IBase resource = json.parseResource(fis);
 
-        String c3 = "authoredOn.replaceMatches('\\\\b(?<year>\\\\d{4})-(?<month>\\\\d{2})-(?<day>\\\\d{2})\\\\b', '${day}/${month}/${year}')";
+        String regex = "\\\\b(?<year>\\\\d{4})-(?<month>\\\\d{2})-(?<day>\\\\d{2})\\\\b";
+        String substitution = "${day}/${month}/${year}";
+        String expression = String.format("authoredOn.replaceMatches('%s', '%s')", regex, substitution);
 
-        List<Base> resposta = fp.evaluate(medicationRequest, c3, Base.class);
+        // Print exp without so many backslashes (as defined by FHIRPath)
+        System.out.println(expression);
+
+        List<Base> resposta = fp.evaluate(resource, expression, Base.class);
 
         System.out.println(resposta.get(0));
     }
