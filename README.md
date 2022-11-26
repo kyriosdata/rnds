@@ -6,7 +6,7 @@ Este repositório reúne ferramentas para profissionais técnicos envolvidos com
 de software de integração com a RNDS.
 
 - A documentação on-line: https://kyriosdata.github.io/rnds
-- Outra fonte de referência relevante é o [Guia de Integração com a RNDS](https://rnds-guia.saude.gov.br).
+- Outra fonte de referência relevante é o [Guia de Integração com a RNDS](https://rnds-guia.prod.saude.gov.br).
 
 Desenvolvedores:
 
