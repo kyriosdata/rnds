@@ -18,7 +18,7 @@ também montar o _payload_ que será enviado por meio da API.
 ## Características das bibliotecas
 
 - Bibliotecas deverão ser distribuídas pelos canais convencionais da plataforma em questão. Por exemplo, este já é o caso da versão já disponível em [node](https://www.npmjs.com/package/rnds).
-- A funcionalidade das bibliotecas deve ser a mesma. 
+- A expectativa é de que o mesmo conjunto funcional seja oferecido por todas as implementações, embora este alinhamento flutue com o acréscimo de novas funções.
 - A funcionalidade básica pode ser ilustrada pela versão [node](https://github.com/kyriosdata/rnds/tree/master/libs/rnds-js). Outras funções de mais alto nível ainda não contam com _design_ correspondente. 
 - A documentação deve incluir primeiros passos, identificação clara de pré-requisitos e conter exemplos. 
 - As funções são definidas pelas operações oferecidas pela RNDS. Apenas o que for publicamente disponibilizado pela RNDS deverá ser contemplado.
