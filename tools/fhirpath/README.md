@@ -6,6 +6,10 @@ Informa para cada nome se contém ou não a letra ‘e’.
 Todos os nomes oficiais devem se iniciar com letra maiúscula
 - `name.where(use = 'official').given.all($this.matches('[A-Z]'))`
 
+- `Patient.address.postalCode.matches('^\\d{4}[A-Z]{2}$')`
+
+- `now() - 18 years > birthDate`
+
 Quantos nomes distintos há no recurso?
 - name.given.distinct().count()
 
