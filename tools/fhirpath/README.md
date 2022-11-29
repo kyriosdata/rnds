@@ -3,6 +3,9 @@
 Informa para cada nome se contém ou não a letra ‘e’.
 - name.given.select($this +  iif($this.contains('e'), '', ' does not') + ' contains letter e')
 
+Todos os nomes oficiais devem se iniciar com letra maiúscula
+- `name.where(use = 'official').given.all($this.matches('[A-Z]'))`
+
 Quantos nomes distintos há no recurso?
 - name.given.distinct().count()
 
