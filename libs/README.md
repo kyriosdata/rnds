@@ -13,7 +13,7 @@ também montar o _payload_ que será enviado por meio da API.
 - C# (não iniciado)
 - [node](rnds-js)
 - Go (não iniciado)
-- Python (não iniciado)
+- [Python](rnds-py)
 
 ## Características das bibliotecas
 
