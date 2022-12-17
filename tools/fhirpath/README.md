@@ -3,6 +3,13 @@
 Informa para cada nome se contém ou não a letra ‘e’.
 - name.given.select($this +  iif($this.contains('e'), '', ' does not') + ' contains letter e')
 
+Todos os nomes oficiais devem se iniciar com letra maiúscula
+- `name.where(use = 'official').given.all($this.matches('[A-Z]'))`
+
+- `Patient.address.postalCode.matches('^\\d{4}[A-Z]{2}$')`
+
+- `now() - 18 years > birthDate`
+
 Quantos nomes distintos há no recurso?
 - name.given.distinct().count()
 
@@ -11,6 +18,7 @@ Quantos nomes distintos há no recurso?
 - https://hl7.github.io/fhirpath.js/
 - http://niquola.github.io/fhirpath-demo/#/
 - http://fhirpath-lab.azurewebsites.net/FhirPath/
+- [fhirpath-tester](https://apps.microsoft.com/store/detail/fhirpath-tester/9NXV8QDQ154V?hl=en-us&gl=us) Microsoft
 
 
 ## FHIRPath
