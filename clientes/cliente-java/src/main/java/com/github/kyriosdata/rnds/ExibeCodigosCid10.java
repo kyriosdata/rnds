@@ -13,7 +13,8 @@ public class ExibeCodigosCid10 {
         CodeSystem codeSystem = (CodeSystem) Serializacao.codeSystemFromXml("BRCID10.xml");
         System.out.println(String.format("Tipo: %s", codeSystem.fhirType()));
 
-        codeSystem.getConcept().stream()
-                .forEach(c -> System.out.println(c.getCode() + " " + c.getDisplay()));
+//        codeSystem.getConcept().stream()
+//                .forEach(c -> System.out.println(c.getCode() + " " + c.getDisplay()));
+        System.out.println("Total de entradas: " + codeSystem.getConcept().size());
     }
 }
