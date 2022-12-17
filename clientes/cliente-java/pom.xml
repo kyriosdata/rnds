@@ -55,12 +55,12 @@
     </scm>
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
-            com.github.kyriosdata.rnds.ExibeCodigosCid10
+            com.github.kyriosdata.rnds.ToJson
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
@@ -69,10 +69,12 @@
         <checkstyle.versao>8.29</checkstyle.versao>
         <dependency.check.versao>5.2.2</dependency.check.versao>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+        <exec.maven.plugin>3.0.0</exec.maven.plugin>
         <h2.versao>2.1.210</h2.versao>
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <junit.versao>5.5.2</junit.versao>
         <log4j2.version>2.12.1</log4j2.version>
+        <lombok.version>1.18.24</lombok.version>
         <maven.compiler.versao>3.8.1</maven.compiler.versao>
         <pmd.plugin.versao>3.12.0</pmd.plugin.versao>
         <pmd.versao>6.19.0</pmd.versao>
@@ -85,6 +87,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -411,7 +420,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>${exec.maven.plugin}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -419,9 +428,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>${project.mainClass}</mainClass>
-                </configuration>
             </plugin>
 
             <!-- mvn org.pitest:pitest-maven:mutationCoverage -->

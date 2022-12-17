@@ -44,7 +44,7 @@ public class Validacao {
         Observation obs = new Observation();
         obs.getCode().addCoding().setSystem("http://loinc.org").setCode("12345-6");
         obs.setValue(new StringType("This is a value"));
-        obs.setStatus(Observation.ObservationStatus.FINAL);
+        obs.setStatus(Observation.ObservationStatus.CANCELLED);
 
         // Validate
         ValidationResult result = validator.validateWithResult(obs);
