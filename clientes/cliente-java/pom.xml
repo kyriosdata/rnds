@@ -242,7 +242,7 @@
         </pluginManagement>
 
         <!-- Define o nome do arquivo a ser gerado (.jar é acrescentada) -->
-        <finalName>exemplo</finalName>
+        <finalName>rnds</finalName>
 
         <plugins>
 
@@ -751,7 +751,7 @@
                         <artifactId>maven-jar-plugin</artifactId>
                         <version>3.1.2</version>
                         <configuration>
-                            <finalName>exemplo-dir</finalName>
+                            <finalName>rnds-dir</finalName>
                             <archive>
                                 <!-- Evita inclusão dir 'maven' em META-INF -->
                                 <addMavenDescriptor>false</addMavenDescriptor>
@@ -785,7 +785,6 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>exemplo-unico</finalName>
                                     <archive>
                                         <manifest>
                                             <mainClass>${project.mainClass}

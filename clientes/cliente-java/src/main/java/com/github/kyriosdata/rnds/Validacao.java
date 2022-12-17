@@ -8,6 +8,7 @@ import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
 import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
+import org.hl7.fhir.common.hapi.validation.support.RemoteTerminologyServiceValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.Observation;
@@ -19,9 +20,18 @@ public class Validacao {
     public static void main(String[] args) {
         FhirContext ctx = FhirContext.forR4();
 
+        RemoteTerminologyServiceValidationSupport remoteTerminologyService =
+                new RemoteTerminologyServiceValidationSupport(ctx);
+
+        // Some is using 'system' others 'url' ???!!!
+        String tx = "https://tx.fhir.org/r4/";
+        String hf = "http://hapi.fhir.org/baseR4";
+        remoteTerminologyService.setBaseUrl(tx);
+
         // Create a validation support chain
         ValidationSupportChain validationSupportChain = new ValidationSupportChain(
                 new DefaultProfileValidationSupport(ctx),
+                remoteTerminologyService,
                 new InMemoryTerminologyServerValidationSupport(ctx),
                 new CommonCodeSystemsTerminologyService(ctx)
         );
@@ -42,7 +52,7 @@ public class Validacao {
          * populated, but it is missing Observation.status, which is mandatory.
          */
         Observation obs = new Observation();
-        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("12345-6");
+        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("80913-7");
         obs.setValue(new StringType("This is a value"));
         obs.setStatus(Observation.ObservationStatus.CANCELLED);
 
