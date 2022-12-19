@@ -28,7 +28,9 @@ public class Validacao {
         // Some is using 'system' others 'url' ???!!!
         String tx = "https://tx.fhir.org/r4/";
         String hf = "http://hapi.fhir.org/baseR4";
-        remoteTerminologyService.setBaseUrl(hf);
+        String os = "https://r4.ontoserver.csiro.au/fhir/";
+        String lo = "https://fhir.loinc.org/";
+        remoteTerminologyService.setBaseUrl(os);
 
         // Create a validation support chain
         ValidationSupportChain validationSupportChain = new ValidationSupportChain(
@@ -54,7 +56,7 @@ public class Validacao {
          * populated, but it is missing Observation.status, which is mandatory.
          */
         Observation obs = new Observation();
-        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("80913-7");
+        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("80913-7x");
         obs.setValue(new StringType("This is a value"));
         obs.setStatus(Observation.ObservationStatus.CANCELLED);
 
