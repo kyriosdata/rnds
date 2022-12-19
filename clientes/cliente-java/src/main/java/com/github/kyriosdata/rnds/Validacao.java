@@ -6,6 +6,7 @@ import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.SingleValidationMessage;
 import ca.uhn.fhir.validation.ValidationResult;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
 import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.RemoteTerminologyServiceValidationSupport;
@@ -15,6 +16,7 @@ import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.StringType;
 
+@Slf4j
 public class Validacao {
 
     public static void main(String[] args) {
@@ -26,7 +28,7 @@ public class Validacao {
         // Some is using 'system' others 'url' ???!!!
         String tx = "https://tx.fhir.org/r4/";
         String hf = "http://hapi.fhir.org/baseR4";
-        remoteTerminologyService.setBaseUrl(tx);
+        remoteTerminologyService.setBaseUrl(hf);
 
         // Create a validation support chain
         ValidationSupportChain validationSupportChain = new ValidationSupportChain(

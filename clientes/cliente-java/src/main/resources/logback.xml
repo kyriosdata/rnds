@@ -9,6 +9,8 @@
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="org.apache" level="WARN" />
-    <logger name="httpclient" level="WARN" />
+    <logger name="ca.uhn.fhir.context.ModelScanner" level="INFO" />
+    <logger name="org.apache.http.headers" level="INFO" />
+    <logger name="org.apache.http.wire" level="INFO" />
+    <logger name="org.hl7.fhir.convertors" level="INFO" />
 </configuration>

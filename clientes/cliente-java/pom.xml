@@ -73,7 +73,6 @@
         <h2.versao>2.1.210</h2.versao>
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <junit.versao>5.5.2</junit.versao>
-        <log4j2.version>2.12.1</log4j2.version>
         <lombok.version>1.18.24</lombok.version>
         <maven.compiler.versao>3.8.1</maven.compiler.versao>
         <pmd.plugin.versao>3.12.0</pmd.plugin.versao>
@@ -97,8 +96,14 @@
 
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.5</version>
         </dependency>
 
         <dependency>
