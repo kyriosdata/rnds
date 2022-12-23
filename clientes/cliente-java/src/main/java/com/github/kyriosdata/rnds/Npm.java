@@ -6,7 +6,6 @@ import ca.uhn.fhir.context.support.ValidationSupportContext;
 import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.NpmPackageValidationSupport;
-import org.hl7.fhir.r4.model.CodeSystem;
 
 import java.io.IOException;
 
@@ -21,8 +20,13 @@ public class Npm {
         NpmPackageValidationSupport npm =
                 new NpmPackageValidationSupport(ctx);
 
-        CodeSystem codeSystem = Cid10.getCodeSystem();
-        npm.addCodeSystem(codeSystem);
+        // Antes de usar exemplo x.tar.gz a CID10 era obtida diretamente do CodeSystem,
+        // conforme ilustrado nas duas linhas abaixo. O FHIR NPM Package deveria produzir
+        // o mesmo resultado.
+//        CodeSystem codeSystem = Cid10.getCodeSystem();
+//        npm.addCodeSystem(codeSystem);
+
+        npm.loadPackageFromClasspath("/x.tar.gz");
 
         ValidationSupportContext con = new ValidationSupportContext(npm);
         InMemoryTerminologyServerValidationSupport ram = new InMemoryTerminologyServerValidationSupport(ctx);
