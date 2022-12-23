@@ -1,7 +1,9 @@
 package com.github.kyriosdata.rnds;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.context.support.ConceptValidationOptions;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
+import ca.uhn.fhir.context.support.IValidationSupport;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.SingleValidationMessage;
@@ -56,7 +58,7 @@ public class Validacao {
          * populated, but it is missing Observation.status, which is mandatory.
          */
         Observation obs = new Observation();
-        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("80913-7x");
+        obs.getCode().addCoding().setSystem("http://loinc.org").setCode("80913-7");
         obs.setValue(new StringType("This is a value"));
         obs.setStatus(Observation.ObservationStatus.CANCELLED);
 
