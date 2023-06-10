@@ -2,36 +2,44 @@ package com.github.kyriosdata.rnds;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.instance.model.api.IBase;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.hapi.fluentpath.FhirPathR4;
 import org.hl7.fhir.r4.model.Base;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 public class FhirPathApp {
     public static void main(String[] args) throws IOException {
         FhirContext ctx = FhirContext.forR4();
         FhirPathR4 fp = new FhirPathR4(ctx);
+
         IParser json = ctx.newJsonParser();
+        json.setPrettyPrint(true);
 
-        // Pass 'medicationRequestUSCORE.json' file as arg
-        InputStream fis = Files.newInputStream(Paths.get(args[0]));
+        String recursoStr = Files.readString(Paths.get(args[0]));
+        IBase resource = json.parseResource(recursoStr);
 
-        IBase resource = json.parseResource(fis);
+        log.info("Iniciando avaliação de FHIRPath...");
 
-        String regex = "\\\\b(?<year>\\\\d{4})-(?<month>\\\\d{2})-(?<day>\\\\d{2})\\\\b";
-        String substitution = "${day}/${month}/${year}";
-        String expression = String.format("authoredOn.replaceMatches('%s', '%s')", regex, substitution);
+        List<Base> resposta = fp.evaluate(resource, args[1], Base.class);
 
-        // Print exp without so many backslashes (as defined by FHIRPath)
-        System.out.println(expression);
+        log.info("Avaliação de FHIRPath concluída.");
 
-        List<Base> resposta = fp.evaluate(resource, expression, Base.class);
+        for (Base base : resposta) {
+            if (base instanceof IBaseResource) {
+                System.out.printf("%s\n", json.encodeResourceToString((IBaseResource) base));
+                continue;
+            }
 
-        System.out.println(resposta.get(0));
+            System.out.printf("%s\n", base.toString());
+        }
+
+        log.info("Aplicação encerrada.");
     }
 }

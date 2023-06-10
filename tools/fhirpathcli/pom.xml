@@ -55,14 +55,12 @@
     </scm>
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>16</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.mainClass>
-            com.github.kyriosdata.rnds.CLI
-        </project.mainClass>
 
+        <project.mainClass>com.github.kyriosdata.rnds.FhirPathApp</project.mainClass>
         <tools.dir>${project.basedir}/tools</tools.dir>
 
         <checkstyle.plugin.versao>3.1.0</checkstyle.plugin.versao>
@@ -73,7 +71,6 @@
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <jline.version>3.21.0</jline.version>
         <junit.versao>5.5.2</junit.versao>
-        <log4j2.version>2.12.1</log4j2.version>
         <maven.compiler.versao>3.8.1</maven.compiler.versao>
         <pmd.plugin.versao>3.12.0</pmd.plugin.versao>
         <pmd.versao>6.19.0</pmd.versao>
@@ -82,17 +79,10 @@
         <spring.boot.versao>2.2.5.RELEASE</spring.boot.versao>
         <surefire.versao>2.22.2</surefire.versao>
         <findsecbugs-plugin.version>1.10.1</findsecbugs-plugin.version>
-        <hapi.fhir.version>6.0.0</hapi.fhir.version>
+        <hapi.fhir.version>6.6.0</hapi.fhir.version>
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
-        </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -101,15 +91,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.jsoniter</groupId>
             <artifactId>jsoniter</artifactId>
             <version>0.9.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.7</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
@@ -132,11 +129,24 @@
             <artifactId>hapi-fhir-base</artifactId>
             <version>${hapi.fhir.version}</version>
         </dependency>
-
-        <!-- FHIR R4 Model classes -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-r4</artifactId>
+            <version>${hapi.fhir.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-server</artifactId>
+            <version>${hapi.fhir.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-validation</artifactId>
+            <version>${hapi.fhir.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-validation-resources-r4</artifactId>
             <version>${hapi.fhir.version}</version>
         </dependency>
 
@@ -157,23 +167,6 @@
                     <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <!--
-        Test dependencies on other optional parts of HAPI
-        -->
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation-resources-r4</artifactId>
-            <version>5.1.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
         </dependency>
 
         <dependency>
@@ -472,14 +465,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <version>3.1.0</version>
                 <configuration>
                     <mainClass>${project.mainClass}</mainClass>
                 </configuration>
