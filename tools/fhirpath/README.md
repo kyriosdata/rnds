@@ -13,6 +13,10 @@ Todos os nomes oficiais devem se iniciar com letra maiúscula
 Quantos nomes distintos há no recurso?
 - name.given.distinct().count()
 
+Os tipos dos recursos contidos em um Bundle:
+
+- `Bundle.entry.resource.type().name`
+
 Os identificadores, apenas estes, de todos os recursos no Bundle em questão, 
 que contém element.path='Extension' e element.min = 1. 
 - `entry.resource.where($this.exists($this.snapshot.element.where(path='Extension' and min = 1))).id`
