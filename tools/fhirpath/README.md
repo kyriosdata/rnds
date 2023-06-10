@@ -21,6 +21,10 @@ Os identificadores, apenas estes, de todos os recursos no Bundle em questão,
 que contém element.path='Extension' e element.min = 1. 
 - `entry.resource.where($this.exists($this.snapshot.element.where(path='Extension' and min = 1))).id`
 
+Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propriedade **title**:
+
+- `Bundle.entry.where(resource.title.empty().not()).resource`
+- 
 ## Ferramenta online
 
 - https://hl7.github.io/fhirpath.js/
