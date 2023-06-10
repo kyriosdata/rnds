@@ -13,12 +13,25 @@ Todos os nomes oficiais devem se iniciar com letra maiúscula
 Quantos nomes distintos há no recurso?
 - name.given.distinct().count()
 
+Os tipos dos recursos contidos em um Bundle:
+
+- `Bundle.entry.resource.type().name`
+
+Os identificadores, apenas estes, de todos os recursos no Bundle em questão, 
+que contém element.path='Extension' e element.min = 1. 
+- `entry.resource.where($this.exists($this.snapshot.element.where(path='Extension' and min = 1))).id`
+
+Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propriedade **title**:
+
+- `Bundle.entry.where(resource.title.empty().not()).resource`
+- 
 ## Ferramenta online
 
 - https://hl7.github.io/fhirpath.js/
 - http://niquola.github.io/fhirpath-demo/#/
 - http://fhirpath-lab.azurewebsites.net/FhirPath/
 - [fhirpath-tester](https://apps.microsoft.com/store/detail/fhirpath-tester/9NXV8QDQ154V?hl=en-us&gl=us) Microsoft
+- [Firely Terminal](https://fire.ly/products/firely-terminal/) também pode ser empregado, por exemplo, `fhir predicate resourceType` mas apenas retorna true or false.
 
 
 ## FHIRPath
