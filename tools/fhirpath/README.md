@@ -24,7 +24,9 @@ que contém element.path='Extension' e element.min = 1.
 Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propriedade **title**:
 
 - `Bundle.entry.where(resource.title.empty().not()).resource`
-- 
+- `Patient.managingOrganization.reference.is(FHIR.string)`
+
+  
 ## Ferramenta online
 
 - https://hl7.github.io/fhirpath.js/
