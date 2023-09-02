@@ -3,6 +3,11 @@
 - `npm install`
 - `npx fhirpath -f exemplo.json -e "identifier"`
 
+## Executar sentença em FHIRPath
+
+- `npm install`
+- `node_modules\.bin\fhirpath -f exemplo.json -e "identifier"`
+
 ## Exemplos
 
 Informa para cada nome se contém ou não a letra ‘e’.
