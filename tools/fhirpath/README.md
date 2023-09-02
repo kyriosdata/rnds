@@ -1,5 +1,10 @@
 ## Executar sentença em FHIRPath
 
+- `npm install -g fhirpath`
+- `fhirpath -f exemplo.json -e "identifier"`
+
+## Executar sentença em FHIRPath
+
 - `npm install`
 - `npx fhirpath -f exemplo.json -e "identifier"`
 
