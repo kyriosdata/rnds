@@ -1,9 +1,16 @@
+## Executar sentença em FHIRPath
+
+- `npm install`
+- `npx fhirpath -f exemplo.json -e "identifier"`
+
 ## Exemplos
 
 Informa para cada nome se contém ou não a letra ‘e’.
+
 - name.given.select($this +  iif($this.contains('e'), '', ' does not') + ' contains letter e')
 
 Todos os nomes oficiais devem se iniciar com letra maiúscula
+
 - `name.where(use = 'official').given.all($this.matches('[A-Z]'))`
 
 - `Patient.address.postalCode.matches('^\\d{4}[A-Z]{2}$')`
@@ -11,14 +18,16 @@ Todos os nomes oficiais devem se iniciar com letra maiúscula
 - `now() - 18 years > birthDate`
 
 Quantos nomes distintos há no recurso?
+
 - name.given.distinct().count()
 
 Os tipos dos recursos contidos em um Bundle:
 
 - `Bundle.entry.resource.type().name`
 
-Os identificadores, apenas estes, de todos os recursos no Bundle em questão, 
-que contém element.path='Extension' e element.min = 1. 
+Os identificadores, apenas estes, de todos os recursos no Bundle em questão,
+que contém element.path='Extension' e element.min = 1.
+
 - `entry.resource.where($this.exists($this.snapshot.element.where(path='Extension' and min = 1))).id`
 
 Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propriedade **title**:
@@ -26,7 +35,6 @@ Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propr
 - `Bundle.entry.where(resource.title.empty().not()).resource`
 - `Patient.managingOrganization.reference.is(FHIR.string)`
 
-  
 ## Ferramenta online
 
 - https://hl7.github.io/fhirpath.js/
@@ -34,7 +42,6 @@ Os recursos contidos em um Bundle, mas apenas aqueles que possuem valor na propr
 - http://niquola.github.io/fhirpath-demo/#/
 - [fhirpath-tester](https://apps.microsoft.com/store/detail/fhirpath-tester/9NXV8QDQ154V?hl=en-us&gl=us) Microsoft
 - [Firely Terminal](https://fire.ly/products/firely-terminal/) também pode ser empregado, por exemplo, `fhir predicate resourceType` mas apenas retorna true or false.
-
 
 ## FHIRPath
 
