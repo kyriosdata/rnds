@@ -82,7 +82,7 @@
         <spring.boot.versao>2.2.5.RELEASE</spring.boot.versao>
         <surefire.versao>2.22.2</surefire.versao>
         <findsecbugs-plugin.version>1.10.1</findsecbugs-plugin.version>
-        <hapi.fhir.version>5.5.3</hapi.fhir.version>
+        <hapi.fhir.version>5.6.106</hapi.fhir.version>
     </properties>
 
     <dependencies>
