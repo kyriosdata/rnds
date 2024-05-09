@@ -7,7 +7,7 @@ import java.security.PublicKey;
 import java.security.Signature;
 import java.security.spec.X509EncodedKeySpec;
 
-public class Verificar {
+public class VerificarAssinatura {
     public static void main(String[] args) {
         if (args.length != 3) {
             System.out.println("Uso: java VerifySignature <arquivo-conteudo> <arquivo-assinatura> <arquivo-chave-publica>");
