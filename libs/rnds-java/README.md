@@ -139,4 +139,13 @@ Conforme o ambiente cuja chave pública é desejada, use um dos comandos abaixo:
 Parte da saída incluirá a chave pública do servidor. Copia o trecho que se inicia
 com `-----BEGIN CERTIFICATE-----` e termina com 
 `-----END CERTIFICATE-----`. Este é o certificado que contém a chave pública.
-Salve este conteúdo (texto) em um arquivo, por exemplo, **rnp-chave-publica.pem**.
+Salve este conteúdo (texto) em um arquivo, por exemplo, **rnds-chave-publica-producao.pem**
+para o ambiente de produção. 
+
+Ao executar o comando abaixo
+
+- `openssl x509 -pubkey -in rnds-chave-publica-producao.pem -noout`
+
+será fornecida na saída padrão a chave pública empregada pelo servidor da RNDS 
+do ambiente de produção. 
+
