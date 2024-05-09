@@ -129,3 +129,14 @@ variável **RNDS_AUTH**.
   - `keytool -import -alias rnp -keystore rnds.jks -file rnp-chave-publica.cer`
     
   - `keytool -storepasswd -keystore rnds.jks` (altera senha do _keystore_) 
+
+## Como obter a chave pública empregada pelo servidor da RNDS?
+
+Conforme o ambiente cuja chave pública é desejada, use um dos comandos abaixo:
+- `openssl s_client -connect ehr-auth-hmg.saude.gov.br:443` (ambiente de homologação)
+- `openssl s_client -connect ehr-auth.saude.gov.br:443` (ambiente de produção)
+
+Parte da saída incluirá a chave pública do servidor. Copia o trecho que se inicia
+com `-----BEGIN CERTIFICATE-----` e termina com 
+`-----END CERTIFICATE-----`. Este é o certificado que contém a chave pública.
+Salve este conteúdo (texto) em um arquivo, por exemplo, **rnp-chave-publica.pem**.
