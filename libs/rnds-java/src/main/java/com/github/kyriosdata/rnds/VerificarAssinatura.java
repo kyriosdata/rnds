@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 public class VerificarAssinatura {
     public static void main(String[] args) {
@@ -24,20 +27,22 @@ public class VerificarAssinatura {
 
             // Ler a assinatura do arquivo
             byte[] signatureData = readFile(signatureFile);
+            byte[] assinatura = Base64.getDecoder().decode(signatureData);
 
             // Ler a chave pública do arquivo
-            byte[] publicKeyBytes = readFile(publicKeyFile);
-            X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
+            FileInputStream fin = new FileInputStream(publicKeyFile);
+            CertificateFactory f = CertificateFactory.getInstance("X.509");
+            X509Certificate certificate = (X509Certificate)f.generateCertificate(fin);
+            PublicKey pk = certificate.getPublicKey();
+
 
             // Inicializar o objeto Signature com a chave pública
             Signature signature = Signature.getInstance("SHA256withRSA");
-            signature.initVerify(publicKey);
+            signature.initVerify(pk);
 
             // Verificar a assinatura
             signature.update(contentData);
-            boolean verified = signature.verify(signatureData);
+            boolean verified = signature.verify(assinatura);
 
             if (verified) {
                 System.out.println("Assinatura verificada com sucesso. O conteúdo é autêntico.");

@@ -10,23 +10,24 @@ import java.util.Base64;
 
 public class Assinar {
     public static void main(String[] args) {
-        if (args.length != 3) {
+        if (args.length != 4) {
             System.out.println("Uso: java SignWithICPBrasilCert <arquivo.pfx> <arquivo-entrada> <arquivo-saida>");
             return;
         }
 
         String pfxFile = args[0];
-        String inputFile = args[1];
-        String outputFile = args[2];
+        String senha = args[1];
+        String inputFile = args[2];
+        String outputFile = args[3];
 
         try {
             // Carregar o arquivo .pfx
             KeyStore keystore = KeyStore.getInstance("PKCS12");
-            keystore.load(new FileInputStream(pfxFile), "senha".toCharArray()); // Substitua "senha" pela senha do arquivo pfx
+            keystore.load(new FileInputStream(pfxFile), senha.toCharArray()); // Substitua "senha" pela senha do arquivo pfx
 
             // Obter a chave privada do certificado ICP-Brasil
             String alias = keystore.aliases().nextElement();
-            PrivateKey privateKey = (PrivateKey) keystore.getKey(alias, "senha".toCharArray()); // Substitua "senha" pela senha do arquivo pfx
+            PrivateKey privateKey = (PrivateKey) keystore.getKey(alias, senha.toCharArray()); // Substitua "senha" pela senha do arquivo pfx
 
             // Inicializar o objeto Signature com a chave privada
             Signature signature = Signature.getInstance("SHA256withRSA");
